@@ -1,0 +1,4 @@
+<h3 id="separate-app-and-vendor-entries">Separate App and Vendor Entries<a href="#separate-app-and-vendor-entries" aria-hidden="true"><span class="icon icon-link"></span></a></h3>
+<blockquote class="tip">
+    <p>In webpack version &lt; 4 it was common to add vendors as a separate entry point to compile it as a separate file (in combination with the <code>CommonsChunkPlugin</code>). <br><br> This is discouraged in webpack 4. Instead, the <code>optimization.splitChunks</code> option takes care of separating vendors and app modules and creating a separate file. <strong>Do not</strong> create an entry for vendors or other stuff that is not the starting point of execution.</p>
+</blockquote>

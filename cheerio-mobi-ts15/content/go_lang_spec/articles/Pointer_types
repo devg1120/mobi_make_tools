@@ -1,0 +1,11 @@
+<body><p>
+A pointer type denotes the set of all pointers to [<a>variables</a>] of a given
+type, called the <i>base type</i> of the pointer.
+The value of an uninitialized pointer is <code>nil</code>.
+</p><pre>
+[<a>PointerType</a>] = "*" [<a>BaseType</a>] .
+[<a>BaseType</a>]    = [<a>Type</a>] .
+</pre><pre>
+*Point
+*[4]int
+</pre></body>

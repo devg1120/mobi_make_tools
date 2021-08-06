@@ -1,0 +1,121 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Generators
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts13_images/undefined" />
+  </head>
+   <body>
+<h2 id="generators">Generators</h2>
+<p><code>function *</code> is the syntax used to create a <em>generator function</em>. Calling a generator function returns a <em>generator object</em>. The generator object just follows the <a href="iterators.html">iterator</a> interface (i.e. the <code>next</code>, <code>return</code> and <code>throw</code> functions). </p>
+<p>There are two key motivations behind generator functions: </p>
+<h3 id="lazy-iterators">Lazy Iterators</h3>
+<p>Generator functions can be used to create lazy iterators e.g. the following function returns an <strong>infinite</strong> list of integers on demand:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span>* <span class="hljs-title">infiniteSequence</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">var</span> i = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">while</span>(<span class="hljs-literal">true</span>) {
+        <span class="hljs-keyword">yield</span> i++;
+    }
+}
+<span class="hljs-keyword">var</span> iterator = infiniteSequence();
+<span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>) {
+    <span class="hljs-built_in">console</span>.log(iterator.next()); <span class="hljs-comment">// { value: xxxx, done: false } forever and ever</span>
+}
+</code></pre>
+<p>Of course if the iterator does end, you get the result of <code>{ done: true }</code> as demonstrated below:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span>* <span class="hljs-title">idMaker</span>(<span class="hljs-params"></span>)</span>{
+  <span class="hljs-keyword">let</span> index = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">while</span>(index &lt; <span class="hljs-number">3</span>)
+    <span class="hljs-keyword">yield</span> index++;
+}
+<span class="hljs-keyword">let</span> gen = idMaker();
+<span class="hljs-built_in">console</span>.log(gen.next()); <span class="hljs-comment">// { value: 0, done: false }</span>
+<span class="hljs-built_in">console</span>.log(gen.next()); <span class="hljs-comment">// { value: 1, done: false }</span>
+<span class="hljs-built_in">console</span>.log(gen.next()); <span class="hljs-comment">// { value: 2, done: false }</span>
+<span class="hljs-built_in">console</span>.log(gen.next()); <span class="hljs-comment">// { done: true }</span>
+</code></pre>
+<h3 id="externally-controlled-execution">Externally Controlled Execution</h3>
+<p>This is the part of generators that is truly exciting. It essentially allows a function to pause its execution and pass control (fate) of the remainder of the function execution to the caller.</p>
+<p>A generator function does not execute when you call it. It just creates a generator object. Consider the following example along with a sample execution:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span>* <span class="hljs-title">generator</span>(<span class="hljs-params"></span>)</span>{
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;Execution started&apos;</span>);
+    <span class="hljs-keyword">yield</span> <span class="hljs-number">0</span>;
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;Execution resumed&apos;</span>);
+    <span class="hljs-keyword">yield</span> <span class="hljs-number">1</span>;
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;Execution resumed&apos;</span>);
+}
+<span class="hljs-keyword">var</span> iterator = generator();
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;Starting iteration&apos;</span>); <span class="hljs-comment">// This will execute before anything in the generator function body executes</span>
+<span class="hljs-built_in">console</span>.log(iterator.next()); <span class="hljs-comment">// { value: 0, done: false }</span>
+<span class="hljs-built_in">console</span>.log(iterator.next()); <span class="hljs-comment">// { value: 1, done: false }</span>
+<span class="hljs-built_in">console</span>.log(iterator.next()); <span class="hljs-comment">// { value: undefined, done: true }</span>
+</code></pre>
+<p>If you run this you get the following output:</p>
+<pre><code>$ node outside.js
+Starting iteration
+Execution started
+{ value: 0, done: false }
+Execution resumed
+{ value: 1, done: false }
+Execution resumed
+{ value: undefined, done: true }
+</code></pre>
+<ul>
+    <li>The function only starts execution once <code>next</code> is called on the generator object.</li>
+    <li>The function <em>pauses</em> as soon as a <code>yield</code> statement is encountered.</li>
+    <li>The function <em>resumes</em> when <code>next</code> is called.</li>
+</ul>
+<blockquote>
+    <p>So essentially the execution of the generator function is controllable by the generator object.</p>
+</blockquote>
+<p>Our communication using the generator has been mostly one way with the generator returning values for the iterator. One extremely powerful feature of generators in JavaScript is that they allow two way communications (with caveats).</p>
+<ul>
+    <li>you can control the resulting value of the <code>yield</code> expression using <code>iterator.next(valueToInject)</code></li>
+    <li>you can throw an exception at the point of the <code>yield</code> expression using <code>iterator.throw(error)</code></li>
+</ul>
+<p>The following example demonstrates <code>iterator.next(valueToInject)</code>:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span>* <span class="hljs-title">generator</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">const</span> bar = <span class="hljs-keyword">yield</span> <span class="hljs-string">&apos;foo&apos;</span>; <span class="hljs-comment">// bar may be *any* type</span>
+    <span class="hljs-built_in">console</span>.log(bar); <span class="hljs-comment">// bar!</span>
+}
+<span class="hljs-keyword">const</span> iterator = generator();
+<span class="hljs-comment">// Start execution till we get first yield value</span>
+<span class="hljs-keyword">const</span> foo = iterator.next();
+<span class="hljs-built_in">console</span>.log(foo.value); <span class="hljs-comment">// foo</span>
+<span class="hljs-comment">// Resume execution injecting bar</span>
+<span class="hljs-keyword">const</span> nextThing = iterator.next(<span class="hljs-string">&apos;bar&apos;</span>);
+</code></pre>
+<p>Since <code>yield</code> returns the parameter passed to the iterator&apos;s <code>next</code> function, and all iterators&apos; <code>next</code> functions accept a parameter of any type, TypeScript will always assign the <code>any</code> type to the result of the <code>yield</code> operator (<code>bar</code> above).</p>
+<blockquote>
+    <p>You are on your own to coerce the result to the type you expect, and ensure that only values of that type are passed to next (such as by scaffolding an additional type-enforcement layer that calls <code>next</code> for you.) If strong typing is important to you, you may want to avoid two-way communication altogether, as well as packages that rely heavily on it (e.g., redux-saga).</p>
+</blockquote>
+<p>The following example demonstrates <code>iterator.throw(error)</code>:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span>* <span class="hljs-title">generator</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">try</span> {
+        <span class="hljs-keyword">yield</span> <span class="hljs-string">&apos;foo&apos;</span>;
+    }
+    <span class="hljs-keyword">catch</span>(err) {
+        <span class="hljs-built_in">console</span>.log(err.message); <span class="hljs-comment">// bar!</span>
+    }
+}
+<span class="hljs-keyword">var</span> iterator = generator();
+<span class="hljs-comment">// Start execution till we get first yield value</span>
+<span class="hljs-keyword">var</span> foo = iterator.next();
+<span class="hljs-built_in">console</span>.log(foo.value); <span class="hljs-comment">// foo</span>
+<span class="hljs-comment">// Resume execution throwing an exception &apos;bar&apos;</span>
+<span class="hljs-keyword">var</span> nextThing = iterator.throw(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&apos;bar&apos;</span>));
+</code></pre>
+<p>So here is the summary:</p>
+<ul>
+    <li><code>yield</code> allows a generator function to pause its communication and pass control to an external system</li>
+    <li>the external system can push a value into the generator function body</li>
+    <li>the external system can throw an exception into the generator function body</li>
+</ul>
+<p>How is this useful? Jump to the next section <a href="async-await.html"><strong>async/await</strong></a> and find out.</p>
+</body>
+</html>

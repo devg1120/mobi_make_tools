@@ -1,0 +1,195 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    React
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts12_mlv/undefined" />
+  </head>
+   <body>
+<h1 id="react-jsx">React JSX</h1>
+<blockquote>
+    <p><a href="https://www.youtube.com/watch?v=7EW67MqgJvs&amp;list=PLYvdvJlnTOjHNayH7MukKbSJ6PueUNkkG" target="_blank">Free series of youtube videos on React / TypeScript best practices</a></p>
+    <p><a href="https://egghead.io/courses/use-typescript-to-develop-react-applications" target="_blank">PRO Egghead course on TypeScript and React</a></p>
+</blockquote>
+<h2 id="setup">Setup</h2>
+<p>Our <a href="../quick/browser.html">browser quickstart already sets you up to develop react applications</a>. Here are the key highlights.</p>
+<ul>
+    <li>Use files with the extension <code>.tsx</code> (instead of <code>.ts</code>).</li>
+    <li>Use <code>&quot;jsx&quot; : &quot;react&quot;</code> in your <code>tsconfig.json</code>&apos;s <code>compilerOptions</code>.</li>
+    <li>Install the definitions for JSX and React into your project : (<code>npm i -D @types/react @types/react-dom</code>).</li>
+    <li>Import react into your <code>.tsx</code> files (<code>import * as React from &quot;react&quot;</code>).</li>
+</ul>
+<h2 id="html-tags-vs-components">HTML Tags vs. Components</h2>
+<p>React can either render HTML tags (strings) or React components (classes). The JavaScript emit for these elements is different (<code>React.createElement(&apos;div&apos;)</code> vs. <code>React.createElement(MyComponent)</code>). The way this is determined is by the <em>case</em> of the <em>first</em> letter. <code>foo</code> is treated as an HTML tag and <code>Foo</code> is treated as a component.</p>
+<h2 id="type-checking">Type Checking</h2>
+<h3 id="html-tags">HTML Tags</h3>
+<p>An HTML Tag <code>foo</code> is to be of the type <code>JSX.IntrinsicElements.foo</code>. These types are already defined for all the major tags in a file <code>react-jsx.d.ts</code> which we had you install as a part of the setup. Here is a sample of the the contents of the file:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">declare</span> <span class="hljs-keyword">module</span> JSX {
+    <span class="hljs-keyword">interface</span> IntrinsicElements {
+        a: React.HTMLAttributes;
+        abbr: React.HTMLAttributes;
+        div: React.HTMLAttributes;
+        span: React.HTMLAttributes;
+        <span class="hljs-comment">/// so on ...</span>
+    }
+}
+</code></pre>
+<h3 id="function-components">Function Components</h3>
+<p>You can define function components simply with the <code>React.FunctionComponent</code> interface e.g.</p>
+<pre><code class="lang-ts">type Props = {
+  foo: string;
+}
+const MyComponent: React.FunctionComponent<props> = (props) =&gt; {
+    return <span>{props.foo}</span>
+}
+<mycomponent foo="bar">
+</mycomponent></props></code></pre>
+<h3 id="class-components">Class Components</h3>
+<p>Components are type checked based on the <code>props</code> property of the component. This is modeled after how JSX is transformed i.e. the attributes become the <code>props</code> of the component.</p>
+<p>The <code>react.d.ts</code> file defines the <code>React.Component<props,state></props,state></code> class which you should extend in your own class providing your own <code>Props</code> and <code>State</code> interfaces. This is demonstrated below:</p>
+<pre><code class="lang-ts">type Props = {
+  foo: string;
+}
+class MyComponent extends React.Component<props, {}> {
+    render() {
+        return <span>{this.props.foo}</span>
+    }
+}
+<mycomponent foo="bar">
+</mycomponent></props,></code></pre>
+<h3 id="react-jsx-tip-interface-for-renderable">React JSX Tip: Interface for renderable</h3>
+<p>React can render a few things like <code>JSX</code> or <code>string</code>. These are all consolidated into the type <code>React.ReactNode</code> so use it for when you want to accept renderables e.g.</p>
+<pre><code class="lang-ts">type Props = {
+  header: React.ReactNode;
+  body: React.ReactNode;
+}
+class MyComponent extends React.Component<props, {}> {
+    render() {
+        return <div>
+            {this.props.header}
+            {this.props.body}
+        </div>;
+    }
+}
+<mycomponent header="{&lt;h1">Header} body={<i>body</i>} /&gt;
+</mycomponent></props,></code></pre>
+<h3 id="react-jsx-tip-accept-an-instance-of-a-component">React JSX Tip: Accept an instance of a Component</h3>
+<p>The react type definitions provide <code>React.ReactElement<t></t></code> to allow you to annotate the result of a <code>
+        <t></t></code> class component instantiation. e.g.</p>
+<pre><code class="lang-js"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyAwesomeComponent</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>{
+  render() {
+    <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Hello<span class="hljs-tag">div</span>&gt;</span>;
+  }
+}
+<span class="hljs-keyword">const</span> foo: React.ReactElement<myawesomecomponent> = <myawesomecomponent>; // Okay
+const bar: React.ReactElement<myawesomecomponent> = <notmyawesomecomponent>; // Error!
+</notmyawesomecomponent></myawesomecomponent></myawesomecomponent></myawesomecomponent></code></pre>
+<blockquote>
+    <p>Of course you can use this as a function argument annotation and even React component prop member.</p>
+</blockquote>
+<h3 id="react-jsx-tip-accept-a-component-that-can-act-on-props-and-be-rendered-using-jsx">React JSX Tip: Accept a <em>component</em> that can act on props and be rendered using JSX</h3>
+<p>The type <code>React.Component<props></props></code> consolidates <code>React.ComponentClass<p> | React.StatelessComponent</p><p></p></code> so you can accept <em>something</em> that takes type <code>Props</code> and renders it using JSX e.g.</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">const</span> X: React.Component<props> = foo; <span class="hljs-comment">// from somewhere</span>
+<span class="hljs-comment">// Render X with some props:</span>
+<x {...props}>;
+</x></props></code></pre>
+<h3 id="react-jsx-tip-generic-components">React JSX Tip: Generic components</h3>
+<p>It works exactly as expected. Here is an example:</p>
+<pre><code class="lang-ts"><span class="hljs-comment">/** A generic component */</span>
+<span class="hljs-keyword">type</span> SelectProps<t> = { items: T[] }
+<span class="hljs-keyword">class</span> Select<t> extends React.Component<selectprops<t>, <span class="hljs-built_in">any</span>&gt; { }
+<span class="hljs-comment">/** Usage */</span>
+<span class="hljs-keyword">const</span> Form = () =&gt; <select<<span class="hljs-built_in">string&gt; items={[<span class="hljs-string">&apos;a&apos;</span>,<span class="hljs-string">&apos;b&apos;</span>]} /&gt;;
+</select<<span></selectprops<t></t></t></code></pre>
+<h3 id="generic-functions">Generic functions</h3>
+<p>Something like the following works fine:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>&lt;<span class="hljs-title">T</span>&gt;(<span class="hljs-params">x: T</span>): <span class="hljs-title">T</span> </span>{ <span class="hljs-keyword">return</span> x; }
+</code></pre>
+<p>However, using an arrow generic function will not:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">const</span> foo = <t>(x: T) =&gt; x; <span class="hljs-comment">// ERROR : unclosed `T` tag</span>
+</t></code></pre>
+<p><strong>Workaround</strong>: Use <code>extends</code> on the generic parameter to hint the compiler that it&apos;s a generic, e.g.:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">const</span> foo = <t extends {}>(x: T) =&gt; x;
+</t></code></pre>
+<h3 id="react-tip-strongly-typed-refs">React Tip: Strongly Typed Refs</h3>
+<p>You basically initialize a variable as a union of the ref and <code>null</code> and then initialize it as as callback e.g. </p>
+<pre><code class="lang-ts">class Example extends React.Component {
+  example() {
+    // ... something
+  }
+  render() { return <div>Foo</div> }
+}
+class Use {
+  exampleRef: Example | null = null; 
+  render() {
+    return <example ref="{exampleRef" => this.exampleRef = exampleRef } /&gt;
+  }
+}
+</example></code></pre>
+<p>And the same with ref&apos;s for native elements e.g. </p>
+<pre><code class="lang-ts"><span class="hljs-keyword">class</span> FocusingInput extends React.Component<{ value: <span class="hljs-built_in">string, onChange: (value: <span class="hljs-built_in">string</span>) =&gt; <span class="hljs-built_in">any</span> }, {}&gt;{
+  input: HTMLInputElement | <span class="hljs-literal">null</span> = <span class="hljs-literal">null</span>;
+  render() {
+    <span class="hljs-keyword">return</span> (
+      <input ref="{(input)" => <span class="hljs-keyword">this</span>.input = input}
+        value={<span class="hljs-keyword">this</span>.props.value}
+        onChange={(e) =&gt; { <span class="hljs-keyword">this</span>.props.onChange(e.target.value) } }
+        /&gt;
+      );
+    }
+    focus() {
+      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.input != <span class="hljs-literal">null</span>) { <span class="hljs-keyword">this</span>.input.focus() }
+    }
+}
+</{></code></pre>
+<h3 id="type-assertions">Type Assertions</h3>
+<p>Use <code>as Foo</code> syntax for type assertions as we <a href="type-assertion.md#as-foo-vs-foo">mentioned before</a>.</p>
+<h2 id="default-props">Default Props</h2>
+<ul>
+    <li>Stateful components with default props: You can tell TypeScript that a property will be provided externally (by React) by using a <em>null assertion</em> operator (this isn&apos;t ideal but is the simplest minimum <em>extra code</em> solution I could think of).</li>
+</ul>
+<pre><code class="lang-tsx">class Hello extends React.Component<{ ** * @default 'typescript' compiler?: string, framework: string }> {
+  static defaultProps = {
+    compiler: &apos;TypeScript&apos;
+  }
+  render() {
+    const compiler = this.props.compiler!;
+    return (
+      <div>
+        <div>{compiler}</div>
+        <div>{this.props.framework}</div>
+      </div>
+    );
+  }
+}
+ReactDOM.render(
+  <hello framework="React">, // TypeScript React
+  document.getElementById(&quot;root&quot;)
+);
+</hello></{></code></pre>
+<ul>
+    <li>SFC with default props: Recommend leveraging simple JavaScript patterns as they work well with TypeScript&apos;s type system e.g.</li>
+</ul>
+<pre><code class="lang-tsx">const Hello: React.SFC<{ ** * @default 'typescript' compiler?: string, framework: string }> = ({
+  compiler = &apos;TypeScript&apos;, // Default prop
+  framework
+}) =&gt; {
+    return (
+      <div>
+        <div>{compiler}</div>
+        <div>{framework}</div>
+      </div>
+    );
+  };
+ReactDOM.render(
+  <hello framework="React">, // TypeScript React
+  document.getElementById(&quot;root&quot;)
+);
+</hello></{></code></pre>
+</body>
+</html>

@@ -1,0 +1,60 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Binary Files and Translation</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts2/css/kindle.css" />
+  </head>
+   <body>
+    <div class="sect1">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="svn.forcvs.binary-and-trans"></a>Binary Files and Translation</h2>
+          </div>
+        </div>
+      </div>
+      <p>In the most general sense, Subversion handles binary files
+      more gracefully than CVS does.  Because CVS uses RCS, it can
+      only store successive full copies of a changing binary file.
+      Subversion, however, expresses differences between files using a
+      binary differencing algorithm, regardless of whether they
+      contain textual or binary data.  That means all files are
+      stored differentially (compressed) in the repository.</p>
+      <p>CVS users have to mark binary files with
+      <code class="option">-kb</code> flags to prevent data from being
+      garbled (due to keyword expansion and line-ending translations).
+      They sometimes forget to do this.</p>
+      <p>Subversion takes the more paranoid route.  First, it never
+      performs any kind of keyword or line-ending translation unless
+      you explicitly ask it to do so (see
+      <a class="xref" href="svn.advanced.props.special.keywords.html" title="Keyword Substitution">the section called “Keyword Substitution”</a> and
+      <a class="xref" href="svn.advanced.props.file-portability.html#svn.advanced.props.special.eol-style" title="End-of-Line Character Sequences">the section called “End-of-Line Character Sequences”</a> for more
+      details).  By default, Subversion treats all file data as
+      literal byte strings, and files are always stored in the
+      repository in an untranslated state.</p>
+      <p>Second, Subversion maintains an internal notion of whether a
+      file is <span class="quote">“<span class="quote">text</span>”</span> or <span class="quote">“<span class="quote">binary</span>”</span> data, but
+      this notion is <span class="emphasis"><em>only</em></span> extant in the working
+      copy.  During an <span class="command"><strong>svn update</strong></span>, Subversion will
+      perform contextual merges on locally modified text files, but
+      will not attempt to do so for binary files.</p>
+      <p>To determine whether a contextual merge is possible,
+      Subversion examines the <code class="literal">svn:mime-type</code>
+      property.  If the file has no <code class="literal">svn:mime-type</code>
+      property, or has a MIME type that is textual (e.g.,
+      <code class="literal">text/*</code>),
+      Subversion assumes it is text.  Otherwise, Subversion assumes
+      the file is binary.  Subversion also helps users by running a
+      binary-detection algorithm in the <span class="command"><strong>svn import</strong></span>
+      and <span class="command"><strong>svn add</strong></span> commands.  These commands will
+      make a good guess and then (possibly) set a binary
+      <code class="literal">svn:mime-type</code> property on the file being
+      added.  (If Subversion guesses wrong, the user can always remove
+      or hand-edit the property.)</p>
+    </div>
+</body>
+</html>

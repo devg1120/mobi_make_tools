@@ -1,0 +1,41 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Variables
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts12_mlv/undefined" />
+  </head>
+   <body>
+<h3 id="variables">Variables</h3>
+<p>For example to tell TypeScript about the <a href="https://nodejs.org/api/process.html" target="_blank"><code>process</code> variable</a> you <em>can</em> do:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">declare</span> <span class="hljs-keyword">var</span> process: <span class="hljs-built_in">any</span>;
+</code></pre>
+<blockquote>
+    <p>You don&apos;t <em>need</em> to do this for <code>process</code> as there is already a <a href="https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/node/index.d.ts" target="_blank">community maintained <code>node.d.ts</code></a>.</p>
+</blockquote>
+<p>This allows you to use the <code>process</code> variable without TypeScript complaining:</p>
+<pre><code class="lang-ts">process.exit();
+</code></pre>
+<p>We recommend using an interface wherever possible e.g.:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">interface</span> Process {
+    exit(code?: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">void</span>;
+}
+<span class="hljs-keyword">declare</span> <span class="hljs-keyword">var</span> process: Process;
+</code></pre>
+<p>This allows other people to <em>extend</em> the nature of these global variables while still telling TypeScript about such modifications. E.g. consider the following case where we add an <code>exitWithLogging</code> function to process for our amusement:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">interface</span> Process {
+    exitWithLogging(code?: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">void</span>;
+}
+process.exitWithLogging = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;exiting&quot;</span>);
+    process.exit.apply(process, <span class="hljs-built_in">arguments</span>);
+};
+</code></pre>
+<p>Let&apos;s look at interfaces in a bit more detail next.</p>
+</body>
+</html>

@@ -1,0 +1,132 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svn move (mv)</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts6/undefined" />
+  </head>
+   <body>
+    <div class="refentry">
+      <a id="svn.ref.svn.c.move"></a>
+      <div class="titlepage"></div>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svn move (mv) &#x2014; Move a file or directory.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm10565"></a>
+        <h2>Synopsis</h2>
+        <p>
+          <code class="literal">svn move SRC... DST</code>
+        </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm10569"></a>
+        <h2>Description</h2>
+        <p>This command moves files or directories in your
+            working copy or in the repository.</p>
+        <div class="tip" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Tip">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Tip]" src="/home/gusa1120/es2015/cheerio-mobi-ts6/content/svn2/processed_images/tip-grayscale.gif">
+              </td>
+              <th align="left">Tip</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>This command is equivalent to an <span class="command"><strong>svn
+              copy</strong></span> followed by <span class="command"><strong>svn
+              delete</strong></span>.</p>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <p>When moving multiple sources, they will be added as
+            children of <em class="replaceable"><code>DST</code></em>, which must be
+            a directory.</p>
+        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Note">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Note]" src="/home/gusa1120/es2015/cheerio-mobi-ts6/content/svn2/processed_images/note-grayscale.gif">
+              </td>
+              <th align="left">Note</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>Subversion does not support moving between working
+              copies and URLs.  In addition, you can only move files
+              within a single repository&#x2014;Subversion does not
+              support cross-repository moving.  Subversion supports
+              the following types of moves within a single repository:</p>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="variablelist">
+          <dl class="variablelist">
+            <dt>
+              <span class="term">WC &#x2192; WC</span>
+            </dt>
+            <dd>
+              <p>Move and schedule a file or directory for
+                  addition (with history).</p>
+            </dd>
+            <dt>
+              <span class="term">URL &#x2192; URL</span>
+            </dt>
+            <dd>
+              <p>Complete server-side rename.</p>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm10589"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+          <pre class="screen">
+</pre>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm10603"></a>
+        <h2>Examples</h2>
+        <p>Move a file in your working copy:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn move foo.c bar.c
+A         bar.c
+D         foo.c
+</pre>
+        </div>
+        <p>Move several files in your working copy into a
+            subdirectory:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn move baz.c bat.c qux.c src
+A         src/baz.c
+D         baz.c
+A         src/bat.c
+D         bat.c
+A         src/qux.c
+D         qux.c
+</pre>
+        </div>
+        <p>Move a file in the repository (this is an immediate commit,
+            so it requires a commit message):</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn move -m &quot;Move a file&quot; http://svn.red-bean.com/repos/foo.c \
+                            http://svn.red-bean.com/repos/bar.c
+Committed revision 27.
+</pre>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

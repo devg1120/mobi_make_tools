@@ -1,0 +1,56 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>What Unix Gets Wrong</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts7/undefined" />
+  </head>
+   <body>
+<div class="sect1" lang="en"><div class="titlepage"><div><h2 class="title" style="clear: both"><a id="id2808649">What Unix Gets Wrong</a></h2></div></div><p>For a design that dates from 1969, it is remarkably difficult
+to identify design choices in Unix that are unequivocally wrong.
+There are several popular candidates, but each is still a subject of
+spirited debate not merely among Unix fans but across the wider
+community of people who think about and design operating
+systems.</p><p>Unix files have no structure above byte level. File deletion is
+irrevocable.  The Unix security model is arguably too primitive.  Job
+control is botched.  There are too many different kinds of names for
+things.  Having a file system at all may have been the wrong choice.
+We will discuss these technical issues in <a href="futurechapter.html" title="Chapter&#xFFFD;20.&#xFFFD;Futures">Chapter&#xFFFD;20</a>.</p><p>But perhaps the most enduring objections to Unix are consequences of
+a feature of its philosophy first made explicit by the designers of
+the X windowing system</p><p>This tendency reflects Unix&apos;s heritage as an operating system
+designed primarily for technical users, and a consequent belief that
+users know better than operating-system designers what their own needs
+are.</p><div class="blockquote"><table border="0" width="100%" cellspacing="0" cellpadding="0" class="blockquote" summary="Block quote"><tr><td width="10%" valign="top">&#xFFFD;</td><td width="80%" valign="top"><p>This tenet was firmly established at Bell Labs by Dick
+Hamming<sup>[<a id="id2808745" href="ch01s04.html#ftn.id2808745">5</a>]</sup> who insisted in
+the 1950s when computers were rare and expensive, that open-shop
+computing, where customers wrote their own programs, was imperative,
+because &#x201C;it is better to solve the right problem the wrong way
+than the wrong problem the right way&#x201D;.</p></td><td width="10%" valign="top">&#xFFFD;</td></tr><tr><td colspan="2" align="right" valign="top">--<span class="attribution">
+<span class="author">Doug McIlroy</span>
+</span></td><td width="10%" valign="top">&#xFFFD;</td></tr></table></div><p>But the cost of the mechanism-not-policy approach is that when
+the user <span class="emphasis"><em>can</em></span> set policy, the user
+<span class="emphasis"><em>must</em></span> set policy. Nontechnical end-users
+frequently find Unix&apos;s profusion of options and interface styles
+overwhelming and retreat to systems that at least pretend to offer
+them simplicity.</p><p>In the short term, Unix&apos;s laissez-faire approach may lose it a
+good many nontechnical users. In the long term, however, it may turn
+out that this &#x2018;mistake&#x2019; confers a critical advantage
+&#x2014; because policy tends to have a short lifetime, mechanism a
+long one. Today&apos;s fashion in interface look-and-feel too often becomes
+tomorrow&apos;s evolutionary dead end (as people using obsolete X toolkits
+will tell you with some feeling!). So the flip side of the flip side
+is that the &#x201C;mechanism, not policy&#x201D; philosophy may enable
+Unix to renew its relevance long after competitors more tied to one
+set of policy or interface choices have faded from
+view.<sup>[<a id="id2808799" href="ch01s04.html#ftn.id2808799">6</a>]</sup></p><div class="footnotes"><br><hr width="100" align="left"><div class="footnote"><p><sup>[<a id="ftn.id2808745" href="ch01s04.html#id2808745">5</a>] </sup>Yes, the Hamming of &#x2018;Hamming distance&#x2019;
+and &#x2018;Hamming code&#x2019;.</p></div><div class="footnote"><p><sup>[<a id="ftn.id2808799" href="ch01s04.html#id2808799">6</a>] </sup>Jim Gettys, one of the architects of X (and a
+contributor to this book), has meditated in depth on how X&apos;s
+laissez-faire style might be productively carried forward in
+<i>The Two-Edged Sword</i> [<a href="apb.html#Gettys" title="[Gettys]">Gettys</a>].  This essay is well worth reading,
+both for its specific proposals and for its expression of the Unix
+mindset.</p></div></div></div>
+</body>
+</html>

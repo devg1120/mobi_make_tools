@@ -1,0 +1,45 @@
+--- 
+# kindle mobi document genelater
+#
+#
+top_dir: content
+recipe_slug: unix
+
+base_url: http://www.faqs.org/docs/artu/
+index_url:  http://www.faqs.org/docs/artu/index.html
+kindle_css: css/kindle.css
+images_include: true
+
+extract_sections:
+   href_select_class:  .toc
+   href_section_regex: "(preface|chapter)\\.html"
+   href_article_regex: "html$"
+
+#
+kindlegen:
+  compress:  0     # 0/1/2
+  verbose:   true  # booleran
+  locale:    en
+  output_path:    /tmp/mobi
+
+doe: "a deer, a female deer"
+ray: "a drop of golden sun"
+pi: 3.14159
+xmas: true
+french-hens: 3
+calling-birds: 
+   - huey
+   - dewey
+   - louie
+   - fred
+xmas-fifth-day: 
+   calling-birds: four
+   french-hens: 3
+   golden-rings: 5
+   partridges: 
+     count: 1
+     location: "a pear tree"
+   turtle-doves: two
+
+
+

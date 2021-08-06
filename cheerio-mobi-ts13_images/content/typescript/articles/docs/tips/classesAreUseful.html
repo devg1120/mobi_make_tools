@@ -1,0 +1,60 @@
+<h2 id="classes-are-useful">Classes Are Useful</h2>
+<p>It is very common to have the following structure:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">let</span> someProperty;
+
+    <span class="hljs-comment">// Some other initialization code</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">someMethod</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-comment">// Do some stuff with `someProperty`</span>
+        <span class="hljs-comment">// And potentially other things</span>
+    }
+    <span class="hljs-comment">// Maybe some other methods</span>
+
+    <span class="hljs-keyword">return</span> {
+        someMethod,
+        <span class="hljs-comment">// Maybe some other methods</span>
+    };
+}
+</code></pre>
+<p>This is known as the <em>revealing module pattern</em> and quite common in JavaScript (taking advantage of JavaScript closure).</p>
+<p>If you use <a href="../project/modules.html"><em>file modules</em> (which you really should as global scope is bad)</a> then <em>your file is effectively the same</em>. However, there are too many cases where people will write code like the following:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">let</span> someProperty;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>{
+   <span class="hljs-comment">// Some initialization code</span>
+}
+foo(); <span class="hljs-comment">// some initialization code</span>
+
+someProperty = <span class="hljs-number">123</span>; <span class="hljs-comment">// some more initialization</span>
+
+<span class="hljs-comment">// Some utility function not exported</span>
+
+<span class="hljs-comment">// later</span>
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">someMethod</span>(<span class="hljs-params"></span>) </span>{
+
+}
+</code></pre>
+<p>Even though I am not a big fan of inheritance <em>I do find that letting people use classes helps them organize their code better</em>. The same developer would intuitively write the following:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">class</span> Foo {
+    <span class="hljs-keyword">public</span> someProperty;
+
+    <span class="hljs-keyword">constructor</span>() {
+        <span class="hljs-comment">// some initialization</span>
+    }
+
+    <span class="hljs-keyword">public</span> someMethod() {
+        <span class="hljs-comment">// some code</span>
+    }
+
+    <span class="hljs-keyword">private</span> someUtility() {
+        <span class="hljs-comment">// some code</span>
+    }
+}
+
+<span class="hljs-keyword">export</span> = <span class="hljs-keyword">new</span> Foo();
+</code></pre>
+<p>And its not just developers, creating dev tools that provide great visualizations over classes are much more common, and there is one less pattern your team needs to understand and maintain.</p>
+<blockquote>
+    <p>PS: There is nothing wrong in my opinion with <em>shallow</em> class hierarchies if they provide significant reuse and reduction in boiler plate.</p>
+</blockquote>

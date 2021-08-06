@@ -1,0 +1,69 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Dynamic Import Expressions
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts13_images/undefined" />
+  </head>
+   <body>
+<h2 id="dynamic-import-expressions">Dynamic import expressions</h2>
+<p><strong>Dynamic import expressions</strong> are a new feature and part of <strong>ECMAScript</strong> that allows users to asynchronously request a module at any arbitrary point in your program.
+    <strong>TC39</strong> JavaScript committee has it&#x2019;s own proposal which is in stage 3, and it&#x2019;s called <a href="https://github.com/tc39/proposal-dynamic-import" target="_blank">import() proposal for JavaScript</a>.</p>
+<p>Alternatively, <strong>webpack</strong> bundler has a feature called <a href="https://webpack.js.org/guides/code-splitting/" target="_blank"><strong>Code Splitting</strong></a> which allows you to split your bundle into chunks which can be downloaded asynchronously at a later time. For instance, this allows to serve a minimal bootstrap bundle first and to asynchronously load additional features later.</p>
+<p>It&#x2019;s natural to think (if we are using webpack in our dev workflow) that <a href="https://github.com/Microsoft/TypeScript/wiki/What%27s-new-in-TypeScript#dynamic-import-expressions" target="_blank">TypeScript 2.4 dynamic import expressions</a> will <strong>automatically produce</strong> bundle chunks and automatically code-split your JS final bundle. BUT, that is not as easy as it seems, because it depends on the <strong>tsconfig.json configuration</strong> we are working with.</p>
+<p>The thing is that webpack code splitting supports two similar techniques to achieve this goal: using <strong>import()</strong> (preferred, ECMAScript proposal) and <strong>require.ensure()</strong> (legacy, webpack specific). And what that means is the expected TypeScript output is <strong>leave the import() statement as it is</strong> instead of transpile it to anything else.</p>
+<p>Let&#x2019;s see an example to figure out how to configure webpack + TypeScript 2.4.</p>
+<p>In the following code I want to <strong>lazy load the library <em>moment</em></strong> but I am interested in code splitting as well, which means, having the moment library in a separate chunk of JS (JavaScript file) that will be loaded only when required.</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">import</span>(<span class="hljs-comment">/* webpackChunkName: &quot;momentjs&quot; */</span> <span class="hljs-string">&quot;moment&quot;</span>)
+  .then((moment) =&gt; {
+      <span class="hljs-comment">// lazyModule has all of the proper types, autocomplete works,</span>
+      <span class="hljs-comment">// type checking works, code references work \o/</span>
+      <span class="hljs-keyword">const</span> time = moment().format();
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;TypeScript &gt;= 2.4.0 Dynamic Import Expression:&quot;</span>);
+      <span class="hljs-built_in">console</span>.log(time);
+  })
+  .catch((err) =&gt; {
+      <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Failed to load moment&quot;</span>, err);
+  });
+</code></pre>
+<p>Here is the tsconfig.json:</p>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;compilerOptions&quot;</span>: {
+        <span class="hljs-string">&quot;target&quot;</span>: <span class="hljs-string">&quot;es5&quot;</span>,                          
+        <span class="hljs-string">&quot;module&quot;</span>: <span class="hljs-string">&quot;esnext&quot;</span>,                     
+        <span class="hljs-string">&quot;lib&quot;</span>: [
+            <span class="hljs-string">&quot;dom&quot;</span>,
+            <span class="hljs-string">&quot;es5&quot;</span>,
+            <span class="hljs-string">&quot;scripthost&quot;</span>,
+            <span class="hljs-string">&quot;es2015.promise&quot;</span>
+        ],                                        
+        <span class="hljs-string">&quot;jsx&quot;</span>: <span class="hljs-string">&quot;react&quot;</span>,                           
+        <span class="hljs-string">&quot;declaration&quot;</span>: <span class="hljs-literal">false</span>,                     
+        <span class="hljs-string">&quot;sourceMap&quot;</span>: <span class="hljs-literal">true</span>,                        
+        <span class="hljs-string">&quot;outDir&quot;</span>: <span class="hljs-string">&quot;./dist/js&quot;</span>,                    
+        <span class="hljs-string">&quot;strict&quot;</span>: <span class="hljs-literal">true</span>,                           
+        <span class="hljs-string">&quot;moduleResolution&quot;</span>: <span class="hljs-string">&quot;node&quot;</span>,               
+        <span class="hljs-string">&quot;typeRoots&quot;</span>: [
+            <span class="hljs-string">&quot;./node_modules/@types&quot;</span>
+        ],                                        
+        <span class="hljs-string">&quot;types&quot;</span>: [
+            <span class="hljs-string">&quot;node&quot;</span>,
+            <span class="hljs-string">&quot;react&quot;</span>,
+            <span class="hljs-string">&quot;react-dom&quot;</span>
+        ]                                       
+    }
+}
+</code></pre>
+<p><strong>Important notes</strong>:</p>
+<ul>
+    <li>Using <strong>&quot;module&quot;: &quot;esnext&quot;</strong> TypeScript produces the mimic import() statement to be input for Webpack Code Splitting.</li>
+    <li>For further information read this article: <a href="https://blog.josequinto.com/2017/06/29/dynamic-import-expressions-and-webpack-code-splitting-integration-with-typescript-2-4/" target="_blank">Dynamic Import Expressions and webpack 2 Code Splitting integration with TypeScript 2.4</a>.</li>
+</ul>
+<p>You can see full example <a href="https://cdn.rawgit.com/basarat/typescript-book/705e4496/code/dynamic-import-expressions/dynamicImportExpression.js" target="_blank">here</a>.</p>
+</body>
+</html>

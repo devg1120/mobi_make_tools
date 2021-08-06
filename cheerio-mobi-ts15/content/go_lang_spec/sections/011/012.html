@@ -1,0 +1,77 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Calls</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+Given an expression <code>f</code> of function type
+<code>F</code>,
+</p><pre>
+f(a1, a2, &#x2026; an)
+</pre><p>
+calls <code>f</code> with arguments <code>a1, a2, &#x2026; an</code>.
+Except for one special case, arguments must be single-valued expressions
+[<a>assignable</a>] to the parameter types of
+<code>F</code> and are evaluated before the function is called.
+The type of the expression is the result type
+of <code>F</code>.
+A method invocation is similar but the method itself
+is specified as a selector upon a value of the receiver type for
+the method.
+</p><pre>
+math.Atan2(x, y)  // function call
+var pt *Point
+pt.Scale(3.5)     // method call with receiver pt
+</pre><p>
+In a function call, the function value and arguments are evaluated in
+[<a>the usual order</a>].
+After they are evaluated, the parameters of the call are passed by value to the function
+and the called function begins execution.
+The return parameters of the function are passed by value
+back to the calling function when the function returns.
+</p><p>
+Calling a <code>nil</code> function value
+causes a [<a>run-time panic</a>].
+</p><p>
+As a special case, if the return values of a function or method
+<code>g</code> are equal in number and individually
+assignable to the parameters of another function or method
+<code>f</code>, then the call <code>f(g(<i>parameters_of_g</i>))</code>
+will invoke <code>f</code> after binding the return values of
+<code>g</code> to the parameters of <code>f</code> in order.  The call
+of <code>f</code> must contain no parameters other than the call of <code>g</code>,
+and <code>g</code> must have at least one return value.
+If <code>f</code> has a final <code>...</code> parameter, it is
+assigned the return values of <code>g</code> that remain after
+assignment of regular parameters.
+</p><pre>
+func Split(s string, pos int) (string, string) {
+	return s[0:pos], s[pos:]
+}
+func Join(s, t string) string {
+	return s + t
+}
+if Join(Split(value, len(value)/2)) != value {
+	log.Panic(&quot;test fails&quot;)
+}
+</pre><p>
+A method call <code>x.m()</code> is valid if the [<a>method set</a>]
+of (the type of) <code>x</code> contains <code>m</code> and the
+argument list can be assigned to the parameter list of <code>m</code>.
+If <code>x</code> is [<a>addressable</a>] and <code>&amp;x</code>&apos;s method
+set contains <code>m</code>, <code>x.m()</code> is shorthand
+for <code>(&amp;x).m()</code>:
+</p><pre>
+var p Point
+p.Scale(3.5)
+</pre><p>
+There is no distinct method type and there are no method literals.
+</p></body>
+</body>
+</html>

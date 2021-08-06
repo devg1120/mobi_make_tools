@@ -1,0 +1,11 @@
+<body><p>
+The built-in function <code>delete</code> removes the element with key
+<code>k</code> from a [<a>map</a>] <code>m</code>. The
+type of <code>k</code> must be [<a>assignable</a>]
+to the key type of <code>m</code>.
+</p><pre>
+delete(m, k)  // remove element m[k] from map m
+</pre><p>
+If the map <code>m</code> is <code>nil</code> or the element <code>m[k]</code>
+does not exist, <code>delete</code> is a no-op.
+</p></body>

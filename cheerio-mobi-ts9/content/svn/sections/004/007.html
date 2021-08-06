@@ -1,0 +1,421 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Dealing with Structural Conflicts</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/tmp/es2015/cheerio-mobi-ts8/undefined" />
+  </head>
+   <body>
+    <div class="sect1">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="svn.tour.treeconflicts"></a>Dealing with Structural Conflicts</h2>
+          </div>
+        </div>
+      </div>
+      <p>So far, we have only talked about conflicts at the level of
+      file content.  When you and your collaborators make overlapping
+      changes within the same file, Subversion forces you to merge
+      those changes before you can commit.<a href="#ftn.idm1911" class="footnote" id="idm1911"><sup class="footnote">[9]</sup></a></p>
+      <p>But what happens if your collaborators move or delete a file
+      that you are still working on?  Maybe there was a
+      miscommunication, and one person thinks the file should be
+      deleted, while another person still wants to commit changes to
+      the file.  Or maybe your collaborators did some refactoring,
+      renaming files and moving around directories in the process.  If
+      you were still working on these files, those modifications may
+      need to be applied to the files at their new location.  Such
+      conflicts manifest themselves at the directory tree structure
+      level rather than at the file content level, and are known
+      as <em class="firstterm">tree conflicts</em>.</p>
+      <div class="sidebar">
+        <div class="titlepage">
+          <div>
+            <div>
+              <p class="title">
+                <strong>Tree conflicts prior to Subversion 1.6</strong>
+              </p>
+            </div>
+          </div>
+        </div>
+        <p>Prior to Subversion 1.6, tree conflicts could yield rather
+        unexpected results.  For example, if a file was locally
+        modified, but had been renamed in the repository,
+        running <span class="command"><strong>svn update</strong></span> would make Subversion
+        carry out the following steps:</p>
+        <div class="itemizedlist">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+              <p>Check the file to be renamed for local
+          modifications.</p>
+            </li>
+            <li class="listitem">
+              <p>Delete the file at its old location, and if it
+          had local modifications, keep an on-disk copy of the file at
+          the old location.  This on-disk copy now appears as an
+          unversioned file in the working copy.</p>
+            </li>
+            <li class="listitem">
+              <p>Add the file, as it exists in the repository,
+          at its new location.</p>
+            </li>
+          </ul>
+        </div>
+        <p>When this situation arises, there is the possibility that
+        the user makes a commit without realizing that local
+        modifications have been left in a now-unversioned file in the
+        working copy, and have not reached the repository.  This gets
+        more and more likely (and tedious) if the number of files
+        affected by this problem is large.</p>
+        <p>Since Subversion 1.6, this and other similar situations
+        are flagged as conflicts in the working copy.</p>
+      </div>
+      <p>As with textual conflicts, tree conflicts prevent a commit
+      from being made from the conflicted state, giving the user the
+      opportunity to examine the state of the working copy for
+      potential problems arising from the tree conflict, and resolving
+      any such problems before committing.</p>
+      <div class="sect2">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="svn.tour.treeconflicts.example"></a>An Example Tree Conflict</h3>
+            </div>
+          </div>
+        </div>
+        <p>Suppose a software project you were working on currently
+        looked like this:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn list -Rv svn://svn.example.com/trunk/
+     13 harry                 Sep 06 10:34 ./
+     13 harry              27 Sep 06 10:34 COPYING
+     13 harry              41 Sep 06 10:32 Makefile
+     13 harry              53 Sep 06 10:34 README
+     13 harry                 Sep 06 10:32 code/
+     13 harry              54 Sep 06 10:32 code/bar.c
+     13 harry             130 Sep 06 10:32 code/foo.c
+$
+</pre>
+        </div>
+        <p>Later, in revision 14, your collaborator Harry renames the file
+        <code class="filename">bar.c</code> to <code class="filename">baz.c</code>.
+        Unfortunately, you don&apos;t realize this yet.  As it turns out,
+        you are busy in your working copy composing a different set of
+        changes, some of which also involve modifications
+        to <code class="filename">bar.c</code>:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn diff
+Index: code/foo.c
+===================================================================
+--- code/foo.c	(revision 13)
++++ code/foo.c	(working copy)
+@@ -3,5 +3,5 @@
+ int main(int argc, char *argv[])
+ {
+     printf(&quot;I don&apos;t like being moved around!\n%s&quot;, bar());
+-    return 0;
++    return 1;
+ }
+Index: code/bar.c
+===================================================================
+--- code/bar.c	(revision 13)
++++ code/bar.c	(working copy)
+@@ -1,4 +1,4 @@
+ const char *bar(void)
+ {
+-    return &quot;Me neither!\n&quot;;
++    return &quot;Well, I do like being moved around!\n&quot;;
+ }
+$
+</pre>
+        </div>
+        <p>You first realize that someone else has
+        changed <code class="filename">bar.c</code> when your own commit
+        attempt fails:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn commit -m &quot;Small fixes&quot;
+Sending        code/bar.c
+svn: E155011: Commit failed (details follow):
+svn: E155011: File &apos;/home/svn/project/code/bar.c&apos; is out of date
+svn: E160013: File not found: transaction &apos;14-e&apos;, path &apos;/code/bar.c&apos;
+$
+</pre>
+        </div>
+        <p>At this point, you need to run <span class="command"><strong>svn update</strong></span>.
+        Besides bringing our working copy up to date so that you can
+        see Harry&apos;s changes, this also flags a tree conflict so you
+        have the opportunity to evaluate and properly resolve it.</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn update
+Updating &apos;.&apos;:
+   C code/bar.c
+A    code/baz.c
+U    Makefile
+Updated to revision 14.
+Summary of conflicts:
+  Tree conflicts: 1
+$
+</pre>
+        </div>
+        <p>In its output, <span class="command"><strong>svn update</strong></span> signifies tree
+        conflicts using a capital C in the fourth output column.
+        <span class="command"><strong>svn status</strong></span> reveals additional details of the
+        conflict:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn status
+M       code/foo.c
+A  +  C code/bar.c
+      &gt;   local edit, incoming delete upon update
+Summary of conflicts:
+  Tree conflicts: 1
+$
+</pre>
+        </div>
+        <p>Note how <code class="filename">bar.c</code> is automatically
+        scheduled for re-addition in your working copy, which
+        simplifies things in case you want to keep the file.</p>
+        <p>Because a move in Subversion is implemented as a copy
+        operation followed by a delete operation, and these two
+        operations cannot be easily related to one another during an
+        update, all Subversion can warn you about is an incoming
+        delete operation on a locally modified file.  This delete
+        operation <span class="emphasis"><em>may</em></span> be part of a move, or it
+        could be a genuine delete operation.  Determining exactly what
+        semantic change was made to the repository is
+        important&#x2014;you want to know just how your own edits fit
+        into the overall trajectory of the project.  So read log
+        messages, talk to your collaborators, study the line-based
+        differences&#x2014;do whatever you must do&#x2014;to determine
+        your best course of action.</p>
+        <p>In this case, Harry&apos;s commit log message tells you what
+        you need to know.</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn log -r14 ^/trunk
+------------------------------------------------------------------------
+r14 | harry | 2011-09-06 10:38:17 -0400 (Tue, 06 Sep 2011) | 1 line
+Changed paths:
+   M /Makefile
+   D /code/bar.c
+   A /code/baz.c (from /code/bar.c:13)
+Rename bar.c to baz.c, and adjust Makefile accordingly.
+------------------------------------------------------------------------
+$
+</pre>
+        </div>
+        <p><span class="command"><strong>svn info</strong></span> shows the URLs of the items
+        involved in the conflict. The <span class="emphasis"><em>left</em></span> URL
+        shows the source of the local side of the conflict, while
+        the <span class="emphasis"><em>right</em></span> URL shows the source of the
+        incoming side of the conflict. These URLs indicate where you
+        should start searching the repository&apos;s history for the change
+        which conflicts with your local change.</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn info code/bar.c
+Path: code/bar.c
+Name: bar.c
+URL: http://svn.example.com/svn/repo/trunk/code/bar.c
+&#x2026;
+Tree conflict: local edit, incoming delete upon update
+  Source  left: (file) ^/trunk/code/bar.c@4
+  Source right: (none) ^/trunk/code/bar.c@5
+$
+</pre>
+        </div>
+        <p><code class="filename">bar.c</code> is now said to be the
+        <em class="firstterm">victim</em> of a tree conflict.
+        It cannot be committed until the conflict is resolved:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn commit -m &quot;Small fixes&quot; 
+svn: E155015: Commit failed (details follow):
+svn: E155015: Aborting commit: &apos;/home/svn/project/code/bar.c&apos; remains in confl
+ict
+$
+</pre>
+        </div>
+        <p>To resolve this conflict, you must either agree or
+        disagree with the move that Harry made.</p>
+        <p>If you agree with the move, your <code class="filename">bar.c</code>
+        is superfluous.  You&apos;ll want to delete it and mark the tree
+        conflict as resolved.  But wait:  you made changes to that
+        file!  Before deleting <code class="filename">bar.c</code>, you need to
+        decide if the changes you made to it need to be applied
+        elsewhere, for example to the new <code class="filename">baz.c</code>
+        file where all of <code class="filename">bar.c</code>&apos;s code now lives.
+        Let&apos;s assume that your changes do need to <span class="quote">&#x201C;<span class="quote">follow the
+        move</span>&#x201D;</span>.  Subversion isn&apos;t smart enough to do this work
+        for you<a href="#ftn.idm1979" class="footnote" id="idm1979"><sup class="footnote">[10]</sup></a>, so you need to migrate your
+        changes manually.</p>
+        <p>In our example, you could manually re-make your change
+        to <code class="filename">bar.c</code> pretty easily&#x2014;it was,
+        after all, a single-line change.  That&apos;s not always the case,
+        though, so we&apos;ll show a more scalable approach.  We&apos;ll first
+        use <span class="command"><strong>svn diff</strong></span> to create a patch file.  Then
+        we&apos;ll edit the headers of that patch file to point to the new
+        name of our renamed file.  Finally, we re-apply the modified
+        patch to our working copy.</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn diff code/bar.c &gt; PATCHFILE
+$ cat PATCHFILE
+Index: code/bar.c
+===================================================================
+--- code/bar.c	(working copy)
++++ code/bar.c	(working copy)
+@@ -1,4 +1,4 @@
+ const char *bar(void)
+ {
+-    return &quot;Me neither!\n&quot;;
++    return &quot;Well, I do like being moved around!\n&quot;;
+ }
+$ ### Edit PATCHFILE to refer to code/baz.c instead of code/bar.c
+$ cat PATCHFILE
+Index: code/baz.c
+===================================================================
+--- code/baz.c	(working copy)
++++ code/baz.c	(working copy)
+@@ -1,4 +1,4 @@
+ const char *bar(void)
+ {
+-    return &quot;Me neither!\n&quot;;
++    return &quot;Well, I do like being moved around!\n&quot;;
+ }
+$ svn patch PATCHFILE
+U         code/baz.c
+$
+</pre>
+        </div>
+        <p>Now that the changes you originally made
+        to <code class="filename">bar.c</code> have been successfully
+        reproduced in <code class="filename">baz.c</code>, you can
+        delete <code class="filename">bar.c</code> and resolve the conflict,
+        instructing the resolution logic to accept what is currently
+        in the working copy as the desired result.</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn delete --force code/bar.c
+D         code/bar.c
+$ svn resolve --accept=working code/bar.c
+Resolved conflicted state of &apos;code/bar.c&apos;
+$ svn status
+M       code/foo.c
+M       code/baz.c
+$ svn diff
+Index: code/foo.c
+===================================================================
+--- code/foo.c  (revision 14)
++++ code/foo.c  (working copy)
+@@ -3,5 +3,5 @@
+ int main(int argc, char *argv[])
+ {
+     printf(&quot;I don&apos;t like being moved around!\n%s&quot;, bar());
+-    return 0;
++    return 1;
+ }
+Index: code/baz.c
+===================================================================
+--- code/baz.c  (revision 14)
++++ code/baz.c  (working copy)
+@@ -1,4 +1,4 @@
+ const char *bar(void)
+ {
+-    return &quot;Me neither!\n&quot;;
++    return &quot;Well, I do like being moved around!\n&quot;;
+ }
+$
+</pre>
+        </div>
+        <p>But what if you do not agree with the move?  Well, in that
+        case, you can delete <code class="filename">baz.c</code> instead, after
+        making sure any changes made to it after it was renamed are
+        either preserved or not worth keeping.  (Do not forget to also
+        revert the changes Harry made to <code class="filename">Makefile</code>.)
+        Since <code class="filename">bar.c</code> is already scheduled for
+        re-addition, there is nothing else left to do, and the
+        conflict can be marked resolved:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn delete --force code/baz.c
+D         code/baz.c
+$ svn resolve --accept=working code/bar.c
+Resolved conflicted state of &apos;code/bar.c&apos;
+$ svn status
+M       code/foo.c
+A  +    code/bar.c
+D       code/baz.c
+M       Makefile
+$ svn diff
+Index: code/foo.c
+===================================================================
+--- code/foo.c	(revision 14)
++++ code/foo.c	(working copy)
+@@ -3,5 +3,5 @@
+ int main(int argc, char *argv[])
+ {
+     printf(&quot;I don&apos;t like being moved around!\n%s&quot;, bar());
+-    return 0;
++    return 1;
+ }
+Index: code/bar.c
+===================================================================
+--- code/bar.c	(revision 14)
++++ code/bar.c	(working copy)
+@@ -1,4 +1,4 @@
+ const char *bar(void)
+ {
+-    return &quot;Me neither!\n&quot;;
++    return &quot;Well, I do like being moved around!\n&quot;;
+ }
+Index: code/baz.c
+===================================================================
+--- code/baz.c	(revision 14)
++++ code/baz.c	(working copy)
+@@ -1,4 +0,0 @@
+-const char *bar(void)
+-{
+-    return &quot;Me neither!\n&quot;;
+-}
+Index: Makefile
+===================================================================
+--- Makefile	(revision 14)
++++ Makefile	(working copy)
+@@ -1,2 +1,2 @@
+ foo: 
+-	$(CC) -o $@ code/foo.c code/baz.c
++	$(CC) -o $@ code/foo.c code/bar.c
+</pre>
+        </div>
+        <p>You&apos;ve now resolved your first tree conflict!  You can
+        commit your changes and tell Harry during tea break about all
+        the extra work he caused for you.</p>
+      </div>
+      <div class="footnotes">
+        <br>
+        <hr style="width:100; text-align:left;margin-left: 0">
+        <div id="ftn.idm1911" class="footnote">
+          <p><a href="#idm1911" class="para"><sup class="para">[9] </sup></a>Well,
+      you <span class="emphasis"><em>could</em></span> mark files containing conflict
+      markers as resolved and commit them, if you really wanted to.
+      But this is rarely done in practice.</p>
+        </div>
+        <div id="ftn.idm1979" class="footnote">
+          <p><a href="#idm1979" class="para"><sup class="para">[10] </sup></a>In some cases, Subversion 1.5 and 1.6
+        <span class="emphasis"><em>would</em></span> actually handle this for you, but
+        this somewhat hit-or-miss functionality was removed in
+        Subversion 1.7.</p>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

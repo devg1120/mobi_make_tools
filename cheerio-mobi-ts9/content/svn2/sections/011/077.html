@@ -1,0 +1,265 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svnsync—Subversion Repository Mirroring</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts6/undefined" />
+  </head>
+   <body>
+    <div class="sect1">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="svn.ref.svnsync"></a>svnsync&#x2014;Subversion Repository Mirroring</h2>
+          </div>
+        </div>
+      </div>
+      <p><span class="command"><strong>svnsync</strong></span> is the Subversion remote
+      repository mirroring tool.  Put simply, it allows you to replay
+      the revisions of one repository into another one.</p>
+      <p>In any mirroring scenario, there are two repositories: the
+      source repository, and the mirror (or <span class="quote">&#x201C;<span class="quote">sink</span>&#x201D;</span>)
+      repository.  The source repository is the repository from which
+      <span class="command"><strong>svnsync</strong></span> pulls revisions.  The mirror
+      repository is the destination for the revisions pulled from the
+      source repository.  Each of the repositories may be local or
+      remote&#x2014;they are only ever addressed by their URLs.</p>
+      <p>The <span class="command"><strong>svnsync</strong></span> process requires only read
+      access to the source repository; it never attempts to modify it.
+      But obviously, <span class="command"><strong>svnsync</strong></span> requires both read and
+      write access to the mirror repository.</p>
+      <div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Warning">
+          <tr>
+            <td rowspan="2" align="center" valign="top" width="25">
+              <img alt="[Warning]" src="/home/gusa1120/es2015/cheerio-mobi-ts6/content/svn2/processed_images/warning-grayscale.gif">
+            </td>
+            <th align="left">Warning</th>
+          </tr>
+          <tr>
+            <td align="left" valign="top">
+              <p><span class="command"><strong>svnsync</strong></span> is very sensitive to changes
+        made in the mirror repository that weren&apos;t made as part of a
+        mirroring operation.  To prevent this from happening, it&apos;s
+        best if the <span class="command"><strong>svnsync</strong></span> process is the only
+        process permitted to modify the mirror repository.</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="sect2">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="svn.ref.svnsync.sw"></a>svnsync Options</h3>
+            </div>
+          </div>
+        </div>
+        <p>Options in <span class="command"><strong>svnsync</strong></span> are global, just
+        as they are in <span class="command"><strong>svn</strong></span> and
+        <span class="command"><strong>svnadmin</strong></span>:</p>
+        <div class="variablelist">
+          <dl class="variablelist">
+            <dt>
+              <a id="svn.ref.svnsync.sw.allow_non_empty"></a>
+              <span class="term">
+                <code class="option">--allow-non-empty</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Disables the verification (which <span class="command"><strong>svnsync
+              initialize</strong></span> performs by default) that the
+              repository being initialized is empty of history
+              version.</p>
+            </dd>
+            <dt>
+              <a id="svn.ref.svnsync.sw.config_dir"></a>
+              <span class="term"><code class="option">--config-dir</code> <em class="replaceable"><code>DIR</code></em></span>
+            </dt>
+            <dd>
+              <p>Instructs Subversion to read configuration
+              information from the specified directory instead of the
+              default location (<code class="filename">.subversion</code> in
+              the user&apos;s home directory).</p>
+            </dd>
+            <dt>
+              <a id="svn.ref.svnsync.sw.config_option"></a>
+              <span class="term"><code class="option">--config-option</code> <em class="replaceable"><code>CONFSPEC</code></em></span>
+            </dt>
+            <dd>
+              <p>Sets, for the duration of the command, the value of
+              a runtime configuration
+              option.  <em class="replaceable"><code>CONFSPEC</code></em> is a string
+              which specifies the configuration option namespace, name
+              and value that you&apos;d like to assign, formatted as
+              <em class="replaceable"><code>FILE</code></em>:<em class="replaceable"><code>SECTION</code></em>:<em class="replaceable"><code>OPTION</code></em>=[<em class="replaceable"><code>VALUE</code></em>].
+              In this syntax, <em class="replaceable"><code>FILE</code></em>
+              and <em class="replaceable"><code>SECTION</code></em> are the runtime
+              configuration file (either <code class="literal">config</code>
+              or <code class="literal">servers</code>) and the section thereof,
+              respectively, which contain the option whose value you
+              wish to change.  <em class="replaceable"><code>OPTION</code></em> is,
+              of course, the option itself,
+              and <em class="replaceable"><code>VALUE</code></em> the value (if any)
+              you wish to assign to the option.  For example, to
+              temporarily disable the use of the compression in the
+              HTTP protocol,
+              use <code class="option">--config-option=servers:global:http-compression=no</code>.
+              You can use this option multiple times to change
+              multiple option values simultaneously.</p>
+            </dd>
+            <dt>
+              <a id="svn.ref.svnsync.sw.disable_locking"></a>
+              <span class="term">
+                <code class="option">--disable-locking</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Causes <span class="command"><strong>svnsync</strong></span> to bypass its own
+              exclusive access mechanisms and operate on the
+              assumption that its exclusive access to the mirror
+              repository is being guaranteed through some other,
+              out-of-band mechanism.</p>
+            </dd>
+            <dt>
+              <a id="svn.ref.svnsync.sw.no_auth_cache"></a>
+              <span class="term">
+                <code class="option">--no-auth-cache</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Prevents caching of authentication information
+              (e.g., username and password) in the Subversion
+              runtime configuration directories.</p>
+            </dd>
+            <dt>
+              <a id="svn.ref.svnsync.sw.non_interactive"></a>
+              <span class="term">
+                <code class="option">--non-interactive</code>
+              </span>
+            </dt>
+            <dd>
+              <p>In the case of an authentication failure or
+              insufficient credentials, prevents prompting for
+              credentials (e.g., username or password).  This is useful
+              if you&apos;re running Subversion inside an automated
+              script and it&apos;s more appropriate to have Subversion fail
+              than to prompt for more information.</p>
+            </dd>
+            <dt>
+              <a id="svn.ref.svnsync.sw.quiet"></a>
+              <span class="term"><code class="option">--quiet</code> (<code class="option">-q</code>)</span>
+            </dt>
+            <dd>
+              <p>Requests that the client print only essential
+              information while performing an operation.</p>
+            </dd>
+            <dt>
+              <a id="svn.ref.svnsync.sw.revision"></a>
+              <span class="term"><code class="option">--revision</code> (<code class="option">-r</code>) <em class="replaceable"><code>ARG</code></em></span>
+            </dt>
+            <dd>
+              <p>Used by <span class="command"><strong>svnsync copy-revprops</strong></span> to
+              specify a particular revision or revision range on which
+              to operate.</p>
+            </dd>
+            <dt>
+              <a id="svn.ref.svnsync.sw.source_password"></a>
+              <span class="term"><code class="option">--source-password</code> <em class="replaceable"><code>PASSWD</code></em></span>
+            </dt>
+            <dd>
+              <p>Specifies the password for the Subversion server
+              from which you are syncing.  If not provided, or if
+              incorrect, Subversion will prompt you for this
+              information as needed.</p>
+            </dd>
+            <dt>
+              <a id="svn.ref.svnsync.sw.source_prop_encoding"></a>
+              <span class="term">
+                <code class="option">--source-prop-encoding <em class="replaceable"><code>ARG</code></em></code>
+              </span>
+            </dt>
+            <dd>
+              <p>Instructs <span class="command"><strong>svnsync</strong></span> to assume that
+              translatable Subversion revision properties found in the
+              source repository are stored using the character
+              encoding <em class="replaceable"><code>ARG</code></em> and to transcode
+              those into UTF-8 when copying them into the mirror
+              repository.</p>
+            </dd>
+            <dt>
+              <a id="svn.ref.svnsync.sw.source_username"></a>
+              <span class="term"><code class="option">--source-username</code> <em class="replaceable"><code>NAME</code></em></span>
+            </dt>
+            <dd>
+              <p>Specifies the username for the Subversion server
+              from which you are syncing.  If not provided, or if
+              incorrect, Subversion will prompt you for this
+              information as needed.</p>
+            </dd>
+            <dt>
+              <a id="svn.ref.svnsync.sw.steal_lock"></a>
+              <span class="term">
+                <code class="option">--steal-lock</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Causes <span class="command"><strong>svnsync</strong></span> to steal, as
+              necessary, the lock which it uses on the mirror
+              repository to ensure exclusive repository access.  (This
+              option should only be used when a lock exists in the
+              mirror repository and is known to be stale&#x2014;that
+              is, when you are certain that there are no
+              other <span class="command"><strong>svnsync</strong></span> processes accessing
+              that repository.)</p>
+            </dd>
+            <dt>
+              <a id="svn.ref.svnsync.sw.sync_password"></a>
+              <span class="term"><code class="option">--sync-password</code> <em class="replaceable"><code>PASSWD</code></em></span>
+            </dt>
+            <dd>
+              <p>Specifies the password for the Subversion server to
+              which you are syncing.  If not provided, or if
+              incorrect, Subversion will prompt you for this
+              information as needed.</p>
+            </dd>
+            <dt>
+              <a id="svn.ref.svnsync.sw.sync_username"></a>
+              <span class="term"><code class="option">--sync-username</code> <em class="replaceable"><code>NAME</code></em></span>
+            </dt>
+            <dd>
+              <p>Specifies the username for the Subversion server to
+              which you are syncing.  If not provided, or if
+              incorrect, Subversion will prompt you for this
+              information as needed.</p>
+            </dd>
+            <dt>
+              <a id="svn.ref.svnsync.sw.trust_server_cert"></a>
+              <span class="term">
+                <code class="option">--trust-server-cert</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Used with <code class="option">--non-interactive</code> to accept
+              any unknown SSL server certificates without prompting.</p>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="sect2">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="svn.ref.svnsync.c"></a>svnsync Subcommands</h3>
+            </div>
+          </div>
+        </div>
+        <p>Here are the various subcommands
+        for the <span class="command"><strong>svnsync</strong></span> program.</p>
+      </div>
+    </div>
+</body>
+</html>

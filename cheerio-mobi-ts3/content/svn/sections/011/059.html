@@ -1,0 +1,249 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svnlook—Subversion Repository Examination</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/tmp/es2015/cheerio-mobi-ts3/css/kindle.css" />
+  </head>
+   <body>
+    <div class="sect1">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="svn.ref.svnlook"></a>svnlook—Subversion Repository Examination</h2>
+          </div>
+        </div>
+      </div>
+      <p><span class="command"><strong>svnlook</strong></span> is a command-line utility for
+      examining different aspects of a Subversion repository.  It
+      does not make any changes to the repository—it's just
+      used for <span class="quote">“<span class="quote">peeking.</span>”</span>
+      <span class="command"><strong>svnlook</strong></span> is typically used by the
+      repository hooks, but a repository administrator might find it
+      useful for diagnostic purposes.</p>
+      <p>Since <span class="command"><strong>svnlook</strong></span> works via direct repository access
+      (and thus can be used only on the machine that holds the
+      repository), it refers to the repository with a path, not a URL.</p>
+      <p>If no revision or transaction is specified,
+      <span class="command"><strong>svnlook</strong></span> defaults to the youngest (most
+      recent) revision of the repository.</p>
+      <div class="sect2">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="svn.ref.svnlook.sw"></a>svnlook Options</h3>
+            </div>
+          </div>
+        </div>
+        <p>Options in <span class="command"><strong>svnlook</strong></span> are global, just
+        as they are in <span class="command"><strong>svn</strong></span> and
+        <span class="command"><strong>svnadmin</strong></span>; however, most options apply
+        to only one subcommand since the functionality of
+        <span class="command"><strong>svnlook</strong></span> is (intentionally) limited in
+        scope:</p>
+        <div class="variablelist">
+          <dl class="variablelist">
+            <dt>
+              <a id="svn.ref.svnlook.sw.copy_info"></a>
+              <span class="term">
+                <code class="option">--copy-info</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Causes <span class="command"><strong>svnlook changed</strong></span> to show
+              detailed copy source information.</p>
+            </dd>
+            <dt>
+              <a id="svn.ref.svnlook.sw.diff_copy_from"></a>
+              <span class="term">
+                <code class="option">--diff-copy-from</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Print differences for copied items against the copy
+              source.</p>
+            </dd>
+            <dt>
+              <a id="svn.ref.svnlook.sw.extensions"></a>
+              <span class="term"><code class="option">--extensions</code> (<code class="option">-x</code>) <em class="replaceable"><code>ARG</code></em></span>
+            </dt>
+            <dd>
+              <p>Specifies customizations which Subversion should
+              make when performing difference calculations.  Valid
+              extensions include:</p>
+              <div class="variablelist">
+                <dl class="variablelist">
+                  <dt>
+                    <span class="term"><code class="option">--ignore-space-change</code> (<code class="option">-b</code>)</span>
+                  </dt>
+                  <dd>
+                    <p>Ignore changes in the amount of white space.</p>
+                  </dd>
+                  <dt>
+                    <span class="term"><code class="option">--ignore-all-space</code> (<code class="option">-w</code>)</span>
+                  </dt>
+                  <dd>
+                    <p>Ignore all white space.</p>
+                  </dd>
+                  <dt>
+                    <span class="term">
+                      <code class="option">--ignore-eol-style</code>
+                    </span>
+                  </dt>
+                  <dd>
+                    <p>Ignore changes in EOL (end-of-line) style.</p>
+                  </dd>
+                  <dt>
+                    <span class="term"><code class="option">--show-c-function</code> (<code class="option">-p</code>)</span>
+                  </dt>
+                  <dd>
+                    <p>Show C function names in the diff output.</p>
+                  </dd>
+                  <dt>
+                    <span class="term"><code class="option">--unified</code> (<code class="option">-u</code>)</span>
+                  </dt>
+                  <dd>
+                    <p>Show three lines of unified diff context.</p>
+                  </dd>
+                </dl>
+              </div>
+              <p>The default value is <code class="literal">-u</code>.</p>
+              <p>Note that when Subversion is configured to invoke an
+              external diff command, the value of
+              the <code class="option">--extension</code> (<code class="option">-x</code>)
+              option isn't restricted to the previously mentioned
+              options, but may be <span class="emphasis"><em>any</em></span> additional
+              arguments which Subversion should pass to that command.
+              If you wish to pass multiple arguments, you must enclose
+              all of them in quotes.</p>
+            </dd>
+            <dt>
+              <a id="svn.ref.svnlook.sw.full_paths"></a>
+              <span class="term">
+                <code class="option">--full-paths</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Causes <span class="command"><strong>svnlook tree</strong></span> to display
+              full paths instead of hierarchical, indented path
+              components.</p>
+            </dd>
+            <dt>
+              <a id="svn.ref.svnlook.sw.limit"></a>
+              <span class="term"><code class="option">--limit</code> (<code class="option">-l</code>) <em class="replaceable"><code>ARG</code></em></span>
+            </dt>
+            <dd>
+              <p>Limit output to a maximum number of
+              <em class="replaceable"><code>ARG</code></em> items.</p>
+            </dd>
+            <dt>
+              <a id="svn.ref.svnlook.sw.no_diff_deleted"></a>
+              <span class="term">
+                <code class="option">--no-diff-deleted</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Prevents <span class="command"><strong>svnlook diff</strong></span> from printing
+              differences for deleted files.  The default behavior
+              when a file is deleted in a transaction/revision is
+              to print the same differences that you would see if
+              you had left the file but removed all the content.</p>
+            </dd>
+            <dt>
+              <a id="svn.ref.svnlook.sw.no_diff_added"></a>
+              <span class="term">
+                <code class="option">--no-diff-added</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Prevents <span class="command"><strong>svnlook diff</strong></span> from printing
+            differences for added files.  The default behavior when
+            you add a file is to print the same differences that you
+            would see if you had added the entire contents of an
+            existing (empty) file.</p>
+            </dd>
+            <dt>
+              <a id="svn.ref.svnlook.sw.non_recursive"></a>
+              <span class="term"><code class="option">--non-recursive</code> (<code class="option">-N</code>)</span>
+            </dt>
+            <dd>
+              <p>Operate on a single directory only.</p>
+            </dd>
+            <dt>
+              <a id="svn.ref.svnlook.sw.revision"></a>
+              <span class="term"><code class="option">--revision</code> (<code class="option">-r</code>) <em class="replaceable"><code>REV</code></em></span>
+            </dt>
+            <dd>
+              <p>Specifies a particular revision number that you wish
+              to examine.</p>
+            </dd>
+            <dt>
+              <a id="svn.ref.svnlook.sw.revprop"></a>
+              <span class="term">
+                <code class="option">--revprop</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Operates on a revision property instead of a
+              property specific to a file or directory.  This option
+              requires that you also pass a revision with the
+              <code class="option">--revision</code> (<code class="option">-r</code>)
+              option.</p>
+            </dd>
+            <dt>
+              <a id="svn.ref.svnlook.sw.transaction"></a>
+              <span class="term"><code class="option">--transaction</code> (<code class="option">-t</code>) <em class="replaceable"><code>ID</code></em></span>
+            </dt>
+            <dd>
+              <p>Specifies a particular transaction ID that you wish to
+              examine.</p>
+            </dd>
+            <dt>
+              <a id="svn.ref.svnlook.sw.show_ids"></a>
+              <span class="term">
+                <code class="option">--show-ids</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Shows the filesystem node revision IDs for each path in the filesystem
+              tree.</p>
+            </dd>
+            <dt>
+              <a id="svn.ref.svnlook.sw.verbose"></a>
+              <span class="term"><code class="option">--verbose</code> (<code class="option">-v</code>)</span>
+            </dt>
+            <dd>
+              <p>Be verbose.  When used with <span class="command"><strong>svnlook
+              proplist</strong></span>, for example, this causes Subversion
+              to display not just the list of properties, but their
+              values also.</p>
+            </dd>
+            <dt>
+              <a id="svn.ref.svnlook.sw.xml"></a>
+              <span class="term">
+                <code class="option">--xml</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Prints output in XML format.</p>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="sect2">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="svn.ref.svnlook.c"></a>svnlook Subcommands</h3>
+            </div>
+          </div>
+        </div>
+        <p>Here are the various subcommands
+        for the <span class="command"><strong>svnlook</strong></span> program.</p>
+      </div>
+    </div>
+</body>
+</html>

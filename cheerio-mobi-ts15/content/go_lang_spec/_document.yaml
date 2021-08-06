@@ -1,0 +1,1609 @@
+doc_uuid: go_lang_spec-documetation-2019-11-07
+title: go_lang_spec
+author: AUTHOR
+publisher: github.com/danchoi/kindlefodder
+subject: SUBJECT
+date: 2019-11-07-03/09/23
+mobi_outfile: go_lang_spec.2019-11-07.mobi
+cover: /home/admin/es2015/cheerio-mobi-ts15/mobi_images/cover-image.gif
+masthead: /home/admin/es2015/cheerio-mobi-ts15/mobi_images/masthead.gif
+spine_items:
+  - idref: item-000
+  - idref: item-000000
+  - idref: item-001
+  - idref: item-001000
+  - idref: item-002
+  - idref: item-002000
+  - idref: item-003
+  - idref: item-003000
+  - idref: item-003001
+  - idref: item-003002
+  - idref: item-004
+  - idref: item-004000
+  - idref: item-004001
+  - idref: item-004002
+  - idref: item-004003
+  - idref: item-004004
+  - idref: item-004005
+  - idref: item-004006
+  - idref: item-004007
+  - idref: item-004008
+  - idref: item-004009
+  - idref: item-004010
+  - idref: item-004011
+  - idref: item-005
+  - idref: item-005000
+  - idref: item-006
+  - idref: item-006000
+  - idref: item-007
+  - idref: item-007000
+  - idref: item-007001
+  - idref: item-007002
+  - idref: item-007003
+  - idref: item-007004
+  - idref: item-007005
+  - idref: item-007006
+  - idref: item-007007
+  - idref: item-007008
+  - idref: item-007009
+  - idref: item-007010
+  - idref: item-007011
+  - idref: item-007012
+  - idref: item-008
+  - idref: item-008000
+  - idref: item-008001
+  - idref: item-008002
+  - idref: item-008003
+  - idref: item-009
+  - idref: item-009000
+  - idref: item-010
+  - idref: item-010000
+  - idref: item-010001
+  - idref: item-010002
+  - idref: item-010003
+  - idref: item-010004
+  - idref: item-010005
+  - idref: item-010006
+  - idref: item-010007
+  - idref: item-010008
+  - idref: item-010009
+  - idref: item-010010
+  - idref: item-010011
+  - idref: item-010012
+  - idref: item-011
+  - idref: item-011000
+  - idref: item-011001
+  - idref: item-011002
+  - idref: item-011003
+  - idref: item-011004
+  - idref: item-011005
+  - idref: item-011006
+  - idref: item-011007
+  - idref: item-011008
+  - idref: item-011009
+  - idref: item-011010
+  - idref: item-011011
+  - idref: item-011012
+  - idref: item-011013
+  - idref: item-011014
+  - idref: item-011015
+  - idref: item-011016
+  - idref: item-011017
+  - idref: item-011018
+  - idref: item-011019
+  - idref: item-011020
+  - idref: item-011021
+  - idref: item-011022
+  - idref: item-012
+  - idref: item-012000
+  - idref: item-012001
+  - idref: item-012002
+  - idref: item-012003
+  - idref: item-012004
+  - idref: item-012005
+  - idref: item-012006
+  - idref: item-012007
+  - idref: item-012008
+  - idref: item-012009
+  - idref: item-012010
+  - idref: item-012011
+  - idref: item-012012
+  - idref: item-012013
+  - idref: item-012014
+  - idref: item-012015
+  - idref: item-012016
+  - idref: item-012017
+  - idref: item-012018
+  - idref: item-013
+  - idref: item-013000
+  - idref: item-013001
+  - idref: item-013002
+  - idref: item-013003
+  - idref: item-013004
+  - idref: item-013005
+  - idref: item-013006
+  - idref: item-013007
+  - idref: item-013008
+  - idref: item-013009
+  - idref: item-014
+  - idref: item-014000
+  - idref: item-014001
+  - idref: item-014002
+  - idref: item-014003
+  - idref: item-014004
+  - idref: item-015
+  - idref: item-015000
+  - idref: item-015001
+  - idref: item-015002
+  - idref: item-015003
+  - idref: item-016
+  - idref: item-016000
+  - idref: item-017
+  - idref: item-017000
+  - idref: item-018
+  - idref: item-018000
+  - idref: item-018001
+  - idref: item-018002
+sections:
+  - playorder: 2
+    path: sections/000
+    title: Frontmatter
+    idref: item-000
+    href: sections/000/section.html
+    articles:
+      - &ref_0
+        file: sections/000/000.html
+        href: sections/000/000.html
+        title: Title Page
+        short_title: Title Page
+        author: undefined
+        description: undefined
+        playorder: 3
+        idref: item-000000
+  - playorder: 4
+    path: sections/001
+    title: Introduction
+    idref: item-001
+    href: sections/001/section.html
+    articles:
+      - file: sections/001/000.html
+        href: sections/001/000.html
+        title: Introduction
+        short_title: Introduction
+        author: undefined
+        description: undefined
+        playorder: 5
+        idref: item-001000
+  - playorder: 6
+    path: sections/002
+    title: Notation
+    idref: item-002
+    href: sections/002/section.html
+    articles:
+      - file: sections/002/000.html
+        href: sections/002/000.html
+        title: Notation
+        short_title: Notation
+        author: undefined
+        description: undefined
+        playorder: 7
+        idref: item-002000
+  - playorder: 8
+    path: sections/003
+    title: Source code representation
+    idref: item-003
+    href: sections/003/section.html
+    articles:
+      - file: sections/003/000.html
+        href: sections/003/000.html
+        title: Source code representation
+        short_title: Source code representation
+        author: undefined
+        description: undefined
+        playorder: 9
+        idref: item-003000
+      - file: sections/003/001.html
+        href: sections/003/001.html
+        title: Characters
+        short_title: Characters
+        author: undefined
+        description: undefined
+        playorder: 10
+        idref: item-003001
+      - file: sections/003/002.html
+        href: sections/003/002.html
+        title: Letters and digits
+        short_title: Letters and digits
+        author: undefined
+        description: undefined
+        playorder: 11
+        idref: item-003002
+  - playorder: 12
+    path: sections/004
+    title: Lexical elements
+    idref: item-004
+    href: sections/004/section.html
+    articles:
+      - file: sections/004/000.html
+        href: sections/004/000.html
+        title: Lexical elements
+        short_title: Lexical elements
+        author: undefined
+        description: undefined
+        playorder: 13
+        idref: item-004000
+      - file: sections/004/001.html
+        href: sections/004/001.html
+        title: Comments
+        short_title: Comments
+        author: undefined
+        description: undefined
+        playorder: 14
+        idref: item-004001
+      - file: sections/004/002.html
+        href: sections/004/002.html
+        title: Tokens
+        short_title: Tokens
+        author: undefined
+        description: undefined
+        playorder: 15
+        idref: item-004002
+      - file: sections/004/003.html
+        href: sections/004/003.html
+        title: Semicolons
+        short_title: Semicolons
+        author: undefined
+        description: undefined
+        playorder: 16
+        idref: item-004003
+      - file: sections/004/004.html
+        href: sections/004/004.html
+        title: Identifiers
+        short_title: Identifiers
+        author: undefined
+        description: undefined
+        playorder: 17
+        idref: item-004004
+      - file: sections/004/005.html
+        href: sections/004/005.html
+        title: Keywords
+        short_title: Keywords
+        author: undefined
+        description: undefined
+        playorder: 18
+        idref: item-004005
+      - file: sections/004/006.html
+        href: sections/004/006.html
+        title: Operators and punctuation
+        short_title: Operators and punctuation
+        author: undefined
+        description: undefined
+        playorder: 19
+        idref: item-004006
+      - file: sections/004/007.html
+        href: sections/004/007.html
+        title: Integer literals
+        short_title: Integer literals
+        author: undefined
+        description: undefined
+        playorder: 20
+        idref: item-004007
+      - file: sections/004/008.html
+        href: sections/004/008.html
+        title: Floating-point literals
+        short_title: Floating-point literals
+        author: undefined
+        description: undefined
+        playorder: 21
+        idref: item-004008
+      - file: sections/004/009.html
+        href: sections/004/009.html
+        title: Imaginary literals
+        short_title: Imaginary literals
+        author: undefined
+        description: undefined
+        playorder: 22
+        idref: item-004009
+      - file: sections/004/010.html
+        href: sections/004/010.html
+        title: Rune literals
+        short_title: Rune literals
+        author: undefined
+        description: undefined
+        playorder: 23
+        idref: item-004010
+      - file: sections/004/011.html
+        href: sections/004/011.html
+        title: String literals
+        short_title: String literals
+        author: undefined
+        description: undefined
+        playorder: 24
+        idref: item-004011
+  - playorder: 25
+    path: sections/005
+    title: Constants
+    idref: item-005
+    href: sections/005/section.html
+    articles:
+      - file: sections/005/000.html
+        href: sections/005/000.html
+        title: Constants
+        short_title: Constants
+        author: undefined
+        description: undefined
+        playorder: 26
+        idref: item-005000
+  - playorder: 27
+    path: sections/006
+    title: Variables
+    idref: item-006
+    href: sections/006/section.html
+    articles:
+      - file: sections/006/000.html
+        href: sections/006/000.html
+        title: Variables
+        short_title: Variables
+        author: undefined
+        description: undefined
+        playorder: 28
+        idref: item-006000
+  - playorder: 29
+    path: sections/007
+    title: Types
+    idref: item-007
+    href: sections/007/section.html
+    articles:
+      - file: sections/007/000.html
+        href: sections/007/000.html
+        title: Types
+        short_title: Types
+        author: undefined
+        description: undefined
+        playorder: 30
+        idref: item-007000
+      - file: sections/007/001.html
+        href: sections/007/001.html
+        title: Method sets
+        short_title: Method sets
+        author: undefined
+        description: undefined
+        playorder: 31
+        idref: item-007001
+      - file: sections/007/002.html
+        href: sections/007/002.html
+        title: Boolean types
+        short_title: Boolean types
+        author: undefined
+        description: undefined
+        playorder: 32
+        idref: item-007002
+      - file: sections/007/003.html
+        href: sections/007/003.html
+        title: Numeric types
+        short_title: Numeric types
+        author: undefined
+        description: undefined
+        playorder: 33
+        idref: item-007003
+      - file: sections/007/004.html
+        href: sections/007/004.html
+        title: String types
+        short_title: String types
+        author: undefined
+        description: undefined
+        playorder: 34
+        idref: item-007004
+      - file: sections/007/005.html
+        href: sections/007/005.html
+        title: Array types
+        short_title: Array types
+        author: undefined
+        description: undefined
+        playorder: 35
+        idref: item-007005
+      - file: sections/007/006.html
+        href: sections/007/006.html
+        title: Slice types
+        short_title: Slice types
+        author: undefined
+        description: undefined
+        playorder: 36
+        idref: item-007006
+      - file: sections/007/007.html
+        href: sections/007/007.html
+        title: Struct types
+        short_title: Struct types
+        author: undefined
+        description: undefined
+        playorder: 37
+        idref: item-007007
+      - file: sections/007/008.html
+        href: sections/007/008.html
+        title: Pointer types
+        short_title: Pointer types
+        author: undefined
+        description: undefined
+        playorder: 38
+        idref: item-007008
+      - file: sections/007/009.html
+        href: sections/007/009.html
+        title: Function types
+        short_title: Function types
+        author: undefined
+        description: undefined
+        playorder: 39
+        idref: item-007009
+      - file: sections/007/010.html
+        href: sections/007/010.html
+        title: Interface types
+        short_title: Interface types
+        author: undefined
+        description: undefined
+        playorder: 40
+        idref: item-007010
+      - file: sections/007/011.html
+        href: sections/007/011.html
+        title: Map types
+        short_title: Map types
+        author: undefined
+        description: undefined
+        playorder: 41
+        idref: item-007011
+      - file: sections/007/012.html
+        href: sections/007/012.html
+        title: Channel types
+        short_title: Channel types
+        author: undefined
+        description: undefined
+        playorder: 42
+        idref: item-007012
+  - playorder: 43
+    path: sections/008
+    title: Properties of types and values
+    idref: item-008
+    href: sections/008/section.html
+    articles:
+      - file: sections/008/000.html
+        href: sections/008/000.html
+        title: Properties of types and values
+        short_title: Properties of types and values
+        author: undefined
+        description: undefined
+        playorder: 44
+        idref: item-008000
+      - file: sections/008/001.html
+        href: sections/008/001.html
+        title: Type identity
+        short_title: Type identity
+        author: undefined
+        description: undefined
+        playorder: 45
+        idref: item-008001
+      - file: sections/008/002.html
+        href: sections/008/002.html
+        title: Assignability
+        short_title: Assignability
+        author: undefined
+        description: undefined
+        playorder: 46
+        idref: item-008002
+      - file: sections/008/003.html
+        href: sections/008/003.html
+        title: Representability
+        short_title: Representability
+        author: undefined
+        description: undefined
+        playorder: 47
+        idref: item-008003
+  - playorder: 48
+    path: sections/009
+    title: Blocks
+    idref: item-009
+    href: sections/009/section.html
+    articles:
+      - file: sections/009/000.html
+        href: sections/009/000.html
+        title: Blocks
+        short_title: Blocks
+        author: undefined
+        description: undefined
+        playorder: 49
+        idref: item-009000
+  - playorder: 50
+    path: sections/010
+    title: Declarations and scope
+    idref: item-010
+    href: sections/010/section.html
+    articles:
+      - file: sections/010/000.html
+        href: sections/010/000.html
+        title: Declarations and scope
+        short_title: Declarations and scope
+        author: undefined
+        description: undefined
+        playorder: 51
+        idref: item-010000
+      - file: sections/010/001.html
+        href: sections/010/001.html
+        title: Label scopes
+        short_title: Label scopes
+        author: undefined
+        description: undefined
+        playorder: 52
+        idref: item-010001
+      - file: sections/010/002.html
+        href: sections/010/002.html
+        title: Blank identifier
+        short_title: Blank identifier
+        author: undefined
+        description: undefined
+        playorder: 53
+        idref: item-010002
+      - file: sections/010/003.html
+        href: sections/010/003.html
+        title: Predeclared identifiers
+        short_title: Predeclared identifiers
+        author: undefined
+        description: undefined
+        playorder: 54
+        idref: item-010003
+      - file: sections/010/004.html
+        href: sections/010/004.html
+        title: Exported identifiers
+        short_title: Exported identifiers
+        author: undefined
+        description: undefined
+        playorder: 55
+        idref: item-010004
+      - file: sections/010/005.html
+        href: sections/010/005.html
+        title: Uniqueness of identifiers
+        short_title: Uniqueness of identifiers
+        author: undefined
+        description: undefined
+        playorder: 56
+        idref: item-010005
+      - file: sections/010/006.html
+        href: sections/010/006.html
+        title: Constant declarations
+        short_title: Constant declarations
+        author: undefined
+        description: undefined
+        playorder: 57
+        idref: item-010006
+      - file: sections/010/007.html
+        href: sections/010/007.html
+        title: Iota
+        short_title: Iota
+        author: undefined
+        description: undefined
+        playorder: 58
+        idref: item-010007
+      - file: sections/010/008.html
+        href: sections/010/008.html
+        title: Type declarations
+        short_title: Type declarations
+        author: undefined
+        description: undefined
+        playorder: 59
+        idref: item-010008
+      - file: sections/010/009.html
+        href: sections/010/009.html
+        title: Variable declarations
+        short_title: Variable declarations
+        author: undefined
+        description: undefined
+        playorder: 60
+        idref: item-010009
+      - file: sections/010/010.html
+        href: sections/010/010.html
+        title: Short variable declarations
+        short_title: Short variable declarations
+        author: undefined
+        description: undefined
+        playorder: 61
+        idref: item-010010
+      - file: sections/010/011.html
+        href: sections/010/011.html
+        title: Function declarations
+        short_title: Function declarations
+        author: undefined
+        description: undefined
+        playorder: 62
+        idref: item-010011
+      - file: sections/010/012.html
+        href: sections/010/012.html
+        title: Method declarations
+        short_title: Method declarations
+        author: undefined
+        description: undefined
+        playorder: 63
+        idref: item-010012
+  - playorder: 64
+    path: sections/011
+    title: Expressions
+    idref: item-011
+    href: sections/011/section.html
+    articles:
+      - file: sections/011/000.html
+        href: sections/011/000.html
+        title: Expressions
+        short_title: Expressions
+        author: undefined
+        description: undefined
+        playorder: 65
+        idref: item-011000
+      - file: sections/011/001.html
+        href: sections/011/001.html
+        title: Operands
+        short_title: Operands
+        author: undefined
+        description: undefined
+        playorder: 66
+        idref: item-011001
+      - file: sections/011/002.html
+        href: sections/011/002.html
+        title: Qualified identifiers
+        short_title: Qualified identifiers
+        author: undefined
+        description: undefined
+        playorder: 67
+        idref: item-011002
+      - file: sections/011/003.html
+        href: sections/011/003.html
+        title: Composite literals
+        short_title: Composite literals
+        author: undefined
+        description: undefined
+        playorder: 68
+        idref: item-011003
+      - file: sections/011/004.html
+        href: sections/011/004.html
+        title: Function literals
+        short_title: Function literals
+        author: undefined
+        description: undefined
+        playorder: 69
+        idref: item-011004
+      - file: sections/011/005.html
+        href: sections/011/005.html
+        title: Primary expressions
+        short_title: Primary expressions
+        author: undefined
+        description: undefined
+        playorder: 70
+        idref: item-011005
+      - file: sections/011/006.html
+        href: sections/011/006.html
+        title: Selectors
+        short_title: Selectors
+        author: undefined
+        description: undefined
+        playorder: 71
+        idref: item-011006
+      - file: sections/011/007.html
+        href: sections/011/007.html
+        title: Method expressions
+        short_title: Method expressions
+        author: undefined
+        description: undefined
+        playorder: 72
+        idref: item-011007
+      - file: sections/011/008.html
+        href: sections/011/008.html
+        title: Method values
+        short_title: Method values
+        author: undefined
+        description: undefined
+        playorder: 73
+        idref: item-011008
+      - file: sections/011/009.html
+        href: sections/011/009.html
+        title: Index expressions
+        short_title: Index expressions
+        author: undefined
+        description: undefined
+        playorder: 74
+        idref: item-011009
+      - file: sections/011/010.html
+        href: sections/011/010.html
+        title: Slice expressions
+        short_title: Slice expressions
+        author: undefined
+        description: undefined
+        playorder: 75
+        idref: item-011010
+      - file: sections/011/011.html
+        href: sections/011/011.html
+        title: Type assertions
+        short_title: Type assertions
+        author: undefined
+        description: undefined
+        playorder: 76
+        idref: item-011011
+      - file: sections/011/012.html
+        href: sections/011/012.html
+        title: Calls
+        short_title: Calls
+        author: undefined
+        description: undefined
+        playorder: 77
+        idref: item-011012
+      - file: sections/011/013.html
+        href: sections/011/013.html
+        title: 'Passing arguments to '
+        short_title: 'Passing arguments to '
+        author: undefined
+        description: undefined
+        playorder: 78
+        idref: item-011013
+      - file: sections/011/014.html
+        href: sections/011/014.html
+        title: Operators
+        short_title: Operators
+        author: undefined
+        description: undefined
+        playorder: 79
+        idref: item-011014
+      - file: sections/011/015.html
+        href: sections/011/015.html
+        title: Arithmetic operators
+        short_title: Arithmetic operators
+        author: undefined
+        description: undefined
+        playorder: 80
+        idref: item-011015
+      - file: sections/011/016.html
+        href: sections/011/016.html
+        title: Comparison operators
+        short_title: Comparison operators
+        author: undefined
+        description: undefined
+        playorder: 81
+        idref: item-011016
+      - file: sections/011/017.html
+        href: sections/011/017.html
+        title: Logical operators
+        short_title: Logical operators
+        author: undefined
+        description: undefined
+        playorder: 82
+        idref: item-011017
+      - file: sections/011/018.html
+        href: sections/011/018.html
+        title: Address operators
+        short_title: Address operators
+        author: undefined
+        description: undefined
+        playorder: 83
+        idref: item-011018
+      - file: sections/011/019.html
+        href: sections/011/019.html
+        title: Receive operator
+        short_title: Receive operator
+        author: undefined
+        description: undefined
+        playorder: 84
+        idref: item-011019
+      - file: sections/011/020.html
+        href: sections/011/020.html
+        title: Conversions
+        short_title: Conversions
+        author: undefined
+        description: undefined
+        playorder: 85
+        idref: item-011020
+      - file: sections/011/021.html
+        href: sections/011/021.html
+        title: Constant expressions
+        short_title: Constant expressions
+        author: undefined
+        description: undefined
+        playorder: 86
+        idref: item-011021
+      - file: sections/011/022.html
+        href: sections/011/022.html
+        title: Order of evaluation
+        short_title: Order of evaluation
+        author: undefined
+        description: undefined
+        playorder: 87
+        idref: item-011022
+  - playorder: 88
+    path: sections/012
+    title: Statements
+    idref: item-012
+    href: sections/012/section.html
+    articles:
+      - file: sections/012/000.html
+        href: sections/012/000.html
+        title: Statements
+        short_title: Statements
+        author: undefined
+        description: undefined
+        playorder: 89
+        idref: item-012000
+      - file: sections/012/001.html
+        href: sections/012/001.html
+        title: Terminating statements
+        short_title: Terminating statements
+        author: undefined
+        description: undefined
+        playorder: 90
+        idref: item-012001
+      - file: sections/012/002.html
+        href: sections/012/002.html
+        title: Empty statements
+        short_title: Empty statements
+        author: undefined
+        description: undefined
+        playorder: 91
+        idref: item-012002
+      - file: sections/012/003.html
+        href: sections/012/003.html
+        title: Labeled statements
+        short_title: Labeled statements
+        author: undefined
+        description: undefined
+        playorder: 92
+        idref: item-012003
+      - file: sections/012/004.html
+        href: sections/012/004.html
+        title: Expression statements
+        short_title: Expression statements
+        author: undefined
+        description: undefined
+        playorder: 93
+        idref: item-012004
+      - file: sections/012/005.html
+        href: sections/012/005.html
+        title: Send statements
+        short_title: Send statements
+        author: undefined
+        description: undefined
+        playorder: 94
+        idref: item-012005
+      - file: sections/012/006.html
+        href: sections/012/006.html
+        title: IncDec statements
+        short_title: IncDec statements
+        author: undefined
+        description: undefined
+        playorder: 95
+        idref: item-012006
+      - file: sections/012/007.html
+        href: sections/012/007.html
+        title: Assignments
+        short_title: Assignments
+        author: undefined
+        description: undefined
+        playorder: 96
+        idref: item-012007
+      - file: sections/012/008.html
+        href: sections/012/008.html
+        title: If statements
+        short_title: If statements
+        author: undefined
+        description: undefined
+        playorder: 97
+        idref: item-012008
+      - file: sections/012/009.html
+        href: sections/012/009.html
+        title: Switch statements
+        short_title: Switch statements
+        author: undefined
+        description: undefined
+        playorder: 98
+        idref: item-012009
+      - file: sections/012/010.html
+        href: sections/012/010.html
+        title: For statements
+        short_title: For statements
+        author: undefined
+        description: undefined
+        playorder: 99
+        idref: item-012010
+      - file: sections/012/011.html
+        href: sections/012/011.html
+        title: Go statements
+        short_title: Go statements
+        author: undefined
+        description: undefined
+        playorder: 100
+        idref: item-012011
+      - file: sections/012/012.html
+        href: sections/012/012.html
+        title: Select statements
+        short_title: Select statements
+        author: undefined
+        description: undefined
+        playorder: 101
+        idref: item-012012
+      - file: sections/012/013.html
+        href: sections/012/013.html
+        title: Return statements
+        short_title: Return statements
+        author: undefined
+        description: undefined
+        playorder: 102
+        idref: item-012013
+      - file: sections/012/014.html
+        href: sections/012/014.html
+        title: Break statements
+        short_title: Break statements
+        author: undefined
+        description: undefined
+        playorder: 103
+        idref: item-012014
+      - file: sections/012/015.html
+        href: sections/012/015.html
+        title: Continue statements
+        short_title: Continue statements
+        author: undefined
+        description: undefined
+        playorder: 104
+        idref: item-012015
+      - file: sections/012/016.html
+        href: sections/012/016.html
+        title: Goto statements
+        short_title: Goto statements
+        author: undefined
+        description: undefined
+        playorder: 105
+        idref: item-012016
+      - file: sections/012/017.html
+        href: sections/012/017.html
+        title: Fallthrough statements
+        short_title: Fallthrough statements
+        author: undefined
+        description: undefined
+        playorder: 106
+        idref: item-012017
+      - file: sections/012/018.html
+        href: sections/012/018.html
+        title: Defer statements
+        short_title: Defer statements
+        author: undefined
+        description: undefined
+        playorder: 107
+        idref: item-012018
+  - playorder: 108
+    path: sections/013
+    title: Built-in functions
+    idref: item-013
+    href: sections/013/section.html
+    articles:
+      - file: sections/013/000.html
+        href: sections/013/000.html
+        title: Built-in functions
+        short_title: Built-in functions
+        author: undefined
+        description: undefined
+        playorder: 109
+        idref: item-013000
+      - file: sections/013/001.html
+        href: sections/013/001.html
+        title: Close
+        short_title: Close
+        author: undefined
+        description: undefined
+        playorder: 110
+        idref: item-013001
+      - file: sections/013/002.html
+        href: sections/013/002.html
+        title: Length and capacity
+        short_title: Length and capacity
+        author: undefined
+        description: undefined
+        playorder: 111
+        idref: item-013002
+      - file: sections/013/003.html
+        href: sections/013/003.html
+        title: Allocation
+        short_title: Allocation
+        author: undefined
+        description: undefined
+        playorder: 112
+        idref: item-013003
+      - file: sections/013/004.html
+        href: sections/013/004.html
+        title: 'Making slices, maps and channels'
+        short_title: 'Making slices, maps and channels'
+        author: undefined
+        description: undefined
+        playorder: 113
+        idref: item-013004
+      - file: sections/013/005.html
+        href: sections/013/005.html
+        title: Appending to and copying slices
+        short_title: Appending to and copying slices
+        author: undefined
+        description: undefined
+        playorder: 114
+        idref: item-013005
+      - file: sections/013/006.html
+        href: sections/013/006.html
+        title: Deletion of map elements
+        short_title: Deletion of map elements
+        author: undefined
+        description: undefined
+        playorder: 115
+        idref: item-013006
+      - file: sections/013/007.html
+        href: sections/013/007.html
+        title: Manipulating complex numbers
+        short_title: Manipulating complex numbers
+        author: undefined
+        description: undefined
+        playorder: 116
+        idref: item-013007
+      - file: sections/013/008.html
+        href: sections/013/008.html
+        title: Handling panics
+        short_title: Handling panics
+        author: undefined
+        description: undefined
+        playorder: 117
+        idref: item-013008
+      - file: sections/013/009.html
+        href: sections/013/009.html
+        title: Bootstrapping
+        short_title: Bootstrapping
+        author: undefined
+        description: undefined
+        playorder: 118
+        idref: item-013009
+  - playorder: 119
+    path: sections/014
+    title: Packages
+    idref: item-014
+    href: sections/014/section.html
+    articles:
+      - file: sections/014/000.html
+        href: sections/014/000.html
+        title: Packages
+        short_title: Packages
+        author: undefined
+        description: undefined
+        playorder: 120
+        idref: item-014000
+      - file: sections/014/001.html
+        href: sections/014/001.html
+        title: Source file organization
+        short_title: Source file organization
+        author: undefined
+        description: undefined
+        playorder: 121
+        idref: item-014001
+      - file: sections/014/002.html
+        href: sections/014/002.html
+        title: Package clause
+        short_title: Package clause
+        author: undefined
+        description: undefined
+        playorder: 122
+        idref: item-014002
+      - file: sections/014/003.html
+        href: sections/014/003.html
+        title: Import declarations
+        short_title: Import declarations
+        author: undefined
+        description: undefined
+        playorder: 123
+        idref: item-014003
+      - file: sections/014/004.html
+        href: sections/014/004.html
+        title: An example package
+        short_title: An example package
+        author: undefined
+        description: undefined
+        playorder: 124
+        idref: item-014004
+  - playorder: 125
+    path: sections/015
+    title: Program initialization and execution
+    idref: item-015
+    href: sections/015/section.html
+    articles:
+      - file: sections/015/000.html
+        href: sections/015/000.html
+        title: Program initialization and execution
+        short_title: Program initialization and execution
+        author: undefined
+        description: undefined
+        playorder: 126
+        idref: item-015000
+      - file: sections/015/001.html
+        href: sections/015/001.html
+        title: The zero value
+        short_title: The zero value
+        author: undefined
+        description: undefined
+        playorder: 127
+        idref: item-015001
+      - file: sections/015/002.html
+        href: sections/015/002.html
+        title: Package initialization
+        short_title: Package initialization
+        author: undefined
+        description: undefined
+        playorder: 128
+        idref: item-015002
+      - file: sections/015/003.html
+        href: sections/015/003.html
+        title: Program execution
+        short_title: Program execution
+        author: undefined
+        description: undefined
+        playorder: 129
+        idref: item-015003
+  - playorder: 130
+    path: sections/016
+    title: Errors
+    idref: item-016
+    href: sections/016/section.html
+    articles:
+      - file: sections/016/000.html
+        href: sections/016/000.html
+        title: Errors
+        short_title: Errors
+        author: undefined
+        description: undefined
+        playorder: 131
+        idref: item-016000
+  - playorder: 132
+    path: sections/017
+    title: Run-time panics
+    idref: item-017
+    href: sections/017/section.html
+    articles:
+      - file: sections/017/000.html
+        href: sections/017/000.html
+        title: Run-time panics
+        short_title: Run-time panics
+        author: undefined
+        description: undefined
+        playorder: 133
+        idref: item-017000
+  - playorder: 134
+    path: sections/018
+    title: System considerations
+    idref: item-018
+    href: sections/018/section.html
+    articles:
+      - file: sections/018/000.html
+        href: sections/018/000.html
+        title: System considerations
+        short_title: System considerations
+        author: undefined
+        description: undefined
+        playorder: 135
+        idref: item-018000
+      - file: sections/018/001.html
+        href: sections/018/001.html
+        title: 'Package '
+        short_title: 'Package '
+        author: undefined
+        description: undefined
+        playorder: 136
+        idref: item-018001
+      - file: sections/018/002.html
+        href: sections/018/002.html
+        title: Size and alignment guarantees
+        short_title: Size and alignment guarantees
+        author: undefined
+        description: undefined
+        playorder: 137
+        idref: item-018002
+first_article: *ref_0
+manifest_items:
+  - href: sections/000/section.html
+    media: application/xhtml+xml
+    idref: item-000
+  - href: sections/000/000.html
+    media: application/xhtml+xml
+    idref: item-000000
+  - href: sections/001/section.html
+    media: application/xhtml+xml
+    idref: item-001
+  - href: sections/001/000.html
+    media: application/xhtml+xml
+    idref: item-001000
+  - href: sections/002/section.html
+    media: application/xhtml+xml
+    idref: item-002
+  - href: sections/002/000.html
+    media: application/xhtml+xml
+    idref: item-002000
+  - href: sections/003/section.html
+    media: application/xhtml+xml
+    idref: item-003
+  - href: sections/003/000.html
+    media: application/xhtml+xml
+    idref: item-003000
+  - href: sections/003/001.html
+    media: application/xhtml+xml
+    idref: item-003001
+  - href: sections/003/002.html
+    media: application/xhtml+xml
+    idref: item-003002
+  - href: sections/004/section.html
+    media: application/xhtml+xml
+    idref: item-004
+  - href: sections/004/000.html
+    media: application/xhtml+xml
+    idref: item-004000
+  - href: sections/004/001.html
+    media: application/xhtml+xml
+    idref: item-004001
+  - href: sections/004/002.html
+    media: application/xhtml+xml
+    idref: item-004002
+  - href: sections/004/003.html
+    media: application/xhtml+xml
+    idref: item-004003
+  - href: sections/004/004.html
+    media: application/xhtml+xml
+    idref: item-004004
+  - href: sections/004/005.html
+    media: application/xhtml+xml
+    idref: item-004005
+  - href: sections/004/006.html
+    media: application/xhtml+xml
+    idref: item-004006
+  - href: sections/004/007.html
+    media: application/xhtml+xml
+    idref: item-004007
+  - href: sections/004/008.html
+    media: application/xhtml+xml
+    idref: item-004008
+  - href: sections/004/009.html
+    media: application/xhtml+xml
+    idref: item-004009
+  - href: sections/004/010.html
+    media: application/xhtml+xml
+    idref: item-004010
+  - href: sections/004/011.html
+    media: application/xhtml+xml
+    idref: item-004011
+  - href: sections/005/section.html
+    media: application/xhtml+xml
+    idref: item-005
+  - href: sections/005/000.html
+    media: application/xhtml+xml
+    idref: item-005000
+  - href: sections/006/section.html
+    media: application/xhtml+xml
+    idref: item-006
+  - href: sections/006/000.html
+    media: application/xhtml+xml
+    idref: item-006000
+  - href: sections/007/section.html
+    media: application/xhtml+xml
+    idref: item-007
+  - href: sections/007/000.html
+    media: application/xhtml+xml
+    idref: item-007000
+  - href: sections/007/001.html
+    media: application/xhtml+xml
+    idref: item-007001
+  - href: sections/007/002.html
+    media: application/xhtml+xml
+    idref: item-007002
+  - href: sections/007/003.html
+    media: application/xhtml+xml
+    idref: item-007003
+  - href: sections/007/004.html
+    media: application/xhtml+xml
+    idref: item-007004
+  - href: sections/007/005.html
+    media: application/xhtml+xml
+    idref: item-007005
+  - href: sections/007/006.html
+    media: application/xhtml+xml
+    idref: item-007006
+  - href: sections/007/007.html
+    media: application/xhtml+xml
+    idref: item-007007
+  - href: sections/007/008.html
+    media: application/xhtml+xml
+    idref: item-007008
+  - href: sections/007/009.html
+    media: application/xhtml+xml
+    idref: item-007009
+  - href: sections/007/010.html
+    media: application/xhtml+xml
+    idref: item-007010
+  - href: sections/007/011.html
+    media: application/xhtml+xml
+    idref: item-007011
+  - href: sections/007/012.html
+    media: application/xhtml+xml
+    idref: item-007012
+  - href: sections/008/section.html
+    media: application/xhtml+xml
+    idref: item-008
+  - href: sections/008/000.html
+    media: application/xhtml+xml
+    idref: item-008000
+  - href: sections/008/001.html
+    media: application/xhtml+xml
+    idref: item-008001
+  - href: sections/008/002.html
+    media: application/xhtml+xml
+    idref: item-008002
+  - href: sections/008/003.html
+    media: application/xhtml+xml
+    idref: item-008003
+  - href: sections/009/section.html
+    media: application/xhtml+xml
+    idref: item-009
+  - href: sections/009/000.html
+    media: application/xhtml+xml
+    idref: item-009000
+  - href: sections/010/section.html
+    media: application/xhtml+xml
+    idref: item-010
+  - href: sections/010/000.html
+    media: application/xhtml+xml
+    idref: item-010000
+  - href: sections/010/001.html
+    media: application/xhtml+xml
+    idref: item-010001
+  - href: sections/010/002.html
+    media: application/xhtml+xml
+    idref: item-010002
+  - href: sections/010/003.html
+    media: application/xhtml+xml
+    idref: item-010003
+  - href: sections/010/004.html
+    media: application/xhtml+xml
+    idref: item-010004
+  - href: sections/010/005.html
+    media: application/xhtml+xml
+    idref: item-010005
+  - href: sections/010/006.html
+    media: application/xhtml+xml
+    idref: item-010006
+  - href: sections/010/007.html
+    media: application/xhtml+xml
+    idref: item-010007
+  - href: sections/010/008.html
+    media: application/xhtml+xml
+    idref: item-010008
+  - href: sections/010/009.html
+    media: application/xhtml+xml
+    idref: item-010009
+  - href: sections/010/010.html
+    media: application/xhtml+xml
+    idref: item-010010
+  - href: sections/010/011.html
+    media: application/xhtml+xml
+    idref: item-010011
+  - href: sections/010/012.html
+    media: application/xhtml+xml
+    idref: item-010012
+  - href: sections/011/section.html
+    media: application/xhtml+xml
+    idref: item-011
+  - href: sections/011/000.html
+    media: application/xhtml+xml
+    idref: item-011000
+  - href: sections/011/001.html
+    media: application/xhtml+xml
+    idref: item-011001
+  - href: sections/011/002.html
+    media: application/xhtml+xml
+    idref: item-011002
+  - href: sections/011/003.html
+    media: application/xhtml+xml
+    idref: item-011003
+  - href: sections/011/004.html
+    media: application/xhtml+xml
+    idref: item-011004
+  - href: sections/011/005.html
+    media: application/xhtml+xml
+    idref: item-011005
+  - href: sections/011/006.html
+    media: application/xhtml+xml
+    idref: item-011006
+  - href: sections/011/007.html
+    media: application/xhtml+xml
+    idref: item-011007
+  - href: sections/011/008.html
+    media: application/xhtml+xml
+    idref: item-011008
+  - href: sections/011/009.html
+    media: application/xhtml+xml
+    idref: item-011009
+  - href: sections/011/010.html
+    media: application/xhtml+xml
+    idref: item-011010
+  - href: sections/011/011.html
+    media: application/xhtml+xml
+    idref: item-011011
+  - href: sections/011/012.html
+    media: application/xhtml+xml
+    idref: item-011012
+  - href: sections/011/013.html
+    media: application/xhtml+xml
+    idref: item-011013
+  - href: sections/011/014.html
+    media: application/xhtml+xml
+    idref: item-011014
+  - href: sections/011/015.html
+    media: application/xhtml+xml
+    idref: item-011015
+  - href: sections/011/016.html
+    media: application/xhtml+xml
+    idref: item-011016
+  - href: sections/011/017.html
+    media: application/xhtml+xml
+    idref: item-011017
+  - href: sections/011/018.html
+    media: application/xhtml+xml
+    idref: item-011018
+  - href: sections/011/019.html
+    media: application/xhtml+xml
+    idref: item-011019
+  - href: sections/011/020.html
+    media: application/xhtml+xml
+    idref: item-011020
+  - href: sections/011/021.html
+    media: application/xhtml+xml
+    idref: item-011021
+  - href: sections/011/022.html
+    media: application/xhtml+xml
+    idref: item-011022
+  - href: sections/012/section.html
+    media: application/xhtml+xml
+    idref: item-012
+  - href: sections/012/000.html
+    media: application/xhtml+xml
+    idref: item-012000
+  - href: sections/012/001.html
+    media: application/xhtml+xml
+    idref: item-012001
+  - href: sections/012/002.html
+    media: application/xhtml+xml
+    idref: item-012002
+  - href: sections/012/003.html
+    media: application/xhtml+xml
+    idref: item-012003
+  - href: sections/012/004.html
+    media: application/xhtml+xml
+    idref: item-012004
+  - href: sections/012/005.html
+    media: application/xhtml+xml
+    idref: item-012005
+  - href: sections/012/006.html
+    media: application/xhtml+xml
+    idref: item-012006
+  - href: sections/012/007.html
+    media: application/xhtml+xml
+    idref: item-012007
+  - href: sections/012/008.html
+    media: application/xhtml+xml
+    idref: item-012008
+  - href: sections/012/009.html
+    media: application/xhtml+xml
+    idref: item-012009
+  - href: sections/012/010.html
+    media: application/xhtml+xml
+    idref: item-012010
+  - href: sections/012/011.html
+    media: application/xhtml+xml
+    idref: item-012011
+  - href: sections/012/012.html
+    media: application/xhtml+xml
+    idref: item-012012
+  - href: sections/012/013.html
+    media: application/xhtml+xml
+    idref: item-012013
+  - href: sections/012/014.html
+    media: application/xhtml+xml
+    idref: item-012014
+  - href: sections/012/015.html
+    media: application/xhtml+xml
+    idref: item-012015
+  - href: sections/012/016.html
+    media: application/xhtml+xml
+    idref: item-012016
+  - href: sections/012/017.html
+    media: application/xhtml+xml
+    idref: item-012017
+  - href: sections/012/018.html
+    media: application/xhtml+xml
+    idref: item-012018
+  - href: sections/013/section.html
+    media: application/xhtml+xml
+    idref: item-013
+  - href: sections/013/000.html
+    media: application/xhtml+xml
+    idref: item-013000
+  - href: sections/013/001.html
+    media: application/xhtml+xml
+    idref: item-013001
+  - href: sections/013/002.html
+    media: application/xhtml+xml
+    idref: item-013002
+  - href: sections/013/003.html
+    media: application/xhtml+xml
+    idref: item-013003
+  - href: sections/013/004.html
+    media: application/xhtml+xml
+    idref: item-013004
+  - href: sections/013/005.html
+    media: application/xhtml+xml
+    idref: item-013005
+  - href: sections/013/006.html
+    media: application/xhtml+xml
+    idref: item-013006
+  - href: sections/013/007.html
+    media: application/xhtml+xml
+    idref: item-013007
+  - href: sections/013/008.html
+    media: application/xhtml+xml
+    idref: item-013008
+  - href: sections/013/009.html
+    media: application/xhtml+xml
+    idref: item-013009
+  - href: sections/014/section.html
+    media: application/xhtml+xml
+    idref: item-014
+  - href: sections/014/000.html
+    media: application/xhtml+xml
+    idref: item-014000
+  - href: sections/014/001.html
+    media: application/xhtml+xml
+    idref: item-014001
+  - href: sections/014/002.html
+    media: application/xhtml+xml
+    idref: item-014002
+  - href: sections/014/003.html
+    media: application/xhtml+xml
+    idref: item-014003
+  - href: sections/014/004.html
+    media: application/xhtml+xml
+    idref: item-014004
+  - href: sections/015/section.html
+    media: application/xhtml+xml
+    idref: item-015
+  - href: sections/015/000.html
+    media: application/xhtml+xml
+    idref: item-015000
+  - href: sections/015/001.html
+    media: application/xhtml+xml
+    idref: item-015001
+  - href: sections/015/002.html
+    media: application/xhtml+xml
+    idref: item-015002
+  - href: sections/015/003.html
+    media: application/xhtml+xml
+    idref: item-015003
+  - href: sections/016/section.html
+    media: application/xhtml+xml
+    idref: item-016
+  - href: sections/016/000.html
+    media: application/xhtml+xml
+    idref: item-016000
+  - href: sections/017/section.html
+    media: application/xhtml+xml
+    idref: item-017
+  - href: sections/017/000.html
+    media: application/xhtml+xml
+    idref: item-017000
+  - href: sections/018/section.html
+    media: application/xhtml+xml
+    idref: item-018
+  - href: sections/018/000.html
+    media: application/xhtml+xml
+    idref: item-018000
+  - href: sections/018/001.html
+    media: application/xhtml+xml
+    idref: item-018001
+  - href: sections/018/002.html
+    media: application/xhtml+xml
+    idref: item-018002
+cover_mimetype: image/gif

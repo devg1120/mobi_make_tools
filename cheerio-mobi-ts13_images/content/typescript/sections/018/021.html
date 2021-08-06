@@ -1,0 +1,68 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Contributing
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts13_images/undefined" />
+  </head>
+   <body>
+<h2 id="contributing">Contributing</h2>
+<p>TypeScript is <a href="https://github.com/Microsoft/TypeScript" target="_blank">OSS and on GitHub</a> and the team welcomes community input.</p>
+<h3 id="setup">Setup</h3>
+<p>Super easy:</p>
+<pre><code class="lang-bash">git <span class="hljs-built_in">clone</span> https://github.com/Microsoft/TypeScript.git
+<span class="hljs-built_in">cd</span> TypeScript
+npm install -g jake
+npm install
+</code></pre>
+<h3 id="setup-fork">Setup Fork</h3>
+<p>You would obviously need to setup Microsoft/TypeScript as an <code>upstream</code> remote and your own <em>fork</em> (use the GitHub <em>fork</em> button) as <code>origin</code>:</p>
+<pre><code class="lang-bash">git remote rm origin
+git remote rm upstream
+git remote add upstream https://github.com/Microsoft/TypeScript.git
+git remote add origin https://github.com/basarat/TypeScript.git
+</code></pre>
+<p>Additionally I like to work off branches like <code>bas/</code> to have it show up cleaner in the branch listings.</p>
+<h3 id="running-tests">Running Tests</h3>
+<p>There are lots of <code>test</code> and <code>build</code> options in their JakeFile. You can run <em>all</em> tests with <code>jake runtests</code></p>
+<h3 id="baselines">Baselines</h3>
+<p>Baselines are used to manage if there are any changes in the <em>expected</em> output of the TypeScript compiler. Baselines are located in <code>tests/baselines</code>.</p>
+<ul>
+    <li>Reference (<em>expected</em>) baselines: <code>tests/baselines/reference</code></li>
+    <li>Generated (<em>in this test run</em>) baselines : <code>tests/baselines/local</code> (this folder is in <strong>.gitignore</strong>)</li>
+</ul>
+<blockquote>
+    <p>If there are any differences between these folders tests will fail. You can diff the two folders with tools like BeyondCompare or KDiff3.</p>
+</blockquote>
+<p>If you think these changes in generated files are valid then accept baselines using <code>jake baseline-accept</code>. The changes to <code>reference</code> baselines will now show as a git diff you can commit.</p>
+<blockquote>
+    <p>Note that if you don&apos;t run <em>all</em> tests then use <code>jake baseline-accept[soft]</code> which will only copy over the new files and not delete the whole <code>reference</code> directory.</p>
+</blockquote>
+<h3 id="test-categories">Test Categories</h3>
+<p>There are different categories for different scenarios and even different test infrastructures. Here are a few of these explained.</p>
+<h4 id="compiler-tests">Compiler Tests</h4>
+<p>These ensure that compiling a file :</p>
+<ul>
+    <li>generates errors as expected</li>
+    <li>generated JS as expected</li>
+    <li>types are identified as expected</li>
+    <li>symbols are identified as expected</li>
+</ul>
+<p>These expectations are validated using the baselines infrastructure.</p>
+<h5 id="creating-a-compiler-test">Creating a Compiler Test</h5>
+<p>Test can be created by adding a new file <code>yourtest.ts</code> to <code>tests/cases/compiler</code>. As soon as you do so and run the tests you should get baseline failure. Accept these baselines (to get them to show up in git), and tweak them to be what you <em>expect</em> them to be ... now get the tests to pass.</p>
+<p>Run all of these in isolation using <code>jake runtests tests=compiler</code>, or just your new file using <code>jake runtests tests=compiler/yourtest</code></p>
+<p>I will even often do <code>jake runtests tests=compiler/yourtest || jake baseline-accept[soft]</code> and get the diff in <code>git</code>.</p>
+<h3 id="debugging-tests">Debugging Tests</h3>
+<p><code>jake runtests-browser tests=theNameOfYourTest</code> and debugging in-browser usually works pretty well.</p>
+<h3 id="more">More</h3>
+<ul>
+    <li>An article by Remo : <a href="https://dev.to/remojansen/learn-how-to-contribute-to-the-typescript-compiler-on-github-through-a-real-world-example-4df0" target="_blank">https://dev.to/remojansen/learn-how-to-contribute-to-the-typescript-compiler-on-github-through-a-real-world-example-4df0</a> &#x1F339;</li>
+</ul>
+</body>
+</html>

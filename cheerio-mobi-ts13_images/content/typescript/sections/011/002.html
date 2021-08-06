@@ -1,0 +1,99 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    strictNullChecks
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts13_images/undefined" />
+  </head>
+   <body>
+<h1 id="strictnullchecks"><code>strictNullChecks</code></h1>
+<p>By default <code>null</code> and <code>undefined</code> are assignable to all types in TypeScript e.g.</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">let</span> foo: <span class="hljs-built_in">number</span> = <span class="hljs-number">123</span>;
+foo = <span class="hljs-literal">null</span>; <span class="hljs-comment">// Okay</span>
+foo = <span class="hljs-literal">undefined</span>; <span class="hljs-comment">// Okay</span>
+</code></pre>
+<p>This is modelled after how a lot of people write JavaScript. However, like all things, TypeScript allows you to be <em>explicit</em> about what <em>can and cannot be</em> assigned a <code>null</code> or <code>undefined</code>.</p>
+<p>In strict null checking mode, <code>null</code> and <code>undefined</code> are different:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">let</span> foo = <span class="hljs-literal">undefined</span>;
+foo = <span class="hljs-literal">null</span>; <span class="hljs-comment">// NOT Okay</span>
+</code></pre>
+<p>Let&apos;s say we have a <code>Member</code> interface:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">interface</span> Member {
+  name: <span class="hljs-built_in">string</span>,
+  age?: <span class="hljs-built_in">number</span>
+}
+</code></pre>
+<p>Not every <code>Member</code> will provide their age, so <code>age</code> is an optional property, meaning the value of <code>age</code> may or may not be <code>undefined</code>.</p>
+<p><code>undefined</code> is the root of all evil. It often leads to runtime errors. It is easy to write code that will throw <code>Error</code> at runtime:</p>
+<pre><code class="lang-ts">getMember()
+  .then(member: Member =&gt; {
+    <span class="hljs-keyword">const</span> stringifyAge = member.age.toString() <span class="hljs-comment">// Cannot read property &apos;toString&apos; of undefined</span>
+  })
+</code></pre>
+<p>But in strict null checking mode, this error will be caught at compile time:</p>
+<pre><code class="lang-ts">getMember()
+  .then(member: Member =&gt; {
+    <span class="hljs-keyword">const</span> stringifyAge = member.age.toString() <span class="hljs-comment">// Object is possibly &apos;undefined&apos;</span>
+  })
+</code></pre>
+<h2 id="non-null-assertion-operator">Non-Null Assertion Operator</h2>
+<p>A new <code>!</code> post-fix expression operator may be used to assert that its operand is non-null and non-undefined in contexts where the type checker is unable to conclude that fact. For example:</p>
+<pre><code class="lang-ts"><span class="hljs-comment">// Compiled with --strictNullChecks</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">validateEntity</span>(<span class="hljs-params">e?: Entity</span>) </span>{
+    <span class="hljs-comment">// Throw exception if e is null or invalid entity</span>
+}
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">processEntity</span>(<span class="hljs-params">e?: Entity</span>) </span>{
+    validateEntity(e);
+    <span class="hljs-keyword">let</span> a = e.name;  <span class="hljs-comment">// TS ERROR: e may be null.</span>
+    <span class="hljs-keyword">let</span> b = e!.name;  <span class="hljs-comment">// OKAY. We are asserting that e is non-null.</span>
+}
+</code></pre>
+<blockquote>
+    <p>Note that it is just an assertion, and just like type assertions <em>you are responsible</em> for making sure the value is not null. A non-null assertion is essentially you telling the compiler &quot;I know it&apos;s not null so let me use it as though it&apos;s not null&quot;.</p>
+</blockquote>
+<h3 id="definite-assignment-assertion-operator">Definite Assignment Assertion Operator</h3>
+<p>TypeScript will also complain about properties in classes not being initialized e.g.:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">class</span> C {
+  foo: <span class="hljs-built_in">number</span>; <span class="hljs-comment">// OKAY as assigned in constructor</span>
+  bar: <span class="hljs-built_in">string</span> = <span class="hljs-string">&quot;hello&quot;</span>; <span class="hljs-comment">// OKAY as has property initializer</span>
+  baz: <span class="hljs-built_in">boolean</span>; <span class="hljs-comment">// TS ERROR: Property &apos;baz&apos; has no initializer and is not assigned directly in the constructor.</span>
+  <span class="hljs-keyword">constructor</span>() {
+    <span class="hljs-keyword">this</span>.foo = <span class="hljs-number">42</span>;
+  }
+}
+</code></pre>
+<p>You can use the definite assignment assertion postfixed to the property name to tell TypeScript that you are initializing it somewhere other than the constructor e.g.</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">class</span> C {
+  foo!: <span class="hljs-built_in">number</span>;
+  <span class="hljs-comment">// ^</span>
+  <span class="hljs-comment">// Notice this exclamation point!</span>
+  <span class="hljs-comment">// This is the &quot;definite assignment assertion&quot; modifier.</span>
+  <span class="hljs-keyword">constructor</span>() {
+    <span class="hljs-keyword">this</span>.initialize();
+  }
+  initialize() {
+    <span class="hljs-keyword">this</span>.foo = <span class="hljs-number">0</span>;
+  }
+}
+</code></pre>
+<p>You can also use this assertion with simple variable declarations e.g.:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">let</span> a: <span class="hljs-built_in">number</span>[]; <span class="hljs-comment">// No assertion</span>
+<span class="hljs-keyword">let</span> b!: <span class="hljs-built_in">number</span>[]; <span class="hljs-comment">// Assert</span>
+initialize();
+a.push(<span class="hljs-number">4</span>); <span class="hljs-comment">// TS ERROR: variable used before assignment</span>
+b.push(<span class="hljs-number">4</span>); <span class="hljs-comment">// OKAY: because of the assertion</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">initialize</span>(<span class="hljs-params"></span>) </span>{
+  a = [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>];
+  b = [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>];
+}
+</code></pre>
+<blockquote>
+    <p>Like all assertions, you are telling the compiler to trust you. The compiler will not complain even if the code doesn&apos;t actually always assign the property.</p>
+</blockquote>
+</body>
+</html>

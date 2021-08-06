@@ -1,0 +1,91 @@
+<div class="refentry">
+    <a id="svn.ref.mod_authz_svn.conf"></a>
+    <div class="titlepage"></div>
+    <div class="refnamediv">
+        <h2>Name</h2>
+        <p>mod_authz_svn Configuration Directives — Apache configuration directives for configuring
+            path-based authorization for Subversion repositories served
+            through the Apache HTTP Server.</p>
+    </div>
+    <div class="refsect1">
+        <a id="svn.ref.mod_authz_svn.conf.desc"></a>
+        <h2>Description</h2>
+        <p>This section briefly describes each Apache configuration
+            directive offered by <span class="command"><strong>mod_authz_svn</strong></span>. For
+            an in-depth description of using path-based authorization in
+            Subversion, see <a class="xref" href="svn.serverconfig.pathbasedauthz.html" title="Path-Based Authorization">the section called “Path-Based Authorization”</a>.</p>
+    </div>
+    <div class="refsect1">
+        <a id="svn.ref.mod_authz_svn.conf.directives"></a>
+        <h2>Directives</h2>
+        <p>These are the <code class="filename">httpd.conf</code> directives
+            that apply to <span class="command"><strong>mod_authz_svn</strong></span>:</p>
+        <div class="variablelist">
+            <dl class="variablelist">
+                <dt>
+                    <span class="term">
+                        <code class="literal">AuthzForceUsernameCase Upper|Lower</code>
+                    </span>
+                </dt>
+                <dd>
+                    <p>Set to <code class="literal">Upper</code>
+                        or <code class="literal">Lower</code> to perform case conversion
+                        of the specified sort on the authenticated username
+                        before checking it for authorization. While usernames
+                        are compared in a case-sensitive fashion against those
+                        referenced in the authorization rules file, this
+                        directive can at least normalize variably-cased
+                        usernames into something consistent.</p>
+                </dd>
+                <dt>
+                    <span class="term">
+                        <code class="literal">AuthzSVNAccessFile
+                            <em class="replaceable"><code>file-path</code></em></code>
+                    </span>
+                </dt>
+                <dd>
+                    <p>Consult <em class="replaceable"><code>file-path</code></em> for
+                        access rules describing the permissions for paths in
+                        Subversion repository.</p>
+                </dd>
+                <dt>
+                    <span class="term">
+                        <code class="literal">AuthzSVNAnonymous On|Off</code>
+                    </span>
+                </dt>
+                <dd>
+                    <p>Set to <code class="literal">Off</code> to disable two
+                        special-case behaviours of this module: interaction
+                        with the <code class="literal">Satisfy Any</code> directive and
+                        enforcement of the authorization policy even when no
+                        <code class="literal">Require</code> directives are present.
+                        The default value of this directive is
+                        <code class="literal">On</code>.</p>
+                </dd>
+                <dt>
+                    <span class="term">
+                        <code class="literal">AuthzSVNAuthoritative On|Off</code>
+                    </span>
+                </dt>
+                <dd>
+                    <p>Set to <code class="literal">Off</code> to allow access
+                        control to be passed along to lower modules. The
+                        default value of this directive is
+                        <code class="literal">On</code>.</p>
+                </dd>
+                <dt>
+                    <span class="term">
+                        <code class="literal">AuthzSVNNoAuthWhenAnonymousAllowed On|Off</code>
+                    </span>
+                </dt>
+                <dd>
+                    <p>Set to <code class="literal">On</code> to suppress
+                        authentication and authorization for requests which
+                        anonymous users are allowed to perform. The default
+                        value of this directive is
+                        <code class="literal">On</code>.</p>
+                </dd>
+            </dl>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,110 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svn revert</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts5/css/kindle.css" />
+  </head>
+   <body>
+    <div class="refentry">
+      <a id="svn.ref.svn.c.revert"></a>
+      <div class="titlepage"></div>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svn revert &#x2014; Undo all local edits.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm11109"></a>
+        <h2>Synopsis</h2>
+        <p>
+          <code class="literal">svn revert PATH...</code>
+        </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm11113"></a>
+        <h2>Description</h2>
+        <p>Reverts any local changes to a file or directory and
+            resolves any conflicted states.  <span class="command"><strong>svn
+            revert</strong></span> will revert not only the contents of an
+            item in your working copy, but also any property
+            changes.  Finally, you can use it to undo any scheduling
+            operations that you may have performed (e.g., files scheduled
+            for addition or deletion can be
+            <span class="quote">&#x201C;<span class="quote">unscheduled</span>&#x201D;</span>).</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm11118"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+          <pre class="screen">
+</pre>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm11127"></a>
+        <h2>Examples</h2>
+        <p>Discard changes to a file:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn revert foo.c
+Reverted foo.c
+</pre>
+        </div>
+        <p>If you want to revert a whole directory of files,
+            use the <code class="option">--depth=infinity</code> option:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn revert --depth=infinity .
+Reverted newdir/afile
+Reverted foo.c
+Reverted bar.txt
+</pre>
+        </div>
+        <p>Lastly, you can undo any scheduling
+            operations:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn add mistake.txt whoops
+A         mistake.txt
+A         whoops
+A         whoops/oopsie.c
+$ svn revert mistake.txt whoops
+Reverted mistake.txt
+Reverted whoops
+$ svn status
+?       mistake.txt
+?       whoops
+</pre>
+        </div>
+        <div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Warning">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Warning]" src="/home/gusa1120/es2015/cheerio-mobi-ts5/content/svn/processed_images/warning-grayscale.gif">
+              </td>
+              <th align="left">Warning</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p><span class="command"><strong>svn revert</strong></span> is inherently
+              dangerous, since its entire purpose is to throw away
+              data&#x2014;namely, your uncommitted changes.  Once
+              you&apos;ve reverted, Subversion provides <span class="emphasis"><em>no
+              way</em></span> to get back those uncommitted
+              changes.</p>
+                <p>If you provide no targets to <span class="command"><strong>svn
+              revert</strong></span>, it will do nothing.  To protect you
+              from accidentally losing changes in your working
+              copy, <span class="command"><strong>svn revert</strong></span> requires you to
+              explicitly provide at least one target.</p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

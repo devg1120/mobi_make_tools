@@ -1,0 +1,472 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svn status (stat, st)</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts6/undefined" />
+  </head>
+   <body>
+    <div class="refentry">
+      <a id="svn.ref.svn.c.status"></a>
+      <div class="titlepage"></div>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svn status (stat, st) &#x2014; Print the status of working copy files and directories.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm11154"></a>
+        <h2>Synopsis</h2>
+        <p>
+          <code class="literal">svn status [PATH...]</code>
+        </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm11158"></a>
+        <h2>Description</h2>
+        <p>Print the status of working copy files and
+            directories.  With no arguments, it prints only locally
+            modified items (no repository access).  With
+            <code class="option">--show-updates</code> (<code class="option">-u</code>), it
+            adds working revision and server out-of-date information.
+            With <code class="option">--verbose</code> (<code class="option">-v</code>), it
+            prints full revision information on every item.
+            With <code class="option">--quiet</code> (<code class="option">-q</code>), it
+            prints only summary information about locally modified
+            items.</p>
+        <p>The first seven columns in the output are each one
+            character wide, and each column gives you information
+            about a different aspect of each working copy item.</p>
+        <p>The first column indicates that an item
+            was added, deleted, or otherwise changed:</p>
+        <div class="variablelist">
+          <dl class="variablelist">
+            <dt>
+              <span class="term">
+                <code class="literal">&apos; &apos;</code>
+              </span>
+            </dt>
+            <dd>
+              <p>No modifications.</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">&apos;A&apos;</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Item is scheduled for addition.</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">&apos;D&apos;</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Item is scheduled for deletion.</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">&apos;M&apos;</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Item has been modified.</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">&apos;R&apos;</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Item has been replaced in your working copy.
+                This means the file was scheduled for deletion, and
+                then a new file with the same name was scheduled for
+                addition in its place.</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">&apos;C&apos;</code>
+              </span>
+            </dt>
+            <dd>
+              <p>The contents (as opposed to the properties) of
+                  the item conflict with updates received from the
+                  repository.</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">&apos;X&apos;</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Item is present because of an externals definition.</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">&apos;I&apos;</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Item is being ignored (e.g., with the 
+                  <code class="literal">svn:ignore</code> property).</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">&apos;?&apos;</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Item is not under version control.</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">&apos;!&apos;</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Item is missing (e.g., you moved or deleted it
+                  without using <span class="command"><strong>svn</strong></span>).  This also
+                  indicates that a directory is incomplete (a checkout
+                  or update was interrupted).</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">&apos;~&apos;</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Item is versioned as one kind of object (file,
+                  directory, link), but has been replaced by a different
+                  kind of object.</p>
+            </dd>
+          </dl>
+        </div>
+        <p>The second column tells the status of a file&apos;s or
+            directory&apos;s properties:</p>
+        <div class="variablelist">
+          <dl class="variablelist">
+            <dt>
+              <span class="term">
+                <code class="literal">&apos; &apos;</code>
+              </span>
+            </dt>
+            <dd>
+              <p>No modifications.</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">&apos;M&apos;</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Properties for this item have been
+                  modified.</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">&apos;C&apos;</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Properties for this item are in conflict with
+                  property updates received from the
+                  repository.</p>
+            </dd>
+          </dl>
+        </div>
+        <p>The third column is populated only if the
+            working copy directory is locked (see
+            ):</p>
+        <div class="variablelist">
+          <dl class="variablelist">
+            <dt>
+              <span class="term">
+                <code class="literal">&apos; &apos;</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Item is not locked.</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">&apos;L&apos;</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Item is locked.</p>
+            </dd>
+          </dl>
+        </div>
+        <p>The fourth column is populated only if the item is
+            scheduled for addition-with-history:</p>
+        <div class="variablelist">
+          <dl class="variablelist">
+            <dt>
+              <span class="term">
+                <code class="literal">&apos; &apos;</code>
+              </span>
+            </dt>
+            <dd>
+              <p>No history scheduled with commit.</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">&apos;+&apos;</code>
+              </span>
+            </dt>
+            <dd>
+              <p>History scheduled with commit.</p>
+            </dd>
+          </dl>
+        </div>
+        <p>The fifth column is populated only if the item is
+            switched relative to its parent (see ):</p>
+        <div class="variablelist">
+          <dl class="variablelist">
+            <dt>
+              <span class="term">
+                <code class="literal">&apos; &apos;</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Item is a child of its parent directory.</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">&apos;S&apos;</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Item is switched.</p>
+            </dd>
+          </dl>
+        </div>
+        <p>The sixth column is populated with lock information:</p>
+        <div class="variablelist">
+          <dl class="variablelist">
+            <dt>
+              <span class="term">
+                <code class="literal">&apos; &apos;</code>
+              </span>
+            </dt>
+            <dd>
+              <p>When <code class="option">--show-updates</code>
+                  (<code class="option">-u</code>) is used, this means the file is not
+                  locked.  If <code class="option">--show-updates</code>
+                  (<code class="option">-u</code>) is <span class="emphasis"><em>not</em></span>
+                  used, this merely means that the file is not locked
+                  in this working copy.</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">&apos;K&apos;</code>
+              </span>
+            </dt>
+            <dd>
+              <p>File is locked in this working copy.</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">&apos;O&apos;</code>
+              </span>
+            </dt>
+            <dd>
+              <p>File is locked either by another user or in
+                another working copy.  This appears only when
+                <code class="option">--show-updates</code>
+                (<code class="option">-u</code>) is used.</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">&apos;T&apos;</code>
+              </span>
+            </dt>
+            <dd>
+              <p>File was locked in this working copy, but the
+                lock has been <span class="quote">&#x201C;<span class="quote">stolen</span>&#x201D;</span> and is invalid.
+                The file is currently locked in the repository.  This
+                appears only when <code class="option">--show-updates</code>
+                (<code class="option">-u</code>) is used.</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">&apos;B&apos;</code>
+              </span>
+            </dt>
+            <dd>
+              <p>File was locked in this working copy, but the
+                  lock has been <span class="quote">&#x201C;<span class="quote">broken</span>&#x201D;</span> and is invalid.
+                  The file is no longer locked.  This appears only
+                  when <code class="option">--show-updates</code>
+                  (<code class="option">-u</code>) is used.</p>
+            </dd>
+          </dl>
+        </div>
+        <p>The seventh column is populated only if the item is
+            the victim of a tree conflict:</p>
+        <div class="variablelist">
+          <dl class="variablelist">
+            <dt>
+              <span class="term">
+                <code class="literal">&apos; &apos;</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Item is not the victim of a tree conflict.</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">&apos;C&apos;</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Item is the victim of a tree conflict.</p>
+            </dd>
+          </dl>
+        </div>
+        <p>The eighth column is always blank.</p>
+        <p>The out-of-date information appears in the ninth
+            column (only if you pass the
+            <code class="option">--show-updates</code> (<code class="option">-u</code>)
+            option):</p>
+        <div class="variablelist">
+          <dl class="variablelist">
+            <dt>
+              <span class="term">
+                <code class="literal">&apos; &apos;</code>
+              </span>
+            </dt>
+            <dd>
+              <p>The item in your working copy is up to date.</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">&apos;*&apos;</code>
+              </span>
+            </dt>
+            <dd>
+              <p>A newer revision of the item exists on the
+                  server.</p>
+            </dd>
+          </dl>
+        </div>
+        <p>The remaining fields are variable width and delimited
+            by spaces.  The working revision is the next field if
+            the <code class="option">--show-updates</code> (<code class="option">-u</code>)
+            or <code class="option">--verbose</code> (<code class="option">-v</code>) option
+            is passed.</p>
+        <p>If the <code class="option">--verbose</code>
+            (<code class="option">-v</code>) option is passed, the last committed
+            revision and last committed author are displayed
+            next.</p>
+        <p>The working copy path is always the final field, so
+            it can include spaces.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm11358"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+          <pre class="screen">
+</pre>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm11371"></a>
+        <h2>Examples</h2>
+        <p>This is the easiest way to find out what changes you
+            have made to your working copy:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn status wc
+ M      wc/bar.c
+A  +    wc/qax.c
+</pre>
+        </div>
+        <p>If you want to find out what files in your working
+            copy are out of date, pass
+            the <code class="option">--show-updates</code> (<code class="option">-u</code>)
+            option (this will <span class="emphasis"><em>not</em></span> make any
+            changes to your working copy).  Here you can see that
+            <code class="filename">wc/foo.c</code> has changed in the
+            repository since we last updated our working
+            copy:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn status -u wc
+ M            965    wc/bar.c
+        *     965    wc/foo.c
+A  +          965    wc/qax.c
+Status against revision:    981
+</pre>
+        </div>
+        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Note">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Note]" src="/home/gusa1120/es2015/cheerio-mobi-ts6/content/svn2/processed_images/note-grayscale.gif">
+              </td>
+              <th align="left">Note</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p><code class="option">--show-updates</code>
+              (<code class="option">-u</code>) <span class="emphasis"><em>only</em></span> places
+              an asterisk next to items that are out of date (i.e.,
+              items that will be updated from the repository if you
+              later use <span class="command"><strong>svn update</strong></span>).
+              <code class="option">--show-updates</code> (<code class="option">-u</code>)
+              does <span class="emphasis"><em>not</em></span> cause the status listing
+              to reflect the repository&apos;s version of the item
+              (although you can see the revision number in the
+              repository by passing the <code class="option">--verbose</code>
+              (<code class="option">-v</code>) option).</p>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <p>The most information you can get out of
+            the status subcommand is as follows:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn status -u -v wc
+ M            965       938 sally        wc/bar.c
+        *     965       922 harry        wc/foo.c
+A  +          965       687 harry        wc/qax.c
+              965       687 harry        wc/zig.c
+Status against revision:   981
+</pre>
+        </div>
+        <p>Lastly, you can get <span class="command"><strong>svn status</strong></span>
+            output in XML format with the <code class="option">--xml</code>
+            option:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn status --xml wc
+<?xml version="1.0"?>
+<status>
+<target path="wc">
+<entry path="qax.c">
+<wc-status props="none" item="added" revision="0">
+</wc-status>
+</entry>
+<entry path="bar.c">
+<wc-status props="normal" item="modified" revision="965">
+<commit revision="965">
+<author>sally</author>
+<date>2008-05-28T06:35:53.048870Z</date>
+</commit>
+</wc-status>
+</entry>
+</target>
+</status>
+</pre>
+        </div>
+        <p>For many more examples of <span class="command"><strong>svn status</strong></span>,
+            see .</p>
+      </div>
+    </div>
+</body>
+</html>

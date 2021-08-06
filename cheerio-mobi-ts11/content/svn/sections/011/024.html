@@ -1,0 +1,68 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svn propdel (pdel, pd)</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts10/undefined" />
+  </head>
+   <body>
+<div class="refentry">
+    <a id="svn.ref.svn.c.propdel"></a>
+    <div class="titlepage"></div>
+    <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svn propdel (pdel, pd) &#x2014; Remove a property from an item.</p>
+    </div>
+    <div class="refsect1">
+        <a id="idm10703"></a>
+        <h2>Synopsis</h2>
+        <p>
+            <code class="literal">svn propdel PROPNAME [PATH...]</code>
+        </p>
+        <p>
+            <code class="literal">svn propdel PROPNAME --revprop -r REV [TARGET]</code>
+        </p>
+    </div>
+    <div class="refsect1">
+        <a id="idm10709"></a>
+        <h2>Description</h2>
+        <p>This removes properties from files, directories, or
+            revisions. The first form removes versioned properties in
+            your working copy, and the second removes unversioned
+            remote properties on a repository revision
+            (<em class="replaceable"><code>TARGET</code></em> determines only which
+            repository to access).</p>
+    </div>
+    <div class="refsect1">
+        <a id="idm10713"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+            <pre class="screen">
+</pre>
+        </div>
+    </div>
+    <div class="refsect1">
+        <a id="idm10723"></a>
+        <h2>Examples</h2>
+        <p>Delete a property from a file in your working
+            copy:</p>
+        <div class="informalexample">
+            <pre class="screen">
+$ svn propdel svn:mime-type some-script
+property &apos;svn:mime-type&apos; deleted from &apos;some-script&apos;.
+</pre>
+        </div>
+        <p>Delete a revision property:</p>
+        <div class="informalexample">
+            <pre class="screen">
+$ svn propdel --revprop -r 26 release-date 
+property &apos;release-date&apos; deleted from repository revision &apos;26&apos;
+</pre>
+        </div>
+    </div>
+</div>
+</body>
+</html>

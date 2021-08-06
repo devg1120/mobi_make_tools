@@ -1,0 +1,123 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svn commit (ci)</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts10/undefined" />
+  </head>
+   <body>
+<div class="refentry">
+    <a id="svn.ref.svn.c.commit"></a>
+    <div class="titlepage"></div>
+    <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svn commit (ci) &#x2014; Send changes from your working copy to the repository.</p>
+    </div>
+    <div class="refsect1">
+        <a id="idm9540"></a>
+        <h2>Synopsis</h2>
+        <p>
+            <code class="literal">svn commit [PATH...]</code>
+        </p>
+    </div>
+    <div class="refsect1">
+        <a id="idm9544"></a>
+        <h2>Description</h2>
+        <p>Send changes from your working copy to the repository.
+            If you do not supply a log message with your commit by
+            using either the <code class="option">--file</code>
+            (<code class="option">-F</code>) or <code class="option">--message</code>
+            (<code class="option">-m</code>) option,
+            <span class="command"><strong>svn</strong></span> will launch your editor for you
+            to compose a commit message. See the
+            <code class="literal">editor-cmd</code> list entry in .</p>
+        <p><span class="command"><strong>svn commit</strong></span> will send any lock
+            tokens that it finds and will release locks on all
+            <em class="replaceable"><code>PATH</code></em>s committed (recursively)
+            unless <code class="option">--no-unlock</code> is passed.</p>
+        <div class="tip" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <table border="0" summary="Tip">
+                <tr>
+                    <td rowspan="2" align="center" valign="top" width="25">
+                        <img alt="[Tip]" src="/home/admin/es2015/cheerio-mobi-ts10/content/svn/processed_images/tip-grayscale.gif">
+                    </td>
+                    <th align="left">Tip</th>
+                </tr>
+                <tr>
+                    <td align="left" valign="top">
+                        <p>If you begin a commit and Subversion launches your
+                            editor to compose the commit message, you can still
+                            abort without committing your changes. If you want to
+                            cancel your commit, just quit your editor without saving
+                            your commit message and Subversion will prompt you to
+                            either abort the commit, continue with no message, or
+                            edit the message again.</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="refsect1">
+        <a id="idm9560"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+            <pre class="screen">
+</pre>
+        </div>
+    </div>
+    <div class="refsect1">
+        <a id="idm9576"></a>
+        <h2>Examples</h2>
+        <p>Commit a simple modification to a file with the
+            commit message on the command line and an implicit
+            target of your current directory
+            (<span class="quote">&#x201C;<span class="quote"><code class="filename">.</code></span>&#x201D;</span>):</p>
+        <div class="informalexample">
+            <pre class="screen">
+$ svn commit -m &quot;added howto section.&quot;
+Sending        a
+Transmitting file data .
+Committed revision 3.
+</pre>
+        </div>
+        <p>Commit a modification to the file
+            <code class="filename">foo.c</code> (explicitly specified on the
+            command line) with the commit message in a file named
+            <code class="filename">msg</code>:</p>
+        <div class="informalexample">
+            <pre class="screen">
+$ svn commit -F msg foo.c
+Sending        foo.c
+Transmitting file data .
+Committed revision 5.
+</pre>
+        </div>
+        <p>If you want to use a file that&apos;s under version control
+            for your commit message with <code class="option">--file</code>
+            (<code class="option">-F</code>), you need to pass the
+            <code class="option">--force-log</code> option:</p>
+        <div class="informalexample">
+            <pre class="screen">
+$ svn commit -F file_under_vc.txt foo.c
+svn: E205004: Log message file is a versioned file; use &apos;--force-log&apos; to override
+$ svn commit --force-log -F file_under_vc.txt foo.c
+Sending        foo.c
+Transmitting file data .
+Committed revision 6.
+</pre>
+        </div>
+        <p>To commit a file scheduled for deletion:</p>
+        <div class="informalexample">
+            <pre class="screen">
+$ svn commit -m &quot;removed file &apos;c&apos;.&quot;
+Deleting       c
+Committed revision 7.
+</pre>
+        </div>
+    </div>
+</div>
+</body>
+</html>

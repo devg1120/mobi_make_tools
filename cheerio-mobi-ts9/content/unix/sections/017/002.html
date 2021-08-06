@@ -1,0 +1,55 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Transparency as the Key to Reuse</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts9/undefined" />
+  </head>
+   <body>
+<div class="sect1" lang="en"><div class="titlepage"><div><h2 class="title" style="clear: both"><a id="id2990071">Transparency as the Key to Reuse</a></h2></div></div><p>We field-tested the tale of J. Random Newbie on a number of
+experienced programmers.  If you the reader are one yourself, we
+expect you responded to it much as they did: with groans of
+recognition.  If you are not a programmer but you manage programmers,
+we sincerely hope you found it enlightening.  The tale is intended to
+illustrate the ways in which different levels of pressure against reuse
+reinforce each other to create a magnitude of problem not linearly
+predictable from any individual cause.</p><p>So accustomed are most of us to the background assumptions of
+the software industry that it can take considerable mental effort
+before the primary causes of this problem can be separated from the
+accidents of narrative.  But they are not, in the end, very
+complex.</p><p>At the bottom of most of J. Random Newbie&apos;s troubles (and the
+large-scale quality problems they imply) is
+transparency</p><p>In <a href="transparencychapter.html" title="Chapter&#xFFFD;6.&#xFFFD;Transparency">Chapter&#xFFFD;6</a>, we
+observed how central transparency is to good software.
+Object-code-only components destroy the transparency of a software
+system, On the other hand, the frustrations of code reuse are far less
+likely to bite when the code you are attempting to reuse is available
+for reading and modification. Well-commented source code is its own
+documentation. Bugs in source code can be fixed. Source can be
+instrumented and compiled for debugging to make probing its behavior
+in obscure cases easier. And if you need to change its behavior, you
+can do that.</p><p>There is another vital reason to demand source code.  A lesson
+Unix programmers have learned through decades of constant change is
+that source code lasts, object code doesn&apos;t.  Hardware platforms
+change, service components like support libraries change, the
+operating system grows new APIs and deprecates old ones.  Everything
+changes &#x2014; but opaque binary executables cannot adapt to change.
+They are brittle, cannot be reliably forward-ported, and have to be
+supported with increasingly thick and error-prone layers of emulation
+code.  They lock users into the assumptions of the people who built
+them.  You need source because, even if you have neither the
+intention nor the need to change the software, you will have to
+rebuild it in new environments to keep it running.</p><p>The importance of transparency and the code-legacy problem are
+reasons that you should require the code you reuse to be open to
+inspection and modification.<sup>[<a id="id2990172" href="ch16s02.html#ftn.id2990172">140</a>]</sup>  It is not a complete argument for what
+is now called &#x2018;open source&#x2019;; because &#x2018;open
+source&#x2019; has rather stronger implications than simply requiring
+code to be transparent and visible.</p><div class="footnotes"><br><hr width="100" align="left"><div class="footnote"><p><sup>[<a id="ftn.id2990172" href="ch16s02.html#id2990172">140</a>] </sup>NASA, which consciously
+builds software intended to have a service life of decades, has learned
+to insist on source-code availability for all space avionics
+software.</p></div></div></div>
+</body>
+</html>

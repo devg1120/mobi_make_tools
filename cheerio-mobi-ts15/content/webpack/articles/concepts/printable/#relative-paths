@@ -1,0 +1,4 @@
+<h3 id="relative-paths">Relative paths<a href="#relative-paths" aria-hidden="true"><span class="icon icon-link"></span></a></h3>
+<pre><code class="hljs language-js"><span class="token keyword">import</span> <span class="token string">&apos;../src/file1&apos;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token string">&apos;./file2&apos;</span><span class="token punctuation">;</span></code></pre>
+<p>In this case, the directory of the resource file where the <code>import</code> or <code>require</code> occurs is taken to be the context directory. The relative path specified in the <code>import/require</code> is joined to this context path to produce the absolute path to the module.</p>

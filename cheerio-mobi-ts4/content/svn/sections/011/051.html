@@ -1,0 +1,87 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svnadmin recover</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/tmp/es2015/cheerio-mobi-ts4/css/kindle.css" />
+  </head>
+   <body>
+    <div class="refentry">
+      <a id="svn.ref.svnadmin.c.recover"></a>
+      <div class="titlepage"></div>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svnadmin recover &#x2014; Bring a repository database back into a
+          consistent state (applies only to repositories using the
+          <code class="literal">bdb</code> backend).  In addition, if
+          <code class="filename">repos/conf/passwd</code> does not exist, it
+          will create a default passwordfile .</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm12145"></a>
+        <h2>Synopsis</h2>
+        <p>
+          <code class="literal">svnadmin recover REPOS_PATH</code>
+        </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm12149"></a>
+        <h2>Description</h2>
+        <p>Run this command if you get an error indicating that
+            your repository needs to be recovered.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm12152"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+          <pre class="screen">
+</pre>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm12157"></a>
+        <h2>Examples</h2>
+        <p>Recover a hung repository:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svnadmin recover /var/svn/repos/ 
+Repository lock acquired.
+Please wait; recovering the repository may take some time...
+Recovery completed.
+The latest repos revision is 34.
+</pre>
+        </div>
+        <p>Recovering the database requires an exclusive lock on
+            the repository. (This is a <span class="quote">&#x201C;<span class="quote">database lock</span>&#x201D;</span>;
+            see the sidebar .)
+            If another process is accessing the repository,
+            then <span class="command"><strong>svnadmin recover</strong></span> will error:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svnadmin recover /var/svn/repos
+svn: E165000: Failed to get exclusive repository access; perhaps another proce
+ss such as httpd, svnserve or svn has it open?
+$
+</pre>
+        </div>
+        <p>The <code class="option">--wait</code> option, however, will
+            cause <span class="command"><strong>svnadmin recover</strong></span> to wait
+            indefinitely for other processes to disconnect:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svnadmin recover /var/svn/repos --wait
+Waiting on repository lock; perhaps another process has it open?
+### time goes by&#x2026;
+Repository lock acquired.
+Please wait; recovering the repository may take some time...
+Recovery completed.
+The latest repos revision is 34.
+</pre>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

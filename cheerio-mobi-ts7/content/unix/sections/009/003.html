@@ -1,0 +1,220 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Designing Minilanguages</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts7/undefined" />
+  </head>
+   <body>
+<div class="sect1" lang="en"><div class="titlepage"><div><h2 class="title" style="clear: both"><a id="id2936349">Designing Minilanguages</a></h2></div></div><p>When is designing a minilanguage appropriate?  We&apos;ve observed
+that minilanguages offer a way to push problem specifications to a
+higher level, and seen how this operates in several case studies.  The
+flip side of this observation is that a minilanguage is likely to be a
+good approach whenever the domain primitives in your application area
+are simple and stereotyped, but the ways in which users are likely to
+want to apply them are fluid and varying.</p><p>For some related ideas, find a description of the <a href="http://www.c2.com/cgi/wiki?AlternateHardAndSoftLayers" target="_top">Alternate
+Hard And Soft Layers</a> and <a href="http://www.doc.ic.ac.uk/~np2/patterns/scripting/scripting.html" target="_top">Scripted
+Components</a> design patterns.</p><p>An interesting survey of design styles and techniques in
+minilanguages is </p><div class="sect2" lang="en"><div class="titlepage"><div><h3 class="title"><a id="id2936413">Choosing the Right Complexity Level</a></h3></div></div><p>The first important thing to bear in mind when designing a
+minilanguage is, as usual, to keep it as simple as possible.  The
+taxonomy diagram we used to organize the case studies implies a
+hierarchy of complexity; you want to keep your design as far toward the
+left-hand edge as possible.  If you can get away with designing a
+structured data file rather than a minilanguage that is going to
+modify external data when it&apos;s interpreted, by all means do
+so.</p><p>One very pragmatic reason to stick with structured data rather
+than a minilanguage is that in a networked world, embedded
+minilanguage facilities are subject to abuses that can be inconvenient
+or even dangerous.  JavaScript</p><p>Microsoft Word</p><p>If there is any way that your application&apos;s users might end up
+running programs from untrusted sources, risky features of your
+application minilanguage might end up having to be suppressed.
+Languages like Java and JavaScript are explicitly
+<i>sandboxed</i>&#x2014;that is, they have limited
+access to their environment not merely to simplify their design but to
+try to prevent potentially destructive operations by buggy or
+malicious code.</p><p>On the other hand, a lot of bad designs have been
+botched by designers who failed to face up to the fact that they
+really needed a minilanguage rather than a data-file format.  Too
+often, language-like features get pasted on as an afterthought.
+The two most common symptoms of this problem are weak, ad-hoc control
+structures and poor or nonexistent facilities for declaring
+procedures.</p><p>It&apos;s risky to design minilanguages that are only accidentally
+Turing-complete.  If you do this the odds are good that, sometime in
+the future, some clever fellow is going to think he needs to press 
+your language into doing loops and conditionals for him.  Because
+these are only available in an obfuscated way, he&apos;ll produce
+obfuscated code. The results may be serviceable in the short term, 
+but are likely to be a nightmare for those who come after him.</p><p>Minilanguage design is both powerful and esthetically rewarding,
+but it&apos;s also full of similar traps.  There are kinds of design in
+which it is appropriate to take the bottom-up approach of pasting
+together a bunch of low-level services and worrying about their
+organization after you have explored the problem domain for a
+while.  One of the virtues of minilanguages is that they can help you
+get a good design out of bottom-up programming by allowing you to
+defer some top-down decisions into the control flow of programs in
+your minilanguage.  But if you take a bottom-up approach to the minilanguage
+design <span class="emphasis"><em>itself</em></span>, you are likely to end up with an
+ugly syntax reflecting a weak language and a poorly-thought-out
+implementation.</p><p>There are many places in a minilanguage design where small
+choices make a large difference in the useability and ease of the
+tool:</p><div class="blockquote"><table border="0" width="100%" cellspacing="0" cellpadding="0" class="blockquote" summary="Block quote"><tr><td width="10%" valign="top">&#xFFFD;</td><td width="80%" valign="top"><p>As a language designer, it is a good principle to consider the
+alternatives to giving an error message.  When there is true ambiguity
+in the intent of the programmer an error message is appropriate, but
+in many cases the intent is clear, and making the language silently do
+the right thing is a great boon.  A good example is C accommodating an
+extra comma at the end of an array initializer list, which makes both
+editing and machine generation of array initializers much easier.
+Anti-examples are the pickiness of various HTML readers, especially
+their habit of silently discarding parts of your document because of
+trivial nesting errors.</p></td><td width="10%" valign="top">&#xFFFD;</td></tr><tr><td colspan="2" align="right" valign="top">--<span class="attribution">
+<span class="author">Steve Johnson</span>
+</span></td><td width="10%" valign="top">&#xFFFD;</td></tr></table></div><p>On this issue, as elsewhere, there is no substitute for good
+taste and engineering judgment.  If you&apos;re going to design a
+minilanguage, don&apos;t do it halfway.  Declarative minilanguages should
+have a clear, consistent language-like syntax designed to be readable
+by humans.  Imperative ones should add a full range of control
+structures adapted from language models you can expect your users to
+be familiar with.  Think about the language <span class="emphasis"><em>as</em></span> a
+language; ask yourself esthetic questions like &#x201C;Will this be
+comfortable to program in?&#x201D; and even &#x201C;Will it be pleasant
+to look at?&#x201D; Here, as elsewhere in software design, David
+Gelernter&apos;s maxim is apt: beauty is the ultimate defense against
+complexity.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><h3 class="title"><a id="id2936650">Extending and Embedding Languages</a></h3></div></div><p>One fundamentally important question is whether you can
+implement your minilanguage by extending or embedding an existing
+scripting language</p><p>Sometimes it&apos;s possible to write your imperative language simply
+by coding service functions in an interpreted language, which we&apos;ll
+call the &#x2018;host&#x2019; language for purposes of this
+discussion. Your minilanguage programs are then just scripts that load
+your service library and use the host language&apos;s control structures
+and other facilities as a framework.  Every facility the host language
+supplies is one you don&apos;t have to write.</p><p>This is the easiest way to write a minilanguage.  Old-school
+Lisp</p><p>Your host language may be unable to interface to a code library
+that you need.  Or, internally, its ontology of data types may be
+inadequate for the kind of computation you need to do.  Or, after
+measuring the performance of a prototype, you discover that it&apos;s too
+slow.  When any of these things happen, your solution is usually
+going to involve coding in C</p><p>The option of extending a scripting
+language</p><p>Both techniques also rely on the ability to move data between
+the type ontology of C and the type ontology of your scripting
+language.  Some scripting languages are designed from the ground up to
+support this.  One such is Tcl</p><p>It is possible (though in 2003 still rather painful and
+difficult) to extend or embed Perl</p><p>There are lots of bad reasons not to piggyback your imperative
+minilanguage on an existing scripting
+language</p></div><div class="sect2" lang="en"><div class="titlepage"><div><h3 class="title"><a id="id2936912">Writing a Custom Grammar</a></h3></div></div><p>For declarative minilanguages, one major question is whether or
+not you should use XML as a base syntax and specify your grammar as an
+XML document type.  This may well be the right thing for elaborately
+structured declarative minilanguages, but the same caveats we noted in
+<a href="textualitychapter.html" title="Chapter&#xFFFD;5.&#xFFFD;Textuality">Chapter&#xFFFD;5</a> about the
+design of data-file formats apply &#x2014; XML might be overkill.  If
+you don&apos;t use XML, follow the Rule of Least Surprise by supporting the
+Unix conventions we described for data files (simple token-oriented
+syntax, supporting C</p><p>If you do need a custom grammar, <i>yacc</i>
+and <i>lex</i> (or their local equivalent in the
+language you&apos;re using) should probably be your best friends, unless
+the grammar of your language is so simple that hand-coding a
+recursive-descent parser is trivial. Even then,
+<i>yacc</i> may give you better error recovery,
+and a <i>yacc</i> specification will be easier to
+modify as the language syntax evolves.  See <a href="generationchapter.html" title="Chapter&#xFFFD;9.&#xFFFD;Generation">Chapter&#xFFFD;9</a> for a look at the
+<i>yacc</i>- and
+<i>lex</i>-derived tools available in different
+implementation languages.</p><p>Even if you decide you must implement your own syntax, consider
+what mileage you can get from reusing existing tools.  If you need a
+macro facility, consider whether preprocessing with
+m4(1)
+might be the right answer &#x2014; but consider the cautions in the
+next section first.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><h3 class="title"><a id="macroexpansion">Macros &#x2014; Beware!</a></h3></div></div><p>Macro expansion facilities were a favored tactic for language
+designers in early Unix; the C</p><p>Macro expansion is easy to specify and implement, and you can do
+a lot of cute tricks with it.  Those early designers appear to have been
+influenced by experience with assemblers, in which macro facilities
+were often the only device available for structuring programs.</p><p>The strength of macro expansion is that it knows nothing about
+the underlying syntax of the base language, and can be used to extend
+that syntax.  Unfortunately, this power is very easily abused to
+produce code that is opaque, surprising, and a fertile source of
+hard-to-characterize bugs.</p><p>In C, the classic example of this sort of problem is a macro
+such as this:</p><pre class="programlisting">
+#define max(x, y)	x &gt; y ? x : y
+</pre><p>There are at least two problems with this macro.  One is that it
+can produce surprising results if either of the arguments is an
+expression including an operator of lower precedence than <tt>&gt;</tt> or <tt>?:</tt>.
+Consider the expression <tt>max(a = b,
+++c)</tt>.  If the programmer has forgotten that <tt>max</tt> is a macro, he will be expecting the
+assignment <tt>a = b</tt> and the preincrement
+operation on <tt>c</tt> to be executed before
+the resulting values are passed as arguments to <tt>max</tt>.</p><p>But that&apos;s not what will happen.  Instead, the preprocessor will
+expand this expression to <tt>a = b &gt; ++c ? a = b :
+++c</tt>, which the C compiler&apos;s precedence rules make it
+interpret as <tt>a = (b &gt; ++c ? a = b :
+++c)</tt>.  The effect will be to assign to <tt>a</tt>!</p><p>This sort of bad interaction can be headed off by coding the
+macro definition more defensively.</p><pre class="programlisting">
+#define max(x, y)	((x) &gt; (y) ? (x) : (y))
+</pre><p>With this definition, the expansion would be <tt>((a = b) &gt; (++c) ? (a = b) : (++c))</tt>.  This
+solves one problem &#x2014; but notice that <tt>c</tt> may be incremented twice!  There are subtler
+versions of this trap, such as passing the macro a function-call with
+side effects.</p><p>In general, interactions between macros and expressions with
+side effects can lead to unfortunate results that are hard to
+diagnose.  C&apos;s macro processor is a deliberately lightweight and
+simple one; more powerful ones can actually get you in worse
+trouble.</p><p>The <i>TeX</i> formatting
+language (see <a href="documentationchapter.html" title="Chapter&#xFFFD;18.&#xFFFD;Documentation">Chapter&#xFFFD;18</a>) well illustrates the general
+problem.  <i>TeX</i> is intentionally
+Turing-complete (it has conditionals, loops, and recursion), but while
+it can be made to do amazing things, <i>TeX</i> code tends to be unreadable and
+painful to debug.  The sources for <i>LaTeX</i>, the the most widely used <i>TeX</i> macro package, are an instructive
+example: they&apos;re in very good <i>TeX</i> style, but even so are extremely
+difficult to follow.</p><p>A minor problem, compared to this one, is that macro expansion
+tends to screw up error diagnostics.  The base language processor
+generates its error reports relative to the macro expanded text, not
+the original the programmer is looking at.  If the relationship
+between the two has been obfuscated by macro expansion, the emitted
+diagnostic can be very difficult to associate with the actual
+location of the error.</p><p>This is especially a problem with preprocessors and macros
+that can have multiline expansions, conditionally include or exclude
+text, or otherwise change line numbers in the expanded text. </p><p>Macro expansion stages that are built into a language can do
+their own compensation, fiddling line numbers to refer back to the
+preexpanded text.  The macro facility in
+pic(1)
+does this, for example.  This problem is more difficult to solve when
+the macro expansion is done by a preprocessor.</p><p>The C preprocessor</p><p>These are reasons to use macro expansion with extreme caution.  
+One of the long-term lessons of the Unix experience is that macros
+tend to create more problems than they solve.  Modern language and
+minilanguage designs have moved away from them.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><h3 class="title"><a id="id2937424">Language or Application Protocol?</a></h3></div></div><p>Another important question you need to ask is whether your
+minilanguage engine will be called interactively by other
+programs, as a slave process.  If so, your design should probably look
+less like a conversational language for human interaction and more
+like the kind of application protocols we looked at in <a href="textualitychapter.html" title="Chapter&#xFFFD;5.&#xFFFD;Textuality">Chapter&#xFFFD;5</a>.</p><p>The main difference is how carefully marked the boundaries
+of transactions are.  Human beings are good at spotting where
+conversational output from a CLI ends, and where the prompt for the
+next input is.  They can use context to tell what&apos;s significant and
+what should be ignored.  Computer programs have much more trouble with 
+this.  Without either unambiguous end markers on output or advance
+knowledge of the length of the output, they can&apos;t tell when to stop
+reading.</p><div class="blockquote"><table border="0" width="100%" cellspacing="0" cellpadding="0" class="blockquote" summary="Block quote"><tr><td width="10%" valign="top">&#xFFFD;</td><td width="80%" valign="top"><p>Even worse is when a program&apos;s input is buffered (often
+inadvertently, as by stdio).  A program that stops overtly reading at
+the right place can nonetheless eat past it.</p></td><td width="10%" valign="top">&#xFFFD;</td></tr><tr><td colspan="2" align="right" valign="top">--<span class="attribution"><span class="author">Doug McIlroy</span>
+</span></td><td width="10%" valign="top">&#xFFFD;</td></tr></table></div><p>Programs in which master processes are trying to do interactive
+things with slaved minilanguages that are not carefully designed
+around this problem are prone to deadlock as the master and slave fall
+out of synchronization (a problem we first noted in <a href="multiprogramchapter.html" title="Chapter&#xFFFD;7.&#xFFFD;Multiprogramming">Chapter&#xFFFD;7</a>).</p><p>There are workarounds for driving minilanguages that are not so
+carefully designed.  The prototype for most of them is the
+Tcl</p><p>Workalikes of the <i>expect</i> package in
+other languages are available; a Web search for the name of your
+favorite language with the added keywords &#x201C;Tcl expect&#x201D; is
+quite likely to turn up something useful.  As a minilanguage designer,
+however, you would be unwise to assume that all your users will be
+<i>expect</i> gurus. Even if they are, this is an
+extra glue layer and a place for things to go wrong.</p><p>Be aware of this issue when designing your minilanguage.  It may
+be a good idea to add an option that changes its conversational
+behavior to make it respond more like an application protocol, with
+unambiguous end-of-output delimiters and an analog of
+<a href="ch05s04.html#byte_stuffing">byte stuffing</a>.</p></div><div class="footnotes"><br><hr width="100" align="left"><div class="footnote"><p><sup>[<a id="ftn.id2936473" href="ch08s03.html#id2936473">95</a>] </sup>20M is a conservative estimate based on
+mid-2003 figures from the Linux Counter and
+elsewhere.</p></div><div class="footnote"><p><sup>[<a id="ftn.id2936490" href="ch08s03.html#id2936490">96</a>] </sup><i>Kmail</i>, which we looked
+at in <a href="transparencychapter.html" title="Chapter&#xFFFD;6.&#xFFFD;Transparency">Chapter&#xFFFD;6</a>, won&apos;t
+even chase off-site links in HTML for this
+reason.</p></div></div></div>
+</body>
+</html>

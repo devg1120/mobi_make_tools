@@ -1,0 +1,6 @@
+ 1022  mkdir nga-cli-ts
+ 1023  cd nga-cli-ts
+ 1024  npm init
+ 1025  npm install -D typescript
+ 1026  npm install -D tslint
+ 1027  npm install @types/node -D

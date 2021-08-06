@@ -1,0 +1,24 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Rest Parameters
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts13_images/undefined" />
+  </head>
+   <body>
+<h3 id="rest-parameters">Rest Parameters</h3>
+<p>Rest parameters (denoted by <code>...argumentName</code> for the last argument) allow you to quickly accept multiple arguments in your function and get them as an array. This is demonstrated in the below example.</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">iTakeItAll</span>(<span class="hljs-params">first, second, ...allOthers</span>) </span>{
+    <span class="hljs-built_in">console</span>.log(allOthers);
+}
+iTakeItAll(<span class="hljs-string">&apos;foo&apos;</span>, <span class="hljs-string">&apos;bar&apos;</span>); <span class="hljs-comment">// []</span>
+iTakeItAll(<span class="hljs-string">&apos;foo&apos;</span>, <span class="hljs-string">&apos;bar&apos;</span>, <span class="hljs-string">&apos;bas&apos;</span>, <span class="hljs-string">&apos;qux&apos;</span>); <span class="hljs-comment">// [&apos;bas&apos;,&apos;qux&apos;]</span>
+</code></pre>
+<p>Rest parameters can be used in any function be it <code>function</code>/<code>()=&gt;</code>/<code>class member</code>.</p>
+</body>
+</html>

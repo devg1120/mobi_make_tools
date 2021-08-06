@@ -1,0 +1,61 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svnadmin rmtxns</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/tmp/es2015/cheerio-mobi-ts4/css/kindle.css" />
+  </head>
+   <body>
+    <div class="refentry">
+      <a id="svn.ref.svnadmin.c.rmtxns"></a>
+      <div class="titlepage"></div>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svnadmin rmtxns &#x2014; Delete transactions from a repository.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm12208"></a>
+        <h2>Synopsis</h2>
+        <p>
+          <code class="literal">svnadmin rmtxns REPOS_PATH TXN_NAME...</code>
+        </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm12212"></a>
+        <h2>Description</h2>
+        <p>Delete outstanding transactions from a repository.
+            This is covered in detail in .</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm12216"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+          <pre class="screen">
+</pre>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm12221"></a>
+        <h2>Examples</h2>
+        <p>Remove named transactions:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svnadmin rmtxns /var/svn/repos/ 1w 1x
+</pre>
+        </div>
+        <p>Fortunately, the output of <span class="command"><strong>lstxns</strong></span>
+            works great as the input for <span class="command"><strong>rmtxns</strong></span>:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svnadmin rmtxns /var/svn/repos/  `svnadmin lstxns /var/svn/repos/`
+</pre>
+        </div>
+        <p>This removes all uncommitted transactions from
+            your repository.</p>
+      </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,9 @@
+<h1>Module Resolution</h1>
+<p>A resolver is a library which helps in locating a module by its absolute path.
+    A module can be required as a dependency from another module as:</p>
+<pre><code class="hljs language-js"><span class="token keyword">import</span> foo <span class="token keyword">from</span> <span class="token string">&apos;path/to/module&apos;</span><span class="token punctuation">;</span>
+<span class="token comment">// or</span>
+<span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;path/to/module&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>The dependency module can be from the application code or a third-party library. The resolver helps
+    webpack find the module code that needs to be included in the bundle for every such <code>require</code>/<code>import</code> statement.
+    webpack uses <a href="https://github.com/webpack/enhanced-resolve">enhanced-resolve</a> to resolve file paths while bundling modules.</p>

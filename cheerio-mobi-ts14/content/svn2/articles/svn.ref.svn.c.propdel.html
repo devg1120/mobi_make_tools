@@ -1,0 +1,68 @@
+
+    
+    
+    <div class="refentry">
+      <a id="svn.ref.svn.c.propdel"></a>
+      <div class="titlepage"></div>
+      <a id="idm10696" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svn propdel (pdel, pd) — Remove a property from an item.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm10703"></a>
+        <h2>Synopsis</h2>
+        <p>
+          <code class="literal">svn propdel PROPNAME [PATH...]</code>
+        </p>
+        <p>
+          <code class="literal">svn propdel PROPNAME --revprop -r REV [TARGET]</code>
+        </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm10709"></a>
+        <h2>Description</h2>
+        <p>This removes properties from files, directories, or
+            revisions.  The first form removes versioned properties in
+            your working copy, and the second removes unversioned
+            remote properties on a repository revision
+            (<em class="replaceable"><code>TARGET</code></em> determines only which
+            repository to access).</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm10713"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+          <pre class="screen">
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.changelist"><code class="option">--changelist</code> (<code class="option">--cl</code>) <em class="replaceable"><code>ARG</code></em></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.depth"><code class="option">--depth</code> <em class="replaceable"><code>ARG</code></em></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.quiet"><code class="option">--quiet</code> (<code class="option">-q</code>)</a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.recursive"><code class="option">--recursive</code> (<code class="option">-R</code>)</a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.revision"><code class="option">--revision</code> (<code class="option">-r</code>) <em class="replaceable"><code>REV</code></em></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.revprop"><code class="option">--revprop</code></a>
+</pre>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm10723"></a>
+        <h2>Examples</h2>
+        <p>Delete a property from a file in your working
+            copy:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn propdel svn:mime-type some-script
+property 'svn:mime-type' deleted from 'some-script'.
+</pre>
+        </div>
+        <p>Delete a revision property:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn propdel --revprop -r 26 release-date 
+property 'release-date' deleted from repository revision '26'
+</pre>
+        </div>
+      </div>
+    </div>
+    
+    
+  

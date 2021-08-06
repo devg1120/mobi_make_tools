@@ -1,0 +1,65 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Package </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+The built-in package <code>unsafe</code>, known to the compiler
+and accessible through the [<a>import path</a>] <code>&quot;unsafe&quot;</code>,
+provides facilities for low-level programming including operations
+that violate the type system. A package using <code>unsafe</code>
+must be vetted manually for type safety and may not be portable.
+The package provides the following interface:
+</p><pre>
+package unsafe
+type ArbitraryType int  // shorthand for an arbitrary Go type; it is not a real type
+type Pointer *ArbitraryType
+func Alignof(variable ArbitraryType) uintptr
+func Offsetof(selector ArbitraryType) uintptr
+func Sizeof(variable ArbitraryType) uintptr
+</pre><p>
+A <code>Pointer</code> is a [<a>pointer type</a>] but a <code>Pointer</code>
+value may not be [<a>dereferenced</a>].
+Any pointer or value of [<a>underlying type</a>] <code>uintptr</code> can be converted to
+a type of underlying type <code>Pointer</code> and vice versa.
+The effect of converting between <code>Pointer</code> and <code>uintptr</code> is implementation-defined.
+</p><pre>
+var f float64
+bits = *(*uint64)(unsafe.Pointer(&amp;f))
+type ptr unsafe.Pointer
+bits = *(*uint64)(ptr(&amp;f))
+var p ptr = nil
+</pre><p>
+The functions <code>Alignof</code> and <code>Sizeof</code> take an expression <code>x</code>
+of any type and return the alignment or size, respectively, of a hypothetical variable <code>v</code>
+as if <code>v</code> was declared via <code>var v = x</code>.
+</p><p>
+The function <code>Offsetof</code> takes a (possibly parenthesized) [<a>selector</a>]
+<code>s.f</code>, denoting a field <code>f</code> of the struct denoted by <code>s</code>
+or <code>*s</code>, and returns the field offset in bytes relative to the struct&apos;s address.
+If <code>f</code> is an [<a>embedded field</a>], it must be reachable
+without pointer indirections through fields of the struct.
+For a struct <code>s</code> with field <code>f</code>:
+</p><pre>
+uintptr(unsafe.Pointer(&amp;s)) + unsafe.Offsetof(s.f) == uintptr(unsafe.Pointer(&amp;s.f))
+</pre><p>
+Computer architectures may require memory addresses to be <i>aligned</i>;
+that is, for addresses of a variable to be a multiple of a factor,
+the variable&apos;s type&apos;s <i>alignment</i>.  The function <code>Alignof</code>
+takes an expression denoting a variable of any type and returns the
+alignment of the (type of the) variable in bytes.  For a variable
+<code>x</code>:
+</p><pre>
+uintptr(unsafe.Pointer(&amp;x)) % unsafe.Alignof(x) == 0
+</pre><p>
+Calls to <code>Alignof</code>, <code>Offsetof</code>, and
+<code>Sizeof</code> are compile-time constant expressions of type <code>uintptr</code>.
+</p></body>
+</body>
+</html>

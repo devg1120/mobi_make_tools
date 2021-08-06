@@ -1,0 +1,161 @@
+<div class="sect1">
+    <div class="titlepage">
+        <div>
+            <div>
+                <h2 class="title" style="clear: both"><a id="svn.ref.svnrdump"></a>svnrdump—Remote Subversion Repository Data Migration</h2>
+            </div>
+        </div>
+    </div>
+    <p><span class="command"><strong>svnrdump</strong></span> joined the Subversion tool chain
+        in the Subversion 1.7 release. It is best described as a
+        network-aware version of the <span class="command"><strong>svnadmin dump</strong></span>
+        and <span class="command"><strong>svnadmin load</strong></span> commands, paired together
+        and released as a separate standalone program. We discuss the
+        process of dumping and loading repository data—using
+        both <span class="command"><strong>svnadmin</strong></span>
+        and <span class="command"><strong>svnrdump</strong></span>— in
+        <a class="xref" href="svn.reposadmin.maint.html#svn.reposadmin.maint.migrate" title="Migrating Repository Data Elsewhere">the section called “Migrating Repository Data Elsewhere”</a>.</p>
+    <div class="sect2">
+        <div class="titlepage">
+            <div>
+                <div>
+                    <h3 class="title"><a id="svn.ref.svnrdump.sw"></a>svnrdump Options</h3>
+                </div>
+            </div>
+        </div>
+        <p>Options in <span class="command"><strong>svnrdump</strong></span> are global, just
+            as they are in <span class="command"><strong>svn</strong></span> and
+            <span class="command"><strong>svnadmin</strong></span>:</p>
+        <div class="variablelist">
+            <dl class="variablelist">
+                <dt>
+                    <a id="svn.ref.svnrdump.sw.config_dir"></a>
+                    <span class="term"><code class="option">--config-dir</code> <em class="replaceable"><code>DIR</code></em></span>
+                </dt>
+                <dd>
+                    <p>Instructs Subversion to read configuration
+                        information from the specified directory instead of the
+                        default location (<code class="filename">.subversion</code> in
+                        the user's home directory).</p>
+                </dd>
+                <dt>
+                    <a id="svn.ref.svnrdump.sw.config_option"></a>
+                    <span class="term"><code class="option">--config-option</code> <em class="replaceable"><code>FILE</code></em>:<em class="replaceable"><code>SECTION</code></em>:<em class="replaceable"><code>OPTION</code></em>=[<em class="replaceable"><code>VALUE</code></em>]</span>
+                </dt>
+                <dd>
+                    <p>Sets, for the duration of the command, the value of
+                        a runtime configuration
+                        option. <em class="replaceable"><code>FILE</code></em>
+                        and <em class="replaceable"><code>SECTION</code></em> are the runtime
+                        configuration file (either <code class="literal">config</code>
+                        or <code class="literal">servers</code>) and the section thereof,
+                        respectively, which contain the option whose value you
+                        wish to change. <em class="replaceable"><code>OPTION</code></em> is,
+                        of course, the option itself,
+                        and <em class="replaceable"><code>VALUE</code></em> the value (if any)
+                        you wish to assign to the option. For example, to
+                        temporarily disable the use of the compression in the
+                        HTTP protocol,
+                        use <code class="option">--config-option=servers:global:http-compression=no</code>.
+                        You can use this option multiple times to change
+                        multiple option values simultaneously.</p>
+                </dd>
+                <dt>
+                    <a id="svn.ref.svnrdump.sw.incremental"></a>
+                    <span class="term">
+                        <code class="option">--incremental</code>
+                    </span>
+                </dt>
+                <dd>
+                    <p>Dump a revision or revision range only as a diff
+                        against the previous revision, instead of the default,
+                        which is begin a dumped revision range with a complete
+                        expansion of all contents of the repository as of that
+                        revision.</p>
+                </dd>
+                <dt>
+                    <a id="svn.ref.svnrdump.sw.no_auth_cache"></a>
+                    <span class="term">
+                        <code class="option">--no-auth-cache</code>
+                    </span>
+                </dt>
+                <dd>
+                    <p>Prevents caching of authentication information
+                        (e.g., username and password) in the Subversion
+                        runtime configuration directories.</p>
+                </dd>
+                <dt>
+                    <a id="svn.ref.svnrdump.sw.non_interactive"></a>
+                    <span class="term">
+                        <code class="option">--non-interactive</code>
+                    </span>
+                </dt>
+                <dd>
+                    <p>In the case of an authentication failure or
+                        insufficient credentials, prevents prompting for
+                        credentials (e.g., username or password). This is useful
+                        if you're running Subversion inside an automated
+                        script and it's more appropriate to have Subversion fail
+                        than to prompt for more information.</p>
+                </dd>
+                <dt>
+                    <a id="svn.ref.svnrdump.sw.password"></a>
+                    <span class="term"><code class="option">--password</code> <em class="replaceable"><code>PASSWD</code></em></span>
+                </dt>
+                <dd>
+                    <p>Specifies the password to use when authenticating
+                        against a Subversion server. If not provided, or if
+                        incorrect, Subversion will prompt you for this
+                        information as needed.</p>
+                </dd>
+                <dt>
+                    <a id="svn.ref.svnrdump.sw.quiet"></a>
+                    <span class="term"><code class="option">--quiet</code> (<code class="option">-q</code>)</span>
+                </dt>
+                <dd>
+                    <p>Requests that the client print only essential
+                        information while performing an operation.</p>
+                </dd>
+                <dt>
+                    <a id="svn.ref.svnrdump.sw.revision"></a>
+                    <span class="term"><code class="option">--revision</code> (<code class="option">-r</code>) <em class="replaceable"><code>ARG</code></em></span>
+                </dt>
+                <dd>
+                    <p>Specifies a particular revision or revision range on
+                        which to operate.</p>
+                </dd>
+                <dt>
+                    <a id="svn.ref.svnrdump.sw.trust_server_cert"></a>
+                    <span class="term">
+                        <code class="option">--trust-server-cert</code>
+                    </span>
+                </dt>
+                <dd>
+                    <p>Used with <code class="option">--non-interactive</code> to accept
+                        any unknown SSL server certificates without prompting.</p>
+                </dd>
+                <dt>
+                    <a id="svn.ref.svnrdump.sw.username"></a>
+                    <span class="term"><code class="option">--username</code> <em class="replaceable"><code>NAME</code></em></span>
+                </dt>
+                <dd>
+                    <p>Specifies the username to use when authenticating
+                        against a Subversion server. If not provided, or if
+                        incorrect, Subversion will prompt you for this
+                        information as needed.</p>
+                </dd>
+            </dl>
+        </div>
+    </div>
+    <div class="sect2">
+        <div class="titlepage">
+            <div>
+                <div>
+                    <h3 class="title"><a id="svn.ref.svnrdump.c"></a>svnrdump Subcommands</h3>
+                </div>
+            </div>
+        </div>
+        <p>Here are the various subcommands
+            for the <span class="command"><strong>svnrdump</strong></span> program.</p>
+    </div>
+</div>

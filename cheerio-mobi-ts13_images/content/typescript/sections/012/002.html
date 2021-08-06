@@ -1,0 +1,58 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Common Errors
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts13_images/undefined" />
+  </head>
+   <body>
+<h1 id="common-errors">Common Errors</h1>
+<p>In this section we explain a number of common error codes that users experience in the real world.</p>
+<h2 id="ts2304">TS2304</h2>
+<p>Samples:</p>
+<blockquote>
+    <p><code>Cannot find name ga</code>
+        <code>Cannot find name $</code>
+        <code>Cannot find module jquery</code></p>
+</blockquote>
+<p>You are probably using a third party library (e.g. google analytics) and don&apos;t have it <code>declare</code>d. TypeScript tries to save you from <em>spelling mistakes</em> and <em>using variables without declaring them</em> so you need to be explicit on anything that is <em>available at runtime</em> because of you including some external library (<a href="../types/ambient/d.ts.html">more on how to fix it</a>).</p>
+<h2 id="ts2307">TS2307</h2>
+<p>Samples:</p>
+<blockquote>
+    <p><code>Cannot find module &apos;underscore&apos;</code></p>
+</blockquote>
+<p>You are probably using a third party library (e.g. underscore) as a <em>module</em> (<a href="../project/modules.html">more on modules</a>) and don&apos;t have the ambient declaration file for it (<a href="../types/ambient/d.ts.html">more on ambient declarations</a>).</p>
+<h2 id="ts1148">TS1148</h2>
+<p>Sample:</p>
+<blockquote>
+    <p>Cannot compile modules unless the &apos;--module&apos; flag is provided</p>
+</blockquote>
+<p>Checkout the <a href="../project/modules.html">section on modules</a>.</p>
+<h2 id="catch-clause-variable-cannot-have-a-type-annotation">Catch clause variable cannot have a type annotation</h2>
+<p>Sample:</p>
+<pre><code class="lang-js"><span class="hljs-keyword">try</span> { something(); }
+<span class="hljs-keyword">catch</span> (e: <span class="hljs-built_in">Error</span>) { <span class="hljs-comment">// Catch clause variable cannot have a type annotation</span>
+}
+</code></pre>
+<p>TypeScript is protecting you from JavaScript code in the wild being wrong. Use a type guard instead:</p>
+<pre><code class="lang-js"><span class="hljs-keyword">try</span> { something(); }
+<span class="hljs-keyword">catch</span> (e) {
+  <span class="hljs-keyword">if</span> (e <span class="hljs-keyword">instanceof</span> <span class="hljs-built_in">Error</span>){
+    <span class="hljs-comment">// Here you go.</span>
+  }
+}
+</code></pre>
+<h2 id="interface-elementclass-cannot-simultaneously-extend-types-component-and-component">Interface <code>ElementClass</code> cannot simultaneously extend types <code>Component</code> and <code>Component</code></h2>
+<p>This happens when you have two <code>react.d.ts</code> (<code>@types/react/index.d.ts</code>) in the compilation context.</p>
+<p><strong>Fix</strong>:</p>
+<ul>
+    <li>Delete <code>node_modules</code> and any <code>package-lock</code> (or yarn lock) and <code>npm install</code> again.</li>
+    <li>If it doesn&apos;t work, find the invalid module (all modules used by your project should have <code>react.d.ts</code> as a <code>peerDependency</code> and not a hard <code>dependency</code>) and report it on their project.</li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,81 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Constants</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+Constants in Go are just that&#x2014;constant.
+They are created at compile time, even when defined as
+locals in functions,
+and can only be numbers, characters (runes), strings or booleans.
+Because of the compile-time restriction, the expressions
+that define them must be constant expressions,
+evaluatable by the compiler.  For instance,
+<code>1&lt;<3< code> is a constant expression, while
+<code>math.Sin(math.Pi/4)</code> is not because
+the function call to <code>math.Sin</code> needs
+to happen at run time.
+</3<></code></p><p>
+In Go, enumerated constants are created using the <code>iota</code>
+enumerator.  Since <code>iota</code> can be part of an expression and
+expressions can be implicitly repeated, it is easy to build intricate
+sets of values.
+</p><pre>{{code &quot;/doc/progs/eff_bytesize.go&quot; `/^type ByteSize/` `/^\)/`}}
+type ByteSize float64
+const (
+    _           = iota <span>// ignore first value by assigning to blank identifier</span>
+    KB ByteSize = 1 &lt;&lt; (10 * iota)
+    MB
+    GB
+    TB
+    PB
+    EB
+    ZB
+    YB
+)</pre><p>
+The ability to attach a method such as <code>String</code> to any
+user-defined type makes it possible for arbitrary values to format themselves
+automatically for printing.
+Although you&apos;ll see it most often applied to structs, this technique is also useful for
+scalar types such as floating-point types like <code>ByteSize</code>.
+</p><pre>{{code &quot;/doc/progs/eff_bytesize.go&quot; `/^func.*ByteSize.*String/` `/^}/`}}
+func (b ByteSize) String() string {
+    switch {
+    case b &gt;= YB:
+        return fmt.Sprintf(&quot;%.2fYB&quot;, b/YB)
+    case b &gt;= ZB:
+        return fmt.Sprintf(&quot;%.2fZB&quot;, b/ZB)
+    case b &gt;= EB:
+        return fmt.Sprintf(&quot;%.2fEB&quot;, b/EB)
+    case b &gt;= PB:
+        return fmt.Sprintf(&quot;%.2fPB&quot;, b/PB)
+    case b &gt;= TB:
+        return fmt.Sprintf(&quot;%.2fTB&quot;, b/TB)
+    case b &gt;= GB:
+        return fmt.Sprintf(&quot;%.2fGB&quot;, b/GB)
+    case b &gt;= MB:
+        return fmt.Sprintf(&quot;%.2fMB&quot;, b/MB)
+    case b &gt;= KB:
+        return fmt.Sprintf(&quot;%.2fKB&quot;, b/KB)
+    }
+    return fmt.Sprintf(&quot;%.2fB&quot;, b)
+}</pre><p>
+The expression <code>YB</code> prints as <code>1.00YB</code>,
+while <code>ByteSize(1e13)</code> prints as <code>9.09TB</code>.
+</p><p>
+The use here of <code>Sprintf</code>
+to implement <code>ByteSize</code>&apos;s <code>String</code> method is safe
+(avoids recurring indefinitely) not because of a conversion but
+because it calls <code>Sprintf</code> with <code>%f</code>,
+which is not a string format: <code>Sprintf</code> will only call
+the <code>String</code> method when it wants a string, and <code>%f</code>
+wants a floating-point value.
+</p></body>
+</body>
+</html>

@@ -1,0 +1,6 @@
+<body><p>
+A <i>boolean type</i> represents the set of Boolean truth values
+denoted by the predeclared constants <code>true</code>
+and <code>false</code>. The predeclared boolean type is <code>bool</code>;
+it is a [<a>defined type</a>].
+</p></body>

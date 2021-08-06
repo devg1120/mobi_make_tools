@@ -1,0 +1,186 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Async Await
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts13_images/undefined" />
+  </head>
+   <body>
+<h2 id="async-await">Async Await</h2>
+<blockquote>
+    <p><a href="https://egghead.io/courses/async-await-using-typescript" target="_blank">A PRO egghead video course that covers the same material</a></p>
+</blockquote>
+<p>As a thought experiment imagine the following: a way to tell the JavaScript runtime to pause the executing of code on the <code>await</code> keyword when used on a promise and resume <em>only</em> once (and if) the promise returned from the function is settled:</p>
+<pre><code class="lang-ts"><span class="hljs-comment">// Not actual code. A thought experiment</span>
+async <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">try</span> {
+        <span class="hljs-keyword">var</span> val = await getMeAPromise();
+        <span class="hljs-built_in">console</span>.log(val);
+    }
+    <span class="hljs-keyword">catch</span>(err) {
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;Error: &apos;</span>, err.message);
+    }
+}
+</code></pre>
+<p>When the promise settles execution continues,</p>
+<ul>
+    <li>if it was fulfilled then await will return the value,</li>
+    <li>if it&apos;s rejected an error will be thrown synchronously which we can catch.</li>
+</ul>
+<p>This suddenly (and magically) makes asynchronous programming as easy as synchronous programming. Three things needed for this thought experiment are:</p>
+<ul>
+    <li>Ability to <em>pause function</em> execution.</li>
+    <li>Ability to <em>put a value inside</em> the function.</li>
+    <li>Ability to <em>throw an exception inside</em> the function.</li>
+</ul>
+<p>This is exactly what generators allowed us to do! The thought experiment <em>is actually real</em> and so is the <code>async</code>/<code>await</code> implementation in TypeScript / JavaScript. Under the covers it just uses generators.</p>
+<h3 id="generated-javascript">Generated JavaScript</h3>
+<p>You don&apos;t have to understand this, but it&apos;s fairly simple if you&apos;ve <a href="generators.html">read up on generators</a>. The function <code>foo</code> can be simply wrapped up as follows:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">const</span> foo = wrapToReturnPromise(<span class="hljs-function"><span class="hljs-keyword">function</span>* (<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">try</span> {
+        <span class="hljs-keyword">var</span> val = <span class="hljs-keyword">yield</span> getMeAPromise();
+        <span class="hljs-built_in">console</span>.log(val);
+    }
+    <span class="hljs-keyword">catch</span>(err) {
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;Error: &apos;</span>, err.message);
+    }
+});
+</code></pre>
+<p>where the <code>wrapToReturnPromise</code> just executes the generator function to get the <code>generator</code> and then use <code>generator.next()</code>, if the value is a <code>promise</code> it would <code>then</code>+<code>catch</code> the promise and depending upon the result call <code>generator.next(result)</code> or <code>generator.throw(error)</code>. That&apos;s it!</p>
+<h3 id="async-await-support-in-typescript">Async Await Support in TypeScript</h3>
+<p><strong>Async - Await</strong> has been supported by <a href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-1-7.html" target="_blank">TypeScript since version 1.7</a>. Asynchronous functions are prefixed with the <em>async</em> keyword; <em>await</em> suspends the execution until an asynchronous function return promise is fulfilled and unwraps the value from the <em>Promise</em> returned.
+    It was only supported for <strong>target es6</strong> transpiling directly to <strong>ES6 generators</strong>.</p>
+<p><strong>TypeScript 2.1</strong> <a href="https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-1.html" target="_blank">added the capability to ES3 and ES5 run-times</a>, meaning you&#x2019;ll be free to take advantage of it no matter what environment you&#x2019;re using. It&apos;s important to notice that we can use async / await with TypeScript 2.1 and many browsers are supported, of course, having globally added a <strong>polyfill for Promise</strong>.</p>
+<p>Let&apos;s see this <strong>example</strong> and take a look at this code to figure out how TypeScript async / await <strong>notation</strong> works: </p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">delay</span>(<span class="hljs-params">milliseconds: <span class="hljs-built_in">number</span>, count: <span class="hljs-built_in">number</span></span>): <span class="hljs-title">Promise</span>&lt;<span class="hljs-title">number</span>&gt; </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Promise&lt;<span class="hljs-built_in">number</span>&gt;(resolve =&gt; {
+            setTimeout(() =&gt; {
+                resolve(count);
+            }, milliseconds);
+        });
+}
+<span class="hljs-comment">// async function always returns a Promise</span>
+async <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">dramaticWelcome</span>(<span class="hljs-params"></span>): <span class="hljs-title">Promise</span>&lt;<span class="hljs-title">void</span>&gt; </span>{
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Hello&quot;</span>);
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) {
+        <span class="hljs-comment">// await is converting Promise<number> into number</number></span>
+        <span class="hljs-keyword">const</span> count:<span class="hljs-built_in">number</span> = await delay(<span class="hljs-number">500</span>, i);
+        <span class="hljs-built_in">console</span>.log(count);
+    }
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;World!&quot;</span>);
+}
+dramaticWelcome();
+</code></pre>
+<p><strong>Transpiling to ES6 (--target es6)</strong></p>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> __awaiter = (<span class="hljs-keyword">this</span> &amp;&amp; <span class="hljs-keyword">this</span>.__awaiter) || <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">thisArg, _arguments, P, generator</span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> (P || (P = <span class="hljs-built_in">Promise</span>))(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">resolve, reject</span>) </span>{
+        <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fulfilled</span>(<span class="hljs-params">value</span>) </span>{ <span class="hljs-keyword">try</span> { step(generator.next(value)); } <span class="hljs-keyword">catch</span> (e) { reject(e); } }
+        <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">rejected</span>(<span class="hljs-params">value</span>) </span>{ <span class="hljs-keyword">try</span> { step(generator[<span class="hljs-string">&quot;throw&quot;</span>](value)); } <span class="hljs-keyword">catch</span> (e) { reject(e); } }
+        <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">step</span>(<span class="hljs-params">result</span>) </span>{ result.done ? resolve(result.value) : <span class="hljs-keyword">new</span> P(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">resolve</span>) </span>{ resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">delay</span>(<span class="hljs-params">milliseconds, count</span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(resolve =&gt; {
+        setTimeout(() =&gt; {
+            resolve(count);
+        }, milliseconds);
+    });
+}
+<span class="hljs-comment">// async function always returns a Promise</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">dramaticWelcome</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">return</span> __awaiter(<span class="hljs-keyword">this</span>, <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>, <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>* (<span class="hljs-params"></span>) </span>{
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Hello&quot;</span>);
+        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++) {
+            <span class="hljs-comment">// await is converting Promise<number> into number</number></span>
+            <span class="hljs-keyword">const</span> count = <span class="hljs-keyword">yield</span> delay(<span class="hljs-number">500</span>, i);
+            <span class="hljs-built_in">console</span>.log(count);
+        }
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;World!&quot;</span>);
+    });
+}
+dramaticWelcome();
+</code></pre>
+<p>You can see full example <a href="https://cdn.rawgit.com/basarat/typescript-book/705e4496/code/async-await/es6/asyncAwaitES6.js" target="_blank">here</a>.</p>
+<p><strong>Transpiling to ES5 (--target es5)</strong></p>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> __awaiter = (<span class="hljs-keyword">this</span> &amp;&amp; <span class="hljs-keyword">this</span>.__awaiter) || <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">thisArg, _arguments, P, generator</span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> (P || (P = <span class="hljs-built_in">Promise</span>))(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">resolve, reject</span>) </span>{
+        <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fulfilled</span>(<span class="hljs-params">value</span>) </span>{ <span class="hljs-keyword">try</span> { step(generator.next(value)); } <span class="hljs-keyword">catch</span> (e) { reject(e); } }
+        <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">rejected</span>(<span class="hljs-params">value</span>) </span>{ <span class="hljs-keyword">try</span> { step(generator[<span class="hljs-string">&quot;throw&quot;</span>](value)); } <span class="hljs-keyword">catch</span> (e) { reject(e); } }
+        <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">step</span>(<span class="hljs-params">result</span>) </span>{ result.done ? resolve(result.value) : <span class="hljs-keyword">new</span> P(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">resolve</span>) </span>{ resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+<span class="hljs-keyword">var</span> __generator = (<span class="hljs-keyword">this</span> &amp;&amp; <span class="hljs-keyword">this</span>.__generator) || <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">thisArg, body</span>) </span>{
+    <span class="hljs-keyword">var</span> _ = { label: <span class="hljs-number">0</span>, sent: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{ <span class="hljs-keyword">if</span> (t[<span class="hljs-number">0</span>] &amp; <span class="hljs-number">1</span>) <span class="hljs-keyword">throw</span> t[<span class="hljs-number">1</span>]; <span class="hljs-keyword">return</span> t[<span class="hljs-number">1</span>]; }, trys: [], ops: [] }, f, y, t, g;
+    <span class="hljs-keyword">return</span> g = { next: verb(<span class="hljs-number">0</span>), <span class="hljs-string">&quot;throw&quot;</span>: verb(<span class="hljs-number">1</span>), <span class="hljs-string">&quot;return&quot;</span>: verb(<span class="hljs-number">2</span>) }, <span class="hljs-keyword">typeof</span> <span class="hljs-built_in">Symbol</span> === <span class="hljs-string">&quot;function&quot;</span> &amp;&amp; (g[<span class="hljs-built_in">Symbol</span>.iterator] = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{ <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>; }), g;
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">verb</span>(<span class="hljs-params">n</span>) </span>{ <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">v</span>) </span>{ <span class="hljs-keyword">return</span> step([n, v]); }; }
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">step</span>(<span class="hljs-params">op</span>) </span>{
+        <span class="hljs-keyword">if</span> (f) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">TypeError</span>(<span class="hljs-string">&quot;Generator is already executing.&quot;</span>);
+        <span class="hljs-keyword">while</span> (_) <span class="hljs-keyword">try</span> {
+            <span class="hljs-keyword">if</span> (f = <span class="hljs-number">1</span>, y &amp;&amp; (t = y[op[<span class="hljs-number">0</span>] &amp; <span class="hljs-number">2</span> ? <span class="hljs-string">&quot;return&quot;</span> : op[<span class="hljs-number">0</span>] ? <span class="hljs-string">&quot;throw&quot;</span> : <span class="hljs-string">&quot;next&quot;</span>]) &amp;&amp; !(t = t.call(y, op[<span class="hljs-number">1</span>])).done) <span class="hljs-keyword">return</span> t;
+            <span class="hljs-keyword">if</span> (y = <span class="hljs-number">0</span>, t) op = [<span class="hljs-number">0</span>, t.value];
+            <span class="hljs-keyword">switch</span> (op[<span class="hljs-number">0</span>]) {
+                <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>: <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>: t = op; <span class="hljs-keyword">break</span>;
+                <span class="hljs-keyword">case</span> <span class="hljs-number">4</span>: _.label++; <span class="hljs-keyword">return</span> { value: op[<span class="hljs-number">1</span>], done: <span class="hljs-literal">false</span> };
+                <span class="hljs-keyword">case</span> <span class="hljs-number">5</span>: _.label++; y = op[<span class="hljs-number">1</span>]; op = [<span class="hljs-number">0</span>]; <span class="hljs-keyword">continue</span>;
+                <span class="hljs-keyword">case</span> <span class="hljs-number">7</span>: op = _.ops.pop(); _.trys.pop(); <span class="hljs-keyword">continue</span>;
+                <span class="hljs-keyword">default</span>:
+                    <span class="hljs-keyword">if</span> (!(t = _.trys, t = t.length &gt; <span class="hljs-number">0</span> &amp;&amp; t[t.length - <span class="hljs-number">1</span>]) &amp;&amp; (op[<span class="hljs-number">0</span>] === <span class="hljs-number">6</span> || op[<span class="hljs-number">0</span>] === <span class="hljs-number">2</span>)) { _ = <span class="hljs-number">0</span>; <span class="hljs-keyword">continue</span>; }
+                    <span class="hljs-keyword">if</span> (op[<span class="hljs-number">0</span>] === <span class="hljs-number">3</span> &amp;&amp; (!t || (op[<span class="hljs-number">1</span>] &gt; t[<span class="hljs-number">0</span>] &amp;&amp; op[<span class="hljs-number">1</span>] &lt; t[<span class="hljs-number">3</span>]))) { _.label = op[<span class="hljs-number">1</span>]; <span class="hljs-keyword">break</span>; }
+                    <span class="hljs-keyword">if</span> (op[<span class="hljs-number">0</span>] === <span class="hljs-number">6</span> &amp;&amp; _.label &lt; t[<span class="hljs-number">1</span>]) { _.label = t[<span class="hljs-number">1</span>]; t = op; <span class="hljs-keyword">break</span>; }
+                    <span class="hljs-keyword">if</span> (t &amp;&amp; _.label &lt; t[<span class="hljs-number">2</span>]) { _.label = t[<span class="hljs-number">2</span>]; _.ops.push(op); <span class="hljs-keyword">break</span>; }
+                    <span class="hljs-keyword">if</span> (t[<span class="hljs-number">2</span>]) _.ops.pop();
+                    _.trys.pop(); <span class="hljs-keyword">continue</span>;
+            }
+            op = body.call(thisArg, _);
+        } <span class="hljs-keyword">catch</span> (e) { op = [<span class="hljs-number">6</span>, e]; y = <span class="hljs-number">0</span>; } <span class="hljs-keyword">finally</span> { f = t = <span class="hljs-number">0</span>; }
+        <span class="hljs-keyword">if</span> (op[<span class="hljs-number">0</span>] &amp; <span class="hljs-number">5</span>) <span class="hljs-keyword">throw</span> op[<span class="hljs-number">1</span>]; <span class="hljs-keyword">return</span> { value: op[<span class="hljs-number">0</span>] ? op[<span class="hljs-number">1</span>] : <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>, done: <span class="hljs-literal">true</span> };
+    }
+};
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">delay</span>(<span class="hljs-params">milliseconds, count</span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">resolve</span>) </span>{
+        setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+            resolve(count);
+        }, milliseconds);
+    });
+}
+<span class="hljs-comment">// async function always returns a Promise</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">dramaticWelcome</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">return</span> __awaiter(<span class="hljs-keyword">this</span>, <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>, <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">var</span> i, count;
+        <span class="hljs-keyword">return</span> __generator(<span class="hljs-keyword">this</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">_a</span>) </span>{
+            <span class="hljs-keyword">switch</span> (_a.label) {
+                <span class="hljs-keyword">case</span> <span class="hljs-number">0</span>:
+                    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;Hello&quot;</span>);
+                    i = <span class="hljs-number">0</span>;
+                    _a.label = <span class="hljs-number">1</span>;
+                <span class="hljs-keyword">case</span> <span class="hljs-number">1</span>:
+                    <span class="hljs-keyword">if</span> (!(i &lt; <span class="hljs-number">5</span>)) <span class="hljs-keyword">return</span> [<span class="hljs-number">3</span> <span class="hljs-comment">/*break*/</span>, <span class="hljs-number">4</span>];
+                    <span class="hljs-keyword">return</span> [<span class="hljs-number">4</span> <span class="hljs-comment">/*yield*/</span>, delay(<span class="hljs-number">500</span>, i)];
+                <span class="hljs-keyword">case</span> <span class="hljs-number">2</span>:
+                    count = _a.sent();
+                    <span class="hljs-built_in">console</span>.log(count);
+                    _a.label = <span class="hljs-number">3</span>;
+                <span class="hljs-keyword">case</span> <span class="hljs-number">3</span>:
+                    i++;
+                    <span class="hljs-keyword">return</span> [<span class="hljs-number">3</span> <span class="hljs-comment">/*break*/</span>, <span class="hljs-number">1</span>];
+                <span class="hljs-keyword">case</span> <span class="hljs-number">4</span>:
+                    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;World!&quot;</span>);
+                    <span class="hljs-keyword">return</span> [<span class="hljs-number">2</span> <span class="hljs-comment">/*return*/</span>];
+            }
+        });
+    });
+}
+dramaticWelcome();
+</code></pre>
+<p>You can see full example <a href="https://cdn.rawgit.com/basarat/typescript-book/705e4496/code/async-await/es5/asyncAwaitES5.js" target="_blank">here</a>.</p>
+<p><strong>Note</strong>: for both target scenarios, we need to make sure our run-time has an ECMAScript-compliant Promise available globally. That might involve grabbing a polyfill for Promise. We also need to make sure that TypeScript knows Promise exists by setting our lib flag to something like &quot;dom&quot;, &quot;es2015&quot; or &quot;dom&quot;, &quot;es2015.promise&quot;, &quot;es5&quot;.
+    <strong>We can see what browsers DO have Promise support (native and polyfilled) <a href="https://kangax.github.io/compat-table/es6/#test-Promise" target="_blank">here</a>.</strong></p>
+</body>
+</html>

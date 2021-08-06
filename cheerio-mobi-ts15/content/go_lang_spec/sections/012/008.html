@@ -1,0 +1,36 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>If statements</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+&quot;If&quot; statements specify the conditional execution of two branches
+according to the value of a boolean expression.  If the expression
+evaluates to true, the &quot;if&quot; branch is executed, otherwise, if
+present, the &quot;else&quot; branch is executed.
+</p><pre>
+[<a>IfStmt</a>] = &quot;if&quot; [ [<a>SimpleStmt</a>] &quot;;&quot; ] [<a>Expression</a>] [<a>Block</a>] [ &quot;else&quot; ( [<a>IfStmt</a>] | [<a>Block</a>] ) ] .
+</pre><pre>
+if x &gt; max {
+	x = max
+}
+</pre><p>
+The expression may be preceded by a simple statement, which
+executes before the expression is evaluated.
+</p><pre>
+if x := f(); x &lt; y {
+	return x
+} else if x &gt; z {
+	return z
+} else {
+	return y
+}
+</pre></body>
+</body>
+</html>

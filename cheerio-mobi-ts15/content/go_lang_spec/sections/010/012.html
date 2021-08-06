@@ -1,0 +1,62 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Method declarations</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+A method is a [<a>function</a>] with a <i>receiver</i>.
+A method declaration binds an identifier, the <i>method name</i>, to a method,
+and associates the method with the receiver&apos;s <i>base type</i>.
+</p><pre>
+[<a>MethodDecl</a>] = &quot;func&quot; [<a>Receiver</a>] [<a>MethodName</a>] [<a>Signature</a>] [ [<a>FunctionBody</a>] ] .
+[<a>Receiver</a>]   = [<a>Parameters</a>] .
+</pre><p>
+The receiver is specified via an extra parameter section preceding the method
+name. That parameter section must declare a single non-variadic parameter, the receiver.
+Its type must be a [<a>defined</a>] type <code>T</code> or a
+pointer to a defined type <code>T</code>. <code>T</code> is called the receiver
+<i>base type</i>. A receiver base type cannot be a pointer or interface type and
+it must be defined in the same package as the method.
+The method is said to be <i>bound</i> to its receiver base type and the method name
+is visible only within [<a>selectors</a>] for type <code>T</code>
+or <code>*T</code>.
+</p><p>
+A non-[<a>blank</a>] receiver identifier must be
+[<a>unique</a>] in the method signature.
+If the receiver&apos;s value is not referenced inside the body of the method,
+its identifier may be omitted in the declaration. The same applies in
+general to parameters of functions and methods.
+</p><p>
+For a base type, the non-blank names of methods bound to it must be unique.
+If the base type is a [<a>struct type</a>],
+the non-blank method and field names must be distinct.
+</p><p>
+Given defined type <code>Point</code>, the declarations
+</p><pre>
+func (p *Point) Length() float64 {
+	return math.Sqrt(p.x * p.x + p.y * p.y)
+}
+func (p *Point) Scale(factor float64) {
+	p.x *= factor
+	p.y *= factor
+}
+</pre><p>
+bind the methods <code>Length</code> and <code>Scale</code>,
+with receiver type <code>*Point</code>,
+to the base type <code>Point</code>.
+</p><p>
+The type of a method is the type of a function with the receiver as first
+argument.  For instance, the method <code>Scale</code> has type
+</p><pre>
+func(p *Point, factor float64)
+</pre><p>
+However, a function declared this way is not a method.
+</p></body>
+</body>
+</html>

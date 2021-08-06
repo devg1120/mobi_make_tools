@@ -1,0 +1,26 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Currying
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts12_mlv/undefined" />
+  </head>
+   <body>
+<h2 id="currying">Currying</h2>
+<p>Just use a chain of fat arrow functions:</p>
+<pre><code class="lang-ts"><span class="hljs-comment">// A curried function</span>
+<span class="hljs-keyword">let</span> add = (x: <span class="hljs-built_in">number</span>) =&gt; (y: <span class="hljs-built_in">number</span>) =&gt; x + y;
+<span class="hljs-comment">// Simple usage</span>
+add(<span class="hljs-number">123</span>)(<span class="hljs-number">456</span>);
+<span class="hljs-comment">// partially applied</span>
+<span class="hljs-keyword">let</span> add123 = add(<span class="hljs-number">123</span>);
+<span class="hljs-comment">// fully apply the function</span>
+add123(<span class="hljs-number">456</span>);
+</code></pre>
+</body>
+</html>

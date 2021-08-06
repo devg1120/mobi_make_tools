@@ -1,0 +1,132 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Interfaces and methods</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+Since almost anything can have methods attached, almost anything can
+satisfy an interface.  One illustrative example is in the <code>http</code>
+package, which defines the <code>Handler</code> interface.  Any object
+that implements <code>Handler</code> can serve HTTP requests.
+</p><pre>
+type Handler interface {
+    ServeHTTP(ResponseWriter, *Request)
+}
+</pre><p>
+<code>ResponseWriter</code> is itself an interface that provides access
+to the methods needed to return the response to the client.
+Those methods include the standard <code>Write</code> method, so an
+<code>http.ResponseWriter</code> can be used wherever an <code>io.Writer</code>
+can be used.
+<code>Request</code> is a struct containing a parsed representation
+of the request from the client.
+</p><p>
+For brevity, let&apos;s ignore POSTs and assume HTTP requests are always
+GETs; that simplification does not affect the way the handlers are
+set up.  Here&apos;s a trivial but complete implementation of a handler to
+count the number of times the
+page is visited.
+</p><pre>
+// Simple counter server.
+type Counter struct {
+    n int
+}
+func (ctr *Counter) ServeHTTP(w http.ResponseWriter, req *http.Request) {
+    ctr.n++
+    fmt.Fprintf(w, &quot;counter = %d\n&quot;, ctr.n)
+}
+</pre><p>
+(Keeping with our theme, note how <code>Fprintf</code> can print to an
+<code>http.ResponseWriter</code>.)
+For reference, here&apos;s how to attach such a server to a node on the URL tree.
+</p><pre>
+import &quot;net/http&quot;
+...
+ctr := new(Counter)
+http.Handle(&quot;/counter&quot;, ctr)
+</pre><p>
+But why make <code>Counter</code> a struct?  An integer is all that&apos;s needed.
+(The receiver needs to be a pointer so the increment is visible to the caller.)
+</p><pre>
+// Simpler counter server.
+type Counter int
+func (ctr *Counter) ServeHTTP(w http.ResponseWriter, req *http.Request) {
+    *ctr++
+    fmt.Fprintf(w, &quot;counter = %d\n&quot;, *ctr)
+}
+</pre><p>
+What if your program has some internal state that needs to be notified that a page
+has been visited?  Tie a channel to the web page.
+</p><pre>
+// A channel that sends a notification on each visit.
+// (Probably want the channel to be buffered.)
+type Chan chan *http.Request
+func (ch Chan) ServeHTTP(w http.ResponseWriter, req *http.Request) {
+    ch <- req fmt.fprint(w, "notification sent") } < pre><p>
+Finally, let&apos;s say we wanted to present on <code>/args</code> the arguments
+used when invoking the server binary.
+It&apos;s easy to write a function to print the arguments.
+</p><pre>
+func ArgServer() {
+    fmt.Println(os.Args)
+}
+</pre><p>
+How do we turn that into an HTTP server?  We could make <code>ArgServer</code>
+a method of some type whose value we ignore, but there&apos;s a cleaner way.
+Since we can define a method for any type except pointers and interfaces,
+we can write a method for a function.
+The <code>http</code> package contains this code:
+</p><pre>
+// The HandlerFunc type is an adapter to allow the use of
+// ordinary functions as HTTP handlers.  If f is a function
+// with the appropriate signature, HandlerFunc(f) is a
+// Handler object that calls f.
+type HandlerFunc func(ResponseWriter, *Request)
+// ServeHTTP calls f(w, req).
+func (f HandlerFunc) ServeHTTP(w ResponseWriter, req *Request) {
+    f(w, req)
+}
+</pre><p>
+<code>HandlerFunc</code> is a type with a method, <code>ServeHTTP</code>,
+so values of that type can serve HTTP requests.  Look at the implementation
+of the method: the receiver is a function, <code>f</code>, and the method
+calls <code>f</code>.  That may seem odd but it&apos;s not that different from, say,
+the receiver being a channel and the method sending on the channel.
+</p><p>
+To make <code>ArgServer</code> into an HTTP server, we first modify it
+to have the right signature.
+</p><pre>
+// Argument server.
+func ArgServer(w http.ResponseWriter, req *http.Request) {
+    fmt.Fprintln(w, os.Args)
+}
+</pre><p>
+<code>ArgServer</code> now has same signature as <code>HandlerFunc</code>,
+so it can be converted to that type to access its methods,
+just as we converted <code>Sequence</code> to <code>IntSlice</code>
+to access <code>IntSlice.Sort</code>.
+The code to set it up is concise:
+</p><pre>
+http.Handle(&quot;/args&quot;, http.HandlerFunc(ArgServer))
+</pre><p>
+When someone visits the page <code>/args</code>,
+the handler installed at that page has value <code>ArgServer</code>
+and type <code>HandlerFunc</code>.
+The HTTP server will invoke the method <code>ServeHTTP</code>
+of that type, with <code>ArgServer</code> as the receiver, which will in turn call
+<code>ArgServer</code> (via the invocation <code>f(w, req)</code>
+inside <code>HandlerFunc.ServeHTTP</code>).
+The arguments will then be displayed.
+</p><p>
+In this section we have made an HTTP server from a struct, an integer,
+a channel, and a function, all because interfaces are just sets of
+methods, which can be defined for (almost) any type.
+</p></-></pre></body>
+</body>
+</html>

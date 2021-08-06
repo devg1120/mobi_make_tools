@@ -1,0 +1,119 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svn propget (pget, pg)</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/tmp/es2015/cheerio-mobi-ts3/css/kindle.css" />
+  </head>
+   <body>
+    <div class="refentry">
+      <a id="svn.ref.svn.c.propget"></a>
+      <div class="titlepage"></div>
+      <a id="idm10770" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svn propget (pget, pg) — Print the value of a property.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm10777"></a>
+        <h2>Synopsis</h2>
+        <p>
+          <code class="literal">svn propget PROPNAME [TARGET[@REV]...]</code>
+        </p>
+        <p>
+          <code class="literal">svn propget PROPNAME --revprop -r REV [URL]</code>
+        </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm10783"></a>
+        <h2>Description</h2>
+        <p>Print the value of a property on files,
+            directories, or revisions.  The first form prints the
+            versioned property of an item or items in your working
+            copy, and the second prints unversioned remote
+            properties on a repository revision.  See <a class="xref" href="svn.advanced.props.html" title="Properties">the section called “Properties”</a> for more information on
+            properties.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm10787"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+          <pre class="screen">
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.changelist"><code class="option">--changelist</code> (<code class="option">--cl</code>) <em class="replaceable"><code>ARG</code></em></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.depth"><code class="option">--depth</code> <em class="replaceable"><code>ARG</code></em></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.recursive"><code class="option">--recursive</code> (<code class="option">-R</code>)</a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.revision"><code class="option">--revision</code> (<code class="option">-r</code>) <em class="replaceable"><code>REV</code></em></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.revprop"><code class="option">--revprop</code></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.strict"><code class="option">--strict</code></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.verbose"><code class="option">--verbose</code> (<code class="option">-v</code>)</a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.xml"><code class="option">--xml</code></a>
+</pre>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm10799"></a>
+        <h2>Examples</h2>
+        <p>Examine a property of a file in your working
+            copy:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn propget svn:keywords foo.c
+Author
+Date
+Rev
+</pre>
+        </div>
+        <p>The same goes for a revision property:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn propget svn:log --revprop -r 20 
+Began journal.
+</pre>
+        </div>
+        <p>For a more structured display of properties, use
+            the <code class="option">--verbose</code> (<code class="option">-v</code>)
+            option:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn propget svn:keywords foo.c --verbose
+Properties on 'foo.c':
+  svn:keywords
+    Author
+    Date
+    Rev
+</pre>
+        </div>
+        <p>By default, <span class="command"><strong>svn propget</strong></span> will append
+            a trailing end-of-line sequence to the property value it
+            prints.  Most of the time, this is a desirable feature
+            that has a positive effect on the printed output.  But
+            there are times when you might wish to capture the precise
+            property value, perhaps because that value is not textual
+            in nature, but of some binary format (such as a JPEG
+            thumbnail stored as a property value, for example).  To
+            disable pretty-printing of property values, use
+            the <code class="option">--strict</code> option.</p>
+        <p>Lastly, you can get <span class="command"><strong>svn propget</strong></span>
+            output in XML format with the <code class="option">--xml</code>
+            option:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn propget --xml svn:ignore .
+<?xml version="1.0"?>
+<properties>
+<target
+   path="">
+<property
+   name="svn:ignore">*.o
+</property>
+</target>
+</properties>
+</pre>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

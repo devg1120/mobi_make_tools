@@ -1,0 +1,188 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Getting Data into Your Repository</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts7/undefined" />
+  </head>
+   <body>
+    <div class="sect1">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="svn.tour.importing"></a>Getting Data into Your Repository</h2>
+          </div>
+        </div>
+      </div>
+      <p>You can get new files into your Subversion
+      repository in two ways: <span class="command"><strong>svn import</strong></span> and <span class="command"><strong>svn
+      add</strong></span>.  We&apos;ll discuss <span class="command"><strong>svn import</strong></span> now
+      and will discuss <span class="command"><strong>svn add</strong></span> later in this
+      chapter when we review a typical day with Subversion.</p>
+      <div class="sect2">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="svn.tour.importing.import"></a>Importing Files and Directories</h3>
+            </div>
+          </div>
+        </div>
+        <p>The <span class="command"><strong>svn import</strong></span> command is a quick way to
+        copy an unversioned tree of files into a repository, creating
+        intermediate directories as necessary.  <span class="command"><strong>svn
+        import</strong></span> doesn&apos;t require a working copy, and your files
+        are immediately committed to the repository.  You typically
+        use this when you have an existing tree of files that you want to
+        begin tracking in your Subversion repository.  For example:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn import /path/to/mytree \
+             http://svn.example.com/svn/repo/some/project \
+             -m &quot;Initial import&quot;
+Adding         mytree/foo.c
+Adding         mytree/bar.c
+Adding         mytree/subdir
+Adding         mytree/subdir/quux.h
+Committed revision 1.
+$
+</pre>
+        </div>
+        <p>The previous example copied the contents of the local
+        directory <code class="filename">mytree</code> into the directory
+        <code class="filename">some/project</code> in the repository.  Note
+        that you didn&apos;t have to create that new directory
+        first&#x2014;<span class="command"><strong>svn import</strong></span> does that for you.
+        Immediately after the commit, you can see your data in the
+        repository:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn list http://svn.example.com/svn/repo/some/project
+bar.c
+foo.c
+subdir/
+$
+</pre>
+        </div>
+        <p>Note that after the import is finished, the original local
+        directory is <span class="emphasis"><em>not</em></span> converted into a working
+        copy.  To begin working on that data in a versioned fashion,
+        you still need to create a fresh working copy of that
+        tree.</p>
+      </div>
+      <div class="sect2">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="svn.tour.importing.layout"></a>Recommended Repository Layout</h3>
+            </div>
+          </div>
+        </div>
+        <p>Subversion provides the ultimate flexibility in terms of
+        how you arrange your data.  Because it simply versions
+        directories and files, and because it ascribes no particular
+        meaning to any of those objects, you may arrange the data in
+        your repository in any way that you choose.  Unfortunately,
+        this flexibility also means that it&apos;s easy to find
+        yourself <span class="quote">&#x201C;<span class="quote">lost without a roadmap</span>&#x201D;</span> as you attempt
+        to navigate different Subversion repositories which may carry
+        completely different and unpredictable arrangements of the
+        data within them.</p>
+        <p>To counteract this confusion, we recommend that you follow
+        a repository layout convention (established long ago, in the
+        nascency of the Subversion project itself) in which a handful
+        of strategically named Subversion repository directories
+        convey valuable meaning about the data they hold.  Most
+        projects have a recognizable <span class="quote">&#x201C;<span class="quote">main line</span>&#x201D;</span>,
+        or <em class="firstterm">trunk</em>, of development;
+        some <em class="firstterm">branches</em>, which are divergent
+        copies of development lines; and
+        some <em class="firstterm">tags</em>, which are named, stable
+        snapshots of a particular line of development.  So we first
+        recommend that each project have a
+        recognizable <em class="firstterm">project root</em> in the
+        repository, a directory under which all of the versioned
+        information for that project&#x2014;and only that
+        project&#x2014;lives.  Secondly, we suggest that each project
+        root contain a <code class="filename">trunk</code> subdirectory for the
+        main development line, a
+        <code class="filename">branches</code> subdirectory in which specific
+        branches (or collections of branches) will be created, and
+        a <code class="filename">tags</code> subdirectory in which specific
+        tags (or collections of tags) will be created.  Of course, if
+        a repository houses only a single project, the root of the
+        repository can serve as the project root, too.</p>
+        <p>Here are some examples:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn list file:///var/svn/single-project-repo
+trunk/
+branches/
+tags/
+$ svn list file:///var/svn/multi-project-repo
+project-A/
+project-B/
+$ svn list file:///var/svn/multi-project-repo/project-A
+trunk/
+branches/
+tags/
+$
+</pre>
+        </div>
+        <p>We talk much more about tags and branches in
+        .  For details and some
+        advice on how to set up repositories when you have multiple
+        projects, see .
+        Finally, we discuss project roots more in
+        .</p>
+      </div>
+      <div class="sect2">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="svn.tour.importing.naming"></a>What&apos;s In a Name?</h3>
+            </div>
+          </div>
+        </div>
+        <p>Subversion tries hard not to limit the type of data you
+        can place under version control.  The contents of files and
+        property values are stored and transmitted as binary data, and
+        tells you how to give Subversion a hint that
+        <span class="quote">&#x201C;<span class="quote">textual</span>&#x201D;</span> operations don&apos;t make sense for a
+        particular file.  There are a few places, however, where
+        Subversion places restrictions on information it
+        stores.</p>
+        <p>Subversion internally handles certain bits of
+        data&#x2014;for example, property names, pathnames, and log
+        messages&#x2014;as UTF-8-encoded Unicode.  This is not to say
+        that all your interactions with Subversion must involve UTF-8,
+        though.  As a general rule, Subversion clients will gracefully
+        and transparently handle conversions between UTF-8 and the
+        encoding system in use on your computer, if such a conversion
+        can meaningfully be done (which is the case for most common
+        encodings in use today).</p>
+        <p>In WebDAV exchanges and older versions of some of
+        Subversion&apos;s administrative files, paths are used as XML
+        attribute values, and property names in XML tag names.  This
+        means that pathnames can contain only legal XML (1.0)
+        characters, and properties are further limited to ASCII
+        characters.  Subversion also prohibits <code class="literal">TAB</code>,
+        <code class="literal">CR</code>, and <code class="literal">LF</code> characters in
+        path names to prevent paths from being broken up in diffs or
+        in the output of commands such as <span class="command"><strong>svn log</strong></span>
+        or <span class="command"><strong>svn status</strong></span>.</p>
+        <p>While it may seem like a lot to remember, in practice
+        these limitations are rarely a problem.  As long as your
+        locale settings are compatible with UTF-8 and you don&apos;t use
+        control characters in path names, you should have no trouble
+        communicating with Subversion.  The command-line client adds
+        an extra bit of help&#x2014;to create
+        <span class="quote">&#x201C;<span class="quote">legally correct</span>&#x201D;</span> versions for internal
+        use it will automatically escape illegal
+        path characters as needed in URLs that you type.</p>
+      </div>
+    </div>
+</body>
+</html>

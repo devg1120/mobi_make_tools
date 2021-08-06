@@ -1,0 +1,113 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Recover</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+When <code>panic</code> is called, including implicitly for run-time
+errors such as indexing a slice out of bounds or failing a type
+assertion, it immediately stops execution of the current function
+and begins unwinding the stack of the goroutine, running any deferred
+functions along the way.  If that unwinding reaches the top of the
+goroutine&apos;s stack, the program dies.  However, it is possible to
+use the built-in function <code>recover</code> to regain control
+of the goroutine and resume normal execution.
+</p><p>
+A call to <code>recover</code> stops the unwinding and returns the
+argument passed to <code>panic</code>.  Because the only code that
+runs while unwinding is inside deferred functions, <code>recover</code>
+is only useful inside deferred functions.
+</p><p>
+One application of <code>recover</code> is to shut down a failing goroutine
+inside a server without killing the other executing goroutines.
+</p><pre>
+func server(workChan <-chan *work) { for work :="range" workchan go safelydo(work) } func safelydo(work defer func() if err !="nil" log.println("work failed:", err) }() do(work) < pre><p>
+In this example, if <code>do(work)</code> panics, the result will be
+logged and the goroutine will exit cleanly without disturbing the
+others.  There&apos;s no need to do anything else in the deferred closure;
+calling <code>recover</code> handles the condition completely.
+</p><p>
+Because <code>recover</code> always returns <code>nil</code> unless called directly
+from a deferred function, deferred code can call library routines that themselves
+use <code>panic</code> and <code>recover</code> without failing.  As an example,
+the deferred function in <code>safelyDo</code> might call a logging function before
+calling <code>recover</code>, and that logging code would run unaffected
+by the panicking state.
+</p><p>
+With our recovery pattern in place, the <code>do</code>
+function (and anything it calls) can get out of any bad situation
+cleanly by calling <code>panic</code>.  We can use that idea to
+simplify error handling in complex software.  Let&apos;s look at an
+idealized version of a <code>regexp</code> package, which reports
+parsing errors by calling <code>panic</code> with a local
+error type.  Here&apos;s the definition of <code>Error</code>,
+an <code>error</code> method, and the <code>Compile</code> function.
+</p><pre>
+// Error is the type of a parse error; it satisfies the error interface.
+type Error string
+func (e Error) Error() string {
+    return string(e)
+}
+// error is a method of *Regexp that reports parsing errors by
+// panicking with an Error.
+func (regexp *Regexp) error(err string) {
+    panic(Error(err))
+}
+// Compile returns a parsed representation of the regular expression.
+func Compile(str string) (regexp *Regexp, err error) {
+    regexp = new(Regexp)
+    // doParse will panic if there is a parse error.
+    defer func() {
+        if e := recover(); e != nil {
+            regexp = nil    // Clear return value.
+            err = e.(Error) // Will re-panic if not a parse error.
+        }
+    }()
+    return regexp.doParse(str), nil
+}
+</pre><p>
+If <code>doParse</code> panics, the recovery block will set the
+return value to <code>nil</code>&#x2014;deferred functions can modify
+named return values.  It will then check, in the assignment
+to <code>err</code>, that the problem was a parse error by asserting
+that it has the local type <code>Error</code>.
+If it does not, the type assertion will fail, causing a run-time error
+that continues the stack unwinding as though nothing had interrupted
+it.
+This check means that if something unexpected happens, such
+as an index out of bounds, the code will fail even though we
+are using <code>panic</code> and <code>recover</code> to handle
+parse errors.
+</p><p>
+With error handling in place, the <code>error</code> method (because it&apos;s a
+method bound to a type, it&apos;s fine, even natural, for it to have the same name
+as the builtin <code>error</code> type)
+makes it easy to report parse errors without worrying about unwinding
+the parse stack by hand:
+</p><pre>
+if pos == 0 {
+    re.error(&quot;&apos;*&apos; illegal at start of expression&quot;)
+}
+</pre><p>
+Useful though this pattern is, it should be used only within a package.
+<code>Parse</code> turns its internal <code>panic</code> calls into
+<code>error</code> values; it does not expose <code>panics</code>
+to its client.  That is a good rule to follow.
+</p><p>
+By the way, this re-panic idiom changes the panic value if an actual
+error occurs.  However, both the original and new failures will be
+presented in the crash report, so the root cause of the problem will
+still be visible.  Thus this simple re-panic approach is usually
+sufficient&#x2014;it&apos;s a crash after all&#x2014;but if you want to
+display only the original value, you can write a little more code to
+filter unexpected problems and re-panic with the original error.
+That&apos;s left as an exercise for the reader.
+</p></-chan></pre></body>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<body><p>
+A package clause begins each source file and defines the package
+to which the file belongs.
+</p><pre>
+[<a>PackageClause</a>]  = "package" [<a>PackageName</a>] .
+[<a>PackageName</a>]    = [<a>identifier</a>] .
+</pre><p>
+The PackageName must not be the [<a>blank identifier</a>].
+</p><pre>
+package math
+</pre><p>
+A set of files sharing the same PackageName form the implementation of a package.
+An implementation may require that all source files for a package inhabit the same directory.
+</p></body>

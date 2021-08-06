@@ -1,0 +1,70 @@
+<div class="refentry">
+    <a id="svn.ref.svnadmin.c.upgrade"></a>
+    <div class="titlepage"></div>
+    <a id="idm12340" class="indexterm"></a>
+    <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svnadmin upgrade — Upgrade a repository to the latest supported
+            schema version.</p>
+    </div>
+    <div class="refsect1">
+        <a id="idm12347"></a>
+        <h2>Synopsis</h2>
+        <p>
+            <code class="literal">svnadmin upgrade REPOS_PATH</code>
+        </p>
+    </div>
+    <div class="refsect1">
+        <a id="idm12351"></a>
+        <h2>Description</h2>
+        <p>Upgrade the repository located
+            at <em class="replaceable"><code>REPOS_PATH</code></em> to the latest
+            supported schema version.</p>
+        <p>This functionality is provided as a convenience for
+            repository administrators who wish to make use of new
+            Subversion functionality without having to undertake a
+            potentially costly full repository dump and load
+            operation. As such, the upgrade performs only the minimum
+            amount of work needed to accomplish this while still
+            maintaining the integrity of the repository. While a dump
+            and subsequent load guarantee the most optimized
+            repository state, <span class="command"><strong>svnadmin upgrade</strong></span> does
+            not.</p>
+        <div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <table border="0" summary="Warning">
+                <tr>
+                    <td rowspan="2" align="center" valign="top" width="25">
+                        <img alt="[Warning]" src="images/warning.png">
+                    </td>
+                    <th align="left">Warning</th>
+                </tr>
+                <tr>
+                    <td align="left" valign="top">
+                        <p>You should <span class="emphasis"><em>always</em></span> back up your
+                            repository before upgrading.</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="refsect1">
+        <a id="idm12360"></a>
+        <h2>Options</h2>
+        <p>None</p>
+    </div>
+    <div class="refsect1">
+        <a id="idm12363"></a>
+        <h2>Examples</h2>
+        <p>Upgrade the repository at
+            path <code class="filename">/var/repos/svn</code>:</p>
+        <div class="informalexample">
+            <pre class="screen">
+$ svnadmin upgrade /var/repos/svn
+Repository lock acquired.
+Please wait; upgrading the repository may take some time...
+
+Upgrade completed.
+</pre>
+        </div>
+    </div>
+</div>

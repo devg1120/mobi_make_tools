@@ -1,0 +1,58 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>post-commit</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts6/undefined" />
+  </head>
+   <body>
+    <div class="refentry">
+      <a id="svn.ref.reposhooks.post-commit"></a>
+      <div class="titlepage"></div>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>post-commit &#x2014; Notification of a successful commit.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm14451"></a>
+        <h2>Description</h2>
+        <p>The <code class="literal">post-commit</code> hook is run after the
+          transaction is committed and a new revision is created.  Most
+          people use this hook to send out descriptive emails about
+          the commit or to notify some other tool (such as an issue
+          tracker) that a commit has happened.  Some configurations
+          also use this hook to trigger backup processes.</p>
+        <p>If the <code class="literal">post-commit</code> hook returns a
+          nonzero exit status, the commit <span class="emphasis"><em>will
+          not</em></span> be aborted since it has already
+          completed.  However, anything that the hook printed
+          to <code class="filename">stderr</code> will be marshalled back to the
+          client, making it easier to diagnose hook failures.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm14459"></a>
+        <h2>Input parameter(s)</h2>
+        <p>The command-line arguments passed to the hook program,
+          in order, are:</p>
+        <div class="orderedlist">
+          <ol class="orderedlist" type="1">
+            <li class="listitem">
+              <p>Repository path</p>
+            </li>
+            <li class="listitem">
+              <p>Revision number created by the commit</p>
+            </li>
+          </ol>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm14467"></a>
+        <h2>Common uses</h2>
+        <p>Commit notification; tool integration</p>
+      </div>
+    </div>
+</body>
+</html>

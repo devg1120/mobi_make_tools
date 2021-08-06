@@ -1,0 +1,160 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Readonly
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts14/undefined" />
+  </head>
+   <body>
+<h2 id="readonly">readonly</h2>
+<p>TypeScript&apos;s type system allows you to mark individual properties on an interface as <code>readonly</code>. This allows you to work in a functional way (unexpected mutation is bad):</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">config: {
+    readonly bar: <span class="hljs-built_in">number</span>,
+    readonly bas: <span class="hljs-built_in">number</span>
+}</span>) </span>{
+    <span class="hljs-comment">// ..</span>
+}
+<span class="hljs-keyword">let</span> config = { bar: <span class="hljs-number">123</span>, bas: <span class="hljs-number">123</span> };
+foo(config);
+<span class="hljs-comment">// You can be sure that `config` isn&apos;t changed &#x1F339;</span>
+</code></pre>
+<p>Of course you can use <code>readonly</code> in <code>interface</code> and <code>type</code> definitions as well e.g.:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">type</span> Foo = {
+    readonly bar: <span class="hljs-built_in">number</span>;
+    readonly bas: <span class="hljs-built_in">number</span>;
+}
+<span class="hljs-comment">// Initialization is okay</span>
+<span class="hljs-keyword">let</span> foo: Foo = { bar: <span class="hljs-number">123</span>, bas: <span class="hljs-number">456</span> };
+<span class="hljs-comment">// Mutation is not</span>
+foo.bar = <span class="hljs-number">456</span>; <span class="hljs-comment">// Error: Left-hand side of assignment expression cannot be a constant or a read-only property</span>
+</code></pre>
+<p>You can even declare a class property as <code>readonly</code>. You can initialize them at the point of declaration or in the constructor as shown below:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">class</span> Foo {
+    readonly bar = <span class="hljs-number">1</span>; <span class="hljs-comment">// OK</span>
+    readonly baz: <span class="hljs-built_in">string</span>;
+    <span class="hljs-keyword">constructor</span>() {
+        <span class="hljs-keyword">this</span>.baz = <span class="hljs-string">&quot;hello&quot;</span>; <span class="hljs-comment">// OK</span>
+    }
+}
+</code></pre>
+<h2 id="readonly">Readonly</h2>
+<p>There is a type <code>Readonly</code> that takes a type <code>T</code> and marks all of its properties as <code>readonly</code> using mapped types. Here is a demo that uses it in practice: </p>
+<pre><code class="lang-ts"><span class="hljs-keyword">type</span> Foo = {
+  bar: <span class="hljs-built_in">number</span>;
+  bas: <span class="hljs-built_in">number</span>;
+}
+<span class="hljs-keyword">type</span> FooReadonly = Readonly<foo>; 
+<span class="hljs-keyword">let</span> foo:Foo = {bar: <span class="hljs-number">123</span>, bas: <span class="hljs-number">456</span>};
+<span class="hljs-keyword">let</span> fooReadonly:FooReadonly = {bar: <span class="hljs-number">123</span>, bas: <span class="hljs-number">456</span>};
+foo.bar = <span class="hljs-number">456</span>; <span class="hljs-comment">// Okay</span>
+fooReadonly.bar = <span class="hljs-number">456</span>; <span class="hljs-comment">// ERROR: bar is readonly</span>
+</foo></code></pre>
+<h3 id="various-use-cases">Various Use Cases</h3>
+<h4 id="reactjs">ReactJS</h4>
+<p>One library that loves immutability is ReactJS, you <em>could</em> mark your <code>Props</code> and <code>State</code> to be immutable e.g.:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">interface</span> Props {
+    readonly foo: <span class="hljs-built_in">number</span>;
+}
+<span class="hljs-keyword">interface</span> State {
+    readonly bar: <span class="hljs-built_in">number</span>;
+}
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> Something extends React.Component<props,state> {
+  someMethod() {
+    <span class="hljs-comment">// You can rest assured no one is going to do</span>
+    <span class="hljs-keyword">this</span>.props.foo = <span class="hljs-number">123</span>; <span class="hljs-comment">// ERROR: (props are immutable)</span>
+    <span class="hljs-keyword">this</span>.state.baz = <span class="hljs-number">456</span>; <span class="hljs-comment">// ERROR: (one should use this.setState)  </span>
+  }
+}
+</props,state></code></pre>
+<p>You do not need to, however, as the type definitions for React mark these as <code>readonly</code> already (by internally wrapping the passed in generic types with the <code>Readonly</code> type mentioned above).</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> Something extends React.Component<{ foo: <span class="hljs-built_in">number }, { baz: <span class="hljs-built_in">number</span> }&gt; {
+  <span class="hljs-comment">// You can rest assured no one is going to do</span>
+  someMethod() {
+    <span class="hljs-keyword">this</span>.props.foo = <span class="hljs-number">123</span>; <span class="hljs-comment">// ERROR: (props are immutable)</span>
+    <span class="hljs-keyword">this</span>.state.baz = <span class="hljs-number">456</span>; <span class="hljs-comment">// ERROR: (one should use this.setState)  </span>
+  }
+}
+</{></code></pre>
+<h4 id="seamless-immutable">Seamless Immutable</h4>
+<p>You can even mark index signatures as readonly:</p>
+<pre><code class="lang-ts"><span class="hljs-comment">/**
+ * Declaration
+ */</span>
+<span class="hljs-keyword">interface</span> Foo {
+    readonly[x: <span class="hljs-built_in">number</span>]: <span class="hljs-built_in">number</span>;
+}
+<span class="hljs-comment">/**
+ * Usage
+ */</span>
+<span class="hljs-keyword">let</span> foo: Foo = { <span class="hljs-number">0</span>: <span class="hljs-number">123</span>, <span class="hljs-number">2</span>: <span class="hljs-number">345</span> };
+<span class="hljs-built_in">console</span>.log(foo[<span class="hljs-number">0</span>]);   <span class="hljs-comment">// Okay (reading)</span>
+foo[<span class="hljs-number">0</span>] = <span class="hljs-number">456</span>;          <span class="hljs-comment">// Error (mutating): Readonly</span>
+</code></pre>
+<p>This is great if you want to use native JavaScript arrays in an <em>immutable</em> fashion. In fact TypeScript ships with a <code>ReadonlyArray<t></t></code> interface to allow you to do just that:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">let</span> foo: ReadonlyArray&lt;<span class="hljs-built_in">number</span>&gt; = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>];
+<span class="hljs-built_in">console</span>.log(foo[<span class="hljs-number">0</span>]);   <span class="hljs-comment">// Okay</span>
+foo.push(<span class="hljs-number">4</span>);           <span class="hljs-comment">// Error: `push` does not exist on ReadonlyArray as it mutates the array</span>
+foo = foo.concat([<span class="hljs-number">4</span>]); <span class="hljs-comment">// Okay: create a copy</span>
+</code></pre>
+<h4 id="automatic-inference">Automatic Inference</h4>
+<p>In some cases the compiler can automatically infer a particular item to be readonly e.g. within a class if you have a property that only has a getter but no setter, it is assumed readonly e.g.:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">class</span> Person {
+    firstName: <span class="hljs-built_in">string</span> = <span class="hljs-string">&quot;John&quot;</span>;
+    lastName: <span class="hljs-built_in">string</span> = <span class="hljs-string">&quot;Doe&quot;</span>;
+    <span class="hljs-keyword">get</span> fullName() {
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.firstName + <span class="hljs-keyword">this</span>.lastName;
+    }
+}
+<span class="hljs-keyword">const</span> person = <span class="hljs-keyword">new</span> Person();
+<span class="hljs-built_in">console</span>.log(person.fullName); <span class="hljs-comment">// John Doe</span>
+person.fullName = <span class="hljs-string">&quot;Dear Reader&quot;</span>; <span class="hljs-comment">// Error! fullName is readonly</span>
+</code></pre>
+<h3 id="difference-from-const">Difference from <code>const</code></h3>
+<p><code>const</code></p>
+<ol>
+    <li>is for a variable reference</li>
+    <li>the variable cannot be reassigned to anything else.</li>
+</ol>
+<p><code>readonly</code> is</p>
+<ol>
+    <li>for a property</li>
+    <li>the property can be modified because of aliasing</li>
+</ol>
+<p>Sample explaining 1:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">const</span> foo = <span class="hljs-number">123</span>; <span class="hljs-comment">// variable reference</span>
+<span class="hljs-keyword">var</span> bar: {
+    readonly bar: <span class="hljs-built_in">number</span>; <span class="hljs-comment">// for property</span>
+}
+</code></pre>
+<p>Sample explaining 2:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">let</span> foo: {
+    readonly bar: <span class="hljs-built_in">number</span>;
+} = {
+        bar: <span class="hljs-number">123</span>
+    };
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">iMutateFoo</span>(<span class="hljs-params">foo: { bar: <span class="hljs-built_in">number</span> }</span>) </span>{
+    foo.bar = <span class="hljs-number">456</span>;
+}
+iMutateFoo(foo); <span class="hljs-comment">// The foo argument is aliased by the foo parameter</span>
+<span class="hljs-built_in">console</span>.log(foo.bar); <span class="hljs-comment">// 456!</span>
+</code></pre>
+<p>Basically <code>readonly</code> ensures that a property <em>cannot be modified by me</em>, but if you give it to someone that doesn&apos;t have that guarantee (allowed for type compatibility reasons) they can modify it. Of course if <code>iMutateFoo</code> said that they do not mutate <code>foo.bar</code> the compiler would correctly flag it as an error as shown:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">interface</span> Foo {
+    readonly bar: <span class="hljs-built_in">number</span>;
+}
+<span class="hljs-keyword">let</span> foo: Foo = {
+    bar: <span class="hljs-number">123</span>
+};
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">iTakeFoo</span>(<span class="hljs-params">foo: Foo</span>) </span>{
+    foo.bar = <span class="hljs-number">456</span>; <span class="hljs-comment">// Error! bar is readonly</span>
+}
+iTakeFoo(foo); <span class="hljs-comment">// The foo argument is aliased by the foo parameter</span>
+</code></pre>
+<p><a href="https://github.com/Microsoft/TypeScript/pull/6532" target="_blank"></a></p>
+</body>
+</html>

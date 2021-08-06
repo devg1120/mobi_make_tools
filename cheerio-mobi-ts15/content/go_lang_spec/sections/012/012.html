@@ -1,0 +1,76 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Select statements</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+A &quot;select&quot; statement chooses which of a set of possible
+[<a>send</a>] or
+[<a>receive</a>]
+operations will proceed.
+It looks similar to a
+[<a>&quot;switch&quot;</a>] statement but with the
+cases all referring to communication operations.
+</p><pre>
+[<a>SelectStmt</a>] = &quot;select&quot; &quot;{&quot; { [<a>CommClause</a>] } &quot;}&quot; .
+[<a>CommClause</a>] = [<a>CommCase</a>] &quot;:&quot; [<a>StatementList</a>] .
+[<a>CommCase</a>]   = &quot;case&quot; ( [<a>SendStmt</a>] | [<a>RecvStmt</a>] ) | &quot;default&quot; .
+[<a>RecvStmt</a>]   = [ [<a>ExpressionList</a>] &quot;=&quot; | [<a>IdentifierList</a>] &quot;:=&quot; ] [<a>RecvExpr</a>] .
+[<a>RecvExpr</a>]   = [<a>Expression</a>] .
+</pre><p>
+A case with a RecvStmt may assign the result of a RecvExpr to one or
+two variables, which may be declared using a
+[<a>short variable declaration</a>].
+The RecvExpr must be a (possibly parenthesized) receive operation.
+There can be at most one default case and it may appear anywhere
+in the list of cases.
+</p><p>
+Execution of a &quot;select&quot; statement proceeds in several steps:
+</p><ol>
+<li>
+For all the cases in the statement, the channel operands of receive operations
+and the channel and right-hand-side expressions of send statements are
+evaluated exactly once, in source order, upon entering the &quot;select&quot; statement.
+The result is a set of channels to receive from or send to,
+and the corresponding values to send.
+Any side effects in that evaluation will occur irrespective of which (if any)
+communication operation is selected to proceed.
+Expressions on the left-hand side of a RecvStmt with a short variable declaration
+or assignment are not yet evaluated.
+</li>
+<li>
+If one or more of the communications can proceed,
+a single one that can proceed is chosen via a uniform pseudo-random selection.
+Otherwise, if there is a default case, that case is chosen.
+If there is no default case, the &quot;select&quot; statement blocks until
+at least one of the communications can proceed.
+</li>
+<li>
+Unless the selected case is the default case, the respective communication
+operation is executed.
+</li>
+<li>
+If the selected case is a RecvStmt with a short variable declaration or
+an assignment, the left-hand side expressions are evaluated and the
+received value (or values) are assigned.
+</li>
+<li>
+The statement list of the selected case is executed.
+</li>
+</ol><p>
+Since communication on <code>nil</code> channels can never proceed,
+a select with only <code>nil</code> channels and no default case blocks forever.
+</p><pre>
+var a []int
+var c, c1, c2, c3, c4 chan int
+var i1, i2 int
+select {
+case i1 = <-c1: print("received ", i1, " from c1\n") case c2 <- i2: print("sent i2, to c2\n") i3, ok :="(&lt;-c3):" same as: if { c3\n") } else print("c3 is closed\n") a[f()]="&lt;-c4:" t default: print("no communication\n") for send random sequence of bits c select 0: note: no statement, fallthrough, folding cases 1: {} block forever < pre></-c1:></pre></body>
+</body>
+</html>

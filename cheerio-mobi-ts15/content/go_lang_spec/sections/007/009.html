@@ -1,0 +1,49 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Function types</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+A function type denotes the set of all functions with the same parameter
+and result types. The value of an uninitialized variable of function type
+is <code>nil</code>.
+</p><pre>
+[<a>FunctionType</a>]   = &quot;func&quot; [<a>Signature</a>] .
+[<a>Signature</a>]      = [<a>Parameters</a>] [ [<a>Result</a>] ] .
+[<a>Result</a>]         = [<a>Parameters</a>] | [<a>Type</a>] .
+[<a>Parameters</a>]     = &quot;(&quot; [ [<a>ParameterList</a>] [ &quot;,&quot; ] ] &quot;)&quot; .
+[<a>ParameterList</a>]  = [<a>ParameterDecl</a>] { &quot;,&quot; [<a>ParameterDecl</a>] } .
+[<a>ParameterDecl</a>]  = [ [<a>IdentifierList</a>] ] [ &quot;...&quot; ] [<a>Type</a>] .
+</pre><p>
+Within a list of parameters or results, the names (IdentifierList)
+must either all be present or all be absent. If present, each name
+stands for one item (parameter or result) of the specified type and
+all non-[<a>blank</a>] names in the signature
+must be [<a>unique</a>].
+If absent, each type stands for one item of that type.
+Parameter and result
+lists are always parenthesized except that if there is exactly
+one unnamed result it may be written as an unparenthesized type.
+</p><p>
+The final incoming parameter in a function signature may have
+a type prefixed with <code>...</code>.
+A function with such a parameter is called <i>variadic</i> and
+may be invoked with zero or more arguments for that parameter.
+</p><pre>
+func()
+func(x int) int
+func(a, _ int, z float32) bool
+func(a, b int, z float32) (bool)
+func(prefix string, values ...int)
+func(a, b int, z float64, opt ...interface{}) (success bool)
+func(int, int, float64) (float64, *[]int)
+func(n int) func(p *T)
+</pre></body>
+</body>
+</html>

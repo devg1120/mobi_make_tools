@@ -1,0 +1,18 @@
+<h3 id="binder-function">Binder function</h3>
+<p>Two critical binder functions are <code>bindSourceFile</code> and <code>mergeSymbolTable</code>. We will take a look at these next.</p>
+<h4 id="bindsourcefile"><code>bindSourceFile</code></h4>
+<p>Basically checks if <code>file.locals</code> is defined, if not it hands over to (a local function) <code>bind</code>.</p>
+<p>Note: <code>locals</code> is defined on <code>Node</code> and is of type <code>SymbolTable</code>. Note that <code>SourceFile</code> is also a <code>Node</code> (in fact a root node in the AST).</p>
+<p>TIP: local functions are used heavily within the TypeScript compiler. A local function very likely uses variables from the parent function (captured by closure). In the case of <code>bind</code> (a local function within <code>bindSourceFile</code>) it (or a function it calls) will setup the <code>symbolCount</code> and <code>classifiableNames</code> among others, that are then stored on the returned <code>SourceFile</code>.</p>
+<h4 id="bind"><code>bind</code></h4>
+<p>Bind takes any <code>Node</code> (not just <code>SourceFile</code>). First thing it does is assign the <code>node.parent</code> (if <code>parent</code> variable has been setup ... which again is something the binder does during its processing within the <code>bindChildren</code> function), then hands off to <code>bindWorker</code> which does the <em>heavy</em> lifting. Finally it calls <code>bindChildren</code> (a function that simply stores the binder state e.g. current <code>parent</code> within its function local vars, then calls <code>bind</code> on each child, and then restores the binder state). Now let's look at <code>bindWorker</code> which is the more interesting function.</p>
+<h4 id="bindworker"><code>bindWorker</code></h4>
+<p>This function switches on <code>node.kind</code> (of type <code>SyntaxKind</code>) and delegates work to the appropriate <code>bindFoo</code> function (also defined within <code>binder.ts</code>). For example if the <code>node</code> is a <code>SourceFile</code> it calls (eventually and only if its an external file module) <code>bindAnonymousDeclaration</code></p>
+<h4 id="bindfoo-functions"><code>bindFoo</code> functions</h4>
+<p>There are a few patterns common to <code>bindFoo</code> functions as well as some utility functions that these use. One function that is almost always used is the <code>createSymbol</code> function. It is presented in its entirety below:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createSymbol</span>(<span class="hljs-params">flags: SymbolFlags, name: <span class="hljs-built_in">string</span></span>): <span class="hljs-title">Symbol</span> </span>{
+    symbolCount++;
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Symbol(flags, name);
+}
+</code></pre>
+<p>As you can see it is simply keeping the <code>symbolCount</code> (a local to <code>bindSourceFile</code>) up to date and creating the symbol with the specified parameters.</p>

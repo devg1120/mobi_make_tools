@@ -1,0 +1,46 @@
+<div class="sect1">
+    <div class="titlepage">
+        <div>
+            <div>
+                <h2 class="title" style="clear: both"><a id="svn.forcvs.branches-and-tags"></a>Branches and Tags</h2>
+            </div>
+        </div>
+    </div>
+    <p>Subversion doesn't distinguish between filesystem space and
+        <span class="quote">“<span class="quote">branch</span>”</span> space; branches and tags are ordinary
+        directories within the filesystem. This is probably the single
+        biggest mental hurdle that a CVS user will need to cross. Read
+        all about it in <a class="xref" href="svn.branchmerge.html" title="Chapter 4. Branching and Merging">Chapter 4, <em>Branching and Merging</em></a>.</p>
+    <div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Warning">
+            <tr>
+                <td rowspan="2" align="center" valign="top" width="25">
+                    <img alt="[Warning]" src="images/warning.png">
+                </td>
+                <th align="left">Warning</th>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    <p>Since Subversion treats branches and tags as ordinary
+                        directories, your project's various lines of development
+                        probably live in subdirectories of the main project directory.
+                        So remember to check out using the URL of the subdirectory
+                        that contains the particular line of development you want, not
+                        the project's root URL. If you make the mistake of checking
+                        out the root of the project, you may very well wind up with a
+                        working copy that contains a complete copy of your project's
+                        content for each and every one of its branches and tags.
+                        <a href="#ftn.idm14940" class="footnote" id="idm14940"><sup class="footnote">[74]</sup></a></p>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="footnotes">
+        <br>
+        <hr style="width:100; text-align:left;margin-left: 0">
+        <div id="ftn.idm14940" class="footnote">
+            <p><a href="#idm14940" class="para"><sup class="para">[74] </sup></a>That is, providing you don't run out of disk
+                space before your checkout finishes.</p>
+        </div>
+    </div>
+</div>

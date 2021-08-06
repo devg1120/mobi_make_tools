@@ -1,0 +1,43 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Notation</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+The syntax is specified using Extended Backus-Naur Form (EBNF):
+</p><pre>
+Production  = production_name &quot;=&quot; [ Expression ] &quot;.&quot; .
+Expression  = Alternative { &quot;|&quot; Alternative } .
+Alternative = Term { Term } .
+Term        = production_name | token [ &quot;&#x2026;&quot; token ] | Group | Option | Repetition .
+Group       = &quot;(&quot; Expression &quot;)&quot; .
+Option      = &quot;[&quot; Expression &quot;]&quot; .
+Repetition  = &quot;{&quot; Expression &quot;}&quot; .
+</pre><p>
+Productions are expressions constructed from terms and the following
+operators, in increasing precedence:
+</p><pre>
+|   alternation
+()  grouping
+[]  option (0 or 1 times)
+{}  repetition (0 to n times)
+</pre><p>
+Lower-case production names are used to identify lexical tokens.
+Non-terminals are in CamelCase. Lexical tokens are enclosed in
+double quotes <code>&quot;&quot;</code> or back quotes <code>``</code>.
+</p><p>
+The form <code>a &#x2026; b</code> represents the set of characters from
+<code>a</code> through <code>b</code> as alternatives. The horizontal
+ellipsis <code>&#x2026;</code> is also used elsewhere in the spec to informally denote various
+enumerations or code snippets that are not further specified. The character <code>&#x2026;</code>
+(as opposed to the three characters <code>...</code>) is not a token of the Go
+language.
+</p></body>
+</body>
+</html>

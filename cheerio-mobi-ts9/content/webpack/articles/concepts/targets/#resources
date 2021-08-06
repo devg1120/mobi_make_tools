@@ -1,0 +1,6 @@
+<h2 id="resources">Resources<a href="#resources" aria-hidden="true"><span class="icon icon-link"></span></a></h2><p>As seen from the options above, there are multiple deployment <em>targets</em> that you can choose from. Below is a list of examples and resources that you can refer to.</p><ul>
+<li><strong><a href="https://github.com/TheLarkInn/compare-webpack-target-bundles">compare-webpack-target-bundles</a></strong>: A great resource for testing and viewing different webpack <em>targets</em>. Also great for bug reporting.</li>
+<li><strong><a href="https://github.com/chentsulin/electron-react-boilerplate">Boilerplate of Electron-React Application</a></strong>: A good example of a build process for electron&apos;s main process and renderer process.</li>
+</ul><blockquote class="todo">
+<p>Need to find up to date examples of these webpack targets being used in live code or boilerplates.</p>
+</blockquote>

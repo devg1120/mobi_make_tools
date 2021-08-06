@@ -1,0 +1,34 @@
+<div class="sect1" lang="en"><div class="titlepage"><div><h2 class="title" style="clear: both"><a id="id3001081">Internationalization</a></h2></div></div><p>An in-depth discussion of code internationalization —
+designing software so the interface readily incorporates multiple
+languages and the vagaries of different character sets — would be
+out of scope for this book.  However, a few lessons for good practice 
+do stand out from Unix experience.</p><p>First, <span class="emphasis"><em>separate the message base from the
+code</em></span>.  Good Unix practice is to separate the message
+strings a program uses from its code. so that message dictionaries
+in other languages can be plugged in without modifying the
+code.</p><p>The best-known tool for this job is GNU
+<i>gettext</i>, which requires that you wrap 
+native-language strings that need to be internationalized in
+a special macro.  The macro uses each string as a key into per-language
+dictionaries which can be supplied as separate files.  If no such
+dictionaries are available (or if they are but the string lookup does
+not return a match), the macro simply returns its argument, implicitly
+falling back on the native language in the code.</p><p>While <i>gettext</i> itself is messy and
+fragile as of mid-2003, its general philosophy is sound.  For many
+projects, it is possible to craft a lighter-weight version of this
+idea with good results.</p><p>Second, there is a clear trend in modern Unixes to scrap all the
+historical cruft associated with multiple character sets and make
+applications natively speak UTF-8, the 8-bit shift encoding of the
+Unicode character set (as opposed to, say, making them natively speak
+16-bit wide characters).  The low 128 characters of UTF-8 are ASCII,
+and the low 256 are Latin-1, which means this choice is
+backward-compatible with the two most widely used character sets.  The
+fact that XML and Java have made this choice helps, but the momentum
+is present even where XML and Java are not.</p><p>Third, beware of character ranges in regular expressions.  The
+element <b>[a-z]</b> will not necessarily catch all
+lower-case letters if the script or program it's in is applied to
+(say) German, where the sharp-s or � character is considered
+lower-case but does not fall in that range; similar problems arise
+with French accented letters. Its safer to use
+<b>[[:lower:]]</b>. and other symbolic ranges described in
+the POSIX standard.</p></div>

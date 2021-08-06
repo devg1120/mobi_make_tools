@@ -1,0 +1,172 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Branch Maintenance</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts7/undefined" />
+  </head>
+   <body>
+    <div class="sect1">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="svn.branchmerge.maint"></a>Branch Maintenance</h2>
+          </div>
+        </div>
+      </div>
+      <p>You may have noticed by now that Subversion is extremely
+      flexible.  Because it implements branches and tags with the same
+      underlying mechanism (directory copies), and because branches
+      and tags appear in normal filesystem space, many people find
+      Subversion intimidating.  It&apos;s almost <span class="emphasis"><em>too</em></span>
+      flexible.  In this section, we&apos;ll offer some suggestions for
+      arranging and managing your data over time.</p>
+      <div class="sect2">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="svn.branchmerge.maint.layout"></a>Repository Layout</h3>
+            </div>
+          </div>
+        </div>
+        <p>There are some standard, recommended ways to organize the
+        contents of a repository.  Most people create a
+        <code class="filename">trunk</code> directory to hold the <span class="quote">&#x201C;<span class="quote">main
+        line</span>&#x201D;</span> of development, a <code class="filename">branches</code>
+        directory to contain branch copies, and
+        a <code class="filename">tags</code> directory to contain tag copies.
+        If a repository holds only one project, often people create
+        these top-level directories:</p>
+        <div class="informalexample">
+          <div class="literallayout">
+            <p><br>
+/<br>
+&#xA0;&#xA0;&#xA0;trunk/<br>
+&#xA0;&#xA0;&#xA0;branches/<br>
+&#xA0;&#xA0;&#xA0;tags/<br>
+</p>
+          </div>
+        </div>
+        <p>If a repository contains multiple projects, admins
+        typically index their layout by project.  See  to read more about
+        <span class="quote">&#x201C;<span class="quote">project roots</span>&#x201D;</span>, but here&apos;s an example of such a
+        layout:</p>
+        <div class="informalexample">
+          <div class="literallayout">
+            <p><br>
+/<br>
+&#xA0;&#xA0;&#xA0;paint/<br>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;trunk/<br>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;branches/<br>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;tags/<br>
+&#xA0;&#xA0;&#xA0;calc/<br>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;trunk/<br>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;branches/<br>
+&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;tags/<br>
+</p>
+          </div>
+        </div>
+        <p>Of course, you&apos;re free to ignore these common layouts.
+        You can create any sort of variation, whatever works best for
+        you or your team.  Remember that whatever you choose, it&apos;s not
+        a permanent commitment.  You can reorganize your repository at
+        any time.  Because branches and tags are ordinary directories,
+        the <span class="command"><strong>svn move</strong></span> command can move or rename
+        them however you wish.  Switching from one layout to another
+        is just a matter of issuing a series of server-side moves; if
+        you don&apos;t like the way things are organized in the repository,
+        just juggle the directories around.</p>
+        <p>Remember, though, that while moving directories is
+        easy to do, you need to be considerate of other users as well.
+        Your juggling can disorient users with existing
+        working copies.  If a user has a working copy of a particular
+        repository directory and your <span class="command"><strong>svn move</strong></span>
+        subcommand removes the path from the latest revision, then
+        when the user next runs <span class="command"><strong>svn update</strong></span>, she is
+        told that her working copy represents a path that no
+        longer exists.  She is then forced to <span class="command"><strong>svn
+        switch</strong></span> to the new location.</p>
+      </div>
+      <div class="sect2">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="svn.branchmerge.maint.lifetime"></a>Data Lifetimes</h3>
+            </div>
+          </div>
+        </div>
+        <p>Another nice feature of Subversion&apos;s model is that
+        branches and tags can have finite lifetimes, just like any
+        other versioned item.  For example, suppose you eventually
+        finish all your work on your personal branch of the
+        <code class="filename">calc</code> project.  After merging all of your
+        changes back into <code class="filename">/calc/trunk</code>, there&apos;s
+        no need for your private branch directory to stick around
+        anymore:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn delete http://svn.example.com/repos/calc/branches/my-calc-branch \
+             -m &quot;Removing obsolete branch of calc project.&quot;
+Committed revision 375.
+</pre>
+        </div>
+        <p>And now your branch is gone.  Of course, it&apos;s not really
+        gone: the directory is simply missing from the
+        <code class="literal">HEAD</code> revision, no longer distracting
+        anyone.  If you use <span class="command"><strong>svn checkout</strong></span>,
+        <span class="command"><strong>svn switch</strong></span>, or <span class="command"><strong>svn list</strong></span>
+        to examine an earlier revision, you can still see
+        your old branch.</p>
+        <p>If browsing your deleted directory isn&apos;t enough, you can
+        always bring it back.  Resurrecting data is very easy in
+        Subversion.  If there&apos;s a deleted directory (or file) that
+        you&apos;d like to bring back into <code class="literal">HEAD</code>, simply
+        use <span class="command"><strong>svn copy</strong></span> to copy it from the old
+        revision:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn copy http://svn.example.com/repos/calc/branches/my-calc-branch@374 \
+           http://svn.example.com/repos/calc/branches/my-calc-branch \
+           -m &quot;Restore my-calc-branch.&quot;
+Committed revision 376.
+</pre>
+        </div>
+        <p>In our example, your personal branch had a relatively
+        short lifetime: you may have created it to fix a bug or
+        implement a new feature.  When your task is done, so is the
+        branch.  In software development, though, it&apos;s also common to
+        have two <span class="quote">&#x201C;<span class="quote">main</span>&#x201D;</span> branches running side by side for
+        very long periods.  For example, suppose it&apos;s time to release
+        a stable version of the <code class="filename">calc</code> project to the
+        public, and you know it&apos;s going to take a couple of months to
+        shake bugs out of the software.  You don&apos;t want people to add
+        new features to the project, but you don&apos;t want to tell all
+        developers to stop programming either.  So instead, you create
+        a <span class="quote">&#x201C;<span class="quote">stable</span>&#x201D;</span> branch of the software that won&apos;t
+        change much:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn copy http://svn.example.com/repos/calc/trunk \
+           http://svn.example.com/repos/calc/branches/stable-1.0 \
+           -m &quot;Creating stable branch of calc project.&quot;
+Committed revision 377.
+</pre>
+        </div>
+        <p>And now developers are free to continue adding
+        cutting-edge (or experimental) features to
+        <code class="filename">/calc/trunk</code>, and you can declare a
+        project policy that only bug fixes are to be committed to
+        <code class="filename">/calc/branches/stable-1.0</code>.  That is, as
+        people continue to work on the trunk, a human selectively
+        ports bug fixes over to the stable branch.  Even after the
+        stable branch has shipped, you&apos;ll probably continue to
+        maintain the branch for a long time&#x2014;that is, as long
+        as you continue to support that release for customers.  We&apos;ll
+        discuss this more in the next section.</p>
+      </div>
+    </div>
+</body>
+</html>

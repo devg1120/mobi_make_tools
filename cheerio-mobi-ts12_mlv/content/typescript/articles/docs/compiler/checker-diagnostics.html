@@ -1,0 +1,9 @@
+<h3 id="checker-error-reporting">Checker error reporting</h3>
+<p>The checker uses the local <code>error</code> function to report errors. Here is the function:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">error</span>(<span class="hljs-params">location: Node, message: DiagnosticMessage, arg0?: <span class="hljs-built_in">any</span>, arg1?: <span class="hljs-built_in">any</span>, arg2?: <span class="hljs-built_in">any</span></span>): <span class="hljs-title">void</span> </span>{
+    <span class="hljs-keyword">let</span> diagnostic = location
+        ? createDiagnosticForNode(location, message, arg0, arg1, arg2)
+        : createCompilerDiagnostic(message, arg0, arg1, arg2);
+    diagnostics.add(diagnostic);
+}
+</code></pre>

@@ -1,0 +1,34 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Continue statements</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+A &quot;continue&quot; statement begins the next iteration of the
+innermost [<a>&quot;for&quot; loop</a>] at its post statement.
+The &quot;for&quot; loop must be within the same function.
+</p><pre>
+[<a>ContinueStmt</a>] = &quot;continue&quot; [ [<a>Label</a>] ] .
+</pre><p>
+If there is a label, it must be that of an enclosing
+&quot;for&quot; statement, and that is the one whose execution
+advances.
+</p><pre>
+RowLoop:
+	for y, row := range rows {
+		for x, data := range row {
+			if data == endOfRow {
+				continue RowLoop
+			}
+			row[x] = data + bias(x, y)
+		}
+	}
+</pre></body>
+</body>
+</html>

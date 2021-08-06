@@ -1,0 +1,53 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Integer literals</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+An integer literal is a sequence of digits representing an
+[<a>integer constant</a>].
+An optional prefix sets a non-decimal base: <code>0b</code> or <code>0B</code>
+for binary, <code>0</code>, <code>0o</code>, or <code>0O</code> for octal,
+and <code>0x</code> or <code>0X</code> for hexadecimal.
+A single <code>0</code> is considered a decimal zero.
+In hexadecimal literals, letters <code>a</code> through <code>f</code>
+and <code>A</code> through <code>F</code> represent values 10 through 15.
+</p><p>
+For readability, an underscore character <code>_</code> may appear after
+a base prefix or between successive digits; such underscores do not change
+the literal&apos;s value.
+</p><pre>
+[<a>int_lit</a>]        = [<a>decimal_lit</a>] | [<a>binary_lit</a>] | [<a>octal_lit</a>] | [<a>hex_lit</a>] .
+[<a>decimal_lit</a>]    = &quot;0&quot; | ( &quot;1&quot; &#x2026; &quot;9&quot; ) [ [ &quot;_&quot; ] [<a>decimal_digits</a>] ] .
+[<a>binary_lit</a>]     = &quot;0&quot; ( &quot;b&quot; | &quot;B&quot; ) [ &quot;_&quot; ] [<a>binary_digits</a>] .
+[<a>octal_lit</a>]      = &quot;0&quot; [ &quot;o&quot; | &quot;O&quot; ] [ &quot;_&quot; ] [<a>octal_digits</a>] .
+[<a>hex_lit</a>]        = &quot;0&quot; ( &quot;x&quot; | &quot;X&quot; ) [ &quot;_&quot; ] [<a>hex_digits</a>] .
+[<a>decimal_digits</a>] = [<a>decimal_digit</a>] { [ &quot;_&quot; ] [<a>decimal_digit</a>] } .
+[<a>binary_digits</a>]  = [<a>binary_digit</a>] { [ &quot;_&quot; ] [<a>binary_digit</a>] } .
+[<a>octal_digits</a>]   = [<a>octal_digit</a>] { [ &quot;_&quot; ] [<a>octal_digit</a>] } .
+[<a>hex_digits</a>]     = [<a>hex_digit</a>] { [ &quot;_&quot; ] [<a>hex_digit</a>] } .
+</pre><pre>
+42
+4_2
+0600
+0_600
+0o600
+0O600       // second character is capital letter &apos;O&apos;
+0xBadFace
+0xBad_Face
+0x_67_7a_2f_cc_40_c6
+170141183460469231731687303715884105727
+170_141183_460469_231731_687303_715884_105727
+_42         // an identifier, not an integer literal
+42_         // invalid: _ must separate successive digits
+4__2        // invalid: only one _ at a time
+0_xBadFace  // invalid: _ must separate successive digits
+</pre></body>
+</body>
+</html>

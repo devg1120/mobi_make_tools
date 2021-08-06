@@ -1,0 +1,106 @@
+<div class="refentry">
+    <a id="svn.ref.svnsync.c.copy-revprops"></a>
+    <div class="titlepage"></div>
+    <a id="idm13204" class="indexterm"></a>
+    <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svnsync copy-revprops — Copy all revision properties for a particular
+            revision (or range of revisions) from the source
+            repository to the mirror repository.</p>
+    </div>
+    <div class="refsect1">
+        <a id="idm13211"></a>
+        <h2>Synopsis</h2>
+        <p>
+            <code class="literal">svnsync copy-revprops DEST_URL
+                [SOURCE_URL]</code>
+        </p>
+        <p>
+            <code class="literal">svnsync copy-revprops DEST_URL
+                REV[:REV2]</code>
+        </p>
+    </div>
+    <div class="refsect1">
+        <a id="idm13217"></a>
+        <h2>Description</h2>
+        <p>Because Subversion revision properties can be changed
+            at any time, it's possible that the properties for some
+            revision might be changed after that revision has already
+            been synchronized to another repository. Because the
+            <span class="command"><strong>svnsync synchronize</strong></span> command operates
+            only on the range of revisions that have not yet been
+            synchronized, it won't notice a revision property change
+            outside that range. Left as is, this causes a deviation
+            in the values of that revision's properties between the
+            source and mirror repositories. <span class="command"><strong>svnsync
+                    copy-revprops</strong></span> is the answer to this problem.
+            Use it to resynchronize the revision properties for a
+            particular revision or range of revisions.</p>
+        <p>When <em class="replaceable"><code>SOURCE_URL</code></em> is
+            provided, <span class="command"><strong>svnsync</strong></span> will use it as the
+            repository URL which the destination repository is
+            mirroring. Generally, <em class="replaceable"><code>SOURCE_URL</code></em>
+            will be exactly the same source URL as was used with
+            the <span class="command"><strong>svnsync initialize</strong></span> command when the
+            mirror was first set up. You may choose, however, to
+            omit <em class="replaceable"><code>SOURCE_URL</code></em>, in which
+            case <span class="command"><strong>svnsync</strong></span> will consult the mirror
+            repository's records to determine the source URL which
+            should be used.</p>
+        <div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <table border="0" summary="Warning">
+                <tr>
+                    <td rowspan="2" align="center" valign="top" width="25">
+                        <img alt="[Warning]" src="images/warning.png">
+                    </td>
+                    <th align="left">Warning</th>
+                </tr>
+                <tr>
+                    <td align="left" valign="top">
+                        <p>We strongly recommend that you specify the source
+                            URL on the command-line, especially when untrusted users
+                            have write access to the revision 0 properties
+                            which <span class="command"><strong>svnsync</strong></span> uses to coordinate its
+                            efforts.</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="refsect1">
+        <a id="idm13232"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+            <pre class="screen">
+<a class="xref" href="svn.ref.svnsync.html#svn.ref.svnsync.sw.config_dir"><code class="option">--config-dir</code> <em class="replaceable"><code>DIR</code></em></a>
+<a class="xref" href="svn.ref.svnsync.html#svn.ref.svnsync.sw.config_option"><code class="option">--config-option</code> <em class="replaceable"><code>CONFSPEC</code></em></a>
+<a class="xref" href="svn.ref.svnsync.html#svn.ref.svnsync.sw.disable_locking"><code class="option">--disable-locking</code></a>
+<a class="xref" href="svn.ref.svnsync.html#svn.ref.svnsync.sw.no_auth_cache"><code class="option">--no-auth-cache</code></a>
+<a class="xref" href="svn.ref.svnsync.html#svn.ref.svnsync.sw.non_interactive"><code class="option">--non-interactive</code></a>
+<a class="xref" href="svn.ref.svnsync.html#svn.ref.svnsync.sw.quiet"><code class="option">--quiet</code> (<code class="option">-q</code>)</a>
+<a class="xref" href="svn.ref.svnsync.html#svn.ref.svnsync.sw.revision"><code class="option">--revision</code> (<code class="option">-r</code>) <em class="replaceable"><code>ARG</code></em></a>
+<a class="xref" href="svn.ref.svnsync.html#svn.ref.svnsync.sw.source_password"><code class="option">--source-password</code> <em class="replaceable"><code>PASSWD</code></em></a>
+<a class="xref" href="svn.ref.svnsync.html#svn.ref.svnsync.sw.source_prop_encoding"><code class="option">--source-prop-encoding <em class="replaceable"><code>ARG</code></em></code></a>
+<a class="xref" href="svn.ref.svnsync.html#svn.ref.svnsync.sw.source_username"><code class="option">--source-username</code> <em class="replaceable"><code>NAME</code></em></a>
+<a class="xref" href="svn.ref.svnsync.html#svn.ref.svnsync.sw.steal_lock"><code class="option">--steal-lock</code></a>
+<a class="xref" href="svn.ref.svnsync.html#svn.ref.svnsync.sw.sync_password"><code class="option">--sync-password</code> <em class="replaceable"><code>PASSWD</code></em></a>
+<a class="xref" href="svn.ref.svnsync.html#svn.ref.svnsync.sw.sync_username"><code class="option">--sync-username</code> <em class="replaceable"><code>NAME</code></em></a>
+<a class="xref" href="svn.ref.svnsync.html#svn.ref.svnsync.sw.trust_server_cert"><code class="option">--trust-server-cert</code></a>
+</pre>
+        </div>
+    </div>
+    <div class="refsect1">
+        <a id="idm13250"></a>
+        <h2>Examples</h2>
+        <p>Resynchronize the revision properties associated with
+            a single revision (r6):</p>
+        <div class="informalexample">
+            <pre class="screen">
+$ svnsync copy-revprops -r 6 file:///var/svn/repos-mirror \
+                             http://svn.example.com/repos
+Copied properties for revision 6.
+$
+</pre>
+        </div>
+    </div>
+</div>

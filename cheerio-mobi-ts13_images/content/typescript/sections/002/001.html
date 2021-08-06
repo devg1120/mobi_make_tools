@@ -1,0 +1,124 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Why TypeScript
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts13_images/undefined" />
+  </head>
+   <body>
+<h1 id="why-typescript">Why TypeScript</h1>
+<p>There are two main goals of TypeScript:</p>
+<ul>
+    <li>Provide an <em>optional type system</em> for JavaScript.</li>
+    <li>Provide planned features from future JavaScript editions to current JavaScript engines</li>
+</ul>
+<p>The desire for these goals is motivated below.</p>
+<h2 id="the-typescript-type-system">The TypeScript type system</h2>
+<p>You might be wondering &quot;<strong>Why add types to JavaScript?</strong>&quot;</p>
+<p>Types have proven ability to enhance code quality and understandability. Large teams (Google, Microsoft, Facebook) have continually arrived at this conclusion. Specifically:</p>
+<ul>
+    <li>Types increase your agility when doing refactoring. <em>It&apos;s better for the compiler to catch errors than to have things fail at runtime</em>.</li>
+    <li>Types are one of the best forms of documentation you can have. <em>The function signature is a theorem and the function body is the proof</em>.</li>
+</ul>
+<p>However, types have a way of being unnecessarily ceremonious. TypeScript is very particular about keeping the barrier to entry as low as possible. Here&apos;s how:</p>
+<h3 id="your-javascript-is-typescript">Your JavaScript is TypeScript</h3>
+<p>TypeScript provides compile time type safety for your JavaScript code. This is no surprise given its name. The great thing is that the types are completely optional. Your JavaScript code <code>.js</code> file can be renamed to a <code>.ts</code> file and TypeScript will still give you back valid <code>.js</code> equivalent to the original JavaScript file. TypeScript is <em>intentionally</em> and strictly a superset of JavaScript with optional Type checking.</p>
+<h3 id="types-can-be-implicit">Types can be Implicit</h3>
+<p>TypeScript will try to infer as much of the type information as it can in order to give you type safety with minimal cost of productivity during code development. For example, in the following example TypeScript will know that foo is of type <code>number</code> below and will give an error on the second line as shown:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">var</span> foo = <span class="hljs-number">123</span>;
+foo = <span class="hljs-string">&apos;456&apos;</span>; <span class="hljs-comment">// Error: cannot assign `string` to `number`</span>
+<span class="hljs-comment">// Is foo a number or a string?</span>
+</code></pre>
+<p>This type inference is well motivated. If you do stuff like shown in this example, then, in the rest of your code, you cannot be certain that <code>foo</code> is a <code>number</code> or a <code>string</code>. Such issues turn up often in large multi-file code bases. We will deep dive into the type inference rules later.</p>
+<h3 id="types-can-be-explicit">Types can be Explicit</h3>
+<p>As we&apos;ve mentioned before, TypeScript will infer as much as it can safely. However, you can use annotations to:</p>
+<ol>
+    <li>Help along the compiler, and more importantly document stuff for the next developer who has to read your code (that might be future you!).</li>
+    <li>Enforce that what the compiler sees, is what you thought it should see. That is your understanding of the code matches an algorithmic analysis of the code (done by the compiler).</li>
+</ol>
+<p>TypeScript uses postfix type annotations popular in other <em>optionally</em> annotated languages (e.g. ActionScript and F#).</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">var</span> foo: <span class="hljs-built_in">number</span> = <span class="hljs-number">123</span>;
+</code></pre>
+<p>So if you do something wrong the compiler will error e.g.:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">var</span> foo: <span class="hljs-built_in">number</span> = <span class="hljs-string">&apos;123&apos;</span>; <span class="hljs-comment">// Error: cannot assign a `string` to a `number`</span>
+</code></pre>
+<p>We will discuss all the details of all the annotation syntax supported by TypeScript in a later chapter.</p>
+<h3 id="types-are-structural">Types are structural</h3>
+<p>In some languages (specifically nominally typed ones) static typing results in unnecessary ceremony because even though <em>you know</em> that the code will work fine the language semantics force you to copy stuff around. This is why stuff like <a href="http://automapper.org/" target="_blank">automapper for C#</a> is <em>vital</em> for C#. In TypeScript because we really want it to be easy for JavaScript developers with a minimum cognitive overload, types are <em>structural</em>. This means that <em>duck typing</em> is a first class language construct. Consider the following example. The function <code>iTakePoint2D</code> will accept anything that contains all the things (<code>x</code> and <code>y</code>) it expects:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">interface</span> Point2D {
+    x: <span class="hljs-built_in">number</span>;
+    y: <span class="hljs-built_in">number</span>;
+}
+<span class="hljs-keyword">interface</span> Point3D {
+    x: <span class="hljs-built_in">number</span>;
+    y: <span class="hljs-built_in">number</span>;
+    z: <span class="hljs-built_in">number</span>;
+}
+<span class="hljs-keyword">var</span> point2D: Point2D = { x: <span class="hljs-number">0</span>, y: <span class="hljs-number">10</span> }
+<span class="hljs-keyword">var</span> point3D: Point3D = { x: <span class="hljs-number">0</span>, y: <span class="hljs-number">10</span>, z: <span class="hljs-number">20</span> }
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">iTakePoint2D</span>(<span class="hljs-params">point: Point2D</span>) </span>{ <span class="hljs-comment">/* do something */</span> }
+iTakePoint2D(point2D); <span class="hljs-comment">// exact match okay</span>
+iTakePoint2D(point3D); <span class="hljs-comment">// extra information okay</span>
+iTakePoint2D({ x: <span class="hljs-number">0</span> }); <span class="hljs-comment">// Error: missing information `y`</span>
+</code></pre>
+<h3 id="type-errors-do-not-prevent-javascript-emit">Type errors do not prevent JavaScript emit</h3>
+<p>To make it easy for you to migrate your JavaScript code to TypeScript, even if there are compilation errors, by default TypeScript <em>will emit valid JavaScript</em> the best that it can. e.g.</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">var</span> foo = <span class="hljs-number">123</span>;
+foo = <span class="hljs-string">&apos;456&apos;</span>; <span class="hljs-comment">// Error: cannot assign a `string` to a `number`</span>
+</code></pre>
+<p>will emit the following js:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">var</span> foo = <span class="hljs-number">123</span>;
+foo = <span class="hljs-string">&apos;456&apos;</span>;
+</code></pre>
+<p>So you can incrementally upgrade your JavaScript code to TypeScript. This is very different from how many other language compilers work and yet another reason to move to TypeScript.</p>
+<h3 id="types-can-be-ambient">Types can be ambient</h3>
+<p>A major design goal of TypeScript was to make it possible for you to safely and easily use existing JavaScript libraries in TypeScript. TypeScript does this by means of <em>declaration</em>. TypeScript provides you with a sliding scale of how much or how little effort you want to put in your declarations, the more effort you put the more type safety + code intelligence you get. Note that definitions for most of the popular JavaScript libraries have already been written for you by the <a href="https://github.com/borisyankov/DefinitelyTyped" target="_blank">DefinitelyTyped community</a> so for most purposes either:</p>
+<ol>
+    <li>The definition file already exists.</li>
+    <li>Or at the very least, you have a vast list of well reviewed TypeScript declaration templates already available</li>
+</ol>
+<p>As a quick example of how you would author your own declaration file, consider a trivial example of <a href="https://jquery.com/" target="_blank">jquery</a>. By default (as is to be expected of good JS code) TypeScript expects you to declare (i.e. use <code>var</code> somewhere) before you use a variable</p>
+<pre><code class="lang-ts">$(<span class="hljs-string">&apos;.awesome&apos;</span>).show(); <span class="hljs-comment">// Error: cannot find name `$`</span>
+</code></pre>
+<p>As a quick fix <em>you can tell TypeScript</em> that there is indeed something called <code>$</code>:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">declare</span> <span class="hljs-keyword">var</span> $: <span class="hljs-built_in">any</span>;
+$(<span class="hljs-string">&apos;.awesome&apos;</span>).show(); <span class="hljs-comment">// Okay!</span>
+</code></pre>
+<p>If you want you can build on this basic definition and provide more information to help protect you from errors:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">declare</span> <span class="hljs-keyword">var</span> $: {
+    (selector:<span class="hljs-built_in">string</span>): <span class="hljs-built_in">any</span>;
+};
+$(<span class="hljs-string">&apos;.awesome&apos;</span>).show(); <span class="hljs-comment">// Okay!</span>
+$(<span class="hljs-number">123</span>).show(); <span class="hljs-comment">// Error: selector needs to be a string</span>
+</code></pre>
+<p>We will discuss the details of creating TypeScript definitions for existing JavaScript in detail later once you know more about TypeScript (e.g. stuff like <code>interface</code> and the <code>any</code>).</p>
+<h2 id="future-javascript--now">Future JavaScript =&gt; Now</h2>
+<p>TypeScript provides a number of features that are planned in ES6 for current JavaScript engines (that only support ES5 etc). The TypeScript team is actively adding these features and this list is only going to get bigger over time and we will cover this in its own section. But just as a specimen here is an example of a class:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">class</span> Point {
+    <span class="hljs-keyword">constructor</span>(public x: number, public y: number) {
+    }
+    add(point: Point) {
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Point(<span class="hljs-keyword">this</span>.x + point.x, <span class="hljs-keyword">this</span>.y + point.y);
+    }
+}
+<span class="hljs-keyword">var</span> p1 = <span class="hljs-keyword">new</span> Point(<span class="hljs-number">0</span>, <span class="hljs-number">10</span>);
+<span class="hljs-keyword">var</span> p2 = <span class="hljs-keyword">new</span> Point(<span class="hljs-number">10</span>, <span class="hljs-number">20</span>);
+<span class="hljs-keyword">var</span> p3 = p1.add(p2); <span class="hljs-comment">// { x: 10, y: 30 }</span>
+</code></pre>
+<p>and the lovely fat arrow function:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">var</span> inc = x =&gt; x+<span class="hljs-number">1</span>;
+</code></pre>
+<h3 id="summary">Summary</h3>
+<p>In this section we have provided you with the motivation and design goals of TypeScript. With this out of the way we can dig into the nitty gritty details of TypeScript.</p>
+<p><a href="Interfaces%20are%20open%20ended"></a>
+    <a href="Type%20Inferernce%20rules"></a>
+    <a href="Cover%20all%20the%20annotations"></a>
+    <a href="Cover%20all%20ambients%20:%20also%20that%20there%20are%20no%20runtime%20enforcement"></a>
+    <a href=".ts%20vs.%20.d.ts"></a></p>
+</body>
+</html>

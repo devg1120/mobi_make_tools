@@ -1,0 +1,106 @@
+
+    
+    
+    <div class="refentry">
+      <a id="svn.ref.svn.c.upgrade"></a>
+      <div class="titlepage"></div>
+      <a id="idm11604" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svn upgrade — Upgrade the metadata storage format for a
+            working copy.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm11611"></a>
+        <h2>Synopsis</h2>
+        <p>
+          <code class="literal">svn upgrade [PATH...]</code>
+        </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm11615"></a>
+        <h2>Description</h2>
+        <p>As new versions of Subversion are released, the format
+            used for the working copy metadata changes to accomodate
+            new features or fix bugs.  Older versions of Subversion
+            would automatically upgrade working copies to the new
+            format the first time the working copy was used by the new
+            version of the software.  Beginning with Subversion 1.7,
+            working copy upgrades must be explicitly performed at the
+            user's request.  <span class="command"><strong>svn upgrade</strong></span> is the
+            subcommand used to trigger that upgrade process.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm11619"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+          <pre class="screen">
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.quiet"><code class="option">--quiet</code> (<code class="option">-q</code>)</a>
+</pre>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm11624"></a>
+        <h2>Examples</h2>
+        <p>If you attempt to use Subversion 1.7 on a working copy
+            created with an older version of Subversion, you will see
+            an error:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn status
+svn: E155036: Please see the 'svn upgrade' command
+svn: E155036: Working copy '/home/sally/project' is too old (format 10, create
+d by Subversion 1.6)
+$
+</pre>
+        </div>
+        <p>Use the <span class="command"><strong>svn upgrade</strong></span> command to
+            upgrade the working copy to the most recent metadata
+            format supported by your version of Subversion.</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn upgrade
+Upgraded '.'
+Upgraded 'A'
+Upgraded 'A/B'
+Upgraded 'A/B/E'
+Upgraded 'A/B/F'
+Upgraded 'A/C'
+Upgraded 'A/D'
+Upgraded 'A/D/G'
+Upgraded 'A/D/H'
+$ svn status
+D       A/B/E/alpha
+M       A/D/gamma
+A       A/newfile
+$
+</pre>
+        </div>
+        <p>Notice that <span class="command"><strong>svn upgrade</strong></span> preserved
+            the local modifications present in the working copy at the
+            time of the upgrade, which were introduced by the version
+            of Subversion previously used to manipulate this working
+            copy.</p>
+        <div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Warning">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Warning]" src="images/warning.png">
+              </td>
+              <th align="left">Warning</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>As was the case with automatically upgraded working
+              copies in the past, explicitly upgraded working copies
+              will be unusable by older versions of Subversion,
+              too.</p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    
+    
+  

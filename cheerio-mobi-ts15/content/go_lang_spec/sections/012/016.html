@@ -1,0 +1,49 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Goto statements</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+A &quot;goto&quot; statement transfers control to the statement with the corresponding label
+within the same function.
+</p><pre>
+[<a>GotoStmt</a>] = &quot;goto&quot; [<a>Label</a>] .
+</pre><pre>
+goto Error
+</pre><p>
+Executing the &quot;goto&quot; statement must not cause any variables to come into
+[<a>scope</a>] that were not already in scope at the point of the goto.
+For instance, this example:
+</p><pre>
+	goto L  // BAD
+	v := 3
+L:
+</pre><p>
+is erroneous because the jump to label <code>L</code> skips
+the creation of <code>v</code>.
+</p><p>
+A &quot;goto&quot; statement outside a [<a>block</a>] cannot jump to a label inside that block.
+For instance, this example:
+</p><pre>
+if n%2 == 1 {
+	goto L1
+}
+for n &gt; 0 {
+	f()
+	n--
+L1:
+	f()
+	n--
+}
+</pre><p>
+is erroneous because the label <code>L1</code> is inside
+the &quot;for&quot; statement&apos;s block but the <code>goto</code> is not.
+</p></body>
+</body>
+</html>

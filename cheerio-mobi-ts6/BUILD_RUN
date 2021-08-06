@@ -1,0 +1,12 @@
+# build
+
+  tsc
+
+# run
+
+  node dist/src/app.js
+
+  node dist/src/app.js wg5 gene
+
+
+

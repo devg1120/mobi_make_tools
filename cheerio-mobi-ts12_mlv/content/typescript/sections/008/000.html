@@ -1,0 +1,86 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Library QuickStart
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts12_mlv/undefined" />
+  </head>
+   <body>
+<h1 id="creating-typescript-node-modules">Creating TypeScript node modules</h1>
+<ul>
+    <li><a href="https://egghead.io/lessons/typescript-create-high-quality-npm-packages-using-typescript" target="_blank">A lesson on creating TypeScript node modules</a></li>
+</ul>
+<p>Using modules written in TypeScript is super fun as you get great compile time safety and autocomplete (essentially executable documentation).</p>
+<p>TypeScript modules can be consumed both in the nodejs (as is) browser (with something like webpack).</p>
+<p>Creating a high quality TypeScript module is simple. Assume the following desired folder structure for your package:</p>
+<pre><code class="lang-text">package
+&#x251C;&#x2500; package.json
+&#x251C;&#x2500; tsconfig.json
+&#x251C;&#x2500; src
+&#x2502;  &#x251C;&#x2500; index.ts
+&#x2502;  &#x251C;&#x2500; foo.ts
+&#x2502;  &#x2514;&#x2500; ...All your source files (Authored)
+&#x2514;&#x2500; lib
+  &#x251C;&#x2500; index.d.ts.map
+  &#x251C;&#x2500; index.d.ts
+  &#x251C;&#x2500; index.js
+  &#x251C;&#x2500; foo.d.ts.map
+  &#x251C;&#x2500; foo.d.ts
+  &#x251C;&#x2500; foo.js
+  &#x2514;&#x2500; ... All your compiled files (Generated)
+</code></pre>
+<ul>
+    <li>
+        <p><code>src/index.ts</code>: Here you would export anything you expect to be consumed from your project. E.g <code>export { Foo } from &apos;./foo&apos;;</code>. Exporting from this file makes it available for consumption when someone does <code>import { /* Here */ } from &apos;example&apos;;</code></p>
+    </li>
+    <li>
+        <p>In your <code>tsconfig.json</code></p>
+        <ul>
+            <li>have <code>compilerOptions</code>: <code>&quot;outDir&quot;: &quot;lib&quot;</code> + <code>&quot;declaration&quot;: true</code> + <code>&quot;declarationMap&quot; : true</code>
+                &lt; This generates <code>.js</code> (JavaScript) <code>.d.ts</code> (declarations for TypeSafety) and <code>.d.ts.map</code> (enables <code>declaration .d.ts</code> =&gt; <code>source .ts</code> IDE navigation) in the lib folder.
+            </li>
+            <li>have <code>include: [&quot;src&quot;]</code>
+                &lt; This includes all the files from the <code>src</code> dir.
+            </li>
+        </ul>
+    </li>
+    <li>
+        <p>In your <code>package.json</code> have</p>
+        <ul>
+            <li><code>&quot;main&quot;: &quot;lib/index&quot;</code>
+                &lt; This tells to load <code>lib/index.js</code> for runtime code.
+            </li>
+            <li><code>&quot;types&quot;: &quot;lib/index&quot;</code>
+                &lt; This tells TypeScript to load <code>lib/index.d.ts</code> for type checking.
+            </li>
+        </ul>
+    </li>
+</ul>
+<p>Example package:</p>
+<ul>
+    <li><code>npm install typestyle</code> <a href="https://www.npmjs.com/package/typestyle" target="_blank">for TypeStyle</a></li>
+    <li>Usage: <code>import { style } from &apos;typestyle&apos;;</code> will be completely type safe.</li>
+</ul>
+<h3 id="managing-dependencies">Managing Dependencies</h3>
+<h4 id="devdependencies">devDependencies</h4>
+<ul>
+    <li>If your package depends on another package while you are developing it (e.g. <code>prettier</code>) you should install them as a <code>devDependency</code>. This way they will not pollute the <code>node_modules</code> of your module&apos;s consumers (as <code>npm i foo</code> does not install <code>devDependencies</code> of <code>foo</code>).</li>
+    <li><code>typescript</code> is normally a <code>devDependency</code> as you only use it to build your package. The consumers can use your package with or without TypeScript.</li>
+    <li>If your package depends on other JavaScript authored packages and you want to use it with type safety in your project, put their types (e.g. <code>@types/foo</code>) in <code>devDependencies</code>. JavaScript types should be managed <em>out of bound</em> from the main NPM streams. The JavaScript ecosystem breaks types without semantic versioning too commonly, so if your users need types for these they should install the <code>@types/foo</code> version that works for them. If you want to guide users to install these types you can put them in <code>peerDependencies</code> mentioned next.</li>
+</ul>
+<h4 id="peerdependencies">peerDependencies</h4>
+<p>If your package depends on a package that it heavily <em>works with</em> (as opposed to <em>works using</em>) e.g. <code>react</code>, put them in <code>peerDependencies</code> just like you would with raw JS packages. To test them locally you should also put them in <code>devDependencies</code>. </p>
+<p>Now: </p>
+<ul>
+    <li>When you are developing the package you will get the version of the dependency you specified in your <code>devDependencies</code>. </li>
+    <li>When someone installs your package they will <em>not</em> get this dependency (as <code>npm i foo</code> does not install <code>devDependencies</code> of <code>foo</code>) but they will get a warning that they should install the missing <code>peerDependencies</code> of your package. </li>
+</ul>
+<h4 id="dependencies">dependencies</h4>
+<p>If your package <em>wraps</em> another package (meant for internal use even after compilation) you should put them in <code>dependencies</code>. Now when someone installs your package they will get your package + any of its dependencies.</p>
+</body>
+</html>

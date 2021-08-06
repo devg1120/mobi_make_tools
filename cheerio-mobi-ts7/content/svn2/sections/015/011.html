@@ -1,0 +1,44 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Converting a Repository from CVS to Subversion</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts6/undefined" />
+  </head>
+   <body>
+    <div class="sect1">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="svn.forcvs.convert"></a>Converting a Repository from CVS to Subversion</h2>
+          </div>
+        </div>
+      </div>
+      <p>Perhaps the most important way to familiarize CVS users with
+      Subversion is to let them continue to work on their projects
+      using the new system.  And while that can be somewhat
+      accomplished using a flat import into a Subversion repository of
+      an exported CVS repository, the more thorough solution involves
+      transferring not just the latest snapshot of their data, but all
+      the history behind it as well, from one system to another.  This
+      is an extremely difficult problem to solve; it involves
+      deducing changesets in the absence of atomicity and translating
+      between the systems&apos; completely orthogonal branching policies,
+      among other complications.  Still, a handful of tools claim
+      to at least partially support the ability to convert
+      existing CVS repositories into Subversion ones.</p>
+      <p>The most popular (and mature) conversion tool is
+      cvs2svn (<a class="ulink" href="http://cvs2svn.tigris.org/" target="_top">http://cvs2svn.tigris.org/</a>), a Python
+      program originally created by members of Subversion&apos;s own
+      development community.  This tool is meant to run exactly once:
+      it scans your CVS repository multiple times and attempts to
+      deduce commits, branches, and tags as best it can.  When it
+      finishes, the result is either a Subversion repository or a
+      portable Subversion dump file representing your code&apos;s history.
+      See the web site for detailed instructions and caveats.</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<h3 id="declaration-file">Declaration file</h3>
+<p>You can tell TypeScript that you are trying to describe code that exists elsewhere (e.g. written in JavaScript/CoffeeScript/The runtime environment like the browser or Node.js) using the <code>declare</code> keyword. As a quick example:</p>
+<pre><code class="lang-ts">foo = <span class="hljs-number">123</span>; <span class="hljs-comment">// Error: `foo` is not defined</span>
+</code></pre>
+<p>vs.</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">declare</span> <span class="hljs-keyword">var</span> foo: <span class="hljs-built_in">any</span>;
+foo = <span class="hljs-number">123</span>; <span class="hljs-comment">// allowed</span>
+</code></pre>
+<p>You have the option of putting these declarations in a <code>.ts</code> file or in a <code>.d.ts</code> file. We highly recommend that in your real world projects you use a separate <code>.d.ts</code> (start with one called something like <code>globals.d.ts</code> or <code>vendor.d.ts</code>).</p>
+<p>If a file has the extension <code>.d.ts</code> then each root level definition must have the <code>declare</code> keyword prefixed to it. This helps make it clear to the author that there will be <em>no code emitted by TypeScript</em>. The author needs to ensure that the declared item will exist at runtime.</p>
+<blockquote>
+    <ul>
+        <li>Ambient declarations is a promise that you are making with the compiler. If these do not exist at runtime and you try to use them, things will break without warning.</li>
+        <li>Ambient declarations are like docs. If the source changes the docs need to be kept updated. So you might have new behaviours that work at runtime but no one's updated the ambient declaration and hence you get compiler errors.</li>
+    </ul>
+</blockquote>

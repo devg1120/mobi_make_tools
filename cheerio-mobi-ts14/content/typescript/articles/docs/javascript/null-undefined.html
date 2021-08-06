@@ -1,0 +1,98 @@
+<h2 id="null-and-undefined">Null and Undefined</h2>
+<blockquote>
+    <p><a href="https://www.youtube.com/watch?v=kaUfBNzuUAI" target="_blank">Free youtube video on the subject</a></p>
+</blockquote>
+<p>JavaScript (and by extension TypeScript) has two bottom types : <code>null</code> and <code>undefined</code>. They are <em>intended</em> to mean different things:</p>
+<ul>
+    <li>Something hasn't been initialized : <code>undefined</code>.</li>
+    <li>Something is currently unavailable: <code>null</code>.</li>
+</ul>
+<h3 id="checking-for-either">Checking for either</h3>
+<p>Fact is you will need to deal with both. Interestingly in JavaScript with <code>==</code>, <code>null</code> and <code>undefined</code> are only equal to each other:</p>
+<pre><code class="lang-ts"><span class="hljs-comment">// Both null and undefined are only `==` to themselves and each other:</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-literal">null</span> == <span class="hljs-literal">null</span>); <span class="hljs-comment">// true (of course)</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-literal">undefined</span> == <span class="hljs-literal">undefined</span>); <span class="hljs-comment">// true (of course)</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-literal">null</span> == <span class="hljs-literal">undefined</span>); <span class="hljs-comment">// true</span>
+
+
+<span class="hljs-comment">// You don't have to worry about falsy values making through this check</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-number">0</span> == <span class="hljs-literal">undefined</span>); <span class="hljs-comment">// false</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">''</span> == <span class="hljs-literal">undefined</span>); <span class="hljs-comment">// false</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-literal">false</span> == <span class="hljs-literal">undefined</span>); <span class="hljs-comment">// false</span>
+</code></pre>
+<p>Recommend <code>== null</code> to check for both <code>undefined</code> or <code>null</code>. You generally don't want to make a distinction between the two.</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">arg: <span class="hljs-built_in">string</span> | <span class="hljs-literal">null</span> | <span class="hljs-literal">undefined</span></span>) </span>{
+  <span class="hljs-keyword">if</span> (arg != <span class="hljs-literal">null</span>) {
+    <span class="hljs-comment">// arg must be a string as `!=` rules out both null and undefined. </span>
+  }
+}
+</code></pre>
+<blockquote>
+    <p>You could also do <code>== undefined</code>, but <code>== null</code> is more conventional/shorter.</p>
+</blockquote>
+<p>One exception, root level <code>undefined</code> values which we discuss next.</p>
+<h3 id="checking-for-root-level-undefined">Checking for root level undefined</h3>
+<p>Remember how I said you should use <code>== null</code>. Of course you do (cause I just said it ^). Don't use it for root level things. In strict mode if you use <code>foo</code> and <code>foo</code> is undefined you get a <code>ReferenceError</code> <strong>exception</strong> and the whole call stack unwinds.</p>
+<blockquote>
+    <p>You should use strict mode ... and in fact the TS compiler will insert it for you if you use modules ... more on those later in the book so you don't have to be explicit about it :)</p>
+</blockquote>
+<p>So to check if a variable is defined or not at a <em>global</em> level you normally use <code>typeof</code>:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> someglobal !== <span class="hljs-string">'undefined'</span>) {
+  <span class="hljs-comment">// someglobal is now safe to use</span>
+  <span class="hljs-built_in">console</span>.log(someglobal);
+}
+</code></pre>
+<h3 id="limit-explicit-use-of-undefined">Limit explicit use of <code>undefined</code></h3>
+<p>Because TypeScript gives you the opportunity to <em>document</em> your structures separately from values instead of stuff like:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>)</span>{
+  <span class="hljs-comment">// if Something</span>
+  <span class="hljs-keyword">return</span> {a:<span class="hljs-number">1</span>,b:<span class="hljs-number">2</span>};
+  <span class="hljs-comment">// else</span>
+  <span class="hljs-keyword">return</span> {a:<span class="hljs-number">1</span>,b:<span class="hljs-literal">undefined</span>};
+}
+</code></pre>
+<p>you should use a type annotation:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>):</span>{a:<span class="hljs-built_in">number</span>,b?:<span class="hljs-built_in">number</span>}{
+  <span class="hljs-comment">// if Something</span>
+  <span class="hljs-keyword">return</span> {a:<span class="hljs-number">1</span>,b:<span class="hljs-number">2</span>};
+  <span class="hljs-comment">// else</span>
+  <span class="hljs-keyword">return</span> {a:<span class="hljs-number">1</span>};
+}
+</code></pre>
+<h3 id="node-style-callbacks">Node style callbacks</h3>
+<p>Node style callback functions (e.g. <code>(err,somethingElse)=>{ /* something */ }</code>) are generally called with <code>err</code> set to <code>null</code> if there isn't an error. You generally just use a truthy check for this anyways:</p>
+<pre><code class="lang-ts">fs.readFile(<span class="hljs-string">'someFile'</span>, <span class="hljs-string">'utf8'</span>, (err,data) => {
+  <span class="hljs-keyword">if</span> (err) {
+    <span class="hljs-comment">// do something</span>
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-comment">// no error</span>
+  }
+});
+</code></pre>
+<p>When creating your own APIs it's <em>okay</em> to use <code>null</code> in this case for consistency. In all sincerity for your own APIs you should look at promises, in that case you actually don't need to bother with absent error values (you handle them with <code>.then</code> vs. <code>.catch</code>).</p>
+<h3 id="dont-use-undefined-as-a-means-of-denoting-validity">Don't use <code>undefined</code> as a means of denoting <em>validity</em></h3>
+<p>For example an awful function like this:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">toInt</span>(<span class="hljs-params">str: <span class="hljs-built_in">string</span></span>) </span>{
+  <span class="hljs-keyword">return</span> str ? <span class="hljs-built_in">parseInt</span>(str) : <span class="hljs-literal">undefined</span>;
+}
+</code></pre>
+<p>can be much better written like this:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">toInt</span>(<span class="hljs-params">str: <span class="hljs-built_in">string</span></span>): </span>{ valid: <span class="hljs-built_in">boolean</span>, int?: <span class="hljs-built_in">number</span> } {
+  <span class="hljs-keyword">const</span> int = <span class="hljs-built_in">parseInt</span>(str);
+  <span class="hljs-keyword">if</span> (<span class="hljs-built_in">isNaN</span>(int)) {
+    <span class="hljs-keyword">return</span> { valid: <span class="hljs-literal">false</span> };
+  }
+  <span class="hljs-keyword">else</span> {
+    <span class="hljs-keyword">return</span> { valid: <span class="hljs-literal">true</span>, int };
+  }
+}
+</code></pre>
+<h3 id="json-and-serialization">JSON and serialization</h3>
+<p>The JSON standard has support for encoding <code>null</code> but not <code>undefined</code>. When JSON-encoding an object with an attribute that is <code>null</code>, the attribute will be included with its null value, whereas an attribute with an <code>undefined</code> value will be excluded entirely.</p>
+<pre><code class="lang-ts"><span class="hljs-built_in">JSON</span>.stringify({willStay: <span class="hljs-literal">null</span>, willBeGone: <span class="hljs-literal">undefined</span>}); <span class="hljs-comment">// {"willStay":null}</span>
+</code></pre>
+<p>As a result, JSON-based databases may support <code>null</code> values but not <code>undefined</code> values. Since attributes set to <code>null</code> are encoded, you can transmit the intent to clear an attribute by setting its value to <code>null</code> before encoding and transmitting the object to a remote store.</p>
+<p>Setting attribute values to undefined can save of storage and transmission costs, as the attribute names will not be encoded. However, this can complicate the semantics of clearing values vs. absent values.</p>
+<h3 id="final-thoughts">Final thoughts</h3>
+<p>TypeScript team doesn't use <code>null</code> : <a href="https://github.com/Microsoft/TypeScript/wiki/Coding-guidelines#null-and-undefined" target="_blank">TypeScript coding guidelines</a> and it hasn't caused any problems. Douglas Crockford thinks <a href="https://www.youtube.com/watch?v=PSGEjv3Tqo0&feature=youtu.be&t=9m21s" target="_blank"><code>null</code> is a bad idea</a> and we should all just use <code>undefined</code>.</p>
+<p>However, NodeJS style code bases uses <code>null</code> for Error arguments as standard as it denotes <code>Something is currently unavailable</code>. I personally don't care to distinguish between the two as most projects use libraries with differing opinions and just rule out both with <code>== null</code>.</p>

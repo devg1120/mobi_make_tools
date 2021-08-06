@@ -1,0 +1,188 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Summary</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts7/undefined" />
+  </head>
+   <body>
+    <div class="sect1">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="svn.branchmerge.summary"></a>Summary</h2>
+          </div>
+        </div>
+      </div>
+      <p>We covered a lot of ground in this chapter.  We
+      discussed the concepts of tags and branches and demonstrated
+      how Subversion implements these concepts by copying directories
+      with the <span class="command"><strong>svn copy</strong></span> command.  We showed how
+      to use <span class="command"><strong>svn merge</strong></span> to copy changes from one
+      branch to another or roll back bad changes.  We went over
+      the use of <span class="command"><strong>svn switch</strong></span> to create
+      mixed-location working copies.  And we talked about how one
+      might manage the organization and lifetimes of branches in a
+      repository.</p>
+      <p>Remember the Subversion mantra: branches and tags are cheap.
+      So don&apos;t be afraid to use them when needed!</p>
+      <p>As a helpful reminder of all the operations we discussed,
+      here is handy reference table you can consult as
+      you begin to make use of branches.</p>
+      <div class="table">
+        <a id="svn.branchemerge.summary.tbl-1"></a>
+        <p class="title">
+          <strong>Table&#xA0;4.1.&#xA0;Branching and merging commands</strong>
+        </p>
+        <div class="table-contents">
+          <table class="table" summary="Branching and merging commands" border="1">
+            <colgroup>
+              <col>
+              <col>
+            </colgroup>
+            <thead>
+              <tr>
+                <th>Action</th>
+                <th>Command</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Create a branch or tag</td>
+                <td>
+                  <strong class="userinput">
+                    <code>svn copy <em class="replaceable"><code>URL1</code></em> <em class="replaceable"><code>URL2</code></em></code>
+                  </strong>
+                </td>
+              </tr>
+              <tr>
+                <td>Switch a working copy to a branch or tag</td>
+                <td>
+                  <strong class="userinput">
+                    <code>svn switch <em class="replaceable"><code>URL</code></em></code>
+                  </strong>
+                </td>
+              </tr>
+              <tr>
+                <td>Synchronize a branch with trunk</td>
+                <td>
+                  <strong class="userinput">
+                    <code>svn merge <em class="replaceable"><code>trunkURL</code></em>; svn commit</code>
+                  </strong>
+                </td>
+              </tr>
+              <tr>
+                <td>See merge history or eligible changesets</td>
+                <td>
+                  <strong class="userinput">
+                    <code>svn mergeinfo <em class="replaceable"><code>SOURCE</code></em> <em class="replaceable"><code>TARGET</code></em></code>
+                  </strong>
+                </td>
+              </tr>
+              <tr>
+                <td>Merge a branch back into trunk</td>
+                <td>
+                  <strong class="userinput">
+                    <code>svn merge --reintegrate <em class="replaceable"><code>branchURL</code></em>; svn commit</code>
+                  </strong>
+                </td>
+              </tr>
+              <tr>
+                <td>Merge one specific change</td>
+                <td>
+                  <strong class="userinput">
+                    <code>svn merge -c <em class="replaceable"><code>REV</code></em> <em class="replaceable"><code>URL</code></em>; svn commit</code>
+                  </strong>
+                </td>
+              </tr>
+              <tr>
+                <td>Merge a range of changes</td>
+                <td>
+                  <strong class="userinput">
+                    <code>svn merge -r <em class="replaceable"><code>REV1</code></em>:<em class="replaceable"><code>REV2</code></em> <em class="replaceable"><code>URL</code></em>; svn commit</code>
+                  </strong>
+                </td>
+              </tr>
+              <tr>
+                <td>Block a change from automatic merging</td>
+                <td>
+                  <strong class="userinput">
+                    <code>svn merge -c <em class="replaceable"><code>REV</code></em> --record-only <em class="replaceable"><code>URL</code></em>; svn commit</code>
+                  </strong>
+                </td>
+              </tr>
+              <tr>
+                <td>Preview a merge</td>
+                <td>
+                  <strong class="userinput">
+                    <code>svn merge <em class="replaceable"><code>URL</code></em> --dry-run</code>
+                  </strong>
+                </td>
+              </tr>
+              <tr>
+                <td>Abandon merge results</td>
+                <td>
+                  <strong class="userinput">
+                    <code>svn revert -R .</code>
+                  </strong>
+                </td>
+              </tr>
+              <tr>
+                <td>Resurrect something from history</td>
+                <td>
+                  <strong class="userinput">
+                    <code>svn copy <em class="replaceable"><code>URL</code></em>@<em class="replaceable"><code>REV</code></em> <em class="replaceable"><code>localPATH</code></em></code>
+                  </strong>
+                </td>
+              </tr>
+              <tr>
+                <td>Undo a committed change</td>
+                <td>
+                  <strong class="userinput">
+                    <code>svn merge -c -<em class="replaceable"><code>REV</code></em> <em class="replaceable"><code>URL</code></em>; svn commit</code>
+                  </strong>
+                </td>
+              </tr>
+              <tr>
+                <td>Examine merge-sensitive history</td>
+                <td>
+                  <strong class="userinput">
+                    <code>svn log -g; svn blame -g</code>
+                  </strong>
+                </td>
+              </tr>
+              <tr>
+                <td>Create a tag from a working copy</td>
+                <td>
+                  <strong class="userinput">
+                    <code>svn copy . <em class="replaceable"><code>tagURL</code></em></code>
+                  </strong>
+                </td>
+              </tr>
+              <tr>
+                <td>Rearrange a branch or tag</td>
+                <td>
+                  <strong class="userinput">
+                    <code>svn move <em class="replaceable"><code>URL1</code></em> <em class="replaceable"><code>URL2</code></em></code>
+                  </strong>
+                </td>
+              </tr>
+              <tr>
+                <td>Remove a branch or tag</td>
+                <td>
+                  <strong class="userinput">
+                    <code>svn delete <em class="replaceable"><code>URL</code></em></code>
+                  </strong>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <br class="table-break">
+    </div>
+</body>
+</html>

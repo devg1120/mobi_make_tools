@@ -1,0 +1,67 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svnlook proplist (plist, pl)</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/tmp/es2015/cheerio-mobi-ts4/css/kindle.css" />
+  </head>
+   <body>
+    <div class="refentry">
+      <a id="svn.ref.svnlook.c.proplist"></a>
+      <div class="titlepage"></div>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svnlook proplist (plist, pl) &#x2014; Print the names and values of versioned file and
+            directory properties.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm12954"></a>
+        <h2>Synopsis</h2>
+        <p>
+          <code class="literal">svnlook proplist REPOS_PATH [PATH_IN_REPOS]</code>
+        </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm12958"></a>
+        <h2>Description</h2>
+        <p>List the properties of a path in the repository.  With
+            <code class="option">--verbose</code> (<code class="option">-v</code>), show the
+            property values too.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm12963"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+          <pre class="screen">
+</pre>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm12972"></a>
+        <h2>Examples</h2>
+        <p>This shows the names of properties set on the file
+            <code class="filename">/trunk/README</code> in the
+            <code class="literal">HEAD</code> revision:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svnlook proplist /var/svn/repos /trunk/README
+  original-author
+  svn:mime-type
+</pre>
+        </div>
+        <p>This is the same command as in the preceding example,
+            but this time showing the property values as well:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svnlook -v proplist /var/svn/repos /trunk/README
+  original-author : harry
+  svn:mime-type : text/plain
+</pre>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

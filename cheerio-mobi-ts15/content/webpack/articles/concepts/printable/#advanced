@@ -1,0 +1,16 @@
+<h2 id="advanced">Advanced<a href="#advanced" aria-hidden="true"><span class="icon icon-link"></span></a></h2>
+<p>Here&apos;s a more complicated example of using a CDN and hashes for assets:</p>
+<p><strong>config.js</strong></p>
+<pre><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token comment">//...</span>
+  output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    path<span class="token punctuation">:</span> <span class="token string">&apos;/home/proj/cdn/assets/[hash]&apos;</span><span class="token punctuation">,</span>
+    publicPath<span class="token punctuation">:</span> <span class="token string">&apos;https://cdn.example.com/assets/[hash]/&apos;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<p>In cases where the eventual <code>publicPath</code> of output files isn&apos;t known at compile time, it can be left blank and set dynamically at runtime via the <code>__webpack_public_path__</code> variable in the entry point file:</p>
+<pre><code class="hljs language-javascript">__webpack_public_path__ <span class="token operator">=</span> myRuntimePublicPath<span class="token punctuation">;</span>
+
+<span class="token comment">// rest of your application entry</span></code></pre>
+<h1 id="loaders-1">Loaders<a href="#loaders-1" aria-hidden="true"><span class="icon icon-link"></span></a></h1>
+<p>Loaders are transformations that are applied on the source code of a module. They allow you to pre-process files as you <code>import</code> or &#x201C;load&#x201D; them. Thus, loaders are kind of like &#x201C;tasks&#x201D; in other build tools and provide a powerful way to handle front-end build steps. Loaders can transform files from a different language (like TypeScript) to JavaScript or inline images as data URLs. Loaders even allow you to do things like <code>import</code> CSS files directly from your JavaScript modules!</p>

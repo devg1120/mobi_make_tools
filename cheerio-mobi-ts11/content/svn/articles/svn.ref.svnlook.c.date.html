@@ -1,0 +1,44 @@
+<div class="refentry">
+    <a id="svn.ref.svnlook.c.date"></a>
+    <div class="titlepage"></div>
+    <a id="idm12664" class="indexterm"></a>
+    <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svnlook date — Print the datestamp.</p>
+    </div>
+    <div class="refsect1">
+        <a id="idm12671"></a>
+        <h2>Synopsis</h2>
+        <p>
+            <code class="literal">svnlook date REPOS_PATH</code>
+        </p>
+    </div>
+    <div class="refsect1">
+        <a id="idm12675"></a>
+        <h2>Description</h2>
+        <p>Print the datestamp of a revision or transaction in
+            a repository.</p>
+    </div>
+    <div class="refsect1">
+        <a id="idm12678"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+            <pre class="screen">
+<a class="xref" href="svn.ref.svnlook.html#svn.ref.svnlook.sw.revision"><code class="option">--revision</code> (<code class="option">-r</code>) <em class="replaceable"><code>REV</code></em></a>
+<a class="xref" href="svn.ref.svnlook.html#svn.ref.svnlook.sw.transaction"><code class="option">--transaction</code> (<code class="option">-t</code>) <em class="replaceable"><code>ID</code></em></a>
+</pre>
+        </div>
+    </div>
+    <div class="refsect1">
+        <a id="idm12684"></a>
+        <h2>Examples</h2>
+        <p>This shows the date of revision 40 of a test
+            repository:</p>
+        <div class="informalexample">
+            <pre class="screen">
+$ svnlook date -r 40 /var/svn/repos/
+2003-02-22 17:44:49 -0600 (Sat, 22 Feb 2003)
+</pre>
+        </div>
+    </div>
+</div>

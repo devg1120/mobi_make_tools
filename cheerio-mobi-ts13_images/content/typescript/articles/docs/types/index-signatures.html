@@ -1,0 +1,244 @@
+<h1 id="index-signatures">Index Signatures</h1>
+<p>An <code>Object</code> in JavaScript (and hence TypeScript) can be accessed with a <strong>string</strong> to hold a reference to any other JavaScript <strong>object</strong>.</p>
+<p>Here is a quick example:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">let</span> foo:<span class="hljs-built_in">any</span> = {};
+foo[<span class="hljs-string">'Hello'</span>] = <span class="hljs-string">'World'</span>;
+<span class="hljs-built_in">console</span>.log(foo[<span class="hljs-string">'Hello'</span>]); <span class="hljs-comment">// World</span>
+</code></pre>
+<p>We store a string <code>"World"</code> under the key <code>"Hello"</code>. Remember we said it can store any JavaScript <strong>object</strong>, so lets store a class instance just to show the concept:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">class</span> Foo {
+  <span class="hljs-keyword">constructor</span>(public message: string){};
+  log(){
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>.message)
+  }
+}
+
+<span class="hljs-keyword">let</span> foo:<span class="hljs-built_in">any</span> = {};
+foo[<span class="hljs-string">'Hello'</span>] = <span class="hljs-keyword">new</span> Foo(<span class="hljs-string">'World'</span>);
+foo[<span class="hljs-string">'Hello'</span>].log(); <span class="hljs-comment">// World</span>
+</code></pre>
+<p>Also remember that we said that it can be accessed with a <strong>string</strong>. If you pass any other object to the index signature the JavaScript runtime actually calls <code>.toString</code> on it before getting the result. This is demonstrated below:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">let</span> obj = {
+  toString(){
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'toString called'</span>)
+    <span class="hljs-keyword">return</span> <span class="hljs-string">'Hello'</span>
+  }
+}
+
+<span class="hljs-keyword">let</span> foo:<span class="hljs-built_in">any</span> = {};
+foo[obj] = <span class="hljs-string">'World'</span>; <span class="hljs-comment">// toString called</span>
+<span class="hljs-built_in">console</span>.log(foo[obj]); <span class="hljs-comment">// toString called, World</span>
+<span class="hljs-built_in">console</span>.log(foo[<span class="hljs-string">'Hello'</span>]); <span class="hljs-comment">// World</span>
+</code></pre>
+<p>Note that <code>toString</code> will get called whenever the <code>obj</code> is used in an index position.</p>
+<p>Arrays are slightly different. For <code>number</code> indexing JavaScript VMs will try to optimise (depending on things like is it actually an array and do the structures of items stored match etc.). So <code>number</code> should be considered as a valid object accessor in its own right (distinct from <code>string</code>). Here is a simple array example:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">let</span> foo = [<span class="hljs-string">'World'</span>];
+<span class="hljs-built_in">console</span>.log(foo[<span class="hljs-number">0</span>]); <span class="hljs-comment">// World</span>
+</code></pre>
+<p>So that's JavaScript. Now let's look at TypeScript's graceful handling of this concept.</p>
+<h2 id="typescript-index-signature">TypeScript Index Signature</h2>
+<p>First off, because JavaScript <em>implicitly</em> calls <code>toString</code> on any object index signature, TypeScript will give you an error to prevent beginners from shooting themselves in the foot (I see users shooting themselves in the foot when using JavaScript all the time on stackoverflow):</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">let</span> obj = {
+  toString(){
+    <span class="hljs-keyword">return</span> <span class="hljs-string">'Hello'</span>
+  }
+}
+
+<span class="hljs-keyword">let</span> foo:<span class="hljs-built_in">any</span> = {};
+
+<span class="hljs-comment">// ERROR: the index signature must be string, number ...</span>
+foo[obj] = <span class="hljs-string">'World'</span>;
+
+<span class="hljs-comment">// FIX: TypeScript forces you to be explicit</span>
+foo[obj.toString()] = <span class="hljs-string">'World'</span>;
+</code></pre>
+<p>The reason for forcing the user to be explicit is because the default <code>toString</code> implementation on an object is pretty awful, e.g. on v8 it always returns <code>[object Object]</code>:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">let</span> obj = {message:<span class="hljs-string">'Hello'</span>}
+<span class="hljs-keyword">let</span> foo:<span class="hljs-built_in">any</span> = {};
+
+<span class="hljs-comment">// ERROR: the index signature must be string, number ...</span>
+foo[obj] = <span class="hljs-string">'World'</span>;
+
+<span class="hljs-comment">// Here is where you actually stored it!</span>
+<span class="hljs-built_in">console</span>.log(foo[<span class="hljs-string">"[object Object]"</span>]); <span class="hljs-comment">// World</span>
+</code></pre>
+<p>Of course <code>number</code> is supported because</p>
+<ol>
+    <li>its needed for excellent Array / Tuple support.</li>
+    <li>even if you use it for an <code>obj</code> its default <code>toString</code> implementation is nice (not <code>[object Object]</code>).</li>
+</ol>
+<p>Point 2 is shown below:</p>
+<pre><code class="lang-ts"><span class="hljs-built_in">console</span>.log((<span class="hljs-number">1</span>).toString()); <span class="hljs-comment">// 1</span>
+<span class="hljs-built_in">console</span>.log((<span class="hljs-number">2</span>).toString()); <span class="hljs-comment">// 2</span>
+</code></pre>
+<p>So lesson 1:</p>
+<blockquote>
+    <p>TypeScript index signatures must be either <code>string</code> or <code>number</code></p>
+</blockquote>
+<p>Quick note: <code>symbols</code> are also valid and supported by TypeScript. But let's not go there just yet. Baby steps.</p>
+<h3 id="declaring-an-index-signature">Declaring an index signature</h3>
+<p>So we've been using <code>any</code> to tell TypeScript to let us do whatever we want. We can actually specify an <em>index</em> signature explicitly. E.g. say you want to make sure that anything that is stored in an object using a string conforms to the structure <code>{message: string}</code>. This can be done with the declaration <code>{ [index:string] : {message: string} }</code>. This is demonstrated below:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">let</span> foo:{ [index:<span class="hljs-built_in">string</span>] : {message: <span class="hljs-built_in">string</span>} } = {};
+
+<span class="hljs-comment">/**
+ * Must store stuff that conforms to the structure
+ */</span>
+<span class="hljs-comment">/** Ok */</span>
+foo[<span class="hljs-string">'a'</span>] = { message: <span class="hljs-string">'some message'</span> };
+<span class="hljs-comment">/** Error: must contain a `message` or type string. You have a typo in `message` */</span>
+foo[<span class="hljs-string">'a'</span>] = { messages: <span class="hljs-string">'some message'</span> };
+
+<span class="hljs-comment">/**
+ * Stuff that is read is also type checked
+ */</span>
+<span class="hljs-comment">/** Ok */</span>
+foo[<span class="hljs-string">'a'</span>].message;
+<span class="hljs-comment">/** Error: messages does not exist. You have a typo in `message` */</span>
+foo[<span class="hljs-string">'a'</span>].messages;
+</code></pre>
+<blockquote>
+    <p>TIP: the name of the index signature e.g. <code>index</code> in <code>{ [index:string] : {message: string} }</code> has no significance for TypeScript and is only for readability. e.g. if it's user names you can do <code>{ [username:string] : {message: string} }</code> to help the next dev who looks at the code (which just might happen to be you).</p>
+</blockquote>
+<p>Of course <code>number</code> indexes are also supported e.g. <code>{ [count: number] : SomeOtherTypeYouWantToStoreEgRebate }</code></p>
+<h3 id="all-members-must-conform-to-the-string-index-signature">All members must conform to the <code>string</code> index signature</h3>
+<p>As soon as you have a <code>string</code> index signature, all explicit members must also conform to that index signature. This is shown below:</p>
+<pre><code class="lang-ts"><span class="hljs-comment">/** Okay */</span>
+<span class="hljs-keyword">interface</span> Foo {
+  [key:<span class="hljs-built_in">string</span>]: <span class="hljs-built_in">number</span>
+  x: <span class="hljs-built_in">number</span>;
+  y: <span class="hljs-built_in">number</span>;
+}
+<span class="hljs-comment">/** Error */</span>
+<span class="hljs-keyword">interface</span> Bar {
+  [key:<span class="hljs-built_in">string</span>]: <span class="hljs-built_in">number</span>
+  x: <span class="hljs-built_in">number</span>;
+  y: <span class="hljs-built_in">string</span>; <span class="hljs-comment">// ERROR: Property `y` must be of type number</span>
+}
+</code></pre>
+<p>This is to provide safety so that any string access gives the same result:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">interface</span> Foo {
+  [key:<span class="hljs-built_in">string</span>]: <span class="hljs-built_in">number</span>
+  x: <span class="hljs-built_in">number</span>;
+}
+<span class="hljs-keyword">let</span> foo: Foo = {x:<span class="hljs-number">1</span>,y:<span class="hljs-number">2</span>};
+
+<span class="hljs-comment">// Directly</span>
+foo[<span class="hljs-string">'x'</span>]; <span class="hljs-comment">// number</span>
+
+<span class="hljs-comment">// Indirectly</span>
+<span class="hljs-keyword">let</span> x = <span class="hljs-string">'x'</span>
+foo[x]; <span class="hljs-comment">// number</span>
+</code></pre>
+<h3 id="using-a-limited-set-of-string-literals">Using a limited set of string literals</h3>
+<p>An index signature can require that index strings be members of a union of literal strings by using <em>Mapped Types</em> e.g.:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">type</span> Index = <span class="hljs-string">'a'</span> | <span class="hljs-string">'b'</span> | <span class="hljs-string">'c'</span>
+<span class="hljs-keyword">type</span> FromIndex = { [k <span class="hljs-keyword">in</span> Index]?: <span class="hljs-built_in">number</span> }
+
+<span class="hljs-keyword">const</span> good: FromIndex = {b:<span class="hljs-number">1</span>, c:<span class="hljs-number">2</span>}
+
+<span class="hljs-comment">// Error:</span>
+<span class="hljs-comment">// Type '{ b: number; c: number; d: number; }' is not assignable to type 'FromIndex'.</span>
+<span class="hljs-comment">// Object literal may only specify known properties, and 'd' does not exist in type 'FromIndex'.</span>
+<span class="hljs-keyword">const</span> bad: FromIndex = {b:<span class="hljs-number">1</span>, c:<span class="hljs-number">2</span>, d:<span class="hljs-number">3</span>};
+</code></pre>
+<p>This is often used together with <code>keyof typeof</code> to capture vocabulary types, described on the next page.</p>
+<p>The specification of the vocabulary can be deferred generically:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">type</span> FromSomeIndex<K extends <span class="hljs-built_in">string</span>> = { [key <span class="hljs-keyword">in</span> K]: <span class="hljs-built_in">number</span> }
+</code></pre>
+<h3 id="having-both-string-and-number-indexers">Having both <code>string</code> and <code>number</code> indexers</h3>
+<p>This is not a common use case, but TypeScript compiler supports it nonetheless.</p>
+<p>However, it has the restriction that the <code>string</code> indexer is more strict than the <code>number</code> indexer. This is intentional e.g. to allow typing stuff like:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">interface</span> ArrStr {
+  [key: <span class="hljs-built_in">string</span>]: <span class="hljs-built_in">string</span> | <span class="hljs-built_in">number</span>; <span class="hljs-comment">// Must accommodate all members</span>
+
+  [index: <span class="hljs-built_in">number</span>]: <span class="hljs-built_in">string</span>; <span class="hljs-comment">// Can be a subset of string indexer</span>
+
+  <span class="hljs-comment">// Just an example member</span>
+  length: <span class="hljs-built_in">number</span>;
+}
+</code></pre>
+<h3 id="design-pattern-nested-index-signature">Design Pattern: Nested index signature</h3>
+<blockquote>
+    <p>API consideration when adding index signatures</p>
+</blockquote>
+<p>Quite commonly in the JS community you will see APIs that abuse string indexers. e.g. a common pattern among CSS in JS libraries:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">interface</span> NestedCSS {
+  color?: <span class="hljs-built_in">string</span>;
+  [selector: <span class="hljs-built_in">string</span>]: <span class="hljs-built_in">string</span> | NestedCSS | <span class="hljs-literal">undefined</span>;
+}
+
+<span class="hljs-keyword">const</span> example: NestedCSS = {
+  color: <span class="hljs-string">'red'</span>,
+  <span class="hljs-string">'.subclass'</span>: {
+    color: <span class="hljs-string">'blue'</span>
+  }
+}
+</code></pre>
+<p>Try not to mix string indexers with <em>valid</em> values this way. E.g. a typo in the padding will remain uncaught:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">const</span> failsSilently: NestedCSS = {
+  colour: <span class="hljs-string">'red'</span>, <span class="hljs-comment">// No error as `colour` is a valid string selector</span>
+}
+</code></pre>
+<p>Instead separate out the nesting into its own property e.g. in a name like <code>nest</code> (or <code>children</code> or <code>subnodes</code> etc.):</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">interface</span> NestedCSS {
+  color?: <span class="hljs-built_in">string</span>;
+  nest?: {
+    [selector: <span class="hljs-built_in">string</span>]: NestedCSS;
+  }
+}
+
+<span class="hljs-keyword">const</span> example: NestedCSS = {
+  color: <span class="hljs-string">'red'</span>,
+  nest: {
+    <span class="hljs-string">'.subclass'</span>: {
+      color: <span class="hljs-string">'blue'</span>
+    }
+  }
+}
+
+<span class="hljs-keyword">const</span> failsSilently: NestedCSS = {
+  colour: <span class="hljs-string">'red'</span>, <span class="hljs-comment">// TS Error: unknown property `colour`</span>
+}
+</code></pre>
+<h3 id="excluding-certain-properties-from-the-index-signature">Excluding certain properties from the index signature</h3>
+<p>Sometimes you need to combine properties into the index signature. This is not advised, and you <em>should</em> use the Nested index signature pattern mentioned above. </p>
+<p>However, if you are modeling <em>existing JavaScript</em> you can get around it with an intersection type. The following shows an example of the error you will encounter without using an intersection:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">type</span> FieldState = {
+  value: <span class="hljs-built_in">string</span>
+}
+
+<span class="hljs-keyword">type</span> FormState = {
+  isValid: <span class="hljs-built_in">boolean</span>  <span class="hljs-comment">// Error: Does not conform to the index signature</span>
+  [fieldName: <span class="hljs-built_in">string</span>]: FieldState
+}
+</code></pre>
+<p>Here is the workaround using an intersection type:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">type</span> FieldState = {
+  value: <span class="hljs-built_in">string</span>
+}
+
+<span class="hljs-keyword">type</span> FormState =
+  { isValid: <span class="hljs-built_in">boolean</span> }
+  & { [fieldName: <span class="hljs-built_in">string</span>]: FieldState }
+</code></pre>
+<p>Note that even though you can declare it to model existing JavaScript, you cannot create such an object using TypeScript: </p>
+<pre><code class="lang-ts"><span class="hljs-keyword">type</span> FieldState = {
+  value: <span class="hljs-built_in">string</span>
+}
+
+<span class="hljs-keyword">type</span> FormState =
+  { isValid: <span class="hljs-built_in">boolean</span> }
+  & { [fieldName: <span class="hljs-built_in">string</span>]: FieldState }
+
+
+<span class="hljs-comment">// Use it for some JavaScript object you are gettting from somewhere </span>
+<span class="hljs-keyword">declare</span> <span class="hljs-keyword">const</span> foo:FormState; 
+
+<span class="hljs-keyword">const</span> isValidBool = foo.isValid;
+<span class="hljs-keyword">const</span> somethingFieldState = foo[<span class="hljs-string">'something'</span>];
+
+<span class="hljs-comment">// Using it to create a TypeScript object will not work</span>
+<span class="hljs-keyword">const</span> bar: FormState = { <span class="hljs-comment">// Error `isValid` not assignable to `FieldState</span>
+  isValid: <span class="hljs-literal">false</span>
+}
+</code></pre>

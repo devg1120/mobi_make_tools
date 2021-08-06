@@ -1,0 +1,58 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    for...of
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts14/undefined" />
+  </head>
+   <body>
+<h3 id="forof">for...of</h3>
+<p>A common error experienced by beginning JavaScript developers is that <code>for...in</code> for an array does not iterate over the array items. Instead it iterates over the <em>keys</em> of the object passed in. This is demonstrated in the below example. Here you would expect <code>9,2,5</code> but you get the indexes <code>0,1,2</code>:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">var</span> someArray = [<span class="hljs-number">9</span>, <span class="hljs-number">2</span>, <span class="hljs-number">5</span>];
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> item <span class="hljs-keyword">in</span> someArray) {
+    <span class="hljs-built_in">console</span>.log(item); <span class="hljs-comment">// 0,1,2</span>
+}
+</code></pre>
+<p>This is one of the reasons why <code>for...of</code> exists in TypeScript (and ES6). The following iterates over the array correctly logging out the members as expected:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">var</span> someArray = [<span class="hljs-number">9</span>, <span class="hljs-number">2</span>, <span class="hljs-number">5</span>];
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> item of someArray) {
+    <span class="hljs-built_in">console</span>.log(item); <span class="hljs-comment">// 9,2,5</span>
+}
+</code></pre>
+<p>Similarly TypeScript has no trouble going through a string character by character using <code>for...of</code>:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">var</span> hello = <span class="hljs-string">&quot;is it me you&apos;re looking for?&quot;</span>;
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> char of hello) {
+    <span class="hljs-built_in">console</span>.log(char); <span class="hljs-comment">// is it me you&apos;re looking for?</span>
+}
+</code></pre>
+<h4 id="js-generation">JS Generation</h4>
+<p>For pre ES6 targets TypeScript will generate the standard <code>for (var i = 0; i &lt; list.length; i++)</code> kind of loop. For example here&apos;s what gets generated for our previous example:</p> <pre><code class="lang-ts"><span class="hljs-keyword">var</span> someArray = [<span class="hljs-number">9</span>, <span class="hljs-number">2</span>, <span class="hljs-number">5</span>];
+                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> item of someArray) {
+                <span class="hljs-built_in">console</span>.log(item);
+                }
+                <span class="hljs-comment">// becomes //</span>
+                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> _i = <span class="hljs-number">0</span>; _i &lt; someArray.length; _i++) { <span class="hljs-keyword">var</span> item = someArray[_i];
+                    <span class="hljs-built_in">console</span>.log(item);
+                    }
+            </code>
+</pre>
+<p>You can see that using <code>for...of</code> makes <em>intent</em> clearer and also decreases the amount of code you have to write (and variable names you need to come up with).</p>
+<h4 id="limitations">Limitations</h4>
+<p>If you are not targeting ES6 or above, the generated code assumes the property <code>length</code> exists on the object and that the object can be indexed via numbers e.g. <code>obj[2]</code>. So it is only supported on <code>string</code> and <code>array</code> for these legacy JS engines.</p>
+<p>If TypeScript can see that you are not using an array or a string it will give you a clear error <em>&quot;is not an array type or a string type&quot;</em>;</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">let</span> articleParagraphs = <span class="hljs-built_in">document</span>.querySelectorAll(<span class="hljs-string">&quot;article &gt; p&quot;</span>);
+<span class="hljs-comment">// Error: Nodelist is not an array type or a string type</span>
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> paragraph of articleParagraphs) {
+    paragraph.classList.add(<span class="hljs-string">&quot;read&quot;</span>);
+}
+</code></pre>
+<p>Use <code>for...of</code> only for stuff that <em>you know</em> to be an array or a string. Note that this limitation might be removed in a future version of TypeScript.</p>
+<h4 id="summary">Summary</h4>
+<p>You would be surprised at how many times you will be iterating over the elements of an array. The next time you find yourself doing that, give <code>for...of</code> a go. You might just make the next person who reviews your code happy.</p>
+</body>
+</html>

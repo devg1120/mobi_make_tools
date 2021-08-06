@@ -1,0 +1,20 @@
+<h1 id="prettier">Prettier</h1>
+<p>Prettier is a great tool by facebook that makes code formatting so much easier that it's worth mentioning. Setting up with TypeScript using our recommended project setup (aka everything in <code>src</code> folder) is super easy: </p>
+<h2 id="setup">Setup</h2>
+<ul>
+    <li><code>npm install prettier -D</code> </li>
+    <li>Add <code>scripts</code> to <code>package.json</code>: </li>
+</ul>
+<pre><code>    "prettier:base": "prettier --parser typescript --single-quote",
+    "prettier:check": "npm run prettier:base -- --list-different \"src/**/*.{ts,tsx}\"",
+    "prettier:write": "npm run prettier:base -- --write \"src/**/*.{ts,tsx}\""
+</code></pre>
+<h2 id="usage">Usage</h2>
+<p>On your build server: </p>
+<ul>
+    <li><code>npm run prettier:check</code> </li>
+</ul>
+<p>During dev (or pre commit hook): </p>
+<ul>
+    <li><code>npm run prettier:write</code></li>
+</ul>

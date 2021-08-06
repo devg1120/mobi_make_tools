@@ -1,0 +1,14 @@
+<h2 id="emitter">Emitter</h2>
+<p>There are two <code>emitters</code> provided with the TypeScript compiler:</p>
+<ul>
+    <li><code>emitter.ts</code>: this is the emitter you are most likely to be interested in. Its the TS -> JavaScript emitter.</li>
+    <li><code>declarationEmitter.ts</code>: this is the emitter used to create a <em>declaration file</em> (a <code>.d.ts</code>) for a <em>TypeScript source file</em> (a <code>.ts</code> file).</li>
+</ul>
+<p>We will look at <code>emitter.ts</code> in this section.</p>
+<h3 id="usage-by-program">Usage by <code>program</code></h3>
+<p>Program provides an <code>emit</code> function. This function primarily delegates to <code>emitFiles</code> function in <code>emitter.ts</code>. Here is the call stack:</p>
+<pre><code>Program.emit ->
+    `emitWorker` (local in program.ts createProgram) ->
+        `emitFiles` (function in emitter.ts)
+</code></pre>
+<p>One thing that the <code>emitWorker</code> provides to the emitter (via an argument to <code>emitFiles</code>) is an <code>EmitResolver</code>. <code>EmitResolver</code> is provided by the program's TypeChecker, basically it is a subset of <em>local</em> functions from <code>createChecker</code>.</p>

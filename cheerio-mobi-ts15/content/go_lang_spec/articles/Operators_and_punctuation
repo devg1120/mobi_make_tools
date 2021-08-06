@@ -1,0 +1,11 @@
+<body><p>
+The following character sequences represent [<a>operators</a>]
+(including [<a>assignment operators</a>]) and punctuation:
+</p><pre>
++    &     +=    &=     &&    ==    !=    (    )
+-    |     -=    |=     ||    <     <=    [    ]
+*    ^     *=    ^=     <-    >     >=    {    }
+/    <<    /=    <<=    ++    =     :=    ,    ;
+%    >>    %=    >>=    --    !     ...   .    :
+     &^          &^=
+</pre></body>

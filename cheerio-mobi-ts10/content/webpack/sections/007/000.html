@@ -1,0 +1,34 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Configuration</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts10/undefined" />
+  </head>
+   <body>
+<h1>Configuration</h1>
+<p>You may have noticed that few webpack configurations look exactly alike. This is because <strong>webpack&apos;s configuration file is a JavaScript file that exports a webpack <a href="/configuration/">configuration</a>.</strong> This configuration is then processed by webpack based upon its defined properties.</p>
+<p>Because it&apos;s a standard Node.js CommonJS module, you <strong>can do the following</strong>:</p>
+<ul>
+    <li>import other files via <code>require(...)</code></li>
+    <li>use utilities on npm via <code>require(...)</code></li>
+    <li>use JavaScript control flow expressions, e.g. the <code>?:</code> operator</li>
+    <li>use constants or variables for often used values</li>
+    <li>write and execute functions to generate a part of the configuration</li>
+</ul>
+<p>Use these features when appropriate.</p>
+<p>While they are technically feasible, <strong>the following practices should be avoided</strong>:</p>
+<ul>
+    <li>Access CLI arguments, when using the webpack CLI (instead write your own CLI, or <a href="/configuration/configuration-types/">use <code>--env</code></a>)</li>
+    <li>Export non-deterministic values (calling webpack twice should result in the same output files)</li>
+    <li>Write long configurations (instead split the configuration into multiple files)</li>
+</ul>
+<blockquote class="tip">
+    <p>The most important part to take away from this document is that there are many different ways to format and style your webpack configuration. The key is to stick with something consistent that you and your team can understand and maintain.</p>
+</blockquote>
+<p>The examples below describe how webpack&apos;s configuration can be both expressive and configurable because <em>it is code</em>:</p>
+</body>
+</html>

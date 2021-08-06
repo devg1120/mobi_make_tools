@@ -1,0 +1,60 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Never Type
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts14/undefined" />
+  </head>
+   <body>
+<h1 id="never">Never</h1>
+<blockquote>
+    <p><a href="https://egghead.io/lessons/typescript-use-the-never-type-to-avoid-code-with-dead-ends-using-typescript" target="_blank">A video lesson on the never type</a></p>
+</blockquote>
+<p>Programming language design does have a concept of <em>bottom</em> type that is a <strong>natural</strong> outcome as soon as you do <em>code flow analysis</em>. TypeScript does <em>code flow analysis</em> (&#x1F60E;) and so it needs to reliably represent stuff that might never happen.</p>
+<p>The <code>never</code> type is used in TypeScript to denote this <em>bottom</em> type. Cases when it occurs naturally:</p>
+<ul>
+    <li>A function never returns (e.g. if the function body has <code>while(true){}</code>)</li>
+    <li>A function always throws (e.g. in <code>function foo(){throw new Error(&apos;Not Implemented&apos;)}</code> the return type of <code>foo</code> is <code>never</code>)</li>
+</ul>
+<p>Of course you can use this annotation yourself as well</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">let</span> foo: never; <span class="hljs-comment">// Okay</span>
+</code></pre>
+<p>However, <em>only <code>never</code> can be assigned to another never</em>. e.g.</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">let</span> foo: never = <span class="hljs-number">123</span>; <span class="hljs-comment">// Error: Type number is not assignable to never</span>
+<span class="hljs-comment">// Okay as the function&apos;s return type is `never`</span>
+<span class="hljs-keyword">let</span> bar: never = (() =&gt; { <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&apos;Throw my hands in the air like I just dont care&apos;</span>) })();
+</code></pre>
+<p>Great. Now let&apos;s just jump into its key use case :)</p>
+<h1 id="use-case-exhaustive-checks">Use case: Exhaustive Checks</h1>
+<p>You can call never functions in a never context.</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">x: <span class="hljs-built_in">string</span> | <span class="hljs-built_in">number</span></span>): <span class="hljs-title">boolean</span> </span>{
+  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> x === <span class="hljs-string">&quot;string&quot;</span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+  } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> x === <span class="hljs-string">&quot;number&quot;</span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+  }
+  <span class="hljs-comment">// Without a never type we would error :</span>
+  <span class="hljs-comment">// - Not all code paths return a value (strict null checks)</span>
+  <span class="hljs-comment">// - Or Unreachable code detected</span>
+  <span class="hljs-comment">// But because TypeScript understands that `fail` function returns `never`</span>
+  <span class="hljs-comment">// It can allow you to call it as you might be using it for runtime safety / exhaustive checks.</span>
+  <span class="hljs-keyword">return</span> fail(<span class="hljs-string">&quot;Unexhaustive!&quot;</span>);
+}
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fail</span>(<span class="hljs-params">message: <span class="hljs-built_in">string</span></span>): <span class="hljs-title">never</span> </span>{ <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(message); }
+</code></pre>
+<p>And because <code>never</code> is only assignable to another <code>never</code> you can use it for <em>compile time</em> exhaustive checks as well. This is covered in the <a href="discriminated-unions.html"><em>discriminated union</em> section</a>.</p>
+<h1 id="confusion-with-void">Confusion with <code>void</code></h1>
+<p>As soon as someone tells you that <code>never</code> is returned when a function never exits gracefully you intuitively want to think of it as the same as <code>void</code>. However, <code>void</code> is a Unit. <code>never</code> is a falsum.</p>
+<p>A function that <em>returns</em> nothing returns a Unit <code>void</code>. However, a function <em>that never returns</em> (or always throws) returns <code>never</code>. <code>void</code> is something that can be assigned (without <code>strictNullChecking</code>) but <code>never</code> can <em>never</em> be assigned to anything other than <code>never</code>.</p>
+<!--
+PR: https://github.com/Microsoft/TypeScript/pull/8652
+Issue : https://github.com/Microsoft/TypeScript/issues/3076
+Concept : https://en.wikipedia.org/wiki/Bottom_type
+-->
+</body>
+</html>

@@ -1,0 +1,102 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    NPM
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts12_mlv/undefined" />
+  </head>
+   <body>
+<h1 id="npm">NPM</h1>
+<blockquote>
+    <p>Fun fact <code>npm</code> is <a href="https://twitter.com/npmjs/status/347057301401763840" target="_blank">not an acronym</a> so it doesn&apos;t expand to anything, but among friends it is commonly called <code>node package manager</code>.</p>
+</blockquote>
+<p><code>npm</code> is a binary that comes with default <code>node</code> installations used to manage community shared JavaScript / TypeScript packages.</p>
+<ul>
+    <li>NPM packages are hosted at (and installed from) <a href="https://www.npmjs.com/" target="_blank">https://www.npmjs.com/</a> (the &#x2601;&#xFE0F;).</li>
+</ul>
+<h2 id="quick-common-setup">Quick common setup</h2>
+<ul>
+    <li>npm packages are configured using <code>package.json</code> file. You can generate a quick file using <code>npm init -y</code>.</li>
+    <li>packages get installed into a <code>./node_modules</code> folder. You normally have this folder in your <code>.gitignore</code>.</li>
+</ul>
+<blockquote>
+    <p>Even though you might be building an application, having a <code>package.json</code> essentially makes your project a package as well. So the terms your <code>project | package</code> can be used interchangably.</p>
+</blockquote>
+<p>When you checkout someone&apos;s (your team&apos;s) package, it will have a <code>package.json</code> that will list the dependencies you need to run the project. You simply run <code>npm install</code> and npm will bring them down from the cloud &#x2601;&#xFE0F;.</p>
+<h2 id="installing-a-package">Installing a package</h2>
+<p>You can run <code>npm install <something></something></code>. Most people will use the shorthand <code>npm i <something></something></code> e.g. </p>
+<pre><code class="lang-ts"><span class="hljs-comment">// Install react</span>
+npm i react
+</code></pre>
+<blockquote>
+    <p>This will also automatically add <code>react</code> into your <code>package.json</code>&apos;s <code>dependencies</code>.</p>
+</blockquote>
+<h2 id="installing-a-devdependency">Installing a devDependency</h2>
+<p><code>devDependencies</code> are dependencies that are only required during <em>development</em> if your project and not required after deployment. </p>
+<p><code>typescript</code> is common in <code>devDependencies</code> as its only required to build <code>.ts -&gt; .js</code>. You normally deploy the built <code>.js</code> files:</p>
+<ul>
+    <li>into production </li>
+    <li>OR for consumption by other other npm packages</li>
+</ul>
+<h2 id="security">Security</h2>
+<p>The public <code>npm</code> packages are scanned by security team worldwide and issues get reported to npm team. They then release security advisories detailing the issue and potential fixes. Commonly the fix is simply updating the package. </p>
+<p>You can run an audit on your node project by simply running <code>npm audit</code>. This will highlight any vulnerabilities that might exist in the package / dependencies of the package. e.g. </p>
+<pre><code>&#x250C;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x252C;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2510;
+&#x2502; Low           &#x2502; Regular Expression Denial of Service                         &#x2502;
+&#x251C;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x253C;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2524;
+&#x2502; Package       &#x2502; debug                                                        &#x2502;
+&#x251C;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x253C;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2524;
+&#x2502; Dependency of &#x2502; jest [dev]                                                   &#x2502;
+&#x251C;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x253C;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2524;
+&#x2502; Path          &#x2502; jest &gt; jest-cli &gt; istanbul-lib-source-maps &gt; debug           &#x2502;
+&#x251C;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x253C;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2524;
+&#x2502; More info     &#x2502; https://nodesecurity.io/advisories/534                       &#x2502;
+&#x2514;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2534;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2518;
+</code></pre>
+<p>Note that commonly the issues are found in <em>development</em> dependencies (e.g. jest in this case). Since these aren&apos;t are a part of your production deployments, most likely your production application is not vulnerable. But still good practice to keep vulnerabilities to <code>0</code>.</p>
+<p>Simply add <code>npm audit</code> (the command exist with error code <code>1</code> in case of error) as a part of your deployment to ensure the projects stay up to date.</p>
+<h2 id="npm-scripts">NPM Scripts</h2>
+<h3 id="what-is-with----in-scripts">What is with <code>--</code> in scripts</h3>
+<p>You can build a base script with a limited set of command line arguments e.g. here is a script target that runs <code>tsc</code> for the TypeScript compiler: </p>
+<pre><code class="lang-json">{
+  <span class="hljs-string">&quot;scripts&quot;</span>: {
+    <span class="hljs-string">&quot;build&quot;</span>: <span class="hljs-string">&quot;tsc -p .&quot;</span>
+  }
+}
+</code></pre>
+<p>You can create a <code>build:watch</code> target to run <code>tsc -p . -w</code> or alternatively asking npm to run <code>build</code> with the additional <code>-w</code> flag like so: </p>
+<pre><code class="lang-json">{
+  <span class="hljs-string">&quot;scripts&quot;</span>: {
+    <span class="hljs-string">&quot;build&quot;</span>: <span class="hljs-string">&quot;tsc -p .&quot;</span>,
+    <span class="hljs-string">&quot;build:watch&quot;</span>: <span class="hljs-string">&quot;npm run build -- -w&quot;</span>
+  }
+}
+</code></pre>
+<p>You can pass in as many flags as you want after <code>--</code> e.g. in the following example <code>build:more</code> has the same effect as <code>something --foo -f -d --bar</code></p>
+<pre><code class="lang-json">{
+  <span class="hljs-string">&quot;scripts&quot;</span>: {
+    <span class="hljs-string">&quot;build&quot;</span>: <span class="hljs-string">&quot;something --foo&quot;</span>,
+    <span class="hljs-string">&quot;build:more&quot;</span>: <span class="hljs-string">&quot;npm run build -- -f -d --bar&quot;</span>
+  }
+}
+</code></pre>
+<h2 id="public-vs-private-packages">Public vs. Private packages</h2>
+<p>You don&apos;t need this when <em>using</em> any of the common public npm packages. Just know its there for enterprise / commercial customers.</p>
+<h3 id="public-packages">Public packages</h3>
+<ul>
+    <li>Packages are public by default. </li>
+    <li>Anyone can deploy a package to npm. </li>
+    <li>You just need an account (which you can get for free).</li>
+</ul>
+<p>No one needs an account to download a public package. </p>
+<p>This free sharing of packages is one of the key reasons of success for npm &#x1F339;.</p>
+<h3 id="private-packages">Private packages</h3>
+<p>If you want a private package for your company / team / enterprise you need to sign up to a paid plan, details here : <a href="https://www.npmjs.com/pricing" target="_blank">https://www.npmjs.com/pricing</a></p>
+<p>Of-course you need an account with the right permissions to download a private package.</p>
+</body>
+</html>

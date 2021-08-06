@@ -1,0 +1,55 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Map types</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+A map is an unordered group of elements of one type, called the
+element type, indexed by a set of unique <i>keys</i> of another type,
+called the key type.
+The value of an uninitialized map is <code>nil</code>.
+</p><pre>
+[<a>MapType</a>]     = &quot;map&quot; &quot;[&quot; [<a>KeyType</a>] &quot;]&quot; [<a>ElementType</a>] .
+[<a>KeyType</a>]     = [<a>Type</a>] .
+</pre><p>
+The [<a>comparison operators</a>]
+<code>==</code> and <code>!=</code> must be fully defined
+for operands of the key type; thus the key type must not be a function, map, or
+slice.
+If the key type is an interface type, these
+comparison operators must be defined for the dynamic key values;
+failure will cause a [<a>run-time panic</a>].
+</p><pre>
+map[string]int
+map[*T]struct{ x, y float64 }
+map[string]interface{}
+</pre><p>
+The number of map elements is called its length.
+For a map <code>m</code>, it can be discovered using the
+built-in function [<a><code>len</code></a>]
+and may change during execution. Elements may be added during execution
+using [<a>assignments</a>] and retrieved with
+[<a>index expressions</a>]; they may be removed with the
+[<a><code>delete</code></a>] built-in function.
+</p><p>
+A new, empty map value is made using the built-in
+function [<a><code>make</code></a>],
+which takes the map type and an optional capacity hint as arguments:
+</p><pre>
+make(map[string]int)
+make(map[string]int, 100)
+</pre><p>
+The initial capacity does not bound its size:
+maps grow to accommodate the number of items
+stored in them, with the exception of <code>nil</code> maps.
+A <code>nil</code> map is equivalent to an empty map except that no elements
+may be added.
+</p></body>
+</body>
+</html>

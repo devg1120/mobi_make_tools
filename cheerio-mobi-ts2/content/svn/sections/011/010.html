@@ -1,0 +1,129 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svn delete (del, remove, rm)</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts2/css/kindle.css" />
+  </head>
+   <body>
+    <div class="refentry">
+      <a id="svn.ref.svn.c.delete"></a>
+      <div class="titlepage"></div>
+      <a id="idm9687" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svn delete (del, remove, rm) — Delete an item from a working copy
+            or the repository.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm9694"></a>
+        <h2>Synopsis</h2>
+        <p>
+          <code class="literal">svn delete PATH...</code>
+        </p>
+        <p>
+          <code class="literal">svn delete URL...</code>
+        </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm9700"></a>
+        <h2>Description</h2>
+        <p>Items specified by <em class="replaceable"><code>PATH</code></em> are
+            scheduled for deletion upon the next commit.  Files (and
+            directories that have not been committed) are immediately
+            removed from the working copy unless the
+            <code class="option">--keep-local</code> option is given.  The
+            command will not remove any unversioned or modified items;
+            use the <code class="option">--force</code> option to override this
+            behavior.</p>
+        <p>Items specified by URL are deleted from
+            the repository via an immediate commit.  Multiple URLs are
+            committed atomically.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm9707"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+          <pre class="screen">
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.editor_cmd"><code class="option">--editor-cmd</code> <em class="replaceable"><code>CMD</code></em></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.encoding"><code class="option">--encoding</code> <em class="replaceable"><code>ENC</code></em></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.file"><code class="option">--file</code> (<code class="option">-F</code>) <em class="replaceable"><code>FILENAME</code></em></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.force"><code class="option">--force</code></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.force_log"><code class="option">--force-log</code></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.keep_local"><code class="option">--keep-local</code></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.message"><code class="option">--message</code> (<code class="option">-m</code>) <em class="replaceable"><code>MESSAGE</code></em></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.quiet"><code class="option">--quiet</code> (<code class="option">-q</code>)</a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.targets"><code class="option">--targets</code> <em class="replaceable"><code>FILENAME</code></em></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.with_revprop"><code class="option">--with-revprop</code> <em class="replaceable"><code>ARG</code></em></a>
+</pre>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm9721"></a>
+        <h2>Examples</h2>
+        <p>Using <span class="command"><strong>svn</strong></span> to delete a file from
+            your working copy deletes your local copy of the file, but
+            it merely schedules the file to be deleted from the
+            repository.  When you commit, the file is deleted in the
+            repository.</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn delete myfile
+D         myfile
+$ svn commit -m "Deleted file 'myfile'."
+Deleting       myfile
+Transmitting file data .
+Committed revision 14.
+</pre>
+        </div>
+        <p>Deleting a URL, however, is immediate, so you have
+            to supply a log message:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn delete -m "Deleting file 'yourfile'" \
+             file:///var/svn/repos/test/yourfile
+Committed revision 15.
+</pre>
+        </div>
+        <p>Here's an example of how to force deletion of a file
+            that has local mods:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn delete over-there 
+svn: E195006: Use --force to override this restriction (local modifications m\
+ay be lost)
+svn: E195006: '/home/sally/project/over-there' has local modifications -- com\
+mit or revert them first
+$ svn delete --force over-there 
+D         over-there
+$
+</pre>
+        </div>
+        <p>Use the <code class="option">--keep-local</code> option to
+            override the default <span class="command"><strong>svn delete</strong></span>
+            behavior of also removing the target file that was
+            scheduled for versioned deletion.  This is helpful when
+            you realize that you've accidentally committed the
+            addition of a file that you need to keep around in your
+            working copy, but which shouldn't have been added to
+            version control.</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn delete --keep-local conf/program.conf
+D         conf/program.conf
+$ svn commit -m "Remove accidentally-added configuration file."
+Deleting       conf/program.conf
+Transmitting file data .
+Committed revision 21.
+$ svn status
+?       conf/program.conf
+$
+</pre>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

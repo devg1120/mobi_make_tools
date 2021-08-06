@@ -1,0 +1,35 @@
+<div class="sect1" lang="en">
+    <div class="titlepage">
+        <div>
+            <h2 class="title" style="clear: both"><a id="id2968378">Interpreted Languages and Mixed Strategies</a></h2>
+        </div>
+    </div>
+    <p>Languages that avoid manual memory management do it by having a
+        memory manager built into their runtime executable somewhere.
+        Typically, runtime environments in these languages are split into a
+        program part (the running script itself) and the interpreter part,
+        with the interpreter managing dynamic storage. On Unixes (and other
+        modern operating systems) the interpreter core can be shared by
+        multiple program parts, reducing the effective overhead for each
+        one.</p>
+    <p><a id="sh_history">
+            <a id="id2968402" class="indexterm"> Scripting is nowhere near a new idea
+                in the Unix world. As far back as the mid-1970s, in an era of far
+                smaller machines, the Unix shell (the interpreter for commands typed
+                to a Unix console) was designed as a full interpreted programming
+                language. It was common even then to write programs entirely in
+                shell<a id="id2968419" class="indexterm">, or
+                    to use the shell to write glue logic that knit together canned
+                    utilities and custom programs in C into wholes greater than the sum of
+                    their parts. Classical introductions to the Unix environment (such as
+                    <i>The Unix Programming Environment</i> [<a href="apb.html#Kernighan-Pike84" title="[Kernighan-Pike84]">Kernighan-Pike84</a>]) have dwelt
+                    heavily on this tactic, and with good reason: it was one of Unix's
+                    most important innovations.</a></a></a></p>
+    <p>Advanced shell programming mixes languages freely, employing
+        both binaries and interpreted elements from half a dozen or more
+        other languages for subtasks. Each language does what it does best,
+        each component is a module with narrow interfaces to the others,
+        and the global complexity of the whole is much lower than it would
+        be had it been coded as a single monster monolith in a general-purpose
+        language.</p>
+</div>

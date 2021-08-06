@@ -1,0 +1,106 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Struct types</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+A struct is a sequence of named elements, called fields, each of which has a
+name and a type. Field names may be specified explicitly (IdentifierList) or
+implicitly (EmbeddedField).
+Within a struct, non-[<a>blank</a>] field names must
+be [<a>unique</a>].
+</p><pre>
+[<a>StructType</a>]    = &quot;struct&quot; &quot;{&quot; { [<a>FieldDecl</a>] &quot;;&quot; } &quot;}&quot; .
+[<a>FieldDecl</a>]     = ([<a>IdentifierList</a>] [<a>Type</a>] | [<a>EmbeddedField</a>]) [ [<a>Tag</a>] ] .
+[<a>EmbeddedField</a>] = [ &quot;*&quot; ] [<a>TypeName</a>] .
+[<a>Tag</a>]           = [<a>string_lit</a>] .
+</pre><pre>
+// An empty struct.
+struct {}
+// A struct with 6 fields.
+struct {
+	x, y int
+	u float32
+	_ float32  // padding
+	A *[]int
+	F func()
+}
+</pre><p>
+A field declared with a type but no explicit field name is called an <i>embedded field</i>.
+An embedded field must be specified as
+a type name <code>T</code> or as a pointer to a non-interface type name <code>*T</code>,
+and <code>T</code> itself may not be
+a pointer type. The unqualified type name acts as the field name.
+</p><pre>
+// A struct with four embedded fields of types T1, *T2, P.T3 and *P.T4
+struct {
+	T1        // field name is T1
+	*T2       // field name is T2
+	P.T3      // field name is T3
+	*P.T4     // field name is T4
+	x, y int  // field names are x and y
+}
+</pre><p>
+The following declaration is illegal because field names must be unique
+in a struct type:
+</p><pre>
+struct {
+	T     // conflicts with embedded field *T and *P.T
+	*T    // conflicts with embedded field T and *P.T
+	*P.T  // conflicts with embedded field T and *T
+}
+</pre><p>
+A field or [<a>method</a>] <code>f</code> of an
+embedded field in a struct <code>x</code> is called <i>promoted</i> if
+<code>x.f</code> is a legal [<a>selector</a>] that denotes
+that field or method <code>f</code>.
+</p><p>
+Promoted fields act like ordinary fields
+of a struct except that they cannot be used as field names in
+[<a>composite literals</a>] of the struct.
+</p><p>
+Given a struct type <code>S</code> and a [<a>defined type</a>]
+<code>T</code>, promoted methods are included in the method set of the struct as follows:
+</p><ul>
+	<li>
+	If <code>S</code> contains an embedded field <code>T</code>,
+	the [<a>method sets</a>] of <code>S</code>
+	and <code>*S</code> both include promoted methods with receiver
+	<code>T</code>. The method set of <code>*S</code> also
+	includes promoted methods with receiver <code>*T</code>.
+	</li>
+	<li>
+	If <code>S</code> contains an embedded field <code>*T</code>,
+	the method sets of <code>S</code> and <code>*S</code> both
+	include promoted methods with receiver <code>T</code> or
+	<code>*T</code>.
+	</li>
+</ul><p>
+A field declaration may be followed by an optional string literal <i>tag</i>,
+which becomes an attribute for all the fields in the corresponding
+field declaration. An empty tag string is equivalent to an absent tag.
+The tags are made visible through a [<a>reflection interface</a>]
+and take part in [<a>type identity</a>] for structs
+but are otherwise ignored.
+</p><pre>
+struct {
+	x, y float64 &quot;&quot;  // an empty tag string is like an absent tag
+	name string  &quot;any string is permitted as a tag&quot;
+	_    [4]byte &quot;ceci n&apos;est pas un champ de structure&quot;
+}
+// A struct corresponding to a TimeStamp protocol buffer.
+// The tag strings define the protocol buffer field numbers;
+// they follow the convention outlined by the reflect package.
+struct {
+	microsec  uint64 `protobuf:&quot;1&quot;`
+	serverIP6 uint64 `protobuf:&quot;2&quot;`
+}
+</pre></body>
+</body>
+</html>

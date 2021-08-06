@@ -1,0 +1,160 @@
+<body><p>
+A "for" statement specifies repeated execution of a block. There are three forms:
+The iteration may be controlled by a single condition, a "for" clause, or a "range" clause.
+</p><pre>
+[<a>ForStmt</a>] = "for" [ [<a>Condition</a>] | [<a>ForClause</a>] | [<a>RangeClause</a>] ] [<a>Block</a>] .
+[<a>Condition</a>] = [<a>Expression</a>] .
+</pre><h4>For statements with single condition</h4><p>
+In its simplest form, a "for" statement specifies the repeated execution of
+a block as long as a boolean condition evaluates to true.
+The condition is evaluated before each iteration.
+If the condition is absent, it is equivalent to the boolean value
+<code>true</code>.
+</p><pre>
+for a < b {
+	a *= 2
+}
+</pre><h4>For statements with <code>for</code> clause</h4><p>
+A "for" statement with a ForClause is also controlled by its condition, but
+additionally it may specify an <i>init</i>
+and a <i>post</i> statement, such as an assignment,
+an increment or decrement statement. The init statement may be a
+[<a>short variable declaration</a>], but the post statement must not.
+Variables declared by the init statement are re-used in each iteration.
+</p><pre>
+[<a>ForClause</a>] = [ [<a>InitStmt</a>] ] ";" [ [<a>Condition</a>] ] ";" [ [<a>PostStmt</a>] ] .
+[<a>InitStmt</a>] = [<a>SimpleStmt</a>] .
+[<a>PostStmt</a>] = [<a>SimpleStmt</a>] .
+</pre><pre>
+for i := 0; i < 10; i++ {
+	f(i)
+}
+</pre><p>
+If non-empty, the init statement is executed once before evaluating the
+condition for the first iteration;
+the post statement is executed after each execution of the block (and
+only if the block was executed).
+Any element of the ForClause may be empty but the
+[<a>semicolons</a>] are
+required unless there is only a condition.
+If the condition is absent, it is equivalent to the boolean value
+<code>true</code>.
+</p><pre>
+for cond { S() }    is the same as    for ; cond ; { S() }
+for      { S() }    is the same as    for true     { S() }
+</pre><h4>For statements with <code>range</code> clause</h4><p>
+A "for" statement with a "range" clause
+iterates through all entries of an array, slice, string or map,
+or values received on a channel. For each entry it assigns <i>iteration values</i>
+to corresponding <i>iteration variables</i> if present and then executes the block.
+</p><pre>
+[<a>RangeClause</a>] = [ [<a>ExpressionList</a>] "=" | [<a>IdentifierList</a>] ":=" ] "range" [<a>Expression</a>] .
+</pre><p>
+The expression on the right in the "range" clause is called the <i>range expression</i>,
+which may be an array, pointer to an array, slice, string, map, or channel permitting
+[<a>receive operations</a>].
+As with an assignment, if present the operands on the left must be
+[<a>addressable</a>] or map index expressions; they
+denote the iteration variables. If the range expression is a channel, at most
+one iteration variable is permitted, otherwise there may be up to two.
+If the last iteration variable is the [<a>blank identifier</a>],
+the range clause is equivalent to the same clause without that identifier.
+</p><p>
+The range expression <code>x</code> is evaluated once before beginning the loop,
+with one exception: if at most one iteration variable is present and
+<code>len(x)</code> is [<a>constant</a>],
+the range expression is not evaluated.
+</p><p>
+Function calls on the left are evaluated once per iteration.
+For each iteration, iteration values are produced as follows
+if the respective iteration variables are present:
+</p><pre>
+Range expression                          1st value          2nd value
+
+array or slice  a  [n]E, *[n]E, or []E    index    i  int    a[i]       E
+string          s  string type            index    i  int    see below  rune
+map             m  map[K]V                key      k  K      m[k]       V
+channel         c  chan E, <-chan E       element  e  E
+</pre><ol>
+<li>
+For an array, pointer to array, or slice value <code>a</code>, the index iteration
+values are produced in increasing order, starting at element index 0.
+If at most one iteration variable is present, the range loop produces
+iteration values from 0 up to <code>len(a)-1</code> and does not index into the array
+or slice itself. For a <code>nil</code> slice, the number of iterations is 0.
+</li>
+
+<li>
+For a string value, the "range" clause iterates over the Unicode code points
+in the string starting at byte index 0.  On successive iterations, the index value will be the
+index of the first byte of successive UTF-8-encoded code points in the string,
+and the second value, of type <code>rune</code>, will be the value of
+the corresponding code point.  If the iteration encounters an invalid
+UTF-8 sequence, the second value will be <code>0xFFFD</code>,
+the Unicode replacement character, and the next iteration will advance
+a single byte in the string.
+</li>
+
+<li>
+The iteration order over maps is not specified
+and is not guaranteed to be the same from one iteration to the next.
+If a map entry that has not yet been reached is removed during iteration,
+the corresponding iteration value will not be produced. If a map entry is
+created during iteration, that entry may be produced during the iteration or
+may be skipped. The choice may vary for each entry created and from one
+iteration to the next.
+If the map is <code>nil</code>, the number of iterations is 0.
+</li>
+
+<li>
+For channels, the iteration values produced are the successive values sent on
+the channel until the channel is [<a>closed</a>]. If the channel
+is <code>nil</code>, the range expression blocks forever.
+</li>
+</ol><p>
+The iteration values are assigned to the respective
+iteration variables as in an [<a>assignment statement</a>].
+</p><p>
+The iteration variables may be declared by the "range" clause using a form of
+[<a>short variable declaration</a>]
+(<code>:=</code>).
+In this case their types are set to the types of the respective iteration values
+and their [<a>scope</a>] is the block of the "for"
+statement; they are re-used in each iteration.
+If the iteration variables are declared outside the "for" statement,
+after execution their values will be those of the last iteration.
+</p><pre>
+var testdata *struct {
+	a *[7]int
+}
+for i, _ := range testdata.a {
+	// testdata.a is never evaluated; len(testdata.a) is constant
+	// i ranges from 0 to 6
+	f(i)
+}
+
+var a [10]string
+for i, s := range a {
+	// type of i is int
+	// type of s is string
+	// s == a[i]
+	g(i, s)
+}
+
+var key string
+var val interface {}  // element type of m is assignable to val
+m := map[string]int{"mon":0, "tue":1, "wed":2, "thu":3, "fri":4, "sat":5, "sun":6}
+for key, val = range m {
+	h(key, val)
+}
+// key == last map key encountered in iteration
+// val == map[key]
+
+var ch chan Work = producer()
+for w := range ch {
+	doWork(w)
+}
+
+// empty a channel
+for range ch {}
+</pre></body>

@@ -1,0 +1,117 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Classes Emit
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts13_images/undefined" />
+  </head>
+   <body>
+<h4 id="whats-up-with-the-iife">What&apos;s up with the IIFE</h4>
+<p>The js generated for the class could have been:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Point</span>(<span class="hljs-params">x, y</span>) </span>{
+    <span class="hljs-keyword">this</span>.x = x;
+    <span class="hljs-keyword">this</span>.y = y;
+}
+Point.prototype.add = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">point</span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Point(<span class="hljs-keyword">this</span>.x + point.x, <span class="hljs-keyword">this</span>.y + point.y);
+};
+</code></pre>
+<p>The reason it&apos;s wrapped in an Immediately-Invoked Function Expression (IIFE) i.e.</p>
+<pre><code class="lang-ts">(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    <span class="hljs-comment">// BODY</span>
+    <span class="hljs-keyword">return</span> Point;
+})();
+</code></pre>
+<p>has to do with inheritance. It allows TypeScript to capture the base class as a variable <code>_super</code> e.g.</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">var</span> Point3D = (<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">_super</span>) </span>{
+    __extends(Point3D, _super);
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Point3D</span>(<span class="hljs-params">x, y, z</span>) </span>{
+        _super.call(<span class="hljs-keyword">this</span>, x, y);
+        <span class="hljs-keyword">this</span>.z = z;
+    }
+    Point3D.prototype.add = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">point</span>) </span>{
+        <span class="hljs-keyword">var</span> point2D = _super.prototype.add.call(<span class="hljs-keyword">this</span>, point);
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Point3D(point2D.x, point2D.y, <span class="hljs-keyword">this</span>.z + point.z);
+    };
+    <span class="hljs-keyword">return</span> Point3D;
+})(Point);
+</code></pre>
+<p>Notice that the IIFE allows TypeScript to easily capture the base class <code>Point</code> in a <code>_super</code> variable and that is used consistently in the class body.</p>
+<h3 id="extends"><code>__extends</code></h3>
+<p>You will notice that as soon as you inherit a class TypeScript also generates the following function:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">var</span> __extends = <span class="hljs-keyword">this</span>.__extends || <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">d, b</span>) </span>{
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> p <span class="hljs-keyword">in</span> b) <span class="hljs-keyword">if</span> (b.hasOwnProperty(p)) d[p] = b[p];
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__</span>(<span class="hljs-params"></span>) </span>{ <span class="hljs-keyword">this</span>.constructor = d; }
+    __.prototype = b.prototype;
+    d.prototype = <span class="hljs-keyword">new</span> __();
+};
+</code></pre>
+<p>Here <code>d</code> refers to the derived class and <code>b</code> refers to the base class. This function does two things:</p>
+<ol>
+    <li>copies the static members of the base class onto the child class i.e. <code>for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];</code></li>
+    <li>sets up the child class function&apos;s prototype to optionally lookup members on the parent&apos;s <code>proto</code> i.e. effectively <code>d.prototype.__proto__ = b.prototype</code></li>
+</ol>
+<p>People rarely have trouble understanding 1, but many people struggle with 2. So an explanation is in order.</p>
+<h4 id="dprototypeproto--bprototype"><code>d.prototype.__proto__ = b.prototype</code></h4>
+<p>After having tutored many people about this I find the following explanation to be simplest. First we will explain how the code from <code>__extends</code> is equivalent to the simple <code>d.prototype.__proto__ = b.prototype</code>, and then why this line in itself is significant. To understand all this you need to know these things:</p>
+<ol>
+    <li><code>__proto__</code></li>
+    <li><code>prototype</code></li>
+    <li>effect of <code>new</code> on <code>this</code> inside the called function</li>
+    <li>effect of <code>new</code> on <code>prototype</code> and <code>__proto__</code></li>
+</ol>
+<p>All objects in JavaScript contain a <code>__proto__</code> member. This member is often not accessible in older browsers (sometimes documentation refers to this magical property as <code>[[prototype]]</code>). It has one objective: If a property is not found on an object during lookup (e.g. <code>obj.property</code>) then it is looked up at <code>obj.__proto__.property</code>. If it is still not found then <code>obj.__proto__.__proto__.property</code> till either: <em>it is found</em> or <em>the latest <code>.__proto__</code> itself is null</em>. This explains why JavaScript is said to support <em>prototypal inheritance</em> out of the box. This is shown in the following example, which you can run in the chrome console or Node.js:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">var</span> foo = {}
+<span class="hljs-comment">// setup on foo as well as foo.__proto__</span>
+foo.bar = <span class="hljs-number">123</span>;
+foo.__proto__.bar = <span class="hljs-number">456</span>;
+<span class="hljs-built_in">console</span>.log(foo.bar); <span class="hljs-comment">// 123</span>
+<span class="hljs-keyword">delete</span> foo.bar; <span class="hljs-comment">// remove from object</span>
+<span class="hljs-built_in">console</span>.log(foo.bar); <span class="hljs-comment">// 456</span>
+<span class="hljs-keyword">delete</span> foo.__proto__.bar; <span class="hljs-comment">// remove from foo.__proto__</span>
+<span class="hljs-built_in">console</span>.log(foo.bar); <span class="hljs-comment">// undefined</span>
+</code></pre>
+<p>Cool so you understand <code>__proto__</code>. Another useful fact is that all <code>function</code>s in JavaScript have a property called <code>prototype</code> and that it has a member <code>constructor</code> pointing back to the function. This is shown below:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Foo</span>(<span class="hljs-params"></span>) </span>{ }
+<span class="hljs-built_in">console</span>.log(Foo.prototype); <span class="hljs-comment">// {} i.e. it exists and is not undefined</span>
+<span class="hljs-built_in">console</span>.log(Foo.prototype.constructor === Foo); <span class="hljs-comment">// Has a member called `constructor` pointing back to the function</span>
+</code></pre>
+<p>Now let&apos;s look at <em>effect of <code>new</code> on <code>this</code> inside the called function</em>. Basically <code>this</code> inside the called function is going to point to the newly created object that will be returned from the function. It&apos;s simple to see if you mutate a property on <code>this</code> inside the function:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Foo</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">this</span>.bar = <span class="hljs-number">123</span>;
+}
+<span class="hljs-comment">// call with the new operator</span>
+<span class="hljs-keyword">var</span> newFoo = <span class="hljs-keyword">new</span> Foo();
+<span class="hljs-built_in">console</span>.log(newFoo.bar); <span class="hljs-comment">// 123</span>
+</code></pre>
+<p>Now the only other thing you need to know is that calling <code>new</code> on a function assigns the <code>prototype</code> of the function to the <code>__proto__</code> of the newly created object that is returned from the function call. Here is the code you can run to completely understand it:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Foo</span>(<span class="hljs-params"></span>) </span>{ }
+<span class="hljs-keyword">var</span> foo = <span class="hljs-keyword">new</span> Foo();
+<span class="hljs-built_in">console</span>.log(foo.__proto__ === Foo.prototype); <span class="hljs-comment">// True!</span>
+</code></pre>
+<p>That&apos;s it. Now look at the following straight out of <code>__extends</code>. I&apos;ve taken the liberty to number these lines:</p>
+<pre><code class="lang-ts"><span class="hljs-number">1</span>  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">__</span>(<span class="hljs-params"></span>) </span>{ <span class="hljs-keyword">this</span>.constructor = d; }
+<span class="hljs-number">2</span>   __.prototype = b.prototype;
+<span class="hljs-number">3</span>   d.prototype = <span class="hljs-keyword">new</span> __();
+</code></pre>
+<p>Reading this function in reverse the <code>d.prototype = new __()</code> on line 3 effectively means <code>d.prototype = {__proto__ : __.prototype}</code> (because of the effect of <code>new</code> on <code>prototype</code> and <code>__proto__</code>), combining it with the previous line (i.e. line 2 <code>__.prototype = b.prototype;</code>) you get <code>d.prototype = {__proto__ : b.prototype}</code>.</p>
+<p>But wait, we wanted <code>d.prototype.__proto__</code> i.e. just the proto changed and maintain the old <code>d.prototype.constructor</code>. This is where the significance of the first line (i.e. <code>function __() { this.constructor = d; }</code>) comes in. Here we will effectively have <code>d.prototype = {__proto__ : __.prototype, constructor : d}</code> (because of the effect of <code>new</code> on <code>this</code> inside the called function). So, since we restore <code>d.prototype.constructor</code>, the only thing we have truly mutated is the <code>__proto__</code> hence <code>d.prototype.__proto__ = b.prototype</code>.</p>
+<h4 id="dprototypeproto--bprototype-significance"><code>d.prototype.__proto__ = b.prototype</code> significance</h4>
+<p>The significance is that it allows you to add member functions to a child class and inherit others from the base class. This is demonstrated by the following simple example:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Animal</span>(<span class="hljs-params"></span>) </span>{ }
+Animal.prototype.walk = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{ <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;walk&apos;</span>) };
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Bird</span>(<span class="hljs-params"></span>) </span>{ }
+Bird.prototype.__proto__ = Animal.prototype;
+Bird.prototype.fly = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{ <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;fly&apos;</span>) };
+<span class="hljs-keyword">var</span> bird = <span class="hljs-keyword">new</span> Bird();
+bird.walk();
+bird.fly();
+</code></pre>
+<p>Basically <code>bird.fly</code> will be looked up from <code>bird.__proto__.fly</code> (remember that <code>new</code> makes the <code>bird.__proto__</code> point to <code>Bird.prototype</code>) and <code>bird.walk</code> (an inherited member) will be looked up from <code>bird.__proto__.__proto__.walk</code> (as <code>bird.__proto__ == Bird.prototype</code> and <code>bird.__proto__.__proto__</code> == <code>Animal.prototype</code>).</p>
+</body>
+</html>

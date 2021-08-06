@@ -1,0 +1,68 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svnadmin hotcopy</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts10/undefined" />
+  </head>
+   <body>
+<div class="refentry">
+    <a id="svn.ref.svnadmin.c.hotcopy"></a>
+    <div class="titlepage"></div>
+    <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svnadmin hotcopy &#x2014; Make a hot copy of a repository.</p>
+    </div>
+    <div class="refsect1">
+        <a id="idm11965"></a>
+        <h2>Synopsis</h2>
+        <p>
+            <code class="literal">svnadmin hotcopy REPOS_PATH NEW_REPOS_PATH</code>
+        </p>
+    </div>
+    <div class="refsect1">
+        <a id="idm11969"></a>
+        <h2>Description</h2>
+        <p>This subcommand makes a full <span class="quote">&#x201C;<span class="quote">hot</span>&#x201D;</span> backup
+            of your repository, including all hooks, configuration
+            files, and, of course, database files. If you pass the
+            <code class="option">--clean-logs</code> option,
+            <span class="command"><strong>svnadmin</strong></span> will perform a hot copy of your
+            repository, and then remove unused Berkeley DB logs from
+            the original repository. You can run this command at any
+            time and make a safe copy of the repository, regardless of
+            whether other processes are using the repository.</p>
+    </div>
+    <div class="refsect1">
+        <a id="idm11975"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+            <pre class="screen">
+</pre>
+        </div>
+        <div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <table border="0" summary="Warning">
+                <tr>
+                    <td rowspan="2" align="center" valign="top" width="25">
+                        <img alt="[Warning]" src="/home/admin/es2015/cheerio-mobi-ts10/content/svn/processed_images/warning-grayscale.gif">
+                    </td>
+                    <th align="left">Warning</th>
+                </tr>
+                <tr>
+                    <td align="left" valign="top">
+                        <p>As described in , hot-copied
+                            Berkeley DB repositories are <span class="emphasis"><em>not</em></span>
+                            portable across operating systems, nor will they work on
+                            machines with a different <span class="quote">&#x201C;<span class="quote">endianness</span>&#x201D;</span> than
+                            the machine where they were created.</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,262 @@
+
+    
+    
+    <div class="sect1">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="svn.ref.svnserve"></a>svnserve—Custom Subversion Server</h2>
+          </div>
+        </div>
+      </div>
+      <p><span class="command"><strong>svnserve</strong></span> allows access to Subversion
+      repositories using Subversion's custom network protocol.</p>
+      <p>You can run <span class="command"><strong>svnserve</strong></span> as a standalone
+      server process (for clients that are using the
+      <code class="literal">svn://</code> access method); you can have a daemon
+      such as <span class="command"><strong>inetd</strong></span> or <span class="command"><strong>xinetd</strong></span>
+      launch it for you on demand (also for
+      <code class="literal">svn://</code>), or you can have
+      <span class="command"><strong>sshd</strong></span> launch it on demand for the
+      <code class="literal">svn+ssh://</code> access method.</p>
+      <p>Regardless of the access method, once the client has
+      selected a repository by transmitting its URL,
+      <span class="command"><strong>svnserve</strong></span> reads a file named
+      <code class="filename">conf/svnserve.conf</code> in the repository
+      directory to determine repository-specific settings such as
+      what authentication database to use and what authorization
+      policies to apply.  See <a class="xref" href="svn.serverconfig.svnserve.html" title="svnserve, a Custom Server">the section called “svnserve, a Custom Server”</a> for details of the
+      <code class="filename">svnserve.conf</code> file.</p>
+      <div class="sect2">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="svn.ref.svnserve.sw"></a>svnserve Options</h3>
+            </div>
+          </div>
+        </div>
+        <p>Unlike the previous commands we've
+        described, <span class="command"><strong>svnserve</strong></span> has no
+        subcommands—it is controlled exclusively by
+        options.</p>
+        <div class="variablelist">
+          <dl class="variablelist">
+            <dt>
+              <a id="svn.ref.svnserve.sw.cache_fulltexts"></a>
+              <span class="term"><code class="option">--cache-fulltexts</code> <em class="replaceable"><code>ARG</code></em></span>
+            </dt>
+            <dd>
+              <p>Toggles support for fulltext file content caching (in
+              FSFS repositories only).</p>
+            </dd>
+            <dt>
+              <a id="svn.ref.svnserve.sw.cache_txdeltas"></a>
+              <span class="term"><code class="option">--cache-txdeltas</code> <em class="replaceable"><code>ARG</code></em></span>
+            </dt>
+            <dd>
+              <p>Toggles support for file content delta caching (in
+              FSFS repositories only).</p>
+            </dd>
+            <dt>
+              <a id="svn.ref.svnserve.sw.compression"></a>
+              <span class="term"><code class="option">--compression</code> <em class="replaceable"><code>LEVEL</code></em></span>
+            </dt>
+            <dd>
+              <p>Specifies the level of compression used for wire
+              transmissions as an integer beween 0 and 9, inclusive.
+              A value of <code class="literal">9</code> offers the best
+              compression, <code class="literal">5</code> is the default value,
+              and <code class="literal">0</code> disables compression
+              altogether.</p>
+            </dd>
+            <dt>
+              <a id="svn.ref.svnserve.sw.daemon"></a>
+              <span class="term"><code class="option">--daemon</code> (<code class="option">-d</code>)</span>
+            </dt>
+            <dd>
+              <p>Causes <span class="command"><strong>svnserve</strong></span> to run in daemon
+              mode.  <span class="command"><strong>svnserve</strong></span> backgrounds itself
+              and accepts and serves TCP/IP connections on
+              the <code class="literal">svn</code> port (3690, by
+              default).</p>
+            </dd>
+            <dt>
+              <a id="svn.ref.svnserve.sw.foreground"></a>
+              <span class="term">
+                <code class="option">--foreground</code>
+              </span>
+            </dt>
+            <dd>
+              <p>When used together with <code class="option">-d</code>,
+              causes <span class="command"><strong>svnserve</strong></span> to stay in the
+              foreground.  This is mainly useful for debugging.</p>
+            </dd>
+            <dt>
+              <a id="svn.ref.svnserve.sw.inetd"></a>
+              <span class="term"><code class="option">--inetd</code> (<code class="option">-i</code>)</span>
+            </dt>
+            <dd>
+              <p>Causes <span class="command"><strong>svnserve</strong></span> to use the
+              <code class="filename">stdin</code> and <code class="filename">stdout</code> file descriptors, as is appropriate for a
+              daemon running out of <span class="command"><strong>inetd</strong></span>.</p>
+            </dd>
+            <dt>
+              <a id="svn.ref.svnserve.sw.help"></a>
+              <span class="term"><code class="option">--help</code> (<code class="option">-h</code>)</span>
+            </dt>
+            <dd>
+              <p>Displays a usage summary and exits.</p>
+            </dd>
+            <dt>
+              <a id="svn.ref.svnserve.sw.listen_host"></a>
+              <span class="term"><code class="option">--listen-host</code> <em class="replaceable"><code>HOST</code></em></span>
+            </dt>
+            <dd>
+              <p>Causes <span class="command"><strong>svnserve</strong></span> to listen on the
+              interface specified by <em class="replaceable"><code>HOST</code></em>,
+              which may be either a hostname or an IP address.</p>
+            </dd>
+            <dt>
+              <a id="svn.ref.svnserve.sw.listen_once"></a>
+              <span class="term"><code class="option">--listen-once</code> (<code class="option">-X</code>)</span>
+            </dt>
+            <dd>
+              <p>Causes <span class="command"><strong>svnserve</strong></span> to accept one
+              connection on the <code class="literal">svn</code> port, serve it,
+              and exit.  This option is mainly useful for
+              debugging.</p>
+            </dd>
+            <dt>
+              <a id="svn.ref.svnserve.sw.listen_port"></a>
+              <span class="term"><code class="option">--listen-port</code> <em class="replaceable"><code>PORT</code></em></span>
+            </dt>
+            <dd>
+              <p>Causes <span class="command"><strong>svnserve</strong></span> to listen on
+              <em class="replaceable"><code>PORT</code></em> when run in daemon mode.
+              (FreeBSD daemons listen only on tcp6 by default—this
+              option tells them to also listen on tcp4.)</p>
+            </dd>
+            <dt>
+              <a id="svn.ref.svnserve.sw.log_file"></a>
+              <span class="term"><code class="option">--log-file</code> <em class="replaceable"><code>FILENAME</code></em></span>
+            </dt>
+            <dd>
+              <p>Instructs <span class="command"><strong>svnserve</strong></span> to create (if
+              necessary) and use the file located
+              at <em class="replaceable"><code>FILENAME</code></em> for Subversion
+              operational log output of the same sort
+              that <span class="command"><strong>mod_dav_svn</strong></span> generates.  See
+              <a class="xref" href="svn.serverconfig.operational-logging.html" title="High-level Logging">the section called “High-level Logging”</a>
+              for details.</p>
+            </dd>
+            <dt>
+              <a id="svn.ref.svnserve.sw.memory_cache_size"></a>
+              <span class="term"><code class="option">--memory-cache-size</code> (<code class="option">-M</code>) <em class="replaceable"><code>ARG</code></em></span>
+            </dt>
+            <dd>
+              <p>Configures the size (in Megabytes) of the extra
+              in-memory cache used to minimize redundant operations.
+              The default value is <code class="literal">16</code>.  (This cache
+              is used for FSFS-backed repositories only.)</p>
+            </dd>
+            <dt>
+              <a id="svn.ref.svnserve.sw.pid_file"></a>
+              <span class="term"><code class="option">--pid-file</code> <em class="replaceable"><code>FILENAME</code></em></span>
+            </dt>
+            <dd>
+              <p>Causes <span class="command"><strong>svnserve</strong></span> to write its
+              process ID to <em class="replaceable"><code>FILENAME</code></em>, which
+              must be writable by the user under
+              which <span class="command"><strong>svnserve</strong></span> is running.</p>
+            </dd>
+            <dt>
+              <a id="svn.ref.svnserve.sw.prefer_ipv6"></a>
+              <span class="term"><code class="option">--prefer-ipv6</code> (<code class="option">-6</code>)</span>
+            </dt>
+            <dd>
+              <p>When resolving the listen hostname, prever an IPv6
+              answer over an IPv4 one.  IPv4 is preferred by
+              default.</p>
+            </dd>
+            <dt>
+              <a id="svn.ref.svnserve.sw.quiet"></a>
+              <span class="term">
+                <code class="option">--quiet</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Disables progress notifications.  Error output will
+              still be printed.</p>
+            </dd>
+            <dt>
+              <a id="svn.ref.svnserve.sw.root"></a>
+              <span class="term"><code class="option">--root</code> (<code class="option">-r</code>) <em class="replaceable"><code>ROOT</code></em></span>
+            </dt>
+            <dd>
+              <p>Sets the virtual root for repositories served by
+              <span class="command"><strong>svnserve</strong></span>.  The pathname in URLs
+              provided by the client will be interpreted relative to
+              this root and will not be allowed to escape this
+              root.</p>
+            </dd>
+            <dt>
+              <a id="svn.ref.svnserve.sw.threads"></a>
+              <span class="term"><code class="option">--threads</code> (<code class="option">-T</code>)</span>
+            </dt>
+            <dd>
+              <p>When running in daemon mode, causes
+              <span class="command"><strong>svnserve</strong></span> to spawn a thread instead of
+              a process for each connection (e.g., for when running on
+              Windows).  The <span class="command"><strong>svnserve</strong></span> process still
+              backgrounds itself at startup time.</p>
+            </dd>
+            <dt>
+              <a id="svn.ref.svnserve.sw.tunnel"></a>
+              <span class="term"><code class="option">--tunnel</code> (<code class="option">-t</code>)</span>
+            </dt>
+            <dd>
+              <p>Causes <span class="command"><strong>svnserve</strong></span> to run in tunnel
+              mode, which is just like the <span class="command"><strong>inetd</strong></span>
+              mode of operation (both modes serve one connection over
+              <code class="filename">stdin</code>/<code class="filename">stdout</code>, and then exit), except that the connection
+              is considered to be preauthenticated with the username
+              of the current UID.  This flag is automatically passed
+              for you by the client when running over a tunnel agent
+              such as <span class="command"><strong>ssh</strong></span>.  That means there's
+              rarely any need for <span class="emphasis"><em>you</em></span> to pass
+              this option to <span class="command"><strong>svnserve</strong></span>.  So, if you
+              find yourself
+              typing <code class="literal">svnserve --tunnel</code> on the
+              command line and wondering what to do next, see
+              <a class="xref" href="svn.serverconfig.svnserve.html#svn.serverconfig.svnserve.sshauth" title="Tunneling over SSH">the section called “Tunneling over SSH”</a>.</p>
+            </dd>
+            <dt>
+              <a id="svn.ref.svnserve.sw.tunnel_user"></a>
+              <span class="term"><code class="option">--tunnel-user</code> <em class="replaceable"><code>NAME</code></em></span>
+            </dt>
+            <dd>
+              <p>Used in conjunction with the <code class="option">--tunnel</code>
+              option, tells <span class="command"><strong>svnserve</strong></span> to assume that
+              <em class="replaceable"><code>NAME</code></em> is the authenticated
+              user, rather than the UID of the <span class="command"><strong>svnserve</strong></span>
+              process.  This is useful for users wishing to share a single
+              system account over SSH, but to maintain separate commit
+              identities.</p>
+            </dd>
+            <dt>
+              <a id="svn.ref.svnserve.sw.version"></a>
+              <span class="term">
+                <code class="option">--version</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Displays version information and a list of repository
+            backend modules available, and then exits.</p>
+            </dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+    
+    
+  

@@ -1,0 +1,102 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Maps</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+Maps are a convenient and powerful built-in data structure that associate
+values of one type (the <em>key</em>) with values of another type
+(the <em>element</em> or <em>value</em>).
+The key can be of any type for which the equality operator is defined,
+such as integers,
+floating point and complex numbers,
+strings, pointers, interfaces (as long as the dynamic type
+supports equality), structs and arrays.
+Slices cannot be used as map keys,
+because equality is not defined on them.
+Like slices, maps hold references to an underlying data structure.
+If you pass a map to a function
+that changes the contents of the map, the changes will be visible
+in the caller.
+</p><p>
+Maps can be constructed using the usual composite literal syntax
+with colon-separated key-value pairs,
+so it&apos;s easy to build them during initialization.
+</p><pre>
+var timeZone = map[string]int{
+    &quot;UTC&quot;:  0*60*60,
+    &quot;EST&quot;: -5*60*60,
+    &quot;CST&quot;: -6*60*60,
+    &quot;MST&quot;: -7*60*60,
+    &quot;PST&quot;: -8*60*60,
+}
+</pre><p>
+Assigning and fetching map values looks syntactically just like
+doing the same for arrays and slices except that the index doesn&apos;t
+need to be an integer.
+</p><pre>
+offset := timeZone[&quot;EST&quot;]
+</pre><p>
+An attempt to fetch a map value with a key that
+is not present in the map will return the zero value for the type
+of the entries
+in the map.  For instance, if the map contains integers, looking
+up a non-existent key will return <code>0</code>.
+A set can be implemented as a map with value type <code>bool</code>.
+Set the map entry to <code>true</code> to put the value in the set, and then
+test it by simple indexing.
+</p><pre>
+attended := map[string]bool{
+    &quot;Ann&quot;: true,
+    &quot;Joe&quot;: true,
+    ...
+}
+if attended[person] { // will be false if person is not in the map
+    fmt.Println(person, &quot;was at the meeting&quot;)
+}
+</pre><p>
+Sometimes you need to distinguish a missing entry from
+a zero value.  Is there an entry for <code>&quot;UTC&quot;</code>
+or is that 0 because it&apos;s not in the map at all?
+You can discriminate with a form of multiple assignment.
+</p><pre>
+var seconds int
+var ok bool
+seconds, ok = timeZone[tz]
+</pre><p>
+For obvious reasons this is called the &#x201C;comma ok&#x201D; idiom.
+In this example, if <code>tz</code> is present, <code>seconds</code>
+will be set appropriately and <code>ok</code> will be true; if not,
+<code>seconds</code> will be set to zero and <code>ok</code> will
+be false.
+Here&apos;s a function that puts it together with a nice error report:
+</p><pre>
+func offset(tz string) int {
+    if seconds, ok := timeZone[tz]; ok {
+        return seconds
+    }
+    log.Println(&quot;unknown time zone:&quot;, tz)
+    return 0
+}
+</pre><p>
+To test for presence in the map without worrying about the actual value,
+you can use the [<a>blank identifier</a>] (<code>_</code>)
+in place of the usual variable for the value.
+</p><pre>
+_, present := timeZone[tz]
+</pre><p>
+To delete a map entry, use the <code>delete</code>
+built-in function, whose arguments are the map and the key to be deleted.
+It&apos;s safe to do this even if the key is already absent
+from the map.
+</p><pre>
+delete(timeZone, &quot;PDT&quot;)  // Now on Standard Time
+</pre></body>
+</body>
+</html>

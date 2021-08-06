@@ -1,0 +1,25 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    globals.d.ts
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts14/undefined" />
+  </head>
+   <body>
+<h1 id="globalsdts">globals.d.ts</h1>
+<p>We discussed <em>global</em> vs. <em>file</em> modules when covering <a href="modules.html">projects</a> and recommended using file based modules and not polluting the global namespace.</p>
+<p>Nevertheless, if you have beginning TypeScript developers you can give them a <code>globals.d.ts</code> file to put interfaces / types in the global namespace to make it easy to have some <em>types</em> just <em>magically</em> available for consumption in <em>all</em> your TypeScript code.</p>
+<blockquote>
+    <p>For any code that is going to generate <em>JavaScript</em> we highly recommend using <em>file modules</em>.</p>
+</blockquote>
+<ul>
+    <li><code>globals.d.ts</code> is great for adding extensions to <code>lib.d.ts</code> if you need to.</li>
+    <li>It&apos;s good for quick <code>declare module &quot;some-library-you-dont-care-to-get-defs-for&quot;;</code> when doing JS to TS migrations.</li>
+</ul>
+</body>
+</html>

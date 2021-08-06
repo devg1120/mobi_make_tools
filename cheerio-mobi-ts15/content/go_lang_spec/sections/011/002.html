@@ -1,0 +1,27 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Qualified identifiers</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+A qualified identifier is an identifier qualified with a package name prefix.
+Both the package name and the identifier must not be
+[<a>blank</a>].
+</p><pre>
+[<a>QualifiedIdent</a>] = [<a>PackageName</a>] &quot;.&quot; [<a>identifier</a>] .
+</pre><p>
+A qualified identifier accesses an identifier in a different package, which
+must be [<a>imported</a>].
+The identifier must be [<a>exported</a>] and
+declared in the [<a>package block</a>] of that package.
+</p><pre>
+math.Sin	// denotes the Sin function in package math
+</pre></body>
+</body>
+</html>

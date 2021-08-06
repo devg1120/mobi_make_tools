@@ -1,0 +1,43 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Authentication</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/tmp/es2015/cheerio-mobi-ts8/undefined" />
+  </head>
+   <body>
+    <div class="sect1">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="svn.forcvs.auth"></a>Authentication</h2>
+          </div>
+        </div>
+      </div>
+      <p>With CVS&apos;s pserver, you are required to log in to the server
+      (using the <span class="command"><strong>cvs login</strong></span> command) before
+      performing any read or write operation&#x2014;you sometimes even
+      have to log in for anonymous operations.  With a Subversion
+      repository using Apache <span class="command"><strong>httpd</strong></span> or
+      <span class="command"><strong>svnserve</strong></span> as the server, you don&apos;t provide any
+      authentication credentials at the outset&#x2014;if an operation
+      that you perform requires authentication, the server will
+      challenge you for your credentials (whether those credentials
+      are username and password, a client certificate, or even both).
+      So if your repository is world-readable, you will not be
+      required to authenticate at all for read operations.</p>
+      <p>As with CVS, Subversion still caches your credentials on
+      disk (in your <code class="filename">~/.subversion/auth/</code>
+      directory) unless you tell it not to by using the
+      <code class="option">--no-auth-cache</code> option.</p>
+      <p>The exception to this behavior, however, is in the case of
+      accessing an <span class="command"><strong>svnserve</strong></span> server over an SSH
+      tunnel, using the <code class="literal">svn+ssh://</code> URL scheme.  In
+      that case, the <span class="command"><strong>ssh</strong></span> program unconditionally
+      demands authentication just to start the tunnel.</p>
+    </div>
+</body>
+</html>

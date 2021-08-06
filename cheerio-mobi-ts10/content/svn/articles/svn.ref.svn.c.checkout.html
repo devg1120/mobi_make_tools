@@ -1,0 +1,217 @@
+<div class="refentry">
+    <a id="svn.ref.svn.c.checkout"></a>
+    <div class="titlepage"></div>
+    <a id="idm9440" class="indexterm"></a>
+    <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svn checkout (co) — Check out a working copy from a repository.</p>
+    </div>
+    <div class="refsect1">
+        <a id="idm9447"></a>
+        <h2>Synopsis</h2>
+        <p>
+            <code class="literal">svn checkout URL[@REV]... [PATH]</code>
+        </p>
+    </div>
+    <div class="refsect1">
+        <a id="idm9451"></a>
+        <h2>Description</h2>
+        <p>Check out a working copy from a repository. If
+            <em class="replaceable"><code>PATH</code></em> is omitted, the
+            basename of the URL will be used as the destination.
+            If multiple URLs are given, each will be checked out into a
+            subdirectory of <em class="replaceable"><code>PATH</code></em>, with the
+            name of the subdirectory being the basename of the
+            URL.</p>
+    </div>
+    <div class="refsect1">
+        <a id="idm9456"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+            <pre class="screen">
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.depth"><code class="option">--depth</code> <em class="replaceable"><code>ARG</code></em></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.force"><code class="option">--force</code></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.ignore_externals"><code class="option">--ignore-externals</code></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.quiet"><code class="option">--quiet</code> (<code class="option">-q</code>)</a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.revision"><code class="option">--revision</code> (<code class="option">-r</code>) <em class="replaceable"><code>REV</code></em></a>
+</pre>
+        </div>
+    </div>
+    <div class="refsect1">
+        <a id="idm9465"></a>
+        <h2>Examples</h2>
+        <p>Check out a working copy into a directory called
+            <code class="filename">mine</code>:</p>
+        <div class="informalexample">
+            <pre class="screen">
+$ svn checkout file:///var/svn/repos/test mine
+A    mine/a
+A    mine/b
+A    mine/c
+A    mine/d
+Checked out revision 20.
+$ ls
+mine
+$
+</pre>
+        </div>
+        <p>Check out two different directories into two separate
+            working copies:</p>
+        <div class="informalexample">
+            <pre class="screen">
+$ svn checkout file:///var/svn/repos/test \
+               file:///var/svn/repos/quiz
+A    test/a
+A    test/b
+A    test/c
+A    test/d
+Checked out revision 20.
+A    quiz/l
+A    quiz/m
+Checked out revision 13.
+$ ls
+quiz  test
+$
+</pre>
+        </div>
+        <p>Check out two different directories into two separate
+            working copies, but place both into a directory called
+            <code class="filename">working-copies</code>:</p>
+        <div class="informalexample">
+            <pre class="screen">
+$ svn checkout file:///var/svn/repos/test \
+               file:///var/svn/repos/quiz \
+               working-copies
+A    working-copies/test/a
+A    working-copies/test/b
+A    working-copies/test/c
+A    working-copies/test/d
+Checked out revision 20.
+A    working-copies/quiz/l
+A    working-copies/quiz/m
+Checked out revision 13.
+$ ls
+working-copies
+</pre>
+        </div>
+        <p>If you interrupt a checkout (or something else
+            interrupts your checkout, such as loss of connectivity,
+            etc.), you can restart it either by issuing the identical
+            checkout command again or by updating the incomplete
+            working copy:</p>
+        <div class="informalexample">
+            <pre class="screen">
+$ svn checkout file:///var/svn/repos/test mine
+A    mine/a
+A    mine/b
+^C
+svn: E200015: Caught signal
+$ svn checkout file:///var/svn/repos/test mine
+A    mine/c
+^C
+svn: E200015: Caught signal
+$ svn update mine
+Updating 'mine':
+A    mine/d
+Updated to revision 20.
+$
+</pre>
+        </div>
+        <p>If you wish to check out some revision other than the
+            most recent one, you can do so by providing the
+            <code class="option">--revision</code> (<code class="option">-r</code>) option
+            to the <span class="command"><strong>svn checkout</strong></span> command:</p>
+        <div class="informalexample">
+            <pre class="screen">
+$ svn checkout -r 2 file:///var/svn/repos/test mine
+A    mine/a
+Checked out revision 2.
+$
+</pre>
+        </div>
+        <p>Prior to version 1.7, Subversion would complain by
+            default if you try to check out a directory atop an
+            existing directory which contains files or subdirectories
+            that the checkout itself would have created. Subversion
+            1.7 handles this situation differently, allowing the
+            checkout to proceed but marking any obstructing objects as
+            tree conflicts. Use the <code class="option">--force</code> option
+            to override this safeguard. When you check out with
+            the <code class="option">--force</code> option, any unversioned file
+            in the checkout target tree which ordinarily would
+            obstruct the checkout will still become versioned, but
+            Subversion will preserve its contents as-is. If those
+            contents differ from the repository file at that path
+            (which was downloaded as part of the checkout), the file
+            will appear to have local modifications—the changes
+            required to transform the versioned file you checked out
+            into the unversioned file you had before checking
+            out—when the checkout completes.</p>
+        <div class="informalexample">
+            <pre class="screen">
+$ mkdir project
+$ mkdir project/lib
+$ touch project/lib/file.c
+$ svn checkout file:///var/svn/repos/project/trunk project --force
+E    project/lib
+A    project/lib/subdir
+E    project/lib/file.c
+A    project/lib/anotherfile.c
+A    project/include/header.h
+Checked out revision 21.
+$ svn status wc
+M       project/lib/file.c
+$ svn diff wc
+Index: project/lib/file.c
+===================================================================
+--- project/lib/file.c	(revision 1)
++++ project/lib/file.c	(working copy)
+@@ -3 +0,0 @@
+-/* file.c: Code for acting file-ishly. */
+-#include <stdio.h>
+-/* Not feeling particularly creative today. */
+
+$
+</pre>
+        </div>
+        <p>As in another other working copy, you have the choices
+            typically available: reverting some or all of those
+            local <span class="quote">“<span class="quote">modifications</span>”</span>, committing them, or
+            continuing to modify your working copy.</p>
+        <p>This feature is especially useful for performing
+            in-place imports of unversioned directory trees. By first
+            importing the tree into the repository, and then checking
+            out new repository location atop the unversioned tree with
+            the <code class="option">--force</code> option, you effectively
+            transform the unversioned tree into a working
+            copy.</p>
+        <div class="informalexample">
+            <pre class="screen">
+$ svn mkdir -m "Create newproject project root." \
+      file://var/svn/repos/newproject
+$ svn import -m "Import initial newproject codebase." newproject \
+      file://var/svn/repos/newproject/trunk
+Adding         newproject/include
+Adding         newproject/include/newproject.h
+Adding         newproject/lib
+Adding         newproject/lib/helpers.c
+Adding         newproject/lib/base.c
+Adding         newproject/notes
+Adding         newproject/notes/README
+
+Committed revision 22.
+$ svn checkout file://`pwd`/repos-1.6/newproject/trunk newproject --force
+E    newproject/include
+E    newproject/include/newproject.h
+E    newproject/lib
+E    newproject/lib/helpers.c
+E    newproject/lib/base.c
+E    newproject/notes
+E    newproject/notes/README
+Checked out revision 2.
+$ svn status newproject
+$
+</pre>
+        </div>
+    </div>
+</div>

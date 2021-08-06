@@ -1,0 +1,109 @@
+<h2 id="number">Number</h2>
+<p>Whenever you are handling numbers in any programming language you need to be aware of the idiosyncrasies of how the language handles numbers. Here are a few critical pieces of information about numbers in JavaScript that you should be aware of.</p>
+<h3 id="core-type">Core Type</h3>
+<p>JavaScript has only one number type. It is a double-precision 64-bit <code>Number</code>. Below we discuss its limitations along with a recommended solution.</p>
+<h3 id="decimal">Decimal</h3>
+<p>For those familiar with doubles / float in other languages, you would know that binary floating point numbers <em>do not</em> map correctly to Decimal numbers. A trivial (and famous) example with JavaScript's built in numbers is shown below:</p>
+<pre><code class="lang-js"><span class="hljs-built_in">console</span>.log(<span class="hljs-number">.1</span> + <span class="hljs-number">.2</span>); <span class="hljs-comment">// 0.30000000000000004</span>
+</code></pre>
+<blockquote>
+    <p>For true decimal math use <code>big.js</code> mentioned below.</p>
+</blockquote>
+<h3 id="integer">Integer</h3>
+<p>The integer limits represented by the built in number type are <code>Number.MAX_SAFE_INTEGER</code> and <code>Number.MIN_SAFE_INTEGER</code>.</p>
+<pre><code class="lang-js"><span class="hljs-built_in">console</span>.log({max: <span class="hljs-built_in">Number</span>.MAX_SAFE_INTEGER, min: <span class="hljs-built_in">Number</span>.MIN_SAFE_INTEGER});
+<span class="hljs-comment">// {max: 9007199254740991, min: -9007199254740991}</span>
+</code></pre>
+<p><strong>Safe</strong> in this context refers to the fact that the value <em>cannot be the result of a rounding error</em>.</p>
+<p>The unsafe values are <code>+1 / -1</code> away from these safe values and any amount of addition / subtraction will <em>round</em> the result.</p>
+<pre><code class="lang-js"><span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Number</span>.MAX_SAFE_INTEGER + <span class="hljs-number">1</span> === <span class="hljs-built_in">Number</span>.MAX_SAFE_INTEGER + <span class="hljs-number">2</span>); <span class="hljs-comment">// true!</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Number</span>.MIN_SAFE_INTEGER - <span class="hljs-number">1</span> === <span class="hljs-built_in">Number</span>.MIN_SAFE_INTEGER - <span class="hljs-number">2</span>); <span class="hljs-comment">// true!</span>
+
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Number</span>.MAX_SAFE_INTEGER);      <span class="hljs-comment">// 9007199254740991</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Number</span>.MAX_SAFE_INTEGER + <span class="hljs-number">1</span>);  <span class="hljs-comment">// 9007199254740992 - Correct</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Number</span>.MAX_SAFE_INTEGER + <span class="hljs-number">2</span>);  <span class="hljs-comment">// 9007199254740992 - Rounded!</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Number</span>.MAX_SAFE_INTEGER + <span class="hljs-number">3</span>);  <span class="hljs-comment">// 9007199254740994 - Rounded - correct by luck</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Number</span>.MAX_SAFE_INTEGER + <span class="hljs-number">4</span>);  <span class="hljs-comment">// 9007199254740996 - Rounded!</span>
+</code></pre>
+<p>To check safety you can use ES6 <code>Number.isSafeInteger</code>:</p>
+<pre><code class="lang-js"><span class="hljs-comment">// Safe value</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Number</span>.isSafeInteger(<span class="hljs-built_in">Number</span>.MAX_SAFE_INTEGER)); <span class="hljs-comment">// true</span>
+
+<span class="hljs-comment">// Unsafe value</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Number</span>.isSafeInteger(<span class="hljs-built_in">Number</span>.MAX_SAFE_INTEGER + <span class="hljs-number">1</span>)); <span class="hljs-comment">// false</span>
+
+<span class="hljs-comment">// Because it might have been rounded to it due to overflow</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Number</span>.isSafeInteger(<span class="hljs-built_in">Number</span>.MAX_SAFE_INTEGER + <span class="hljs-number">10</span>)); <span class="hljs-comment">// false</span>
+</code></pre>
+<blockquote>
+    <p>JavaScript will eventually get <a href="https://developers.google.com/web/updates/2018/05/bigint" target="_blank">BigInt</a> support. For now, if you want arbitrary precision integer math use <code>big.js</code> mentioned below.</p>
+</blockquote>
+<h3 id="bigjs">big.js</h3>
+<p>Whenever you use math for financial calculations (e.g. GST calculation, money with cents, addition etc) use a library like <a href="https://github.com/MikeMcl/big.js/" target="_blank">big.js</a> which is designed for</p>
+<ul>
+    <li>Perfect decimal math</li>
+    <li>Safe out of bound integer values</li>
+</ul>
+<p>Installation is simple:</p>
+<pre><code class="lang-bash">npm install big.js @types/big.js
+</code></pre>
+<p>Quick Usage example:</p>
+<pre><code class="lang-js"><span class="hljs-keyword">import</span> { Big } <span class="hljs-keyword">from</span> <span class="hljs-string">'big.js'</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> foo = <span class="hljs-keyword">new</span> Big(<span class="hljs-string">'111.11111111111111111111'</span>);
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> bar = foo.plus(<span class="hljs-keyword">new</span> Big(<span class="hljs-string">'0.00000000000000000001'</span>));
+
+<span class="hljs-comment">// To get a number:</span>
+<span class="hljs-keyword">const</span> x: number = <span class="hljs-built_in">Number</span>(bar.toString()); <span class="hljs-comment">// Loses the precision</span>
+</code></pre>
+<blockquote>
+    <p>Do not use this library for math used for UI / performance intensive purposes e.g charts, canvas drawing etc.</p>
+</blockquote>
+<h3 id="nan">NaN</h3>
+<p>When some number calculation is not representable by a valid number, JavaScript returns a special <code>NaN</code> value. A classic example is imaginary numbers:</p>
+<pre><code class="lang-js"><span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Math</span>.sqrt(<span class="hljs-number">-1</span>)); <span class="hljs-comment">// NaN</span>
+</code></pre>
+<p>Note: Equality checks <strong>don't</strong> work on <code>NaN</code> values. Use <code>Number.isNaN</code> instead:</p>
+<pre><code class="lang-js"><span class="hljs-comment">// Don't do this</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-literal">NaN</span> === <span class="hljs-literal">NaN</span>); <span class="hljs-comment">// false!!</span>
+
+<span class="hljs-comment">// Do this</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Number</span>.isNaN(<span class="hljs-literal">NaN</span>)); <span class="hljs-comment">// true</span>
+</code></pre>
+<h3 id="infinity">Infinity</h3>
+<p>The outer bounds of values representable in Number are available as static <code>Number.MAX_VALUE</code> and <code>-Number.MAX_VALUE</code> values.</p>
+<pre><code class="lang-js"><span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Number</span>.MAX_VALUE);  <span class="hljs-comment">// 1.7976931348623157e+308</span>
+<span class="hljs-built_in">console</span>.log(-<span class="hljs-built_in">Number</span>.MAX_VALUE); <span class="hljs-comment">// -1.7976931348623157e+308</span>
+</code></pre>
+<p>Values outside the range where precision isn't changed are clamped to these limits e.g.</p>
+<pre><code class="lang-js"><span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Number</span>.MAX_VALUE + <span class="hljs-number">1</span> == <span class="hljs-built_in">Number</span>.MAX_VALUE);   <span class="hljs-comment">// true!</span>
+<span class="hljs-built_in">console</span>.log(-<span class="hljs-built_in">Number</span>.MAX_VALUE - <span class="hljs-number">1</span> == -<span class="hljs-built_in">Number</span>.MAX_VALUE); <span class="hljs-comment">// true!</span>
+</code></pre>
+<p>Values outside the range where precision is changed resolve to special values <code>Infinity</code>/<code>-Infinity</code> e.g.</p>
+<pre><code class="lang-js"><span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Number</span>.MAX_VALUE + <span class="hljs-number">10</span>**<span class="hljs-number">1000</span>);  <span class="hljs-comment">// Infinity</span>
+<span class="hljs-built_in">console</span>.log(-<span class="hljs-built_in">Number</span>.MAX_VALUE - <span class="hljs-number">10</span>**<span class="hljs-number">1000</span>); <span class="hljs-comment">// -Infinity</span>
+</code></pre>
+<p>Of-course, these special infinity values also show up with arithmetic that requires it e.g.</p>
+<pre><code class="lang-js"><span class="hljs-built_in">console</span>.log( <span class="hljs-number">1</span> / <span class="hljs-number">0</span>); <span class="hljs-comment">// Infinity</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-number">-1</span> / <span class="hljs-number">0</span>); <span class="hljs-comment">// -Infinity</span>
+</code></pre>
+<p>You can use these <code>Infinity</code> values manually or using static members of the <code>Number</code> class as shown below:</p>
+<pre><code class="lang-js"><span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Number</span>.POSITIVE_INFINITY === <span class="hljs-literal">Infinity</span>);  <span class="hljs-comment">// true</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Number</span>.NEGATIVE_INFINITY === -<span class="hljs-literal">Infinity</span>); <span class="hljs-comment">// true</span>
+</code></pre>
+<p>Fortunately comparison operators (<code>
+        <</code> / <code>>
+    </code>) work reliably on infinity values:</p>
+<pre><code class="lang-js"><span class="hljs-built_in">console</span>.log( <span class="hljs-literal">Infinity</span> >  <span class="hljs-number">1</span>); <span class="hljs-comment">// true</span>
+<span class="hljs-built_in">console</span>.log(-<span class="hljs-literal">Infinity</span> < <span class="hljs-number">-1</span>); <span class="hljs-comment">// true</span>
+</code></pre>
+<h3 id="infinitesimal">Infinitesimal</h3>
+<p>The smallest non-zero value representable in Number is available as static <code>Number.MIN_VALUE</code></p>
+<pre><code class="lang-js"><span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Number</span>.MIN_VALUE);  <span class="hljs-comment">// 5e-324</span>
+</code></pre>
+<p>Values smaller than <code>MIN_VALUE</code> ("underflow values") are converted to 0.</p>
+<pre><code class="lang-js"><span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Number</span>.MIN_VALUE / <span class="hljs-number">10</span>);  <span class="hljs-comment">// 0</span>
+</code></pre>
+<blockquote>
+    <p>Further intuition: Just like values bigger than <code>Number.MAX_VALUE</code> get clamped to INFINITY, values smaller than <code>Number.MIN_VALUE</code> get clamped to <code>0</code>.</p>
+</blockquote>

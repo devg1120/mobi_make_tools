@@ -1,0 +1,115 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>The Web Browser as a Universal Front End</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts10/undefined" />
+  </head>
+   <body>
+<div class="sect1" lang="en">
+    <div class="titlepage">
+        <div>
+            <h2 class="title" style="clear: both"><a id="id2960391">The Web Browser as a Universal Front End</a></h2>
+        </div>
+    </div>
+    <p>Separating your CLI back end from a GUI interface has become an even
+        more attractive strategy since the transformation of computing by
+        the World Wide Web in the mid-1990s. For a large class of
+        applications, it makes increasing sense not to write a custom GUI
+        front end at all, but rather to press Web browsers into service in
+        that role.</p>
+    <p>This approach has many advantages. The most obvious is that you
+        don&apos;t have to write procedural GUI code &#x2014; instead, you can
+        describe the GUI you want in languages (HTML and JavaScript) that are
+        specialized for it. This avoids a lot of expensive and complex
+        single-purpose coding and often more than halves the total project
+        effort. Another is that it makes your application instantly
+        Internet-ready; the front end may be on the same host as the back end,
+        or may be a thousand miles away. Yet another is that all the minor
+        presentation details of the application (such as fonts and color) are
+        no longer your back end&apos;s problem, and indeed can be customized by
+        users to their own tastes through mechanisms like browser preferences
+        and cascading style sheets. Finally, the uniform elements of the Web
+        interface substantially ease the user&apos;s learning task.</p>
+    <p>There are disadvantages. The two most important are (a) the
+        batch style of interaction that the Web enforces, and (b) the
+        difficulties of managing persistent sessions using a stateless
+        protocol. Though these are not exclusively Unix issues, we&apos;ll discuss
+        them here &#x2014; because it&apos;s very important to think clearly on the
+        <span class="emphasis"><em>design</em></span> level about when it&apos;s worthwhile to accept
+        or work around these constraints.</p>
+    <p>CGI, the Common Gateway Interface through which a browser can
+        invoke a program on the server host, does not support fine-grained
+        interactivity well. Nor do the templating systems, application
+        servers, and embedded server scripts that are gradually replacing it
+        (in a mild abuse of language, we will use CGI for all of these in
+        this section).</p>
+    <p>You can&apos;t do character-by-character or
+        GUI-gesture-by-GUI-gesture I/O through a CGI gateway; instead, you
+        have to fill out an HTML form and click a submit button that sends the
+        form contents to a CGI script. The CGI script then runs and the server
+        hands you back a page of HTML that it generated (which may itself be
+        another CGI form).</p>
+    <p>This is essentially a batch style of interaction, not that far
+        removed in concept from dropping punched cards in an input hopper and
+        getting back a printout. It can be made more palatable by using
+        JavaScript to interact with the user, batching up transactions into
+        messages to be shipped to the server.</p>
+    <p>Java</p>
+    <p>Both Java</p>
+    <p>As an independent issue, it is tricky to maintain session
+        information across multiple CGI forms. The server doesn&apos;t keep any
+        state about client sessions between CGI transactions, so you can&apos;t
+        rely on it to connect later form submissions with earlier ones by the
+        same user. There are two standard dodges around this: chained forms
+        and browser cookies.</p>
+    <p>When you chain forms, you arrange for the CGI for the first form
+        to generate a unique ID in an invisible field of the second form, and
+        for the second and all subsequent forms to pass that ID to their
+        successors. Cookies give a similar effect in a less direct way
+        analogous to environment variables (see any of the hundreds of books
+        on CGI design for details). In either case, your CGI has to use the
+        ID as a session index (or cookies to cache state directly) and to
+        handle multiplexing the sessions explicitly.</p>
+    <p>It is often possible to live with these restrictions. Many
+        nontrivial applications can fit into a single form and response,
+        evading both problems. Even when this isn&apos;t true and the
+        application requires multiple forms, the complexity and cost
+        savings from not having to build and distribute a specialized front
+        end are so large that they can easily pay for the effort required
+        to write CGIs smart enough to do their own session tracking.</p>
+    <p>The session management problem can be addressed with application
+        servers like Zope or Enhydra which provide a session abstraction, and
+        services like user authentication to programs embedded inside
+        them. The drawback of these programs is identical to their advantage:
+        the fact that they make it easier to keep per-user state on the
+        server. That per-user state can be a problem; it eats resources, and
+        it has to be timed out, because between transactions there is no way to
+        know that the user is still on the other end of the wire.</p>
+    <p>As usual, the best advice is to choose the simplest pattern
+        possible. Resist the temptation to do a heavyweight design relying on
+        Java or an application server when simple CGIs and cookies will
+        do the job.</p>
+    <p>One problem with the browser-as-universal-front-end approach is that
+        CGI back ends aren&apos;t readily separable from the browser environment, so
+        it can be hard to script or automate transactions to the back end.
+        The Unix answer is a three-tier architecture &#x2014; Web forms
+        calling CGIs which call commands. The automation interface is the
+        commands.</p>
+    <p>The way that browsers decouple front and back ends has larger
+        implications. On the Web, locking in consumers to closed, proprietary
+        protocols and APIs has become more difficult and less attractive as
+        this trend has advanced. The economics of software development are
+        therefore tilting toward HTML, XML, and other open, text-based
+        Internet standards. This trend synergizes in interesting ways with
+        the evolution of the open-source development model, which we&apos;ll survey
+        in <a href="opensourcechapter.html" title="Chapter&#xFFFD;19.&#xFFFD;Open Source">Chapter&#xFFFD;19</a>. In the
+        world that the Web is creating, Unix&apos;s design tradition &#x2014;
+        including the approaches to interface design we&apos;ve surveyed in this
+        chapter &#x2014; looks more at home than ever before.</p>
+</div>
+</body>
+</html>

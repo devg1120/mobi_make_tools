@@ -1,0 +1,192 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>High-Speed Tutorial</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts10/undefined" />
+  </head>
+   <body>
+<div class="sect1">
+    <div class="titlepage">
+        <div>
+            <div>
+                <h2 class="title" style="clear: both"><a id="svn.intro.quickstart"></a>High-Speed Tutorial</h2>
+            </div>
+        </div>
+    </div>
+    <div class="blockquote">
+        <blockquote class="blockquote">
+            <p>
+                <span class="quote">&#x201C;<span class="quote">Please make sure your seat backs are in their full,
+                        upright position and that your tray tables are stored. Flight
+                        attendants, prepare for take-off&#x2026;.</span>&#x201D;</span>
+            </p>
+        </blockquote>
+    </div>
+    <p>What follows is a quick tutorial that walks you through some
+        basic Subversion configuration and operation. When you finish
+        it, you should have a general understanding of Subversion&apos;s
+        typical usage.</p>
+    <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Note">
+            <tr>
+                <td rowspan="2" align="center" valign="top" width="25">
+                    <img alt="[Note]" src="/home/admin/es2015/cheerio-mobi-ts10/content/svn/processed_images/note-grayscale.gif">
+                </td>
+                <th align="left">Note</th>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    <p>The examples used in this appendix assume that you have
+                        <span class="command"><strong>svn</strong></span>, the Subversion command-line client,
+                        and <span class="command"><strong>svnadmin</strong></span>, the administrative tool,
+                        ready to go on a Unix-like operating system. (This tutorial
+                        also works at the Windows command-line prompt, assuming you
+                        make some obvious tweaks.) We also assume you are using
+                        Subversion 1.2 or later (run <strong class="userinput"><code>svn --version</code></strong>
+                        to check).</p>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <p>Subversion stores all versioned data in a central
+        repository. To begin, create a new repository:</p>
+    <div class="informalexample">
+        <pre class="screen">
+$ cd /var/svn
+$ svnadmin create repos
+$ ls repos
+conf/  dav/  db/  format  hooks/  locks/  README.txt
+$
+</pre>
+    </div>
+    <p>This command creates a Subversion repository in the directory
+        <code class="filename">/var/svn/repos</code>, creating
+        the <code class="filename">repos</code> directory itself if it doesn&apos;t
+        already exist. This directory contains (among other things) a
+        collection of database files. You won&apos;t see your versioned
+        files if you peek inside. For more information about repository
+        creation and maintenance, see
+        .</p>
+    <p>Subversion has no concept of a <span class="quote">&#x201C;<span class="quote">project.</span>&#x201D;</span> The
+        repository is just a virtual versioned filesystem, a large tree
+        that can hold anything you wish. Some administrators prefer to
+        store only one project in a repository, and others prefer to
+        store multiple projects in a repository by placing them into
+        separate directories. We discuss the merits of each approach
+        in .
+        Either way, the repository manages only files and directories,
+        so it&apos;s up to humans to interpret particular directories as
+        <span class="quote">&#x201C;<span class="quote">projects.</span>&#x201D;</span> So while you might see references to
+        projects throughout this book, keep in mind that we&apos;re only ever
+        talking about some directory (or collection of directories) in
+        the repository.</p>
+    <p>In this example, we assume you already have some sort
+        of project (a collection of files and directories) that you wish
+        to import into your newly created Subversion repository. Begin
+        by organizing your data into a single directory called
+        <code class="filename">myproject</code> (or whatever you wish). For
+        reasons explained in , your
+        project&apos;s tree structure should contain three top-level
+        directories named <code class="filename">branches</code>,
+        <code class="filename">tags</code>, and <code class="filename">trunk</code>. The
+        <code class="filename">trunk</code> directory should contain all of your
+        data, and the <code class="filename">branches</code> and
+        <code class="filename">tags</code> directories should be empty:</p>
+    <div class="informalexample">
+        <div class="literallayout">
+            <p><br>
+                /tmp/<br>
+                &#xA0;&#xA0;&#xA0;myproject/<br>
+                &#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;branches/<br>
+                &#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;tags/<br>
+                &#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;trunk/<br>
+                &#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;foo.c<br>
+                &#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;bar.c<br>
+                &#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;Makefile<br>
+                &#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#xA0;&#x2026;<br>
+            </p>
+        </div>
+    </div>
+    <p>The <code class="filename">branches</code>, <code class="filename">tags</code>,
+        and <code class="filename">trunk</code> subdirectories aren&apos;t actually
+        required by Subversion. They&apos;re merely a popular convention
+        that you&apos;ll most likely want to use later on.</p>
+    <p>Once you have your tree of data ready to go, import it into
+        the repository with the <span class="command"><strong>svn import</strong></span> command
+        (see ):</p>
+    <div class="informalexample">
+        <pre class="screen">
+$ svn import /tmp/myproject file:///var/svn/repos/myproject \
+      -m &quot;initial import&quot;
+Adding         /tmp/myproject/branches
+Adding         /tmp/myproject/tags
+Adding         /tmp/myproject/trunk
+Adding         /tmp/myproject/trunk/foo.c
+Adding         /tmp/myproject/trunk/bar.c
+Adding         /tmp/myproject/trunk/Makefile
+&#x2026;
+Committed revision 1.
+$ 
+</pre>
+    </div>
+    <p>Now the repository contains this tree of data. As mentioned
+        earlier, you won&apos;t see your files by directly peeking into the
+        repository; they&apos;re all stored within a database. But the
+        repository&apos;s imaginary filesystem now contains a top-level
+        directory named <code class="filename">myproject</code>, which in turn
+        contains your data.</p>
+    <p>Note that the original <code class="filename">/tmp/myproject</code>
+        directory is unchanged; Subversion is unaware of it. (In fact,
+        you can even delete that directory if you wish.) To
+        start manipulating repository data, you need to create a new
+        <span class="quote">&#x201C;<span class="quote">working copy</span>&#x201D;</span> of the data, a sort of private
+        workspace. Ask Subversion to <span class="quote">&#x201C;<span class="quote">check out</span>&#x201D;</span> a working
+        copy of the <code class="filename">myproject/trunk</code> directory in
+        the repository:</p>
+    <div class="informalexample">
+        <pre class="screen">
+$ svn checkout file:///var/svn/repos/myproject/trunk myproject
+A    myproject/foo.c
+A    myproject/bar.c
+A    myproject/Makefile
+&#x2026;
+Checked out revision 1.
+$
+</pre>
+    </div>
+    <p>Now you have a personal copy of part of the repository in a
+        new directory named <code class="filename">myproject</code>. You can edit
+        the files in your working copy and then commit those changes
+        back into the repository.</p>
+    <div class="itemizedlist">
+        <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+                <p>Enter your working copy and edit a file&apos;s
+                    contents.</p>
+            </li>
+            <li class="listitem">
+                <p>Run <strong class="userinput"><code>svn diff</code></strong> to see unified diff
+                    output of your changes.</p>
+            </li>
+            <li class="listitem">
+                <p>Run <strong class="userinput"><code>svn commit</code></strong> to commit the new
+                    version of your file to the repository.</p>
+            </li>
+            <li class="listitem">
+                <p>Run <strong class="userinput"><code>svn update</code></strong> to bring your working
+                    copy <span class="quote">&#x201C;<span class="quote">up to date</span>&#x201D;</span> with the repository.</p>
+            </li>
+        </ul>
+    </div>
+    <p>For a full tour of all the things you can do with your
+        working copy, read .</p>
+    <p>At this point, you have the option of making your repository
+        available to others over a network. See  to learn about the different sorts of
+        server processes available and how to configure them.</p>
+</div>
+</body>
+</html>

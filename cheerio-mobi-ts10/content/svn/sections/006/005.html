@@ -1,0 +1,228 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Traversing Branches</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts10/undefined" />
+  </head>
+   <body>
+<div class="sect1">
+    <div class="titlepage">
+        <div>
+            <div>
+                <h2 class="title" style="clear: both"><a id="svn.branchmerge.switchwc"></a>Traversing Branches</h2>
+            </div>
+        </div>
+    </div>
+    <p>The <span class="command"><strong>svn switch</strong></span> command transforms an
+        existing working copy to reflect a different branch. While this
+        command isn&apos;t strictly necessary for working with branches, it
+        provides a nice shortcut. In one of our earlier examples,
+        after creating your private branch, you checked out a fresh
+        working copy of the new repository directory. Instead, you can
+        simply ask Subversion to change your working copy of
+        <code class="filename">/calc/trunk</code> to mirror the new branch
+        location:</p>
+    <div class="informalexample">
+        <pre class="screen">
+$ cd calc
+$ svn info | grep URL
+URL: http://svn.example.com/repos/calc/trunk
+$ svn switch ^/calc/branches/my-calc-branch
+U    integer.c
+U    button.c
+U    Makefile
+Updated to revision 341.
+$ svn info | grep URL
+URL: http://svn.example.com/repos/calc/branches/my-calc-branch
+</pre>
+    </div>
+    <p><span class="quote">&#x201C;<span class="quote">Switching</span>&#x201D;</span> a working copy that has no local
+        modifications to a different branch results in the working copy
+        looking just as it would if you&apos;d done a fresh checkout of the
+        directory. It&apos;s usually more efficient to
+        use this command, because often branches differ by only a small
+        degree. The server sends only the minimal set of changes
+        necessary to make your working copy reflect the branch
+        directory.</p>
+    <p>The <span class="command"><strong>svn switch</strong></span> command also takes a
+        <code class="option">--revision</code> (<code class="option">-r</code>) option, so you
+        need not always move your working copy to the
+        <code class="literal">HEAD</code> of the branch.</p>
+    <p>Of course, most projects are more complicated than our
+        <code class="filename">calc</code> example, and contain multiple
+        subdirectories. Subversion users often follow a specific
+        algorithm when using branches:</p>
+    <div class="orderedlist">
+        <ol class="orderedlist" type="1">
+            <li class="listitem">
+                <p>Copy the project&apos;s entire <span class="quote">&#x201C;<span class="quote">trunk</span>&#x201D;</span> to a new
+                    branch directory.</p>
+            </li>
+            <li class="listitem">
+                <p>Switch only <span class="emphasis"><em>part</em></span> of the trunk
+                    working copy to mirror the branch.</p>
+            </li>
+        </ol>
+    </div>
+    <p>In other words, if a user knows that the branch work needs
+        to happen on only a specific subdirectory, she uses
+        <span class="command"><strong>svn switch</strong></span> to move only that subdirectory to
+        the branch. (Or sometimes users will switch just a single
+        working file to the branch!) That way, the user can continue to
+        receive normal <span class="quote">&#x201C;<span class="quote">trunk</span>&#x201D;</span> updates to most of her
+        working copy, but the switched portions will remain immune
+        (unless someone commits a change to her branch). This feature
+        adds a whole new dimension to the concept of a <span class="quote">&#x201C;<span class="quote">mixed
+                working copy</span>&#x201D;</span>&#x2014;not only can working copies contain a
+        mixture of working revisions, but they can also contain a
+        mixture of repository locations as well.</p>
+    <div class="tip" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Tip">
+            <tr>
+                <td rowspan="2" align="center" valign="top" width="25">
+                    <img alt="[Tip]" src="/home/admin/es2015/cheerio-mobi-ts10/content/svn/processed_images/tip-grayscale.gif">
+                </td>
+                <th align="left">Tip</th>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    <p>Typically switched subdirectories share common ancestry with
+                        the location which is switched <span class="quote">&#x201C;<span class="quote">away</span>&#x201D;</span> from. However
+                        <span class="command"><strong>svn switch</strong></span> can switch a subdirectory to mirror
+                        a repository location which it shares no common ancestry with.
+                        To do this you need to use the
+                        <code class="option">--ignore-ancestry</code> option.
+                    </p>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <p>If your working copy contains a number of switched subtrees
+        from different repository locations, it continues to function as
+        normal. When you update, you&apos;ll receive patches to each subtree
+        as appropriate. When you commit, your local changes are still
+        applied as a single, atomic change to the repository.</p>
+    <p>Note that while it&apos;s okay for your working copy to reflect a
+        mixture of repository locations, these locations must all be
+        within the <span class="emphasis"><em>same</em></span> repository. Subversion
+        repositories aren&apos;t yet able to communicate with one another;
+        that feature is planned for the
+        future.<a href="#ftn.idm4550" class="footnote" id="idm4550"><sup class="footnote">[34]</sup></a></p>
+    <div class="tip" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Tip">
+            <tr>
+                <td rowspan="2" align="center" valign="top" width="25">
+                    <img alt="[Tip]" src="/home/admin/es2015/cheerio-mobi-ts10/content/svn/processed_images/tip-grayscale.gif">
+                </td>
+                <th align="left">Tip</th>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    <p>Administrators who need to change the URL of a repository
+                        which is accessed via HTTP are encouraged to add to
+                        their <code class="filename">httpd.conf</code> configuration file a
+                        permanent redirect from the old URL location to the new one
+                        (via the <code class="literal">RedirectPermanent</code> directive).
+                        Subversion clients will generally display the new repository
+                        URL in error messages generated when the user attempts to use
+                        working copies which still reflect the old URL location. In
+                        fact, Subversion 1.7 clients will go a step further,
+                        automatically relocating the working copy to the new
+                        URL.</p>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="sidebar">
+        <div class="titlepage">
+            <div>
+                <div>
+                    <p class="title">
+                        <strong>Switches and Updates</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <p>Have you noticed that the output of <span class="command"><strong>svn
+                    switch</strong></span> and <span class="command"><strong>svn update</strong></span> looks the
+            same? The switch command is actually a superset of the update
+            command.</p>
+        <p>When you run <span class="command"><strong>svn update</strong></span>, you&apos;re asking
+            the repository to compare two trees. The repository does so,
+            and then sends a description of the differences back to the
+            client. The only difference between <span class="command"><strong>svn
+                    switch</strong></span> and <span class="command"><strong>svn update</strong></span> is that the
+            latter command always compares two identical repository
+            paths.</p>
+        <p>That is, if your working copy is a mirror of
+            <code class="filename">/calc/trunk</code>, <span class="command"><strong>svn
+                    update</strong></span> will automatically compare your working copy
+            of <code class="filename">/calc/trunk</code> to
+            <code class="filename">/calc/trunk</code> in the
+            <code class="literal">HEAD</code> revision. If you&apos;re switching your
+            working copy to a branch, <span class="command"><strong>svn switch</strong></span>
+            will compare your working copy of
+            <code class="filename">/calc/trunk</code> to some
+            <span class="emphasis"><em>other</em></span> branch directory in the
+            <code class="literal">HEAD</code> revision.</p>
+        <p>In other words, an update moves your working copy through
+            time. A switch moves your working copy through time
+            <span class="emphasis"><em>and</em></span> space.</p>
+    </div>
+    <p>Because <span class="command"><strong>svn switch</strong></span> is essentially a
+        variant of <span class="command"><strong>svn update</strong></span>, it shares the same
+        behaviors; any local modifications in your working copy are
+        preserved when new data arrives from the repository.</p>
+    <div class="tip" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Tip">
+            <tr>
+                <td rowspan="2" align="center" valign="top" width="25">
+                    <img alt="[Tip]" src="/home/admin/es2015/cheerio-mobi-ts10/content/svn/processed_images/tip-grayscale.gif">
+                </td>
+                <th align="left">Tip</th>
+            </tr>
+            <tr>
+                <td align="left" valign="top">
+                    <p>Have you ever found yourself making some complex edits (in
+                        your <code class="filename">/trunk</code> working copy) and suddenly
+                        realized, <span class="quote">&#x201C;<span class="quote">Hey, these changes ought to be in their own
+                                branch?</span>&#x201D;</span> There is a great two step technique to do
+                        this:</p>
+                    <div class="informalexample">
+                        <pre class="screen">
+$ svn copy http://svn.example.com/repos/calc/trunk \
+           http://svn.example.com/repos/calc/branches/newbranch \
+           -m &quot;Create branch &apos;newbranch&apos;.&quot;
+Committed revision 353.
+$ svn switch ^/calc/branches/newbranch
+At revision 353.
+</pre>
+                    </div>
+                    <p>The <span class="command"><strong>svn switch</strong></span> command, like
+                        <span class="command"><strong>svn update</strong></span>, preserves your local edits. At
+                        this point, your working copy is now a reflection of the newly
+                        created branch, and your next <span class="command"><strong>svn commit</strong></span>
+                        invocation will send your changes there.</p>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="footnotes">
+        <br>
+        <hr style="width:100; text-align:left;margin-left: 0">
+        <div id="ftn.idm4550" class="footnote">
+            <p><a href="#idm4550" class="para"><sup class="para">[34] </sup></a>You <span class="emphasis"><em>can</em></span>, however,
+                use <span class="command"><strong>svn relocate</strong></span> if the URL of your server
+                changes and you don&apos;t want to abandon an existing working copy.
+                See  in
+                 for more information and an
+                example.</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    const
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts12_mlv/undefined" />
+  </head>
+   <body>
+<h3 id="const">const</h3>
+<p><code>const</code> is a very welcomed addition offered by ES6 / TypeScript. It allows you to be immutable with variables. This is good from a documentation as well as a runtime perspective. To use const just replace <code>var</code> with <code>const</code>:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">const</span> foo = <span class="hljs-number">123</span>;
+</code></pre>
+<blockquote>
+    <p>The syntax is much better (IMHO) than other languages that force the user to type something like <code>let constant foo</code> i.e. a variable + behavior specifier.</p>
+</blockquote>
+<p><code>const</code> is a good practice for both readability and maintainability and avoids using <em>magic literals</em> e.g.</p>
+<pre><code class="lang-ts"><span class="hljs-comment">// Low readability</span>
+<span class="hljs-keyword">if</span> (x &gt; <span class="hljs-number">10</span>) {
+}
+<span class="hljs-comment">// Better!</span>
+<span class="hljs-keyword">const</span> maxRows = <span class="hljs-number">10</span>;
+<span class="hljs-keyword">if</span> (x &gt; maxRows) {
+}
+</code></pre>
+<h4 id="const-declarations-must-be-initialized">const declarations must be initialized</h4>
+<p>The following is a compiler error:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">const</span> foo; <span class="hljs-comment">// ERROR: const declarations must be initialized</span>
+</code></pre>
+<h4 id="left-hand-side-of-assignment-cannot-be-a-constant">Left hand side of assignment cannot be a constant</h4>
+<p>Constants are immutable after creation, so if you try to assign them to a new value it is a compiler error:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">const</span> foo = <span class="hljs-number">123</span>;
+foo = <span class="hljs-number">456</span>; <span class="hljs-comment">// ERROR: Left-hand side of an assignment expression cannot be a constant</span>
+</code></pre>
+<h4 id="block-scoped">Block Scoped</h4>
+<p>A <code>const</code> is block scoped like we saw with <a href="let.html"><code>let</code></a>:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">const</span> foo = <span class="hljs-number">123</span>;
+<span class="hljs-keyword">if</span> (<span class="hljs-literal">true</span>) {
+    <span class="hljs-keyword">const</span> foo = <span class="hljs-number">456</span>; <span class="hljs-comment">// Allowed as its a new variable limited to this `if` block</span>
+}
+</code></pre>
+<h4 id="deep-immutability">Deep immutability</h4>
+<p>A <code>const</code> works with object literals as well, as far as protecting the variable <em>reference</em> is concerned:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">const</span> foo = { bar: <span class="hljs-number">123</span> };
+foo = { bar: <span class="hljs-number">456</span> }; <span class="hljs-comment">// ERROR : Left hand side of an assignment expression cannot be a constant</span>
+</code></pre>
+<p>However, it still allows sub properties of objects to be mutated, as shown below:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">const</span> foo = { bar: <span class="hljs-number">123</span> };
+foo.bar = <span class="hljs-number">456</span>; <span class="hljs-comment">// Allowed!</span>
+<span class="hljs-built_in">console</span>.log(foo); <span class="hljs-comment">// { bar: 456 }</span>
+</code></pre>
+<h4 id="prefer-const">Prefer const</h4>
+<p>Always use <code>const</code>, unless you plan to either lazily initialization of a variable, or do a reassignment (use <code>let</code> for those cases).</p>
+</body>
+</html>

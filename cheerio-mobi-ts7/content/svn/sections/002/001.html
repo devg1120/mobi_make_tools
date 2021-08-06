@@ -1,0 +1,492 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>What Is Subversion?</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts7/undefined" />
+  </head>
+   <body>
+    <div class="sect1">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="svn.intro.whatis"></a>What Is Subversion?</h2>
+          </div>
+        </div>
+      </div>
+      <p>Subversion is a free/open source <em class="firstterm">version control
+      system</em> (VCS).  That is, Subversion manages files and
+      directories, and the changes made to them, over time.  This
+      allows you to recover older versions of your data, or examine the
+      history of how your data changed.  In this regard, many people
+      think of a version control system as a sort of <span class="quote">&#x201C;<span class="quote">time
+      machine.</span>&#x201D;</span></p>
+      <p>Subversion can operate across networks, which allows it to
+      be used by people on different computers.  At some level, the
+      ability for various people to modify and manage the same set of
+      data from their respective locations fosters collaboration.
+      Progress can occur more quickly without a single conduit through
+      which all modifications must occur.  And because the work is
+      versioned, you need not fear that quality is the trade-off for
+      losing that conduit&#x2014;if some incorrect change is made to
+      the data, just undo that change.</p>
+      <p>Some version control systems are also <em class="firstterm">software
+      configuration management</em> (SCM) systems.  These
+      systems are specifically tailored to manage trees of source code
+      and have many features that are specific to software
+      development&#x2014;such as natively understanding programming
+      languages, or supplying tools for building software.
+      Subversion, however, is not one of these systems.  It is a
+      general system that can be used to manage
+      <span class="emphasis"><em>any</em></span> collection of files.  For you, those
+      files might be source code&#x2014;for others, anything from
+      grocery shopping lists to digital video mixdowns and
+      beyond.</p>
+      <div class="sect2">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="svn.intro.righttool"></a>Is Subversion the Right Tool?</h3>
+            </div>
+          </div>
+        </div>
+        <p>If you&apos;re a user or system administrator pondering the use
+        of Subversion, the first question you should ask yourself is:
+        &quot;Is this the right tool for the job?&quot;  Subversion is a
+        fantastic hammer, but be careful not to view every problem as
+        a nail.</p>
+        <p>As a first step, you need to decide if version control in
+        general is required for your purposes.  If you need to archive
+        old versions of files and directories, possibly resurrect
+        them, and examine logs of how they&apos;ve changed over time, then
+        version control tools can do that.  If you need to collaborate
+        with people on documents (usually over a network) and keep
+        track of who made which changes, a version control tool can do
+        that, too.  In fact, this is why version control tools such as
+        Subversion are so often used in software development
+        environments&#x2014;working on a development team is an
+        inherently social activity where changes to source code files
+        are constantly being discussed, made, evaluated, and even
+        sometimes unmade.  Version control tools facilitate that sort
+        of collaboration.</p>
+        <p>There is cost associated with using version control, too.
+        Unless you can outsource the administration of your version
+        control system to a third-party, you&apos;ll have the obvious costs
+        of performing that administration yourself.  When working with
+        the data on a daily basis, you won&apos;t be able to copy, move,
+        rename, or delete files the way you usually do.  Instead,
+        you&apos;ll have to do all of those things through the version
+        control system.</p>
+        <p>Even assuming that you are okay with the cost/benefit
+        tradeoff afforded by a version control system, you shouldn&apos;t
+        choose to use one merely because it <span class="emphasis"><em>can</em></span>
+        do what you want.  Consider whether your needs are better
+        addressed by other tools.  For example, because Subversion
+        replicates data to all the collaborators involved, a common
+        misuse is to treat it as a generic distribution system.
+        People will sometimes use Subversion to distribute huge
+        collections of photos, digital music, or software packages.
+        The problem is that this sort of data usually isn&apos;t changing
+        at all.  The collection itself grows over time, but the
+        individual files within the collection aren&apos;t being changed.
+        In this case, using Subversion is
+        <span class="quote">&#x201C;<span class="quote">overkill.</span>&#x201D;</span><a href="#ftn.idm112" class="footnote" id="idm112"><sup class="footnote">[2]</sup></a> There are simpler tools that
+        efficiently replicate data <span class="emphasis"><em>without</em></span> the
+        overhead of tracking changes, such as <span class="command"><strong>rsync</strong></span>
+        or <span class="command"><strong>unison</strong></span>.</p>
+        <p>Once you&apos;ve decided that you need a version control
+        solution, you&apos;ll find no shortage of available options.  When
+        Subversion was first designed and released, the predominant
+        methodology of version control was <em class="firstterm">centralized
+        version control</em>&#x2014;a single remote master
+        storehouse of versioned data with individual users operating
+        locally against shallow copies of that data&apos;s version history.
+        Subversion quickly emerged after its initial introduction as
+        the clear leader in this field of version control, earning
+        widespread adoption and supplanting installations of many
+        older version control systems.  It continues to hold that
+        prominent position today.</p>
+        <p>Much has changed since that time, though.  In the years
+        since the Subversion project began its life, a newer
+        methodology of version control called <em class="firstterm">distributed
+        version control</em> has likewise garnered widespread
+        attention and adoption.  Tools such as Git
+        (<a class="ulink" href="http://git-scm.com/" target="_top">http://git-scm.com/</a>) and Mercurial
+        (<a class="ulink" href="http://mercurial.selenic.com/" target="_top">http://mercurial.selenic.com/</a>) quickly rose
+        to the tops of the distributed version control system (DVCS)
+        ranks.  Distributed version control harnesses the growing
+        ubiquity of high-speed network connections and low storage
+        costs to offer an approach which differs from the centralized
+        model in key ways.  First and most obvious is the fact that
+        there is no remote, central storehouse of versioned data.
+        Rather, each user keeps and operates against very
+        deep&#x2014;complete, in a sense&#x2014;local version history
+        data stores.  Collaboration still occurs, but is accomplished
+        by trading <em class="firstterm">changesets</em> (collections of
+        changes made to versioned items) directly between users&apos; local
+        data stores, not via a centralized master data store.  In
+        fact, any semblance of a canonical <span class="quote">&#x201C;<span class="quote">master</span>&#x201D;</span>
+        source of a project&apos;s versioned data is by convention only, a
+        status attributed by the various collaborators on that
+        project.</p>
+        <p>There are pros and cons to each version control approach.
+        Perhaps the two biggest benefits delivered by the DVCS tools
+        are incredible performance for day-to-day operations (because
+        the primary data store is locally held) and vastly better
+        support for merging between branches (because merge algorithms
+        serve as the very core of how DVCSes work at all).  The
+        downside is that distributed version control is an inherently
+        more complicated model, which can present a non-negligible
+        challenge to comfortable collaboration.  Also, DVCS tools do
+        what they do well in part because of a certain degree of
+        control withheld from the user which centalized systems freely
+        offer&#x2014;the ability to implement path-based access
+        control, the flexibility to update or backdate individual
+        versioned data items, etc.  Fortunately, many wise
+        organizations have discovered that this needn&apos;t be a religious
+        debate, and that Subversion and a DVCS tool such as Git can be
+        used together harmoniously within the organization, each
+        serving the purposes best suited to the tool.</p>
+        <p>Alas, this book is about Subversion, so we&apos;ll not attempt
+        a full comparison of Subversion and other tools.  Readers who
+        have the option of choosing their version control system are
+        encouraged to research the available options and make the
+        determination that works best for themselves and their fellow
+        collaborators.  And if, after doing so, Subversion is the
+        chosen tool, there&apos;s <span class="emphasis"><em>plenty</em></span> of detailed
+        information about how to use it successfully in the chapters
+        that follow!</p>
+      </div>
+      <div class="sect2">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="svn.intro.history"></a>Subversion&apos;s History</h3>
+            </div>
+          </div>
+        </div>
+        <p>In early 2000, CollabNet,
+        Inc. (<a class="ulink" href="http://www.collab.net" target="_top">http://www.collab.net</a>) began seeking
+        developers to write a replacement for CVS.  CollabNet
+        offered<a href="#ftn.idm138" class="footnote" id="idm138"><sup class="footnote">[3]</sup></a> a collaboration software suite
+        called CollabNet Enterprise Edition (CEE), of which one
+        component was version control.  Although CEE used CVS as its
+        initial version control system, CVS&apos;s limitations were obvious
+        from the beginning, and CollabNet knew it would eventually
+        have to find something better.  Unfortunately, CVS had become
+        the de facto standard in the open source world largely because
+        there <span class="emphasis"><em>wasn&apos;t</em></span> anything better, at least
+        not under a free license.  So CollabNet determined to write a
+        new version control system from scratch, retaining the basic
+        ideas of CVS, but without the bugs and misfeatures.</p>
+        <p>In February 2000, they contacted Karl Fogel, the author of
+        <em class="citetitle">Open Source Development with CVS</em>
+        (Coriolis, 1999), and asked if he&apos;d like to work on this new
+        project.  Coincidentally, at the time Karl was already
+        discussing a design for a new version control system with his
+        friend Jim Blandy.  In 1995, the two had started Cyclic
+        Software, a company providing CVS support contracts, and
+        although they later sold the business, they still used CVS
+        every day at their jobs.  Their frustration with CVS had led
+        Jim to think carefully about better ways to manage versioned
+        data, and he&apos;d already come up with not only the Subversion
+        name, but also the basic design of the Subversion data store.
+        When CollabNet called, Karl immediately agreed to work on the
+        project, and Jim got his employer, Red Hat Software, to
+        essentially donate him to the project for an indefinite period
+        of time.  CollabNet hired Karl and Ben Collins-Sussman, and
+        detailed design work began in May 2000.  With the help of some
+        well-placed prods from Brian Behlendorf and Jason Robbins of
+        CollabNet, and from Greg Stein (at the time an independent
+        developer active in the WebDAV/DeltaV specification process),
+        Subversion quickly attracted a community of active developers.
+        It turned out that many people had encountered the same
+        frustrating experiences with CVS and welcomed the chance to
+        finally do something about it.</p>
+        <p>The original design team settled on some simple goals.  They
+        didn&apos;t want to break new ground in version control methodology,
+        they just wanted to fix CVS.  They decided that Subversion would
+        match CVS&apos;s features and preserve the same development model,
+        but not duplicate CVS&apos;s most obvious flaws.  And although it did
+        not need to be a drop-in replacement for CVS, it should be
+        similar enough that any CVS user could make the switch with
+        little effort.</p>
+        <p>After 14 months of coding, Subversion became
+        <span class="quote">&#x201C;<span class="quote">self-hosting</span>&#x201D;</span> on August 31, 2001.  That is,
+        Subversion developers stopped using CVS to manage Subversion&apos;s
+        own source code and started using Subversion instead.</p>
+        <p>While CollabNet started the project, and still funds a
+        large chunk of the work (it pays the salaries of a few
+        full-time Subversion developers), Subversion is run like most
+        open source projects, governed by a loose, transparent set of
+        rules that encourage meritocracy.  In 2009, CollabNet worked
+        with the Subversion developers towards the goal of integrating
+        the Subversion project into the Apache Software Foundation
+        (ASF), one of the most well-known collectives of open source
+        projects in the world.  Subversion&apos;s technical roots,
+        community priorities, and development practices were a perfect
+        fit for the ASF, many of whose members were already active
+        Subversion contributors.  In early 2010, Subversion was fully
+        adopted into the ASF&apos;s family of top-level projects, moved its
+        web presence to
+        <a class="ulink" href="http://subversion.apache.org" target="_top">http://subversion.apache.org</a>, and was
+        rechristened <span class="quote">&#x201C;<span class="quote">Apache Subversion</span>&#x201D;</span>.</p>
+      </div>
+      <div class="sect2">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="svn.intro.architecture"></a>Subversion&apos;s Architecture</h3>
+            </div>
+          </div>
+        </div>
+        <p> illustrates
+        a <span class="quote">&#x201C;<span class="quote">mile-high</span>&#x201D;</span> view of Subversion&apos;s
+        design.</p>
+        <div class="figure">
+          <a id="svn.intro.architecture.dia-1"></a>
+          <p class="title">
+            <strong>Figure&#xA0;1.&#xA0;Subversion&apos;s architecture</strong>
+          </p>
+          <div class="figure-contents">
+            <div>
+              <img src="/home/gusa1120/es2015/cheerio-mobi-ts7/content/svn/processed_images/ch01dia1-grayscale.gif" alt="Subversion&apos;s architecture">
+            </div>
+          </div>
+        </div>
+        <br class="figure-break">
+        <p>On one end is a Subversion repository that holds all of
+        your versioned data.  On the other end is your Subversion
+        client program, which manages local reflections of portions of
+        that versioned data.  Between these extremes are multiple
+        routes through a Repository Access (RA) layer, some of which
+        go across computer networks and through network servers which
+        then access the repository, others of which bypass the network
+        altogether and access the repository directly.</p>
+      </div>
+      <div class="sect2">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="svn.intro.components"></a>Subversion&apos;s Components</h3>
+            </div>
+          </div>
+        </div>
+        <p>Subversion, once installed, has a number of different
+        pieces.  The following is a quick overview of what you get.
+        Don&apos;t be alarmed if the brief descriptions leave you
+        scratching your head&#x2014;<span class="emphasis"><em>plenty</em></span> more
+        pages in this book are devoted to alleviating that
+        confusion.</p>
+        <div class="variablelist">
+          <dl class="variablelist">
+            <dt>
+              <span class="term">svn</span>
+            </dt>
+            <dd>
+              <p>The command-line client program</p>
+            </dd>
+            <dt>
+              <span class="term">svnversion</span>
+            </dt>
+            <dd>
+              <p>A program for reporting the state (in terms of
+              revisions of the items present) of a working copy</p>
+            </dd>
+            <dt>
+              <span class="term">svnlook</span>
+            </dt>
+            <dd>
+              <p>A tool for directly inspecting a Subversion repository</p>
+            </dd>
+            <dt>
+              <span class="term">svnadmin</span>
+            </dt>
+            <dd>
+              <p>A tool for creating, tweaking, or repairing a Subversion
+              repository</p>
+            </dd>
+            <dt>
+              <span class="term">mod_dav_svn</span>
+            </dt>
+            <dd>
+              <p>A plug-in module for the Apache HTTP Server, used to
+              make your repository available to others over a
+              network</p>
+            </dd>
+            <dt>
+              <span class="term">svnserve</span>
+            </dt>
+            <dd>
+              <p>A custom standalone server program, runnable as a
+              daemon process or invokable by SSH; another way to make
+              your repository available to others over a network</p>
+            </dd>
+            <dt>
+              <span class="term">svndumpfilter</span>
+            </dt>
+            <dd>
+              <p>A program for filtering Subversion repository dump
+              streams</p>
+            </dd>
+            <dt>
+              <span class="term">svnsync</span>
+            </dt>
+            <dd>
+              <p>A program for incrementally mirroring one
+            repository to another over a network</p>
+            </dd>
+            <dt>
+              <span class="term">svnrdump</span>
+            </dt>
+            <dd>
+              <p>A program for performing repository history dumps
+              and loads over a network</p>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="sect2">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="svn.intro.whatsnew"></a>What&apos;s New in Subversion</h3>
+            </div>
+          </div>
+        </div>
+        <p>The first edition of this book was published by O&apos;Reilly
+        Media in 2004, shortly after Subversion had reached 1.0.
+        Since that time, the Subversion project has continued to
+        release new major releases of the software.  Here&apos;s a quick
+        summary of major new changes since Subversion 1.0.  Note that
+        this is not a complete list; for full details, please visit
+        Subversion&apos;s web site at
+        <a class="ulink" href="http://subversion.apache.org" target="_top">http://subversion.apache.org</a>.</p>
+        <div class="variablelist">
+          <dl class="variablelist">
+            <dt>
+              <span class="term">Subversion 1.1 (September 2004)</span>
+            </dt>
+            <dd>
+              <p>Release 1.1 introduced FSFS, a flat-file repository
+              storage option for the repository.  While the Berkeley DB
+              backend is still widely used and supported, FSFS has
+              since become the default choice for
+              newly created repositories due to its low barrier to
+              entry and minimal maintenance requirements.  Also in
+              this release came the ability to put symbolic links
+              under version control, auto-escaping of URLs, and a
+              localized user interface.</p>
+            </dd>
+            <dt>
+              <span class="term">Subversion 1.2 (May 2005)</span>
+            </dt>
+            <dd>
+              <p>Release 1.2 introduced the ability to create
+              server-side locks on files, thus serializing commit
+              access to certain resources.  While Subversion is still
+              a fundamentally concurrent version control system,
+              certain types of binary files (e.g. art assets)
+              cannot be merged together.  The locking feature fulfills
+              the need to version and protect such resources.  With
+              locking also came a complete WebDAV auto-versioning
+              implementation, allowing Subversion repositories to be
+              mounted as network folders.  Finally, Subversion 1.2
+              began using a new, faster binary-differencing algorithm
+              to compress and retrieve old versions of files.</p>
+            </dd>
+            <dt>
+              <span class="term">Subversion 1.3 (December 2005)</span>
+            </dt>
+            <dd>
+              <p>Release 1.3 brought path-based authorization
+              controls to the <span class="command"><strong>svnserve</strong></span> server,
+              matching a feature formerly found only in the Apache
+              server.  The Apache server, however, gained some new
+              logging features of its own, and Subversion&apos;s API
+              bindings to other languages also made great leaps
+              forward.</p>
+            </dd>
+            <dt>
+              <span class="term">Subversion 1.4 (September 2006)</span>
+            </dt>
+            <dd>
+              <p>Release 1.4 introduced a whole new
+              tool&#x2014;<span class="command"><strong>svnsync</strong></span>&#x2014;for doing
+              one-way repository replication over a network.  Major
+              parts of the working copy metadata were revamped to no
+              longer use XML (resulting in client-side speed gains),
+              while the Berkeley DB repository backend gained the
+              ability to automatically recover itself after a server
+              crash.</p>
+            </dd>
+            <dt>
+              <span class="term">Subversion 1.5 (June 2008)</span>
+            </dt>
+            <dd>
+              <p>Release 1.5 took much longer to finish than prior
+              releases, but the headliner feature was gigantic:
+              semi-automated tracking of branching and merging.  This
+              was a huge boon for users, and pushed Subversion far
+              beyond the abilities of CVS and into the ranks of
+              commercial competitors such as Perforce and ClearCase.
+              Subversion 1.5 also introduced a bevy of other
+              user-focused features, such as interactive resolution of
+              file conflicts, sparse checkouts, client-side
+              management of changelists, powerful new syntax for
+              externals definitions, and SASL authentication support for
+              the <span class="command"><strong>svnserve</strong></span> server.</p>
+            </dd>
+            <dt>
+              <span class="term">Subversion 1.6 (March 2009)</span>
+            </dt>
+            <dd>
+              <p>Release 1.6 continued to make branching and merging
+              more robust by introducing tree conflicts, and offered
+              improvements to several other existing features: more
+              interactive conflict resolution options; de-telescoping
+              and outright exclusion support for sparse checkouts;
+              file-based externals definitions; and operational
+              logging support for <span class="command"><strong>svnserve</strong></span> similar
+              to what <span class="command"><strong>mod_dav_svn</strong></span> offered.  Also,
+              the command-line client introduced a new shortcut syntax
+              for referring to Subversion repository URLs.</p>
+            </dd>
+            <dt>
+              <span class="term">Subversion 1.7 (October 2011)</span>
+            </dt>
+            <dd>
+              <p>Release 1.7 was primarily a delivery vehicle for two
+              big plumbing overhauls of existing Subversion
+              components.  The largest and most impactful of these was
+              the so-called <span class="quote">&#x201C;<span class="quote">WC-NG</span>&#x201D;</span>&#x2014;a complete
+              rewrite of the <span class="command"><strong>libsvn_wc</strong></span> working copy
+              management library.  The second change was the
+              introduction of a sleeker HTTP protocol for Subversion
+              client/server interaction.  Subversion 1.7 delivered a
+              handful of additional features, many bug fixes, and some
+              notable performance improvements, too.</p>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="footnotes">
+        <br>
+        <hr style="width:100; text-align:left;margin-left: 0">
+        <div id="ftn.idm112" class="footnote">
+          <p><a href="#idm112" class="para"><sup class="para">[2] </sup></a>Or as a friend puts
+        it, <span class="quote">&#x201C;<span class="quote">swatting a fly with a
+        Buick.</span>&#x201D;</span></p>
+        </div>
+        <div id="ftn.idm138" class="footnote">
+          <p><a href="#idm138" class="para"><sup class="para">[3] </sup></a>CollabNet Enterprise Edition has since
+        been replaced by a new product line called CollabNet
+        TeamForge.</p>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

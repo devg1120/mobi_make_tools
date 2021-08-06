@@ -1,0 +1,104 @@
+<body><p>
+An interface type specifies a [<a>method set</a>] called its <i>interface</i>.
+A variable of interface type can store a value of any type with a method set
+that is any superset of the interface. Such a type is said to
+<i>implement the interface</i>.
+The value of an uninitialized variable of interface type is <code>nil</code>.
+</p><pre>
+[<a>InterfaceType</a>]      = "interface" "{" { [<a>MethodSpec</a>] ";" } "}" .
+[<a>MethodSpec</a>]         = [<a>MethodName</a>] [<a>Signature</a>] | [<a>InterfaceTypeName</a>] .
+[<a>MethodName</a>]         = [<a>identifier</a>] .
+[<a>InterfaceTypeName</a>]  = [<a>TypeName</a>] .
+</pre><p>
+As with all method sets, in an interface type, each method must have a
+[<a>unique</a>]
+non-[<a>blank</a>] name.
+</p><pre>
+// A simple File interface.
+interface {
+	Read([]byte) (int, error)
+	Write([]byte) (int, error)
+	Close() error
+}
+</pre><pre>
+interface {
+	String() string
+	String() string  // illegal: String not unique
+	_(x int)         // illegal: method must have non-blank name
+}
+</pre><p>
+More than one type may implement an interface.
+For instance, if two types <code>S1</code> and <code>S2</code>
+have the method set
+</p><pre>
+func (p T) Read(p []byte) (n int, err error)   { return … }
+func (p T) Write(p []byte) (n int, err error)  { return … }
+func (p T) Close() error                       { return … }
+</pre><p>
+(where <code>T</code> stands for either <code>S1</code> or <code>S2</code>)
+then the <code>File</code> interface is implemented by both <code>S1</code> and
+<code>S2</code>, regardless of what other methods
+<code>S1</code> and <code>S2</code> may have or share.
+</p><p>
+A type implements any interface comprising any subset of its methods
+and may therefore implement several distinct interfaces. For
+instance, all types implement the <i>empty interface</i>:
+</p><pre>
+interface{}
+</pre><p>
+Similarly, consider this interface specification,
+which appears within a [<a>type declaration</a>]
+to define an interface called <code>Locker</code>:
+</p><pre>
+type Locker interface {
+	Lock()
+	Unlock()
+}
+</pre><p>
+If <code>S1</code> and <code>S2</code> also implement
+</p><pre>
+func (p T) Lock() { … }
+func (p T) Unlock() { … }
+</pre><p>
+they implement the <code>Locker</code> interface as well
+as the <code>File</code> interface.
+</p><p>
+An interface <code>T</code> may use a (possibly qualified) interface type
+name <code>E</code> in place of a method specification. This is called
+<i>embedding</i> interface <code>E</code> in <code>T</code>; it adds
+all (exported and non-exported) methods of <code>E</code> to the interface
+<code>T</code>.
+</p><pre>
+type ReadWriter interface {
+	Read(b Buffer) bool
+	Write(b Buffer) bool
+}
+
+type File interface {
+	ReadWriter  // same as adding the methods of ReadWriter
+	Locker      // same as adding the methods of Locker
+	Close()
+}
+
+type LockedFile interface {
+	Locker
+	File        // illegal: Lock, Unlock not unique
+	Lock()      // illegal: Lock not unique
+}
+</pre><p>
+An interface type <code>T</code> may not embed itself
+or any interface type that embeds <code>T</code>, recursively.
+</p><pre>
+// illegal: Bad cannot embed itself
+type Bad interface {
+	Bad
+}
+
+// illegal: Bad1 cannot embed itself using Bad2
+type Bad1 interface {
+	Bad2
+}
+type Bad2 interface {
+	Bad1
+}
+</pre></body>

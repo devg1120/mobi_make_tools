@@ -1,0 +1,5 @@
+<body><p>
+The empty statement does nothing.
+</p><pre>
+[<a>EmptyStmt</a>] = .
+</pre></body>

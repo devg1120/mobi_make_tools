@@ -1,0 +1,444 @@
+- title: Frontmatter
+  articles:
+    - title: Title Page
+      path: articles/titlepage
+- title: Foreword
+  articles:
+    - title: Foreword
+      path: articles/svn.foreword.html
+- title: Preface
+  articles:
+    - title: Preface
+      path: articles/svn.preface.html
+    - title: What Is Subversion?
+      path: articles/svn.intro.whatis.html
+    - title: Audience
+      path: articles/svn.preface.audience.html
+    - title: How to Read This Book
+      path: articles/svn.preface.howread.html
+    - title: Organization of This Book
+      path: articles/svn.preface.organization.html
+    - title: This Book Is Free
+      path: articles/svn.preface.free.html
+    - title: Acknowledgments
+      path: articles/svn.preface.acks.html
+- title: 1. Fundamental Concepts
+  articles:
+    - title: 1. Fundamental Concepts
+      path: articles/svn.basic.html
+    - title: Version Control Basics
+      path: articles/svn.basic.version-control-basics.html
+    - title: Version Control the Subversion Way
+      path: articles/svn.basic.in-action.html
+    - title: Summary
+      path: articles/svn.basic.summary.html
+- title: 2. Basic Usage
+  articles:
+    - title: 2. Basic Usage
+      path: articles/svn.tour.html
+    - title: Help!
+      path: articles/svn.tour.help.html
+    - title: Getting Data into Your Repository
+      path: articles/svn.tour.importing.html
+    - title: Creating a Working Copy
+      path: articles/svn.tour.initial.html
+    - title: Basic Work Cycle
+      path: articles/svn.tour.cycle.html
+    - title: Examining History
+      path: articles/svn.tour.history.html
+    - title: Sometimes You Just Need to Clean Up
+      path: articles/svn.tour.cleanup.html
+    - title: Dealing with Structural Conflicts
+      path: articles/svn.tour.treeconflicts.html
+    - title: Summary
+      path: articles/svn.tour.summary.html
+- title: 3. Advanced Topics
+  articles:
+    - title: 3. Advanced Topics
+      path: articles/svn.advanced.html
+    - title: Revision Specifiers
+      path: articles/svn.tour.revs.specifiers.html
+    - title: Peg and Operative Revisions
+      path: articles/svn.advanced.pegrevs.html
+    - title: Properties
+      path: articles/svn.advanced.props.html
+    - title: File Portability
+      path: articles/svn.advanced.props.file-portability.html
+    - title: Ignoring Unversioned Items
+      path: articles/svn.advanced.props.special.ignore.html
+    - title: Keyword Substitution
+      path: articles/svn.advanced.props.special.keywords.html
+    - title: Sparse Directories
+      path: articles/svn.advanced.sparsedirs.html
+    - title: Locking
+      path: articles/svn.advanced.locking.html
+    - title: Externals Definitions
+      path: articles/svn.advanced.externals.html
+    - title: Changelists
+      path: articles/svn.advanced.changelists.html
+    - title: Network Model
+      path: articles/svn.serverconfig.netmodel.html
+    - title: Summary
+      path: articles/svn.advanced.summary.html
+- title: 4. Branching and Merging
+  articles:
+    - title: 4. Branching and Merging
+      path: articles/svn.branchmerge.html
+    - title: What's a Branch?
+      path: articles/svn.branchmerge.whatis.html
+    - title: Using Branches
+      path: articles/svn.branchmerge.using.html
+    - title: Basic Merging
+      path: articles/svn.branchmerge.basicmerging.html
+    - title: Advanced Merging
+      path: articles/svn.branchmerge.advanced.html
+    - title: Traversing Branches
+      path: articles/svn.branchmerge.switchwc.html
+    - title: Tags
+      path: articles/svn.branchmerge.tags.html
+    - title: Branch Maintenance
+      path: articles/svn.branchmerge.maint.html
+    - title: Common Branching Patterns
+      path: articles/svn.branchmerge.commonpatterns.html
+    - title: Vendor Branches
+      path: articles/svn.advanced.vendorbr.html
+    - title: To Branch or Not to Branch?
+      path: articles/svn.branchmerge.when.html
+    - title: Summary
+      path: articles/svn.branchmerge.summary.html
+- title: 5. Repository Administration
+  articles:
+    - title: 5. Repository Administration
+      path: articles/svn.reposadmin.html
+    - title: 'The Subversion Repository, Defined'
+      path: articles/svn.reposadmin.basics.html
+    - title: Strategies for Repository Deployment
+      path: articles/svn.reposadmin.planning.html
+    - title: Creating and Configuring Your Repository
+      path: articles/svn.reposadmin.create.html
+    - title: Repository Maintenance
+      path: articles/svn.reposadmin.maint.html
+    - title: Moving and Removing Repositories
+      path: articles/svn.reposadmin.maint.moving-and-removing.html
+    - title: Summary
+      path: articles/svn.reposadmin.summary.html
+- title: 6. Server Configuration
+  articles:
+    - title: 6. Server Configuration
+      path: articles/svn.serverconfig.html
+    - title: Overview
+      path: articles/svn.serverconfig.overview.html
+    - title: Choosing a Server Configuration
+      path: articles/svn.serverconfig.choosing.html
+    - title: 'svnserve, a Custom Server'
+      path: articles/svn.serverconfig.svnserve.html
+    - title: 'httpd, the Apache HTTP Server'
+      path: articles/svn.serverconfig.httpd.html
+    - title: Path-Based Authorization
+      path: articles/svn.serverconfig.pathbasedauthz.html
+    - title: High-level Logging
+      path: articles/svn.serverconfig.operational-logging.html
+    - title: Server Optimization
+      path: articles/svn.serverconfig.optimization.html
+    - title: Supporting Multiple Repository Access Methods
+      path: articles/svn.serverconfig.multimethod.html
+- title: 7. Customizing Your Subversion Experience
+  articles:
+    - title: 7. Customizing Your Subversion Experience
+      path: articles/svn.customization.html
+    - title: Runtime Configuration Area
+      path: articles/svn.advanced.confarea.html
+    - title: Localization
+      path: articles/svn.advanced.l10n.html
+    - title: Using External Editors
+      path: articles/svn.advanced.externaleditors.html
+    - title: Using External Differencing and Merge Tools
+      path: articles/svn.advanced.externaldifftools.html
+    - title: Summary
+      path: articles/svn.customization.summary.html
+- title: 8. Embedding Subversion
+  articles:
+    - title: 8. Embedding Subversion
+      path: articles/svn.developer.html
+    - title: Layered Library Design
+      path: articles/svn.developer.layerlib.html
+    - title: Using the APIs
+      path: articles/svn.developer.usingapi.html
+    - title: Summary
+      path: articles/svn.developer.summary.html
+- title: 9. Subversion Complete Reference
+  articles:
+    - title: 9. Subversion Complete Reference
+      path: articles/svn.ref.html
+    - title: svn—Subversion Command-Line Client
+      path: articles/svn.ref.svn.html
+    - title: svn add
+      path: articles/svn.ref.svn.c.add.html
+    - title: 'svn blame (praise, annotate, ann)'
+      path: articles/svn.ref.svn.c.blame.html
+    - title: svn cat
+      path: articles/svn.ref.svn.c.cat.html
+    - title: svn changelist (cl)
+      path: articles/svn.ref.svn.c.changelist.html
+    - title: svn checkout (co)
+      path: articles/svn.ref.svn.c.checkout.html
+    - title: svn cleanup
+      path: articles/svn.ref.svn.c.cleanup.html
+    - title: svn commit (ci)
+      path: articles/svn.ref.svn.c.commit.html
+    - title: svn copy (cp)
+      path: articles/svn.ref.svn.c.copy.html
+    - title: 'svn delete (del, remove, rm)'
+      path: articles/svn.ref.svn.c.delete.html
+    - title: svn diff (di)
+      path: articles/svn.ref.svn.c.diff.html
+    - title: svn export
+      path: articles/svn.ref.svn.c.export.html
+    - title: 'svn help (h, ?)'
+      path: articles/svn.ref.svn.c.help.html
+    - title: svn import
+      path: articles/svn.ref.svn.c.import.html
+    - title: svn info
+      path: articles/svn.ref.svn.c.info.html
+    - title: svn list (ls)
+      path: articles/svn.ref.svn.c.list.html
+    - title: svn lock
+      path: articles/svn.ref.svn.c.lock.html
+    - title: svn log
+      path: articles/svn.ref.svn.c.log.html
+    - title: svn merge
+      path: articles/svn.ref.svn.c.merge.html
+    - title: svn mergeinfo
+      path: articles/svn.ref.svn.c.mergeinfo.html
+    - title: svn mkdir
+      path: articles/svn.ref.svn.c.mkdir.html
+    - title: svn move (mv)
+      path: articles/svn.ref.svn.c.move.html
+    - title: svn patch
+      path: articles/svn.ref.svn.c.patch.html
+    - title: 'svn propdel (pdel, pd)'
+      path: articles/svn.ref.svn.c.propdel.html
+    - title: 'svn propedit (pedit, pe)'
+      path: articles/svn.ref.svn.c.propedit.html
+    - title: 'svn propget (pget, pg)'
+      path: articles/svn.ref.svn.c.propget.html
+    - title: 'svn proplist (plist, pl)'
+      path: articles/svn.ref.svn.c.proplist.html
+    - title: 'svn propset (pset, ps)'
+      path: articles/svn.ref.svn.c.propset.html
+    - title: svn relocate
+      path: articles/svn.ref.svn.c.relocate.html
+    - title: svn resolve
+      path: articles/svn.ref.svn.c.resolve.html
+    - title: svn resolved
+      path: articles/svn.ref.svn.c.resolved.html
+    - title: svn revert
+      path: articles/svn.ref.svn.c.revert.html
+    - title: 'svn status (stat, st)'
+      path: articles/svn.ref.svn.c.status.html
+    - title: svn switch (sw)
+      path: articles/svn.ref.svn.c.switch.html
+    - title: svn unlock
+      path: articles/svn.ref.svn.c.unlock.html
+    - title: svn update (up)
+      path: articles/svn.ref.svn.c.update.html
+    - title: svn upgrade
+      path: articles/svn.ref.svn.c.upgrade.html
+    - title: svnadmin—Subversion Repository Administration
+      path: articles/svn.ref.svnadmin.html
+    - title: svnadmin crashtest
+      path: articles/svn.ref.svnadmin.c.crashtest.html
+    - title: svnadmin create
+      path: articles/svn.ref.svnadmin.c.create.html
+    - title: svnadmin deltify
+      path: articles/svn.ref.svnadmin.c.deltify.html
+    - title: svnadmin dump
+      path: articles/svn.ref.svnadmin.c.dump.html
+    - title: 'svnadmin help (h, ?)'
+      path: articles/svn.ref.svnadmin.c.help.html
+    - title: svnadmin hotcopy
+      path: articles/svn.ref.svnadmin.c.hotcopy.html
+    - title: svnadmin list-dblogs
+      path: articles/svn.ref.svnadmin.c.list-dblogs.html
+    - title: svnadmin list-unused-dblogs
+      path: articles/svn.ref.svnadmin.c.list-unused-dblogs.html
+    - title: svnadmin load
+      path: articles/svn.ref.svnadmin.c.load.html
+    - title: svnadmin lslocks
+      path: articles/svn.ref.svnadmin.c.lslocks.html
+    - title: svnadmin lstxns
+      path: articles/svn.ref.svnadmin.c.lstxns.html
+    - title: svnadmin pack
+      path: articles/svn.ref.svnadmin.c.pack.html
+    - title: svnadmin recover
+      path: articles/svn.ref.svnadmin.c.recover.html
+    - title: svnadmin rmlocks
+      path: articles/svn.ref.svnadmin.c.rmlocks.html
+    - title: svnadmin rmtxns
+      path: articles/svn.ref.svnadmin.c.rmtxns.html
+    - title: svnadmin setlog
+      path: articles/svn.ref.svnadmin.c.setlog.html
+    - title: svnadmin setrevprop
+      path: articles/svn.ref.svnadmin.c.setrevprop.html
+    - title: svnadmin setuuid
+      path: articles/svn.ref.svnadmin.c.setuuid.html
+    - title: svnadmin upgrade
+      path: articles/svn.ref.svnadmin.c.upgrade.html
+    - title: svnadmin verify
+      path: articles/svn.ref.svnadmin.c.verify.html
+    - title: svnlook—Subversion Repository Examination
+      path: articles/svn.ref.svnlook.html
+    - title: svnlook author
+      path: articles/svn.ref.svnlook.c.author.html
+    - title: svnlook cat
+      path: articles/svn.ref.svnlook.c.cat.html
+    - title: svnlook changed
+      path: articles/svn.ref.svnlook.c.changed.html
+    - title: svnlook date
+      path: articles/svn.ref.svnlook.c.date.html
+    - title: svnlook diff
+      path: articles/svn.ref.svnlook.c.diff.html
+    - title: svnlook dirs-changed
+      path: articles/svn.ref.svnlook.c.dirs-changed.html
+    - title: svnlook filesize
+      path: articles/svn.ref.svnlook.c.filesize.html
+    - title: 'svnlook help (h, ?)'
+      path: articles/svn.ref.svnlook.c.help.html
+    - title: svnlook history
+      path: articles/svn.ref.svnlook.c.history.html
+    - title: svnlook info
+      path: articles/svn.ref.svnlook.c.info.html
+    - title: svnlook lock
+      path: articles/svn.ref.svnlook.c.lock.html
+    - title: svnlook log
+      path: articles/svn.ref.svnlook.c.log.html
+    - title: 'svnlook propget (pget, pg)'
+      path: articles/svn.ref.svnlook.c.propget.html
+    - title: 'svnlook proplist (plist, pl)'
+      path: articles/svn.ref.svnlook.c.proplist.html
+    - title: svnlook tree
+      path: articles/svn.ref.svnlook.c.tree.html
+    - title: svnlook uuid
+      path: articles/svn.ref.svnlook.c.uuid.html
+    - title: svnlook youngest
+      path: articles/svn.ref.svnlook.c.youngest.html
+    - title: svnsync—Subversion Repository Mirroring
+      path: articles/svn.ref.svnsync.html
+    - title: svnsync copy-revprops
+      path: articles/svn.ref.svnsync.c.copy-revprops.html
+    - title: svnsync help
+      path: articles/svn.ref.svnsync.c.help.html
+    - title: svnsync info
+      path: articles/svn.ref.svnsync.c.info.html
+    - title: svnsync initialize (init)
+      path: articles/svn.ref.svnsync.c.init.html
+    - title: svnsync synchronize (sync)
+      path: articles/svn.ref.svnsync.c.sync.html
+    - title: svnrdump—Remote Subversion Repository Data Migration
+      path: articles/svn.ref.svnrdump.html
+    - title: svnrdump dump
+      path: articles/svn.ref.svnrdump.c.dump.html
+    - title: svnrdump help
+      path: articles/svn.ref.svnrdump.c.help.html
+    - title: svnrdump load
+      path: articles/svn.ref.svnrdump.c.load.html
+    - title: svnserve—Custom Subversion Server
+      path: articles/svn.ref.svnserve.html
+    - title: svndumpfilter—Subversion History Filtering
+      path: articles/svn.ref.svndumpfilter.html
+    - title: svndumpfilter exclude
+      path: articles/svn.ref.svndumpfilter.commands.c.exclude.html
+    - title: svndumpfilter include
+      path: articles/svn.ref.svndumpfilter.commands.c.include.html
+    - title: svndumpfilter help
+      path: articles/svn.ref.svndumpfilter.commands.c.help.html
+    - title: svnversion—Subversion Working Copy Version Info
+      path: articles/svn.ref.svnversion.html
+    - title: svnversion
+      path: articles/svn.ref.svnversion.re.html
+    - title: mod_dav_svn—Subversion Apache HTTP Server Module
+      path: articles/svn.ref.mod_dav_svn.html
+- title: mod_dav_svn Configuration Directives
+  articles:
+    - title: mod_dav_svn Configuration Directives
+      path: articles/svn.ref.mod_dav_svn.conf.html
+    - title: mod_authz_svn—Subversion Apache HTTP Authorization Module
+      path: articles/svn.ref.mod_authz_svn.html
+- title: mod_authz_svn Configuration Directives
+  articles:
+    - title: mod_authz_svn Configuration Directives
+      path: articles/svn.ref.mod_authz_svn.conf.html
+    - title: Subversion Properties
+      path: articles/svn.ref.properties.html
+    - title: Repository Hooks
+      path: articles/svn.ref.reposhooks.html
+    - title: start-commit
+      path: articles/svn.ref.reposhooks.start-commit.html
+    - title: pre-commit
+      path: articles/svn.ref.reposhooks.pre-commit.html
+    - title: post-commit
+      path: articles/svn.ref.reposhooks.post-commit.html
+    - title: pre-revprop-change
+      path: articles/svn.ref.reposhooks.pre-revprop-change.html
+    - title: post-revprop-change
+      path: articles/svn.ref.reposhooks.post-revprop-change.html
+    - title: pre-lock
+      path: articles/svn.ref.reposhooks.pre-lock.html
+    - title: post-lock
+      path: articles/svn.ref.reposhooks.post-lock.html
+    - title: pre-unlock
+      path: articles/svn.ref.reposhooks.pre-unlock.html
+    - title: post-unlock
+      path: articles/svn.ref.reposhooks.post-unlock.html
+- title: A. Subversion Quick-Start Guide
+  articles:
+    - title: A. Subversion Quick-Start Guide
+      path: articles/svn.intro.html
+    - title: Installing Subversion
+      path: articles/svn.intro.install.html
+    - title: High-Speed Tutorial
+      path: articles/svn.intro.quickstart.html
+- title: B. Subversion for CVS Users
+  articles:
+    - title: B. Subversion for CVS Users
+      path: articles/svn.forcvs.html
+    - title: Revision Numbers Are Different Now
+      path: articles/svn.forcvs.revnums.html
+    - title: Directory Versions
+      path: articles/svn.forcvs.directories.html
+    - title: More Disconnected Operations
+      path: articles/svn.forcvs.disconnected.html
+    - title: Distinction Between Status and Update
+      path: articles/svn.forcvs.status-vs-update.html
+    - title: Branches and Tags
+      path: articles/svn.forcvs.branches-and-tags.html
+    - title: Metadata Properties
+      path: articles/svn.forcvs.properties.html
+    - title: Conflict Resolution
+      path: articles/svn.forcvs.conflicts.html
+    - title: Binary Files and Translation
+      path: articles/svn.forcvs.binary-and-trans.html
+    - title: Versioned Modules
+      path: articles/svn.forcvs.modules.html
+    - title: Authentication
+      path: articles/svn.forcvs.auth.html
+    - title: Converting a Repository from CVS to Subversion
+      path: articles/svn.forcvs.convert.html
+- title: C. WebDAV and Autoversioning
+  articles:
+    - title: C. WebDAV and Autoversioning
+      path: articles/svn.webdav.html
+    - title: What Is WebDAV?
+      path: articles/svn.webdav.basic.html
+    - title: Autoversioning
+      path: articles/svn.webdav.autoversioning.html
+    - title: Client Interoperability
+      path: articles/svn.webdav.clients.html
+- title: D. Copyright
+  articles:
+    - title: D. Copyright
+      path: articles/svn.copyright.html
+- title: Index
+  articles:
+    - title: Index
+      path: articles/svn.index.html

@@ -1,0 +1,281 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Type Compatibility
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts13_images/undefined" />
+  </head>
+   <body>
+<ul>
+    <li><a href="#type-compatibility">Type Compatibility</a></li>
+    <li><a href="#soundness">Soundness</a></li>
+    <li><a href="#structural">Structural</a></li>
+    <li><a href="#generics">Generics</a></li>
+    <li><a href="#variance">Variance</a></li>
+    <li><a href="#functions">Functions</a>
+        <ul>
+            <li><a href="#return-type">Return Type</a></li>
+            <li><a href="#number-of-arguments">Number of arguments</a></li>
+            <li><a href="#optional-and-rest-parameters">Optional and rest parameters</a></li>
+            <li><a href="#types-of-arguments">Types of arguments</a></li>
+        </ul>
+    </li>
+    <li><a href="#enums">Enums</a></li>
+    <li><a href="#classes">Classes</a></li>
+    <li><a href="#generics">Generics</a></li>
+    <li><a href="#footnote-invariance">FootNote: Invariance</a></li>
+</ul>
+<h2 id="type-compatibility">Type Compatibility</h2>
+<p>Type Compatibility (as we discuss here) determines if one thing can be assigned to another. E.g. <code>string</code> and <code>number</code> are not compatible:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">let</span> str: <span class="hljs-built_in">string</span> = <span class="hljs-string">&quot;Hello&quot;</span>;
+<span class="hljs-keyword">let</span> num: <span class="hljs-built_in">number</span> = <span class="hljs-number">123</span>;
+str = num; <span class="hljs-comment">// ERROR: `number` is not assignable to `string`</span>
+num = str; <span class="hljs-comment">// ERROR: `string` is not assignable to `number`</span>
+</code></pre>
+<h2 id="soundness">Soundness</h2>
+<p>TypeScript&apos;s type system is designed to be convenient and allows for <em>unsound</em> behaviours e.g. anything can be assigned to <code>any</code> which means telling the compiler to allow you to do whatever you want:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">let</span> foo: <span class="hljs-built_in">any</span> = <span class="hljs-number">123</span>;
+foo = <span class="hljs-string">&quot;Hello&quot;</span>;
+<span class="hljs-comment">// Later</span>
+foo.toPrecision(<span class="hljs-number">3</span>); <span class="hljs-comment">// Allowed as you typed it as `any`</span>
+</code></pre>
+<h2 id="structural">Structural</h2>
+<p>TypeScript objects are structurally typed. This means the <em>names</em> don&apos;t matter as long as the structures match</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">interface</span> Point {
+    x: <span class="hljs-built_in">number</span>,
+    y: <span class="hljs-built_in">number</span>
+}
+<span class="hljs-keyword">class</span> Point2D {
+    <span class="hljs-keyword">constructor</span>(public x:number, public y:number){}
+}
+<span class="hljs-keyword">let</span> p: Point;
+<span class="hljs-comment">// OK, because of structural typing</span>
+p = <span class="hljs-keyword">new</span> Point2D(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>);
+</code></pre>
+<p>This allows you to create objects on the fly (like you do in vanilla JS) and still have safety whenever it can be inferred.</p>
+<p>Also <em>more</em> data is considered fine:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">interface</span> Point2D {
+    x: <span class="hljs-built_in">number</span>;
+    y: <span class="hljs-built_in">number</span>;
+}
+<span class="hljs-keyword">interface</span> Point3D {
+    x: <span class="hljs-built_in">number</span>;
+    y: <span class="hljs-built_in">number</span>;
+    z: <span class="hljs-built_in">number</span>;
+}
+<span class="hljs-keyword">var</span> point2D: Point2D = { x: <span class="hljs-number">0</span>, y: <span class="hljs-number">10</span> }
+<span class="hljs-keyword">var</span> point3D: Point3D = { x: <span class="hljs-number">0</span>, y: <span class="hljs-number">10</span>, z: <span class="hljs-number">20</span> }
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">iTakePoint2D</span>(<span class="hljs-params">point: Point2D</span>) </span>{ <span class="hljs-comment">/* do something */</span> }
+iTakePoint2D(point2D); <span class="hljs-comment">// exact match okay</span>
+iTakePoint2D(point3D); <span class="hljs-comment">// extra information okay</span>
+iTakePoint2D({ x: <span class="hljs-number">0</span> }); <span class="hljs-comment">// Error: missing information `y`</span>
+</code></pre>
+<h2 id="variance">Variance</h2>
+<p>Variance is an easy to understand and important concept for type compatibility analysis.</p>
+<p>For simple types <code>Base</code> and <code>Child</code>, if <code>Child</code> is a child of <code>Base</code>, then instances of <code>Child</code> can be assigned to a variable of type <code>Base</code>.</p>
+<blockquote>
+    <p>This is polymorphism 101</p>
+</blockquote>
+<p>In type compatibility of complex types composed of such <code>Base</code> and <code>Child</code> types depends on where the <code>Base</code> and <code>Child</code> in similar scenarios is driven by <em>variance</em>.</p>
+<ul>
+    <li>Covariant : (co aka joint) only in <em>same direction</em></li>
+    <li>Contravariant : (contra aka negative) only in <em>opposite direction</em></li>
+    <li>Bivariant : (bi aka both) both co and contra.</li>
+    <li>Invariant : if the types aren&apos;t exactly the same then they are incompatible.</li>
+</ul>
+<blockquote>
+    <p>Note: For a completely sound type system in the presence of mutable data like JavaScript, <code>invariant</code> is the only valid option. But as mentioned <em>convenience</em> forces us to make unsound choices.</p>
+</blockquote>
+<h2 id="functions">Functions</h2>
+<p>There are a few subtle things to consider when comparing two functions.</p>
+<h3 id="return-type">Return Type</h3>
+<p><code>covariant</code>: The return type must contain at least enough data.</p>
+<pre><code class="lang-ts"><span class="hljs-comment">/** Type Hierarchy */</span>
+<span class="hljs-keyword">interface</span> Point2D { x: <span class="hljs-built_in">number</span>; y: <span class="hljs-built_in">number</span>; }
+<span class="hljs-keyword">interface</span> Point3D { x: <span class="hljs-built_in">number</span>; y: <span class="hljs-built_in">number</span>; z: <span class="hljs-built_in">number</span>; }
+<span class="hljs-comment">/** Two sample functions */</span>
+<span class="hljs-keyword">let</span> iMakePoint2D = (): Point2D =&gt; ({ x: <span class="hljs-number">0</span>, y: <span class="hljs-number">0</span> });
+<span class="hljs-keyword">let</span> iMakePoint3D = (): Point3D =&gt; ({ x: <span class="hljs-number">0</span>, y: <span class="hljs-number">0</span>, z: <span class="hljs-number">0</span> });
+<span class="hljs-comment">/** Assignment */</span>
+iMakePoint2D = iMakePoint3D; <span class="hljs-comment">// Okay</span>
+iMakePoint3D = iMakePoint2D; <span class="hljs-comment">// ERROR: Point2D is not assignable to Point3D</span>
+</code></pre>
+<h3 id="number-of-arguments">Number of arguments</h3>
+<p>Fewer arguments are okay (i.e. functions can choose to ignore additional parameters). After all you are guaranteed to be called with at least enough arguments.</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">let</span> iTakeSomethingAndPassItAnErr
+    = (x: (err: <span class="hljs-built_in">Error</span>, data: <span class="hljs-built_in">any</span>) =&gt; <span class="hljs-built_in">void</span>) =&gt; { <span class="hljs-comment">/* do something */</span> };
+iTakeSomethingAndPassItAnErr(() =&gt; <span class="hljs-literal">null</span>) <span class="hljs-comment">// Okay</span>
+iTakeSomethingAndPassItAnErr((err) =&gt; <span class="hljs-literal">null</span>) <span class="hljs-comment">// Okay</span>
+iTakeSomethingAndPassItAnErr((err, data) =&gt; <span class="hljs-literal">null</span>) <span class="hljs-comment">// Okay</span>
+<span class="hljs-comment">// ERROR: Argument of type &apos;(err: any, data: any, more: any) =&gt; null&apos; is not assignable to parameter of type &apos;(err: Error, data: any) =&gt; void&apos;.</span>
+iTakeSomethingAndPassItAnErr((err, data, more) =&gt; <span class="hljs-literal">null</span>);
+</code></pre>
+<h3 id="optional-and-rest-parameters">Optional and Rest Parameters</h3>
+<p>Optional (pre determined count) and Rest parameters (any count of arguments) are compatible, again for convenience.</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">let</span> foo = (x:<span class="hljs-built_in">number</span>, y: <span class="hljs-built_in">number</span>) =&gt; { <span class="hljs-comment">/* do something */</span> }
+<span class="hljs-keyword">let</span> bar = (x?:<span class="hljs-built_in">number</span>, y?: <span class="hljs-built_in">number</span>) =&gt; { <span class="hljs-comment">/* do something */</span> }
+<span class="hljs-keyword">let</span> bas = (...args: <span class="hljs-built_in">number</span>[]) =&gt; { <span class="hljs-comment">/* do something */</span> }
+foo = bar = bas;
+bas = bar = foo;
+</code></pre>
+<blockquote>
+    <p>Note: optional (in our example <code>bar</code>) and non optional (in our example <code>foo</code>) are only compatible if strictNullChecks is false.</p>
+</blockquote>
+<h3 id="types-of-arguments">Types of arguments</h3>
+<p><code>bivariant</code> : This is designed to support common event handling scenarios</p>
+<pre><code class="lang-ts">/** Event Hierarchy */
+interface Event { timestamp: number; }
+interface MouseEvent extends Event { x: number; y: number }
+interface KeyEvent extends Event { keyCode: number }
+/** Sample event listener */
+enum EventType { Mouse, Keyboard }
+function addEventListener(eventType: EventType, handler: (n: Event) =&gt; void) {
+    /* ... */
+}
+// Unsound, but useful and common. Works as function argument comparison is bivariant
+addEventListener(EventType.Mouse, (e: MouseEvent) =&gt; console.log(e.x + &quot;,&quot; + e.y));
+// Undesirable alternatives in presence of soundness
+addEventListener(EventType.Mouse, (e: Event) =&gt; console.log((<mouseevent>e).x + &quot;,&quot; + (<mouseevent>e).y));
+addEventListener(EventType.Mouse, <(e: event)> void&gt;((e: MouseEvent) =&gt; console.log(e.x + &quot;,&quot; + e.y)));
+// Still disallowed (clear error). Type safety enforced for wholly incompatible types
+addEventListener(EventType.Mouse, (e: number) =&gt; console.log(e));
+</(e:></mouseevent></mouseevent></code></pre>
+<p>Also makes <code>Array<child></child></code> assignable to <code>Array
+        <base></code> (covariance) as the functions are compatible. Array covariance requires all <code>Array<child></child></code> functions to be assignable to <code>Array
+        <base></code> e.g. <code>push(t:Child)</code> is assignable to <code>push(t:Base)</code> which is made possible by function argument bivariance.</p>
+<p><strong>This can be confusing for people coming from other languages</strong> who would expect the following to error but will not in TypeScript:</p>
+<pre><code class="lang-ts"><span class="hljs-comment">/** Type Hierarchy */</span>
+<span class="hljs-keyword">interface</span> Point2D { x: <span class="hljs-built_in">number</span>; y: <span class="hljs-built_in">number</span>; }
+<span class="hljs-keyword">interface</span> Point3D { x: <span class="hljs-built_in">number</span>; y: <span class="hljs-built_in">number</span>; z: <span class="hljs-built_in">number</span>; }
+<span class="hljs-comment">/** Two sample functions */</span>
+<span class="hljs-keyword">let</span> iTakePoint2D = (point: Point2D) =&gt; { <span class="hljs-comment">/* do something */</span> }
+<span class="hljs-keyword">let</span> iTakePoint3D = (point: Point3D) =&gt; { <span class="hljs-comment">/* do something */</span> }
+iTakePoint3D = iTakePoint2D; <span class="hljs-comment">// Okay : Reasonable</span>
+iTakePoint2D = iTakePoint3D; <span class="hljs-comment">// Okay : WHAT</span>
+</code></pre>
+<h2 id="enums">Enums</h2>
+<ul>
+    <li>Enums are compatible with numbers, and numbers are compatible with enums.</li>
+</ul>
+<pre><code class="lang-ts"><span class="hljs-keyword">enum</span> Status { Ready, Waiting };
+<span class="hljs-keyword">let</span> status = Status.Ready;
+<span class="hljs-keyword">let</span> num = <span class="hljs-number">0</span>;
+status = num; <span class="hljs-comment">// OKAY</span>
+num = status; <span class="hljs-comment">// OKAY</span>
+</code></pre>
+<ul>
+    <li>Enum values from different enum types are considered incompatible. This makes enums useable <em>nominally</em> (as opposed to structurally)</li>
+</ul>
+<pre><code class="lang-ts"><span class="hljs-keyword">enum</span> Status { Ready, Waiting };
+<span class="hljs-keyword">enum</span> Color { Red, Blue, Green };
+<span class="hljs-keyword">let</span> status = Status.Ready;
+<span class="hljs-keyword">let</span> color = Color.Red;
+status = color; <span class="hljs-comment">// ERROR</span>
+</code></pre>
+<h2 id="classes">Classes</h2>
+<ul>
+    <li>Only instance members and methods are compared. <em>constructors</em> and <em>statics</em> play no part.</li>
+</ul>
+<pre><code class="lang-ts"><span class="hljs-keyword">class</span> Animal {
+    feet: <span class="hljs-built_in">number</span>;
+    <span class="hljs-keyword">constructor</span>(name: string, numFeet: number) { <span class="hljs-comment">/** do something */</span> }
+}
+<span class="hljs-keyword">class</span> Size {
+    feet: <span class="hljs-built_in">number</span>;
+    <span class="hljs-keyword">constructor</span>(meters: number) { <span class="hljs-comment">/** do something */</span> }
+}
+<span class="hljs-keyword">let</span> a: Animal;
+<span class="hljs-keyword">let</span> s: Size;
+a = s;  <span class="hljs-comment">// OK</span>
+s = a;  <span class="hljs-comment">// OK</span>
+</code></pre>
+<ul>
+    <li><code>private</code> and <code>protected</code> members <em>must originate from the same class</em>. Such members essentially make the class <em>nominal</em>.</li>
+</ul>
+<pre><code class="lang-ts"><span class="hljs-comment">/** A class hierarchy */</span>
+<span class="hljs-keyword">class</span> Animal { <span class="hljs-keyword">protected</span> feet: <span class="hljs-built_in">number</span>; }
+<span class="hljs-keyword">class</span> Cat extends Animal { }
+<span class="hljs-keyword">let</span> animal: Animal;
+<span class="hljs-keyword">let</span> cat: Cat;
+animal = cat; <span class="hljs-comment">// OKAY</span>
+cat = animal; <span class="hljs-comment">// OKAY</span>
+<span class="hljs-comment">/** Looks just like Animal */</span>
+<span class="hljs-keyword">class</span> Size { <span class="hljs-keyword">protected</span> feet: <span class="hljs-built_in">number</span>; }
+<span class="hljs-keyword">let</span> size: Size;
+animal = size; <span class="hljs-comment">// ERROR</span>
+size = animal; <span class="hljs-comment">// ERROR</span>
+</code></pre>
+<h2 id="generics">Generics</h2>
+<p>Since TypeScript has a structural type system, type parameters only affect compatibility when used by a member. For example, in the following <code>T</code> has no impact on compatibility:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">interface</span> Empty<t> {
+}
+<span class="hljs-keyword">let</span> x: Empty&lt;<span class="hljs-built_in">number</span>&gt;;
+<span class="hljs-keyword">let</span> y: Empty&lt;<span class="hljs-built_in">string</span>&gt;;
+x = y;  <span class="hljs-comment">// okay, y matches structure of x</span>
+</t></code></pre>
+<p>However, if <code>T</code> is used, it will play a role in compatibility based on its <em>instantiation</em> as shown below:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">interface</span> NotEmpty<t> {
+    data: T;
+}
+<span class="hljs-keyword">let</span> x: NotEmpty&lt;<span class="hljs-built_in">number</span>&gt;;
+<span class="hljs-keyword">let</span> y: NotEmpty&lt;<span class="hljs-built_in">string</span>&gt;;
+x = y;  <span class="hljs-comment">// error, x and y are not compatible</span>
+</t></code></pre>
+<p>In cases where generic arguments haven&apos;t been <em>instantiated</em> they are substituted by <code>any</code> before checking compatibility:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">let</span> identity = <span class="hljs-function"><span class="hljs-keyword">function</span>&lt;<span class="hljs-title">T</span>&gt;(<span class="hljs-params">x: T</span>): <span class="hljs-title">T</span> </span>{
+    <span class="hljs-comment">// ...</span>
+}
+<span class="hljs-keyword">let</span> reverse = <span class="hljs-function"><span class="hljs-keyword">function</span>&lt;<span class="hljs-title">U</span>&gt;(<span class="hljs-params">y: U</span>): <span class="hljs-title">U</span> </span>{
+    <span class="hljs-comment">// ...</span>
+}
+identity = reverse;  <span class="hljs-comment">// Okay because (x: any)=&gt;any matches (y: any)=&gt;any</span>
+</code></pre>
+<p>Generics involving classes are matched by relevant class compatibility as mentioned before. e.g. </p>
+<pre><code class="lang-ts"><span class="hljs-keyword">class</span> List<t> {
+  add(val: T) { }
+}
+<span class="hljs-keyword">class</span> Animal { name: <span class="hljs-built_in">string</span>; }
+<span class="hljs-keyword">class</span> Cat extends Animal { meow() { } }
+<span class="hljs-keyword">const</span> animals = <span class="hljs-keyword">new</span> List<animal>();
+animals.add(<span class="hljs-keyword">new</span> Animal()); <span class="hljs-comment">// Okay </span>
+animals.add(<span class="hljs-keyword">new</span> Cat()); <span class="hljs-comment">// Okay </span>
+<span class="hljs-keyword">const</span> cats = <span class="hljs-keyword">new</span> List<cat>();
+cats.add(<span class="hljs-keyword">new</span> Animal()); <span class="hljs-comment">// Error </span>
+cats.add(<span class="hljs-keyword">new</span> Cat()); <span class="hljs-comment">// Okay</span>
+</cat></animal></t></code></pre>
+<h2 id="footnote-invariance">FootNote: Invariance</h2>
+<p>We said invariance is the only sound option. Here is an example where both <code>contra</code> and <code>co</code> variance are shown to be unsafe for arrays.</p>
+<pre><code class="lang-ts"><span class="hljs-comment">/** Hierarchy */</span>
+<span class="hljs-keyword">class</span> Animal { <span class="hljs-keyword">constructor</span>(public name: string){} }
+<span class="hljs-keyword">class</span> Cat extends Animal { meow() { } }
+<span class="hljs-comment">/** An item of each */</span>
+<span class="hljs-keyword">var</span> animal = <span class="hljs-keyword">new</span> Animal(<span class="hljs-string">&quot;animal&quot;</span>);
+<span class="hljs-keyword">var</span> cat = <span class="hljs-keyword">new</span> Cat(<span class="hljs-string">&quot;cat&quot;</span>);
+<span class="hljs-comment">/**
+ * Demo : polymorphism 101
+ * Animal <= cat * < span>
+animal = cat; <span class="hljs-comment">// Okay</span>
+cat = animal; <span class="hljs-comment">// ERROR: cat extends animal</span>
+<span class="hljs-comment">/** Array of each to demonstrate variance */</span>
+<span class="hljs-keyword">let</span> animalArr: Animal[] = [animal];
+<span class="hljs-keyword">let</span> catArr: Cat[] = [cat];
+<span class="hljs-comment">/**
+ * Obviously Bad : Contravariance
+ * Animal <= cat * animal[]>= Cat[]
+ */</=></span>
+catArr = animalArr; <span class="hljs-comment">// Okay if contravariant</span>
+catArr[<span class="hljs-number">0</span>].meow(); <span class="hljs-comment">// Allowed but BANG &#x1F52B; at runtime</span>
+<span class="hljs-comment">/**
+ * Also Bad : covariance
+ * Animal <= cat * animal[] <="Cat[]" span>
+animalArr = catArr; <span class="hljs-comment">// Okay if covariant</span>
+animalArr.push(<span class="hljs-keyword">new</span> Animal(<span class="hljs-string">&apos;another animal&apos;</span>)); <span class="hljs-comment">// Just pushed an animal into catArr!</span>
+catArr.forEach(c =&gt; c.meow()); <span class="hljs-comment">// Allowed but BANG &#x1F52B; at runtime</span>
+</=></span></=></span></code></pre>
+</body>
+</html>

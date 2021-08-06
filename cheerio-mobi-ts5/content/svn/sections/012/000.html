@@ -1,0 +1,318 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>mod_dav_svn Configuration Directives</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts5/css/kindle.css" />
+  </head>
+   <body>
+    <div class="refentry">
+      <a id="svn.ref.mod_dav_svn.conf"></a>
+      <div class="titlepage"></div>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>mod_dav_svn Configuration Directives &#x2014; Apache configuration
+        directives for serving Subversion repositories through the
+        Apache HTTP Server.</p>
+      </div>
+      <div class="refsect1">
+        <a id="svn.ref.mod_dav_svn.conf.desc"></a>
+        <h2>Description</h2>
+        <p>This section briefly describes each Subversion
+          Apache configuration directive.  For an in-depth
+          description of configuring Apache with Subversion, see .</p>
+      </div>
+      <div class="refsect1">
+        <a id="svn.ref.mod_dav_svn.conf.directives"></a>
+        <h2>Directives</h2>
+        <p>These are the <code class="filename">httpd.conf</code> directives
+          that apply to <span class="command"><strong>mod_dav_svn</strong></span>:</p>
+        <div class="variablelist">
+          <dl class="variablelist">
+            <dt>
+              <span class="term">
+                <code class="literal">DAV svn</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Must be included in any
+                <code class="literal">Directory</code> or
+                <code class="literal">Location</code> block for a Subversion
+                repository.  It tells <span class="command"><strong>httpd</strong></span> to use the Subversion
+                backend for <code class="literal">mod_dav</code> to handle all
+                requests.</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">SVNActivitiesDB
+              <em class="replaceable"><code>directory-path</code></em></code>
+              </span>
+            </dt>
+            <dd>
+              <p>Specifies the location in the filesystem where the
+                activities database should be stored.  By default,
+                <span class="command"><strong>mod_dav_svn</strong></span> creates and uses a directory in the
+                repository
+                called <code class="filename">dav/activities.d</code>.  The
+                path specified with this option must be an absolute
+                path.</p>
+              <p>If specified for
+                an <code class="literal">SVNParentPath</code> area, <span class="command"><strong>mod_dav_svn</strong></span>
+                appends the basename of the repository to the path
+                specified here.  For example:</p>
+              <div class="informalexample">
+                <pre class="screen">
+<location svn>
+  DAV svn
+  # any &quot;/svn/foo&quot; URL will map to a repository in 
+  # /net/svn.nfs/repositories/foo
+  SVNParentPath         &quot;/net/svn.nfs/repositories&quot;
+  # any &quot;/svn/foo&quot; URL will map to an activities db in
+  #  /var/db/svn/activities/foo
+  SVNActivitiesDB       &quot;/var/db/svn/activities&quot;
+</location>
+</pre>
+              </div>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">SVNAdvertiseV2Protocol On|Off</code>
+              </span>
+            </dt>
+            <dd>
+              <p>New to Subversion 1.7, this toggles
+                whether <span class="command"><strong>mod_dav_svn</strong></span> advertises its
+                support for the new version of its HTTP protocol also
+                introduced in that version.  Most admins will not wish
+                to use this directive (which is <code class="literal">On</code>
+                by default), choosing instead to enjoy the performance
+                benefits that the new protocol offers.  However, whena
+                configuring a server as a write-through proxy to
+                another server which does not support the new
+                protocol, set this directive&apos;s value
+                to <code class="literal">Off</code>.</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">SVNAllowBulkUpdates On|Off</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Toggles support for all-inclusive
+                responses to update-style <code class="literal">REPORT</code>
+                requests.  Subversion clients use
+                <code class="literal">REPORT</code> requests to get information
+                about directory tree checkouts and updates from
+                <span class="command"><strong>mod_dav_svn</strong></span>.  They can ask the
+                server to send that information in one of two ways:
+                with the entirety of the tree&apos;s information in one
+                massive response, or with a
+                <em class="firstterm">skelta</em> (a skeletal
+                representation of a tree delta) which contains just
+                enough information for the client to know what
+                <span class="emphasis"><em>additional</em></span> data to request from
+                the server.  When this directive is included with a
+                value of <code class="literal">Off</code>,
+                <span class="command"><strong>mod_dav_svn</strong></span> will only ever respond
+                to these <code class="literal">REPORT</code> requests with
+                skelta responses, regardless of the type of responses
+                requested by the client.</p>
+              <p>Most folks won&apos;t need to use this directive at
+                all.  It primarily exists for administrators who
+                wish&#x2014;for security or auditing reasons&#x2014;to
+                force Subversion clients to fetch individually all the
+                files and directories needed for updates and
+                checkouts, thus leaving an audit trail of
+                <code class="literal">GET</code> and <code class="literal">PROPFIND</code>
+                requests in Apache&apos;s logs.  The default value of this
+                directive is <code class="literal">On</code>.</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">SVNAutoversioning On|Off</code>
+              </span>
+            </dt>
+            <dd>
+              <p>When its value is
+                <code class="literal">On</code>, allows write requests from
+                WebDAV clients to result in automatic commits.  A
+                generic log message is auto-generated and attached to
+                each revision.  If you enable autoversioning, you&apos;ll
+                likely want to set <code class="literal">ModMimeUsePathInfo
+                On</code> so that <code class="literal">mod_mime</code> can
+                set <code class="literal">svn:mime-type</code> to the correct
+                MIME type automatically (as best as
+                <code class="literal">mod_mime</code> is able to, of course).
+                For more information, see .  The default value of this
+                directive is <code class="literal">Off</code>.</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">SVNCacheFullTexts On|Off</code>
+              </span>
+            </dt>
+            <dd>
+              <p>When set to <code class="literal">On</code>, this tells
+                Subversion to cache content fulltexts if sufficient
+                in-memory cache is available, which could offer a
+                significant performance benefit to the server.  (See
+                also the <code class="literal">SVNInMemoryCacheSize</code>
+                directive.)  The default value of this directive
+                is <code class="literal">Off</code>.</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">SVNCacheTextDeltas On|Off</code>
+              </span>
+            </dt>
+            <dd>
+              <p>When set to <code class="literal">On</code>, this tells
+                Subversion to cache content deltas if sufficient
+                in-memory cache is available, which could offer a
+                significant performance benefit to the server.  (See
+                also the <code class="literal">SVNInMemoryCacheSize</code>
+                directive.)  The default value of this directive
+                is <code class="literal">Off</code>.</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">SVNCompressionLevel
+              <em class="replaceable"><code>level</code></em></code>
+              </span>
+            </dt>
+            <dd>
+              <p>Specifies the compression level used when sending
+                file content over the network.  A value
+                of <code class="literal">0</code> disables compression
+                altogether, and <code class="literal">9</code> is the maximum
+                value.  <code class="literal">5</code> is the default
+                value.</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">SVNIndexXSLT
+              <em class="replaceable"><code>directory-path</code></em></code>
+              </span>
+            </dt>
+            <dd>
+              <p>Specifies the URI of an XSL transformation for
+                directory indexes.  This directive is optional.</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">SVNInMemoryCacheSize
+              <em class="replaceable"><code>size</code></em></code>
+              </span>
+            </dt>
+            <dd>
+              <p>Specifies the maximum size (in kbytes) per process
+                of Subversion&apos;s in-memory object cache.  The default
+                value is <code class="literal">16384</code>; use a value
+                of <code class="literal">0</code> to deactivate this cache
+                altogether.</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">SVNListParentPath On|Off</code>
+              </span>
+            </dt>
+            <dd>
+              <p>When set to <code class="literal">On</code>, allows
+                a <code class="literal">GET</code>
+                of <code class="literal">SVNParentPath</code>, which results in
+                a listing of all repositories under that path.  The
+                default setting is
+                <code class="literal">Off</code>.</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">SVNMasterURI
+              <em class="replaceable"><code>url</code></em></code>
+              </span>
+            </dt>
+            <dd>
+              <p>Specifies a URI to the master Subversion
+                repository (used for a write-through proxy).</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">SVNParentPath
+              <em class="replaceable"><code>directory-path</code></em></code>
+              </span>
+            </dt>
+            <dd>
+              <p>Specifies the location in the filesystem of a
+                parent directory whose child directories are
+                Subversion repositories.  In a configuration block for
+                a Subversion repository, either this directive or
+                <code class="literal">SVNPath</code> must be present, but not
+                both.</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">SVNPath
+              <em class="replaceable"><code>directory-path</code></em></code>
+              </span>
+            </dt>
+            <dd>
+              <p>Specifies the location in the
+                filesystem for a Subversion repository&apos;s files.  In a
+                configuration block for a Subversion repository,
+                either this directive or
+                <code class="literal">SVNParentPath</code> must be present, but
+                not both.</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">SVNPathAuthz On|Off|short_circuit</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Controls path-based authorization by enabling
+                subrequests (<code class="literal">On</code>), disabling
+                subrequests (<code class="literal">Off</code>; see ),
+                or querying <span class="command"><strong>mod_authz_svn</strong></span> directly
+                (<code class="literal">short_circuit</code>).  The default
+                value of this directive is <code class="literal">On</code>.</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">SVNReposName
+              <em class="replaceable"><code>name</code></em></code>
+              </span>
+            </dt>
+            <dd>
+              <p>Specifies the name of a Subversion repository for
+                use in <code class="literal">HTTP GET</code> responses.  This
+                value will be prepended to the title of all directory
+                listings (which are served when you navigate to a
+                Subversion repository with a web browser).  This
+                directive is optional.</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">SVNSpecialURI
+              <em class="replaceable"><code>component</code></em></code>
+              </span>
+            </dt>
+            <dd>
+              <p>Specifies the URI component (namespace) for
+                special Subversion resources.  The default is
+                <code class="literal">!svn</code>, and most
+                administrators will never use this directive.  Set
+                this only if there is a pressing need to have a file
+                named <code class="filename">!svn</code> in your repository.
+                If you change this on a server already in use, it will
+                break all of the outstanding working copies, and your
+                users will hunt you down with pitchforks and flaming
+                torches.</p>
+            </dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

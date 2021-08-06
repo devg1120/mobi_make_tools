@@ -1,0 +1,69 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Operators</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+Operators combine operands into expressions.
+</p><pre>
+[<a>Expression</a>] = [<a>UnaryExpr</a>] | [<a>Expression</a>] [<a>binary_op</a>] [<a>Expression</a>] .
+[<a>UnaryExpr</a>]  = [<a>PrimaryExpr</a>] | [<a>unary_op</a>] [<a>UnaryExpr</a>] .
+[<a>binary_op</a>]  = &quot;||&quot; | &quot;&amp;&amp;&quot; | [<a>rel_op</a>] | [<a>add_op</a>] | [<a>mul_op</a>] .
+[<a>rel_op</a>]     = &quot;==&quot; | &quot;!=&quot; | &quot;<" | "<=" | ">&quot; | &quot;&gt;=&quot; .
+[<a>add_op</a>]     = &quot;+&quot; | &quot;-&quot; | &quot;|&quot; | &quot;^&quot; .
+[<a>mul_op</a>]     = &quot;*&quot; | &quot;/&quot; | &quot;%&quot; | &quot;&lt;<" | ">&gt;&quot; | &quot;&amp;&quot; | &quot;&amp;^&quot; .
+[<a>unary_op</a>]   = &quot;+&quot; | &quot;-&quot; | &quot;!&quot; | &quot;^&quot; | &quot;*&quot; | &quot;&amp;&quot; | &quot;<-" . < pre><p>
+Comparisons are discussed [<a>elsewhere</a>].
+For other binary operators, the operand types must be [<a>identical</a>]
+unless the operation involves shifts or untyped [<a>constants</a>].
+For operations involving constants only, see the section on
+[<a>constant expressions</a>].
+</p><p>
+Except for shift operations, if one operand is an untyped [<a>constant</a>]
+and the other operand is not, the constant is implicitly [<a>converted</a>]
+to the type of the other operand.
+</p><p>
+The right operand in a shift expression must have integer type
+or be an untyped constant [<a>representable</a>] by a
+value of type <code>uint</code>.
+If the left operand of a non-constant shift expression is an untyped constant,
+it is first implicitly converted to the type it would assume if the shift expression were
+replaced by its left operand alone.
+</p><pre>
+var s uint = 33
+var i = 1&lt;<s 0 1 2 has type int var j int32="1&lt;&lt;s" int32; k="uint64(1&lt;&lt;s)" uint64; 1<<33 m 1.0 int; if ints are 32bits in size n="1.0&lt;&lt;s" =="j" true o="1&lt;&lt;s" and have p="1&lt;&lt;s" illegal size: int, but overflows u="1.0&lt;&lt;s" illegal: float64, cannot shift u1="1.0&lt;&lt;s" !="0" u2="1&lt;&lt;s" v float32="1&lt;&lt;s" float32, w int64="1.0&lt;&lt;33" 1.0<<33 is a constant expression x="a[1.0&lt;&lt;s]" a[0] 1.0<<s) len(a)="=" < pre><h4>Operator precedence</h4><p>
+Unary operators have the highest precedence.
+As the  <code>++</code> and <code>--</code> operators form
+statements, not expressions, they fall
+outside the operator hierarchy.
+As a consequence, statement <code>*p++</code> is the same as <code>(*p)++</code>.
+</p><p>
+There are five precedence levels for binary operators.
+Multiplication operators bind strongest, followed by addition
+operators, comparison operators, <code>&amp;&amp;</code> (logical AND),
+and finally <code>||</code> (logical OR):
+</p><pre>
+Precedence    Operator
+    5             *  /  %  &lt;&lt;  &gt;&gt;  &amp;  &amp;^
+    4             +  -  |  ^
+    3             ==  !=  &lt;  <=>  &gt;=
+    2             &amp;&amp;
+    1             ||
+</=></pre><p>
+Binary operators of the same precedence associate from left to right.
+For instance, <code>x / y * z</code> is the same as <code>(x / y) * z</code>.
+</p><pre>
++x
+23 + 3*x[i]
+x <= f() ^a>&gt; b
+f() || g()
+x == y+1 &amp;&amp; <-chanptr> 0
+</-chanptr></=></pre></s></pre></-"></"></"></pre></body>
+</body>
+</html>

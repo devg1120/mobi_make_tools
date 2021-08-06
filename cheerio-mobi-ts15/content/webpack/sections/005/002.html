@@ -1,0 +1,70 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Using Loaders</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<h2 id="using-loaders">Using Loaders<a href="#using-loaders" aria-hidden="true"><span class="icon icon-link"></span></a></h2>
+<p>There are three ways to use loaders in your application:</p>
+<ul>
+    <li><a href="#configuration">Configuration</a> (recommended): Specify them in your <strong>webpack.config.js</strong> file.</li>
+    <li><a href="#inline">Inline</a>: Specify them explicitly in each <code>import</code> statement.</li>
+    <li><a href="#cli">CLI</a>: Specify them within a shell command.</li>
+</ul>
+<h3 id="configuration">Configuration<a href="#configuration" aria-hidden="true"><span class="icon icon-link"></span></a></h3>
+<p><a href="/configuration/module/#modulerules"><code>module.rules</code></a> allows you to specify several loaders within your webpack configuration.
+    This is a concise way to display loaders, and helps to maintain clean code. It also offers you a full overview of each respective loader.</p>
+<p>Loaders are evaluated/executed from right to left (or from bottom to top). In the example below execution starts with sass-loader, continues with css-loader and finally ends with style-loader. See <a href="/concepts/loaders/#loader-features">&quot;Loader Features&quot;</a> for more information about loaders order.</p>
+<pre><code>module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  module<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    rules<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        test<span class="token punctuation">:</span> <span class="token regex">/\.css$/</span><span class="token punctuation">,</span>
+        use<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+          <!-- -->// <a href="/loaders/style-loader">style-loader</a>
+          <span class="token punctuation">{</span> loader<span class="token punctuation">:</span> <span class="token string">&apos;style-loader&apos;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <!-- -->// <a href="/loaders/css-loader">css-loader</a>
+          <span class="token punctuation">{</span>
+            loader<span class="token punctuation">:</span> <span class="token string">&apos;css-loader&apos;</span><span class="token punctuation">,</span>
+            options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+              modules<span class="token punctuation">:</span> <span class="token boolean">true</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <!-- -->// <a href="/loaders/sass-loader">sass-loader</a>
+          <span class="token punctuation">{</span> loader<span class="token punctuation">:</span> <span class="token string">&apos;sass-loader&apos;</span> <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<h3 id="inline">Inline<a href="#inline" aria-hidden="true"><span class="icon icon-link"></span></a></h3>
+<p>It&apos;s possible to specify loaders in an <code>import</code> statement, or any <a href="/api/module-methods">equivalent &quot;importing&quot; method</a>. Separate loaders from the resource with <code>!</code>. Each part is resolved relative to the current directory.</p>
+<pre><code><span class="token keyword">import</span> Styles <span class="token keyword">from</span> <span class="token string">&apos;style-loader!css-loader?modules!./styles.css&apos;</span><span class="token punctuation">;</span></code></pre>
+<p>It&apos;s possible to override any loaders, preLoaders and postLoaders from the <a href="/configuration">configuration</a> by prefixing the inline <code>import</code> statement:</p>
+<ul>
+    <li>Prefixing with <code>!</code> will disable all configured normal loaders</li>
+</ul>
+<pre><code><span class="token keyword">import</span> Styles <span class="token keyword">from</span> <span class="token string">&apos;!style-loader!css-loader?modules!./styles.css&apos;</span><span class="token punctuation">;</span></code></pre>
+<ul>
+    <li>Prefixing with <code>!!</code> will disable all configured loaders (preLoaders, loaders, postLoaders)</li>
+</ul>
+<pre><code><span class="token keyword">import</span> Styles <span class="token keyword">from</span> <span class="token string">&apos;!!style-loader!css-loader?modules!./styles.css&apos;</span><span class="token punctuation">;</span></code></pre>
+<ul>
+    <li>Prefixing with <code>-!</code> will disable all configured preLoaders and loaders but not postLoaders</li>
+</ul>
+<pre><code><span class="token keyword">import</span> Styles <span class="token keyword">from</span> <span class="token string">&apos;-!style-loader!css-loader?modules!./styles.css&apos;</span><span class="token punctuation">;</span></code></pre>
+<p>Options can be passed with a query parameter, e.g. <code>?key=value&amp;foo=bar</code>, or a JSON object, e.g. <code>?{&quot;key&quot;:&quot;value&quot;,&quot;foo&quot;:&quot;bar&quot;}</code>.</p>
+<blockquote class="tip">
+    <p>Use <code>module.rules</code> whenever possible, as this will reduce boilerplate in your source code and allow you to debug or locate a loader faster if something goes south.</p>
+</blockquote>
+<h3 id="cli">CLI<a href="#cli" aria-hidden="true"><span class="icon icon-link"></span></a></h3>
+<p>You can also use loaders through the CLI:</p>
+<pre><code>webpack --module-bind jade-loader --module-bind <span class="token string">&apos;css=style-loader!css-loader&apos;</span></code></pre>
+<p>This uses the <code>jade-loader</code> for <code>.jade</code> files, and the <a href="/loaders/style-loader"><code>style-loader</code></a> and <a href="/loaders/css-loader"><code>css-loader</code></a> for <code>.css</code> files.</p>
+</body>
+</html>

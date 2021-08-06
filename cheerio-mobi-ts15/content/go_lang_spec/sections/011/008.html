@@ -1,0 +1,78 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Method values</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+If the expression <code>x</code> has static type <code>T</code> and
+<code>M</code> is in the [<a>method set</a>] of type <code>T</code>,
+<code>x.M</code> is called a <i>method value</i>.
+The method value <code>x.M</code> is a function value that is callable
+with the same arguments as a method call of <code>x.M</code>.
+The expression <code>x</code> is evaluated and saved during the evaluation of the
+method value; the saved copy is then used as the receiver in any calls,
+which may be executed later.
+</p><p>
+The type <code>T</code> may be an interface or non-interface type.
+</p><p>
+As in the discussion of [<a>method expressions</a>] above,
+consider a struct type <code>T</code> with two methods,
+<code>Mv</code>, whose receiver is of type <code>T</code>, and
+<code>Mp</code>, whose receiver is of type <code>*T</code>.
+</p><pre>
+type T struct {
+	a int
+}
+func (tv  T) Mv(a int) int         { return 0 }  // value receiver
+func (tp *T) Mp(f float32) float32 { return 1 }  // pointer receiver
+var t T
+var pt *T
+func makeT() T
+</pre><p>
+The expression
+</p><pre>
+t.Mv
+</pre><p>
+yields a function value of type
+</p><pre>
+func(int) int
+</pre><p>
+These two invocations are equivalent:
+</p><pre>
+t.Mv(7)
+f := t.Mv; f(7)
+</pre><p>
+Similarly, the expression
+</p><pre>
+pt.Mp
+</pre><p>
+yields a function value of type
+</p><pre>
+func(float32) float32
+</pre><p>
+As with [<a>selectors</a>], a reference to a non-interface method with a value receiver
+using a pointer will automatically dereference that pointer: <code>pt.Mv</code> is equivalent to <code>(*pt).Mv</code>.
+</p><p>
+As with [<a>method calls</a>], a reference to a non-interface method with a pointer receiver
+using an addressable value will automatically take the address of that value: <code>t.Mp</code> is equivalent to <code>(&amp;t).Mp</code>.
+</p><pre>
+f := t.Mv; f(7)   // like t.Mv(7)
+f := pt.Mp; f(7)  // like pt.Mp(7)
+f := pt.Mv; f(7)  // like (*pt).Mv(7)
+f := t.Mp; f(7)   // like (&amp;t).Mp(7)
+f := makeT().Mp   // invalid: result of makeT() is not addressable
+</pre><p>
+Although the examples above use non-interface types, it is also legal to create a method value
+from a value of interface type.
+</p><pre>
+var i interface { M(int) } = myVal
+f := i.M; f(7)  // like i.M(7)
+</pre></body>
+</body>
+</html>

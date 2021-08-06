@@ -1,0 +1,70 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Separating Complexity Control from Performance Tuning</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts10/undefined" />
+  </head>
+   <body>
+<div class="sect1" lang="en">
+    <div class="titlepage">
+        <div>
+            <h2 class="title" style="clear: both"><a id="id2918559">Separating Complexity Control from Performance Tuning</a></h2>
+        </div>
+    </div>
+    <p>First, though, we need to dispose of a few red herrings. Our
+        discussion is <span class="emphasis"><em>not</em></span> going to be about using
+        concurrency to improve performance. Putting that concern before
+        developing a clean architecture that minimizes global complexity is
+        premature optimization</p>
+    <p>A closely related red herring is threads (that is, multiple
+        concurrent processes sharing the same memory-address space). Threading is a
+        performance hack. To avoid a long diversion here, we&apos;ll
+        examine threads in more detail at the end of this chapter; the
+        summary is that they do not reduce global complexity but rather
+        <span class="emphasis"><em>increase</em></span> it, and should therefore be avoided
+        save under dire necessity.</p>
+    <p>Respecting the Rule of Modularity, on the other hand, is
+        <span class="emphasis"><em>not</em></span> a red herring; doing so can make your
+        programs &#x2014; and your life &#x2014; simpler. All the reasons for
+        process partitioning are continuous with the reasons for module
+        partitioning that we developed in <a href="modularitychapter.html" title="Chapter&#xFFFD;4.&#xFFFD;Modularity">Chapter&#xFFFD;4</a>.</p>
+    <p>Another important reason for breaking up programs into
+        cooperating processes is for better security. Under Unix, programs
+        that must be run by ordinary users, but must have write access to
+        security-critical system resources, get that access through a feature
+        called the <i>setuid bit</i>.<sup>[<a id="id2915417" href="ch07s01.html#ftn.id2915417">66</a>]</sup> Executable files are the smallest unit
+        of code that can hold a setuid bit; thus, every line of code in a
+        setuid executable must be trusted. (Well-written setuid programs,
+        however, take all necessary privileged actions first and then drop
+        their privileges back to user level for the remainder of their
+        existence.)</p>
+    <p>Usually a setuid program only needs its privileges for one or a
+        small handful of operations. It is often possible to break up such a
+        program into cooperating processes, a smaller one that needs setuid
+        and a larger one that does not. When we can do this, only the code in
+        the smaller program has to be trusted. It is in significant part
+        because this kind of partitioning and delegation is possible that Unix
+        has a better security track record<sup>[<a id="id2915447" href="ch07s01.html#ftn.id2915447">67</a>]</sup> than its competitors.</p>
+    <div class="footnotes"><br>
+        <hr width="100" align="left">
+        <div class="footnote">
+            <p><sup>[<a id="ftn.id2915417" href="ch07s01.html#id2915417">66</a>] </sup>A setuid
+                program runs not with the privileges of the user calling it, but with
+                the privileges of the owner of the executable. This feature can be
+                used to give restricted, program-controlled access to things like the
+                password file that nonadministrators should not be allowed to modify
+                directly.</p>
+        </div>
+        <div class="footnote">
+            <p><sup>[<a id="ftn.id2915447" href="ch07s01.html#id2915447">67</a>] </sup>That is, a better
+                record measured in security breaches per total machine hours of
+                Internet exposure.</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

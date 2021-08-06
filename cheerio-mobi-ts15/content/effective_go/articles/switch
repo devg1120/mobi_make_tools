@@ -1,0 +1,91 @@
+<body><p>
+Go's <code>switch</code> is more general than C's.
+The expressions need not be constants or even integers,
+the cases are evaluated top to bottom until a match is found,
+and if the <code>switch</code> has no expression it switches on
+<code>true</code>.
+It's therefore possible—and idiomatic—to write an
+<code>if</code>-<code>else</code>-<code>if</code>-<code>else</code>
+chain as a <code>switch</code>.
+</p><pre>
+func unhex(c byte) byte {
+    switch {
+    case '0' <= c && c <= '9':
+        return c - '0'
+    case 'a' <= c && c <= 'f':
+        return c - 'a' + 10
+    case 'A' <= c && c <= 'F':
+        return c - 'A' + 10
+    }
+    return 0
+}
+</pre><p>
+There is no automatic fall through, but cases can be presented
+in comma-separated lists.
+</p><pre>
+func shouldEscape(c byte) bool {
+    switch c {
+    case ' ', '?', '&', '=', '#', '+', '%':
+        return true
+    }
+    return false
+}
+</pre><p>
+Although they are not nearly as common in Go as some other C-like
+languages, <code>break</code> statements can be used to terminate
+a <code>switch</code> early.
+Sometimes, though, it's necessary to break out of a surrounding loop,
+not the switch, and in Go that can be accomplished by putting a label
+on the loop and "breaking" to that label.
+This example shows both uses.
+</p><pre>
+Loop:
+	for n := 0; n < len(src); n += size {
+		switch {
+		case src[n] < sizeOne:
+			if validateOnly {
+				break
+			}
+			size = 1
+			update(src[n])
+
+		case src[n] < sizeTwo:
+			if n+1 >= len(src) {
+				err = errShortInput
+				break Loop
+			}
+			if validateOnly {
+				break
+			}
+			size = 2
+			update(src[n] + src[n+1]<<shift)
+		}
+	}
+</pre><p>
+Of course, the <code>continue</code> statement also accepts an optional label
+but it applies only to loops.
+</p><p>
+To close this section, here's a comparison routine for byte slices that uses two
+<code>switch</code> statements:
+</p><pre>
+// Compare returns an integer comparing the two byte slices,
+// lexicographically.
+// The result will be 0 if a == b, -1 if a < b, and +1 if a > b
+func Compare(a, b []byte) int {
+    for i := 0; i < len(a) && i < len(b); i++ {
+        switch {
+        case a[i] > b[i]:
+            return 1
+        case a[i] < b[i]:
+            return -1
+        }
+    }
+    switch {
+    case len(a) > len(b):
+        return 1
+    case len(a) < len(b):
+        return -1
+    }
+    return 0
+}
+</pre></body>

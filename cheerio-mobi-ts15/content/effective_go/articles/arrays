@@ -1,0 +1,36 @@
+<body><p>
+Arrays are useful when planning the detailed layout of memory and sometimes
+can help avoid allocation, but primarily
+they are a building block for slices, the subject of the next section.
+To lay the foundation for that topic, here are a few words about arrays.
+</p><p>
+There are major differences between the ways arrays work in Go and C.
+In Go,
+</p><ul>
+<li>
+Arrays are values. Assigning one array to another copies all the elements.
+</li>
+<li>
+In particular, if you pass an array to a function, it
+will receive a <i>copy</i> of the array, not a pointer to it.
+</li><li>
+The size of an array is part of its type.  The types <code>[10]int</code>
+and <code>[20]int</code> are distinct.
+</li>
+</ul><p>
+The value property can be useful but also expensive; if you want C-like behavior and efficiency,
+you can pass a pointer to the array.
+</p><pre>
+func Sum(a *[3]float64) (sum float64) {
+    for _, v := range *a {
+        sum += v
+    }
+    return
+}
+
+array := [...]float64{7.0, 8.5, 9.1}
+x := Sum(&array)  // Note the explicit address-of operator
+</pre><p>
+But even this style isn't idiomatic Go.
+Use slices instead.
+</p></body>

@@ -1,0 +1,94 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Type declarations</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+A type declaration binds an identifier, the <i>type name</i>, to a [<a>type</a>].
+Type declarations come in two forms: alias declarations and type definitions.
+</p><p>
+<pre>
+[<a>TypeDecl</a>] = &quot;type&quot; ( [<a>TypeSpec</a>] | &quot;(&quot; { [<a>TypeSpec</a>] &quot;;&quot; } &quot;)&quot; ) .
+[<a>TypeSpec</a>] = [<a>AliasDecl</a>] | [<a>TypeDef</a>] .
+</pre>
+</p><h4>Alias declarations</h4><p>
+An alias declaration binds an identifier to the given type.
+</p><pre>
+[<a>AliasDecl</a>] = [<a>identifier</a>] &quot;=&quot; [<a>Type</a>] .
+</pre><p>
+Within the [<a>scope</a>] of
+the identifier, it serves as an <i>alias</i> for the type.
+</p><pre>
+type (
+	nodeList = []*Node  // nodeList and []*Node are identical types
+	Polar    = polar    // Polar and polar denote identical types
+)
+</pre><h4>Type definitions</h4><p>
+A type definition creates a new, distinct type with the same
+[<a>underlying type</a>] and operations as the given type,
+and binds an identifier to it.
+</p><pre>
+[<a>TypeDef</a>] = [<a>identifier</a>] [<a>Type</a>] .
+</pre><p>
+The new type is called a <i>defined type</i>.
+It is [<a>different</a>] from any other type,
+including the type it is created from.
+</p><pre>
+type (
+	Point struct{ x, y float64 }  // Point and struct{ x, y float64 } are different types
+	polar Point                   // polar and Point denote different types
+)
+type TreeNode struct {
+	left, right *TreeNode
+	value *Comparable
+}
+type Block interface {
+	BlockSize() int
+	Encrypt(src, dst []byte)
+	Decrypt(src, dst []byte)
+}
+</pre><p>
+A defined type may have [<a>methods</a>] associated with it.
+It does not inherit any methods bound to the given type,
+but the [<a>method set</a>]
+of an interface type or of elements of a composite type remains unchanged:
+</p><pre>
+// A Mutex is a data type with two methods, Lock and Unlock.
+type Mutex struct         { /* Mutex fields */ }
+func (m *Mutex) Lock()    { /* Lock implementation */ }
+func (m *Mutex) Unlock()  { /* Unlock implementation */ }
+// NewMutex has the same composition as Mutex but its method set is empty.
+type NewMutex Mutex
+// The method set of PtrMutex&apos;s underlying type *Mutex remains unchanged,
+// but the method set of PtrMutex is empty.
+type PtrMutex *Mutex
+// The method set of *PrintableMutex contains the methods
+// Lock and Unlock bound to its embedded field Mutex.
+type PrintableMutex struct {
+	Mutex
+}
+// MyBlock is an interface type that has the same method set as Block.
+type MyBlock Block
+</pre><p>
+Type definitions may be used to define different boolean, numeric,
+or string types and associate methods with them:
+</p><pre>
+type TimeZone int
+const (
+	EST TimeZone = -(5 + iota)
+	CST
+	MST
+	PST
+)
+func (tz TimeZone) String() string {
+	return fmt.Sprintf(&quot;GMT%+dh&quot;, tz)
+}
+</pre></body>
+</body>
+</html>

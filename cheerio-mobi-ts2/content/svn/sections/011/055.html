@@ -1,0 +1,65 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svnadmin setrevprop</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts2/css/kindle.css" />
+  </head>
+   <body>
+    <div class="refentry">
+      <a id="svn.ref.svnadmin.c.setrevprop"></a>
+      <div class="titlepage"></div>
+      <a id="idm12270" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svnadmin setrevprop — Set a property on a revision.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm12277"></a>
+        <h2>Synopsis</h2>
+        <p>
+          <code class="literal">svnadmin setrevprop REPOS_PATH -r REVISION NAME FILE</code>
+        </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm12281"></a>
+        <h2>Description</h2>
+        <p>Set the property <em class="replaceable"><code>NAME</code></em> on
+              revision <em class="replaceable"><code>REVISION</code></em> to the
+              contents of <em class="replaceable"><code>FILE</code></em>.  Use
+              <code class="option">--use-pre-revprop-change-hook</code>
+              or <code class="option">--use-post-revprop-change-hook</code> to
+              trigger the revision property-related hooks (e.g., if
+              you want an email notification sent from your <code class="literal">post-revprop-change-hook</code>).</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm12290"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+          <pre class="screen">
+<a class="xref" href="svn.ref.svnadmin.html#svn.ref.svnadmin.sw.revision"><code class="option">--revision</code> (<code class="option">-r</code>) <em class="replaceable"><code>ARG</code></em></a>
+<a class="xref" href="svn.ref.svnadmin.html#svn.ref.svnadmin.sw.use_post_revprop_change_hook"><code class="option">--use-post-revprop-change-hook</code></a>
+<a class="xref" href="svn.ref.svnadmin.html#svn.ref.svnadmin.sw.use_pre_revprop_change_hook"><code class="option">--use-pre-revprop-change-hook</code></a>
+</pre>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm12297"></a>
+        <h2>Examples</h2>
+        <p>The following sets the revision
+          property <code class="literal">repository-photo</code> to the contents
+          of the file <code class="filename">sandwich.png</code>:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svnadmin setrevprop /var/svn/repos -r 0 repository-photo sandwich.png
+</pre>
+        </div>
+        <p>As you can see, <span class="command"><strong>svnadmin setrevprop</strong></span>
+            has no output upon success.</p>
+      </div>
+    </div>
+</body>
+</html>

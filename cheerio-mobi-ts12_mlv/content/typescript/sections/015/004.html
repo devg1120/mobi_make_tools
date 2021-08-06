@@ -1,0 +1,54 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Changelog
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts12_mlv/undefined" />
+  </head>
+   <body>
+<h2 id="changelog">Changelog</h2>
+<blockquote>
+    <p>Reading a markdown file with the progress in the project is easier than reading a commit log.</p>
+</blockquote>
+<p>Automatic changelog generation from commit messages is a fairly common pattern nowadays. There is a project called <a href="https://github.com/conventional-changelog/conventional-changelog" target="_blank">conventional-changelog</a> that generates a changelog from commit messages that follow a <em>convention</em>. </p>
+<h3 id="commit-message-convention">Commit message convention</h3>
+<p>The most common convention is the <em>angular</em> commit messages convention which is <a href="https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines" target="_blank">detailed here</a>.</p>
+<h3 id="setup">Setup</h3>
+<ul>
+    <li>Install: </li>
+</ul>
+<pre><code class="lang-bash">npm install standard-version -D
+</code></pre>
+<ul>
+    <li>Add a <code>script</code> target to your <code>package.json</code>: </li>
+</ul>
+<pre><code class="lang-js">{
+  <span class="hljs-string">&quot;scripts&quot;</span>: {
+    <span class="hljs-string">&quot;release&quot;</span>: <span class="hljs-string">&quot;standard-version&quot;</span>
+  }
+}
+</code></pre>
+<ul>
+    <li>Optionally : To automatically push the new <em>git commit and tag</em> plus publish to npm add a <code>postrelease</code> script: </li>
+</ul>
+<pre><code class="lang-js">{
+  <span class="hljs-string">&quot;scripts&quot;</span>: {
+    <span class="hljs-string">&quot;release&quot;</span>: <span class="hljs-string">&quot;standard-version&quot;</span>,
+    <span class="hljs-string">&quot;postrelease&quot;</span>: <span class="hljs-string">&quot;git push --follow-tags origin master &amp;&amp; npm publish&quot;</span>
+  }
+}
+</code></pre>
+<h3 id="releasing">Releasing</h3>
+<p>Simply run: </p>
+<pre><code class="lang-bash">npm run release
+</code></pre>
+<p>Based on the commit messages <code>major</code> | <code>minor</code> | <code>patch</code> is automatically determined. To <em>explicitly</em> specify a version you can specify <code>--release-as</code> e.g.: </p>
+<pre><code class="lang-bash">npm run release -- --release-as minor
+</code></pre>
+</body>
+</html>

@@ -1,0 +1,50 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    JavaScript
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts14/undefined" />
+  </head>
+   <body>
+<h1 id="your-javascript-is-typescript">Your JavaScript is TypeScript</h1>
+<p>There were (and will continue to be) a lot of competitors in <em>Some syntax</em> to <em>JavaScript</em> compilers. TypeScript is different from them in that <em>Your JavaScript is TypeScript</em>. Here&apos;s a diagram:</p>
+<p><img src="/home/admin/es2015/cheerio-mobi-ts14/content/typescript/processed_images/venn-grayscale.gif" alt="JavaScript is TypeScript"></p>
+<p>However, it does mean that <em>you need to learn JavaScript</em> (the good news is <em>you <strong>only</strong> need to learn JavaScript</em>). TypeScript is just standardizing all the ways you provide <em>good documentation</em> on JavaScript.</p>
+<ul>
+    <li>Just giving you a new syntax doesn&apos;t help fix bugs (looking at you CoffeeScript).</li>
+    <li>Creating a new language abstracts you too far from your runtimes, communities (looking at you Dart).</li>
+</ul>
+<p>TypeScript is just JavaScript with docs.</p>
+<blockquote>
+    <p>JSNext is open to interpretation - not everything proposed for the next version of JS actually makes it to browsers. TypeScript only adds support for proposals once they reach <a href="https://tc39.es/process-document/" target="_blank">stage 3</a>.</p>
+</blockquote>
+<h2 id="making-javascript-better">Making JavaScript Better</h2>
+<p>TypeScript will try to protect you from portions of JavaScript that never worked (so you don&apos;t need to remember this stuff):</p>
+<pre><code class="lang-ts">[] + []; <span class="hljs-comment">// JavaScript will give you &quot;&quot; (which makes little sense), TypeScript will error</span>
+<span class="hljs-comment">//</span>
+<span class="hljs-comment">// other things that are nonsensical in JavaScript</span>
+<span class="hljs-comment">// - don&apos;t give a runtime error (making debugging hard)</span>
+<span class="hljs-comment">// - but TypeScript will give a compile time error (making debugging unnecessary)</span>
+<span class="hljs-comment">//</span>
+{} + []; <span class="hljs-comment">// JS : 0, TS Error</span>
+[] + {}; <span class="hljs-comment">// JS : &quot;[object Object]&quot;, TS Error</span>
+{} + {}; <span class="hljs-comment">// JS : NaN or [object Object][object Object] depending upon browser, TS Error</span>
+<span class="hljs-string">&quot;hello&quot;</span> - <span class="hljs-number">1</span>; <span class="hljs-comment">// JS : NaN, TS Error</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">add</span>(<span class="hljs-params">a,b</span>) </span>{
+  <span class="hljs-keyword">return</span>
+    a + b; <span class="hljs-comment">// JS : undefined, TS Error &apos;unreachable code detected&apos;</span>
+}
+</code></pre>
+<p>Essentially TypeScript is linting JavaScript. Just doing a better job at it than other linters that don&apos;t have <em>type information</em>.</p>
+<h2 id="you-still-need-to-learn-javascript">You still need to learn JavaScript</h2>
+<p>That said TypeScript is very pragmatic about the fact that <em>you do write JavaScript</em> so there are some things about JavaScript that you still need to know in order to not be caught off-guard. Let&apos;s discuss them next.</p>
+<blockquote>
+    <p>Note: TypeScript is a superset of JavaScript. Just with documentation that can actually be used by compilers / IDEs ;)</p>
+</blockquote>
+</body>
+</html>

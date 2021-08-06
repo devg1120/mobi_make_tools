@@ -1,0 +1,23 @@
+<body><p>
+"If" statements specify the conditional execution of two branches
+according to the value of a boolean expression.  If the expression
+evaluates to true, the "if" branch is executed, otherwise, if
+present, the "else" branch is executed.
+</p><pre>
+[<a>IfStmt</a>] = "if" [ [<a>SimpleStmt</a>] ";" ] [<a>Expression</a>] [<a>Block</a>] [ "else" ( [<a>IfStmt</a>] | [<a>Block</a>] ) ] .
+</pre><pre>
+if x > max {
+	x = max
+}
+</pre><p>
+The expression may be preceded by a simple statement, which
+executes before the expression is evaluated.
+</p><pre>
+if x := f(); x < y {
+	return x
+} else if x > z {
+	return z
+} else {
+	return y
+}
+</pre></body>

@@ -1,0 +1,33 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Options
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts12_mlv/undefined" />
+  </head>
+   <body>
+<h1 id="convenience-vs-soundness">Convenience vs. Soundness</h1>
+<p>There are a few things that TypeScript prevents you from doing out of the box e.g. using a variable that <em>isn&apos;t ever declared</em> (of course you can use a <em>declaration file</em> for external systems).</p>
+<p>That said, traditionally programming languages have a hard boundary between what is and isn&apos;t allowed by the type system. TypeScript is different in that it gives you control over where you put the slider. This is really to allow you to use the JavaScript you know and love with as much safety as <strong>you</strong> want. There are lots of compiler options to control exactly this slider so let&apos;s have a look.</p>
+<h2 id="boolean-options">Boolean Options</h2>
+<p><code>compilerOptions</code> that are <code>boolean</code> can be specified as <code>compilerOptions</code> in <code>tsconfig.json</code>:</p>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;compilerOptions&quot;</span>: {
+        <span class="hljs-string">&quot;someBooleanOption&quot;</span>: <span class="hljs-literal">true</span>
+    }
+}
+</code></pre>
+<p>or on the command line</p>
+<pre><code class="lang-sh">tsc --someBooleanOption
+</code></pre>
+<blockquote>
+    <p>All of these are <code>false</code> by default.</p>
+</blockquote>
+<p>Click <a href="https://www.typescriptlang.org/docs/handbook/compiler-options.html" target="_blank">here</a> to see all compiler options.</p>
+</body>
+</html>

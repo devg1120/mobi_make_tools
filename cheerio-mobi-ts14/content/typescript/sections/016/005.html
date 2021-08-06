@@ -1,0 +1,40 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Type Instantiation
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts14/undefined" />
+  </head>
+   <body>
+<h2 id="type-instantiation-for-generics">Type Instantiation for Generics</h2>
+<p>Say you have something that has a generic parameter e.g. a class <code>Foo</code>:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">class</span> Foo<t>{
+    foo: T;
+}
+</t></code></pre>
+<p>You want to create a specialized version for it for a particular type. The pattern is to copy the item into a new variable and give it the type annotation with the generics replaced with concrete types. E.g. if you want a class <code>Foo<number></number></code>:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">class</span> Foo<t>{
+    foo: T;
+}
+<span class="hljs-keyword">let</span> FooNumber = Foo as { <span class="hljs-keyword">new</span> ():Foo&lt;<span class="hljs-built_in">number</span>&gt; }; <span class="hljs-comment">// ref 1</span>
+</t></code></pre>
+<p>In <code>ref 1</code> you are saying that <code>FooNumber</code> is the same as <code>Foo</code> but just treat it as something that when called with the <code>new</code> operator gives an instance of <code>Foo<number></number></code>.</p>
+<h3 id="inheritance">Inheritance</h3>
+<p>The Type assertion pattern is unsafe in that it trusts you to do the right thing. A common pattern in other languages <em>for classes</em> is to just use inheritance :</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">class</span> FooNumber extends Foo&lt;<span class="hljs-built_in">number</span>&gt;{}
+</code></pre>
+<p>One word of caution here: if you use decorators on the base class then the inherited class might not have the same behavior as the base class (it is no longer wrapped by the decorator).</p>
+<p>Of course if you are not specializing classes you still have to come up with a coercion / assertion pattern that works and hence we showed the general assertion pattern first, e.g.:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">id</span>&lt;<span class="hljs-title">T</span>&gt;(<span class="hljs-params">x: T</span>) </span>{ <span class="hljs-keyword">return</span> x; }
+<span class="hljs-keyword">const</span> idNum = id as {(x:<span class="hljs-built_in">number</span>):<span class="hljs-built_in">number</span>};
+</code></pre>
+<blockquote>
+    <p>Inspired by this <a href="http://stackoverflow.com/a/34864705/390330" target="_blank">stackoverflow question</a></p>
+</blockquote>
+</body>
+</html>

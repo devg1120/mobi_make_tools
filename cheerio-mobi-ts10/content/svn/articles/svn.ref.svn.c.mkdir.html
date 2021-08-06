@@ -1,0 +1,69 @@
+<div class="refentry">
+    <a id="svn.ref.svn.c.mkdir"></a>
+    <div class="titlepage"></div>
+    <a id="idm10517" class="indexterm"></a>
+    <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svn mkdir — Create a new directory under version control.</p>
+    </div>
+    <div class="refsect1">
+        <a id="idm10524"></a>
+        <h2>Synopsis</h2>
+        <p>
+            <code class="literal">svn mkdir PATH...</code>
+        </p>
+        <p>
+            <code class="literal">svn mkdir URL...</code>
+        </p>
+    </div>
+    <div class="refsect1">
+        <a id="idm10530"></a>
+        <h2>Description</h2>
+        <p>Create a directory with a name given by the final
+            component of the <em class="replaceable"><code>PATH</code></em> or <em class="replaceable"><code>URL</code></em>.
+            A directory specified by a working copy
+            <em class="replaceable"><code>PATH</code></em> is scheduled for addition
+            in the working copy. A directory specified by a URL is
+            created in the repository via an immediate commit.
+            Multiple directory URLs are committed atomically. In both
+            cases, all the intermediate directories must already exist
+            unless the <code class="option">--parents</code> option is
+            used.</p>
+    </div>
+    <div class="refsect1">
+        <a id="idm10537"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+            <pre class="screen">
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.editor_cmd"><code class="option">--editor-cmd</code> <em class="replaceable"><code>CMD</code></em></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.encoding"><code class="option">--encoding</code> <em class="replaceable"><code>ENC</code></em></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.file"><code class="option">--file</code> (<code class="option">-F</code>) <em class="replaceable"><code>FILENAME</code></em></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.force_log"><code class="option">--force-log</code></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.message"><code class="option">--message</code> (<code class="option">-m</code>) <em class="replaceable"><code>MESSAGE</code></em></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.parents"><code class="option">--parents</code></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.quiet"><code class="option">--quiet</code> (<code class="option">-q</code>)</a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.with_revprop"><code class="option">--with-revprop</code> <em class="replaceable"><code>ARG</code></em></a>
+</pre>
+        </div>
+    </div>
+    <div class="refsect1">
+        <a id="idm10549"></a>
+        <h2>Examples</h2>
+        <p>Create a directory in your working copy:</p>
+        <div class="informalexample">
+            <pre class="screen">
+$ svn mkdir newdir
+A         newdir
+</pre>
+        </div>
+        <p>Create one in the repository (this is an instant commit, so a
+            log message is required):</p>
+        <div class="informalexample">
+            <pre class="screen">
+$ svn mkdir -m "Making a new dir." http://svn.red-bean.com/repos/newdir
+
+Committed revision 26.
+</pre>
+        </div>
+    </div>
+</div>

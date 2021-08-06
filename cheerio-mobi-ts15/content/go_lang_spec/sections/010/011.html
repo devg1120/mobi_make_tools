@@ -1,0 +1,45 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Function declarations</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+A function declaration binds an identifier, the <i>function name</i>,
+to a function.
+</p><pre>
+[<a>FunctionDecl</a>] = &quot;func&quot; [<a>FunctionName</a>] [<a>Signature</a>] [ [<a>FunctionBody</a>] ] .
+[<a>FunctionName</a>] = [<a>identifier</a>] .
+[<a>FunctionBody</a>] = [<a>Block</a>] .
+</pre><p>
+If the function&apos;s [<a>signature</a>] declares
+result parameters, the function body&apos;s statement list must end in
+a [<a>terminating statement</a>].
+</p><pre>
+func IndexRune(s string, r rune) int {
+	for i, c := range s {
+		if c == r {
+			return i
+		}
+	}
+	// invalid: missing return statement
+}
+</pre><p>
+A function declaration may omit the body. Such a declaration provides the
+signature for a function implemented outside Go, such as an assembly routine.
+</p><pre>
+func min(x int, y int) int {
+	if x &lt; y {
+		return x
+	}
+	return y
+}
+func flushICache(begin, end uintptr)  // implemented externally
+</pre></body>
+</body>
+</html>

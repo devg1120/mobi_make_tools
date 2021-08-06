@@ -1,0 +1,159 @@
+<h3 id="classes">Classes</h3>
+<p>The reason why it's important to have classes in JavaScript as a first class item is that:</p>
+<ol>
+    <li><a href="tips/classesAreUseful.html">Classes offer a useful structural abstraction</a></li>
+    <li>Provides a consistent way for developers to use classes instead of every framework (emberjs,reactjs etc) coming up with their own version.</li>
+    <li>Object Oriented Developers already understand classes.</li>
+</ol>
+<p>Finally JavaScript developers can <em>have <code>class</code></em>. Here we have a basic class called Point:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">class</span> Point {
+    x: <span class="hljs-built_in">number</span>;
+    y: <span class="hljs-built_in">number</span>;
+    <span class="hljs-keyword">constructor</span>(x: number, y: number) {
+        <span class="hljs-keyword">this</span>.x = x;
+        <span class="hljs-keyword">this</span>.y = y;
+    }
+    add(point: Point) {
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Point(<span class="hljs-keyword">this</span>.x + point.x, <span class="hljs-keyword">this</span>.y + point.y);
+    }
+}
+
+<span class="hljs-keyword">var</span> p1 = <span class="hljs-keyword">new</span> Point(<span class="hljs-number">0</span>, <span class="hljs-number">10</span>);
+<span class="hljs-keyword">var</span> p2 = <span class="hljs-keyword">new</span> Point(<span class="hljs-number">10</span>, <span class="hljs-number">20</span>);
+<span class="hljs-keyword">var</span> p3 = p1.add(p2); <span class="hljs-comment">// {x:10,y:30}</span>
+</code></pre>
+<p>This class generates the following JavaScript on ES5 emit:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">var</span> Point = (<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Point</span>(<span class="hljs-params">x, y</span>) </span>{
+        <span class="hljs-keyword">this</span>.x = x;
+        <span class="hljs-keyword">this</span>.y = y;
+    }
+    Point.prototype.add = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">point</span>) </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Point(<span class="hljs-keyword">this</span>.x + point.x, <span class="hljs-keyword">this</span>.y + point.y);
+    };
+    <span class="hljs-keyword">return</span> Point;
+})();
+</code></pre>
+<p>This is a fairly idiomatic traditional JavaScript class pattern now as a first class language construct.</p>
+<h3 id="inheritance">Inheritance</h3>
+<p>Classes in TypeScript (like other languages) support <em>single</em> inheritance using the <code>extends</code> keyword as shown below:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">class</span> Point3D extends Point {
+    z: <span class="hljs-built_in">number</span>;
+    <span class="hljs-keyword">constructor</span>(x: number, y: number, z: number) {
+        <span class="hljs-keyword">super</span>(x, y);
+        <span class="hljs-keyword">this</span>.z = z;
+    }
+    add(point: Point3D) {
+        <span class="hljs-keyword">var</span> point2D = <span class="hljs-keyword">super</span>.add(point);
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Point3D(point2D.x, point2D.y, <span class="hljs-keyword">this</span>.z + point.z);
+    }
+}
+</code></pre>
+<p>If you have a constructor in your class then you <em>must</em> call the parent constructor from your constructor (TypeScript will point this out to you). This ensures that the stuff that it needs to set on <code>this</code> gets set. Followed by the call to <code>super</code> you can add any additional stuff you want to do in your constructor (here we add another member <code>z</code>).</p>
+<p>Note that you override parent member functions easily (here we override <code>add</code>) and still use the functionality of the super class in your members (using <code>super.</code> syntax).</p>
+<h3 id="statics">Statics</h3>
+<p>TypeScript classes support <code>static</code> properties that are shared by all instances of the class. A natural place to put (and access) them is on the class itself and that is what TypeScript does:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">class</span> Something {
+    <span class="hljs-keyword">static</span> instances = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">constructor</span>() {
+        Something.instances++;
+    }
+}
+
+<span class="hljs-keyword">var</span> s1 = <span class="hljs-keyword">new</span> Something();
+<span class="hljs-keyword">var</span> s2 = <span class="hljs-keyword">new</span> Something();
+<span class="hljs-built_in">console</span>.log(Something.instances); <span class="hljs-comment">// 2</span>
+</code></pre>
+<p>You can have static members as well as static functions.</p>
+<h3 id="access-modifiers">Access Modifiers</h3>
+<p>TypeScript supports access modifiers <code>public</code>,<code>private</code> and <code>protected</code> which determine the accessibility of a <code>class</code> member as shown below:</p>
+<table>
+    <thead>
+        <tr>
+            <th>accessible on</th>
+            <th><code>public</code></th>
+            <th><code>protected</code></th>
+            <th><code>private</code></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>class</td>
+            <td>yes</td>
+            <td>yes</td>
+            <td>yes</td>
+        </tr>
+        <tr>
+            <td>class children</td>
+            <td>yes</td>
+            <td>yes</td>
+            <td>no</td>
+        </tr>
+        <tr>
+            <td>class instances</td>
+            <td>yes</td>
+            <td>no</td>
+            <td>no</td>
+        </tr>
+    </tbody>
+</table>
+<p>If an access modifier is not specified it is implicitly <code>public</code> as that matches the <em>convenient</em> nature of JavaScript 🌹.</p>
+<p>Note that at runtime (in the generated JS) these have no significance but will give you compile time errors if you use them incorrectly. An example of each is shown below:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">class</span> FooBase {
+    <span class="hljs-keyword">public</span> x: <span class="hljs-built_in">number</span>;
+    <span class="hljs-keyword">private</span> y: <span class="hljs-built_in">number</span>;
+    <span class="hljs-keyword">protected</span> z: <span class="hljs-built_in">number</span>;
+}
+
+<span class="hljs-comment">// EFFECT ON INSTANCES</span>
+<span class="hljs-keyword">var</span> foo = <span class="hljs-keyword">new</span> FooBase();
+foo.x; <span class="hljs-comment">// okay</span>
+foo.y; <span class="hljs-comment">// ERROR : private</span>
+foo.z; <span class="hljs-comment">// ERROR : protected</span>
+
+<span class="hljs-comment">// EFFECT ON CHILD CLASSES</span>
+<span class="hljs-keyword">class</span> FooChild extends FooBase {
+    <span class="hljs-keyword">constructor</span>() {
+      <span class="hljs-keyword">super</span>();
+        <span class="hljs-keyword">this</span>.x; <span class="hljs-comment">// okay</span>
+        <span class="hljs-keyword">this</span>.y; <span class="hljs-comment">// ERROR: private</span>
+        <span class="hljs-keyword">this</span>.z; <span class="hljs-comment">// okay</span>
+    }
+}
+</code></pre>
+<p>As always these modifiers work for both member properties and member functions.</p>
+<h3 id="abstract">Abstract</h3>
+<p><code>abstract</code> can be thought of as an access modifier. We present it separately because opposed to the previously mentioned modifiers it can be on a <code>class</code> as well as any member of the class. Having an <code>abstract</code> modifier primarily means that such functionality <em>cannot be directly invoked</em> and a child class must provide the functionality.</p>
+<ul>
+    <li><code>abstract</code> <strong>classes</strong> cannot be directly instantiated. Instead the user must create some <code>class</code> that inherits from the <code>abstract class</code>.</li>
+    <li><code>abstract</code> <strong>members</strong> cannot be directly accessed and a child class must provide the functionality.</li>
+</ul>
+<h3 id="constructor-is-optional">Constructor is optional</h3>
+<p>The class does not need to have a constructor. e.g. the following is perfectly fine. </p>
+<pre><code class="lang-ts"><span class="hljs-keyword">class</span> Foo {}
+<span class="hljs-keyword">var</span> foo = <span class="hljs-keyword">new</span> Foo();
+</code></pre>
+<h3 id="define-using-constructor">Define using constructor</h3>
+<p>Having a member in a class and initializing it like below:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">class</span> Foo {
+    x: <span class="hljs-built_in">number</span>;
+    <span class="hljs-keyword">constructor</span>(x:number) {
+        <span class="hljs-keyword">this</span>.x = x;
+    }
+}
+</code></pre>
+<p>is such a common pattern that TypeScript provides a shorthand where you can prefix the member with an <em>access modifier</em> and it is automatically declared on the class and copied from the constructor. So the previous example can be re-written as (notice <code>public x:number</code>):</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">class</span> Foo {
+    <span class="hljs-keyword">constructor</span>(public x:number) {
+    }
+}
+</code></pre>
+<h3 id="property-initializer">Property initializer</h3>
+<p>This is a nifty feature supported by TypeScript (from ES7 actually). You can initialize any member of the class outside the class constructor, useful to provide default (notice <code>members = []</code>)</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">class</span> Foo {
+    members = [];  <span class="hljs-comment">// Initialize directly</span>
+    add(x) {
+        <span class="hljs-keyword">this</span>.members.push(x);
+    }
+}
+</code></pre>

@@ -1,0 +1,13 @@
+<body><p>
+The following terms are used to denote specific Unicode character classes:
+</p><pre>
+[<a>newline</a>]        = /* the Unicode code point U+000A */ .
+[<a>unicode_char</a>]   = /* an arbitrary Unicode code point except newline */ .
+[<a>unicode_letter</a>] = /* a Unicode code point classified as "Letter" */ .
+[<a>unicode_digit</a>]  = /* a Unicode code point classified as "Number, decimal digit" */ .
+</pre><p>
+In [<a>The Unicode Standard 8.0</a>],
+Section 4.5 "General Category" defines a set of character categories.
+Go treats all characters in any of the Letter categories Lu, Ll, Lt, Lm, or Lo
+as Unicode letters, and those in the Number category Nd as Unicode digits.
+</p></body>

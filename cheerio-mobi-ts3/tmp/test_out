@@ -1,0 +1,59 @@
+* generator sample
+
+### basic
+-- name: Satoshi Watanabe
+-- age:   109
+-- info.ref: KOBE
+
+### build-in helper   each
+       Kanako Momota
+       red
+       Ayaka Sasaki
+       pink
+       Shiori Tamai
+       yellow
+       Momoka Ariyasu
+       green
+       Reni Takagi
+       purple
+
+
+### build-in helper   if/unless
+    syouichi nishigusa
+
+    syouichi nishigusa
+
+
+### build-in helper   with
+       red
+       pink
+       yellow
+       green
+       purple
+
+
+### build-in helper   lookup
+    red
+    pink
+    yellow
+    green
+    purple
+
+### custom regist helper   'fullName'
+ Kanako Momota
+    Kanako Momota
+    Ayaka Sasaki
+    Shiori Tamai
+    Momoka Ariyasu
+    Reni Takagi
+
+### custom regist blockhelper   'list'
+<ul>
+<li>Yehuda Katz</li>
+<li>Carl Lerche</li>
+<li>Alan Johnson</li>
+</ul>
+
+
+
+

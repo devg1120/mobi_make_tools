@@ -1,0 +1,6 @@
+<body><p>
+The <i>blank identifier</i> is represented by the underscore character <code>_</code>.
+It serves as an anonymous placeholder instead of a regular (non-blank)
+identifier and has special meaning in [<a>declarations</a>],
+as an [<a>operand</a>], and in [<a>assignments</a>].
+</p></body>

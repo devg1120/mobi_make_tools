@@ -1,0 +1,40 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Which Files?
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts12_mlv/undefined" />
+  </head>
+   <body>
+<h2 id="which-files">Which files?</h2>
+<p>Use <code>include</code> and <code>exclude</code> to specify files / folders / globs. E.g.:</p>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;include&quot;</span>:[
+        <span class="hljs-string">&quot;./folder&quot;</span>
+    ],
+    <span class="hljs-string">&quot;exclude&quot;</span>:[
+        <span class="hljs-string">&quot;./folder/**/*.spec.ts&quot;</span>,
+        <span class="hljs-string">&quot;./folder/someSubFolder&quot;</span>
+    ]
+}
+</code></pre>
+<h3 id="globs">Globs</h3>
+<ul>
+    <li>For globs : <code>**/*</code> (e.g. sample usage <code>somefolder/**/*</code>) means all folder and any files (the extensions <code>.ts</code>/<code>.tsx</code> will be assumed and if <code>allowJs:true</code> so will <code>.js</code>/<code>.jsx</code>)</li>
+</ul>
+<h3 id="files-option"><code>files</code> option</h3>
+<p>You can either use <code>files</code> to be explicit. </p>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;files&quot;</span>:[
+        <span class="hljs-string">&quot;./some/file.ts&quot;</span>
+    ]
+}
+</code></pre>
+<p>But it is not recommended as you have to keep updating it. Instead use <code>include</code> to just add the containing folder. </p>
+</body>
+</html>

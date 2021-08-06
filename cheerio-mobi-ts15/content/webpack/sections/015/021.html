@@ -1,0 +1,39 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Configuration</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<h3 id="configuration">Configuration<a href="#configuration" aria-hidden="true"><span class="icon icon-link"></span></a></h3>
+<p><a href="/configuration/module/#modulerules"><code>module.rules</code></a> allows you to specify several loaders within your webpack configuration.
+    This is a concise way to display loaders, and helps to maintain clean code. It also offers you a full overview of each respective loader.</p>
+<p>Loaders are evaluated/executed from right to left (or from bottom to top). In the example below execution starts with sass-loader, continues with css-loader and finally ends with style-loader. See <a href="/concepts/loaders/#loader-features">&quot;Loader Features&quot;</a> for more information about loaders order.</p>
+<pre><code class="hljs language-js-with-links">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  module<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    rules<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span>
+        test<span class="token punctuation">:</span> <span class="token regex">/\\.css$/</span><span class="token punctuation">,</span>
+        use<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+          <span class="token comment">// [style-loader](/loaders/style-loader)</span>
+          <span class="token punctuation">{</span> loader<span class="token punctuation">:</span> <span class="token string">&apos;style-loader&apos;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token comment">// [css-loader](/loaders/css-loader)</span>
+          <span class="token punctuation">{</span>
+            loader<span class="token punctuation">:</span> <span class="token string">&apos;css-loader&apos;</span><span class="token punctuation">,</span>
+            options<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+              modules<span class="token punctuation">:</span> <span class="token boolean">true</span>
+            <span class="token punctuation">}</span>
+          <span class="token punctuation">}</span><span class="token punctuation">,</span>
+          <span class="token comment">// [sass-loader](/loaders/sass-loader)</span>
+          <span class="token punctuation">{</span> loader<span class="token punctuation">:</span> <span class="token string">&apos;sass-loader&apos;</span> <span class="token punctuation">}</span>
+        <span class="token punctuation">]</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+</body>
+</html>

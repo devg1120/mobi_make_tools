@@ -1,0 +1,17 @@
+<body><p>
+Operands denote the elementary values in an expression. An operand may be a
+literal, a (possibly [<a>qualified</a>])
+non-[<a>blank</a>] identifier denoting a
+[<a>constant</a>],
+[<a>variable</a>], or
+[<a>function</a>],
+or a parenthesized expression.
+</p><p>
+The [<a>blank identifier</a>] may appear as an
+operand only on the left-hand side of an [<a>assignment</a>].
+</p><pre>
+[<a>Operand</a>]     = [<a>Literal</a>] | [<a>OperandName</a>] | "(" [<a>Expression</a>] ")" .
+[<a>Literal</a>]     = [<a>BasicLit</a>] | [<a>CompositeLit</a>] | [<a>FunctionLit</a>] .
+[<a>BasicLit</a>]    = [<a>int_lit</a>] | [<a>float_lit</a>] | [<a>imaginary_lit</a>] | [<a>rune_lit</a>] | [<a>string_lit</a>] .
+[<a>OperandName</a>] = [<a>identifier</a>] | [<a>QualifiedIdent</a>].
+</pre></body>

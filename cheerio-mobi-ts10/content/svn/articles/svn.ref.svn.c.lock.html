@@ -1,0 +1,73 @@
+<div class="refentry">
+    <a id="svn.ref.svn.c.lock"></a>
+    <div class="titlepage"></div>
+    <a id="idm10177" class="indexterm"></a>
+    <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svn lock — Lock working copy paths or URLs in the
+            repository so that no other user can commit changes to
+            them.</p>
+    </div>
+    <div class="refsect1">
+        <a id="idm10184"></a>
+        <h2>Synopsis</h2>
+        <p>
+            <code class="literal">svn lock TARGET...</code>
+        </p>
+    </div>
+    <div class="refsect1">
+        <a id="idm10188"></a>
+        <h2>Description</h2>
+        <p>Lock each <em class="replaceable"><code>TARGET</code></em>. If any
+            <em class="replaceable"><code>TARGET</code></em> is already locked by
+            another user, print a warning and continue locking the
+            rest of the <em class="replaceable"><code>TARGET</code></em>s. Use
+            <code class="option">--force</code> to steal a lock from another user
+            or working copy.</p>
+    </div>
+    <div class="refsect1">
+        <a id="idm10195"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+            <pre class="screen">
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.encoding"><code class="option">--encoding</code> <em class="replaceable"><code>ENC</code></em></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.file"><code class="option">--file</code> (<code class="option">-F</code>) <em class="replaceable"><code>FILENAME</code></em></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.force"><code class="option">--force</code></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.force_log"><code class="option">--force-log</code></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.message"><code class="option">--message</code> (<code class="option">-m</code>) <em class="replaceable"><code>MESSAGE</code></em></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.targets"><code class="option">--targets</code> <em class="replaceable"><code>FILENAME</code></em></a>
+</pre>
+        </div>
+    </div>
+    <div class="refsect1">
+        <a id="idm10205"></a>
+        <h2>Examples</h2>
+        <p>Lock two files in your working copy:</p>
+        <div class="informalexample">
+            <pre class="screen">
+$ svn lock tree.jpg house.jpg
+'tree.jpg' locked by user 'harry'.
+'house.jpg' locked by user 'harry'.
+</pre>
+        </div>
+        <p>Lock a file in your working copy that is currently
+            locked by another user:</p>
+        <div class="informalexample">
+            <pre class="screen">
+$ svn lock tree.jpg
+svn: warning: W160035: Path '/tree.jpg is already locked by user 'sally' in fi
+lesystem '/var/svn/repos/db'
+$ svn lock --force tree.jpg
+'tree.jpg' locked by user 'harry'.
+</pre>
+        </div>
+        <p>Lock a file without a working copy:</p>
+        <div class="informalexample">
+            <pre class="screen">
+$ svn lock http://svn.red-bean.com/repos/test/tree.jpg
+'tree.jpg' locked by user 'harry'.
+</pre>
+        </div>
+        <p>For further details, see <a class="xref" href="svn.advanced.locking.html" title="Locking">the section called “Locking”</a>.</p>
+    </div>
+</div>

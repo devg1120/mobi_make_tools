@@ -1,0 +1,107 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svn add</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts2/css/kindle.css" />
+  </head>
+   <body>
+    <div class="refentry">
+      <a id="svn.ref.svn.c.add"></a>
+      <div class="titlepage"></div>
+      <a id="idm9272" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svn add — Add files, directories, or symbolic links.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm9279"></a>
+        <h2>Synopsis</h2>
+        <p>
+          <code class="literal">svn add PATH...</code>
+        </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm9283"></a>
+        <h2>Description</h2>
+        <p>Schedule files, directories, or symbolic links in your
+            working copy for addition to the repository.  They will be
+            uploaded and added to the repository on your next commit.
+            If you add something and change your mind before
+            committing, you can unschedule the addition using
+            <span class="command"><strong>svn revert</strong></span>.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm9287"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+          <pre class="screen">
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.auto_props"><code class="option">--auto-props</code></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.depth"><code class="option">--depth</code> <em class="replaceable"><code>ARG</code></em></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.force"><code class="option">--force</code></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.no_auto_props"><code class="option">--no-auto-props</code></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.no_ignore"><code class="option">--no-ignore</code></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.parents"><code class="option">--parents</code></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.quiet"><code class="option">--quiet</code> (<code class="option">-q</code>)</a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.targets"><code class="option">--targets</code> <em class="replaceable"><code>FILENAME</code></em></a>
+</pre>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm9299"></a>
+        <h2>Examples</h2>
+        <p>To add a file to your working copy:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn add foo.c 
+A         foo.c
+</pre>
+        </div>
+        <p>When adding a directory, the default behavior of
+            <span class="command"><strong>svn add</strong></span> is to recurse:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn add testdir
+A         testdir
+A         testdir/a
+A         testdir/b
+A         testdir/c
+A         testdir/d
+</pre>
+        </div>
+        <p>You can add a directory without adding its
+            contents:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn add --depth=empty otherdir
+A         otherdir
+</pre>
+        </div>
+        <p>Attempts to schedule the addition of an item which is
+            already versioned will fail by default.  This behavior
+            foils the most common scenario under which users attempt
+            this: when trying to get to Subversion to recursively
+            examine a versioned directory and add any unversioned
+            items inside of it.  To override the default behavior and
+            force Subversion to recurse into already-versioned
+            directories, pass the <code class="option">--force</code>
+            option:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn add versioned-dir
+svn: warning: W150002: '/home/cmpilato/projects/subversion/site' is already un\
+der version control
+$ svn add versioned-dir --force
+A         versioned-dir/foo.c
+A         versioned-dir/somedir/bar.c
+A  (bin)  versioned-dir/otherdir/docs/baz.doc
+…
+</pre>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<h2 id="declaration-spaces">Declaration Spaces</h2>
+<p>There are two declaration spaces in TypeScript: the <em>variable</em> declaration space and the <em>type</em> declaration space. These concepts are explored below.</p>
+<h3 id="type-declaration-space">Type Declaration Space</h3>
+<p>The type declaration space contains stuff that can be used as a type annotation. E.g. the following are a few type declarations:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">class</span> Foo {};
+<span class="hljs-keyword">interface</span> Bar {};
+<span class="hljs-keyword">type</span> Bas = {};
+</code></pre>
+<p>This means that you can use <code>Foo</code>, <code>Bar</code>, <code>Bas</code>, etc. as a type annotation. E.g.:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">var</span> foo: Foo;
+<span class="hljs-keyword">var</span> bar: Bar;
+<span class="hljs-keyword">var</span> bas: Bas;
+</code></pre>
+<p>Notice that even though you have <code>interface Bar</code>, <em>you can't use it as a variable</em> because it doesn't contribute to the <em>variable declaration space</em>. This is shown below:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">interface</span> Bar {};
+<span class="hljs-keyword">var</span> bar = Bar; <span class="hljs-comment">// ERROR: "cannot find name 'Bar'"</span>
+</code></pre>
+<p>The reason why it says <code>cannot find name</code> is because the name <code>Bar</code> <em>is not defined</em> in the <em>variable</em> declaration space. That brings us to the next topic "Variable Declaration Space".</p>
+<h3 id="variable-declaration-space">Variable Declaration Space</h3>
+<p>The variable declaration space contains stuff that you can use as a variable. We saw that having <code>class Foo</code> contributes a type <code>Foo</code> to the <em>type</em> declaration space. Guess what? It also contributes a <em>variable</em> <code>Foo</code> to the <em>variable</em> declaration space as shown below:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">class</span> Foo {};
+<span class="hljs-keyword">var</span> someVar = Foo;
+<span class="hljs-keyword">var</span> someOtherVar = <span class="hljs-number">123</span>;
+</code></pre>
+<p>This is great as sometimes you want to pass classes around as variables. Remember that:</p>
+<ul>
+    <li>we couldn't use something like an <code>interface</code> that is <em>only</em> in the <em>type</em> declaration space as a variable.</li>
+</ul>
+<p>Similarly something that you declare with <code>var</code>, is <em>only</em> in the <em>variable</em> declaration space and cannot be used as a type annotation:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">var</span> foo = <span class="hljs-number">123</span>;
+<span class="hljs-keyword">var</span> bar: foo; <span class="hljs-comment">// ERROR: "cannot find name 'foo'"</span>
+</code></pre>
+<p>The reason why it says <code>cannot find name</code> is because the name <code>foo</code> <em>is not defined</em> in the <em>type</em> declaration space.</p>

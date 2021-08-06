@@ -1,0 +1,228 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svn merge</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/tmp/es2015/cheerio-mobi-ts4/css/kindle.css" />
+  </head>
+   <body>
+    <div class="refentry">
+      <a id="svn.ref.svn.c.merge"></a>
+      <div class="titlepage"></div>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svn merge &#x2014; Apply the differences between two sources to a
+          working copy path.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm10372"></a>
+        <h2>Synopsis</h2>
+        <p>
+          <code class="literal">svn merge [-c M[,N...] | -r N:M ...] SOURCE[@REV] [TARGET_WCPATH]</code>
+        </p>
+        <p>
+          <code class="literal">svn merge --reintegrate SOURCE[@REV] [TARGET_WCPATH]</code>
+        </p>
+        <p>
+          <code class="literal">svn merge SOURCE1[@N] SOURCE2[@M] [TARGET_WCPATH]</code>
+        </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm10380"></a>
+        <h2>Description</h2>
+        <p>In all three forms
+            <em class="replaceable"><code>TARGET_WCPATH</code></em> is
+            the working copy path that will receive the differences. If
+            <em class="replaceable"><code>TARGET_WCPATH</code></em> is omitted, the
+            changes are applied to the current working directory,
+            unless the sources have identical basenames that match a
+            file within the current working directory.  In
+            this case, the differences will be applied to that
+            file.</p>
+        <p>In the first two forms, <em class="replaceable"><code>SOURCE</code></em>
+            can be either a URL or a working copy path (in which case its
+            corresponding URL is used). If the peg revision
+            <em class="replaceable"><code>REV</code></em> is not specified, then
+            <code class="literal">HEAD</code> is assumed.  In the third form the
+            same rules apply for
+            <em class="replaceable"><code>SOURCE1</code></em>,
+            <em class="replaceable"><code>SOURCE2</code></em>,
+            <em class="replaceable"><code>M</code></em>, and <em class="replaceable"><code>N</code></em>
+            with the only difference being that if either source is a
+            working copy path, then the peg revisions
+            <span class="emphasis"><em>must</em></span> be explicitly stated.</p>
+        <div class="itemizedlist">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+              <p>Sync and Cherrypick Merges</p>
+              <p>The first form, when used without either the
+                <code class="option">-c</code> or <code class="option">-r</code> options, is
+                called a <span class="quote">&#x201C;<span class="quote">sync</span>&#x201D;</span> merge and
+                <code class="literal">-r 1:REV</code> is implied. This variant is
+                used to merge all eligible changes to a branch from its
+                immediate ancestor branch, see
+                .
+              </p>
+              <p>When the first form is used with the
+                <code class="option">-c</code> or <code class="option">-r</code> options, this
+                is called a <span class="quote">&#x201C;<span class="quote">cherrypick</span>&#x201D;</span> merge and is used
+                to merge an explicitly defined set of changes from one
+                branch to another, see
+                </p>
+              <div class="tip" style="margin-left: 0.5in; margin-right: 0.5in;">
+                <table border="0" summary="Tip">
+                  <tr>
+                    <td rowspan="2" align="center" valign="top" width="25">
+                      <img alt="[Tip]" src="/tmp/es2015/cheerio-mobi-ts4/content/svn/processed_images/tip-grayscale.gif">
+                    </td>
+                    <th align="left">Tip</th>
+                  </tr>
+                  <tr>
+                    <td align="left" valign="top">
+                      <p>Multiple <code class="literal">-c</code> and/or
+                  <code class="literal">-r</code> instances may be specified, and
+                  mixing of forward and reverse ranges is allowed&#x2014;
+                  the ranges are internally compacted to their minimum
+                  representation before merging begins (which may result
+                  in a no-op merge or conflicts that cause the merge to
+                  stop before merging all of the requested revisions).</p>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <p>In both variants of the first form,
+                <em class="replaceable"><code>SOURCE</code></em> in revision
+                <em class="replaceable"><code>REV</code></em> is compared as it existed
+                between revisions <em class="replaceable"><code>N</code></em> and
+                <em class="replaceable"><code>M</code></em> for each revision range
+                provided.</p>
+            </li>
+            <li class="listitem">
+              <p>Reintegrate Merges</p>
+              <p>The second form is called a <span class="quote">&#x201C;<span class="quote">reintegrate
+                merge</span>&#x201D;</span> and is used to bring changes from a feature
+                branch (<em class="replaceable"><code>SOURCE</code></em>)
+                back into the feature branch&apos;s immediate ancestor branch
+                (<em class="replaceable"><code>TARGET_WCPATH</code></em>).</p>
+              <div class="tip" style="margin-left: 0.5in; margin-right: 0.5in;">
+                <table border="0" summary="Tip">
+                  <tr>
+                    <td rowspan="2" align="center" valign="top" width="25">
+                      <img alt="[Tip]" src="/tmp/es2015/cheerio-mobi-ts4/content/svn/processed_images/tip-grayscale.gif">
+                    </td>
+                    <th align="left">Tip</th>
+                  </tr>
+                  <tr>
+                    <td align="left" valign="top">
+                      <p>Reintegrate merges support only this specialized
+                  use case and as such have a number of special
+                  requirements and limitations that the other two merge
+                  forms do not posses. See
+                  ,
+                  ,
+                  ,
+                  and
+                  .
+                </p>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </li>
+            <li class="listitem">
+              <p>2-URL Merges</p>
+              <p>In the third form, called a <span class="quote">&#x201C;<span class="quote">2-URL Merge</span>&#x201D;</span>,
+                the difference between <em class="replaceable"><code>SOURCE1</code></em>
+                at revision <em class="replaceable"><code>N</code></em> and
+                <em class="replaceable"><code>SOURCE2</code></em> at revision
+                <em class="replaceable"><code>M</code></em> is generated and applied to
+                <em class="replaceable"><code>TARGET_WCPATH</code></em>.  The revisions
+                default to <code class="literal">HEAD</code> if omitted.</p>
+            </li>
+          </ul>
+        </div>
+        <p>If
+            is active, then Subversion will internally track metadata
+            (i.e. the <code class="literal">svn:mergeinfo</code> property) about
+            merge operations when the two merge sources are ancestrally
+            related&#x2014;if the first source is an ancestor of the
+            second or vice versa&#x2014;this is guaranteed to be the case
+            when using the first two forms.  Subversion will also take
+            preexisting merge metadata on the working copy target into
+            account when determining what revisions to merge and in an
+            effort to avoid repeat merges and needless conflicts it may
+            only merge a subset of the requested ranges.</p>
+        <div class="tip" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Tip">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Tip]" src="/tmp/es2015/cheerio-mobi-ts4/content/svn/processed_images/tip-grayscale.gif">
+              </td>
+              <th align="left">Tip</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>
+              can be disabled by using the <code class="option">--ignore-ancestry</code>
+              option.</p>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <p>Unlike <span class="command"><strong>svn diff</strong></span>, the merge command
+            takes the ancestry of a file into consideration when
+            performing a merge operation. This is very important when
+            you&apos;re merging changes from one branch into another and you&apos;ve
+            renamed a file on one branch but not the other.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm10448"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+          <pre class="screen">
+</pre>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm10465"></a>
+        <h2>Examples</h2>
+        <p>Merge a branch back into the trunk (assuming that
+            you have an up-to-date working copy of the trunk):</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn merge --reintegrate \
+            http://svn.example.com/repos/calc/branches/my-calc-branch
+--- Merging differences between repository URLs into &apos;.&apos;:
+U    button.c
+U    integer.c
+U    Makefile
+ U   .
+--- Recording mergeinfo for merge between repository URLs into &apos;.&apos;:
+ U   .
+$ # build, test, verify, ...
+$ svn commit -m &quot;Merge my-calc-branch back into trunk!&quot;
+Sending        .
+Sending        button.c
+Sending        integer.c
+Sending        Makefile
+Transmitting file data ..
+Committed revision 391.
+</pre>
+        </div>
+        <p>To merge changes to a single file:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn merge -c 31 ^/trunk/thhgttg.txt thhgttg.txt 
+--- Merging r31 into &apos;thhgttg.txt&apos;:
+U    thhgttg.txt
+--- Recording mergeinfo for merge of r31 into &apos;thhgttg.txt&apos;:
+ U   thhgttg.txt
+</pre>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,9 @@
+<h3 id="rest-parameters">Rest Parameters</h3>
+<p>Rest parameters (denoted by <code>...argumentName</code> for the last argument) allow you to quickly accept multiple arguments in your function and get them as an array. This is demonstrated in the below example.</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">iTakeItAll</span>(<span class="hljs-params">first, second, ...allOthers</span>) </span>{
+    <span class="hljs-built_in">console</span>.log(allOthers);
+}
+iTakeItAll(<span class="hljs-string">'foo'</span>, <span class="hljs-string">'bar'</span>); <span class="hljs-comment">// []</span>
+iTakeItAll(<span class="hljs-string">'foo'</span>, <span class="hljs-string">'bar'</span>, <span class="hljs-string">'bas'</span>, <span class="hljs-string">'qux'</span>); <span class="hljs-comment">// ['bas','qux']</span>
+</code></pre>
+<p>Rest parameters can be used in any function be it <code>function</code>/<code>()=></code>/<code>class member</code>.</p>

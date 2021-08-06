@@ -1,0 +1,253 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Enums
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts12_mlv/undefined" />
+  </head>
+   <body>
+<ul>
+    <li><a href="#enums">Enums</a></li>
+    <li><a href="#number-enums-and-numbers">Number Enums and numbers</a></li>
+    <li><a href="#number-enums-and-strings">Number Enums and strings</a></li>
+    <li><a href="#changing-the-number-associated-with-a-number-enum">Changing the number associated with a number enum</a></li>
+    <li><a href="#enums-are-open-ended">Enums are open ended</a></li>
+    <li><a href="#number-enums-as-flags">Number Enums as flags</a></li>
+    <li><a href="#string-enums">String Enums</a></li>
+    <li><a href="#const-enums">Const enums</a></li>
+    <li><a href="#enum-with-static-functions">Enum with static functions</a></li>
+</ul>
+<h3 id="enums">Enums</h3>
+<p>An enum is a way to organize a collection of related values. Many other programming languages (C/C#/Java) have an <code>enum</code> data type but JavaScript does not. However, TypeScript does. Here is an example definition of a TypeScript enum:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">enum</span> CardSuit {
+    Clubs,
+    Diamonds,
+    Hearts,
+    Spades
+}
+<span class="hljs-comment">// Sample usage</span>
+<span class="hljs-keyword">var</span> card = CardSuit.Clubs;
+<span class="hljs-comment">// Safety</span>
+card = <span class="hljs-string">&quot;not a member of card suit&quot;</span>; <span class="hljs-comment">// Error : string is not assignable to type `CardSuit`</span>
+</code></pre>
+<p>These enums values are <code>number</code>s so I&apos;ll call them Number Enums from hence forth.</p>
+<h4 id="number-enums-and-numbers">Number Enums and Numbers</h4>
+<p>TypeScript enums are number based. This means that numbers can be assigned to an instance of the enum, and so can anything else that is compatible with <code>number</code>.</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">enum</span> Color {
+    Red,
+    Green,
+    Blue
+}
+<span class="hljs-keyword">var</span> col = Color.Red;
+col = <span class="hljs-number">0</span>; <span class="hljs-comment">// Effectively same as Color.Red</span>
+</code></pre>
+<h4 id="number-enums-and-strings">Number Enums and Strings</h4>
+<p>Before we look further into enums let&apos;s look at the JavaScript that it generates, here is a sample TypeScript:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">enum</span> Tristate {
+    False,
+    True,
+    Unknown
+}
+</code></pre>
+<p>generates the following JavaScript:</p>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> Tristate;
+(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">Tristate</span>) </span>{
+    Tristate[Tristate[<span class="hljs-string">&quot;False&quot;</span>] = <span class="hljs-number">0</span>] = <span class="hljs-string">&quot;False&quot;</span>;
+    Tristate[Tristate[<span class="hljs-string">&quot;True&quot;</span>] = <span class="hljs-number">1</span>] = <span class="hljs-string">&quot;True&quot;</span>;
+    Tristate[Tristate[<span class="hljs-string">&quot;Unknown&quot;</span>] = <span class="hljs-number">2</span>] = <span class="hljs-string">&quot;Unknown&quot;</span>;
+})(Tristate || (Tristate = {}));
+</code></pre>
+<p>let&apos;s focus on the line <code>Tristate[Tristate[&quot;False&quot;] = 0] = &quot;False&quot;;</code>. Within it <code>Tristate[&quot;False&quot;] = 0</code> should be self explanatory, i.e. sets <code>&quot;False&quot;</code> member of <code>Tristate</code> variable to be <code>0</code>. Note that in JavaScript the assignment operator returns the assigned value (in this case <code>0</code>). Therefore the next thing executed by the JavaScript runtime is <code>Tristate[0] = &quot;False&quot;</code>. This means that you can use the <code>Tristate</code> variable to convert a string version of the enum to a number or a number version of the enum to a string. This is demonstrated below:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">enum</span> Tristate {
+    False,
+    True,
+    Unknown
+}
+<span class="hljs-built_in">console</span>.log(Tristate[<span class="hljs-number">0</span>]); <span class="hljs-comment">// &quot;False&quot;</span>
+<span class="hljs-built_in">console</span>.log(Tristate[<span class="hljs-string">&quot;False&quot;</span>]); <span class="hljs-comment">// 0</span>
+<span class="hljs-built_in">console</span>.log(Tristate[Tristate.False]); <span class="hljs-comment">// &quot;False&quot; because `Tristate.False == 0`</span>
+</code></pre>
+<h4 id="changing-the-number-associated-with-a-number-enum">Changing the number associated with a Number Enum</h4>
+<p>By default enums are <code>0</code> based and then each subsequent value increments by 1 automatically. As an example consider the following:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">enum</span> Color {
+    Red,     <span class="hljs-comment">// 0</span>
+    Green,   <span class="hljs-comment">// 1</span>
+    Blue     <span class="hljs-comment">// 2</span>
+}
+</code></pre>
+<p>However, you can change the number associated with any enum member by assigning to it specifically. This is demonstrated below where we start at 3 and start incrementing from there:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">enum</span> Color {
+    DarkRed = <span class="hljs-number">3</span>,  <span class="hljs-comment">// 3</span>
+    DarkGreen,    <span class="hljs-comment">// 4</span>
+    DarkBlue      <span class="hljs-comment">// 5</span>
+}
+</code></pre>
+<blockquote>
+    <p>TIP: I quite commonly initialize the first enum with <code>= 1</code> as it allows me to do a safe truthy check on an enum value.</p>
+</blockquote>
+<h4 id="number-enums-as-flags">Number Enums as flags</h4>
+<p>One excellent use of enums is the ability to use enums as <code>Flags</code>. Flags allow you to check if a certain condition from a set of conditions is true. Consider the following example where we have a set of properties about animals:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">enum</span> AnimalFlags {
+    None           = <span class="hljs-number">0</span>,
+    HasClaws       = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">0</span>,
+    CanFly         = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">1</span>,
+    EatsFish       = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">2</span>,
+    Endangered     = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">3</span>
+}
+</code></pre>
+<p>Here we are using the left shift operator to move <code>1</code> around a certain level of bits to come up with bitwise disjoint numbers <code>0001</code>, <code>0010</code>, <code>0100</code> and <code>1000</code> (these are decimals <code>1</code>,<code>2</code>,<code>4</code>,<code>8</code> if you are curious). The bitwise operators <code>|</code> (or) / <code>&amp;</code> (and) / <code>~</code> (not) are your best friends when working with flags and are demonstrated below:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">enum</span> AnimalFlags {
+    None           = <span class="hljs-number">0</span>,
+    HasClaws       = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">0</span>,
+    CanFly         = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">1</span>,
+}
+<span class="hljs-keyword">type</span> Animal = {
+    flags: AnimalFlags
+}
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">printAnimalAbilities</span>(<span class="hljs-params">animal: Animal</span>) </span>{
+    <span class="hljs-keyword">var</span> animalFlags = animal.flags;
+    <span class="hljs-keyword">if</span> (animalFlags &amp; AnimalFlags.HasClaws) {
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;animal has claws&apos;</span>);
+    }
+    <span class="hljs-keyword">if</span> (animalFlags &amp; AnimalFlags.CanFly) {
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;animal can fly&apos;</span>);
+    }
+    <span class="hljs-keyword">if</span> (animalFlags == AnimalFlags.None) {
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;nothing&apos;</span>);
+    }
+}
+<span class="hljs-keyword">let</span> animal: Animal = { flags: AnimalFlags.None };
+printAnimalAbilities(animal); <span class="hljs-comment">// nothing</span>
+animal.flags |= AnimalFlags.HasClaws;
+printAnimalAbilities(animal); <span class="hljs-comment">// animal has claws</span>
+animal.flags &amp;= ~AnimalFlags.HasClaws;
+printAnimalAbilities(animal); <span class="hljs-comment">// nothing</span>
+animal.flags |= AnimalFlags.HasClaws | AnimalFlags.CanFly;
+printAnimalAbilities(animal); <span class="hljs-comment">// animal has claws, animal can fly</span>
+</code></pre>
+<p>Here:</p>
+<ul>
+    <li>we used <code>|=</code> to add flags</li>
+    <li>a combination of <code>&amp;=</code> and <code>~</code> to clear a flag</li>
+    <li><code>|</code> to combine flags</li>
+</ul>
+<blockquote>
+    <p>Note: you can combine flags to create convenient shortcuts within the enum definition e.g. <code>EndangeredFlyingClawedFishEating</code> below:</p>
+</blockquote>
+<pre><code class="lang-ts"><span class="hljs-keyword">enum</span> AnimalFlags {
+    None           = <span class="hljs-number">0</span>,
+    HasClaws       = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">0</span>,
+    CanFly         = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">1</span>,
+    EatsFish       = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">2</span>,
+    Endangered     = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">3</span>,
+    EndangeredFlyingClawedFishEating = HasClaws | CanFly | EatsFish | Endangered,
+}
+</code></pre>
+<h4 id="string-enums">String Enums</h4>
+<p>We&apos;ve only looked at enums where the member values are <code>number</code>s. You are actually allowed to have enum members with string values as well. e.g. </p>
+<pre><code class="lang-ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">enum</span> EvidenceTypeEnum {
+  UNKNOWN = <span class="hljs-string">&apos;&apos;</span>,
+  PASSPORT_VISA = <span class="hljs-string">&apos;passport_visa&apos;</span>,
+  PASSPORT = <span class="hljs-string">&apos;passport&apos;</span>,
+  SIGHTED_STUDENT_CARD = <span class="hljs-string">&apos;sighted_tertiary_edu_id&apos;</span>,
+  SIGHTED_KEYPASS_CARD = <span class="hljs-string">&apos;sighted_keypass_card&apos;</span>,
+  SIGHTED_PROOF_OF_AGE_CARD = <span class="hljs-string">&apos;sighted_proof_of_age_card&apos;</span>,
+}
+</code></pre>
+<p>These can be easier to deal with and debug as they provide meaningful / debuggable string values. </p>
+<p>You can use these values to do simple string comparisons. e.g. </p>
+<pre><code class="lang-ts"><span class="hljs-comment">// Where `someStringFromBackend` will be &apos;&apos; | &apos;passport_visa&apos; | &apos;passport&apos; ... etc.</span>
+<span class="hljs-keyword">const</span> value = someStringFromBackend as EvidenceTypeEnum; 
+<span class="hljs-comment">// Sample use in code</span>
+<span class="hljs-keyword">if</span> (value === EvidenceTypeEnum.PASSPORT){
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;You provided a passport&apos;</span>);
+    <span class="hljs-built_in">console</span>.log(value); <span class="hljs-comment">// `passport`</span>
+}
+</code></pre>
+<h4 id="const-enums">Const Enums</h4>
+<p>If you have an enum definition like the following:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">enum</span> Tristate {
+    False,
+    True,
+    Unknown
+}
+<span class="hljs-keyword">var</span> lie = Tristate.False;
+</code></pre>
+<p>The line <code>var lie = Tristate.False</code> is compiled to the JavaScript <code>var lie = Tristate.False</code> (yes, output is same as input). This means that at execution the runtime will need to lookup <code>Tristate</code> and then <code>Tristate.False</code>. To get a performance boost here you can mark the <code>enum</code> as a <code>const enum</code>. This is demonstrated below:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">const</span> <span class="hljs-keyword">enum</span> Tristate {
+    False,
+    True,
+    Unknown
+}
+<span class="hljs-keyword">var</span> lie = Tristate.False;
+</code></pre>
+<p>generates the JavaScript:</p>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> lie = <span class="hljs-number">0</span>;
+</code></pre>
+<p>i.e. the compiler:</p>
+<ol>
+    <li><em>Inlines</em> any usages of the enum (<code>0</code> instead of <code>Tristate.False</code>).</li>
+    <li>Does not generate any JavaScript for the enum definition (there is no <code>Tristate</code> variable at runtime) as its usages are inlined.</li>
+</ol>
+<h5 id="const-enum-preserveconstenums">Const enum preserveConstEnums</h5>
+<p>Inlining has obvious performance benefits. The fact that there is no <code>Tristate</code> variable at runtime is simply the compiler helping you out by not generating JavaScript that is not actually used at runtime. However, you might want the compiler to still generate the JavaScript version of the enum definition for stuff like <em>number to string</em> or <em>string to number</em> lookups as we saw. In this case you can use the compiler flag <code>--preserveConstEnums</code> and it will still generate the <code>var Tristate</code> definition so that you can use <code>Tristate[&quot;False&quot;]</code> or <code>Tristate[0]</code> manually at runtime if you want. This does not impact <em>inlining</em> in any way.</p>
+<h3 id="enum-with-static-functions">Enum with static functions</h3>
+<p>You can use the declaration <code>enum</code> + <code>namespace</code> merging to add static methods to an enum. The following demonstrates an example where we add a static member <code>isBusinessDay</code> to an enum <code>Weekday</code>:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">enum</span> Weekday {
+    Monday,
+    Tuesday,
+    Wednesday,
+    Thursday,
+    Friday,
+    Saturday,
+    Sunday
+}
+<span class="hljs-keyword">namespace</span> Weekday {
+    <span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isBusinessDay</span>(<span class="hljs-params">day: Weekday</span>) </span>{
+        <span class="hljs-keyword">switch</span> (day) {
+            <span class="hljs-keyword">case</span> Weekday.Saturday:
+            <span class="hljs-keyword">case</span> Weekday.Sunday:
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+            <span class="hljs-keyword">default</span>:
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        }
+    }
+}
+<span class="hljs-keyword">const</span> mon = Weekday.Monday;
+<span class="hljs-keyword">const</span> sun = Weekday.Sunday;
+<span class="hljs-built_in">console</span>.log(Weekday.isBusinessDay(mon)); <span class="hljs-comment">// true</span>
+<span class="hljs-built_in">console</span>.log(Weekday.isBusinessDay(sun)); <span class="hljs-comment">// false</span>
+</code></pre>
+<h4 id="enums-are-open-ended">Enums are open ended</h4>
+<blockquote>
+    <p>NOTE: open ended enums are only relevant if you are not using modules. You should be using modules. Hence this section is last.</p>
+</blockquote>
+<p>Here is the generated JavaScript for an enum shown again:</p>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> Tristate;
+(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">Tristate</span>) </span>{
+    Tristate[Tristate[<span class="hljs-string">&quot;False&quot;</span>] = <span class="hljs-number">0</span>] = <span class="hljs-string">&quot;False&quot;</span>;
+    Tristate[Tristate[<span class="hljs-string">&quot;True&quot;</span>] = <span class="hljs-number">1</span>] = <span class="hljs-string">&quot;True&quot;</span>;
+    Tristate[Tristate[<span class="hljs-string">&quot;Unknown&quot;</span>] = <span class="hljs-number">2</span>] = <span class="hljs-string">&quot;Unknown&quot;</span>;
+})(Tristate || (Tristate = {}));
+</code></pre>
+<p>We already explained the <code>Tristate[Tristate[&quot;False&quot;] = 0] = &quot;False&quot;;</code> portion. Now notice the surrounding code <code>(function (Tristate) { /*code here */ })(Tristate || (Tristate = {}));</code> specifically the <code>(Tristate || (Tristate = {}));</code> portion. This basically captures a local variable <code>TriState</code> that will either point to an already defined <code>Tristate</code> value or initialize it with a new empty <code>{}</code> object.</p>
+<p>This means that you can split (and extend) an enum definition across multiple files. For example below we have split the definition for <code>Color</code> into two blocks</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">enum</span> Color {
+    Red,
+    Green,
+    Blue
+}
+<span class="hljs-keyword">enum</span> Color {
+    DarkRed = <span class="hljs-number">3</span>,
+    DarkGreen,
+    DarkBlue
+}
+</code></pre>
+<p>Note that you <em>should</em> reinitialize the first member (here <code>DarkRed = 3</code>) in a continuation of an enum to get the generated code not clobber values from a previous definition (i.e. the <code>0</code>, <code>1</code>, ... so on values). TypeScript will warn you if you don&apos;t anyways (error message <code>In an enum with multiple declarations, only one declaration can omit an initializer for its first enum element.</code>).</p>
+</body>
+</html>

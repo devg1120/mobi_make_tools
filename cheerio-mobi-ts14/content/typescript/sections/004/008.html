@@ -1,0 +1,69 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Spread Operator
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts14/undefined" />
+  </head>
+   <body>
+<h3 id="spread-operator">Spread Operator</h3>
+<p>The main objective of the spread operator is to <em>spread</em> the elements of an array or object. This is best explained with examples.</p>
+<h4 id="apply">Apply</h4>
+<p>A common use case is to spread an array into the function arguments. Previously you would need to use <code>Function.prototype.apply</code>:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">x, y, z</span>) </span>{ }
+<span class="hljs-keyword">var</span> args = [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>];
+foo.apply(<span class="hljs-literal">null</span>, args);
+</code></pre>
+<p>Now you can do this simply by prefixing the arguments with <code>...</code> as shown below:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">x, y, z</span>) </span>{ }
+<span class="hljs-keyword">var</span> args = [<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>];
+foo(...args);
+</code></pre>
+<p>Here we are <em>spreading</em> the <code>args</code> array into positional <code>arguments</code>.</p>
+<h4 id="destructuring">Destructuring</h4>
+<p>We&apos;ve already seen one usage of this in <em>destructuring</em>:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">var</span> [x, y, ...remaining] = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>];
+<span class="hljs-built_in">console</span>.log(x, y, remaining); <span class="hljs-comment">// 1,2,[3,4]</span>
+</code></pre>
+<p>The motivation here is to simply make it easy for you to capture the remaining elements of an array when destructuring.</p>
+<h4 id="array-assignment">Array Assignment</h4>
+<p>The spread operator allows you to easily place an <em>expanded version</em> of an array into another array. This is demonstrated in the example below:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">var</span> list = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>];
+list = [...list, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>];
+<span class="hljs-built_in">console</span>.log(list); <span class="hljs-comment">// [1,2,3,4]</span>
+</code></pre>
+<p>You can put the expanded array in at any position, and get the effect you&apos;d expect:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">var</span> list = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>];
+list = [<span class="hljs-number">0</span>, ...list, <span class="hljs-number">4</span>];
+<span class="hljs-built_in">console</span>.log(list); <span class="hljs-comment">// [0,1,2,4]</span>
+</code></pre>
+<h4 id="object-spread">Object spread</h4>
+<p>You can also spread an object into another object. A common use case is to simply add a property to an object without mutating the original:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">const</span> point2D = {x: <span class="hljs-number">1</span>, y: <span class="hljs-number">2</span>};
+<span class="hljs-comment">/** Create a new object by using all the point2D props along with z */</span>
+<span class="hljs-keyword">const</span> point3D = {...point2D, z: <span class="hljs-number">3</span>};
+</code></pre>
+<p>For objects, the order of where you put the spread matters. This works something like <code>Object.assign</code>, and does what you&apos;d expect: what comes first is &apos;overridden&apos; by what comes later:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">const</span> point2D = {x: <span class="hljs-number">1</span>, y: <span class="hljs-number">2</span>};
+<span class="hljs-keyword">const</span> anotherPoint3D = {x: <span class="hljs-number">5</span>, z: <span class="hljs-number">4</span>, ...point2D};
+<span class="hljs-built_in">console</span>.log(anotherPoint3D); <span class="hljs-comment">// {x: 1, y: 2, z: 4}</span>
+<span class="hljs-keyword">const</span> yetAnotherPoint3D = {...point2D, x: <span class="hljs-number">5</span>, z: <span class="hljs-number">4</span>}
+<span class="hljs-built_in">console</span>.log(yetAnotherPoint3D); <span class="hljs-comment">// {x: 5, y: 2, z: 4}</span>
+</code></pre>
+<p>Another common use case is a simple shallow extend:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">const</span> foo = {a: <span class="hljs-number">1</span>, b: <span class="hljs-number">2</span>, c: <span class="hljs-number">0</span>};
+<span class="hljs-keyword">const</span> bar = {c: <span class="hljs-number">1</span>, d: <span class="hljs-number">2</span>};
+<span class="hljs-comment">/** Merge foo and bar */</span>
+<span class="hljs-keyword">const</span> fooBar = {...foo, ...bar};
+<span class="hljs-comment">// fooBar is now {a: 1, b: 2, c: 1, d: 2}</span>
+</code></pre>
+<h4 id="summary">Summary</h4>
+<p><code>apply</code> is something that you often use in JavaScript, so it&apos;s good to have a better syntax where you don&apos;t have that ugly <code>null</code> for the <code>this</code> argument. Also having a dedicated syntax for moving arrays out of (destructuring) or into (assignment) other arrays provides a neat syntax for when you are doing array processing on partial arrays.</p>
+<p><a href="https://github.com/Microsoft/TypeScript/pull/1931" target="_blank"></a></p>
+</body>
+</html>

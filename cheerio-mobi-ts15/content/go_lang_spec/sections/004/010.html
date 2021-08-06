@@ -1,0 +1,91 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Rune literals</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+A rune literal represents a [<a>rune constant</a>],
+an integer value identifying a Unicode code point.
+A rune literal is expressed as one or more characters enclosed in single quotes,
+as in <code>&apos;x&apos;</code> or <code>&apos;\n&apos;</code>.
+Within the quotes, any character may appear except newline and unescaped single
+quote. A single quoted character represents the Unicode value
+of the character itself,
+while multi-character sequences beginning with a backslash encode
+values in various formats.
+</p><p>
+The simplest form represents the single character within the quotes;
+since Go source text is Unicode characters encoded in UTF-8, multiple
+UTF-8-encoded bytes may represent a single integer value.  For
+instance, the literal <code>&apos;a&apos;</code> holds a single byte representing
+a literal <code>a</code>, Unicode U+0061, value <code>0x61</code>, while
+<code>&apos;&#xE4;&apos;</code> holds two bytes (<code>0xc3</code> <code>0xa4</code>) representing
+a literal <code>a</code>-dieresis, U+00E4, value <code>0xe4</code>.
+</p><p>
+Several backslash escapes allow arbitrary values to be encoded as
+ASCII text.  There are four ways to represent the integer value
+as a numeric constant: <code>\x</code> followed by exactly two hexadecimal
+digits; <code>\u</code> followed by exactly four hexadecimal digits;
+<code>\U</code> followed by exactly eight hexadecimal digits, and a
+plain backslash <code>\</code> followed by exactly three octal digits.
+In each case the value of the literal is the value represented by
+the digits in the corresponding base.
+</p><p>
+Although these representations all result in an integer, they have
+different valid ranges.  Octal escapes must represent a value between
+0 and 255 inclusive.  Hexadecimal escapes satisfy this condition
+by construction. The escapes <code>\u</code> and <code>\U</code>
+represent Unicode code points so within them some values are illegal,
+in particular those above <code>0x10FFFF</code> and surrogate halves.
+</p><p>
+After a backslash, certain single-character escapes represent special values:
+</p><pre>
+\a   U+0007 alert or bell
+\b   U+0008 backspace
+\f   U+000C form feed
+\n   U+000A line feed or newline
+\r   U+000D carriage return
+\t   U+0009 horizontal tab
+\v   U+000b vertical tab
+\\   U+005c backslash
+\&apos;   U+0027 single quote  (valid escape only within rune literals)
+\&quot;   U+0022 double quote  (valid escape only within string literals)
+</pre><p>
+All other sequences starting with a backslash are illegal inside rune literals.
+</p><pre>
+[<a>rune_lit</a>]         = &quot;&apos;&quot; ( [<a>unicode_value</a>] | [<a>byte_value</a>] ) &quot;&apos;&quot; .
+[<a>unicode_value</a>]    = [<a>unicode_char</a>] | [<a>little_u_value</a>] | [<a>big_u_value</a>] | [<a>escaped_char</a>] .
+[<a>byte_value</a>]       = [<a>octal_byte_value</a>] | [<a>hex_byte_value</a>] .
+[<a>octal_byte_value</a>] = `\` [<a>octal_digit</a>] [<a>octal_digit</a>] [<a>octal_digit</a>] .
+[<a>hex_byte_value</a>]   = `\` &quot;x&quot; [<a>hex_digit</a>] [<a>hex_digit</a>] .
+[<a>little_u_value</a>]   = `\` &quot;u&quot; [<a>hex_digit</a>] [<a>hex_digit</a>] [<a>hex_digit</a>] [<a>hex_digit</a>] .
+[<a>big_u_value</a>]      = `\` &quot;U&quot; [<a>hex_digit</a>] [<a>hex_digit</a>] [<a>hex_digit</a>] [<a>hex_digit</a>]
+                           [<a>hex_digit</a>] [<a>hex_digit</a>] [<a>hex_digit</a>] [<a>hex_digit</a>] .
+[<a>escaped_char</a>]     = `\` ( &quot;a&quot; | &quot;b&quot; | &quot;f&quot; | &quot;n&quot; | &quot;r&quot; | &quot;t&quot; | &quot;v&quot; | `\` | &quot;&apos;&quot; | `&quot;` ) .
+</pre><pre>
+&apos;a&apos;
+&apos;&#xE4;&apos;
+&apos;&#x672C;&apos;
+&apos;\t&apos;
+&apos;\000&apos;
+&apos;\007&apos;
+&apos;\377&apos;
+&apos;\x07&apos;
+&apos;\xff&apos;
+&apos;\u12e4&apos;
+&apos;\U00101234&apos;
+&apos;\&apos;&apos;         // rune literal containing single quote character
+&apos;aa&apos;         // illegal: too many characters
+&apos;\xa&apos;        // illegal: too few hexadecimal digits
+&apos;\0&apos;         // illegal: too few octal digits
+&apos;\uDFFF&apos;     // illegal: surrogate half
+&apos;\U00110000&apos; // illegal: invalid Unicode code point
+</pre></body>
+</body>
+</html>

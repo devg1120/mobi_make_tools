@@ -1,0 +1,28 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>IncDec statements</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+The &quot;++&quot; and &quot;--&quot; statements increment or decrement their operands
+by the untyped [<a>constant</a>] <code>1</code>.
+As with an assignment, the operand must be [<a>addressable</a>]
+or a map index expression.
+</p><pre>
+[<a>IncDecStmt</a>] = [<a>Expression</a>] ( &quot;++&quot; | &quot;--&quot; ) .
+</pre><p>
+The following [<a>assignment statements</a>] are semantically
+equivalent:
+</p><pre>
+IncDec statement    Assignment
+x++                 x += 1
+x--                 x -= 1
+</pre></body>
+</body>
+</html>

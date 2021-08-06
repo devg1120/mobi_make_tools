@@ -1,0 +1,49 @@
+--- 
+# kindle mobi document genelater
+#
+#
+# //*[@id="root"]/div/nav
+#  #root > div > nav
+#
+#  //*[@id="root"]/div/div[2]/nav
+#  #root > div > div.container.site__content > nav
+#
+#  //*[@id="root"]/div/div[2]/nav/div/div[5]/a
+#  #root > div > div.container.site__content > nav > div > div:nth-child(5) > a
+#  
+#  <a class="sidebar-item__title" href="/concepts/output/">Output</a>
+#
+top_dir: content
+recipe_slug:  typescript
+
+base_url: https://basarat.gitbooks.io/typescript/
+index_url: https://basarat.gitbooks.io/typescript/
+kindle_css: css/kindle.css
+images_include: true
+
+extract_sections:
+   select_class:  .chapter
+   select_method: logic           # logic / regex
+#  select_section_regex: ""
+#  select_article_regex: ""     
+   select_logic_script: | 
+                       let data_level = result.$(this).parent().attr('data-level')
+                       let level = data_level.toString().split('.').length -1
+                       if ( level > 1) {
+                          $url = $url_org + '_article'
+                       } else {
+                          $url = $url_org + '_section'
+                       }
+
+   save_content_tag:   section   # default body
+
+#
+kindlegen:
+  compress:  2     # 0/1/2
+  verbose:   true  # booleran
+  locale:    en
+  output_path:    /tmp/mobi
+
+
+
+

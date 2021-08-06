@@ -1,0 +1,3 @@
+<h2 id="caching">Caching<a href="#caching" aria-hidden="true"><span class="icon icon-link"></span></a></h2>
+<p>Every filesystem access is cached, so that multiple parallel or serial requests to the same file occur faster. In <a href="/configuration/watch/#watch">watch mode</a>, only modified files are evicted from the cache. If watch mode is off, then the cache gets purged before every compilation.</p>
+<p>See <a href="/configuration/resolve">Resolve API</a> to learn more on the configuration options mentioned above.</p>

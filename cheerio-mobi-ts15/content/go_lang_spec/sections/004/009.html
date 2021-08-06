@@ -1,0 +1,41 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Imaginary literals</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+An imaginary literal represents the imaginary part of a
+[<a>complex constant</a>].
+It consists of an [<a>integer</a>] or
+[<a>floating-point</a>] literal
+followed by the lower-case letter <code>i</code>.
+The value of an imaginary literal is the value of the respective
+integer or floating-point literal multiplied by the imaginary unit <i>i</i>.
+</p><pre>
+[<a>imaginary_lit</a>] = ([<a>decimal_digits</a>] | [<a>int_lit</a>] | [<a>float_lit</a>]) &quot;i&quot; .
+</pre><p>
+For backward compatibility, an imaginary literal&apos;s integer part consisting
+entirely of decimal digits (and possibly underscores) is considered a decimal
+integer, even if it starts with a leading <code>0</code>.
+</p><pre>
+0i
+0123i         // == 123i for backward-compatibility
+0o123i        // == 0o123 * 1i == 83i
+0xabci        // == 0xabc * 1i == 2748i
+0.i
+2.71828i
+1.e+0i
+6.67428e-11i
+1E6i
+.25i
+.12345E+5i
+0x1p-2i       // == 0x1p-2 * 1i == 0.25i
+</pre></body>
+</body>
+</html>

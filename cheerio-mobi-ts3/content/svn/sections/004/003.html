@@ -1,0 +1,136 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Creating a Working Copy</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/tmp/es2015/cheerio-mobi-ts3/css/kindle.css" />
+  </head>
+   <body>
+    <div class="sect1">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="svn.tour.initial"></a>Creating a Working Copy</h2>
+          </div>
+        </div>
+      </div>
+      <a id="idm972" class="indexterm"></a>
+      <p>Most of the time, you will start using a Subversion
+      repository by performing a <em class="firstterm">checkout</em> of
+      your project.  Checking out a directory from a repository
+      creates a working copy of that directory on your local machine.
+      Unless otherwise specified, this copy contains the youngest
+      (that is, most recently created or modified) versions of the
+      directory and its children found in the Subversion
+      repository:</p>
+      <div class="informalexample">
+        <pre class="screen">
+$ svn checkout http://svn.example.com/svn/repo/trunk
+A    trunk/README
+A    trunk/INSTALL
+A    trunk/src/main.c
+A    trunk/src/header.h
+…
+Checked out revision 8810.
+$
+</pre>
+      </div>
+      <p>Although the preceding example checks out the trunk
+      directory, you can just as easily check out a deeper
+      subdirectory of a repository by specifying that subdirectory's
+      URL as the checkout URL:</p>
+      <div class="informalexample">
+        <pre class="screen">
+$ svn checkout http://svn.example.com/svn/repo/trunk/src
+A    src/main.c
+A    src/header.h
+A    src/lib/helpers.c
+…
+Checked out revision 8810.
+$
+</pre>
+      </div>
+      <p>Since Subversion uses a copy-modify-merge model instead of
+      lock-modify-unlock (see <a class="xref" href="svn.basic.version-control-basics.html#svn.basic.vsn-models" title="Versioning Models">the section called “Versioning Models”</a>),
+      you can immediately make changes to the files and directories in
+      your working copy.  Your working copy is just like any other
+      collection of files and directories on your system.  You can
+      edit the files inside it, rename it, even delete the entire
+      working copy and forget about it.</p>
+      <div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Warning">
+          <tr>
+            <td rowspan="2" align="center" valign="top" width="25">
+              <img alt="[Warning]" src="images/warning.png">
+            </td>
+            <th align="left">Warning</th>
+          </tr>
+          <tr>
+            <td align="left" valign="top">
+              <p>While your working copy is <span class="quote">“<span class="quote">just like any other
+        collection of files and directories on your system,</span>”</span>
+        you can edit files at will, but you must tell Subversion
+        about <span class="emphasis"><em>everything else</em></span> that you do.  For
+        example, if you want to copy or move an item in a working
+        copy, you should use <span class="command"><strong>svn copy</strong></span> or
+        <span class="command"><strong>svn move</strong></span> instead of the copy and move
+        commands provided by your operating system.  We'll talk more
+        about them later in this chapter.</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <p>Unless you're ready to commit the addition of a new file or
+      directory or changes to existing ones, there's no need to
+      further notify the Subversion server that you've done
+      anything.</p>
+      <div class="sidebar">
+        <div class="titlepage">
+          <div>
+            <div>
+              <p class="title">
+                <strong>What Is This .svn Directory?</strong>
+              </p>
+            </div>
+          </div>
+        </div>
+        <p>The topmost directory of a working copy—and prior to
+        version 1.7, every versioned subdirectory
+        thereof—contains a special administrative subdirectory
+        named <code class="filename">.svn</code>.  Usually, your operating
+        system's directory listing commands won't show this
+        subdirectory, but it is nevertheless an important directory.
+        Whatever you do, don't delete or change anything in the
+        administrative area!  Subversion uses that directory and its
+        contents to manage your working copy.</p>
+      </div>
+      <p>Notice that in the previous pair of examples, Subversion
+      chose to create a working copy in a directory named for the
+      final component of the checkout URL.  This occurs only as a
+      convenience to the user when the checkout URL is the only bit of
+      information provided to the <span class="command"><strong>svn checkout</strong></span>
+      command.  Subversion's command-line client gives you additional
+      flexibility, though, allowing you to optionally specify the
+      local directory name that Subversion should use for the working
+      copy it creates.  For example:</p>
+      <div class="informalexample">
+        <pre class="screen">
+$ svn checkout http://svn.example.com/svn/repo/trunk my-working-copy
+A    my-working-copy/README
+A    my-working-copy/INSTALL
+A    my-working-copy/src/main.c
+A    my-working-copy/src/header.h
+…
+Checked out revision 8810.
+$
+</pre>
+      </div>
+      <p>If the local directory you specify doesn't yet
+      exist, that's okay—<span class="command"><strong>svn checkout</strong></span> will
+      create it for you.</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,306 @@
+- title: Frontmatter
+  articles:
+    - title: Title Page
+      path: articles/titlepage
+- title: Print Section
+  articles:
+    - title: Print Section
+      path: articles/concepts/printable/root.html
+- title: Concepts
+  articles:
+    - title: Concepts
+      path: articles/concepts/root.html
+    - title: Entry
+      path: 'articles/concepts/#entry'
+    - title: Output
+      path: 'articles/concepts/#output'
+    - title: Loaders
+      path: 'articles/concepts/#loaders'
+    - title: Plugins
+      path: 'articles/concepts/#plugins'
+    - title: Mode
+      path: 'articles/concepts/#mode'
+    - title: Browser Compatibility
+      path: 'articles/concepts/#browser-compatibility'
+- title: Entry Points
+  articles:
+    - title: Entry Points
+      path: articles/concepts/entry-points/root.html
+    - title: Single Entry (Shorthand) Syntax
+      path: 'articles/concepts/entry-points/#single-entry-shorthand-syntax'
+    - title: Object Syntax
+      path: 'articles/concepts/entry-points/#object-syntax'
+    - title: Scenarios
+      path: 'articles/concepts/entry-points/#scenarios'
+    - title: Separate App and Vendor Entries
+      path: 'articles/concepts/entry-points/#separate-app-and-vendor-entries'
+    - title: Multi Page Application
+      path: 'articles/concepts/entry-points/#multi-page-application'
+- title: Output
+  articles:
+    - title: Output
+      path: articles/concepts/output/root.html
+    - title: Usage
+      path: 'articles/concepts/output/#usage'
+    - title: Multiple Entry Points
+      path: 'articles/concepts/output/#multiple-entry-points'
+    - title: Advanced
+      path: 'articles/concepts/output/#advanced'
+- title: Loaders
+  articles:
+    - title: Loaders
+      path: articles/concepts/loaders/root.html
+    - title: Example
+      path: 'articles/concepts/loaders/#example'
+    - title: Using Loaders
+      path: 'articles/concepts/loaders/#using-loaders'
+    - title: Configuration
+      path: 'articles/concepts/loaders/#configuration'
+    - title: Inline
+      path: 'articles/concepts/loaders/#inline'
+    - title: CLI
+      path: 'articles/concepts/loaders/#cli'
+    - title: Loader Features
+      path: 'articles/concepts/loaders/#loader-features'
+    - title: Resolving Loaders
+      path: 'articles/concepts/loaders/#resolving-loaders'
+- title: Plugins
+  articles:
+    - title: Plugins
+      path: articles/concepts/plugins/root.html
+    - title: Anatomy
+      path: 'articles/concepts/plugins/#anatomy'
+    - title: Usage
+      path: 'articles/concepts/plugins/#usage'
+    - title: Configuration
+      path: 'articles/concepts/plugins/#configuration'
+    - title: Node API
+      path: 'articles/concepts/plugins/#node-api'
+- title: Configuration
+  articles:
+    - title: Configuration
+      path: articles/concepts/configuration/root.html
+    - title: Simple Configuration
+      path: 'articles/concepts/configuration/#simple-configuration'
+    - title: Multiple Targets
+      path: 'articles/concepts/configuration/#multiple-targets'
+    - title: Using other Configuration Languages
+      path: 'articles/concepts/configuration/#using-other-configuration-languages'
+- title: Modules
+  articles:
+    - title: Modules
+      path: articles/concepts/modules/root.html
+    - title: What is a webpack Module
+      path: 'articles/concepts/modules/#what-is-a-webpack-module'
+    - title: Supported Module Types
+      path: 'articles/concepts/modules/#supported-module-types'
+- title: Module Resolution
+  articles:
+    - title: Module Resolution
+      path: articles/concepts/module-resolution/root.html
+    - title: Resolving rules in webpack
+      path: 'articles/concepts/module-resolution/#resolving-rules-in-webpack'
+    - title: Absolute paths
+      path: 'articles/concepts/module-resolution/#absolute-paths'
+    - title: Relative paths
+      path: 'articles/concepts/module-resolution/#relative-paths'
+    - title: Module paths
+      path: 'articles/concepts/module-resolution/#module-paths'
+    - title: Resolving Loaders
+      path: 'articles/concepts/module-resolution/#resolving-loaders'
+    - title: Caching
+      path: 'articles/concepts/module-resolution/#caching'
+- title: Dependency Graph
+  articles:
+    - title: Dependency Graph
+      path: articles/concepts/dependency-graph/root.html
+- title: Targets
+  articles:
+    - title: Targets
+      path: articles/concepts/targets/root.html
+    - title: Usage
+      path: 'articles/concepts/targets/#usage'
+    - title: Multiple Targets
+      path: 'articles/concepts/targets/#multiple-targets'
+    - title: Resources
+      path: 'articles/concepts/targets/#resources'
+- title: The Manifest
+  articles:
+    - title: The Manifest
+      path: articles/concepts/manifest/root.html
+    - title: Runtime
+      path: 'articles/concepts/manifest/#runtime'
+    - title: Manifest
+      path: 'articles/concepts/manifest/#manifest'
+    - title: The Problem
+      path: 'articles/concepts/manifest/#the-problem'
+- title: Hot Module Replacement
+  articles:
+    - title: Hot Module Replacement
+      path: articles/concepts/hot-module-replacement/root.html
+    - title: How It Works
+      path: 'articles/concepts/hot-module-replacement/#how-it-works'
+    - title: In the Application
+      path: 'articles/concepts/hot-module-replacement/#in-the-application'
+    - title: In the Compiler
+      path: 'articles/concepts/hot-module-replacement/#in-the-compiler'
+    - title: In a Module
+      path: 'articles/concepts/hot-module-replacement/#in-a-module'
+    - title: In the Runtime
+      path: 'articles/concepts/hot-module-replacement/#in-the-runtime'
+    - title: Get Started
+      path: 'articles/concepts/hot-module-replacement/#get-started'
+- title: Why webpack
+  articles:
+    - title: Why webpack
+      path: articles/concepts/why-webpack/root.html
+    - title: IIFE's - Immediately invoked function expressions
+      path: >-
+        articles/concepts/why-webpack/#iifes---immediately-invoked-function-expressions
+    - title: Birth of JavaScript Modules happened thanks to Node.js
+      path: >-
+        articles/concepts/why-webpack/#birth-of-javascript-modules-happened-thanks-to-nodejs
+    - title: npm + Node.js + modules -- mass distribution
+      path: 'articles/concepts/why-webpack/#npm--nodejs--modules----mass-distribution'
+    - title: ESM - ECMAScript Modules
+      path: 'articles/concepts/why-webpack/#esm---ecmascript-modules'
+    - title: Wouldn't it be nice…
+      path: 'articles/concepts/why-webpack/#wouldnt-it-be-nice'
+- title: Printable
+  articles:
+    - title: Printable
+      path: articles/concepts/printable/root.html
+    - title: Concepts
+      path: 'articles/concepts/printable/#concepts'
+    - title: Entry
+      path: 'articles/concepts/printable/#entry'
+    - title: Output
+      path: 'articles/concepts/printable/#output'
+    - title: Loaders
+      path: 'articles/concepts/printable/#loaders'
+    - title: Plugins
+      path: 'articles/concepts/printable/#plugins'
+    - title: Mode
+      path: 'articles/concepts/printable/#mode'
+    - title: Browser Compatibility
+      path: 'articles/concepts/printable/#browser-compatibility'
+    - title: Entry Points
+      path: 'articles/concepts/printable/#entry-points'
+    - title: Single Entry (Shorthand) Syntax
+      path: 'articles/concepts/printable/#single-entry-shorthand-syntax'
+    - title: Object Syntax
+      path: 'articles/concepts/printable/#object-syntax'
+    - title: Scenarios
+      path: 'articles/concepts/printable/#scenarios'
+    - title: Separate App and Vendor Entries
+      path: 'articles/concepts/printable/#separate-app-and-vendor-entries'
+    - title: Multi Page Application
+      path: 'articles/concepts/printable/#multi-page-application'
+    - title: Output
+      path: 'articles/concepts/printable/#output-1'
+    - title: Usage
+      path: 'articles/concepts/printable/#usage'
+    - title: Multiple Entry Points
+      path: 'articles/concepts/printable/#multiple-entry-points'
+    - title: Advanced
+      path: 'articles/concepts/printable/#advanced'
+    - title: Loaders
+      path: 'articles/concepts/printable/#loaders-1'
+    - title: Example
+      path: 'articles/concepts/printable/#example'
+    - title: Using Loaders
+      path: 'articles/concepts/printable/#using-loaders'
+    - title: Configuration
+      path: 'articles/concepts/printable/#configuration'
+    - title: Inline
+      path: 'articles/concepts/printable/#inline'
+    - title: CLI
+      path: 'articles/concepts/printable/#cli'
+    - title: Loader Features
+      path: 'articles/concepts/printable/#loader-features'
+    - title: Resolving Loaders
+      path: 'articles/concepts/printable/#resolving-loaders'
+    - title: Plugins
+      path: 'articles/concepts/printable/#plugins-1'
+    - title: Anatomy
+      path: 'articles/concepts/printable/#anatomy'
+    - title: Usage
+      path: 'articles/concepts/printable/#usage-1'
+    - title: Configuration
+      path: 'articles/concepts/printable/#configuration-1'
+    - title: Node API
+      path: 'articles/concepts/printable/#node-api'
+    - title: Configuration
+      path: 'articles/concepts/printable/#configuration-2'
+    - title: Simple Configuration
+      path: 'articles/concepts/printable/#simple-configuration'
+    - title: Multiple Targets
+      path: 'articles/concepts/printable/#multiple-targets'
+    - title: Using other Configuration Languages
+      path: 'articles/concepts/printable/#using-other-configuration-languages'
+    - title: Modules
+      path: 'articles/concepts/printable/#modules'
+    - title: What is a webpack Module
+      path: 'articles/concepts/printable/#what-is-a-webpack-module'
+    - title: Supported Module Types
+      path: 'articles/concepts/printable/#supported-module-types'
+    - title: Module Resolution
+      path: 'articles/concepts/printable/#module-resolution'
+    - title: Resolving rules in webpack
+      path: 'articles/concepts/printable/#resolving-rules-in-webpack'
+    - title: Absolute paths
+      path: 'articles/concepts/printable/#absolute-paths'
+    - title: Relative paths
+      path: 'articles/concepts/printable/#relative-paths'
+    - title: Module paths
+      path: 'articles/concepts/printable/#module-paths'
+    - title: Resolving Loaders
+      path: 'articles/concepts/printable/#resolving-loaders-1'
+    - title: Caching
+      path: 'articles/concepts/printable/#caching'
+    - title: Dependency Graph
+      path: 'articles/concepts/printable/#dependency-graph'
+    - title: Targets
+      path: 'articles/concepts/printable/#targets'
+    - title: Usage
+      path: 'articles/concepts/printable/#usage-2'
+    - title: Multiple Targets
+      path: 'articles/concepts/printable/#multiple-targets-1'
+    - title: Resources
+      path: 'articles/concepts/printable/#resources'
+    - title: The Manifest
+      path: 'articles/concepts/printable/#the-manifest'
+    - title: Runtime
+      path: 'articles/concepts/printable/#runtime'
+    - title: Manifest
+      path: 'articles/concepts/printable/#manifest'
+    - title: The Problem
+      path: 'articles/concepts/printable/#the-problem'
+    - title: Hot Module Replacement
+      path: 'articles/concepts/printable/#hot-module-replacement'
+    - title: How It Works
+      path: 'articles/concepts/printable/#how-it-works'
+    - title: In the Application
+      path: 'articles/concepts/printable/#in-the-application'
+    - title: In the Compiler
+      path: 'articles/concepts/printable/#in-the-compiler'
+    - title: In a Module
+      path: 'articles/concepts/printable/#in-a-module'
+    - title: In the Runtime
+      path: 'articles/concepts/printable/#in-the-runtime'
+    - title: Get Started
+      path: 'articles/concepts/printable/#get-started'
+    - title: Why webpack
+      path: 'articles/concepts/printable/#why-webpack'
+    - title: IIFE's - Immediately invoked function expressions
+      path: >-
+        articles/concepts/printable/#iifes---immediately-invoked-function-expressions
+    - title: Birth of JavaScript Modules happened thanks to Node.js
+      path: >-
+        articles/concepts/printable/#birth-of-javascript-modules-happened-thanks-to-nodejs
+    - title: npm + Node.js + modules -- mass distribution
+      path: 'articles/concepts/printable/#npm--nodejs--modules----mass-distribution'
+    - title: ESM - ECMAScript Modules
+      path: 'articles/concepts/printable/#esm---ecmascript-modules'
+    - title: Wouldn't it be nice…
+      path: 'articles/concepts/printable/#wouldnt-it-be-nice'

@@ -1,0 +1,40 @@
+{
+    "name": "nga-cli-ts",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "tsc && node dist/src/app.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@types/fs-extra": "^8.0.0",
+        "chalk": "^2.4.2",
+        "cheerio": "",
+        "cheerio-httpcli": "^0.7.4",
+        "child_process": "^1.0.2",
+        "cli-highlight": "^2.1.1",
+        "commander": "^2.19.0",
+        "dateformat": "^3.0.3",
+        "debug": "^4.1.1",
+        "execa": "^1.0.0",
+        "fs-extra": "^8.1.0",
+        "handlebars": "^4.1.2",
+        "jimp": "^0.6.4",
+        "js-beautify": "^1.10.1",
+        "js-yaml": "",
+        "lodash": "^4.17.11",
+        "moment": "^2.23.0",
+        "prompts": "^2.0.1",
+        "request": "^2.88.0",
+        "shelljs": "^0.8.3"
+    },
+    "devDependencies": {
+        "@types/debug": "^4.1.4",
+        "@types/node": "^12.6.1",
+        "tslint": "^5.18.0",
+        "typescript": "^3.5.3"
+    }
+}

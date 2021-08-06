@@ -1,0 +1,15 @@
+<body><p>
+The "++" and "--" statements increment or decrement their operands
+by the untyped [<a>constant</a>] <code>1</code>.
+As with an assignment, the operand must be [<a>addressable</a>]
+or a map index expression.
+</p><pre>
+[<a>IncDecStmt</a>] = [<a>Expression</a>] ( "++" | "--" ) .
+</pre><p>
+The following [<a>assignment statements</a>] are semantically
+equivalent:
+</p><pre>
+IncDec statement    Assignment
+x++                 x += 1
+x--                 x -= 1
+</pre></body>

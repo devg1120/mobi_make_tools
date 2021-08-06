@@ -1,0 +1,154 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svn blame (praise, annotate, ann)</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/tmp/es2015/cheerio-mobi-ts3/css/kindle.css" />
+  </head>
+   <body>
+    <div class="refentry">
+      <a id="svn.ref.svn.c.blame"></a>
+      <div class="titlepage"></div>
+      <a id="idm9316" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svn blame (praise, annotate, ann) — Show author and revision information inline
+            for the specified files or URLs.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm9323"></a>
+        <h2>Synopsis</h2>
+        <p>
+          <code class="literal">svn blame TARGET[@REV]...</code>
+        </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm9327"></a>
+        <h2>Description</h2>
+        <p>Show author and revision information inline for the
+            specified files or URLs.  Each line of text is annotated
+            at the beginning with the author (username) and the
+            revision number for the last change to that line.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm9330"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+          <pre class="screen">
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.extensions"><code class="option">--extensions</code> (<code class="option">-x</code>) <em class="replaceable"><code>ARG</code></em></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.force"><code class="option">--force</code></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.incremental"><code class="option">--incremental</code></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.revision"><code class="option">--revision</code> (<code class="option">-r</code>) <em class="replaceable"><code>REV</code></em></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.use_merge_history"><code class="option">--use-merge-history</code> (<code class="option">-g</code>)</a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.verbose"><code class="option">--verbose</code> (<code class="option">-v</code>)</a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.xml"><code class="option">--xml</code></a>
+</pre>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm9341"></a>
+        <h2>Examples</h2>
+        <p>If you want to see blame-annotated source for
+            <code class="filename">readme.txt</code> in your test
+            repository:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn blame http://svn.red-bean.com/repos/test/readme.txt
+     3      sally This is a README file.
+     5      harry Don't bother reading it.  The boss is a knucklehead.
+     3      sally 
+…
+</pre>
+        </div>
+        <p>Now, just because <span class="command"><strong>svn blame</strong></span> says
+            that Harry last modified <code class="filename">readme.txt</code>
+            in revision 5, understand that this subcommand is by
+            default very picky about what constitutes a change.
+            Before clubbing Harry over the head for what appears to be
+            insubordination, first consider that perhaps the change he
+            made to the file might have been only to its specific
+            character content, not to its overall semantic meaning.
+            Perhaps his changes were the result of blindly running a
+            whitespace cleanup script on this file.  You might need
+            to examine the specific differences and related log
+            message to understand exactly what Harry did to this file
+            in revision 5.</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn log -c 5 http://svn.red-bean.com/repos/test/readme.txt
+------------------------------------------------------------------------
+r5 | harry | 2008-05-29 07:26:12 -0600 (Thu, 29 May 2008) | 1 line
+Commit the results of 'double-space-after-period.sh'.
+------------------------------------------------------------------------
+$ svn diff -c 5 http://svn.red-bean.com/repos/test/readme.txt
+Index: http://svn.red-bean.com/repos/test/readme.txt
+===================================================================
+--- http://svn.red-bean.com/repos/test/readme.txt	(revision 4)
++++ http://svn.red-bean.com/repos/test/readme.txt	(revision 5)
+@@ -1,5 +1,5 @@
+ This is a README file.
+-Don't bother reading it. The boss is a knucklehead.
++Don't bother reading it.  The boss is a knucklehead.
+ INSTRUCTIONS
+ ============
+$
+</pre>
+        </div>
+        <p>Sure enough, Harry only changed the whitespace in that
+            line.  Fortunately, the <code class="option">--extensions</code>
+            (<code class="option">-x</code>) option can help you better determine
+            the last time that a <span class="emphasis"><em>meaningful</em></span>
+            change was made to a given line of text.  For example,
+            here's how you can see the annotation information while
+            disregarding mere whitespace changes:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn blame -x -b http://svn.red-bean.com/repos/test/readme.txt
+     3      sally This is a README file.
+     4       jess Don't bother reading it.  The boss is a knucklehead.
+     3      sally 
+…
+</pre>
+        </div>
+        <p>If you use the <code class="option">--xml</code> option, you can
+            get XML output describing the blame annotations, but not
+            the contents of the lines themselves:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn blame --xml http://svn.red-bean.com/repos/test/readme.txt
+<?xml version="1.0"?>
+<blame>
+<target
+   path="readme.txt">
+<entry
+   line-number="1">
+<commit
+   revision="3">
+<author>sally</author>
+<date>2008-05-25T19:12:31.428953Z</date>
+</commit>
+</entry>
+<entry
+   line-number="2">
+<commit
+   revision="5">
+<author>harry</author>
+<date>2008-05-29T13:26:12.293121Z</date>
+</commit>
+</entry>
+<entry
+   line-number="3">
+…
+</entry>
+</target>
+</blame>
+$
+</pre>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Blocks</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+A <i>block</i> is a possibly empty sequence of declarations and statements
+within matching brace brackets.
+</p><pre>
+[<a>Block</a>] = &quot;{&quot; [<a>StatementList</a>] &quot;}&quot; .
+[<a>StatementList</a>] = { [<a>Statement</a>] &quot;;&quot; } .
+</pre><p>
+In addition to explicit blocks in the source code, there are implicit blocks:
+</p><ol>
+	<li>The <i>universe block</i> encompasses all Go source text.</li>
+	<li>Each [<a>package</a>] has a <i>package block</i> containing all
+	    Go source text for that package.</li>
+	<li>Each file has a <i>file block</i> containing all Go source text
+	    in that file.</li>
+	<li>Each [<a>&quot;if&quot;</a>],
+	    [<a>&quot;for&quot;</a>], and
+	    [<a>&quot;switch&quot;</a>]
+	    statement is considered to be in its own implicit block.</li>
+	<li>Each clause in a [<a>&quot;switch&quot;</a>]
+	    or [<a>&quot;select&quot;</a>] statement
+	    acts as an implicit block.</li>
+</ol><p>
+Blocks nest and influence [<a>scoping</a>].
+</p></body>
+</body>
+</html>

@@ -1,0 +1,130 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Transparency, Expressiveness, and Configurability</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts10/undefined" />
+  </head>
+   <body>
+<div class="sect1" lang="en">
+    <div class="titlepage">
+        <div>
+            <h2 class="title" style="clear: both"><a id="id2957370">Transparency, Expressiveness, and Configurability</a></h2>
+        </div>
+    </div>
+    <p>Unix programmers inherit a strong bias toward making interfaces
+        expressive and configurable. Like programmers from other traditions,
+        they think about how to match their interfaces to the target audience
+        &#x2014; but they differ in how they deal with uncertainty about
+        that target audience. Software developers whose experience is
+        primarily with client operating systems default toward making
+        interfaces simple; they are willing to sacrifice expressiveness to
+        gain ease. Unix programmers default toward making interfaces
+        expressive and transparent, and are more willing to sacrifice ease to
+        get these qualities.</p>
+    <p>The results of this attitude have often been described as
+        interfaces written &#x201C;by programmers, for programmers&#x201D;.
+        But this oversimplifies the matter in an important way. When a Unix
+        programmer opts for configurability and expressiveness over ease, he
+        is not necessarily thinking of his audience as consisting solely of
+        other programmers; rather, he is often acting on a gut-level instinct
+        that in the absence of knowledge about end-users&apos; intentions it is
+        best not to patronize or second-guess them.</p>
+    <div class="blockquote">
+        <table border="0" width="100%" cellspacing="0" cellpadding="0" class="blockquote" summary="Block quote">
+            <tr>
+                <td width="10%" valign="top">&#xFFFD;</td>
+                <td width="80%" valign="top">
+                    <p>The downside of this attitude (which is a close cousin to
+                        &#x201C;mechanism, not policy&#x201D;) is a tendency to assume that
+                        when the highly configurable and expressive interface is done, the job
+                        is finished... even if the result is almost impossible for anyone else
+                        to use without lengthy study. The flip side of configurability is an
+                        urgent need for good defaults and an easy way to set everything to the
+                        default. The flip side of expressivity is a need for guidance &#x2014; be
+                        it in the program or the documentation &#x2014; on where to get started
+                        and how to achieve the most commonly-desired results.</p>
+                </td>
+                <td width="10%" valign="top">&#xFFFD;</td>
+            </tr>
+            <tr>
+                <td colspan="2" align="right" valign="top">--<span class="attribution">
+                        <span class="author">Henry Spencer</span>
+                        </span></td>
+                <td width="10%" valign="top">&#xFFFD;</td>
+            </tr>
+        </table>
+    </div>
+    <p>The Rule of Transparency also has an influence. When a Unix
+        programmer is writing to meet an RFC or other standard that defines a
+        set of control options, he tends to assume that his job is to provide
+        a complete and transparent interface to all of those options; whether
+        or not he thinks any given one will actually be used is secondary.
+        His job is mechanism; policy belongs to the user.</p>
+    <p>This mindset leads to a much stricter attitude about what
+        constitutes standards conformance, one in which incomplete support is
+        much less tolerable. In cases where a Macintosh or Windows developer
+        would say &#x201C;We don&apos;t need to support that feature of the
+        standard; most users won&apos;t care, and it&apos;s too complicated for
+        them&#x201D;, a Unix developer is likely to say &#x201C;We don&apos;t know
+        that nobody will ever want this feature or option, therefore we must
+        support it&#x201D;.</p>
+    <p>These attitudes can lead to clashes when a Unix programmer is
+        working with others, who are likely to interpret his design choices as
+        a blithe willingness to burden users with technical details that are
+        obscure, pointless, and even frightening. Mac or Windows programmers
+        fear scaring away the many to serve the advanced needs of the
+        few.</p>
+    <p>The Unix programmer, on the other hand, is likely to see
+        defaulting away from expressiveness as a sort of cop-out or even
+        betrayal of future users, who will know their own requirements better
+        than the present implementer. Ironically, though the Unix attitude is
+        often construed as a sort of programmer arrogance, it is actually a
+        form of humility &#x2014; one often acquired along with years of battle
+        scars.</p>
+    <p>The extent to which the Unix attitude is appropriate varies.
+        Whichever side of this divide you the reader are on, it is wise to
+        learn to listen to the other, and wise to understand the premises
+        behind the opposing point of view. Rather than falling into the trap
+        of either intimidating users or condescending to them, it may be
+        possible to build transparent interfaces in which the advanced
+        features are present but inconspicuous. The
+        <i>audacity</i> and
+        <i>kmail</i> case studies in <a href="transparencychapter.html" title="Chapter&#xFFFD;6.&#xFFFD;Transparency">Chapter&#xFFFD;6</a> are good examples to follow.</p>
+    <p>Finally, a note about user-interface design for nontechnical
+        end-users. This is a demanding art, and Unix programmers don&apos;t have a
+        tradition of being very good at it. But with the ideas we&apos;ve
+        developed from examining the Unix tradition, it is possible to make
+        one strong and useful statement about it. That is: when people say a
+        user interface is <i>intuitive</i>, what they mean is
+        that it (a) is discoverable, (b) is transparent in use, and (c) obeys
+        the Rule of Least Surprise.<sup>[<a id="id2957556" href="ch11s05.html#ftn.id2957556">107</a>]</sup> Of these three rules, Least
+        Surprise is the least binding; initial surprises can be coped with
+        if discoverability and transparency make longer-term use rewarding.</p>
+    <p>The user interfaces of today&apos;s cellphones (for example) have
+        relatively high mnemonic load in that you have to maintain at least a
+        rough mental map of the interface menus to use them rapidly without
+        constantly having to spend attention on checking where you are in the
+        hierarchy. But the better-designed ones rapidly become
+        &#x2018;intuitive&#x2018; for their users anyway, because they have
+        these three qualities.</p>
+    <p>Intuitiveness is not quite the same quality as ease, because (as
+        the cellphone example shows) people can develop what they think of as
+        &#x2018;intuitions&#x2018; about transparent interfaces that have fairly
+        high mnemonic load, as long as simple operations are easy and there is
+        a discovery path that allows them to assimilate the interface&apos;s more
+        difficult corners one step at a time.</p>
+    <div class="footnotes"><br>
+        <hr width="100" align="left">
+        <div class="footnote">
+            <p><sup>[<a id="ftn.id2957556" href="ch11s05.html#id2957556">107</a>] </sup>This insight comes to us
+                from a nontechnical end-user who just happens to be the author&apos;s wife
+                Catherine Raymond.</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

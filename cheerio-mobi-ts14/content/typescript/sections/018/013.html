@@ -1,0 +1,101 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Binder SymbolTable
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts14/undefined" />
+  </head>
+   <body>
+<h3 id="symboltable">SymbolTable</h3>
+<p>SymbolTable is implemented as a simple HashMap. Here is the interface (<code>types.ts</code>):</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">interface</span> SymbolTable {
+    [index: <span class="hljs-built_in">string</span>]: Symbol;
+}
+</code></pre>
+<p>SymbolTables are initialized by binding. There are a few SymbolTables used by the compiler:</p>
+<p>On <code>Node</code>:</p>
+<pre><code class="lang-ts">locals?: SymbolTable;                   <span class="hljs-comment">// Locals associated with node</span>
+</code></pre>
+<p>On <code>Symbol</code>:</p>
+<pre><code class="lang-ts">members?: SymbolTable;                  <span class="hljs-comment">// Class, interface or literal instance members</span>
+exports?: SymbolTable;                  <span class="hljs-comment">// Module exports</span>
+</code></pre>
+<p>Note: We saw <code>locals</code> getting initialized (to <code>{}</code>) by <code>bindChildren</code> based on <code>ContainerFlags</code>.</p>
+<h4 id="symboltable-population">SymbolTable population</h4>
+<p>SymbolTables are populated with <code>Symbols</code> primarily by a call to <code>declareSymbol</code>. This function is presented below in entirety:</p>
+<pre><code class="lang-ts"><span class="hljs-comment">/**
+ * Declares a Symbol for the node and adds it to symbols. Reports errors for conflicting identifier names.
+ * @param symbolTable - The symbol table which node will be added to.
+ * @param parent - node&apos;s parent declaration.
+ * @param node - The declaration to be added to the symbol table
+ * @param includes - The SymbolFlags that node has in addition to its declaration type (eg: export, ambient, etc.)
+ * @param excludes - The flags which node cannot be declared alongside in a symbol table. Used to report forbidden declarations.
+ */</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">declareSymbol</span>(<span class="hljs-params">symbolTable: SymbolTable, parent: Symbol, node: Declaration, includes: SymbolFlags, excludes: SymbolFlags</span>): <span class="hljs-title">Symbol</span> </span>{
+    Debug.assert(!hasDynamicName(node));
+    <span class="hljs-comment">// The exported symbol for an export default function/class node is always named &quot;default&quot;</span>
+    <span class="hljs-keyword">let</span> name = node.flags &amp; NodeFlags.Default &amp;&amp; parent ? <span class="hljs-string">&quot;default&quot;</span> : getDeclarationName(node);
+    <span class="hljs-keyword">let</span> symbol: Symbol;
+    <span class="hljs-keyword">if</span> (name !== <span class="hljs-literal">undefined</span>) {
+        <span class="hljs-comment">// Check and see if the symbol table already has a symbol with this name.  If not,</span>
+        <span class="hljs-comment">// create a new symbol with this name and add it to the table.  Note that we don&apos;t</span>
+        <span class="hljs-comment">// give the new symbol any flags *yet*.  This ensures that it will not conflict</span>
+        <span class="hljs-comment">// with the &apos;excludes&apos; flags we pass in.</span>
+        <span class="hljs-comment">//</span>
+        <span class="hljs-comment">// If we do get an existing symbol, see if it conflicts with the new symbol we&apos;re</span>
+        <span class="hljs-comment">// creating.  For example, a &apos;var&apos; symbol and a &apos;class&apos; symbol will conflict within</span>
+        <span class="hljs-comment">// the same symbol table.  If we have a conflict, report the issue on each</span>
+        <span class="hljs-comment">// declaration we have for this symbol, and then create a new symbol for this</span>
+        <span class="hljs-comment">// declaration.</span>
+        <span class="hljs-comment">//</span>
+        <span class="hljs-comment">// If we created a new symbol, either because we didn&apos;t have a symbol with this name</span>
+        <span class="hljs-comment">// in the symbol table, or we conflicted with an existing symbol, then just add this</span>
+        <span class="hljs-comment">// node as the sole declaration of the new symbol.</span>
+        <span class="hljs-comment">//</span>
+        <span class="hljs-comment">// Otherwise, we&apos;ll be merging into a compatible existing symbol (for example when</span>
+        <span class="hljs-comment">// you have multiple &apos;vars&apos; with the same name in the same container).  In this case</span>
+        <span class="hljs-comment">// just add this node into the declarations list of the symbol.</span>
+        symbol = hasProperty(symbolTable, name)
+            ? symbolTable[name]
+            : (symbolTable[name] = createSymbol(SymbolFlags.None, name));
+        <span class="hljs-keyword">if</span> (name &amp;&amp; (includes &amp; SymbolFlags.Classifiable)) {
+            classifiableNames[name] = name;
+        }
+        <span class="hljs-keyword">if</span> (symbol.flags &amp; excludes) {
+            <span class="hljs-keyword">if</span> (node.name) {
+                node.name.parent = node;
+            }
+            <span class="hljs-comment">// Report errors every position with duplicate declaration</span>
+            <span class="hljs-comment">// Report errors on previous encountered declarations</span>
+            <span class="hljs-keyword">let</span> message = symbol.flags &amp; SymbolFlags.BlockScopedVariable
+                ? Diagnostics.Cannot_redeclare_block_scoped_variable_0
+                : Diagnostics.Duplicate_identifier_0;
+            forEach(symbol.declarations, declaration =&gt; {
+                file.bindDiagnostics.push(createDiagnosticForNode(declaration.name || declaration, message, getDisplayName(declaration)));
+            });
+            file.bindDiagnostics.push(createDiagnosticForNode(node.name || node, message, getDisplayName(node)));
+            symbol = createSymbol(SymbolFlags.None, name);
+        }
+    }
+    <span class="hljs-keyword">else</span> {
+        symbol = createSymbol(SymbolFlags.None, <span class="hljs-string">&quot;__missing&quot;</span>);
+    }
+    addDeclarationToSymbol(symbol, node, includes);
+    symbol.parent = parent;
+    <span class="hljs-keyword">return</span> symbol;
+}
+</code></pre>
+<p>Which SymbolTable is populated is driven by the first argument to this function. e.g. when adding a declaration to a <em>container</em> of kind <code>SyntaxKind.ClassDeclaration</code> or <code>SyntaxKind.ClassExpression</code> the function <code>declareClassMember</code> will get called which has the following code:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">declareClassMember</span>(<span class="hljs-params">node: Declaration, symbolFlags: SymbolFlags, symbolExcludes: SymbolFlags</span>) </span>{
+    <span class="hljs-keyword">return</span> node.flags &amp; NodeFlags.Static
+        ? declareSymbol(container.symbol.exports, container.symbol, node, symbolFlags, symbolExcludes)
+        : declareSymbol(container.symbol.members, container.symbol, node, symbolFlags, symbolExcludes);
+}
+</code></pre>
+</body>
+</html>

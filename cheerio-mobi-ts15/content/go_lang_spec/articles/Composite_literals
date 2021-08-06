@@ -1,0 +1,157 @@
+<body><p>
+Composite literals construct values for structs, arrays, slices, and maps
+and create a new value each time they are evaluated.
+They consist of the type of the literal followed by a brace-bound list of elements.
+Each element may optionally be preceded by a corresponding key.
+</p><pre>
+[<a>CompositeLit</a>]  = [<a>LiteralType</a>] [<a>LiteralValue</a>] .
+[<a>LiteralType</a>]   = [<a>StructType</a>] | [<a>ArrayType</a>] | "[" "..." "]" [<a>ElementType</a>] |
+                [<a>SliceType</a>] | [<a>MapType</a>] | [<a>TypeName</a>] .
+[<a>LiteralValue</a>]  = "{" [ [<a>ElementList</a>] [ "," ] ] "}" .
+[<a>ElementList</a>]   = [<a>KeyedElement</a>] { "," [<a>KeyedElement</a>] } .
+[<a>KeyedElement</a>]  = [ [<a>Key</a>] ":" ] [<a>Element</a>] .
+[<a>Key</a>]           = [<a>FieldName</a>] | [<a>Expression</a>] | [<a>LiteralValue</a>] .
+[<a>FieldName</a>]     = [<a>identifier</a>] .
+[<a>Element</a>]       = [<a>Expression</a>] | [<a>LiteralValue</a>] .
+</pre><p>
+The LiteralType's underlying type must be a struct, array, slice, or map type
+(the grammar enforces this constraint except when the type is given
+as a TypeName).
+The types of the elements and keys must be [<a>assignable</a>]
+to the respective field, element, and key types of the literal type;
+there is no additional conversion.
+The key is interpreted as a field name for struct literals,
+an index for array and slice literals, and a key for map literals.
+For map literals, all elements must have a key. It is an error
+to specify multiple elements with the same field name or
+constant key value. For non-constant map keys, see the section on
+[<a>evaluation order</a>].
+</p><p>
+For struct literals the following rules apply:
+</p><ul>
+	<li>A key must be a field name declared in the struct type.
+	</li>
+	<li>An element list that does not contain any keys must
+	    list an element for each struct field in the
+	    order in which the fields are declared.
+	</li>
+	<li>If any element has a key, every element must have a key.
+	</li>
+	<li>An element list that contains keys does not need to
+	    have an element for each struct field. Omitted fields
+	    get the zero value for that field.
+	</li>
+	<li>A literal may omit the element list; such a literal evaluates
+	    to the zero value for its type.
+	</li>
+	<li>It is an error to specify an element for a non-exported
+	    field of a struct belonging to a different package.
+	</li>
+</ul><p>
+Given the declarations
+</p><pre>
+type Point3D struct { x, y, z float64 }
+type Line struct { p, q Point3D }
+</pre><p>
+one may write
+</p><pre>
+origin := Point3D{}                            // zero value for Point3D
+line := Line{origin, Point3D{y: -4, z: 12.3}}  // zero value for line.q.x
+</pre><p>
+For array and slice literals the following rules apply:
+</p><ul>
+	<li>Each element has an associated integer index marking
+	    its position in the array.
+	</li>
+	<li>An element with a key uses the key as its index. The
+	    key must be a non-negative constant
+	    [<a>representable</a>] by
+	    a value of type <code>int</code>; and if it is typed
+	    it must be of integer type.
+	</li>
+	<li>An element without a key uses the previous element's index plus one.
+	    If the first element has no key, its index is zero.
+	</li>
+</ul><p>
+[<a>Taking the address</a>] of a composite literal
+generates a pointer to a unique [<a>variable</a>] initialized
+with the literal's value.
+</p><pre>
+var pointer *Point3D = &Point3D{y: 1000}
+</pre><p>
+Note that the [<a>zero value</a>] for a slice or map
+type is not the same as an initialized but empty value of the same type.
+Consequently, taking the address of an empty slice or map composite literal
+does not have the same effect as allocating a new slice or map value with
+[<a>new</a>].
+</p><pre>
+p1 := &[]int{}    // p1 points to an initialized, empty slice with value []int{} and length 0
+p2 := new([]int)  // p2 points to an uninitialized slice with value nil and length 0
+</pre><p>
+The length of an array literal is the length specified in the literal type.
+If fewer elements than the length are provided in the literal, the missing
+elements are set to the zero value for the array element type.
+It is an error to provide elements with index values outside the index range
+of the array. The notation <code>...</code> specifies an array length equal
+to the maximum element index plus one.
+</p><pre>
+buffer := [10]string{}             // len(buffer) == 10
+intSet := [6]int{1, 2, 3, 5}       // len(intSet) == 6
+days := [...]string{"Sat", "Sun"}  // len(days) == 2
+</pre><p>
+A slice literal describes the entire underlying array literal.
+Thus the length and capacity of a slice literal are the maximum
+element index plus one. A slice literal has the form
+</p><pre>
+[]T{x1, x2, … xn}
+</pre><p>
+and is shorthand for a slice operation applied to an array:
+</p><pre>
+tmp := [n]T{x1, x2, … xn}
+tmp[0 : n]
+</pre><p>
+Within a composite literal of array, slice, or map type <code>T</code>,
+elements or map keys that are themselves composite literals may elide the respective
+literal type if it is identical to the element or key type of <code>T</code>.
+Similarly, elements or keys that are addresses of composite literals may elide
+the <code>&T</code> when the element or key type is <code>*T</code>.
+</p><pre>
+[...]Point{{1.5, -3.5}, {0, 0}}     // same as [...]Point{Point{1.5, -3.5}, Point{0, 0}}
+[][]int{{1, 2, 3}, {4, 5}}          // same as [][]int{[]int{1, 2, 3}, []int{4, 5}}
+[][]Point{{{0, 1}, {1, 2}}}         // same as [][]Point{[]Point{Point{0, 1}, Point{1, 2}}}
+map[string]Point{"orig": {0, 0}}    // same as map[string]Point{"orig": Point{0, 0}}
+map[Point]string{{0, 0}: "orig"}    // same as map[Point]string{Point{0, 0}: "orig"}
+
+type PPoint *Point
+[2]*Point{{1.5, -3.5}, {}}          // same as [2]*Point{&Point{1.5, -3.5}, &Point{}}
+[2]PPoint{{1.5, -3.5}, {}}          // same as [2]PPoint{PPoint(&Point{1.5, -3.5}), PPoint(&Point{})}
+</pre><p>
+A parsing ambiguity arises when a composite literal using the
+TypeName form of the LiteralType appears as an operand between the
+[<a>keyword</a>] and the opening brace of the block
+of an "if", "for", or "switch" statement, and the composite literal
+is not enclosed in parentheses, square brackets, or curly braces.
+In this rare case, the opening brace of the literal is erroneously parsed
+as the one introducing the block of statements. To resolve the ambiguity,
+the composite literal must appear within parentheses.
+</p><pre>
+if x == (T{a,b,c}[i]) { … }
+if (x == T{a,b,c}[i]) { … }
+</pre><p>
+Examples of valid array, slice, and map literals:
+</p><pre>
+// list of prime numbers
+primes := []int{2, 3, 5, 7, 9, 2147483647}
+
+// vowels[ch] is true if ch is a vowel
+vowels := [128]bool{'a': true, 'e': true, 'i': true, 'o': true, 'u': true, 'y': true}
+
+// the array [10]float32{-1, 0, 0, 0, -0.1, -0.1, 0, 0, 0, -1}
+filter := [10]float32{-1, 4: -0.1, -0.1, 9: -1}
+
+// frequencies in Hz for equal-tempered scale (A4 = 440Hz)
+noteFrequency := map[string]float32{
+	"C0": 16.35, "D0": 18.35, "E0": 20.60, "F0": 21.83,
+	"G0": 24.50, "A0": 27.50, "B0": 30.87,
+}
+</pre></body>

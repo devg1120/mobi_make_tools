@@ -1,0 +1,351 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Studying Cases</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts7/undefined" />
+  </head>
+   <body>
+<div class="sect1" lang="en"><div class="titlepage"><div><h2 class="title" style="clear: both"><a id="id2911664">Studying Cases</a></h2></div></div><p>Normal practice in this book has been to intersperse case studies with
+philosophy.  But in this chapter we&apos;ll begin by looking at several
+Unix designs that exhibit transparency and discoverability, and
+attempt to draw lessons from them only after all have been
+presented.  Each major point of the analysis in the latter half of this
+chapter draws on several of these, and the arrangement avoids forward
+references to case studies the reader hasn&apos;t seen yet.</p><div class="sect2" lang="en"><div class="titlepage"><div><h3 class="title"><a id="audacity">Case Study: <i>audacity</i></a></h3></div></div><p>First, we&apos;ll look at an example of transparency in UI design.  It
+is <i>audacity</i>, an open-source editor for
+sound files that runs on Unix systems, Mac OS X, and Windows.
+Sources, downloadable binaries, documentation, and screen shots are
+available at the <a href="http://audacity.sourceforge.net/" target="_top">project site</a>.</p><p>This program supports cutting, pasting, and editing of audio
+samples. It supports multitrack editing and mixing.  The UI is
+superbly simple; the sound waveforms are shown in the
+<i>audacity</i> window. The image of the
+waveform can be cut and pasted; operations on that image are directly
+reflected in the audio sample as soon as they are performed.</p><div class="figure"><a id="id2909476"><p class="title"><b>Figure&#xFFFD;6.1.&#xFFFD;Screen shot of <i>audacity</i>.</b></p><div class="mediaobject"><img src="/home/gusa1120/es2015/cheerio-mobi-ts7/content/unix/processed_images/audacity-grayscale.gif" alt="Screen shot of audacity."></div></a></div><p>Multitrack editing is supported in the simplest possible way;
+the screen splits into multiple per-track displays in a spatial
+relationship that conveys their concurrency and makes it easy to 
+match features by inspection.  Tracks can be dragged right or
+left with the mouse to change their relative timing.</p><p>Several features of this UI are subtly excellent and worthy of
+emulation: the large, easily visible and clickable operation 
+buttons with distinguishing colors, the presence of an undo command
+that removes most of the risk from experimentation, the volume slider
+that makes softness/loudness visually obvious in its shape.</p><p>But these are details.  The central virtue of this program is
+that it has a superbly transparent and natural user interface, one that
+erects as few barriers between the user and the sound file as
+possible.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><h3 class="title"><a id="fetchmail_v">Case Study: <i>fetchmail</i>&apos;s <tt>-v</tt> option</a></h3></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><h3 class="title"><a id="id2909841">Case Study: GCC</a></h3></div></div><p>GCC, the GNU C compiler used on most modern Unixes, is perhaps
+an even better example of engineering for transparency.  GCC is
+organized as a sequence of processing stages knit together by a 
+driver program.  The stages are: preprocessor, parser, code 
+generator, assembler, and linker.</p><p>Each of the first three stages takes in a readable textual
+format and emits a readable textual format (the assembler has to emit
+and the linker to accept binary formats, pretty much by definition).
+With various command-line options of the
+gcc(1)
+driver, you can see not just the results after C preprocessing, after
+assembly generation, and after object code generation &#x2014; but you
+can also monitor the results of many intermediate steps in parsing and
+code generation.</p><div class="blockquote"><table border="0" width="100%" cellspacing="0" cellpadding="0" class="blockquote" summary="Block quote"><tr><td width="10%" valign="top">&#xFFFD;</td><td width="80%" valign="top"><p>This is exactly the structure of cc, the first (PDP-11) C
+compiler.</p></td><td width="10%" valign="top">&#xFFFD;</td></tr><tr><td colspan="2" align="right" valign="top">--<span class="attribution">
+<span class="author">Ken Thompson</span>
+</span></td><td width="10%" valign="top">&#xFFFD;</td></tr></table></div><p>There are many benefits of this organization.  One that is
+particularly important for GCC is regression
+testing.<sup>[<a id="id2909913" href="ch06s01.html#ftn.id2909913">60</a>]</sup>  Because most
+of the various intermediate formats are textual, deviations from
+expected results in a regression test are easily spotted and analyzed
+using simple textual diff operations on the intermediate results;
+there is no need for specialist dump-analysis tools that may well
+harbor their own bugs, and in any case would represent an additional
+maintenance burden.</p><p>The design pattern to extract from this example is that the
+driver program has monitoring switches that merely (but sufficiently)
+expose the textual data flows among the components.  As with
+<i>fetchmail&apos;s</i> <tt>-v</tt> option,
+these options are not afterthoughts; they are designed in for
+discoverability.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><h3 class="title"><a id="id2909954">Case Study: <i>kmail</i></a></h3></div></div><p><i>kmail</i> is the GUI mailreader
+distributed with the KDE environment.  The
+<i>kmail</i> UI is tastefully and well designed,
+with many good features including automatic display of enclosed images
+in a MIME</p><p>Many mail user agents make one gesture in the direction of
+discoverability</p><p>A running <i>kmail</i> displays status
+notifications in a one-line subwindow at the bottom of its window, in
+small type over a steel-gray background clearly modeled on the
+Netscape/Mozilla status bar.  When you open a mailbox, for example,
+the status bar displays counts of total and unread messages.  The
+visual presentation is unobtrusive; it is easy to ignore the
+notifications, but also easy to focus on them if you want to.</p><div class="figure"><a id="id2910036"><p class="title"><b>Figure&#xFFFD;6.2.&#xFFFD;Screen shot of <i>kmail</i>.</b></p><div class="mediaobject"><img src="/home/gusa1120/es2015/cheerio-mobi-ts7/content/unix/processed_images/kmail-grayscale.gif" alt="Screen shot of kmail."></div></a></div><p>The <i>kmail</i> GUI is good user-interface
+design. It&apos;s informative, but not distracting; it gets around the
+reason we adduce in <a href="interfacechapter.html" title="Chapter&#xFFFD;11.&#xFFFD;Interfaces">Chapter&#xFFFD;11</a> that the best policy for Unix tools
+operating normally is usually silence.  The authors showed excellent
+taste in borrowing the look and feel of the browser status bar.</p><p>But the extent of the <i>kmail</i>
+developers&apos; tastefulness will not become clear until you have to
+troubleshoot an installation that is having trouble sending mail.  If
+you watch closely during the send, you will observe that each line of
+the SMTP transaction with the remote mail transport is echoed into the
+<i>kmail</i> status bar as it happens.</p><p>The <i>kmail</i> developers neatly avoid a
+trap that often makes GUI programs like
+<i>kmail</i> a terrible pain in a troubleshooter&apos;s
+fundament.  Most design teams with kmail&apos;s objectives would have
+suppressed those messages entirely, fearing that they would give Aunt
+Tillie a touch of the vapors that would drive her back to the
+meretricious pseudo-simplicity of a Windows box.</p><p>Instead, they designed for transparency &#x2014; they made the
+transaction messages show, but also made them visually easy to ignore.
+By getting the presentation right, they managed to please both Aunt
+Tillie and her geeky nephew Melvin who fixes her computer problems.
+This was brilliant; it&apos;s a technique other GUI interfaces could and
+should emulate.</p><p>Ultimately, of course, the visibility of those messages is good
+for Aunt Tillie, because they mean Melvin is far less likely to throw
+up his hands in frustration while trying to solve her email
+problems.</p><p>The lesson here is clear.  Dumbing down your UI is only the
+half-smart thing to do.  The really smart thing is to find a way 
+to leave the details accessible, but make them unobtrusive.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><h3 class="title"><a id="id2910193">Case Study: SNG</a></h3></div></div><p>The program <i>sng</i> translates between
+PNG</p><p>In syntactic style, SNG resembles CSS (Cascading Style Sheets),
+another language for controlling presentation of graphics; this makes
+at least a gesture in the direction of the Rule of Least
+Surprise. Here is a test example:</p><div class="example"><a id="SNG_Example"><p class="title"><b>Example&#xFFFD;6.2.&#xFFFD;An SNG Example.</b></p><pre class="programlisting">
+#SNG: This is a synthetic SNG test file
+# Our first test is a paletted (type 3) image.
+IHDR: {
+        width: 16;
+        height: 19;
+        bitdepth: 8;
+        using color: palette; 
+        with interlace;
+}
+# Sample bit depth chunk
+sBIT: {
+  red: 8;
+  green: 8;
+  blue: 8;
+}
+# An example palette: three colors, one of which 
+# we will render transparent 
+PLTE: {
+   (0,     0, 255)
+   (255,   0,   0)
+   &quot;dark slate gray&quot;,
+}</pre><pre class="programlisting"># Suggested palette
+sPLT {
+   name: &quot;A random suggested palette&quot;;
+   depth: 8;
+   (0,     0, 255), 255, 7;
+   (255,   0,   0), 255, 5;
+   ( 70,  70,  70), 255, 3;
+}
+# The viewer will actually use this...
+IMAGE: {
+   pixels base64
+2222222222222222
+2222222222222222
+0000001111100000
+0000011111110000
+0000111001111000
+0001110000111100
+0001110000111100
+0000110001111000
+0000000011110000
+0000000111100000
+0000001111000000
+0000001111000000
+0000000000000000
+0000000110000000
+0000001111000000
+0000001111000000
+0000000110000000
+2222222222222222
+2222222222222222
+}
+tEXt: {                                # Ordinary text chunk
+  keyword: &quot;Title&quot;;
+  text: &quot;Sample SNG script&quot;;
+}
+# Test file ends here
+</pre></a></div><p>The point of this tool is to enable users to edit various
+obscure PNG</p><p>The gains here go beyond the time not spent writing
+special-purpose code for manipulating binary PNGs, however. The code
+of the <i>sng</i> program itself is not especially
+transparent, but it promotes transparency in larger systems of
+programs by making the entire contents of PNGs
+discoverable</p></div><div class="sect2" lang="en"><div class="titlepage"><div><h3 class="title"><a id="id2910334">Case Study: The Terminfo Database</a></h3></div></div><p>The terminfo database is a collection of descriptions of
+video-display terminals.  Each entry describes the escape sequences 
+that perform various manipulations on the terminal screen, such as
+inserting or deleting lines, erasing from the cursor position to end
+of line or screen, or beginning and ending screen highlights such
+as reverse video, underline, or blink.</p><p>The terminfo database is primarily used by the
+curses(3)
+libraries.  These underlie the &#x201C;roguelike&#x201D; interface
+style we discuss in <a href="interfacechapter.html" title="Chapter&#xFFFD;11.&#xFFFD;Interfaces">Chapter&#xFFFD;11</a>, and some very widely used programs such
+as
+mutt(1),
+lynx(1),
+and
+slrn(1).
+Though the terminal emulators such as
+xterm(1)
+that run on today&apos;s bitmapped displays all have capabilities that are
+minor variations on those of the ANSI X3.64 standard and the venerable
+VT100 terminal, there is still enough variation that hardwiring ANSI
+capabilities into applications would be a bad idea.  Terminfo is also
+worth studying because problems that are logically similar to the one
+it addressed arise constantly in managing other kinds of peripheral
+hardware that doesn&apos;t have a standard way to report their own
+capabilities.</p><p>The design of terminfo benefits from experience with an earlier
+capability format called termcap.  The database of termcap
+descriptions lived in a textual format in one big file, 
+<tt>/etc/termcap</tt>; though this format is 
+now obsolete, your Unix system almost certainly includes a
+copy.</p><p>Normally, the key used to look up your terminal type entry is
+the environment variable <tt>TERM</tt>, which for purposes of
+this case study is set by magic.<sup>[<a id="id2910448" href="ch06s01.html#ftn.id2910448">61</a>]</sup>  Applications that
+use terminfo (or termcap) pay a small penalty in startup lag; when the
+curses(3)
+library initializes itself, it has to look up the entry corresponding
+to <tt>TERM</tt> and load the entry into memory.</p><p>Experience with termcap showed that the startup penalty was
+dominated by the time required to parse the textual representation of
+capabilities. Accordingly, terminfo entries are binary structure dumps
+that can be marshaled and unmarshaled more quickly.  There is a master
+textual format for the entire database, the terminfo capability file.
+That file (or individual entries) can be compiled to binary form with
+the terminfo compiler
+tic(1);
+binary entries can be decompiled to the editable text format by
+infocmp(1).</p><p>The design superficially contradicts the advice we gave in <a href="textualitychapter.html" title="Chapter&#xFFFD;5.&#xFFFD;Textuality">Chapter&#xFFFD;5</a> against binary
+caches, but this is actually the extreme case in which that&apos;s a good
+tactic.  Edits to the text masters are very rare &#x2014; in fact,
+Unixes normally ship with the terminfo database precompiled and the
+text master serving primarily as documentation.  Thus, the
+synchronization and inconsistency problems that would normally
+militate against this approach almost never arise.</p><p>The designers of terminfo could have optimized for speed
+in a second way.  The entire database of binary entries could have
+been put in some kind of big opaque database file.  What they actually did
+instead was more clever and more in the Unix spirit.  Terminfo entries
+live in a directory hierarchy, usually on modern Unixes under
+<tt>/usr/share/terminfo</tt>.  Consult the
+terminfo(5)
+man page to find the location on your system.</p><p>If you look in the terminfo directory, you&apos;ll see subdirectories
+named by single printable characters.  Under each of these are the
+entries for each terminal type that has a name beginning with that
+letter.  The goal of this organization was to avoid having to do a
+linear search of a very large directory; under more modern Unix
+file systems, which represent directories with B-trees or other
+structures optimized for fast lookup, the subdirectories won&apos;t be
+necessary.</p><div class="blockquote"><table border="0" width="100%" cellspacing="0" cellpadding="0" class="blockquote" summary="Block quote"><tr><td width="10%" valign="top">&#xFFFD;</td><td width="80%" valign="top"><p>I found that even on a fairly modern Unix, splitting a big directory up
+into subdirectories can improve performance substantially.  It was tens
+of thousands of files, an authorized-user database for a big educational
+institution, on a late-model DEC Alpha running DEC&apos;s Unix.  (Subdirectories
+named by first and last letter of name &#x2014; e.g., &quot;johnson&quot; would be in
+directory &quot;j_n&quot; &#x2014; worked best of the schemes we tested.  Using the first
+two letters wasn&apos;t nearly as good, because there were a lot of
+systematically-generated names which differed only toward the end.)
+This may just say that sophisticated directory indexing is still not as
+common as it should be... but even so, that makes an organization which
+works well without it more portable than one which requires it.</p></td><td width="10%" valign="top">&#xFFFD;</td></tr><tr><td colspan="2" align="right" valign="top">--<span class="attribution">
+<span class="author">Henry Spencer</span>
+</span></td><td width="10%" valign="top">&#xFFFD;</td></tr></table></div><p>Thus, the cost of opening a terminfo entry is two file system
+lookups and a file open.  But since mining the same entry from one
+big database would have required a lookup and open for the database,
+the incremental cost for terminfo&apos;s organization is at most one
+file system lookup.  Actually, it&apos;s less than that; it&apos;s the cost
+difference between one file system lookup and whatever retrieval method
+the one big database would have used.  This is probably marginal, and
+quite tolerable once per application at startup time.</p><p>Terminfo uses the file system itself as a simple hierarchical
+database.  This is a superb bit of constructive laziness, obeying the
+Rule of Economy and the Rule of Transparency.  It means that all the
+ordinary tools for navigating, examining and modifying the file system
+can be used to navigate, examine, and modify the terminfo database; no
+special ones (other than
+tic(1)
+and
+infocmp(1)
+for packing and unpacking the individual records) need to be written
+and debugged.  It also means that work on speeding up database access
+would be work on speeding up the file system itself, tuning that would
+benefit many more applications than just users of
+curses(3).</p><p>There is one additional advantage of this organization that
+doesn&apos;t come up in the terminfo case; you get to use Unix&apos;s
+permissions mechanism rather than having to invent your own
+access-control layer with its own bugs.  This falls out as a
+consequence of adopting the &#x201C;everything is a file&#x201D;
+philosophy of Unix rather than trying to fight it.</p><p>The terminfo directory layout is rather space-inefficient
+on most Unix file systems.  The entries are usually between 400 and
+1400 bytes long, but file systems normally allocate a minimum of 4K 
+for every nonempty disk file. The designers accepted this cost
+for the same reason they chose a packed binary format, to
+cut the startup latency of terminfo-using programs to a minimum.  Disk 
+capacity for constant price has exploded over a thousandfold since,
+tending to vindicate that decision.</p><p>The contrast with the formats used by the Microsoft Windows
+</p><p>Using the Unix file system as a database is a tactic other
+applications with simple database requirements might do well to emulate.
+Good reasons not to do it are more likely to have to do with the
+database keys not naturally looking like filenames than they are with
+any performance problems.  In any case, it&apos;s the sort of good fast
+hack that can be very useful in prototyping.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><h3 class="title"><a id="id2914115">Case Study: Freeciv Data Files</a></h3></div></div><p>Freeciv is an open-source strategy game inspired by Sid Meier&apos;s
+classic <i>Civilization&#xFFFD;II</i>.  In it, each player
+begins with a wandering band of neolithic nomads and builds a
+civilization. Player civilizations may explore and colonize the world,
+fight wars, engage in trade, and research technological advances.
+Some players may actually be artificial intelligences; solitaire play
+against these can be challenging.  One wins either by conquering the
+world or by being the first player to reach a technology level sufficient
+to get a starship to Alpha Centauri.  Sources and documentation are
+available at the <a href="http://www.freeciv.org/" target="_top">project
+site</a>.</p><div class="figure"><a id="id2914147"><p class="title"><b>Figure&#xFFFD;6.3.&#xFFFD;Main window of a Freeciv game.</b></p><div class="mediaobject"><img src="/home/gusa1120/es2015/cheerio-mobi-ts7/content/unix/processed_images/freeciv-grayscale.gif" alt="Main window of a Freeciv game."></div></a></div><p>In <a href="multiprogramchapter.html" title="Chapter&#xFFFD;7.&#xFFFD;Multiprogramming">Chapter&#xFFFD;7</a>
+we&apos;ll exhibit the Freeciv strategy game as an example of client-server
+partitioning, with the server maintaining shared state and the client
+concentrating on GUI presentation.  But this game has another notable
+architectural feature; much of the game&apos;s fixed data, rather than
+being wired into the server code, is expressed in a property registry
+read in by the game server at startup time.</p><p>The game&apos;s registry files are written in a textual data-file
+format that assembles text strings (with associated text and numeric
+properties) into various internal lists of important data (such as
+nations and unit types) in the game server.  The minilanguage has an
+include directive, so game data can be broken up into semantic units
+(different files) that are each separately editable.  This design
+choice has been carried through to such an extent that it&apos;s possible
+to define new nations and new unit types simply by creating new
+declarations in the data files, without touching the server code at
+all.</p><p>The Freeciv server&apos;s startup parsing has an interesting feature
+that creates something of a conflict between two of Unix&apos;s design
+rules, and is therefore worth closer examination.  The server ignores
+property names it doesn&apos;t know how to use. This makes it possible to
+declare properties that the server doesn&apos;t yet use without breaking
+the startup parsing. It means that development of the game data
+(policy) and the server engine (mechanism) can be cleanly separated.
+On the other hand, it also means startup parsing won&apos;t catch simple
+misspellings of attribute names.  This quiet failure seems to violate
+the Rule of Repair.</p><p>To resolve this conflict, notice that it&apos;s the server&apos;s job to
+<span class="emphasis"><em>use</em></span> the registry data, but the task of carefully
+error-checking that data could be handed off to another program to be run
+by human editors each time the registry is modified.  One Unix
+solution would be a separate auditing program that analyzes either
+a machine-readable specification of the ruleset format or the source
+of the server code to determine the set of properties it uses, parses
+the Freeciv registry to determine the set of properties it provides,
+and prepares a difference report.<sup>[<a id="id2914267" href="ch06s01.html#ftn.id2914267">62</a>]</sup></p><p>The aggregate of all Freeciv data files is functionally similar
+to a Windows registry, and even uses a syntax resembling the textual
+portions of registries.  But the creep and corruption problems we
+noted with the Windows registry don&apos;t crop up here because no program
+(either within or outside the Freeciv suite)
+<span class="emphasis"><em>writes</em></span> to these files.  It&apos;s a read-only
+registry edited only by the game&apos;s maintainers.</p><p>The performance impact of data-file parsing is minimized because
+for each file the operation is performed only once, at either 
+client or server startup time.</p></div><div class="footnotes"><br><hr width="100" align="left"><div class="footnote"><p><sup>[<a id="ftn.id2909913" href="ch06s01.html#id2909913">60</a>] </sup>Regression testing is a method for detecting
+bugs introduced as software is modified.  It consists of periodically
+checking the output of the changing software for some fixed test input
+against a snapshot of output captured at an earlier stage of the process
+and known (or assumed) to be correct.</p></div><div class="footnote"><p><sup>[<a id="ftn.id2910448" href="ch06s01.html#id2910448">61</a>] </sup>Actually,
+<tt>TERM</tt> is set by the system at login time.  For actual
+terminals on serial lines, the mapping from tty lines to
+<tt>TERM</tt> values is set from a system configuration file at
+boot time; the details vary among Unixes.  Terminal emulators like
+xterm(1)
+set this variable themselves.</p></div><div class="footnote"><p><sup>[<a id="ftn.id2914267" href="ch06s01.html#id2914267">62</a>] </sup>The ur-ancestor of 
+such validator programs under Unix was
+<i>lint</i>, a validator for C code separate from
+the C compiler. Though GCC has absorbed its functions, old Unix hands
+are still apt to refer to the process of running a validator as
+&#x2018;linting&#x2019;, and the name survives in utilities such as
+<i>xmllint</i>.</p></div></div></div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+# build
+
+  tsc
+
+# run
+
+# STEP OP
+  node dist/src/app.js wg5 init ./config/unix_config.yaml
+  node dist/src/app.js wg5 gets
+  node dist/src/app.js wg5 build
+  node dist/src/app.js wg5 conv
+  node dist/src/app.js wg5 gene
+
+
+# ONE OP
+  node run.js ./config/unix_config.yaml
+
+  node test.js ./config/unix_config.yaml
+ 
+# DEBUG
+   test.ts
+       DEBUG = '*'
+       DEBUG = 'APP1'
+
+ DEBUG  機能実装
+
+ node run.js ./config/webpack_config.yaml
+
+   -d debug   msgout
+   -t test    phese control
+
+ node run.js -d -t config/webpack_config.yaml
+
+ node run.js  -t config/webpack_config.yaml
+ node run.js  -g -d config/webpack_config.yaml
+

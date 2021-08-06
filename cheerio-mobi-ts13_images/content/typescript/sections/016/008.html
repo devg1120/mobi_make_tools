@@ -1,0 +1,79 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Avoid Export Default
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts13_images/undefined" />
+  </head>
+   <body>
+<h2 id="export-default-considered-harmful"><code>export default</code> considered harmful</h2>
+<p>Consider you have a file <code>foo.ts</code> with the following contents:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">class</span> Foo {
+}
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> Foo;
+</code></pre>
+<p>You would import it (in <code>bar.ts</code>) using ES6 syntax as follows:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">import</span> Foo from <span class="hljs-string">&quot;./foo&quot;</span>;
+</code></pre>
+<p>There are a few maintainability concerns here:</p>
+<ul>
+    <li>If you refactor <code>Foo</code> in <code>foo.ts</code> it will not rename it in <code>bar.ts</code>.</li>
+    <li>If you end up needing to export more stuff from <code>foo.ts</code> (which is what many of your files will have) then you have to juggle the import syntax.</li>
+</ul>
+<p>For this reason I recommend simple exports + destructured import. E.g. <code>foo.ts</code>:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> Foo {
+}
+</code></pre>
+<p>And then:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">import</span> { Foo } from <span class="hljs-string">&quot;./foo&quot;</span>;
+</code></pre>
+<p>Below I also present a few more reasons.</p>
+<h3 id="poor-discoverability">Poor Discoverability</h3>
+<p>Discoverability is very poor for default exports. You cannot explore a module with intellisense to see if it has a default export or not.</p>
+<p>With export default you get nothing here (maybe it does export default / maybe it doesn&apos;t <code>&#xAF;\_(&#x30C4;)_/&#xAF;</code>):</p>
+<pre><code>import /* here */ from &apos;something&apos;;
+</code></pre>
+<p>Without export default you get a nice intellisense here: </p>
+<pre><code>import { /* here */ } from &apos;something&apos;;
+</code></pre>
+<h3 id="autocomplete">Autocomplete</h3>
+<p>Irrespective of if you know about the exports, you evenautocomplete at this <code>import {/*here*/} from &quot;./foo&quot;;</code> cursor location. Gives your developers a bit of wrist relief.</p>
+<h3 id="commonjs-interop">CommonJS interop</h3>
+<p>With <code>default</code> there is horrible experience for commonJS users who have to <code>const {default} = require(&apos;module/foo&apos;);</code> instead of <code>const {Foo} = require(&apos;module/foo&apos;)</code>. You will most likely want to rename the <code>default</code> export to something else when you import it.</p>
+<h3 id="typo-protection">Typo Protection</h3>
+<p>You don&apos;t get typos like one dev doing <code>import Foo from &quot;./foo&quot;;</code> and another doing <code>import foo from &quot;./foo&quot;;</code></p>
+<h3 id="typescript-auto-import">TypeScript auto-import</h3>
+<p>Auto import quickfix works better. You use <code>Foo</code> and auto import will write down <code>import { Foo } from &quot;./foo&quot;;</code> cause its a well defined name exported from a module. Some tools out there will try to magic read and <em>infer</em> a name for a default export but magic is flaky.</p>
+<h3 id="re-exporting">Re-exporting</h3>
+<p>Re-exporting is common for the root <code>index</code> file in npm packages, and forces you to name the default export manually e.g. <code>export { default as Foo } from &quot;./foo&quot;;</code> (with default) vs. <code>export * from &quot;./foo&quot;</code> (with named exports).</p>
+<h3 id="dynamic-imports">Dynamic Imports</h3>
+<p>Default exports expose themselves badly named as <code>default</code> in dynamic <code>import</code>s e.g. </p>
+<pre><code>const HighChart = await import(&apos;https://code.highcharts.com/js/es-modules/masters/highcharts.src.js&apos;);
+Highcharts.default.chart(&apos;container&apos;, { ... }); // Notice `.default`
+</code></pre>
+<h3 id="needs-two-lines-for-non-class--non-function">Needs two lines for non-class / non-function</h3>
+<p>Can be one statement for function / class e.g. </p>
+<pre><code class="lang-ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>{
+}
+</code></pre>
+<p>Can be one statement for <em>non named / type annotated</em> objects e.g.: </p>
+<pre><code class="lang-ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> {
+  notAFunction: <span class="hljs-string">&apos;Yeah, I am not a function or a class&apos;</span>,
+  soWhat: <span class="hljs-string">&apos;The export is now *removed* from the declaration&apos;</span>
+};
+</code></pre>
+<p>But needs two statements otherwise:</p>
+<pre><code class="lang-ts"><span class="hljs-comment">// If you need to name it (here `foo`) for local use OR need to annotate type (here `Foo`)</span>
+<span class="hljs-keyword">const</span> foo: Foo = {
+  notAFunction: <span class="hljs-string">&apos;Yeah, I am not a function or a class&apos;</span>,
+  soWhat: <span class="hljs-string">&apos;The export is now *removed* from the declaration&apos;</span>
+};
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> foo;
+</code></pre>
+</body>
+</html>

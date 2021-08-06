@@ -1,0 +1,39 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    noImplicitAny
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts14/undefined" />
+  </head>
+   <body>
+<h1 id="noimplicitany">noImplicitAny</h1>
+<p>There are some things that cannot be inferred or inferring them might result in unexpected errors. A fine example is function arguments. If you don&apos;t annotate them, its unclear what should and shouldn&apos;t be valid e.g.</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">log</span>(<span class="hljs-params">someArg</span>) </span>{
+  sendDataToServer(someArg);
+}
+<span class="hljs-comment">// What arg is valid and what isn&apos;t?</span>
+log(<span class="hljs-number">123</span>);
+log(<span class="hljs-string">&apos;hello world&apos;</span>);
+</code></pre>
+<p>So if you don&apos;t annotate some function argument, TypeScript assumes <code>any</code> and moves on. This essentially turns off type checking for such cases, which is what a JavaScript dev would expect. But this can catch people that want high safety off guard. Hence there is an option, <code>noImplicitAny</code>, that when switched on will flag the cases where the type cannot be inferred e.g.</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">log</span>(<span class="hljs-params">someArg</span>) </span>{ <span class="hljs-comment">// Error : someArg has an implicit `any` type</span>
+  sendDataToServer(someArg);
+}
+</code></pre>
+<p>Of course you can then go ahead and annotate:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">log</span>(<span class="hljs-params">someArg: <span class="hljs-built_in">number</span></span>) </span>{
+  sendDataToServer(someArg);
+}
+</code></pre>
+<p>And if you truly want <em>zero safety</em> you can mark it <em>explicitly</em> as <code>any</code>:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">log</span>(<span class="hljs-params">someArg: <span class="hljs-built_in">any</span></span>) </span>{
+  sendDataToServer(someArg);
+}
+</code></pre>
+</body>
+</html>

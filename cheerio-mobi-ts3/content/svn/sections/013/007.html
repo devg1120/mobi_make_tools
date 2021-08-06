@@ -1,0 +1,76 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>post-revprop-change</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/tmp/es2015/cheerio-mobi-ts3/css/kindle.css" />
+  </head>
+   <body>
+    <div class="refentry">
+      <a id="svn.ref.reposhooks.post-revprop-change"></a>
+      <div class="titlepage"></div>
+      <a id="idm14507" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>post-revprop-change — Notification of a successful revision property 
+          change.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm14514"></a>
+        <h2>Description</h2>
+        <p>The <code class="literal">post-revprop-change</code> hook is run
+          immediately after the modification of a revision property
+          when performed outside the scope of a normal commit.  As you can
+          derive from the description of its counterpart, the
+          <code class="literal">pre-revprop-change</code> hook, this hook will
+          not run at all unless
+          the <code class="literal">pre-revprop-change</code> hook is
+          implemented.  It is typically used to send email
+          notification of the property change.</p>
+        <p>If the <code class="literal">post-revprop-change</code> hook returns a
+          nonzero exit status, the change <span class="emphasis"><em>will
+          not</em></span> be aborted since it has already
+          completed.  However, anything that the hook printed
+          to <code class="filename">stderr</code> will be marshalled back to the
+          client, making it easier to diagnose hook failures.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm14524"></a>
+        <h2>Input parameter(s)</h2>
+        <p>The command-line arguments passed to the hook program,
+          in order, are:</p>
+        <div class="orderedlist">
+          <ol class="orderedlist" type="1">
+            <li class="listitem">
+              <p>Repository path</p>
+            </li>
+            <li class="listitem">
+              <p>Revision whose property was modified</p>
+            </li>
+            <li class="listitem">
+              <p>Authenticated username of the person making the change</p>
+            </li>
+            <li class="listitem">
+              <p>Name of the property changed</p>
+            </li>
+            <li class="listitem">
+              <p>Change description: <code class="literal">A</code> (added),
+              <code class="literal">D</code> (deleted), or <code class="literal">M</code>
+              (modified)</p>
+            </li>
+          </ol>
+        </div>
+        <p>Additionally, Subversion passes to the hook program, via
+          standard input, the previous value of the property.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm14542"></a>
+        <h2>Common uses</h2>
+        <p>Property change notification</p>
+      </div>
+    </div>
+</body>
+</html>

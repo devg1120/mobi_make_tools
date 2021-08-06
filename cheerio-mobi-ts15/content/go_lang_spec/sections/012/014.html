@@ -1,0 +1,40 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Break statements</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+A &quot;break&quot; statement terminates execution of the innermost
+[<a>&quot;for&quot;</a>],
+[<a>&quot;switch&quot;</a>], or
+[<a>&quot;select&quot;</a>] statement
+within the same function.
+</p><pre>
+[<a>BreakStmt</a>] = &quot;break&quot; [ [<a>Label</a>] ] .
+</pre><p>
+If there is a label, it must be that of an enclosing
+&quot;for&quot;, &quot;switch&quot;, or &quot;select&quot; statement,
+and that is the one whose execution terminates.
+</p><pre>
+OuterLoop:
+	for i = 0; i &lt; n; i++ {
+		for j = 0; j &lt; m; j++ {
+			switch a[i][j] {
+			case nil:
+				state = Error
+				break OuterLoop
+			case item:
+				state = Found
+				break OuterLoop
+			}
+		}
+	}
+</pre></body>
+</body>
+</html>

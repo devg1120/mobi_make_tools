@@ -1,0 +1,58 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Semicolons</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+Like C, Go&apos;s formal grammar uses semicolons to terminate statements,
+but unlike in C, those semicolons do not appear in the source.
+Instead the lexer uses a simple rule to insert semicolons automatically
+as it scans, so the input text is mostly free of them.
+</p><p>
+The rule is this. If the last token before a newline is an identifier
+(which includes words like <code>int</code> and <code>float64</code>),
+a basic literal such as a number or string constant, or one of the
+tokens
+</p><pre>
+break continue fallthrough return ++ -- ) }
+</pre><p>
+the lexer always inserts a semicolon after the token.
+This could be summarized as, &#x201C;if the newline comes
+after a token that could end a statement, insert a semicolon&#x201D;.
+</p><p>
+A semicolon can also be omitted immediately before a closing brace,
+so a statement such as
+</p><pre>
+    go func() { for { dst <- <-src } }() < pre><p>
+needs no semicolons.
+Idiomatic Go programs have semicolons only in places such as
+<code>for</code> loop clauses, to separate the initializer, condition, and
+continuation elements.  They are also necessary to separate multiple
+statements on a line, should you write code that way.
+</p><p>
+One consequence of the semicolon insertion rules
+is that you cannot put the opening brace of a
+control structure (<code>if</code>, <code>for</code>, <code>switch</code>,
+or <code>select</code>) on the next line.  If you do, a semicolon
+will be inserted before the brace, which could cause unwanted
+effects.  Write them like this
+</p><pre>
+if i &lt; f() {
+    g()
+}
+</pre><p>
+not like this
+</p><pre>
+if i &lt; f()  // wrong!
+{           // wrong!
+    g()
+}
+</pre></-></pre></body>
+</body>
+</html>

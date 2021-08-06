@@ -1,0 +1,84 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Freshness
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts13_images/undefined" />
+  </head>
+   <body>
+<ul>
+    <li><a href="#freshness">Freshness</a></li>
+    <li><a href="#allowing-extra-properties">Allowing extra properties</a></li>
+    <li><a href="#use-case-react-state">Use Case: React</a></li>
+</ul>
+<h2 id="freshness">Freshness</h2>
+<p>TypeScript provides a concept of <strong>Freshness</strong> (also called <em>strict object literal checking</em>) to make it easier to type check object literals that would otherwise be structurally type compatible.</p>
+<p>Structural typing is <em>extremely convenient</em>. Consider the following piece of code. This allows you to <em>very conveniently</em> upgrade your JavaScript to TypeScript while still preserving a level of type safety:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">logName</span>(<span class="hljs-params">something: { name: <span class="hljs-built_in">string</span> }</span>) </span>{
+    <span class="hljs-built_in">console</span>.log(something.name);
+}
+<span class="hljs-keyword">var</span> person = { name: <span class="hljs-string">&apos;matt&apos;</span>, job: <span class="hljs-string">&apos;being awesome&apos;</span> };
+<span class="hljs-keyword">var</span> animal = { name: <span class="hljs-string">&apos;cow&apos;</span>, diet: <span class="hljs-string">&apos;vegan, but has milk of own species&apos;</span> };
+<span class="hljs-keyword">var</span> random = { note: <span class="hljs-string">`I don&apos;t have a name property`</span> };
+logName(person); <span class="hljs-comment">// okay</span>
+logName(animal); <span class="hljs-comment">// okay</span>
+logName(random); <span class="hljs-comment">// Error: property `name` is missing</span>
+</code></pre>
+<p>However, <em>structural</em> typing has a weakness in that it allows you to misleadingly think that something accepts more data than it actually does. This is demonstrated in the following code which TypeScript will error on as shown:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">logName</span>(<span class="hljs-params">something: { name: <span class="hljs-built_in">string</span> }</span>) </span>{
+    <span class="hljs-built_in">console</span>.log(something.name);
+}
+logName({ name: <span class="hljs-string">&apos;matt&apos;</span> }); <span class="hljs-comment">// okay</span>
+logName({ name: <span class="hljs-string">&apos;matt&apos;</span>, job: <span class="hljs-string">&apos;being awesome&apos;</span> }); <span class="hljs-comment">// Error: object literals must only specify known properties. `job` is excessive here.</span>
+</code></pre>
+<p>Note that this error <em>only happens on object literals</em>. Without this error one might look at the call <code>logName({ name: &apos;matt&apos;, job: &apos;being awesome&apos; })</code> and think that <em>logName</em> would do something useful with <code>job</code> where as in reality it will completely ignore it.</p>
+<p>Another big use case is with interfaces that have optional members, without such object literal checking, a typo would type check just fine. This is demonstrated below:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">logIfHasName</span>(<span class="hljs-params">something: { name?: <span class="hljs-built_in">string</span> }</span>) </span>{
+    <span class="hljs-keyword">if</span> (something.name) {
+        <span class="hljs-built_in">console</span>.log(something.name);
+    }
+}
+<span class="hljs-keyword">var</span> person = { name: <span class="hljs-string">&apos;matt&apos;</span>, job: <span class="hljs-string">&apos;being awesome&apos;</span> };
+<span class="hljs-keyword">var</span> animal = { name: <span class="hljs-string">&apos;cow&apos;</span>, diet: <span class="hljs-string">&apos;vegan, but has milk of own species&apos;</span> };
+logIfHasName(person); <span class="hljs-comment">// okay</span>
+logIfHasName(animal); <span class="hljs-comment">// okay</span>
+logIfHasName({neme: <span class="hljs-string">&apos;I just misspelled name to neme&apos;</span>}); <span class="hljs-comment">// Error: object literals must only specify known properties. `neme` is excessive here.</span>
+</code></pre>
+<p>The reason why only object literals are type checked this way is because in this case additional properties <em>that aren&apos;t actually used</em> is almost always a typo or a misunderstanding of the API.</p>
+<h3 id="allowing-extra-properties">Allowing extra properties</h3>
+<p>A type can include an index signature to explicitly indicate that excess properties are permitted:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">var</span> x: { foo: <span class="hljs-built_in">number</span>, [x: <span class="hljs-built_in">string</span>]: <span class="hljs-built_in">any</span> };
+x = { foo: <span class="hljs-number">1</span>, baz: <span class="hljs-number">2</span> };  <span class="hljs-comment">// Ok, `baz` matched by index signature</span>
+</code></pre>
+<h3 id="use-case-react-state">Use Case: React State</h3>
+<p><a href="https://facebook.github.io/react/" target="_blank">Facebook ReactJS</a> offers a nice use case for object freshness. Quite commonly in a component you call <code>setState</code> with only a few properties instead of passing in all the properties, i.e.: </p>
+<pre><code class="lang-ts"><span class="hljs-comment">// Assuming</span>
+<span class="hljs-keyword">interface</span> State {
+    foo: <span class="hljs-built_in">string</span>;
+    bar: <span class="hljs-built_in">string</span>;
+}
+<span class="hljs-comment">// You want to do: </span>
+<span class="hljs-keyword">this</span>.setState({foo: <span class="hljs-string">&quot;Hello&quot;</span>}); <span class="hljs-comment">// Error: missing property bar</span>
+<span class="hljs-comment">// But because state contains both `foo` and `bar` TypeScript would force you to do: </span>
+<span class="hljs-keyword">this</span>.setState({foo: <span class="hljs-string">&quot;Hello&quot;</span>, bar: <span class="hljs-keyword">this</span>.state.bar});
+</code></pre>
+<p>Using the idea of freshness you would mark all the members as optional and <em>you still get to catch typos</em>!: </p>
+<pre><code class="lang-ts"><span class="hljs-comment">// Assuming</span>
+<span class="hljs-keyword">interface</span> State {
+    foo?: <span class="hljs-built_in">string</span>;
+    bar?: <span class="hljs-built_in">string</span>;
+}
+<span class="hljs-comment">// You want to do: </span>
+<span class="hljs-keyword">this</span>.setState({foo: <span class="hljs-string">&quot;Hello&quot;</span>}); <span class="hljs-comment">// Yay works fine!</span>
+<span class="hljs-comment">// Because of freshness it&apos;s protected against typos as well!</span>
+<span class="hljs-keyword">this</span>.setState({foos: <span class="hljs-string">&quot;Hello&quot;</span>}); <span class="hljs-comment">// Error: Objects may only specify known properties</span>
+<span class="hljs-comment">// And still type checked</span>
+<span class="hljs-keyword">this</span>.setState({foo: <span class="hljs-number">123</span>}); <span class="hljs-comment">// Error: Cannot assign number to a string</span>
+</code></pre>
+</body>
+</html>

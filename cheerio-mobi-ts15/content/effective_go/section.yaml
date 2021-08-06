@@ -1,0 +1,154 @@
+- title: Frontmatter
+  articles:
+    - title: Title Page
+      path: articles/titlepage
+- title: Introduction
+  articles:
+    - title: Introduction
+      path: articles/introduction
+    - title: Examples
+      path: articles/examples
+- title: Formatting
+  articles:
+    - title: Formatting
+      path: articles/formatting
+- title: Commentary
+  articles:
+    - title: Commentary
+      path: articles/commentary
+- title: Names
+  articles:
+    - title: Names
+      path: articles/names
+    - title: Package names
+      path: articles/package-names
+    - title: Getters
+      path: articles/Getters
+    - title: Interface names
+      path: articles/interface-names
+    - title: MixedCaps
+      path: articles/mixed-caps
+- title: Semicolons
+  articles:
+    - title: Semicolons
+      path: articles/semicolons
+- title: Control structures
+  articles:
+    - title: Control structures
+      path: articles/control-structures
+    - title: If
+      path: articles/if
+    - title: Redeclaration and reassignment
+      path: articles/redeclaration
+    - title: For
+      path: articles/for
+    - title: Switch
+      path: articles/switch
+    - title: Type switch
+      path: articles/type_switch
+- title: Functions
+  articles:
+    - title: Functions
+      path: articles/functions
+    - title: Multiple return values
+      path: articles/multiple-returns
+    - title: Named result parameters
+      path: articles/named-results
+    - title: Defer
+      path: articles/defer
+- title: Data
+  articles:
+    - title: Data
+      path: articles/data
+    - title: 'Allocation with '
+      path: articles/allocation_new
+    - title: Constructors and composite literals
+      path: articles/composite_literals
+    - title: 'Allocation with '
+      path: articles/allocation_make
+    - title: Arrays
+      path: articles/arrays
+    - title: Slices
+      path: articles/slices
+    - title: Two-dimensional slices
+      path: articles/two_dimensional_slices
+    - title: Maps
+      path: articles/maps
+    - title: Printing
+      path: articles/printing
+    - title: Append
+      path: articles/append
+- title: Initialization
+  articles:
+    - title: Initialization
+      path: articles/initialization
+    - title: Constants
+      path: articles/constants
+    - title: Variables
+      path: articles/variables
+    - title: The init function
+      path: articles/init
+- title: Methods
+  articles:
+    - title: Methods
+      path: articles/methods
+    - title: Pointers vs. Values
+      path: articles/pointers_vs_values
+- title: Interfaces and other types
+  articles:
+    - title: Interfaces and other types
+      path: articles/interfaces_and_types
+    - title: Interfaces
+      path: articles/interfaces
+    - title: Conversions
+      path: articles/conversions
+    - title: Interface conversions and type assertions
+      path: articles/interface_conversions
+    - title: Generality
+      path: articles/generality
+    - title: Interfaces and methods
+      path: articles/interface_methods
+- title: The blank identifier
+  articles:
+    - title: The blank identifier
+      path: articles/blank
+    - title: The blank identifier in multiple assignment
+      path: articles/blank_assign
+    - title: Unused imports and variables
+      path: articles/blank_unused
+    - title: Import for side effect
+      path: articles/blank_import
+    - title: Interface checks
+      path: articles/blank_implements
+- title: Embedding
+  articles:
+    - title: Embedding
+      path: articles/embedding
+- title: Concurrency
+  articles:
+    - title: Concurrency
+      path: articles/concurrency
+    - title: Share by communicating
+      path: articles/sharing
+    - title: Goroutines
+      path: articles/goroutines
+    - title: Channels
+      path: articles/channels
+    - title: Channels of channels
+      path: articles/chan_of_chan
+    - title: Parallelization
+      path: articles/parallel
+    - title: A leaky buffer
+      path: articles/leaky_buffer
+- title: Errors
+  articles:
+    - title: Errors
+      path: articles/errors
+    - title: Panic
+      path: articles/panic
+    - title: Recover
+      path: articles/recover
+- title: A web server
+  articles:
+    - title: A web server
+      path: articles/web_server

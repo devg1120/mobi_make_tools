@@ -1,0 +1,60 @@
+<h1 id="interpreting-errors">Interpreting Errors</h1>
+<p>Since TypeScript is a heavily focused <em>Developer Help</em> oriented programming language, its errors messages try to be super helpful when something goes wrong. This can lead to a slight information overload for unsuspecting users of compilers that aren't so helpful. </p>
+<p>Lets look at an example in an IDE to break apart the process of reading an error message. </p>
+<pre><code class="lang-ts"><span class="hljs-keyword">type</span> SomethingComplex = {
+  foo: <span class="hljs-built_in">number</span>,
+  bar: <span class="hljs-built_in">string</span>
+}
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">takeSomethingComplex</span>(<span class="hljs-params">arg: SomethingComplex</span>) </span>{
+}
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getBar</span>(<span class="hljs-params"></span>): <span class="hljs-title">string</span> </span>{
+  <span class="hljs-keyword">return</span> <span class="hljs-string">'some bar'</span>;
+}
+
+<span class="hljs-comment">//////////////////////////////////</span>
+<span class="hljs-comment">// Example error production</span>
+<span class="hljs-comment">//////////////////////////////////</span>
+<span class="hljs-keyword">const</span> fail = {
+  foo: <span class="hljs-number">123</span>,
+  bar: getBar
+};
+
+takeSomethingComplex(fail); <span class="hljs-comment">// TS ERROR HAPPENS HERE</span>
+</code></pre>
+<p>This example demonstrates a common programmer error where they <em>fail</em> to call a function (<code>bar: getBar</code> should be <code>bar: getBar()</code>). Fortunately this mistake is caught by TypeScript as soon as it doesn't meet the type requirements. </p>
+<h2 id="error-categories">Error Categories</h2>
+<p>There are two categories of TypeScript Error messages (succinct and detailed). </p>
+<h3 id="succinct">Succinct</h3>
+<p>The objective of the succinct error message is to provide an example <em>conventional compiler</em> description of the error number and message. For this example the succinct message looks like: </p>
+<pre><code>TS2345: Argument of type '{ foo: number; bar: () => string; }' is not assignable to parameter of type 'SomethingComplex'.
+</code></pre>
+<p>It is fairly self explanatory. However, it doesn't provide a deeper breakdown of <em>why</em> the error is happening. That is what the <em>detiled</em> error message is for.</p>
+<h3 id="detailed">Detailed</h3>
+<p>For this example the detailed version looks like: </p>
+<pre><code>[ts]
+Argument of type '{ foo: number; bar: () => string; }' is not assignable to parameter of type 'SomethingComplex'.
+  Types of property 'bar' are incompatible.
+    Type '() => string' is not assignable to type 'string'.
+</code></pre>
+<p>The objective of the detailed error message is to <em>guide</em> the user to the reason why some error (type incompatability in this case) is happening. The first line is same as the succinct, followed by a chain. You should read this chain as a series of responses to the developer question <code>WHY?</code> between lines i.e </p>
+<pre><code>ERROR: Argument of type '{ foo: number; bar: () => string; }' is not assignable to parameter of type 'SomethingComplex'.
+
+WHY? 
+CAUSE ERROR: Types of property 'bar' are incompatible.
+
+WHY? 
+CAUSE ERROR: Type '() => string' is not assignable to type 'string'.
+</code></pre>
+<p>So the root cause is,</p>
+<ul>
+    <li>for property <code>bar</code></li>
+    <li>there is a function <code>() => string</code> while it was expected as a <code>string</code>. </li>
+</ul>
+<p>This should help the developer fix the bug for the <code>bar</code> property (they forgot to invoke <code>()</code> the function).</p>
+<h2 id="how-it-shows-up-in-an-ide-tooltip">How it shows up in an IDE Tooltip</h2>
+<p>The IDE normally shows the <code>detailed</code> followed by the <code>succinct</code> version in a tooltip as shown below: </p>
+<p><img src="https://raw.githubusercontent.com/basarat/typescript-book/master/images/errors/interpreting-errors/ide.png" alt="IDE error message example"></p>
+<ul>
+    <li>You normally just read the <code>detailed</code> version forming the <code>WHY?</code> chain in your head. </li>
+    <li>You use the succinct version if you want to search for similar errors (using the <code>TSXXXX</code> error code or portions of the error message)</li>
+</ul>

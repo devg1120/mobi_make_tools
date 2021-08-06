@@ -1,0 +1,113 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Essence and Accident in Unix Tradition</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/tmp/es2015/cheerio-mobi-ts8/undefined" />
+  </head>
+   <body>
+<div class="sect1" lang="en"><div class="titlepage"><div><h2 class="title" style="clear: both"><a id="id3017543">Essence and Accident in Unix Tradition</a></h2></div></div><p>To understand how Unix&apos;s design might change in the future, we can
+start by looking at how Unix programming style has changed over time
+in the past.  This effort leads us directly to one of the challenges
+of understanding the Unix style &#x2014; distinguishing between
+accident and essence. That is, recognizing traits that arise from
+transient technical circumstances versus those that are deeply tied to
+the central Unix design challenge &#x2014; how to do modularity and
+abstraction right while also keeping systems transparent and
+simple.</p><p>This distinction can be difficult, because traits that arose as
+accidents have sometimes turned out to have essential utility.
+Consider as an example the &#x2018;Silence is golden&#x2019; rule of
+Unix interface design we examined in <a href="interfacechapter.html" title="Chapter&#xFFFD;11.&#xFFFD;Interfaces">Chapter&#xFFFD;11</a>; it began as an adaptation to slow
+teletypes, but continued because programs with terse output could be
+combined in scripts more easily.  Today, in an environment where
+having many programs running visibly through a GUI is normal, it has a
+third kind of utility: silent programs don&apos;t distract or waste the
+user&apos;s attention.</p><p>On the other hand, some traits that once seemed essential to
+Unix turned out to be accidents tied to a particular set of cost
+ratios.  For example, old-school Unix favored program designs (and
+minilanguages like awk(1)) that did line-at-a-time processing of an
+input stream or record-at-a-time processing of binary files, with any
+context that needed to be maintained between pieces carried by
+elaborate state-machine code.  New-school Unix design, on the other
+hand, is generally happy with the assumption that a program can read
+its entire input into memory and thereafter randomly access it at will.
+Indeed, modern Unixes supply an mmap(2) call that allows the
+programmer to map an entire file into virtual memory and completely
+hides the serialization of I/O to and from disk space.</p><p>This change trades away storage economy to get simpler and more
+transparent code.  It&apos;s an adaptation to the plunging cost of memory
+relative to programmer time.  Many of the differences between
+old-school Unix designs in the 1970s and 1980s and those of the new
+post-1990 school can be traced to the huge shift in relative costs
+that today makes all machine resources several orders of magnitude
+cheaper relative to programmer time than they were in 1969.</p><p>Looking back, we can identify three specific technology changes
+that have driven significant changes in Unix design style:
+internetworking, bitmapped graphics displays, and the personal
+computer.  In each case, the Unix tradition has adapted to the
+challenge by discarding accidents that were no longer adaptive and
+finding new applications for its essential ideas.  Biological
+evolution works this way too.  Evolutionary biologists have a rule:
+&#x201C;Don&apos;t assume that historical origin specifies current utility,
+or vice versa&#x201D;. A brief look at how Unix adapted in each of
+these cases may provide some clues to how Unix might adapt itself to
+future technology shifts that we cannot yet anticipate.</p><p><a href="historychapter.html" title="Chapter&#xFFFD;2.&#xFFFD;History">Chapter&#xFFFD;2</a> described
+the first of these changes: the rise of internetworking, from the
+angle of cultural history, telling how
+TCP/IP</p><p>Eventually the confusion was cleared up when TCP/IP won and BSD
+sockets</p><p>When bitmapped graphics and the example of the Macintosh
+arrived in 1984 a few years after TCP/IP, they posed a rather more
+difficult challenge.  The original GUIs from Xerox
+PARC</p><p>But that was the easy part of the problem.  The hard part was
+deciding whether Unix ought to have a unified interface policy at all,
+and if so what it ought to be.  Several different attempts to
+establish one through proprietary toolkits (like Motif) failed.  Today,
+in 2003, GTK and Qt contend with each other for the role.  While the
+debate on this question is not over in 2003, the persistence of
+different UI styles that we noted in <a href="interfacechapter.html" title="Chapter&#xFFFD;11.&#xFFFD;Interfaces">Chapter&#xFFFD;11</a> seems telling. New-school Unix design has
+kept the command line, and dealt with the tension between GUI and CLI
+approaches by writing lots of CLI-engine/GUI-interface pairs that can
+be used in both styles.</p><p>The personal computer posed few major design challenges as a
+technology in itself.  The 386 and later chips were powerful enough to
+give the systems designed around them cost ratios similar to those of
+the minicomputers, workstations, and servers on which Unix matured.
+The true challenge was a change in the potential market for Unix; the
+much lower overall price of the hardware made personal computers
+attractive to a vastly broader, less technically sophisticated user
+population.</p><p>The proprietary-Unix vendors, accustomed to the fatter margins from
+selling more powerful systems to sophisticated buyers, were never
+interested in this wider market.  The first serious initiatives
+toward the end-user desktop came out of the open-source community and
+were mounted for essentially ideological reasons.  As of mid-2003,
+market surveys indicate that
+Linux</p><p>Whether or not Linux ever does substantially better than this,
+the nature of the Unix community&apos;s response is already clear. We
+examined it in the study of Linux in <a href="contrastchapter.html" title="Chapter&#xFFFD;3.&#xFFFD;Contrasts">Chapter&#xFFFD;3</a>.  It includes adopting a few technologies
+(such as XML) from elsewhere, and putting a lot of effort into
+naturalizing GUIs into the Unix world.  But underneath the themed GUIs
+and the installation packaging, the main emphasis is still on
+modularity and clean code &#x2014; on getting the infrastructure for
+serious, high-reliability computing and communications right.</p><p>The history of the large-scale desktop-focused developments like
+Mozilla and OpenOffice.org that were launched in the late 1990s
+illustrates this emphasis well.  In both these cases, the most
+important theme in community feedback wasn&apos;t demand for new features
+or pressure to make a ship date &#x2014; it was distaste for monster
+monoliths, and a general sense that these huge programs would have to
+be slimmed down, refactored, and carved into modules before they would
+be other than embarrassments.</p><p>Despite being accompanied by a great deal of innovation, the
+responses to all three technologies were conservative with regard to
+the fundamental Unix design rules &#x2014; modularity,
+transparency, separation of policy from mechanism, and the other qualities
+we&apos;ve tried to characterize earlier in this book.  The learned
+response of Unix programmers, reinforced over thirty years, was to go
+back to first principles &#x2014; to try to get more leverage out of
+Unix&apos;s basic abstractions of streams, namespaces, and processes in
+preference to layering on new ones.</p><div class="footnotes"><br><hr width="100" align="left"><div class="footnote"><p><sup>[<a id="ftn.id3017690" href="ch20s01.html#id3017690">153</a>] </sup>For a few years it looked like ISO&apos;s 7-layer
+networking standard might compete successfully with TCP/IP.  It was
+promoted by a European standards committee politically horrified at
+the thought of adopting any technology birthed in the bowels of the
+Pentagon.  Alas, their indignation exceeded their technical acuity.
+The result proved overcomplicated and unhelpful; see [<a href="apb.html#Padlipsky" title="[Padlipsky]">Padlipsky</a>] for details.</p></div></div></div>
+</body>
+</html>

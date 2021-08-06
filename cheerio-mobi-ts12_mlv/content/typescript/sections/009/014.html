@@ -1,0 +1,114 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Literal Types
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts12_mlv/undefined" />
+  </head>
+   <body>
+<h2 id="literals">Literals</h2>
+<p>Literals are <em>exact</em> values that are JavaScript primitives. </p>
+<h3 id="string-literals">String Literals</h3>
+<p>You can use a string literal as a type. For example:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">let</span> foo: <span class="hljs-string">&apos;Hello&apos;</span>;
+</code></pre>
+<p>Here we have created a variable called <code>foo</code> that <em>will only allow the literal value <code>&apos;Hello&apos;</code> to be assigned to it</em>. This is demonstrated below:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">let</span> foo: <span class="hljs-string">&apos;Hello&apos;</span>;
+foo = <span class="hljs-string">&apos;Bar&apos;</span>; <span class="hljs-comment">// Error: &quot;Bar&quot; is not assignable to type &quot;Hello&quot;</span>
+</code></pre>
+<p>They are not very useful on their own but can be combined in a type union to create a powerful (and useful) abstraction e.g.:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">type</span> CardinalDirection =
+    | <span class="hljs-string">&quot;North&quot;</span>
+    | <span class="hljs-string">&quot;East&quot;</span>
+    | <span class="hljs-string">&quot;South&quot;</span>
+    | <span class="hljs-string">&quot;West&quot;</span>;
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">move</span>(<span class="hljs-params">distance: <span class="hljs-built_in">number</span>, direction: CardinalDirection</span>) </span>{
+    <span class="hljs-comment">// ...</span>
+}
+move(<span class="hljs-number">1</span>,<span class="hljs-string">&quot;North&quot;</span>); <span class="hljs-comment">// Okay</span>
+move(<span class="hljs-number">1</span>,<span class="hljs-string">&quot;Nurth&quot;</span>); <span class="hljs-comment">// Error!</span>
+</code></pre>
+<h3 id="other-literal-types">Other literal types</h3>
+<p>TypeScript also supports <code>boolean</code> and <code>number</code> literal types, e.g.: </p>
+<pre><code class="lang-ts"><span class="hljs-keyword">type</span> OneToFive = <span class="hljs-number">1</span> | <span class="hljs-number">2</span> | <span class="hljs-number">3</span> | <span class="hljs-number">4</span> | <span class="hljs-number">5</span>;
+<span class="hljs-keyword">type</span> Bools = <span class="hljs-literal">true</span> | <span class="hljs-literal">false</span>;
+</code></pre>
+<h3 id="inference">Inference</h3>
+<p>Quite commonly you get an error like <code>Type string is not assignable to type &quot;foo&quot;</code>. The following example demonstrates this.</p>
+<pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">iTakeFoo</span>(<span class="hljs-params">foo: &apos;foo&apos;</span>) </span>{ }
+<span class="hljs-keyword">const</span> test = {
+  someProp: <span class="hljs-string">&apos;foo&apos;</span>
+};
+iTakeFoo(test.someProp); <span class="hljs-comment">// Error: Argument of type string is not assignable to parameter of type &apos;foo&apos;</span>
+</code></pre>
+<p>This is because <code>test</code> is inferred to be of type <code>{someProp: string}</code>. The fix here is to use a simple type assertion to tell TypeScript the literal you want it to infer as shown below: </p>
+<pre><code class="lang-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">iTakeFoo</span>(<span class="hljs-params">foo: &apos;foo&apos;</span>) </span>{ }
+<span class="hljs-keyword">const</span> test = {
+  someProp: <span class="hljs-string">&apos;foo&apos;</span> <span class="hljs-keyword">as</span> <span class="hljs-string">&apos;foo&apos;</span>
+};
+iTakeFoo(test.someProp); <span class="hljs-comment">// Okay!</span>
+</code></pre>
+<p>or use a type annotation that helps TypeScript infer the correct thing at the point of declaration: </p>
+<pre><code>function iTakeFoo(foo: &apos;foo&apos;) { }
+type Test = {
+  someProp: &apos;foo&apos;,
+}
+const test: Test = { // Annotate - inferred someProp is always === &apos;foo&apos;
+  someProp: &apos;foo&apos; 
+}; 
+iTakeFoo(test.someProp); // Okay!
+</code></pre>
+<h3 id="use-cases">Use cases</h3>
+<p>Valid use cases for string literal types are:</p>
+<h4 id="string-based-enums">String based enums</h4>
+<p><a href="../enums.html">TypeScript enums are number based</a>. You can use string literals with union types to mock a string based enum as we did in the <code>CardinalDirection</code> example above. You can even generate a <code>Key:Value</code> structure using the following function: </p>
+<pre><code class="lang-ts"><span class="hljs-comment">/** Utility function to create a K:V from a list of strings */</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">strEnum</span>&lt;<span class="hljs-title">T</span> <span class="hljs-title">extends</span> <span class="hljs-title">string</span>&gt;(<span class="hljs-params">o: <span class="hljs-built_in">Array</span><t></t></span>): </span>{[K <span class="hljs-keyword">in</span> T]: K} {
+  <span class="hljs-keyword">return</span> o.reduce((res, key) =&gt; {
+    res[key] = key;
+    <span class="hljs-keyword">return</span> res;
+  }, <span class="hljs-built_in">Object</span>.create(<span class="hljs-literal">null</span>));
+}
+</code></pre>
+<p>And then generate the literal type union using <code>keyof typeof</code>. Here is a complete example:</p>
+<pre><code class="lang-ts"><span class="hljs-comment">/** Utility function to create a K:V from a list of strings */</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">strEnum</span>&lt;<span class="hljs-title">T</span> <span class="hljs-title">extends</span> <span class="hljs-title">string</span>&gt;(<span class="hljs-params">o: <span class="hljs-built_in">Array</span><t></t></span>): </span>{[K <span class="hljs-keyword">in</span> T]: K} {
+  <span class="hljs-keyword">return</span> o.reduce((res, key) =&gt; {
+    res[key] = key;
+    <span class="hljs-keyword">return</span> res;
+  }, <span class="hljs-built_in">Object</span>.create(<span class="hljs-literal">null</span>));
+}
+<span class="hljs-comment">/**
+  * Sample create a string enum
+  */</span>
+<span class="hljs-comment">/** Create a K:V */</span>
+<span class="hljs-keyword">const</span> Direction = strEnum([
+  <span class="hljs-string">&apos;North&apos;</span>,
+  <span class="hljs-string">&apos;South&apos;</span>,
+  <span class="hljs-string">&apos;East&apos;</span>,
+  <span class="hljs-string">&apos;West&apos;</span>
+])
+<span class="hljs-comment">/** Create a Type */</span>
+<span class="hljs-keyword">type</span> Direction = keyof <span class="hljs-keyword">typeof</span> Direction;
+<span class="hljs-comment">/** 
+  * Sample using a string enum
+  */</span>
+<span class="hljs-keyword">let</span> sample: Direction;
+sample = Direction.North; <span class="hljs-comment">// Okay</span>
+sample = <span class="hljs-string">&apos;North&apos;</span>; <span class="hljs-comment">// Okay</span>
+sample = <span class="hljs-string">&apos;AnythingElse&apos;</span>; <span class="hljs-comment">// ERROR!</span>
+</code></pre>
+<h4 id="modelling-existing-javascript-apis">Modelling existing JavaScript APIs</h4>
+<p>E.g. <a href="https://codemirror.net/doc/manual.html#option_readOnly" target="_blank">CodeMirror editor has an option <code>readOnly</code></a> that can either be a <code>boolean</code> or the literal string <code>&quot;nocursor&quot;</code> (effective valid values <code>true,false,&quot;nocursor&quot;</code>). It can be declared as:</p>
+<pre><code class="lang-ts">readOnly: <span class="hljs-built_in">boolean</span> | <span class="hljs-string">&apos;nocursor&apos;</span>;
+</code></pre>
+<h4 id="discriminated-unions">Discriminated Unions</h4>
+<p>We will cover <a href="discriminated-unions.html">this later in the book</a>.</p>
+<p><a href="https://github.com/Microsoft/TypeScript/pull/5185" target="_blank"></a></p>
+</body>
+</html>

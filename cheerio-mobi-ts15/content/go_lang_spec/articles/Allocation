@@ -1,0 +1,20 @@
+<body><p>
+The built-in function <code>new</code> takes a type <code>T</code>,
+allocates storage for a [<a>variable</a>] of that type
+at run time, and returns a value of type <code>*T</code>
+[<a>pointing</a>] to it.
+The variable is initialized as described in the section on
+[<a>initial values</a>].
+</p><pre>
+new(T)
+</pre><p>
+For instance
+</p><pre>
+type S struct { a int; b float64 }
+new(S)
+</pre><p>
+allocates storage for a variable of type <code>S</code>,
+initializes it (<code>a=0</code>, <code>b=0.0</code>),
+and returns a value of type <code>*S</code> containing the address
+of the location.
+</p></body>

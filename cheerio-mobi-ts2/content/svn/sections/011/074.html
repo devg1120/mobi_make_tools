@@ -1,0 +1,113 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svnlook tree</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts2/css/kindle.css" />
+  </head>
+   <body>
+    <div class="refentry">
+      <a id="svn.ref.svnlook.c.tree"></a>
+      <div class="titlepage"></div>
+      <a id="idm12983" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svnlook tree — Print the tree.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm12990"></a>
+        <h2>Synopsis</h2>
+        <p>
+          <code class="literal">svnlook tree REPOS_PATH [PATH_IN_REPOS]</code>
+        </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm12994"></a>
+        <h2>Description</h2>
+        <p>Print the tree, starting at
+            <em class="replaceable"><code>PATH_IN_REPOS</code></em> (if supplied; at
+            the root of the tree otherwise), optionally showing node
+            revision IDs.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm12998"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+          <pre class="screen">
+<a class="xref" href="svn.ref.svnlook.html#svn.ref.svnlook.sw.full_paths"><code class="option">--full-paths</code></a>
+<a class="xref" href="svn.ref.svnlook.html#svn.ref.svnlook.sw.non_recursive"><code class="option">--non-recursive</code> (<code class="option">-N</code>)</a>
+<a class="xref" href="svn.ref.svnlook.html#svn.ref.svnlook.sw.revision"><code class="option">--revision</code> (<code class="option">-r</code>) <em class="replaceable"><code>REV</code></em></a>
+<a class="xref" href="svn.ref.svnlook.html#svn.ref.svnlook.sw.show_ids"><code class="option">--show-ids</code></a>
+<a class="xref" href="svn.ref.svnlook.html#svn.ref.svnlook.sw.transaction"><code class="option">--transaction</code> (<code class="option">-t</code>) <em class="replaceable"><code>ID</code></em></a>
+</pre>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm13007"></a>
+        <h2>Example</h2>
+        <p>This shows the tree output for revision 13 in our
+            sample repository:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svnlook tree -r 13 /var/svn/repos
+/
+ trunk/
+  button.c
+  Makefile
+  integer.c
+ branches/
+  bookstore/
+   button.c
+   Makefile
+   integer.c
+…
+</pre>
+        </div>
+        <p>Use the <code class="option">--show-ids</code> option to include
+            node revision IDs (unique internal identifiers for
+            specific nodes in Subversion's versioned filesystem
+            implementation):</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svnlook tree -r 13 /var/svn/repos --show-ids
+/ <0.0.r13/811>
+ trunk/ <1.0.r9/551>
+  button.c <2.0.r9/238>
+  Makefile <3.0.r7/41>
+  integer.c <4.0.r6/98>
+ branches/ <5.0.r13/593>
+  bookstore/ <1.1.r13/390>
+   button.c <2.1.r12/85>
+   Makefile <3.0.r7/41>
+   integer.c <4.1.r13/109>
+…
+</pre>
+        </div>
+        <p>For output which lends itself more readily to being
+            parsed by scripts, use the <code class="option">--full-paths</code>
+            option, which causes <span class="command"><strong>svnlook</strong></span> to print
+            the full repository path of each tree item and to not use
+            indentation to indicate hierarchy:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svnlook tree -r 13 /var/svn/repos --show-ids --full-paths
+/ <0.0.r13/811>
+trunk/ <1.0.r9/551>
+trunk/button.c <2.0.r9/238>
+trunk/Makefile <3.0.r7/41>
+trunk/integer.c <4.0.r6/98>
+branches/ <5.0.r13/593>
+branches/bookstore/ <1.1.r13/390>
+branches/bookstore/button.c <2.1.r12/85>
+branches/bookstore/Makefile <3.0.r7/41>
+branches/bookstore/integer.c <4.1.r13/109>
+…
+</pre>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

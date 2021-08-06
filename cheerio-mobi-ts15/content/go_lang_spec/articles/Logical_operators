@@ -1,0 +1,9 @@
+<body><p>
+Logical operators apply to [<a>boolean</a>] values
+and yield a result of the same type as the operands.
+The right operand is evaluated conditionally.
+</p><pre>
+&&    conditional AND    p && q  is  "if p then q else false"
+||    conditional OR     p || q  is  "if p then true else q"
+!     NOT                !p      is  "not p"
+</pre></body>

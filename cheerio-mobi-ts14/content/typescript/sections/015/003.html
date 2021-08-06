@@ -1,0 +1,73 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    ESLint
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts14/undefined" />
+  </head>
+   <body>
+<h1 id="eslint">ESLint</h1>
+<p>ESLint existed to lint JavaScript, but now it is also becoming the defacto linter for <a href="https://github.com/Microsoft/TypeScript/issues/29288" target="_blank">TypeScript</a>, thanks to the <a href="https://eslint.org/blog/2019/01/future-typescript-eslint" target="_blank">collaboration</a> between the two teams.</p>
+<h2 id="install">Install</h2>
+<p>To setup ESLint for TypeScript you need the following packages:</p>
+<pre><code class="lang-sh">npm i eslint eslint-plugin-react @typescript-eslint/parser @typescript-eslint/eslint-plugin
+</code></pre>
+<blockquote>
+    <p>TIP: eslint calls packages that contain lint rules as &quot;plugin&quot;</p>
+</blockquote>
+<ul>
+    <li>eslint : Core eslint </li>
+    <li>eslint-plugin-react : For react rules provided by eslint. <a href="https://github.com/yannickcr/eslint-plugin-react#list-of-supported-rules" target="_blank">Supported rules list</a></li>
+    <li>@typescript-eslint/parse : To allow eslint to understand ts / tsx files </li>
+    <li>@typescript-eslint/eslint-plugin : For TypeScript rules. <a href="https://github.com/typescript-eslint/typescript-eslint/tree/master/packages/eslint-plugin#supported-rules" target="_blank">Supported rules list</a></li>
+</ul>
+<blockquote>
+    <p>As you can see there are two eslint packages (for use with js or ts) and two @typescript-eslint packages (for use with ts). So the overhead for TypeScript is not <em>that much</em>.</p>
+</blockquote>
+<h2 id="configure">Configure</h2>
+<p>Create <code>.eslintrc.js</code>: </p>
+<pre><code class="lang-js"><span class="hljs-built_in">module</span>.exports = {
+  parser: <span class="hljs-string">&apos;@typescript-eslint/parser&apos;</span>,
+  parserOptions: {
+    project: <span class="hljs-string">&apos;./tsconfig.json&apos;</span>,
+  },
+  plugins: [<span class="hljs-string">&apos;@typescript-eslint&apos;</span>],
+  extends: [
+    <span class="hljs-string">&apos;plugin:react/recommended&apos;</span>,
+    <span class="hljs-string">&apos;plugin:@typescript-eslint/recommended&apos;</span>,
+  ],
+  rules:  {
+    <span class="hljs-comment">// Overwrite rules specified from the extended configs e.g. </span>
+    <span class="hljs-comment">// &quot;@typescript-eslint/explicit-function-return-type&quot;: &quot;off&quot;,</span>
+  }
+}
+</code></pre>
+<h2 id="run">Run</h2>
+<p>In your <code>package.json</code> add to <code>scripts</code>: </p>
+<pre><code class="lang-json">{
+  <span class="hljs-string">&quot;scripts&quot;</span>: {
+    <span class="hljs-string">&quot;lint&quot;</span>: <span class="hljs-string">&quot;eslint \&quot;src/**\&quot;&quot;</span>
+  }
+}
+</code></pre>
+<p>Now you can <code>npm run lint</code> to validate.</p>
+<h2 id="configure-vscode">Configure VSCode</h2>
+<ul>
+    <li>Install extension <a href="https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint" target="_blank">https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint</a></li>
+    <li>Add to <code>settings.json</code>:
+        <pre><code class="lang-js"><span class="hljs-string">&quot;eslint.validate&quot;</span>:  [
+<span class="hljs-string">&quot;javascript&quot;</span>,
+<span class="hljs-string">&quot;javascriptreact&quot;</span>,
+{<span class="hljs-string">&quot;language&quot;</span>:  <span class="hljs-string">&quot;typescript&quot;</span>,  <span class="hljs-string">&quot;autoFix&quot;</span>:  <span class="hljs-literal">true</span>  },
+{<span class="hljs-string">&quot;language&quot;</span>:  <span class="hljs-string">&quot;typescriptreact&quot;</span>,  <span class="hljs-string">&quot;autoFix&quot;</span>:  <span class="hljs-literal">true</span>  }
+],
+</code></pre>
+    </li>
+</ul>
+</body>
+</html>

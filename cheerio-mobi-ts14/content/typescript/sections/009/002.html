@@ -1,0 +1,42 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    @types
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts14/undefined" />
+  </head>
+   <body>
+<h1 id="types"><code>@types</code></h1>
+<p><a href="https://github.com/DefinitelyTyped/DefinitelyTyped" target="_blank">Definitely Typed</a> is definitely one of TypeScript&apos;s greatest strengths. The community has effectively gone ahead and <strong>documented</strong> the nature of nearly 90% of the top JavaScript projects out there.</p>
+<p>This means that you can use these projects in a very interactive and exploratory manner, no need to have the docs open in a separate window and making sure you don&apos;t make a typo.</p>
+<h2 id="using-types">Using <code>@types</code></h2>
+<p>Installation is fairly simple as it just works on top of <code>npm</code>. So as an example you can install type definitions for <code>jquery</code> simply as:</p>
+<pre><code>npm install @types/jquery --save-dev
+</code></pre>
+<p><code>@types</code> supports both <em>global</em> and <em>module</em> type definitions.</p>
+<h3 id="global-types">Global <code>@types</code></h3>
+<p>By default any definitions that support global consumption are included automatically. E.g. for <code>jquery</code> you should be able to just start using <code>$</code> <em>globally</em> in your project.</p>
+<p>However, for <em>libraries</em> (like <code>jquery</code>) I generally recommend using <em>modules</em>:</p>
+<h3 id="module-types">Module <code>@types</code></h3>
+<p>After installation, no special configuration is required really. You just use it like a module e.g.:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">import</span> * as $ from <span class="hljs-string">&quot;jquery&quot;</span>;
+<span class="hljs-comment">// Use $ at will in this module :)</span>
+</code></pre>
+<h2 id="controlling-globals">Controlling Globals</h2>
+<p>As can be seen, having a definition that allows global leak-in automatically can be a problem for some teams. So you can choose to <em>explicitly</em> only bring in the types that make sense using the <code>tsconfig.json</code> <code>compilerOptions.types</code> e.g.:</p>
+<pre><code class="lang-json">{
+    <span class="hljs-string">&quot;compilerOptions&quot;</span>: {
+        <span class="hljs-string">&quot;types&quot;</span> : [
+            <span class="hljs-string">&quot;jquery&quot;</span>
+        ]
+    }
+}
+</code></pre>
+<p>The above shows a sample where only <code>jquery</code> will be allowed to be used. Even if the person installs another definition like <code>npm install @types/node</code> its globals (e.g. <a href="https://nodejs.org/api/process.html" target="_blank"><code>process</code></a>) will not leak into your code until you add them to the <code>tsconfig.json</code> types option.</p>
+</body>
+</html>

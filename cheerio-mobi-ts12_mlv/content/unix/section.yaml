@@ -1,0 +1,348 @@
+- title: Frontmatter
+  articles:
+    - title: Title Page
+      path: articles/titlepage
+- title: Preface
+  articles:
+    - title: Preface
+      path: articles/preface.html
+    - title: Who Should Read This Book
+      path: articles/pr01s01.html
+    - title: How to Use This Book
+      path: articles/pr01s02.html
+    - title: Related References
+      path: articles/pr01s03.html
+    - title: Conventions Used in This Book
+      path: articles/pr01s04.html
+    - title: Our Case Studies
+      path: articles/pr01s05.html
+    - title: Author's Acknowledgements
+      path: articles/pr01s06.html
+    - title: Context
+      path: articles/context.html
+- title: Philosophy
+  articles:
+    - title: Philosophy
+      path: articles/philosophychapter.html
+    - title: Culture? What Culture?
+      path: articles/ch01s01.html
+    - title: The Durability of Unix
+      path: articles/ch01s02.html
+    - title: The Case against Learning Unix Culture
+      path: articles/ch01s03.html
+    - title: What Unix Gets Wrong
+      path: articles/ch01s04.html
+    - title: What Unix Gets Right
+      path: articles/ch01s05.html
+    - title: Basics of the Unix Philosophy
+      path: articles/ch01s06.html
+    - title: The Unix Philosophy in One Lesson
+      path: articles/ch01s07.html
+    - title: Applying the Unix Philosophy
+      path: articles/ch01s08.html
+    - title: Attitude Matters Too
+      path: articles/ch01s09.html
+- title: History
+  articles:
+    - title: History
+      path: articles/historychapter.html
+    - title: 'Origins and History of Unix, 1969-1995'
+      path: articles/ch02s01.html
+    - title: 'Origins and History of the Hackers, 1961-1995'
+      path: articles/hackers.html
+    - title: 'The Open-Source Movement: 1998 and Onward'
+      path: articles/ch02s03.html
+    - title: The Lessons of Unix History
+      path: articles/ch02s04.html
+- title: Contrasts
+  articles:
+    - title: Contrasts
+      path: articles/contrastchapter.html
+    - title: The Elements of Operating-System Style
+      path: articles/ch03s01.html
+    - title: Operating-System Comparisons
+      path: articles/ch03s02.html
+    - title: 'What Goes Around, Comes Around'
+      path: articles/ch03s03.html
+    - title: Design
+      path: articles/design.html
+- title: Modularity
+  articles:
+    - title: Modularity
+      path: articles/modularitychapter.html
+    - title: Encapsulation and Optimal Module Size
+      path: articles/ch04s01.html
+    - title: Compactness and Orthogonality
+      path: articles/ch04s02.html
+    - title: Software Is a Many-Layered Thing
+      path: articles/ch04s03.html
+    - title: Libraries
+      path: articles/ch04s04.html
+    - title: Unix and Object-Oriented Languages
+      path: articles/unix_and_oo.html
+    - title: Coding for Modularity
+      path: articles/ch04s06.html
+- title: Textuality
+  articles:
+    - title: Textuality
+      path: articles/textualitychapter.html
+    - title: The Importance of Being Textual
+      path: articles/ch05s01.html
+    - title: Data File Metaformats
+      path: articles/ch05s02.html
+    - title: Application Protocol Design
+      path: articles/ch05s03.html
+    - title: Application Protocol Metaformats
+      path: articles/ch05s04.html
+- title: Transparency
+  articles:
+    - title: Transparency
+      path: articles/transparencychapter.html
+    - title: Studying Cases
+      path: articles/ch06s01.html
+    - title: Designing for Transparency and Discoverability
+      path: articles/ch06s02.html
+    - title: Designing for Maintainability
+      path: articles/ch06s03.html
+- title: Multiprogramming
+  articles:
+    - title: Multiprogramming
+      path: articles/multiprogramchapter.html
+    - title: Separating Complexity Control from Performance Tuning
+      path: articles/ch07s01.html
+    - title: Taxonomy of Unix IPC Methods
+      path: articles/ch07s02.html
+    - title: Problems and Methods to Avoid
+      path: articles/ch07s03.html
+    - title: Process Partitioning at the Design Level
+      path: articles/ch07s04.html
+- title: Minilanguages
+  articles:
+    - title: Minilanguages
+      path: articles/minilanguageschapter.html
+    - title: Understanding the Taxonomy of Languages
+      path: articles/ch08s01.html
+    - title: Applying Minilanguages
+      path: articles/ch08s02.html
+    - title: Designing Minilanguages
+      path: articles/ch08s03.html
+- title: Generation
+  articles:
+    - title: Generation
+      path: articles/generationchapter.html
+    - title: Data-Driven Programming
+      path: articles/ch09s01.html
+    - title: Ad-hoc Code Generation
+      path: articles/ch09s02.html
+- title: Configuration
+  articles:
+    - title: Configuration
+      path: articles/configurationchapter.html
+    - title: What Should Be Configurable?
+      path: articles/ch10s01.html
+    - title: Where Configurations Live
+      path: articles/ch10s02.html
+    - title: Run-Control Files
+      path: articles/ch10s03.html
+    - title: Environment Variables
+      path: articles/ch10s04.html
+    - title: Command-Line Options
+      path: articles/ch10s05.html
+    - title: How to Choose among the Methods
+      path: articles/ch10s06.html
+    - title: On Breaking These Rules
+      path: articles/ch10s07.html
+- title: Interfaces
+  articles:
+    - title: Interfaces
+      path: articles/interfacechapter.html
+    - title: Applying the Rule of Least Surprise
+      path: articles/ch11s01.html
+    - title: History of Interface Design on Unix
+      path: articles/ch11s02.html
+    - title: Evaluating Interface Designs
+      path: articles/ch11s03.html
+    - title: Tradeoffs between CLI and Visual Interfaces
+      path: articles/ch11s04.html
+    - title: 'Transparency, Expressiveness, and Configurability'
+      path: articles/ch11s05.html
+    - title: Unix Interface Design Patterns
+      path: articles/ch11s06.html
+    - title: Applying Unix Interface-Design Patterns
+      path: articles/ch11s07.html
+    - title: The Web Browser as a Universal Front End
+      path: articles/ch11s08.html
+    - title: Silence Is Golden
+      path: articles/ch11s09.html
+- title: Optimization
+  articles:
+    - title: Optimization
+      path: articles/optimizationchapter.html
+    - title: 'Don''t Just Do Something, Stand There!'
+      path: articles/ch12s01.html
+    - title: Measure before Optimizing
+      path: articles/ch12s02.html
+    - title: Nonlocality Considered Harmful
+      path: articles/ch12s03.html
+    - title: Throughput vs. Latency
+      path: articles/ch12s04.html
+- title: Complexity
+  articles:
+    - title: Complexity
+      path: articles/complexitychapter.html
+    - title: Speaking of Complexity
+      path: articles/ch13s01.html
+    - title: A Tale of Five Editors
+      path: articles/ch13s02.html
+    - title: The Right Size for an Editor
+      path: articles/ch13s03.html
+    - title: The Right Size of Software
+      path: articles/ch13s04.html
+    - title: Implementation
+      path: articles/implementation.html
+- title: Languages
+  articles:
+    - title: Languages
+      path: articles/languageschapter.html
+    - title: Unix's Cornucopia of Languages
+      path: articles/ch14s01.html
+    - title: Why Not C?
+      path: articles/why_not_c.html
+    - title: Interpreted Languages and Mixed Strategies
+      path: articles/ch14s03.html
+    - title: Language Evaluations
+      path: articles/ch14s04.html
+    - title: Trends for the Future
+      path: articles/ch14s05.html
+    - title: Choosing an X Toolkit
+      path: articles/ch14s06.html
+- title: Tools
+  articles:
+    - title: Tools
+      path: articles/toolschapter.html
+    - title: A Developer-Friendly Operating System
+      path: articles/ch15s01.html
+    - title: Choosing an Editor
+      path: articles/ch15s02.html
+    - title: Special-Purpose Code Generators
+      path: articles/ch15s03.html
+    - title: 'make: Automating Your Recipes'
+      path: articles/ch15s04.html
+    - title: Version-Control Systems
+      path: articles/ch15s05.html
+    - title: Runtime Debugging
+      path: articles/ch15s06.html
+    - title: Profiling
+      path: articles/ch15s07.html
+    - title: Combining Tools with Emacs
+      path: articles/ch15s08.html
+- title: Reuse
+  articles:
+    - title: Reuse
+      path: articles/reusechapter.html
+    - title: The Tale of J. Random Newbie
+      path: articles/ch16s01.html
+    - title: Transparency as the Key to Reuse
+      path: articles/ch16s02.html
+    - title: From Reuse to Open Source
+      path: articles/ch16s03.html
+    - title: The Best Things in Life Are Open
+      path: articles/ch16s04.html
+    - title: Where to Look?
+      path: articles/ch16s05.html
+    - title: Issues in Using Open-Source Software
+      path: articles/ch16s06.html
+    - title: Licensing Issues
+      path: articles/ch16s07.html
+    - title: Community
+      path: articles/community.html
+- title: Portability
+  articles:
+    - title: Portability
+      path: articles/portabilitychapter.html
+    - title: Evolution of C
+      path: articles/c_evolution.html
+    - title: Unix Standards
+      path: articles/ch17s02.html
+    - title: IETF and the RFC Standards Process
+      path: articles/ietf_process.html
+    - title: 'Specifications as DNA, Code as RNA'
+      path: articles/ch17s04.html
+    - title: Programming for Portability
+      path: articles/ch17s05.html
+    - title: Internationalization
+      path: articles/ch17s06.html
+    - title: 'Portability, Open Standards, and Open Source'
+      path: articles/ch17s07.html
+- title: Documentation
+  articles:
+    - title: Documentation
+      path: articles/documentationchapter.html
+    - title: Documentation Concepts
+      path: articles/ch18s01.html
+    - title: The Unix Style
+      path: articles/ch18s02.html
+    - title: The Zoo of Unix Documentation Formats
+      path: articles/ch18s03.html
+    - title: The Present Chaos and a Possible Way Out
+      path: articles/ch18s04.html
+    - title: DocBook
+      path: articles/ch18s05.html
+    - title: Best Practices for Writing Unix Documentation
+      path: articles/ch18s06.html
+- title: Open Source
+  articles:
+    - title: Open Source
+      path: articles/opensourcechapter.html
+    - title: Unix and Open Source
+      path: articles/ch19s01.html
+    - title: Best Practices for Working with Open-Source Developers
+      path: articles/ch19s02.html
+    - title: 'The Logic of Licenses: How to Pick One'
+      path: articles/ch19s03.html
+    - title: Why You Should Use a Standard License
+      path: articles/ch19s04.html
+    - title: Varieties of Open-Source Licensing
+      path: articles/ch19s05.html
+- title: Futures
+  articles:
+    - title: Futures
+      path: articles/futurechapter.html
+    - title: Essence and Accident in Unix Tradition
+      path: articles/ch20s01.html
+    - title: 'Plan 9: The Way the Future Was'
+      path: articles/plan9.html
+    - title: Problems in the Design of Unix
+      path: articles/ch20s03.html
+    - title: Problems in the Environment of Unix
+      path: articles/ch20s04.html
+    - title: Problems in the Culture of Unix
+      path: articles/ch20s05.html
+    - title: Reasons to Believe
+      path: articles/ch20s06.html
+    - title: Glossary of Abbreviations
+      path: articles/apa.html
+    - title: References
+      path: articles/apb.html
+    - title: Contributors
+      path: articles/apc.html
+    - title: Rootless Root
+      path: articles/unix_koans.html
+    - title: Editor's Introduction
+      path: articles/introduction.html
+    - title: Master Foo and the Ten Thousand Lines
+      path: articles/ten-thousand.html
+    - title: Master Foo and the Script Kiddie
+      path: articles/script-kiddie.html
+    - title: Master Foo Discourses on the Two Paths
+      path: articles/two_paths.html
+    - title: "Master Foo and the\r\nMethodologist"
+      path: articles/methodology-consultant.html
+    - title: "Master Foo Discourses on the\r\nGraphical User Interface"
+      path: articles/gui-programmer.html
+    - title: Master Foo and the Unix Zealot
+      path: articles/zealot.html
+    - title: Master Foo Discourses on the Unix-Nature
+      path: articles/unix-nature.html
+    - title: Master Foo and the End User
+      path: articles/end-user.html

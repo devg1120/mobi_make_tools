@@ -1,0 +1,21 @@
+<body><p>
+A "continue" statement begins the next iteration of the
+innermost [<a>"for" loop</a>] at its post statement.
+The "for" loop must be within the same function.
+</p><pre>
+[<a>ContinueStmt</a>] = "continue" [ [<a>Label</a>] ] .
+</pre><p>
+If there is a label, it must be that of an enclosing
+"for" statement, and that is the one whose execution
+advances.
+</p><pre>
+RowLoop:
+	for y, row := range rows {
+		for x, data := range row {
+			if data == endOfRow {
+				continue RowLoop
+			}
+			row[x] = data + bias(x, y)
+		}
+	}
+</pre></body>

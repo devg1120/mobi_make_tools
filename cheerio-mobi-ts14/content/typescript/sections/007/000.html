@@ -1,0 +1,162 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Browser QuickStart
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts14/undefined" />
+  </head>
+   <body>
+<h1 id="typescript-in-the-browser">TypeScript in the browser</h1>
+<p>If you are using TypeScript to create a web application here are my recommendations to get a quick TypeScript + React (my UI framework of choice) project setup.</p>
+<h2 id="general-machine-setup">General Machine Setup</h2>
+<ul>
+    <li>Install <a href="https://nodejs.org/en/download/" target="_blank">Node.js</a></li>
+    <li>Install <a href="https://git-scm.com/downloads" target="_blank">Git</a></li>
+</ul>
+<h2 id="project-setup-quick">Project Setup Quick</h2>
+<p>Use <a href="https://github.com/basarat/react-typescript" target="_blank">https://github.com/basarat/react-typescript</a> as a base. </p>
+<pre><code>git clone https://github.com/basarat/react-typescript.git
+cd react-typescript
+npm install
+</code></pre>
+<p>Now jump to <a href="#develop-your-amazing-application">develop your amazing application</a></p>
+<h2 id="project-setup-detailed">Project Setup Detailed</h2>
+<p>To see how that project is created, its documented below.</p>
+<ul>
+    <li>Create a project dir:</li>
+</ul>
+<pre><code>mkdir your-project
+cd your-project
+</code></pre>
+<ul>
+    <li>Create <code>tsconfig.json</code>:</li>
+</ul>
+<pre><code class="lang-json">{
+  <span class="hljs-string">&quot;compilerOptions&quot;</span>: {
+    <span class="hljs-string">&quot;sourceMap&quot;</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-string">&quot;module&quot;</span>: <span class="hljs-string">&quot;commonjs&quot;</span>,
+    <span class="hljs-string">&quot;esModuleInterop&quot;</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-string">&quot;resolveJsonModule&quot;</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-string">&quot;experimentalDecorators&quot;</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-string">&quot;target&quot;</span>: <span class="hljs-string">&quot;es5&quot;</span>,
+    <span class="hljs-string">&quot;jsx&quot;</span>: <span class="hljs-string">&quot;react&quot;</span>,
+    <span class="hljs-string">&quot;lib&quot;</span>: [
+      <span class="hljs-string">&quot;dom&quot;</span>,
+      <span class="hljs-string">&quot;es6&quot;</span>
+    ]
+  },
+  <span class="hljs-string">&quot;include&quot;</span>: [
+    <span class="hljs-string">&quot;src&quot;</span>
+  ],
+  <span class="hljs-string">&quot;compileOnSave&quot;</span>: <span class="hljs-literal">false</span>
+}
+</code></pre>
+<ul>
+    <li>Create <code>package.json</code>.</li>
+</ul>
+<pre><code class="lang-json">{
+  <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;react-typescript&quot;</span>,
+  <span class="hljs-string">&quot;version&quot;</span>: <span class="hljs-string">&quot;0.0.0&quot;</span>,
+  <span class="hljs-string">&quot;license&quot;</span>: <span class="hljs-string">&quot;MIT&quot;</span>,
+  <span class="hljs-string">&quot;repository&quot;</span>: {
+    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;git&quot;</span>,
+    <span class="hljs-string">&quot;url&quot;</span>: <span class="hljs-string">&quot;https://github.com/basarat/react-typescript.git&quot;</span>
+  },
+  <span class="hljs-string">&quot;scripts&quot;</span>: {
+    <span class="hljs-string">&quot;build&quot;</span>: <span class="hljs-string">&quot;webpack -p&quot;</span>,
+    <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-string">&quot;webpack-dev-server -d --content-base ./public&quot;</span>
+  },
+  <span class="hljs-string">&quot;dependencies&quot;</span>: {
+    <span class="hljs-string">&quot;@types/react&quot;</span>: <span class="hljs-string">&quot;16.4.10&quot;</span>,
+    <span class="hljs-string">&quot;@types/react-dom&quot;</span>: <span class="hljs-string">&quot;16.0.7&quot;</span>,
+    <span class="hljs-string">&quot;clean-webpack-plugin&quot;</span>: <span class="hljs-string">&quot;0.1.19&quot;</span>,
+    <span class="hljs-string">&quot;html-webpack-plugin&quot;</span>: <span class="hljs-string">&quot;3.2.0&quot;</span>,
+    <span class="hljs-string">&quot;react&quot;</span>: <span class="hljs-string">&quot;16.4.2&quot;</span>,
+    <span class="hljs-string">&quot;react-dom&quot;</span>: <span class="hljs-string">&quot;16.4.2&quot;</span>,
+    <span class="hljs-string">&quot;ts-loader&quot;</span>: <span class="hljs-string">&quot;4.4.2&quot;</span>,
+    <span class="hljs-string">&quot;typescript&quot;</span>: <span class="hljs-string">&quot;3.0.1&quot;</span>,
+    <span class="hljs-string">&quot;webpack&quot;</span>: <span class="hljs-string">&quot;4.16.5&quot;</span>,
+    <span class="hljs-string">&quot;webpack-cli&quot;</span>: <span class="hljs-string">&quot;3.1.0&quot;</span>,
+    <span class="hljs-string">&quot;webpack-dev-server&quot;</span>: <span class="hljs-string">&quot;3.1.5&quot;</span>
+  }
+}
+</code></pre>
+<ul>
+    <li>Create a <code>webpack.config.js</code> to bundle your modules into a single <code>app.js</code> file that contains all your resources:</li>
+</ul>
+<pre><code class="lang-js"><span class="hljs-keyword">const</span> { CleanWebpackPlugin } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;clean-webpack-plugin&apos;</span>);
+<span class="hljs-keyword">const</span> HtmlWebpackPlugin = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;html-webpack-plugin&apos;</span>);
+<span class="hljs-built_in">module</span>.exports = {
+  entry: <span class="hljs-string">&apos;./src/app/app.tsx&apos;</span>,
+  plugins: [
+    <span class="hljs-keyword">new</span> CleanWebpackPlugin({
+      cleanAfterEveryBuildPatterns: [<span class="hljs-string">&apos;public/build&apos;</span>]
+    }),
+    <span class="hljs-keyword">new</span> HtmlWebpackPlugin({
+      template: <span class="hljs-string">&apos;src/templates/index.html&apos;</span>
+    }),
+  ],
+  output: {
+    path: __dirname + <span class="hljs-string">&apos;/public&apos;</span>,
+    filename: <span class="hljs-string">&apos;build/[name].[contenthash].js&apos;</span>
+  },
+  resolve: {
+    extensions: [<span class="hljs-string">&apos;.ts&apos;</span>, <span class="hljs-string">&apos;.tsx&apos;</span>, <span class="hljs-string">&apos;.js&apos;</span>]
+  },
+  <span class="hljs-built_in">module</span>: {
+    rules: [
+      { test: <span class="hljs-regexp">/\.tsx?$/</span>, loader: <span class="hljs-string">&apos;ts-loader&apos;</span> }
+    ]
+  }
+}
+</code></pre>
+<ul>
+    <li><code>src/templates/index.html</code> file. It will be used as the template for the <code>index.html</code> generated by webpack. The generated file will be in the <code>public</code> folder and and then served from your webserver: </li>
+</ul>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;root&quot;</span>&gt;</span><span class="hljs-tag">div</span>&gt;
+  <span class="hljs-tag">body</span>&gt;
+<span class="hljs-tag">html</span>&gt;
+</code></pre>
+<ul>
+    <li><code>src/app/app.tsx</code> that is your frontend application entry point: </li>
+</ul>
+<pre><code class="lang-js"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span>;
+<span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react-dom&apos;</span>;
+<span class="hljs-keyword">const</span> Hello: React.FunctionComponent<{ compiler: string, framework: string }> = (props) =&gt; {
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>{props.compiler}<span class="hljs-tag">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>{props.framework}<span class="hljs-tag">div</span>&gt;
+    <span class="hljs-tag">div</span>&gt;
+  );
+}
+ReactDOM.render(
+  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Hello</span> <span class="hljs-attr">compiler</span>=<span class="hljs-string">&quot;TypeScript&quot;</span> <span class="hljs-attr">framework</span>=<span class="hljs-string">&quot;React&quot;</span> /&gt;</span>,
+  document.getElementById(&quot;root&quot;)
+);
+</span></{></code></pre>
+<h1 id="develop-your-amazing-application">Develop your amazing application</h1>
+<blockquote>
+    <p>You can get the latest packages using <code>npm install typescript@latest react@latest react-dom@latest @types/react@latest @types/react-dom@latest webpack@latest webpack-dev-server@latest webpack-cli@latest ts-loader@latest clean-webpack-plugin@latest html-webpack-plugin@latest --save-exact</code></p>
+</blockquote>
+<ul>
+    <li>Do live development by running <code>npm start</code>. <ul>
+            <li>Visit <a href="http://localhost:8080" target="_blank">http://localhost:8080</a></li>
+            <li>Edit the <code>src/app/app.tsx</code> (or any ts/tsx file used in some way by <code>src/app/app.tsx</code>) and application live reloads. </li>
+            <li>Edit the <code>src/templates/index.html</code> and the server live reloads.</li>
+        </ul>
+    </li>
+    <li>Build production assets by running <code>npm run build</code>. <ul>
+            <li>Serve the <code>public</code> folder (which contains the built assets) from your server.</li>
+        </ul>
+    </li>
+</ul>
+</body>
+</html>

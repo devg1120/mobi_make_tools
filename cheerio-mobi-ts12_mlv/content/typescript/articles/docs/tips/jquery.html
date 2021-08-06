@@ -1,0 +1,9 @@
+<h2 id="jquery-tips">JQuery Tips</h2>
+<p>Note: you need to install the <code>jquery.d.ts</code> file for these tips</p>
+<h3 id="quickly-define-a-new-plugin">Quickly define a new plugin</h3>
+<p>Just create <code>jquery-foo.d.ts</code> with: </p>
+<pre><code class="lang-ts"><span class="hljs-keyword">interface</span> JQuery {
+  foo: <span class="hljs-built_in">any</span>;
+}
+</code></pre>
+<p>And now you can use <code>$('something').foo({whateverYouWant:'hello jquery plugin'})</code></p>

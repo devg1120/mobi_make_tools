@@ -1,0 +1,23 @@
+<h2 id="supported-module-types">Supported Module Types<a href="#supported-module-types" aria-hidden="true"><span class="icon icon-link"></span></a></h2>
+<p>webpack supports modules written in a variety of languages and preprocessors, via <em>loaders</em>. <em>Loaders</em> describe to webpack <strong>how</strong> to process non-JavaScript <em>modules</em> and include these <em>dependencies</em> into your <em>bundles</em>.
+    The webpack community has built <em>loaders</em> for a wide variety of popular languages and language processors, including:</p>
+<ul>
+    <li><a href="http://coffeescript.org">CoffeeScript</a></li>
+    <li><a href="https://www.typescriptlang.org">TypeScript</a></li>
+    <li><a href="https://babeljs.io">ESNext (Babel)</a></li>
+    <li><a href="http://sass-lang.com">Sass</a></li>
+    <li><a href="http://lesscss.org">Less</a></li>
+    <li><a href="http://stylus-lang.com">Stylus</a></li>
+    <li><a href="https://elm-lang.org/">Elm</a></li>
+</ul>
+<p>And many others! Overall, webpack provides a powerful and rich API for customization that allows one to use webpack for <strong>any stack</strong>, while staying <strong>non-opinionated</strong> about your development, testing, and production workflows.</p>
+<p>For a full list, see <a href="/loaders"><strong>the list of loaders</strong></a> or <a href="/api/loaders"><strong>write your own</strong></a>.</p>
+<h1 id="module-resolution">Module Resolution<a href="#module-resolution" aria-hidden="true"><span class="icon icon-link"></span></a></h1>
+<p>A resolver is a library which helps in locating a module by its absolute path.
+    A module can be required as a dependency from another module as:</p>
+<pre><code class="hljs language-js"><span class="token keyword">import</span> foo <span class="token keyword">from</span> <span class="token string">&apos;path/to/module&apos;</span><span class="token punctuation">;</span>
+<span class="token comment">// or</span>
+<span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;path/to/module&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>The dependency module can be from the application code or a third-party library. The resolver helps
+    webpack find the module code that needs to be included in the bundle for every such <code>require</code>/<code>import</code> statement.
+    webpack uses <a href="https://github.com/webpack/enhanced-resolve">enhanced-resolve</a> to resolve file paths while bundling modules.</p>

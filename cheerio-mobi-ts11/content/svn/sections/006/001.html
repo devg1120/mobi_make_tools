@@ -1,0 +1,63 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>What's a Branch?</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts10/undefined" />
+  </head>
+   <body>
+<div class="sect1">
+    <div class="titlepage">
+        <div>
+            <div>
+                <h2 class="title" style="clear: both"><a id="svn.branchmerge.whatis"></a>What&apos;s a Branch?</h2>
+            </div>
+        </div>
+    </div>
+    <p>Suppose it&apos;s your job to maintain a document for a division
+        in your company&#x2014;a handbook of some sort. One day a different
+        division asks you for the same handbook, but with a few parts
+        <span class="quote">&#x201C;<span class="quote">tweaked</span>&#x201D;</span> for them, since they do things slightly
+        differently.</p>
+    <p>What do you do in this situation? You do the obvious: make
+        a second copy of your document and begin maintaining the two
+        copies separately. As each department asks you to make small
+        changes, you incorporate them into one copy or the other.</p>
+    <p>You often want to make the same change to both copies. For
+        example, if you discover a typo in the first copy, it&apos;s very
+        likely that the same typo exists in the second copy. The two
+        documents are almost the same, after all; they differ only in
+        small, specific ways.</p>
+    <p>
+        This is the basic concept of a branch&#x2014;namely,
+        a line of development that exists independently of another line,
+        yet still shares a common history if you look far enough back in
+        time. A branch always begins life as a copy of something, and
+        moves on from there, generating its own history (see
+        ).</p>
+    <div class="figure">
+        <a id="svn.branchmerge.whatis.dia-1"></a>
+        <p class="title">
+            <strong>Figure&#xA0;4.1.&#xA0;Branches of development</strong>
+        </p>
+        <div class="figure-contents">
+            <div>
+                <img src="/home/admin/es2015/cheerio-mobi-ts10/content/svn/processed_images/ch04dia1-grayscale.gif" alt="Branches of development">
+            </div>
+        </div>
+    </div>
+    <br class="figure-break">
+    <p>Subversion has commands to help you maintain parallel
+        branches of your files and directories. It allows you to create
+        branches by copying your data, and remembers that the copies are
+        related to one another. It also helps you duplicate changes
+        from one branch to another. Finally, it can make portions of
+        your working copy reflect different branches so that you can
+        <span class="quote">&#x201C;<span class="quote">mix and match</span>&#x201D;</span> different lines of development in
+        your daily work.</p>
+</div>
+</body>
+</html>

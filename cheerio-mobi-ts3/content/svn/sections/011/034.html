@@ -1,0 +1,158 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svn switch (sw)</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/tmp/es2015/cheerio-mobi-ts3/css/kindle.css" />
+  </head>
+   <body>
+    <div class="refentry">
+      <a id="svn.ref.svn.c.switch"></a>
+      <div class="titlepage"></div>
+      <a id="idm11406" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svn switch (sw) — Update working copy to a different URL.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm11413"></a>
+        <h2>Synopsis</h2>
+        <p>
+          <code class="literal">svn switch URL[@PEGREV] [PATH]</code>
+        </p>
+        <p>
+          <code class="literal">switch --relocate FROM TO [PATH...]</code>
+        </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm11419"></a>
+        <h2>Description</h2>
+        <p>The first variant of this subcommand (without the
+            <code class="option">--relocate</code> option) updates your working
+            copy to point to a new URL.  This is the Subversion way to
+            make a working copy begin tracking a new branch.  If
+            specified, <em class="replaceable"><code>PEGREV</code></em> determines in
+            which revision the target is first looked up.  See
+            <a class="xref" href="svn.branchmerge.switchwc.html" title="Traversing Branches">the section called “Traversing Branches”</a> for an in-depth
+            look at switching.</p>
+        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Note">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Note]" src="images/note.png">
+              </td>
+              <th align="left">Note</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>Beginning with Subversion 1.7, the <span class="command"><strong>svn
+              switch</strong></span> command will demand by default that the
+              URL to which you are switching your working copy shares
+              a common ancestry with item that the working copy
+              currently reflects.  You can override this behavior by
+              specifying the <code class="option">--ignore-ancestry</code>
+              option.</p>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <p>If <code class="option">--force</code> is used, unversioned
+            obstructing paths in the working copy do not automatically
+            cause a failure if the switch attempts to add the same
+            path.  If the obstructing path is the same type (file or
+            directory) as the corresponding path in the repository, it
+            becomes versioned but its contents are left untouched in
+            the working copy.  This means that an obstructing
+            directory's unversioned children may also obstruct and
+            become versioned.  For files, any content differences
+            between the obstruction and the repository are treated
+            like a local modification to the working copy.  All
+            properties from the repository are applied to the
+            obstructing path.</p>
+        <p>As with most subcommands, you can limit the scope of
+            the switch operation to a particular tree depth using the
+            <code class="option">--depth</code> option.  Alternatively, you can
+            use the <code class="option">--set-depth</code> option to set a new
+            <span class="quote">“<span class="quote">sticky</span>”</span> working copy depth on the switch
+            target.</p>
+        <p>The <code class="option">--relocate</code> option is deprecated
+            as of Subversion 1.7.  Use <span class="command"><strong>svn relocate</strong></span>
+            (described in <a class="xref" href="svn.ref.svn.c.relocate.html" title="svn relocate">svn relocate</a>)
+            to perform working copy relocation instead.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm11439"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+          <pre class="screen">
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.accept"><code class="option">--accept</code> <em class="replaceable"><code>ACTION</code></em></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.depth"><code class="option">--depth</code> <em class="replaceable"><code>ARG</code></em></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.diff3_cmd"><code class="option">--diff3-cmd</code> <em class="replaceable"><code>CMD</code></em></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.force"><code class="option">--force</code></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.ignore_ancestry"><code class="option">--ignore-ancestry</code></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.ignore_externals"><code class="option">--ignore-externals</code></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.quiet"><code class="option">--quiet</code> (<code class="option">-q</code>)</a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.relocate"><code class="option">--relocate</code></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.revision"><code class="option">--revision</code> (<code class="option">-r</code>) <em class="replaceable"><code>REV</code></em></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.set_depth"><code class="option">--set-depth</code> <em class="replaceable"><code>ARG</code></em></a>
+</pre>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm11453"></a>
+        <h2>Examples</h2>
+        <p>If you're currently inside the directory
+            <code class="filename">vendors</code>, which was branched to
+            <code class="filename">vendors-with-fix</code>, and you'd like to
+            switch your working copy to that branch:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn switch http://svn.red-bean.com/repos/branches/vendors-with-fix .
+U    myproj/foo.txt
+U    myproj/bar.txt
+U    myproj/baz.c
+U    myproj/qux.c
+Updated to revision 31.
+</pre>
+        </div>
+        <p>To switch back, just provide the URL to the
+            location in the repository from which you originally
+            checked out your working copy:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn switch http://svn.red-bean.com/repos/trunk/vendors .
+U    myproj/foo.txt
+U    myproj/bar.txt
+U    myproj/baz.c
+U    myproj/qux.c
+Updated to revision 31.
+</pre>
+        </div>
+        <div class="tip" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Tip">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Tip]" src="images/tip.png">
+              </td>
+              <th align="left">Tip</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>You <span class="emphasis"><em>can</em></span> switch just part of
+              your working copy to a branch if you don't want to
+              switch your entire working copy, but this is not
+              generally recommended.  It's too easy to forget that
+              you've done this and wind up accidentally making and
+              committing changes both to the switched and unswitched
+              portions of your tree.</p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

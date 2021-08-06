@@ -1,0 +1,44 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Getting Started
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts14/undefined" />
+  </head>
+   <body>
+<ul>
+    <li><a href="#getting-started-with-typescript">Getting Started with TypeScript</a></li>
+    <li><a href="#typescript-version">TypeScript Version</a></li>
+</ul>
+<h1 id="getting-started-with-typescript">Getting Started With TypeScript</h1>
+<p>TypeScript compiles into JavaScript. JavaScript is what you are actually going to execute (either in the browser or on the server). So you are going to need the following:</p>
+<ul>
+    <li>TypeScript compiler (OSS available <a href="https://github.com/Microsoft/TypeScript/" target="_blank">in source</a> and on <a href="https://www.npmjs.com/package/typescript" target="_blank">NPM</a>)</li>
+    <li>A TypeScript editor (you can use notepad if you want but I use <a href="https://code.visualstudio.com/" target="_blank">vscode &#x1F339;</a> with an <a href="https://marketplace.visualstudio.com/items?itemName=basarat.god" target="_blank">extension I wrote</a>. Also <a href="https://github.com/Microsoft/TypeScript/wiki/TypeScript-Editor-Support" target="_blank">lots of other IDES support it as well</a>)</li>
+</ul>
+<h2 id="typescript-version">TypeScript Version</h2>
+<p>Instead of using the <em>stable</em> TypeScript compiler we will be presenting a lot of new stuff in this book that may not be associated with a version number yet. I generally recommend people to use the nightly version because <strong>the compiler test suite only catches more bugs over time</strong>.</p>
+<p>You can install it on the command line as</p>
+<pre><code>npm install -g typescript@next
+</code></pre>
+<p>And now the command line <code>tsc</code> will be the latest and greatest. Various IDEs support it too, e.g.</p>
+<ul>
+    <li>You can ask vscode to use this version by creating <code>.vscode/settings.json</code> with the following contents:</li>
+</ul>
+<pre><code class="lang-json">{
+  <span class="hljs-string">&quot;typescript.tsdk&quot;</span>: <span class="hljs-string">&quot;./node_modules/typescript/lib&quot;</span>
+}
+</code></pre>
+<h2 id="getting-the-source-code">Getting the Source Code</h2>
+<p>The source for this book is available in the books github repository <a href="https://github.com/basarat/typescript-book/tree/master/code" target="_blank">https://github.com/basarat/typescript-book/tree/master/code</a> most of the code samples can be copied into vscode and you can play with them as is. For code samples that need additional setup (e.g. npm modules), we will link you to the code sample before presenting the code. e.g.</p>
+<p><code>this/will/be/the/link/to/the/code.ts</code></p>
+<pre><code class="lang-ts"><span class="hljs-comment">// This will be the code under discussion</span>
+</code></pre>
+<p>With a dev setup out of the way let&apos;s jump into TypeScript syntax.</p>
+</body>
+</html>

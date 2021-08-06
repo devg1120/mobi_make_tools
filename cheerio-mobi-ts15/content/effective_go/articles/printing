@@ -1,0 +1,174 @@
+<body><p>
+Formatted printing in Go uses a style similar to C's <code>printf</code>
+family but is richer and more general. The functions live in the <code>fmt</code>
+package and have capitalized names: <code>fmt.Printf</code>, <code>fmt.Fprintf</code>,
+<code>fmt.Sprintf</code> and so on.  The string functions (<code>Sprintf</code> etc.)
+return a string rather than filling in a provided buffer.
+</p><p>
+You don't need to provide a format string.  For each of <code>Printf</code>,
+<code>Fprintf</code> and <code>Sprintf</code> there is another pair
+of functions, for instance <code>Print</code> and <code>Println</code>.
+These functions do not take a format string but instead generate a default
+format for each argument. The <code>Println</code> versions also insert a blank
+between arguments and append a newline to the output while
+the <code>Print</code> versions add blanks only if the operand on neither side is a string.
+In this example each line produces the same output.
+</p><pre>
+fmt.Printf("Hello %d\n", 23)
+fmt.Fprint(os.Stdout, "Hello ", 23, "\n")
+fmt.Println("Hello", 23)
+fmt.Println(fmt.Sprint("Hello ", 23))
+</pre><p>
+The formatted print functions <code>fmt.Fprint</code>
+and friends take as a first argument any object
+that implements the <code>io.Writer</code> interface; the variables <code>os.Stdout</code>
+and <code>os.Stderr</code> are familiar instances.
+</p><p>
+Here things start to diverge from C.  First, the numeric formats such as <code>%d</code>
+do not take flags for signedness or size; instead, the printing routines use the
+type of the argument to decide these properties.
+</p><pre>
+var x uint64 = 1<<64 - 1
+fmt.Printf("%d %x; %d %x\n", x, x, int64(x), int64(x))
+</pre><p>
+prints
+</p><pre>
+18446744073709551615 ffffffffffffffff; -1 -1
+</pre><p>
+If you just want the default conversion, such as decimal for integers, you can use
+the catchall format <code>%v</code> (for “value”); the result is exactly
+what <code>Print</code> and <code>Println</code> would produce.
+Moreover, that format can print <em>any</em> value, even arrays, slices, structs, and
+maps.  Here is a print statement for the time zone map defined in the previous section.
+</p><pre>
+fmt.Printf("%v\n", timeZone)  // or just fmt.Println(timeZone)
+</pre><p>
+which gives output:
+</p><pre>
+map[CST:-21600 EST:-18000 MST:-25200 PST:-28800 UTC:0]
+</pre><p>
+For maps, <code>Printf</code> and friends sort the output lexicographically by key.
+</p><p>
+When printing a struct, the modified format <code>%+v</code> annotates the
+fields of the structure with their names, and for any value the alternate
+format <code>%#v</code> prints the value in full Go syntax.
+</p><pre>
+type T struct {
+    a int
+    b float64
+    c string
+}
+t := &T{ 7, -2.35, "abc\tdef" }
+fmt.Printf("%v\n", t)
+fmt.Printf("%+v\n", t)
+fmt.Printf("%#v\n", t)
+fmt.Printf("%#v\n", timeZone)
+</pre><p>
+prints
+</p><pre>
+&{7 -2.35 abc   def}
+&{a:7 b:-2.35 c:abc     def}
+&main.T{a:7, b:-2.35, c:"abc\tdef"}
+map[string]int{"CST":-21600, "EST":-18000, "MST":-25200, "PST":-28800, "UTC":0}
+</pre><p>
+(Note the ampersands.)
+That quoted string format is also available through <code>%q</code> when
+applied to a value of type <code>string</code> or <code>[]byte</code>.
+The alternate format <code>%#q</code> will use backquotes instead if possible.
+(The <code>%q</code> format also applies to integers and runes, producing a
+single-quoted rune constant.)
+Also, <code>%x</code> works on strings, byte arrays and byte slices as well as
+on integers, generating a long hexadecimal string, and with
+a space in the format (<code>% x</code>) it puts spaces between the bytes.
+</p><p>
+Another handy format is <code>%T</code>, which prints the <em>type</em> of a value.
+</p><pre>
+fmt.Printf("%T\n", timeZone)
+</pre><p>
+prints
+</p><pre>
+map[string]int
+</pre><p>
+If you want to control the default format for a custom type, all that's required is to define
+a method with the signature <code>String() string</code> on the type.
+For our simple type <code>T</code>, that might look like this.
+</p><pre>
+func (t *T) String() string {
+    return fmt.Sprintf("%d/%g/%q", t.a, t.b, t.c)
+}
+fmt.Printf("%v\n", t)
+</pre><p>
+to print in the format
+</p><pre>
+7/-2.35/"abc\tdef"
+</pre><p>
+(If you need to print <em>values</em> of type <code>T</code> as well as pointers to <code>T</code>,
+the receiver for <code>String</code> must be of value type; this example used a pointer because
+that's more efficient and idiomatic for struct types.
+See the section below on [<a>pointers vs. value receivers</a>] for more information.)
+</p><p>
+Our <code>String</code> method is able to call <code>Sprintf</code> because the
+print routines are fully reentrant and can be wrapped this way.
+There is one important detail to understand about this approach,
+however: don't construct a <code>String</code> method by calling
+<code>Sprintf</code> in a way that will recur into your <code>String</code>
+method indefinitely.  This can happen if the <code>Sprintf</code>
+call attempts to print the receiver directly as a string, which in
+turn will invoke the method again.  It's a common and easy mistake
+to make, as this example shows.
+</p><pre>
+type MyString string
+
+func (m MyString) String() string {
+    return fmt.Sprintf("MyString=%s", m) // Error: will recur forever.
+}
+</pre><p>
+It's also easy to fix: convert the argument to the basic string type, which does not have the
+method.
+</p><pre>
+type MyString string
+func (m MyString) String() string {
+    return fmt.Sprintf("MyString=%s", string(m)) // OK: note conversion.
+}
+</pre><p>
+In the [<a>initialization section</a>] we'll see another technique that avoids this recursion.
+</p><p>
+Another printing technique is to pass a print routine's arguments directly to another such routine.
+The signature of <code>Printf</code> uses the type <code>...interface{}</code>
+for its final argument to specify that an arbitrary number of parameters (of arbitrary type)
+can appear after the format.
+</p><pre>
+func Printf(format string, v ...interface{}) (n int, err error) {
+</pre><p>
+Within the function <code>Printf</code>, <code>v</code> acts like a variable of type
+<code>[]interface{}</code> but if it is passed to another variadic function, it acts like
+a regular list of arguments.
+Here is the implementation of the
+function <code>log.Println</code> we used above. It passes its arguments directly to
+<code>fmt.Sprintln</code> for the actual formatting.
+</p><pre>
+// Println prints to the standard logger in the manner of fmt.Println.
+func Println(v ...interface{}) {
+    std.Output(2, fmt.Sprintln(v...))  // Output takes parameters (int, string)
+}
+</pre><p>
+We write <code>...</code> after <code>v</code> in the nested call to <code>Sprintln</code> to tell the
+compiler to treat <code>v</code> as a list of arguments; otherwise it would just pass
+<code>v</code> as a single slice argument.
+</p><p>
+There's even more to printing than we've covered here.  See the <code>godoc</code> documentation
+for package <code>fmt</code> for the details.
+</p><p>
+By the way, a <code>...</code> parameter can be of a specific type, for instance <code>...int</code>
+for a min function that chooses the least of a list of integers:
+</p><pre>
+func Min(a ...int) int {
+    min := int(^uint(0) >> 1)  // largest int
+    for _, i := range a {
+        if i < min {
+            min = i
+        }
+    }
+    return min
+}
+</pre></body>

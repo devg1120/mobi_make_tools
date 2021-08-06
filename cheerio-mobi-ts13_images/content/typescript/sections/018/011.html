@@ -1,0 +1,48 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Binder Declarations
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts13_images/undefined" />
+  </head>
+   <body>
+<h3 id="symbols-and-declarations">Symbols and Declarations</h3>
+<p>Linking between a <code>node</code> and a <code>symbol</code> is performed by a few functions. One function that is used to bind the <code>SourceFile</code> node to the source file Symbol (in case of an external module) is the <code>addDeclarationToSymbol</code> function</p>
+<p>Note : the <code>Symbol</code> for an external module source file is setup as <code>flags : SymbolFlags.ValueModule</code> and <code>name: &apos;&quot;&apos; + removeFileExtension(file.fileName) + &apos;&quot;&apos;</code>).</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">addDeclarationToSymbol</span>(<span class="hljs-params">symbol: Symbol, node: Declaration, symbolFlags: SymbolFlags</span>) </span>{
+    symbol.flags |= symbolFlags;
+    node.symbol = symbol;
+    <span class="hljs-keyword">if</span> (!symbol.declarations) {
+        symbol.declarations = [];
+    }
+    symbol.declarations.push(node);
+    <span class="hljs-keyword">if</span> (symbolFlags &amp; SymbolFlags.HasExports &amp;&amp; !symbol.exports) {
+        symbol.exports = {};
+    }
+    <span class="hljs-keyword">if</span> (symbolFlags &amp; SymbolFlags.HasMembers &amp;&amp; !symbol.members) {
+        symbol.members = {};
+    }
+    <span class="hljs-keyword">if</span> (symbolFlags &amp; SymbolFlags.Value &amp;&amp; !symbol.valueDeclaration) {
+        symbol.valueDeclaration = node;
+    }
+}
+</code></pre>
+<p>The important linking portions:</p>
+<ul>
+    <li>Creates a link to the Symbol from the AST node (<code>node.symbol</code>).</li>
+    <li>Adds the node as <em>one of</em> the declarations of the Symbol (<code>symbol.declarations</code>).</li>
+</ul>
+<h4 id="declaration">Declaration</h4>
+<p>Declaration is just a <code>node</code> with an optional name. In <code>types.ts</code></p>
+<pre><code class="lang-ts"><span class="hljs-keyword">interface</span> Declaration <span class="hljs-keyword">extends</span> Node {
+    _declarationBrand: <span class="hljs-built_in">any</span>;
+    name?: DeclarationName;
+}
+</code></pre>
+</body>
+</html>

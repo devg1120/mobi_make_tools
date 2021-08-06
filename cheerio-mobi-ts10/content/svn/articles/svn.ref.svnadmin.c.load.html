@@ -1,0 +1,85 @@
+<div class="refentry">
+    <a id="svn.ref.svnadmin.c.load"></a>
+    <div class="titlepage"></div>
+    <a id="idm12027" class="indexterm"></a>
+    <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svnadmin load — Read a
+            repository dump stream from
+            <code class="filename">stdin</code>.</p>
+    </div>
+    <div class="refsect1">
+        <a id="idm12035"></a>
+        <h2>Synopsis</h2>
+        <p>
+            <code class="literal">svnadmin load REPOS_PATH</code>
+        </p>
+    </div>
+    <div class="refsect1">
+        <a id="idm12039"></a>
+        <h2>Description</h2>
+        <p>Read a repository dump stream from
+            <code class="filename">stdin</code>, committing new revisions into the repository's
+            filesystem. Send progress feedback to <code class="filename">stdout</code>.</p>
+    </div>
+    <div class="refsect1">
+        <a id="idm12044"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+            <pre class="screen">
+<a class="xref" href="svn.ref.svnadmin.html#svn.ref.svnadmin.sw.bypass_prop_validation"><code class="option">--bypass-prop-validation</code></a>
+<a class="xref" href="svn.ref.svnadmin.html#svn.ref.svnadmin.sw.force_uuid"><code class="option">--force-uuid</code></a>
+<a class="xref" href="svn.ref.svnadmin.html#svn.ref.svnadmin.sw.ignore_uuid"><code class="option">--ignore-uuid</code></a>
+<a class="xref" href="svn.ref.svnadmin.html#svn.ref.svnadmin.sw.memory_cache_size"><code class="option">--memory-cache-size</code> (<code class="option">-M</code>) <em class="replaceable"><code>ARG</code></em></a>
+<a class="xref" href="svn.ref.svnadmin.html#svn.ref.svnadmin.sw.parent_dir"><code class="option">--parent-dir</code> <em class="replaceable"><code>DIR</code></em></a>
+<a class="xref" href="svn.ref.svnadmin.html#svn.ref.svnadmin.sw.quiet"><code class="option">--quiet</code> (<code class="option">-q</code>)</a>
+<a class="xref" href="svn.ref.svnadmin.html#svn.ref.svnadmin.sw.use_post_commit_hook"><code class="option">--use-post-commit-hook</code></a>
+<a class="xref" href="svn.ref.svnadmin.html#svn.ref.svnadmin.sw.use_pre_commit_hook"><code class="option">--use-pre-commit-hook</code></a>
+</pre>
+        </div>
+    </div>
+    <div class="refsect1">
+        <a id="idm12056"></a>
+        <h2>Examples</h2>
+        <p>This shows the beginning of loading a repository from
+            a backup file (made, of course, with <span class="command"><strong>svnadmin
+                    dump</strong></span>):</p>
+        <div class="informalexample">
+            <pre class="screen">
+$ svnadmin load /var/svn/restored < repos-backup
+<<< Started new txn, based on original revision 1
+     * adding path : test ... done.
+     * adding path : test/a ... done.
+…
+</pre>
+        </div>
+        <p>Or if you want to load into a subdirectory:</p>
+        <div class="informalexample">
+            <pre class="screen">
+$ svnadmin load --parent-dir new/subdir/for/project \
+                /var/svn/restored < repos-backup
+<<< Started new txn, based on original revision 1
+     * adding path : test ... done.
+     * adding path : test/a ... done.
+…
+</pre>
+        </div>
+        <p>Newer versions of Subversion have grown more strict
+            regarding the format of the values of Subversion's own
+            built-in properties. Of course, properties created with
+            older versions of Subversion wouldn't have benefitted from
+            that strictness, and as such might be improperly
+            formatted. Dump streams carry property values as-is, so
+            using Subversion 1.7 to load dump streams created from
+            repositories with ill-formatted property values will, by
+            default, trigger a validation error. There are several
+            workaround for this problem. First, you can manually
+            repair the problematic property values in the source
+            repository and recreate the dump stream. Or, you can
+            manually tweak the dump stream itself to fix those
+            property values. Finally, if you'd rather not deal with
+            the problem right now, use the
+            <code class="option">--bypass-prop-validation</code> option
+            with <span class="command"><strong>svnadmin load</strong></span>.</p>
+    </div>
+</div>

@@ -1,0 +1,79 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Scanner
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts12_mlv/undefined" />
+  </head>
+   <body>
+<h2 id="scanner">Scanner</h2>
+<p>The source code for the TypeScript scanner is located entirely in <code>scanner.ts</code>. Scanner is <em>controlled</em> internally by the <code>Parser</code> to convert the source code to an AST. Here is what the desired outcome is.</p>
+<pre><code>SourceCode ~~ scanner ~~&gt; Token Stream ~~ parser ~~&gt; AST
+</code></pre>
+<h3 id="usage-by-parser">Usage by Parser</h3>
+<p>There is a <em>singleton</em> <code>scanner</code> created in <code>parser.ts</code> to avoid the cost of creating scanners over and over again. This scanner is then <em>primed</em> by the parser on demand using the <code>initializeState</code> function.</p>
+<p>Here is a <em>simplied</em> version of the actual code in the parser that you can run demonstrating this concept:</p>
+<p><code>code/compiler/scanner/runScanner.ts</code></p>
+<pre><code class="lang-ts"><span class="hljs-keyword">import</span> * as ts from <span class="hljs-string">&quot;ntypescript&quot;</span>;
+<span class="hljs-comment">// TypeScript has a singelton scanner</span>
+<span class="hljs-keyword">const</span> scanner = ts.createScanner(ts.ScriptTarget.Latest, <span class="hljs-comment">/*skipTrivia*/</span> <span class="hljs-literal">true</span>);
+<span class="hljs-comment">// That is initialized using a function `initializeState` similar to</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">initializeState</span>(<span class="hljs-params">text: <span class="hljs-built_in">string</span></span>) </span>{
+    scanner.setText(text);
+    scanner.setOnError((message: ts.DiagnosticMessage, length: <span class="hljs-built_in">number</span>) =&gt; {
+        <span class="hljs-built_in">console</span>.error(message);
+    });
+    scanner.setScriptTarget(ts.ScriptTarget.ES5);
+    scanner.setLanguageVariant(ts.LanguageVariant.Standard);
+}
+<span class="hljs-comment">// Sample usage</span>
+initializeState(<span class="hljs-string">`
+var foo = 123;
+`</span>.trim());
+<span class="hljs-comment">// Start the scanning</span>
+<span class="hljs-keyword">var</span> token = scanner.scan();
+<span class="hljs-keyword">while</span> (token != ts.SyntaxKind.EndOfFileToken) {
+    <span class="hljs-built_in">console</span>.log(ts.formatSyntaxKind(token));
+    token = scanner.scan();
+}
+</code></pre>
+<p>This will print out the following :</p>
+<pre><code>VarKeyword
+Identifier
+FirstAssignment
+FirstLiteralToken
+SemicolonToken
+</code></pre>
+<h3 id="scanner-state">Scanner State</h3>
+<p>After you call <code>scan</code> the scanner updates its local state (position in the scan, current token details etc). The scanner provides a bunch of utility functions to get the current scanner state. In the below sample we create a scanner and then use it to identify the tokens as well as their positions in the code.</p>
+<p><code>code/compiler/scanner/runScannerWithPosition.ts</code></p>
+<pre><code class="lang-ts"><span class="hljs-comment">// Sample usage</span>
+initializeState(<span class="hljs-string">`
+var foo = 123;
+`</span>.trim());
+<span class="hljs-comment">// Start the scanning</span>
+<span class="hljs-keyword">var</span> token = scanner.scan();
+<span class="hljs-keyword">while</span> (token != ts.SyntaxKind.EndOfFileToken) {
+    <span class="hljs-keyword">let</span> currentToken = ts.formatSyntaxKind(token);
+    <span class="hljs-keyword">let</span> tokenStart = scanner.getStartPos();
+    token = scanner.scan();
+    <span class="hljs-keyword">let</span> tokenEnd = scanner.getStartPos();
+    <span class="hljs-built_in">console</span>.log(currentToken, tokenStart, tokenEnd);
+}
+</code></pre>
+<p>This will print out the following:</p>
+<pre><code>VarKeyword 0 3
+Identifier 3 7
+FirstAssignment 7 9
+FirstLiteralToken 9 13
+SemicolonToken 13 14
+</code></pre>
+<h3 id="standalone-scanner">Standalone scanner</h3>
+<p>Even though the TypeScript parser has a singleton scanner you can create a standalone scanner using <code>createScanner</code> and use its <code>setText</code>/<code>setTextPos</code> to scan at different points in a file for your amusement.</p>
+</body>
+</html>

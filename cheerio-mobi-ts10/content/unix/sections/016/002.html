@@ -1,0 +1,121 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Choosing an Editor</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts10/undefined" />
+  </head>
+   <body>
+<div class="sect1" lang="en">
+    <div class="titlepage">
+        <div>
+            <h2 class="title" style="clear: both"><a id="id2980633">Choosing an Editor</a></h2>
+        </div>
+    </div>
+    <p>The first and most basic tool of development is a text editor
+        suitable for modifying and writing programs.</p>
+    <p>Literally dozens of text editors are available under Unix;
+        writing one seems to be one of the standard finger exercises for
+        budding open-source
+        hackers</p>
+    <p>For serious editing work, two editors completely dominate the
+        Unix programming scene. Each is available in a couple of minor variant
+        implementations, but has a standard version you can rely on finding on
+        any modern Unix system. These two editors are
+        <i>vi</i> and <i>Emacs</i>.
+        We discussed them in <a href="complexitychapter.html" title="Chapter&#xFFFD;13.&#xFFFD;Complexity">Chapter&#xFFFD;13</a> as part of our discussion of the right
+        size of software.</p>
+    <p>As we noted in <a href="complexitychapter.html" title="Chapter&#xFFFD;13.&#xFFFD;Complexity">Chapter&#xFFFD;13</a>, these two editors express sharply
+        contrasting design philosophies, but both are extremely popular and
+        command great loyalty from identifiable core user populations. Surveys
+        of Unix programmers consistently indicate about a 50/50 split between
+        them, with all other editors barely registering.</p>
+    <p>In our earlier examinations of <i>vi</i> and
+        <i>Emacs</i>, we were primarily concerned with
+        their optional complexity and the surrounding design-philosophy issues.
+        Many other things are worth knowing about these editors, both as a
+        matter of practicality and of Unix cultural literacy.</p>
+    <div class="sect2" lang="en">
+        <div class="titlepage">
+            <div>
+                <h3 class="title"><a id="vi_literacy">Useful Things to Know about <i>vi</i></a></h3>
+            </div>
+        </div>
+    </div>
+    <div class="sect2" lang="en">
+        <div class="titlepage">
+            <div>
+                <h3 class="title"><a id="id2979540">Useful Things to Know about Emacs</a></h3>
+            </div>
+        </div>
+        <p><i>Emacs</i> stands for &#x2018;EDiting
+            MACroS&#x2019; (pronounce it <span class="phonetic">/ee&#xFFFD;&#xFFFD;maks/</span>). It was originally
+            written in the late 1970s as a set of macros in an editor called TECO,
+            then reimplemented several times in different ways. In an amusing
+            twist, modern Emacs implementations include a TECO emulation
+            mode.</p>
+        <p>In our earlier discussion of editors and optional complexity, we
+            noted that many people consider Emacs
+            excessively heavyweight. However, investing the time to learn it can
+            yield rich rewards in productivity. Emacs
+            supports many powerful editing modes that offer help with the syntax
+            of various programming languages and markups. We&apos;ll see later in this
+            chapter how Emacs can be used in
+            combination with other development tools to give capabilities
+            comparable to (and in many ways surpassing) those of conventional
+            IDEs.</p>
+        <p>The standard Emacs, universally
+            available on modern Unixes, is <i>GNU Emacs</i>;
+            this is what generally runs if you type <b>emacs</b> to a
+            Unix shell prompt. GNU Emacs sources and documentation are available
+            at the <a href="ftp://gnu.org/pub/gnu" target="_top">Free Software Foundation
+                archive site</a></p>
+        <p>The only major variant is called
+            <i>XEmacs</i>; it has a better X interface but
+            otherwise quite similar capabilities (it forked from Emacs
+            19). <i>XEmacs</i> has a <a href="http://www.xemacs.org" target="_top">home page</a>.
+            Emacs (and Emacs Lisp) is universally
+            available under modern Unixes. It has been ported to MS-DOS (where it
+            works poorly) and Windows 95 and NT (where it is said to work
+            reasonably well).</p>
+        <p>Emacs includes its own interactive
+            tutorial and very complete on-line documentation; you&apos;ll find
+            instructions on how to invoke both on the default
+            Emacs startup screen. A good introduction
+            on paper is <i>Learning GNU Emacs</i> [<a href="apb.html#Cameron" title="[Cameron]">Cameron</a>].</p>
+        <p>The keystroke commands used in the Unix ports of
+            Netscape/Mozilla and Internet Explorer text windows (in forms and the
+            mailer) are copied from the stock Emacs
+            bindings for basic text editing. These bindings are the closest thing
+            to a cross-platform standard for editor keystrokes.</p>
+    </div>
+    <div class="sect2" lang="en">
+        <div class="titlepage">
+            <div>
+                <h3 class="title"><a id="id2979678">The Antireligious Choice: Using Both</a></h3>
+            </div>
+        </div>
+        <p>Many people who regularly use both <i>vi</i> and
+            Emacs tend to use them for different
+            things, and find it valuable to know both.</p>
+        <p>In general, <i>vi</i> is best for small jobs
+            &#x2014; quick replies to mail, simple tweaks to system configuration,
+            and the like. It is especially useful when you&apos;re using a new system
+            (or a remote one over a network) and don&apos;t have your
+            Emacs customization files handy.</p>
+        <p>Emacs comes into its own for extended
+            editing sessions in which you have to handle complex tasks, modify
+            multiple files, and use results from other programs during the
+            session. For programmers using X on their console (which is typical on
+            modern Unixes), it&apos;s normal to start up
+            Emacs shortly after login time in a large
+            window and leave it running forever, possibly visiting dozens of files
+            and even running programs in multiple Emacs
+            subwindows.</p>
+    </div>
+</div>
+</body>
+</html>

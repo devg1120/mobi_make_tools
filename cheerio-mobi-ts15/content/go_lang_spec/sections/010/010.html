@@ -1,0 +1,47 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Short variable declarations</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+A <i>short variable declaration</i> uses the syntax:
+</p><pre>
+[<a>ShortVarDecl</a>] = [<a>IdentifierList</a>] &quot;:=&quot; [<a>ExpressionList</a>] .
+</pre><p>
+It is shorthand for a regular [<a>variable declaration</a>]
+with initializer expressions but no types:
+</p><pre>
+&quot;var&quot; IdentifierList = ExpressionList .
+</pre><pre>
+i, j := 0, 10
+f := func() int { return 7 }
+ch := make(chan int)
+r, w, _ := os.Pipe()  // os.Pipe() returns a connected pair of Files and an error, if any
+_, y, _ := coord(p)   // coord() returns three values; only interested in y coordinate
+</pre><p>
+Unlike regular variable declarations, a short variable declaration may <i>redeclare</i>
+variables provided they were originally declared earlier in the same block
+(or the parameter lists if the block is the function body) with the same type,
+and at least one of the non-[<a>blank</a>] variables is new.
+As a consequence, redeclaration can only appear in a multi-variable short declaration.
+Redeclaration does not introduce a new variable; it just assigns a new value to the original.
+</p><pre>
+field1, offset := nextField(str, 0)
+field2, offset := nextField(str, offset)  // redeclares offset
+a, a := 1, 2                              // illegal: double declaration of a or no new variable if a was declared elsewhere
+</pre><p>
+Short variable declarations may appear only inside functions.
+In some contexts such as the initializers for
+[<a>&quot;if&quot;</a>],
+[<a>&quot;for&quot;</a>], or
+[<a>&quot;switch&quot;</a>] statements,
+they can be used to declare local temporary variables.
+</p></body>
+</body>
+</html>

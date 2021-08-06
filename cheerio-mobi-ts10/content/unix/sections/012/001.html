@@ -1,0 +1,87 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Applying the Rule of Least Surprise</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts10/undefined" />
+  </head>
+   <body>
+<div class="sect1" lang="en">
+    <div class="titlepage">
+        <div>
+            <h2 class="title" style="clear: both"><a id="id2952650">Applying the Rule of Least Surprise</a></h2>
+        </div>
+    </div>
+    <p>The Rule of Least Surprise is a general principle in the design
+        of all kinds of interfaces, not just software: &#x201C;Do the least
+        surprising thing&#x201D;. It&apos;s a consequence of the fact that human
+        beings can only pay attention to one thing at one time (see
+        <i>The Humane Interface</i> [<a href="apb.html#Raskin" title="[Raskin]">Raskin</a>]). Surprises in the interface focus
+        that single locus of attention on the interface, rather than on the
+        task where it belongs.</p>
+    <p>Thus, to design usable interfaces, it&apos;s best when possible not
+        to design an entire new interface model. Novelty is a barrier to
+        entry; it puts a learning burden on the user, so minimize it. Instead,
+        think carefully about the experience and knowledge of your user
+        base. Try to find functional similarities between your program and
+        programs they are likely to already know about. Then mimic the
+        relevant parts of the existing interfaces.</p>
+    <p>The Rule of Least Surprise should not be interpreted as a call
+        for mechanical conservatism in design. Novelty raises the cost of a
+        user&apos;s first few interactions with an interface, but poor design
+        will make the interface needlessly painful forever. As in other
+        sorts of design, rules are not a substitute for good taste and
+        engineering judgment. Consider your tradeoffs carefully &#x2014; and
+        consider them from the <span class="emphasis"><em>user&apos;s</em></span> point of view. The bias
+        implied by the Rule of Least Surprise is a good one to hold
+        consciously, mainly because interface designers (like other
+        programmers) have an unconscious tendency to be too clever for the
+        user&apos;s good.</p>
+    <p>One implication of the Rule of Least Surprise is this: Wherever
+        possible, allow the user to delegate interface functions to a familiar
+        program. We already observed in <a href="multiprogramchapter.html" title="Chapter&#xFFFD;7.&#xFFFD;Multiprogramming">Chapter&#xFFFD;7</a> that, if your program requires the
+        user to edit significant amounts of text, you should write it to call
+        an editor (specifiable by the user) rather than building in your own
+        integrated editor. This will enable the <span class="emphasis"><em>users</em></span>,
+        who know their preferences better than you, to choose the least
+        surprising alternative.</p>
+    <p>Elsewhere in this book we have advocated symbiosis and
+        delegation as tactics for promoting code reuse and minimizing
+        complexity. The point here is that when users can intercept the
+        delegation, and direct it to an agent of their own choice,
+        these techniques become not merely economical for the developer but
+        actively empowering to users.</p>
+    <p>Further: When you can&apos;t delegate, emulate. The purpose of the
+        Rule of Least Surprise is to reduce the amount of complexity a user
+        must absorb to use an interface. Continuing the editor example, this
+        means that if you must implement an embedded editor, it&apos;s best if the
+        editor commands are a subset of those for a well-known general-purpose
+        editor. (Or more than one. Both <i>bash</i> and
+        <i>ksh</i> have command-line editors that allow
+        the user to choose between <i>vi</i> and
+        <i>Emacs</i> editing styles.)</p>
+    <p>Under the Unix versions of the Netscape and Mozilla Web
+        browsers, for example, fill-in fields in forms recognize a subset of
+        the default bindings for the <i>Emacs</i>
+        editor. Control-A goes to start of line, Control-D deletes the next
+        character, and so forth. This choice helps people who know
+        <i>Emacs</i>, and leaves others no worse off than
+        an arbitrary, idiosyncratic command set would have. The only way it
+        could have been bettered was by choosing key bindings associated with
+        some editor significantly more widely used than
+        <i>Emacs</i>; and among Netscape&apos;s original user
+        population there was no such animal.</p>
+    <p>These principles can be applied in many other areas of interface
+        design. They suggest, for example, that it is deeply foolish to create
+        novel document formats for an on-line help system when users are
+        comfortable with an HTML Web browser. Or even that if you are
+        designing an arcade-style game, it is wise to look at the gesture sets
+        of previous games to see if you can give new users a feeling of
+        comfort by allowing them to transfer joystick skills learned in other
+        games.</p>
+</div>
+</body>
+</html>

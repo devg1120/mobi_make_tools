@@ -1,0 +1,29 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Expression statements</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+With the exception of specific built-in functions,
+function and method [<a>calls</a>] and
+[<a>receive operations</a>]
+can appear in statement context. Such statements may be parenthesized.
+</p><pre>
+[<a>ExpressionStmt</a>] = [<a>Expression</a>] .
+</pre><p>
+The following built-in functions are not permitted in statement context:
+</p><pre>
+append cap complex imag len make new real
+unsafe.Alignof unsafe.Offsetof unsafe.Sizeof
+</pre><pre>
+h(x+y)
+f.Close()
+<-ch (<-ch) len("foo") illegal if len is the built-in function < pre></-ch></pre></body>
+</body>
+</html>

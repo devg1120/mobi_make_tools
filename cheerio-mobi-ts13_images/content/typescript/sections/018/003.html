@@ -1,0 +1,43 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    TIP: Visit Children
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts13_images/undefined" />
+  </head>
+   <body>
+<h3 id="ast-tip-visit-children">AST Tip: Visit Children</h3>
+<p>There is a utility function <code>ts.forEachChild</code> that allows you to visit all the child nodes of any Node in the AST.</p>
+<p>Here is simplified snippet of the source code to demonstrate how it functions:</p>
+<pre><code class="lang-ts">
+export function forEachChild<t>(node: Node, cbNode: (node: Node) =&gt; T, cbNodeArray?: (nodes: Node[]) =&gt; T): T {
+        if (!node) {
+            return;
+        }
+        switch (node.kind) {
+            case SyntaxKind.BinaryExpression:
+                return visitNode(cbNode, (<binaryexpression>node).left) ||
+                    visitNode(cbNode, (<binaryexpression>node).operatorToken) ||
+                    visitNode(cbNode, (<binaryexpression>node).right);
+            case SyntaxKind.IfStatement:
+                return visitNode(cbNode, (<ifstatement>node).expression) ||
+                    visitNode(cbNode, (<ifstatement>node).thenStatement) ||
+                    visitNode(cbNode, (<ifstatement>node).elseStatement);
+            // .... lots more
+</ifstatement></ifstatement></ifstatement></binaryexpression></binaryexpression></binaryexpression></t></code></pre>
+<p>Basically, it checks <code>node.kind</code> and based on that assumes an interface offered by the <code>node</code> and calls the <code>cbNode</code> on the children. However, note that this function doesn&apos;t call <code>visitNode</code> for <em>all</em> children (e.g. SyntaxKind.SemicolonToken). If you want <em>all</em> the children of a node in the AST just call <code>.getChildren</code> member function of the <code>Node</code>.</p>
+<p>E.g. here is a function that prints the verbose <code>AST</code> of a node:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">printAllChildren</span>(<span class="hljs-params">node: ts.Node, depth = 0</span>) </span>{
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(depth+<span class="hljs-number">1</span>).join(<span class="hljs-string">&apos;----&apos;</span>), ts.syntaxKindToName(node.kind), node.pos, node.end);
+    depth++;
+    node.getChildren().forEach(c=&gt; printAllChildren(c, depth));
+}
+</code></pre>
+<p>We will see a sample usage of this function when we discuss the parser further.</p>
+</body>
+</html>

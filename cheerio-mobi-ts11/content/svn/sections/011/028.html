@@ -1,0 +1,145 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svn propset (pset, ps)</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts10/undefined" />
+  </head>
+   <body>
+<div class="refentry">
+    <a id="svn.ref.svn.c.propset"></a>
+    <div class="titlepage"></div>
+    <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svn propset (pset, ps) &#x2014; Set <em class="replaceable"><code>PROPNAME</code></em>
+            to <em class="replaceable"><code>PROPVAL</code></em> on files, directories,
+            or revisions.</p>
+    </div>
+    <div class="refsect1">
+        <a id="idm10877"></a>
+        <h2>Synopsis</h2>
+        <p>
+            <code class="literal">svn propset PROPNAME [PROPVAL | -F VALFILE] PATH...</code>
+        </p>
+        <p>
+            <code class="literal">svn propset PROPNAME --revprop -r REV [PROPVAL | -F VALFILE] [TARGET]</code>
+        </p>
+    </div>
+    <div class="refsect1">
+        <a id="idm10883"></a>
+        <h2>Description</h2>
+        <p>Set <em class="replaceable"><code>PROPNAME</code></em> to
+            <em class="replaceable"><code>PROPVAL</code></em> on files, directories,
+            or revisions. The first example creates a versioned, local
+            property change in the working copy, and the second
+            creates an unversioned, remote property change on a
+            repository revision
+            (<em class="replaceable"><code>TARGET</code></em> determines only which
+            repository to access).</p>
+        <div class="tip" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <table border="0" summary="Tip">
+                <tr>
+                    <td rowspan="2" align="center" valign="top" width="25">
+                        <img alt="[Tip]" src="/home/admin/es2015/cheerio-mobi-ts10/content/svn/processed_images/tip-grayscale.gif">
+                    </td>
+                    <th align="left">Tip</th>
+                </tr>
+                <tr>
+                    <td align="left" valign="top">
+                        <p>Subversion has a number of <span class="quote">&#x201C;<span class="quote">special</span>&#x201D;</span>
+                            properties that affect its behavior. See  later in this chapter for more on these
+                            properties.</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="refsect1">
+        <a id="idm10893"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+            <pre class="screen">
+</pre>
+        </div>
+    </div>
+    <div class="refsect1">
+        <a id="idm10907"></a>
+        <h2>Examples</h2>
+        <p>Set the MIME type for a file:</p>
+        <div class="informalexample">
+            <pre class="screen">
+$ svn propset svn:mime-type image/jpeg foo.jpg 
+property &apos;svn:mime-type&apos; set on &apos;foo.jpg&apos;
+</pre>
+        </div>
+        <p>On a Unix system, if you want a file to have the
+            executable permission set:</p>
+        <div class="informalexample">
+            <pre class="screen">
+$ svn propset svn:executable ON somescript
+property &apos;svn:executable&apos; set on &apos;somescript&apos;
+</pre>
+        </div>
+        <p>Perhaps you have an internal policy to set certain
+            properties for the benefit of your coworkers:</p>
+        <div class="informalexample">
+            <pre class="screen">
+$ svn propset owner sally foo.c
+property &apos;owner&apos; set on &apos;foo.c&apos;
+</pre>
+        </div>
+        <p>If you made a mistake in a log message for a
+            particular revision and want to change it, use
+            <code class="option">--revprop</code> and set <code class="literal">svn:log</code>
+            to the new log message:</p>
+        <div class="informalexample">
+            <pre class="screen">
+$ svn propset --revprop -r 25 svn:log &quot;Journaled about trip to New York.&quot;
+property &apos;svn:log&apos; set on repository revision &apos;25&apos;
+</pre>
+        </div>
+        <p>Or, if you don&apos;t have a working copy, you can
+            provide a URL:</p>
+        <div class="informalexample">
+            <pre class="screen">
+$ svn propset --revprop -r 26 svn:log &quot;Document nap.&quot; \
+              http://svn.red-bean.com/repos
+property &apos;svn:log&apos; set on repository revision &apos;25&apos;
+</pre>
+        </div>
+        <p>Lastly, you can tell <span class="command"><strong>propset</strong></span> to take its input from
+            a file. You could even use this to set the contents of a
+            property to something binary:</p>
+        <div class="informalexample">
+            <pre class="screen">
+$ svn propset owner-pic -F sally.jpg moo.c 
+property &apos;owner-pic&apos; set on &apos;moo.c&apos;
+</pre>
+        </div>
+        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <table border="0" summary="Note">
+                <tr>
+                    <td rowspan="2" align="center" valign="top" width="25">
+                        <img alt="[Note]" src="/home/admin/es2015/cheerio-mobi-ts10/content/svn/processed_images/note-grayscale.gif">
+                    </td>
+                    <th align="left">Note</th>
+                </tr>
+                <tr>
+                    <td align="left" valign="top">
+                        <p>By default, you cannot modify revision properties
+                            in a Subversion repository. Your repository
+                            administrator must explicitly enable revision property
+                            modifications by creating a hook named
+                            <code class="literal">pre-revprop-change</code>. See  for more information on
+                            hook scripts.</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

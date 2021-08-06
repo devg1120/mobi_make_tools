@@ -1,0 +1,24 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Multiple Entry Points</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts9/undefined" />
+  </head>
+   <body>
+<h2 id="multiple-entry-points">Multiple Entry Points<a href="#multiple-entry-points" aria-hidden="true"><span class="icon icon-link"></span></a></h2><p>If your configuration creates more than a single &quot;chunk&quot; (as with multiple entry points or when using plugins like CommonsChunkPlugin), you should use <a href="/configuration/output#output-filename">substitutions</a> to ensure that each file has a unique name.</p><pre><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  entry<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    app<span class="token punctuation">:</span> <span class="token string">&apos;./src/app.js&apos;</span><span class="token punctuation">,</span>
+    search<span class="token punctuation">:</span> <span class="token string">&apos;./src/search.js&apos;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    filename<span class="token punctuation">:</span> <span class="token string">&apos;[name].js&apos;</span><span class="token punctuation">,</span>
+    path<span class="token punctuation">:</span> __dirname <span class="token operator">+</span> <span class="token string">&apos;/dist&apos;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token comment">// writes to disk: ./dist/app.js, ./dist/search.js</span></code></pre>
+</body>
+</html>

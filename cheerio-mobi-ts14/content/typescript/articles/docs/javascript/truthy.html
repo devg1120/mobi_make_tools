@@ -1,0 +1,66 @@
+<h2 id="truthy">Truthy</h2>
+<p>JavaScript has a concept of <code>truthy</code> i.e. things that evaluate like <code>true</code> would in certain positions (e.g. <code>if</code> conditions and the boolean <code>&&</code> <code>||</code> operators). The following things are truthy in JavaScript. An example is any number other than <code>0</code> e.g.</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">if</span> (<span class="hljs-number">123</span>) { <span class="hljs-comment">// Will be treated like `true`</span>
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Any number other than 0 is truthy'</span>);
+}
+</code></pre>
+<p>Something that isn't truthy is called <code>falsy</code>.</p>
+<p>Here's a handy table for your reference.</p>
+<table>
+    <thead>
+        <tr>
+            <th>Variable Type</th>
+            <th>When it is <em>falsy</em></th>
+            <th>When it is <em>truthy</em></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>boolean</code></td>
+            <td><code>false</code></td>
+            <td><code>true</code></td>
+        </tr>
+        <tr>
+            <td><code>string</code></td>
+            <td><code>''</code> (empty string)</td>
+            <td>any other string</td>
+        </tr>
+        <tr>
+            <td><code>number</code></td>
+            <td><code>0</code> <code>NaN</code></td>
+            <td>any other number</td>
+        </tr>
+        <tr>
+            <td><code>null</code></td>
+            <td>always</td>
+            <td>never</td>
+        </tr>
+        <tr>
+            <td><code>undefined</code></td>
+            <td>always</td>
+            <td>never</td>
+        </tr>
+        <tr>
+            <td>Any other Object including empty ones like <code>{}</code>,<code>[]</code></td>
+            <td>never</td>
+            <td>always</td>
+        </tr>
+    </tbody>
+</table>
+<h3 id="being-explicit">Being explicit</h3>
+<blockquote>
+    <p>The <code>!!</code> pattern</p>
+</blockquote>
+<p>Quite commonly it helps to be explicit that the intent is to treat the value as a <code>boolean</code> and convert it into a <em>true boolean</em> (one of <code>true</code>|<code>false</code>). You can easily convert values to a true boolean by prefixing it with <code>!!</code> e.g. <code>!!foo</code>. Its just <code>!</code> used <em>twice</em>. The first <code>!</code> converts the variable (in this case <code>foo</code>) to a boolean but inverts the logic (<em>truthy</em> -<code>!</code>> <code>false</code>, <em>falsy</em> -<code>!</code>> <code>true</code>). The second one toggles it again to match the nature of the original object (e.g. <em>truthy</em> -<code>!</code>> <code>false</code> -<code>!</code>> <code>true</code>).</p>
+<p>It is common to use this pattern in lots of places e.g.</p>
+<pre><code class="lang-js"><span class="hljs-comment">// Direct variables</span>
+<span class="hljs-keyword">const</span> hasName = !!name;
+
+<span class="hljs-comment">// As members of objects</span>
+<span class="hljs-keyword">const</span> someObj = {
+  hasName: !!name
+}
+
+<span class="hljs-comment">// e.g. in ReactJS JSX</span>
+{!!someName && <span class="xml"><span class="hljs-tag"><<span class="hljs-name">div</span>></span>{someName}<span class="hljs-tag"></<span class="hljs-name">div</span>></span></span>}
+</code></pre>

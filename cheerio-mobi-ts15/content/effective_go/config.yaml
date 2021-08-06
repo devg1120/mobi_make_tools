@@ -1,0 +1,48 @@
+--- 
+# kindle mobi document genelater
+#
+#
+# //*[@id="root"]/div/nav
+#  #root > div > nav
+#
+#  //*[@id="root"]/div/div[2]/nav
+#  #root > div > div.container.site__content > nav
+#
+#  //*[@id="root"]/div/div[2]/nav/div/div[5]/a
+#  #root > div > div.container.site__content > nav > div > div:nth-child(5) > a
+#  
+#  <a class="sidebar-item__title" href="/concepts/output/">Output</a>
+#
+#
+book_type: refllowbook  # magazine(opf1) / default: refllowbook(opf2)
+top_dir: content
+recipe_slug:  effective_go
+
+base_url: https://golang.org/doc/effective_go.html
+index_url: https://golang.org/doc/effective_go.html
+kindle_css: css/kindle.css
+images_include: true
+
+extract_sections:
+   titlepage:  h1  # default .titlepage
+   flatfile_mode: true    #default false
+   flatfile_section_tag: h2
+   flatfile_article_tag: h3
+#  select_class:  .container
+#  select_class:  .unruled
+#  select_class:  .indent
+#  select_method: logic           # logic / regex
+#  select_section_regex: ""
+#  select_article_regex: ""     
+#  save_content_tag:   section   # default body
+
+#
+kindlegen:
+  compress:  2     # 0/1/2
+  verbose:   true  # booleran
+  locale:    en
+  output_path:    /tmp/mobi
+
+
+
+

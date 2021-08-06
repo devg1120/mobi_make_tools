@@ -1,0 +1,59 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svnlook lock</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts7/undefined" />
+  </head>
+   <body>
+    <div class="refentry">
+      <a id="svn.ref.svnlook.c.lock"></a>
+      <div class="titlepage"></div>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svnlook lock &#x2014; If a lock exists on a path in the repository,
+            describe it.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm12872"></a>
+        <h2>Synopsis</h2>
+        <p>
+          <code class="literal">svnlook lock REPOS_PATH PATH_IN_REPOS</code>
+        </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm12876"></a>
+        <h2>Description</h2>
+        <p>Print all information available for the lock at
+            <em class="replaceable"><code>PATH_IN_REPOS</code></em>.  If
+            <em class="replaceable"><code>PATH_IN_REPOS</code></em> is not locked,
+            print nothing.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm12881"></a>
+        <h2>Options</h2>
+        <p>None</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm12884"></a>
+        <h2>Examples</h2>
+        <p>This describes the lock on the file
+            <code class="filename">tree.jpg</code>:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svnlook lock /var/svn/repos tree.jpg
+UUID Token: opaquelocktoken:ab00ddf0-6afb-0310-9cd0-dda813329753
+Owner: harry
+Created: 2005-07-08 17:27:36 -0500 (Fri, 08 Jul 2005)
+Expires: 
+Comment (1 line):
+Rework the uppermost branches on the bald cypress in the foreground.
+</pre>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

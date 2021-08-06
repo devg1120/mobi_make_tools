@@ -1,0 +1,110 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svndumpfilter include</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts6/undefined" />
+  </head>
+   <body>
+    <div class="refentry">
+      <a id="svn.ref.svndumpfilter.commands.c.include"></a>
+      <div class="titlepage"></div>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svndumpfilter include &#x2014; Filter out nodes without given prefixes from
+            dump stream.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm13884"></a>
+        <h2>Synopsis</h2>
+        <p>
+          <code class="literal">svndumpfilter include PATH_PREFIX...</code>
+        </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm13888"></a>
+        <h2>Description</h2>
+        <p>Can be used to include nodes that begin with one or
+            more <em class="replaceable"><code>PATH_PREFIX</code></em>es in a
+            filtered dump file (thus excluding all other paths).</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm13892"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+          <pre class="screen">
+</pre>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm13903"></a>
+        <h2>Example</h2>
+        <p>If we have a dump file from a repository with a number of
+          different picnic-related directories in it, but want to
+          keep only the <code class="filename">sandwiches</code> part of the
+          repository, we&apos;ll include only that path:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svndumpfilter include sandwiches &lt; dumpfile &gt; filtered-dumpfile
+Including prefixes:
+   &apos;/sandwiches&apos;
+Revision 0 committed as 0.
+Revision 1 committed as 1.
+Revision 2 committed as 2.
+Revision 3 committed as 3.
+Revision 4 committed as 4.
+Dropped 12 node(s):
+   &apos;/condiments&apos;
+   &apos;/condiments/pepper&apos;
+   &apos;/condiments/pepper.OLD&apos;
+   &apos;/condiments/salt&apos;
+   &apos;/condiments/salt.OLD&apos;
+   &apos;/drinks&apos;
+   &apos;/snacks&apos;
+   &apos;/supplies&apos;
+   &apos;/toppings&apos;
+   &apos;/toppings/cheese&apos;
+   &apos;/toppings/cheese.OLD&apos;
+   &apos;/toppings/lettuce&apos;
+$
+</pre>
+        </div>
+        <p>Beginning in Subversion 1.7,
+            <span class="command"><strong>svndumpfilter</strong></span> can optionally treat
+            the <em class="replaceable"><code>PATH_PREFIX</code></em>s not merely as
+            explicit substrings, but as file patterns instead.  So,
+            for example, if you wished to include only paths which ended
+            with <code class="filename">ks</code>, you would do the
+            following:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svndumpfilter include --pattern &quot;*ks&quot; &lt; dumpfile &gt; filtered-dumpfile
+Including prefix patterns:
+   &apos;/*ks&apos;
+Revision 0 committed as 0.
+Revision 1 committed as 1.
+Revision 2 committed as 2.
+Revision 3 committed as 3.
+Revision 4 committed as 4.
+Dropped 11 node(s):
+   &apos;/condiments&apos;
+   &apos;/condiments/pepper&apos;
+   &apos;/condiments/pepper.OLD&apos;
+   &apos;/condiments/salt&apos;
+   &apos;/condiments/salt.OLD&apos;
+   &apos;/sandwiches&apos;
+   &apos;/supplies&apos;
+   &apos;/toppings&apos;
+   &apos;/toppings/cheese&apos;
+   &apos;/toppings/cheese.OLD&apos;
+   &apos;/toppings/lettuce&apos;
+$
+</pre>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

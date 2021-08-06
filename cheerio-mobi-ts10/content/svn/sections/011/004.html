@@ -1,0 +1,117 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svn cat</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts10/undefined" />
+  </head>
+   <body>
+<div class="refentry">
+    <a id="svn.ref.svn.c.cat"></a>
+    <div class="titlepage"></div>
+    <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svn cat &#x2014; Output the contents of the specified files or
+            URLs.</p>
+    </div>
+    <div class="refsect1">
+        <a id="idm9370"></a>
+        <h2>Synopsis</h2>
+        <p>
+            <code class="literal">svn cat TARGET[@REV]...</code>
+        </p>
+    </div>
+    <div class="refsect1">
+        <a id="idm9374"></a>
+        <h2>Description</h2>
+        <p>Output the contents of the specified files or URLs.
+            For listing the contents of directories, see <span class="command"><strong>svn
+                    list</strong></span> later in this chapter.</p>
+    </div>
+    <div class="refsect1">
+        <a id="idm9378"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+            <pre class="screen">
+</pre>
+        </div>
+    </div>
+    <div class="refsect1">
+        <a id="idm9383"></a>
+        <h2>Examples</h2>
+        <p>If you want to view <code class="filename">readme.txt</code> in
+            your repository without checking it out:</p>
+        <div class="informalexample">
+            <pre class="screen">
+$ svn cat http://svn.red-bean.com/repos/test/readme.txt
+This is a README file.
+Don&apos;t bother reading it.  The boss is a knucklehead.
+INSTRUCTIONS
+============
+Step 1:  Do this.
+Step 2:  Do that.
+$
+</pre>
+        </div>
+        <p>You can view specific versions of files, too.</p>
+        <div class="informalexample">
+            <pre class="screen">
+$ svn cat -r 3 http://svn.red-bean.com/repos/test/readme.txt
+This is a README file.
+INSTRUCTIONS
+============
+Step 1:  Do this.
+Step 2:  Do that.
+$
+</pre>
+        </div>
+        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <table border="0" summary="Note">
+                <tr>
+                    <td rowspan="2" align="center" valign="top" width="25">
+                        <img alt="[Note]" src="/home/admin/es2015/cheerio-mobi-ts10/content/svn/processed_images/note-grayscale.gif">
+                    </td>
+                    <th align="left">Note</th>
+                </tr>
+                <tr>
+                    <td align="left" valign="top">
+                        <p>You might develop a reflex action of
+                            using <span class="command"><strong>svn cat</strong></span> to view your working
+                            file contents. But keep in mind that the default peg
+                            revision for <span class="command"><strong>svn cat</strong></span> when used on a
+                            working copy file target is <code class="literal">BASE</code>, the
+                            unmodified base revision of that file. Don&apos;t be
+                            surprised when a simple <strong class="userinput"><code>svn cat
+                                    /path/to/file</code></strong> invocation fails to display
+                            your local modifications to that file!</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="tip" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <table border="0" summary="Tip">
+                <tr>
+                    <td rowspan="2" align="center" valign="top" width="25">
+                        <img alt="[Tip]" src="/home/admin/es2015/cheerio-mobi-ts10/content/svn/processed_images/tip-grayscale.gif">
+                    </td>
+                    <th align="left">Tip</th>
+                </tr>
+                <tr>
+                    <td align="left" valign="top">
+                        <p>If your working copy is out of date (or you have
+                            local modifications) and you want to see the
+                            <code class="literal">HEAD</code> revision of a file in your
+                            working copy, use the <code class="option">--revision</code>
+                            (<code class="option">-r</code>) option: <strong class="userinput"><code>svn cat -r
+                                    HEAD <em class="replaceable"><code>FILENAME</code></em></code></strong></p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    References
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts12_mlv/undefined" />
+  </head>
+   <body>
+<h2 id="references">References</h2>
+<p>Beyond literals, any Object in JavaScript (including functions, arrays, regexp etc) are references. This means the following</p>
+<h3 id="mutations-are-across-all-references">Mutations are across all references</h3>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> foo = {};
+<span class="hljs-keyword">var</span> bar = foo; <span class="hljs-comment">// bar is a reference to the same object</span>
+foo.baz = <span class="hljs-number">123</span>;
+<span class="hljs-built_in">console</span>.log(bar.baz); <span class="hljs-comment">// 123</span>
+</code></pre>
+<h3 id="equality-is-for-references">Equality is for references</h3>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> foo = {};
+<span class="hljs-keyword">var</span> bar = foo; <span class="hljs-comment">// bar is a reference</span>
+<span class="hljs-keyword">var</span> baz = {}; <span class="hljs-comment">// baz is a *new object* distinct from `foo`</span>
+<span class="hljs-built_in">console</span>.log(foo === bar); <span class="hljs-comment">// true</span>
+<span class="hljs-built_in">console</span>.log(foo === baz); <span class="hljs-comment">// false</span>
+</code></pre>
+</body>
+</html>

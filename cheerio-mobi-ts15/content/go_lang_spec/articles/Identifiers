@@ -1,0 +1,14 @@
+<body><p>
+Identifiers name program entities such as variables and types.
+An identifier is a sequence of one or more letters and digits.
+The first character in an identifier must be a letter.
+</p><pre>
+[<a>identifier</a>] = [<a>letter</a>] { [<a>letter</a>] | [<a>unicode_digit</a>] } .
+</pre><pre>
+a
+_x9
+ThisVariableIsExported
+αβ
+</pre><p>
+Some identifiers are [<a>predeclared</a>].
+</p></body>

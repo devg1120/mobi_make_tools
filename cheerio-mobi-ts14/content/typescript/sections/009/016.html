@@ -1,0 +1,143 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Generics
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts14/undefined" />
+  </head>
+   <body>
+<h2 id="generics">Generics</h2>
+<p>The key motivation for generics is to provide meaningful type constraints between members. The members can be:</p>
+<ul>
+    <li>Class instance members</li>
+    <li>Class methods</li>
+    <li>function arguments</li>
+    <li>function return value</li>
+</ul>
+<h2 id="motivation-and-samples">Motivation and samples</h2>
+<p>Consider the simple <code>Queue</code> (first in, first out) data structure implementation. A simple one in TypeScript / JavaScript looks like:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">class</span> Queue {
+  <span class="hljs-keyword">private</span> data = [];
+  push(item) { <span class="hljs-keyword">this</span>.data.push(item); }
+  pop() { <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.data.shift(); }
+}
+</code></pre>
+<p>One issue with this implementation is that it allows people to add <em>anything</em> to the queue and when they pop it - it can be <em>anything</em>. This is shown below, where someone can push a <code>string</code> onto the queue while the usage actually assumes that only <code>numbers</code> were pushed in:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">class</span> Queue {
+  <span class="hljs-keyword">private</span> data = [];
+  push(item) { <span class="hljs-keyword">this</span>.data.push(item); }
+  pop() { <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.data.shift(); }
+}
+<span class="hljs-keyword">const</span> queue = <span class="hljs-keyword">new</span> Queue();
+queue.push(<span class="hljs-number">0</span>);
+queue.push(<span class="hljs-string">&quot;1&quot;</span>); <span class="hljs-comment">// Oops a mistake</span>
+<span class="hljs-comment">// a developer walks into a bar</span>
+<span class="hljs-built_in">console</span>.log(queue.pop().toPrecision(<span class="hljs-number">1</span>));
+<span class="hljs-built_in">console</span>.log(queue.pop().toPrecision(<span class="hljs-number">1</span>)); <span class="hljs-comment">// RUNTIME ERROR</span>
+</code></pre>
+<p>One solution (and in fact the only one in languages that don&apos;t support generics) is to go ahead and create <em>special</em> classes just for these constraints. E.g. a quick and dirty number queue:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">class</span> QueueNumber extends Queue {
+  push(item: <span class="hljs-built_in">number</span>) { <span class="hljs-keyword">super</span>.push(item); }
+  pop(): <span class="hljs-built_in">number</span> { <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.data.shift(); }
+}
+<span class="hljs-keyword">const</span> queue = <span class="hljs-keyword">new</span> QueueNumber();
+queue.push(<span class="hljs-number">0</span>);
+queue.push(<span class="hljs-string">&quot;1&quot;</span>); <span class="hljs-comment">// ERROR : cannot push a string. Only numbers allowed</span>
+<span class="hljs-comment">// ^ if that error is fixed the rest would be fine too</span>
+</code></pre>
+<p>Of course this can quickly become painful e.g. if you want a string queue you have to go through all that effort again. What you really want is a way to say that whatever the type is of the stuff getting <em>pushed</em> it should be the same for whatever gets <em>popped</em>. This is done easily with a <em>generic</em> parameter (in this case, at the class level):</p>
+<pre><code class="lang-ts"><span class="hljs-comment">/** A class definition with a generic parameter */</span>
+<span class="hljs-keyword">class</span> Queue<t> {
+  <span class="hljs-keyword">private</span> data = [];
+  push(item: T) { <span class="hljs-keyword">this</span>.data.push(item); }
+  pop(): T | <span class="hljs-literal">undefined</span> { <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.data.shift(); }
+}
+<span class="hljs-comment">/** Again sample usage */</span>
+<span class="hljs-keyword">const</span> queue = <span class="hljs-keyword">new</span> Queue&lt;<span class="hljs-built_in">number</span>&gt;();
+queue.push(<span class="hljs-number">0</span>);
+queue.push(<span class="hljs-string">&quot;1&quot;</span>); <span class="hljs-comment">// ERROR : cannot push a string. Only numbers allowed</span>
+<span class="hljs-comment">// ^ if that error is fixed the rest would be fine too</span>
+</t></code></pre>
+<p>Another example that we have already seen is that of a <em>reverse</em> function, here the constraint is between what gets passed into the function and what the function returns:</p>
+<pre><code class="lang-ts">function reverse<t>(items: T[]): T[] {
+    var toreturn = [];
+    for (let i = items.length - 1; i &gt;= 0; i--) {
+        toreturn.push(items[i]);
+    }
+    return toreturn;
+}
+var sample = [1, 2, 3];
+var reversed = reverse(sample);
+console.log(reversed); // 3,2,1
+// Safety!
+reversed[0] = &apos;1&apos;;     // Error!
+reversed = [&apos;1&apos;, &apos;2&apos;]; // Error!
+reversed[0] = 1;       // Okay
+reversed = [1, 2];     // Okay
+</t></code></pre>
+<p>In this section you have seen examples of generics being defined <em>at class level</em> and at <em>function level</em>. One minor addition worth mentioning is that you can have generics created just for a member function. As a toy example consider the following where we move the <code>reverse</code> function into a <code>Utility</code> class:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">class</span> Utility {
+  reverse<t>(items: T[]): T[] {
+      <span class="hljs-keyword">var</span> toreturn = [];
+      <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = items.length - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) {
+          toreturn.push(items[i]);
+      }
+      <span class="hljs-keyword">return</span> toreturn;
+  }
+}
+</t></code></pre>
+<blockquote>
+    <p>TIP: You can call the generic parameter whatever you want. It is conventional to use <code>T</code>, <code>U</code>, <code>V</code> when you have simple generics. If you have more than one generic argument try to use meaningful names e.g. <code>TKey</code> and <code>TValue</code> (conventional to prefix with <code>T</code> as generics are also called <em>templates</em> in other languages e.g. C++).</p>
+</blockquote>
+<h3 id="design-pattern-convenience-generic">Design Pattern: Convenience generic</h3>
+<p>Consider the function: </p>
+<pre><code class="lang-ts"><span class="hljs-keyword">declare</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">parse</span>&lt;<span class="hljs-title">T</span>&gt;(<span class="hljs-params">name: <span class="hljs-built_in">string</span></span>): <span class="hljs-title">T</span></span>;
+</code></pre>
+<p>In this case you can see that the type <code>T</code> is only used in one place. So there is no constraint <em>between</em> members. This is equivalent to a type assertion in terms of type safety:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">declare</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">parse</span>(<span class="hljs-params">name: <span class="hljs-built_in">string</span></span>): <span class="hljs-title">any</span></span>;
+<span class="hljs-keyword">const</span> something = parse(<span class="hljs-string">&apos;something&apos;</span>) as TypeOfSomething;
+</code></pre>
+<p>Generics used <em>only once</em> are no better than an assertion in terms of type safety. That said they do provide <em>convenience</em> to your API.</p>
+<p>A more obvious example is a function that loads a json response. It returns a promise of <em>whatever type you pass in</em>:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">const</span> getJSON = <t>(config: {
+    url: <span class="hljs-built_in">string</span>,
+    headers?: { [key: <span class="hljs-built_in">string</span>]: <span class="hljs-built_in">string</span> },
+  }): Promise<t> =&gt; {
+    <span class="hljs-keyword">const</span> fetchConfig = ({
+      method: <span class="hljs-string">&apos;GET&apos;</span>,
+      <span class="hljs-string">&apos;Accept&apos;</span>: <span class="hljs-string">&apos;application/json&apos;</span>,
+      <span class="hljs-string">&apos;Content-Type&apos;</span>: <span class="hljs-string">&apos;application/json&apos;</span>,
+      ...(config.headers || {})
+    });
+    <span class="hljs-keyword">return</span> fetch(config.url, fetchConfig)
+      .then<t>(response =&gt; response.json());
+  }
+</t></t></t></code></pre>
+<p>Note that you still have to explicitly annotate what you want, but the <code>getJSON<t></t></code> signature <code>(config) =&gt; Promise<t></t></code> saves you a few key strokes (you don&apos;t need to annotate the return type of <code>loadUsers</code> as it can be inferred):</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">type</span> LoadUsersResponse = {
+  users: {
+    name: <span class="hljs-built_in">string</span>;
+    email: <span class="hljs-built_in">string</span>;
+  }[];  <span class="hljs-comment">// array of user objects</span>
+}
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">loadUsers</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">return</span> getJSON<loadusersresponse>({ url: <span class="hljs-string">&apos;https://example.com/users&apos;</span> });
+}
+</loadusersresponse></code></pre>
+<p>Also <code>Promise<t></t></code> as a return value is definitely better than alternatives like <code>Promise<any></any></code>.</p>
+<p>Another example is where a generic is only used as an argument: </p>
+<pre><code class="lang-ts"><span class="hljs-keyword">declare</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">send</span>&lt;<span class="hljs-title">T</span>&gt;(<span class="hljs-params">arg: T</span>): <span class="hljs-title">void</span></span>;
+</code></pre>
+<p>Here the generic <code>T</code> can be used to annote the type that you want the argument to match e.g. </p>
+<pre><code class="lang-ts">send<something>({
+  x:<span class="hljs-number">123</span>,
+  <span class="hljs-comment">// Also you get autocomplete  </span>
+}); <span class="hljs-comment">// Will TSError if `x:123` does not match the structure expected for Something</span>
+</something></code></pre>
+</body>
+</html>

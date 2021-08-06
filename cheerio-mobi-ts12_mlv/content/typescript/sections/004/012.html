@@ -1,0 +1,433 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Promise
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts12_mlv/undefined" />
+  </head>
+   <body>
+<h2 id="promise">Promise</h2>
+<p>The <code>Promise</code> class is something that exists in many modern JavaScript engines and can be easily <a href="https://github.com/stefanpenner/es6-promise" target="_blank">polyfilled</a>. The main motivation for promises is to bring synchronous style error handling to Async / Callback style code.</p>
+<h3 id="callback-style-code">Callback style code</h3>
+<p>In order to fully appreciate promises let&apos;s present a simple sample that proves the difficulty of creating reliable Async code with just callbacks. Consider the simple case of authoring an async version of loading JSON from a file. A synchronous version of this can be quite simple:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">import</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;fs&apos;</span>);
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">loadJSONSync</span>(<span class="hljs-params">filename: <span class="hljs-built_in">string</span></span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">JSON</span>.parse(fs.readFileSync(filename));
+}
+<span class="hljs-comment">// good json file</span>
+<span class="hljs-built_in">console</span>.log(loadJSONSync(<span class="hljs-string">&apos;good.json&apos;</span>));
+<span class="hljs-comment">// non-existent file, so fs.readFileSync fails</span>
+<span class="hljs-keyword">try</span> {
+    <span class="hljs-built_in">console</span>.log(loadJSONSync(<span class="hljs-string">&apos;absent.json&apos;</span>));
+}
+<span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;absent.json error&apos;</span>, err.message);
+}
+<span class="hljs-comment">// invalid json file i.e. the file exists but contains invalid JSON so JSON.parse fails</span>
+<span class="hljs-keyword">try</span> {
+    <span class="hljs-built_in">console</span>.log(loadJSONSync(<span class="hljs-string">&apos;invalid.json&apos;</span>));
+}
+<span class="hljs-keyword">catch</span> (err) {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;invalid.json error&apos;</span>, err.message);
+}
+</code></pre>
+<p>There are three behaviors of this simple <code>loadJSONSync</code> function, a valid return value, a file system error or a JSON.parse error. We handle the errors with a simple try/catch as you are used to when doing synchronous programming in other languages. Now let&apos;s make a good async version of such a function. A decent initial attempt with trivial error checking logic would be as follows:</p>
+<pre><code class="lang-ts">import fs = require(&apos;fs&apos;);
+// A decent initial attempt .... but not correct. We explain the reasons below
+function loadJSON(filename: string, cb: (error: Error, data: any) =&gt; void) {
+    fs.readFile(filename, function (err, data) {
+        if (err) cb(err);
+        else cb(null, JSON.parse(data));
+    });
+}
+</code></pre>
+<p>Simple enough, it takes a callback, passes any file system errors to the callback. If no file system errors, it returns the <code>JSON.parse</code> result. A few points to keep in mind when working with async functions based on callbacks are:</p>
+<ol>
+    <li>Never call the callback twice.</li>
+    <li>Never throw an error.</li>
+</ol>
+<p>However, this simple function fails to accommodate for point two. In fact, <code>JSON.parse</code> throws an error if it is passed bad JSON and the callback never gets called and the application crashes. This is demonstrated in the below example:</p>
+<pre><code class="lang-ts">import fs = require(&apos;fs&apos;);
+// A decent initial attempt .... but not correct
+function loadJSON(filename: string, cb: (error: Error, data: any) =&gt; void) {
+    fs.readFile(filename, function (err, data) {
+        if (err) cb(err);
+        else cb(null, JSON.parse(data));
+    });
+}
+// load invalid json
+loadJSON(&apos;invalid.json&apos;, function (err, data) {
+    // This code never executes
+    if (err) console.log(&apos;bad.json error&apos;, err.message);
+    else console.log(data);
+});
+</code></pre>
+<p>A naive attempt at fixing this would be to wrap the <code>JSON.parse</code> in a try catch as shown in the below example:</p>
+<pre><code class="lang-ts">import fs = require(&apos;fs&apos;);
+// A better attempt ... but still not correct
+function loadJSON(filename: string, cb: (error: Error) =&gt; void) {
+    fs.readFile(filename, function (err, data) {
+        if (err) {
+            cb(err);
+        }
+        else {
+            try {
+                cb(null, JSON.parse(data));
+            }
+            catch (err) {
+                cb(err);
+            }
+        }
+    });
+}
+// load invalid json
+loadJSON(&apos;invalid.json&apos;, function (err, data) {
+    if (err) console.log(&apos;bad.json error&apos;, err.message);
+    else console.log(data);
+});
+</code></pre>
+<p>However, there is a subtle bug in this code. If the callback (<code>cb</code>), and not <code>JSON.parse</code>, throws an error, since we wrapped it in a <code>try</code>/<code>catch</code>, the <code>catch</code> executes and we call the callback again i.e. the callback gets called twice! This is demonstrated in the example below:</p>
+<pre><code class="lang-ts">import fs = require(&apos;fs&apos;);
+function loadJSON(filename: string, cb: (error: Error) =&gt; void) {
+    fs.readFile(filename, function (err, data) {
+        if (err) {
+            cb(err);
+        }
+        else {
+            try {
+                cb(null, JSON.parse(data));
+            }
+            catch (err) {
+                cb(err);
+            }
+        }
+    });
+}
+// a good file but a bad callback ... gets called again!
+loadJSON(&apos;good.json&apos;, function (err, data) {
+    console.log(&apos;our callback called&apos;);
+    if (err) console.log(&apos;Error:&apos;, err.message);
+    else {
+        // let&apos;s simulate an error by trying to access a property on an undefined variable
+        var foo;
+        // The following code throws `Error: Cannot read property &apos;bar&apos; of undefined`
+        console.log(foo.bar);
+    }
+});
+</code></pre>
+<pre><code class="lang-bash">$ node asyncbadcatchdemo.js
+our callback called
+our callback called
+Error: Cannot <span class="hljs-built_in">read</span> property <span class="hljs-string">&apos;bar&apos;</span> of undefined
+</code></pre>
+<p>This is because our <code>loadJSON</code> function wrongfully wrapped the callback in a <code>try</code> block. There is a simple lesson to remember here.</p>
+<blockquote>
+    <p>Simple lesson: Contain all your sync code in a try catch, except when you call the callback.</p>
+</blockquote>
+<p>Following this simple lesson, we have a fully functional async version of <code>loadJSON</code> as shown below:</p>
+<pre><code class="lang-ts">import fs = require(&apos;fs&apos;);
+function loadJSON(filename: string, cb: (error: Error) =&gt; void) {
+    fs.readFile(filename, function (err, data) {
+        if (err) return cb(err);
+        // Contain all your sync code in a try catch
+        try {
+            var parsed = JSON.parse(data);
+        }
+        catch (err) {
+            return cb(err);
+        }
+        // except when you call the callback
+        return cb(null, parsed);
+    });
+}
+</code></pre>
+<p>Admittedly this is not hard to follow once you&apos;ve done it a few times but nonetheless it&#x2019;s a lot of boiler plate code to write simply for good error handling. Now let&apos;s look at a better way to tackle asynchronous JavaScript using promises.</p>
+<h2 id="creating-a-promise">Creating a Promise</h2>
+<p>A promise can be either <code>pending</code> or <code>fulfilled</code> or <code>rejected</code>.</p>
+<p><img src="/home/gusa1120/es2015/cheerio-mobi-ts12_mlv/content/typescript/processed_images/promise%20states%20and%20fates-grayscale.gif" alt="promise states and fates"></p>
+<p>Let&apos;s look at creating a promise. It&apos;s a simple matter of calling <code>new</code> on <code>Promise</code> (the promise constructor). The promise constructor is passed <code>resolve</code> and <code>reject</code> functions for settling the promise state:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">const</span> promise = <span class="hljs-keyword">new</span> Promise((resolve, reject) =&gt; {
+    <span class="hljs-comment">// the resolve / reject functions control the fate of the promise</span>
+});
+</code></pre>
+<h3 id="subscribing-to-the-fate-of-the-promise">Subscribing to the fate of the promise</h3>
+<p>The promise fate can be subscribed to using <code>.then</code> (if resolved) or <code>.catch</code> (if rejected).</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">const</span> promise = <span class="hljs-keyword">new</span> Promise((resolve, reject) =&gt; {
+    resolve(<span class="hljs-number">123</span>);
+});
+promise.then((res) =&gt; {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;I get called:&apos;</span>, res === <span class="hljs-number">123</span>); <span class="hljs-comment">// I get called: true</span>
+});
+promise.catch((err) =&gt; {
+    <span class="hljs-comment">// This is never called</span>
+});
+</code></pre>
+<pre><code class="lang-ts"><span class="hljs-keyword">const</span> promise = <span class="hljs-keyword">new</span> Promise((resolve, reject) =&gt; {
+    reject(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&quot;Something awful happened&quot;</span>));
+});
+promise.then((res) =&gt; {
+    <span class="hljs-comment">// This is never called</span>
+});
+promise.catch((err) =&gt; {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;I get called:&apos;</span>, err.message); <span class="hljs-comment">// I get called: &apos;Something awful happened&apos;</span>
+});
+</code></pre>
+<blockquote>
+    <p>TIP: Promise Shortcuts</p>
+    <ul>
+        <li>Quickly creating an already resolved promise: <code>Promise.resolve(result)</code></li>
+        <li>Quickly creating an already rejected promise: <code>Promise.reject(error)</code></li>
+    </ul>
+</blockquote>
+<h3 id="chain-ability-of-promises">Chain-ability of Promises</h3>
+<p>The chain-ability of promises <strong>is the heart of the benefit that promises provide</strong>. Once you have a promise, from that point on, you use the <code>then</code> function to create a chain of promises.</p>
+<ul>
+    <li>If you return a promise from any function in the chain, <code>.then</code> is only called once the value is resolved:</li>
+</ul>
+<pre><code class="lang-ts">Promise.resolve(<span class="hljs-number">123</span>)
+    .then((res) =&gt; {
+        <span class="hljs-built_in">console</span>.log(res); <span class="hljs-comment">// 123</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-number">456</span>;
+    })
+    .then((res) =&gt; {
+        <span class="hljs-built_in">console</span>.log(res); <span class="hljs-comment">// 456</span>
+        <span class="hljs-keyword">return</span> Promise.resolve(<span class="hljs-number">123</span>); <span class="hljs-comment">// Notice that we are returning a Promise</span>
+    })
+    .then((res) =&gt; {
+        <span class="hljs-built_in">console</span>.log(res); <span class="hljs-comment">// 123 : Notice that this `then` is called with the resolved value</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-number">123</span>;
+    })
+</code></pre>
+<ul>
+    <li>You can aggregate the error handling of any preceding portion of the chain with a single <code>catch</code>:</li>
+</ul>
+<pre><code class="lang-ts"><span class="hljs-comment">// Create a rejected promise</span>
+Promise.reject(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&apos;something bad happened&apos;</span>))
+    .then((res) =&gt; {
+        <span class="hljs-built_in">console</span>.log(res); <span class="hljs-comment">// not called</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-number">456</span>;
+    })
+    .then((res) =&gt; {
+        <span class="hljs-built_in">console</span>.log(res); <span class="hljs-comment">// not called</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-number">123</span>;
+    })
+    .then((res) =&gt; {
+        <span class="hljs-built_in">console</span>.log(res); <span class="hljs-comment">// not called</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-number">123</span>;
+    })
+    .catch((err) =&gt; {
+        <span class="hljs-built_in">console</span>.log(err.message); <span class="hljs-comment">// something bad happened</span>
+    });
+</code></pre>
+<ul>
+    <li>The <code>catch</code> actually returns a new promise (effectively creating a new promise chain):</li>
+</ul>
+<pre><code class="lang-ts"><span class="hljs-comment">// Create a rejected promise</span>
+Promise.reject(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&apos;something bad happened&apos;</span>))
+    .then((res) =&gt; {
+        <span class="hljs-built_in">console</span>.log(res); <span class="hljs-comment">// not called</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-number">456</span>;
+    })
+    .catch((err) =&gt; {
+        <span class="hljs-built_in">console</span>.log(err.message); <span class="hljs-comment">// something bad happened</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-number">123</span>;
+    })
+    .then((res) =&gt; {
+        <span class="hljs-built_in">console</span>.log(res); <span class="hljs-comment">// 123</span>
+    })
+</code></pre>
+<ul>
+    <li>Any synchronous errors thrown in a <code>then</code> (or <code>catch</code>) result in the returned promise to fail:</li>
+</ul>
+<pre><code class="lang-ts">Promise.resolve(<span class="hljs-number">123</span>)
+    .then((res) =&gt; {
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&apos;something bad happened&apos;</span>); <span class="hljs-comment">// throw a synchronous error</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-number">456</span>;
+    })
+    .then((res) =&gt; {
+        <span class="hljs-built_in">console</span>.log(res); <span class="hljs-comment">// never called</span>
+        <span class="hljs-keyword">return</span> Promise.resolve(<span class="hljs-number">789</span>);
+    })
+    .catch((err) =&gt; {
+        <span class="hljs-built_in">console</span>.log(err.message); <span class="hljs-comment">// something bad happened</span>
+    })
+</code></pre>
+<ul>
+    <li>Only the relevant (nearest tailing) <code>catch</code> is called for a given error (as the catch starts a new promise chain).</li>
+</ul>
+<pre><code class="lang-ts">Promise.resolve(<span class="hljs-number">123</span>)
+    .then((res) =&gt; {
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">&apos;something bad happened&apos;</span>); <span class="hljs-comment">// throw a synchronous error</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-number">456</span>;
+    })
+    .catch((err) =&gt; {
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;first catch: &apos;</span> + err.message); <span class="hljs-comment">// something bad happened</span>
+        <span class="hljs-keyword">return</span> <span class="hljs-number">123</span>;
+    })
+    .then((res) =&gt; {
+        <span class="hljs-built_in">console</span>.log(res); <span class="hljs-comment">// 123</span>
+        <span class="hljs-keyword">return</span> Promise.resolve(<span class="hljs-number">789</span>);
+    })
+    .catch((err) =&gt; {
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;second catch: &apos;</span> + err.message); <span class="hljs-comment">// never called</span>
+    })
+</code></pre>
+<ul>
+    <li>A <code>catch</code> is only called in case of an error in the preceding chain:</li>
+</ul>
+<pre><code class="lang-ts">Promise.resolve(<span class="hljs-number">123</span>)
+    .then((res) =&gt; {
+        <span class="hljs-keyword">return</span> <span class="hljs-number">456</span>;
+    })
+    .catch((err) =&gt; {
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;HERE&quot;</span>); <span class="hljs-comment">// never called</span>
+    })
+</code></pre>
+<p>The fact that:</p>
+<ul>
+    <li>errors jump to the tailing <code>catch</code> (and skip any middle <code>then</code> calls) and</li>
+    <li>synchronous errors also get caught by any tailing <code>catch</code>.</li>
+</ul>
+<p>effectively provides us with an async programming paradigm that allows better error handling than raw callbacks. More on this below.</p>
+<h3 id="typescript-and-promises">TypeScript and promises</h3>
+<p>The great thing about TypeScript is that it understands the flow of values through a promise chain:</p>
+<pre><code class="lang-ts">Promise.resolve(<span class="hljs-number">123</span>)
+    .then((res) =&gt; {
+         <span class="hljs-comment">// res is inferred to be of type `number`</span>
+         <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+    })
+    .then((res) =&gt; {
+        <span class="hljs-comment">// res is inferred to be of type `boolean`</span>
+    });
+</code></pre>
+<p>Of course it also understands unwrapping any function calls that might return a promise:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">iReturnPromiseAfter1Second</span>(<span class="hljs-params"></span>): <span class="hljs-title">Promise</span>&lt;<span class="hljs-title">string</span>&gt; </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Promise((resolve) =&gt; {
+        setTimeout(() =&gt; resolve(<span class="hljs-string">&quot;Hello world!&quot;</span>), <span class="hljs-number">1000</span>);
+    });
+}
+Promise.resolve(<span class="hljs-number">123</span>)
+    .then((res) =&gt; {
+        <span class="hljs-comment">// res is inferred to be of type `number`</span>
+        <span class="hljs-keyword">return</span> iReturnPromiseAfter1Second(); <span class="hljs-comment">// We are returning `Promise<string>`</string></span>
+    })
+    .then((res) =&gt; {
+        <span class="hljs-comment">// res is inferred to be of type `string`</span>
+        <span class="hljs-built_in">console</span>.log(res); <span class="hljs-comment">// Hello world!</span>
+    });
+</code></pre>
+<h3 id="converting-a-callback-style-function-to-return-a-promise">Converting a callback style function to return a promise</h3>
+<p>Just wrap the function call in a promise and</p>
+<ul>
+    <li><code>reject</code> if an error occurs,</li>
+    <li><code>resolve</code> if it is all good.</li>
+</ul>
+<p>E.g. let&apos;s wrap <code>fs.readFile</code>:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">import</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;fs&apos;</span>);
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">readFileAsync</span>(<span class="hljs-params">filename: <span class="hljs-built_in">string</span></span>): <span class="hljs-title">Promise</span>&lt;<span class="hljs-title">any</span>&gt; </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Promise((resolve,reject) =&gt; {
+        fs.readFile(filename,(err,result) =&gt; {
+            <span class="hljs-keyword">if</span> (err) reject(err);
+            <span class="hljs-keyword">else</span> resolve(result);
+        });
+    });
+}
+</code></pre>
+<p>The most reliable way to do this is to hand write it and it doesn&apos;t have to be as verbose as the previous example e.g. converting <code>setTimeout</code> into a promisified <code>delay</code> function is super easy:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">const</span> delay = (ms: <span class="hljs-built_in">number</span>) =&gt; <span class="hljs-keyword">new</span> Promise(res =&gt; setTimeout(res, ms));
+</code></pre>
+<p>Note that there is a handy dandy function in NodeJS that does this <code>node style function =&gt; promise returning function</code> magic for you:</p>
+<pre><code class="lang-ts"><span class="hljs-comment">/** Sample usage */</span>
+<span class="hljs-keyword">import</span> fs from <span class="hljs-string">&apos;fs&apos;</span>;
+<span class="hljs-keyword">import</span> util from <span class="hljs-string">&apos;util&apos;</span>;
+<span class="hljs-keyword">const</span> readFile = util.promisify(fs.readFile);
+</code></pre>
+<blockquote>
+    <p>Webpack supports the <code>util</code> module out of the box and you can use it in the browser as well.</p>
+</blockquote>
+<p>If you have a node callback style function as a <em>member</em> be sure to <code>bind</code> it as well to make sure it has the correct <code>this</code>: </p>
+<pre><code class="lang-ts"><span class="hljs-keyword">const</span> dbGet = util.promisify(db.get).bind(db);
+</code></pre>
+<h3 id="revisiting-the-json-example">Revisiting the JSON example</h3>
+<p>Now let&apos;s revisit our <code>loadJSON</code> example and rewrite an async version that uses promises. All that we need to do is read the file contents as a promise, then parse them as JSON and we are done. This is illustrated in the below example:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">loadJSONAsync</span>(<span class="hljs-params">filename: <span class="hljs-built_in">string</span></span>): <span class="hljs-title">Promise</span>&lt;<span class="hljs-title">any</span>&gt; </span>{
+    <span class="hljs-keyword">return</span> readFileAsync(filename) <span class="hljs-comment">// Use the function we just wrote</span>
+                .then(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">res</span>) </span>{
+                    <span class="hljs-keyword">return</span> <span class="hljs-built_in">JSON</span>.parse(res);
+                });
+}
+</code></pre>
+<p>Usage (notice how similar it is to the original <code>sync</code> version introduced at the start of this section &#x1F339;):</p>
+<pre><code class="lang-ts"><span class="hljs-comment">// good json file</span>
+loadJSONAsync(<span class="hljs-string">&apos;good.json&apos;</span>)
+    .then(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">val</span>) </span>{ <span class="hljs-built_in">console</span>.log(val); })
+    .catch(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err</span>) </span>{
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;good.json error&apos;</span>, err.message); <span class="hljs-comment">// never called</span>
+    })
+<span class="hljs-comment">// non-existent json file</span>
+    .then(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">return</span> loadJSONAsync(<span class="hljs-string">&apos;absent.json&apos;</span>);
+    })
+    .then(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">val</span>) </span>{ <span class="hljs-built_in">console</span>.log(val); }) <span class="hljs-comment">// never called</span>
+    .catch(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err</span>) </span>{
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;absent.json error&apos;</span>, err.message);
+    })
+<span class="hljs-comment">// invalid json file</span>
+    .then(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">return</span> loadJSONAsync(<span class="hljs-string">&apos;invalid.json&apos;</span>);
+    })
+    .then(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">val</span>) </span>{ <span class="hljs-built_in">console</span>.log(val); }) <span class="hljs-comment">// never called</span>
+    .catch(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">err</span>) </span>{
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;bad.json error&apos;</span>, err.message);
+    });
+</code></pre>
+<p>The reason why this function was simpler is because the &quot;<code>loadFile</code>(async) + <code>JSON.parse</code> (sync) =&gt; <code>catch</code>&quot; consolidation was done by the promise chain. Also the callback was not called by <em>us</em> but called by the promise chain so we didn&apos;t have the chance of making the mistake of wrapping it in a <code>try/catch</code>.</p>
+<h3 id="parallel-control-flow">Parallel control flow</h3>
+<p>We have seen how trivial doing a serial sequence of async tasks is with promises. It is simply a matter of chaining <code>then</code> calls.</p>
+<p>However, you might potentially want to run a series of async tasks and then do something with the results of all of these tasks. <code>Promise</code> provides a static <code>Promise.all</code> function that you can use to wait for <code>n</code> number of promises to complete. You provide it with an array of <code>n</code> promises and it gives you an array of <code>n</code> resolved values. Below we show Chaining as well as Parallel:</p>
+<pre><code class="lang-ts"><span class="hljs-comment">// an async function to simulate loading an item from some server</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">loadItem</span>(<span class="hljs-params">id: <span class="hljs-built_in">number</span></span>): <span class="hljs-title">Promise</span>&lt;</span>{ id: <span class="hljs-built_in">number</span> }&gt; {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Promise((resolve) =&gt; {
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;loading item&apos;</span>, id);
+        setTimeout(() =&gt; { <span class="hljs-comment">// simulate a server delay</span>
+            resolve({ id: id });
+        }, <span class="hljs-number">1000</span>);
+    });
+}
+<span class="hljs-comment">// Chained / Sequential</span>
+<span class="hljs-keyword">let</span> item1, item2;
+loadItem(<span class="hljs-number">1</span>)
+    .then((res) =&gt; {
+        item1 = res;
+        <span class="hljs-keyword">return</span> loadItem(<span class="hljs-number">2</span>);
+    })
+    .then((res) =&gt; {
+        item2 = res;
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;done&apos;</span>);
+    }); <span class="hljs-comment">// overall time will be around 2s</span>
+<span class="hljs-comment">// Concurrent / Parallel</span>
+Promise.all([loadItem(<span class="hljs-number">1</span>), loadItem(<span class="hljs-number">2</span>)])
+    .then((res) =&gt; {
+        [item1, item2] = res;
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;done&apos;</span>);
+    }); <span class="hljs-comment">// overall time will be around 1s</span>
+</code></pre>
+<p>Sometimes, you want to run a series of async tasks, but you get all you need as long as any one of these tasks is settled. <code>Promise</code> provides a static <code>Promise.race</code> function for this scenario:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">var</span> task1 = <span class="hljs-keyword">new</span> Promise(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">resolve, reject</span>) </span>{
+    setTimeout(resolve, <span class="hljs-number">1000</span>, <span class="hljs-string">&apos;one&apos;</span>);
+});
+<span class="hljs-keyword">var</span> task2 = <span class="hljs-keyword">new</span> Promise(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">resolve, reject</span>) </span>{
+    setTimeout(resolve, <span class="hljs-number">2000</span>, <span class="hljs-string">&apos;two&apos;</span>);
+});
+Promise.race([task1, task2]).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">value</span>) </span>{
+  <span class="hljs-built_in">console</span>.log(value); <span class="hljs-comment">// &quot;one&quot;</span>
+  <span class="hljs-comment">// Both resolve, but task1 resolves faster</span>
+});
+</code></pre>
+</body>
+</html>

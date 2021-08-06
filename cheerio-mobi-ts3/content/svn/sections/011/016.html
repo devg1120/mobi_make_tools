@@ -1,0 +1,138 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svn list (ls)</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/tmp/es2015/cheerio-mobi-ts3/css/kindle.css" />
+  </head>
+   <body>
+    <div class="refentry">
+      <a id="svn.ref.svn.c.list"></a>
+      <div class="titlepage"></div>
+      <a id="idm10104" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svn list (ls) — List directory entries in the repository.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm10111"></a>
+        <h2>Synopsis</h2>
+        <p>
+          <code class="literal">svn list [TARGET[@REV]...]</code>
+        </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm10115"></a>
+        <h2>Description</h2>
+        <p>List each <em class="replaceable"><code>TARGET</code></em> file and
+            the contents of each <em class="replaceable"><code>TARGET</code></em>
+            directory as they exist in the repository.  If
+            <em class="replaceable"><code>TARGET</code></em> is a working copy path,
+            the corresponding repository URL will be used.</p>
+        <p>The default <em class="replaceable"><code>TARGET</code></em> is
+            <span class="quote">“<span class="quote"><code class="filename">.</code></span>”</span>, meaning the
+            repository URL of the current working copy
+            directory.</p>
+        <p>With <code class="option">--verbose</code>
+            (<code class="option">-v</code>), <span class="command"><strong>svn list</strong></span> shows
+            the following fields for each item:</p>
+        <div class="itemizedlist">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+              <p>Revision number of the last
+              commit</p>
+            </li>
+            <li class="listitem">
+              <p>Author of the last commit</p>
+            </li>
+            <li class="listitem">
+              <p>If locked, the letter <span class="quote">“<span class="quote">O</span>”</span> (see the preceding section on <a class="xref" href="svn.ref.svn.c.info.html" title="svn info">svn info</a> for details).</p>
+            </li>
+            <li class="listitem">
+              <p>Size (in bytes)</p>
+            </li>
+            <li class="listitem">
+              <p>Date and time of the last
+              commit</p>
+            </li>
+          </ul>
+        </div>
+        <p>With <code class="option">--xml</code>, output is in XML format
+            (with a header and an enclosing document element unless
+            <code class="option">--incremental</code> is also specified).  All of
+            the information is present; the <code class="option">--verbose</code>
+            (<code class="option">-v</code>) option is not accepted.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm10147"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+          <pre class="screen">
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.depth"><code class="option">--depth</code> <em class="replaceable"><code>ARG</code></em></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.incremental"><code class="option">--incremental</code></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.recursive"><code class="option">--recursive</code> (<code class="option">-R</code>)</a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.revision"><code class="option">--revision</code> (<code class="option">-r</code>) <em class="replaceable"><code>REV</code></em></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.verbose"><code class="option">--verbose</code> (<code class="option">-v</code>)</a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.xml"><code class="option">--xml</code></a>
+</pre>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm10157"></a>
+        <h2>Examples</h2>
+        <p><span class="command"><strong>svn list</strong></span> is most useful if you
+            want to see what files a repository has without
+            downloading a working copy:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn list http://svn.red-bean.com/repos/test/support
+README.txt
+INSTALL
+examples/
+…
+</pre>
+        </div>
+        <p>You can pass the <code class="option">--verbose</code>
+            (<code class="option">-v</code>) option for additional information,
+            rather like the Unix command
+            <span class="command"><strong>ls -l</strong></span>:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn list -v file:///var/svn/repos
+     16 sally         28361 Jan 16 23:18 README.txt
+     27 sally             0 Jan 18 15:27 INSTALL
+     24 harry               Jan 18 11:27 examples/
+</pre>
+        </div>
+        <p>You can also get <span class="command"><strong>svn list</strong></span> output in
+            XML format with the <code class="option">--xml</code> option:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn list --xml http://svn.red-bean.com/repos/test
+<?xml version="1.0"?>
+<lists>
+<list
+   path="http://svn.red-bean.com/repos/test">
+<entry
+   kind="dir">
+<name>examples</name>
+<size>0</size>
+<commit
+   revision="24">
+<author>harry</author>
+<date>2008-01-18T06:35:53.048870Z</date>
+</commit>
+</entry>
+...
+</list>
+</lists>
+</pre>
+        </div>
+        <p>For further details, see the earlier section <a class="xref" href="svn.tour.history.html#svn.tour.history.browsing.list" title="Listing versioned directories">the section called “Listing versioned directories”</a>.</p>
+      </div>
+    </div>
+</body>
+</html>

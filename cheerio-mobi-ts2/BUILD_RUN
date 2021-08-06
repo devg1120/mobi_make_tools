@@ -1,0 +1,10 @@
+# build
+
+  tsc
+
+# run
+
+  node dist/src/app.js
+
+
+

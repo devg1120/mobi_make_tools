@@ -1,0 +1,26 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Object Syntax</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts12_mlv/undefined" />
+  </head>
+   <body>
+<h2 id="object-syntax">Object Syntax<a href="#object-syntax" aria-hidden="true"><span class="icon icon-link"></span></a></h2>
+<p>Usage: <code>entry: {[entryChunkName: string]: string|Array&lt;string&gt;}</code></p>
+<p><strong>webpack.config.js</strong></p>
+<pre><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  entry<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    app<span class="token punctuation">:</span> <span class="token string">&apos;./src/app.js&apos;</span><span class="token punctuation">,</span>
+    adminApp<span class="token punctuation">:</span> <span class="token string">&apos;./src/adminApp.js&apos;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<p>The object syntax is more verbose. However, this is the most scalable way of defining entry/entries in your application.</p>
+<blockquote class="tip">
+    <p><strong>&quot;Scalable webpack configurations&quot;</strong> are ones that can be reused and combined with other partial configurations. This is a popular technique used to separate concerns by environment, build target, and runtime. They are then merged using specialized tools like <a href="https://github.com/survivejs/webpack-merge">webpack-merge</a>.</p>
+</blockquote>
+</body>
+</html>

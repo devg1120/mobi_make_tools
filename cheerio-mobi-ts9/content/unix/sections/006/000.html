@@ -1,0 +1,65 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Textuality</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts9/undefined" />
+  </head>
+   <body>
+<div class="chapter" lang="en"><div class="titlepage"><div><h2 class="title"><a id="textualitychapter">Chapter&#xFFFD;5.&#xFFFD;Textuality</a></h2></div><div><h3 class="subtitle"><i>Good Protocols Make Good&#xFFFD;Practice</i></h3></div></div><div xmlns class="epigraph"><i><p xmlns="http://www.w3.org/1999/xhtml">It&apos;s a well-known fact that computing devices such as the abacus
+were invented thousands of years ago. But it&apos;s not well known that the
+first use of a common computer protocol occurred in the Old
+Testament. This, of course, was when Moses aborted the Egyptians&apos;
+process with a control-sea.</p></i><span>--<i><span xmlns="http://www.w3.org/1999/xhtml" class="attribution">
+<span class="author">Tom Galloway</span>
+<i><tt>rec.arts.comics</tt>, February 1992</i>
+</span></i></span></div><p>In this chapter, we&apos;ll look at what the Unix tradition has to
+tell us about two different kinds of design that are closely related:
+the design of file formats for retaining application data in permanent
+storage, and the design of application protocols for passing data
+and commands between cooperating programs, possibly over a
+network.</p><p>What unifies these two kinds of design is that they both involve
+the serialization of in-memory data structures.  For the internal
+operation of computer programs, the most convenient representation of
+a complex data structure is one in which all fields have the machine&apos;s
+native data format (e.g. two&apos;s-complement binary for integers) and all
+pointers are actual memory addresses (as opposed, say, to being named
+references).  But these representations are not well suited to storage
+and transmission; memory addresses in the data structure lose their
+meaning outside memory, and emitting raw native data formats causes
+interoperability problems passing data between machines with different
+conventions (big- vs. little-endian, say, or 32-bit vs. 64-bit).</p><p>For transmission and storage, the traversable, quasi-spatial
+layout of data structures like linked lists needs to be flattened or
+serialized into a byte-stream representation from which the structure
+can later be recovered.  The serialization (save) operation is
+sometimes called <i>marshaling</i> and its inverse
+(load) operation <i>unmarshaling</i>.  These terms
+are usually applied with respect to objects in an
+OO</p><p>A significant percentage of what C</p><p>But these na&#xFFFD;ve methods are often unsatisfactory for
+various reasons, including both the machine-interoperability problems
+we mentioned above and the negative trait of being opaque to other
+tools.  When the application is a network protocol, economy may demand
+that an internal data structure (such as, say, a message with source
+and destination addresses) be serialized not into a single blob of
+data but into a series of attempted transactions or messages which the
+receiving machine may reject (so that, for example, a large message can
+be rejected if the destination address is invalid).</p><p>Interoperability,
+transparency</p><p>Finally, we must note a difference between data file formats and
+the run-control files that are often used to set the startup options
+of Unix programs.  The most basic difference is that (with sporadic
+exceptions like GNU Emacs&apos;s configuration interface) programs don&apos;t
+normally modify their own run-control files &#x2014; the information
+flow is one-way, from file read at startup time to application
+settings.  Data-file formats, on the other hand, associate properties
+with named resources and are both read and written by their
+applications. Configuration files are generally hand-edited and small,
+whereas data files are program-generated and can become arbitrarily
+large.</p><p>Historically, Unix has related but different sets of conventions
+for these two kinds of representation.  The conventions for run
+control files are surveyed in <a href="configurationchapter.html" title="Chapter&#xFFFD;10.&#xFFFD;Configuration">Chapter&#xFFFD;10</a>; only conventions for data files are
+examined in this chapter.</p></div>
+</body>
+</html>

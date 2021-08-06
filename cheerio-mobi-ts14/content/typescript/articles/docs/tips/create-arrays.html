@@ -1,0 +1,8 @@
+<h2 id="creating-arrays">Creating arrays</h2>
+<p>Creating an empty array is super easy: </p>
+<pre><code class="lang-ts"><span class="hljs-keyword">const</span> foo:<span class="hljs-built_in">string</span>[] = [];
+</code></pre>
+<p>If you want to create an array pre-filled with some content use the ES6 <code>Array.prototype.fill</code>: </p>
+<pre><code class="lang-ts"><span class="hljs-keyword">const</span> foo:<span class="hljs-built_in">string</span>[] = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(<span class="hljs-number">3</span>).fill(<span class="hljs-string">''</span>);
+<span class="hljs-built_in">console</span>.log(foo); <span class="hljs-comment">// ['','',''];</span>
+</code></pre>

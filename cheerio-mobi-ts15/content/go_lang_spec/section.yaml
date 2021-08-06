@@ -1,0 +1,272 @@
+- title: Frontmatter
+  articles:
+    - title: Title Page
+      path: articles/titlepage
+- title: Introduction
+  articles:
+    - title: Introduction
+      path: articles/Introduction
+- title: Notation
+  articles:
+    - title: Notation
+      path: articles/Notation
+- title: Source code representation
+  articles:
+    - title: Source code representation
+      path: articles/Source_code_representation
+    - title: Characters
+      path: articles/Characters
+    - title: Letters and digits
+      path: articles/Letters_and_digits
+- title: Lexical elements
+  articles:
+    - title: Lexical elements
+      path: articles/Lexical_elements
+    - title: Comments
+      path: articles/Comments
+    - title: Tokens
+      path: articles/Tokens
+    - title: Semicolons
+      path: articles/Semicolons
+    - title: Identifiers
+      path: articles/Identifiers
+    - title: Keywords
+      path: articles/Keywords
+    - title: Operators and punctuation
+      path: articles/Operators_and_punctuation
+    - title: Integer literals
+      path: articles/Integer_literals
+    - title: Floating-point literals
+      path: articles/Floating-point_literals
+    - title: Imaginary literals
+      path: articles/Imaginary_literals
+    - title: Rune literals
+      path: articles/Rune_literals
+    - title: String literals
+      path: articles/String_literals
+- title: Constants
+  articles:
+    - title: Constants
+      path: articles/Constants
+- title: Variables
+  articles:
+    - title: Variables
+      path: articles/Variables
+- title: Types
+  articles:
+    - title: Types
+      path: articles/Types
+    - title: Method sets
+      path: articles/Method_sets
+    - title: Boolean types
+      path: articles/Boolean_types
+    - title: Numeric types
+      path: articles/Numeric_types
+    - title: String types
+      path: articles/String_types
+    - title: Array types
+      path: articles/Array_types
+    - title: Slice types
+      path: articles/Slice_types
+    - title: Struct types
+      path: articles/Struct_types
+    - title: Pointer types
+      path: articles/Pointer_types
+    - title: Function types
+      path: articles/Function_types
+    - title: Interface types
+      path: articles/Interface_types
+    - title: Map types
+      path: articles/Map_types
+    - title: Channel types
+      path: articles/Channel_types
+- title: Properties of types and values
+  articles:
+    - title: Properties of types and values
+      path: articles/Properties_of_types_and_values
+    - title: Type identity
+      path: articles/Type_identity
+    - title: Assignability
+      path: articles/Assignability
+    - title: Representability
+      path: articles/Representability
+- title: Blocks
+  articles:
+    - title: Blocks
+      path: articles/Blocks
+- title: Declarations and scope
+  articles:
+    - title: Declarations and scope
+      path: articles/Declarations_and_scope
+    - title: Label scopes
+      path: articles/Label_scopes
+    - title: Blank identifier
+      path: articles/Blank_identifier
+    - title: Predeclared identifiers
+      path: articles/Predeclared_identifiers
+    - title: Exported identifiers
+      path: articles/Exported_identifiers
+    - title: Uniqueness of identifiers
+      path: articles/Uniqueness_of_identifiers
+    - title: Constant declarations
+      path: articles/Constant_declarations
+    - title: Iota
+      path: articles/Iota
+    - title: Type declarations
+      path: articles/Type_declarations
+    - title: Variable declarations
+      path: articles/Variable_declarations
+    - title: Short variable declarations
+      path: articles/Short_variable_declarations
+    - title: Function declarations
+      path: articles/Function_declarations
+    - title: Method declarations
+      path: articles/Method_declarations
+- title: Expressions
+  articles:
+    - title: Expressions
+      path: articles/Expressions
+    - title: Operands
+      path: articles/Operands
+    - title: Qualified identifiers
+      path: articles/Qualified_identifiers
+    - title: Composite literals
+      path: articles/Composite_literals
+    - title: Function literals
+      path: articles/Function_literals
+    - title: Primary expressions
+      path: articles/Primary_expressions
+    - title: Selectors
+      path: articles/Selectors
+    - title: Method expressions
+      path: articles/Method_expressions
+    - title: Method values
+      path: articles/Method_values
+    - title: Index expressions
+      path: articles/Index_expressions
+    - title: Slice expressions
+      path: articles/Slice_expressions
+    - title: Type assertions
+      path: articles/Type_assertions
+    - title: Calls
+      path: articles/Calls
+    - title: 'Passing arguments to '
+      path: articles/Passing_arguments_to_..._parameters
+    - title: Operators
+      path: articles/Operators
+    - title: Arithmetic operators
+      path: articles/Arithmetic_operators
+    - title: Comparison operators
+      path: articles/Comparison_operators
+    - title: Logical operators
+      path: articles/Logical_operators
+    - title: Address operators
+      path: articles/Address_operators
+    - title: Receive operator
+      path: articles/Receive_operator
+    - title: Conversions
+      path: articles/Conversions
+    - title: Constant expressions
+      path: articles/Constant_expressions
+    - title: Order of evaluation
+      path: articles/Order_of_evaluation
+- title: Statements
+  articles:
+    - title: Statements
+      path: articles/Statements
+    - title: Terminating statements
+      path: articles/Terminating_statements
+    - title: Empty statements
+      path: articles/Empty_statements
+    - title: Labeled statements
+      path: articles/Labeled_statements
+    - title: Expression statements
+      path: articles/Expression_statements
+    - title: Send statements
+      path: articles/Send_statements
+    - title: IncDec statements
+      path: articles/IncDec_statements
+    - title: Assignments
+      path: articles/Assignments
+    - title: If statements
+      path: articles/If_statements
+    - title: Switch statements
+      path: articles/Switch_statements
+    - title: For statements
+      path: articles/For_statements
+    - title: Go statements
+      path: articles/Go_statements
+    - title: Select statements
+      path: articles/Select_statements
+    - title: Return statements
+      path: articles/Return_statements
+    - title: Break statements
+      path: articles/Break_statements
+    - title: Continue statements
+      path: articles/Continue_statements
+    - title: Goto statements
+      path: articles/Goto_statements
+    - title: Fallthrough statements
+      path: articles/Fallthrough_statements
+    - title: Defer statements
+      path: articles/Defer_statements
+- title: Built-in functions
+  articles:
+    - title: Built-in functions
+      path: articles/Built-in_functions
+    - title: Close
+      path: articles/Close
+    - title: Length and capacity
+      path: articles/Length_and_capacity
+    - title: Allocation
+      path: articles/Allocation
+    - title: 'Making slices, maps and channels'
+      path: articles/Making_slices_maps_and_channels
+    - title: Appending to and copying slices
+      path: articles/Appending_and_copying_slices
+    - title: Deletion of map elements
+      path: articles/Deletion_of_map_elements
+    - title: Manipulating complex numbers
+      path: articles/Complex_numbers
+    - title: Handling panics
+      path: articles/Handling_panics
+    - title: Bootstrapping
+      path: articles/Bootstrapping
+- title: Packages
+  articles:
+    - title: Packages
+      path: articles/Packages
+    - title: Source file organization
+      path: articles/Source_file_organization
+    - title: Package clause
+      path: articles/Package_clause
+    - title: Import declarations
+      path: articles/Import_declarations
+    - title: An example package
+      path: articles/An_example_package
+- title: Program initialization and execution
+  articles:
+    - title: Program initialization and execution
+      path: articles/Program_initialization_and_execution
+    - title: The zero value
+      path: articles/The_zero_value
+    - title: Package initialization
+      path: articles/Package_initialization
+    - title: Program execution
+      path: articles/Program_execution
+- title: Errors
+  articles:
+    - title: Errors
+      path: articles/Errors
+- title: Run-time panics
+  articles:
+    - title: Run-time panics
+      path: articles/Run_time_panics
+- title: System considerations
+  articles:
+    - title: System considerations
+      path: articles/System_considerations
+    - title: 'Package '
+      path: articles/Package_unsafe
+    - title: Size and alignment guarantees
+      path: articles/Size_and_alignment_guarantees

@@ -1,0 +1,60 @@
+<div class="refentry">
+    <a id="svn.ref.reposhooks.pre-revprop-change"></a>
+    <div class="titlepage"></div>
+    <a id="idm14471" class="indexterm"></a>
+    <div class="refnamediv">
+        <h2>Name</h2>
+        <p>pre-revprop-change — Notification of a revision property change
+            attempt.</p>
+    </div>
+    <div class="refsect1">
+        <a id="idm14478"></a>
+        <h2>Description</h2>
+        <p>The <code class="literal">pre-revprop-change</code> hook is run
+            immediately prior to the modification of a revision property
+            when performed outside the scope of a normal commit. Unlike
+            the other hooks, the default state of this one is to deny
+            the proposed action. The hook must actually exist and
+            return a zero exit value before a revision property
+            modification can happen.</p>
+        <p>If the <code class="literal">pre-revprop-change</code> hook
+            doesn't exist, isn't executable, or returns a nonzero exit
+            value, no change to the property will be made, and anything
+            printed to <code class="filename">stderr</code> is marshalled back to the client.</p>
+    </div>
+    <div class="refsect1">
+        <a id="idm14485"></a>
+        <h2>Input parameter(s)</h2>
+        <p>The command-line arguments passed to the hook program,
+            in order, are:</p>
+        <div class="orderedlist">
+            <ol class="orderedlist" type="1">
+                <li class="listitem">
+                    <p>Repository path</p>
+                </li>
+                <li class="listitem">
+                    <p>Revision whose property is about to be modified</p>
+                </li>
+                <li class="listitem">
+                    <p>Authenticated username attempting the property change</p>
+                </li>
+                <li class="listitem">
+                    <p>Name of the property changed</p>
+                </li>
+                <li class="listitem">
+                    <p>Change description: <code class="literal">A</code> (added),
+                        <code class="literal">D</code> (deleted), or <code class="literal">M</code>
+                        (modified)</p>
+                </li>
+            </ol>
+        </div>
+        <p>Additionally, Subversion passes the intended new value
+            of the property to the hook program via standard
+            input.</p>
+    </div>
+    <div class="refsect1">
+        <a id="idm14503"></a>
+        <h2>Common uses</h2>
+        <p>Access control; change validation and control</p>
+    </div>
+</div>

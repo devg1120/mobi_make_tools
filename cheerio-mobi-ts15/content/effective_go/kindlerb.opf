@@ -1,0 +1,190 @@
+<?xml version='1.0' encoding='utf-8'?>
+<package xmlns="http://www.idpf.org/2007/opf" version="2.0" unique-identifier="effective_go-documetation-2019-11-07">
+  <metadata>
+
+    <dc-metadata xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">
+      <dc:title>effective_go</dc:title>
+      <dc:language>en-gb</dc:language>
+      <dc:creator>AUTHOR</dc:creator>
+      <dc:publisher>github.com/danchoi/kindlefodder</dc:publisher>
+      <dc:subject>SUBJECT</dc:subject>
+      <dc:date>2019-11-07-02/59/49</dc:date>
+      <dc:description></dc:description>
+    </dc-metadata>
+    <!--   
+    <x-metadata>
+      <output content-type="application/x-mobipocket-subscription-magazine" encoding="utf-8"/>
+    </x-metadata>
+    -->
+    <meta content="cover-image" name="cover"/>
+
+  </metadata>
+  <manifest>
+    <item href="contents.html" media-type="application/xhtml+xml" id="contents"/>
+    <item href="nav-contents.ncx" media-type="application/x-dtbncx+xml" id="nav-contents"/>
+    <item href="/home/admin/es2015/cheerio-mobi-ts15/mobi_images/cover-image.gif" media-type="image/gif" id="cover-image"/>
+    <item href="/home/admin/es2015/cheerio-mobi-ts15/mobi_images/masthead.gif" media-type="image/gif" id="masthead"/>
+    <item href="sections/000/section.html" media-type="application/xhtml+xml" id="item-000"/>
+    <item href="sections/000/000.html" media-type="application/xhtml+xml" id="item-000000"/>
+    <item href="sections/001/section.html" media-type="application/xhtml+xml" id="item-001"/>
+    <item href="sections/001/000.html" media-type="application/xhtml+xml" id="item-001000"/>
+    <item href="sections/001/001.html" media-type="application/xhtml+xml" id="item-001001"/>
+    <item href="sections/002/section.html" media-type="application/xhtml+xml" id="item-002"/>
+    <item href="sections/002/000.html" media-type="application/xhtml+xml" id="item-002000"/>
+    <item href="sections/003/section.html" media-type="application/xhtml+xml" id="item-003"/>
+    <item href="sections/003/000.html" media-type="application/xhtml+xml" id="item-003000"/>
+    <item href="sections/004/section.html" media-type="application/xhtml+xml" id="item-004"/>
+    <item href="sections/004/000.html" media-type="application/xhtml+xml" id="item-004000"/>
+    <item href="sections/004/001.html" media-type="application/xhtml+xml" id="item-004001"/>
+    <item href="sections/004/002.html" media-type="application/xhtml+xml" id="item-004002"/>
+    <item href="sections/004/003.html" media-type="application/xhtml+xml" id="item-004003"/>
+    <item href="sections/004/004.html" media-type="application/xhtml+xml" id="item-004004"/>
+    <item href="sections/005/section.html" media-type="application/xhtml+xml" id="item-005"/>
+    <item href="sections/005/000.html" media-type="application/xhtml+xml" id="item-005000"/>
+    <item href="sections/006/section.html" media-type="application/xhtml+xml" id="item-006"/>
+    <item href="sections/006/000.html" media-type="application/xhtml+xml" id="item-006000"/>
+    <item href="sections/006/001.html" media-type="application/xhtml+xml" id="item-006001"/>
+    <item href="sections/006/002.html" media-type="application/xhtml+xml" id="item-006002"/>
+    <item href="sections/006/003.html" media-type="application/xhtml+xml" id="item-006003"/>
+    <item href="sections/006/004.html" media-type="application/xhtml+xml" id="item-006004"/>
+    <item href="sections/006/005.html" media-type="application/xhtml+xml" id="item-006005"/>
+    <item href="sections/007/section.html" media-type="application/xhtml+xml" id="item-007"/>
+    <item href="sections/007/000.html" media-type="application/xhtml+xml" id="item-007000"/>
+    <item href="sections/007/001.html" media-type="application/xhtml+xml" id="item-007001"/>
+    <item href="sections/007/002.html" media-type="application/xhtml+xml" id="item-007002"/>
+    <item href="sections/007/003.html" media-type="application/xhtml+xml" id="item-007003"/>
+    <item href="sections/008/section.html" media-type="application/xhtml+xml" id="item-008"/>
+    <item href="sections/008/000.html" media-type="application/xhtml+xml" id="item-008000"/>
+    <item href="sections/008/001.html" media-type="application/xhtml+xml" id="item-008001"/>
+    <item href="sections/008/002.html" media-type="application/xhtml+xml" id="item-008002"/>
+    <item href="sections/008/003.html" media-type="application/xhtml+xml" id="item-008003"/>
+    <item href="sections/008/004.html" media-type="application/xhtml+xml" id="item-008004"/>
+    <item href="sections/008/005.html" media-type="application/xhtml+xml" id="item-008005"/>
+    <item href="sections/008/006.html" media-type="application/xhtml+xml" id="item-008006"/>
+    <item href="sections/008/007.html" media-type="application/xhtml+xml" id="item-008007"/>
+    <item href="sections/008/008.html" media-type="application/xhtml+xml" id="item-008008"/>
+    <item href="sections/008/009.html" media-type="application/xhtml+xml" id="item-008009"/>
+    <item href="sections/009/section.html" media-type="application/xhtml+xml" id="item-009"/>
+    <item href="sections/009/000.html" media-type="application/xhtml+xml" id="item-009000"/>
+    <item href="sections/009/001.html" media-type="application/xhtml+xml" id="item-009001"/>
+    <item href="sections/009/002.html" media-type="application/xhtml+xml" id="item-009002"/>
+    <item href="sections/009/003.html" media-type="application/xhtml+xml" id="item-009003"/>
+    <item href="sections/010/section.html" media-type="application/xhtml+xml" id="item-010"/>
+    <item href="sections/010/000.html" media-type="application/xhtml+xml" id="item-010000"/>
+    <item href="sections/010/001.html" media-type="application/xhtml+xml" id="item-010001"/>
+    <item href="sections/011/section.html" media-type="application/xhtml+xml" id="item-011"/>
+    <item href="sections/011/000.html" media-type="application/xhtml+xml" id="item-011000"/>
+    <item href="sections/011/001.html" media-type="application/xhtml+xml" id="item-011001"/>
+    <item href="sections/011/002.html" media-type="application/xhtml+xml" id="item-011002"/>
+    <item href="sections/011/003.html" media-type="application/xhtml+xml" id="item-011003"/>
+    <item href="sections/011/004.html" media-type="application/xhtml+xml" id="item-011004"/>
+    <item href="sections/011/005.html" media-type="application/xhtml+xml" id="item-011005"/>
+    <item href="sections/012/section.html" media-type="application/xhtml+xml" id="item-012"/>
+    <item href="sections/012/000.html" media-type="application/xhtml+xml" id="item-012000"/>
+    <item href="sections/012/001.html" media-type="application/xhtml+xml" id="item-012001"/>
+    <item href="sections/012/002.html" media-type="application/xhtml+xml" id="item-012002"/>
+    <item href="sections/012/003.html" media-type="application/xhtml+xml" id="item-012003"/>
+    <item href="sections/012/004.html" media-type="application/xhtml+xml" id="item-012004"/>
+    <item href="sections/013/section.html" media-type="application/xhtml+xml" id="item-013"/>
+    <item href="sections/013/000.html" media-type="application/xhtml+xml" id="item-013000"/>
+    <item href="sections/014/section.html" media-type="application/xhtml+xml" id="item-014"/>
+    <item href="sections/014/000.html" media-type="application/xhtml+xml" id="item-014000"/>
+    <item href="sections/014/001.html" media-type="application/xhtml+xml" id="item-014001"/>
+    <item href="sections/014/002.html" media-type="application/xhtml+xml" id="item-014002"/>
+    <item href="sections/014/003.html" media-type="application/xhtml+xml" id="item-014003"/>
+    <item href="sections/014/004.html" media-type="application/xhtml+xml" id="item-014004"/>
+    <item href="sections/014/005.html" media-type="application/xhtml+xml" id="item-014005"/>
+    <item href="sections/014/006.html" media-type="application/xhtml+xml" id="item-014006"/>
+    <item href="sections/015/section.html" media-type="application/xhtml+xml" id="item-015"/>
+    <item href="sections/015/000.html" media-type="application/xhtml+xml" id="item-015000"/>
+    <item href="sections/015/001.html" media-type="application/xhtml+xml" id="item-015001"/>
+    <item href="sections/015/002.html" media-type="application/xhtml+xml" id="item-015002"/>
+    <item href="sections/016/section.html" media-type="application/xhtml+xml" id="item-016"/>
+    <item href="sections/016/000.html" media-type="application/xhtml+xml" id="item-016000"/>
+    <item href="/home/admin/es2015/cheerio-mobi-ts15/content/effective_go/processed_images/chart?chs&#x3D;300x300&amp;cht&#x3D;qr&amp;choe&#x3D;UTF-8&amp;chl&#x3D;{{-grayscale.gif" media-type="image/gif" id="img-000"/>
+  </manifest>
+  <spine toc="nav-contents">
+    <itemref idref="contents"/>
+    <itemref idref="item-000"/>
+    <itemref idref="item-000000"/>
+    <itemref idref="item-001"/>
+    <itemref idref="item-001000"/>
+    <itemref idref="item-001001"/>
+    <itemref idref="item-002"/>
+    <itemref idref="item-002000"/>
+    <itemref idref="item-003"/>
+    <itemref idref="item-003000"/>
+    <itemref idref="item-004"/>
+    <itemref idref="item-004000"/>
+    <itemref idref="item-004001"/>
+    <itemref idref="item-004002"/>
+    <itemref idref="item-004003"/>
+    <itemref idref="item-004004"/>
+    <itemref idref="item-005"/>
+    <itemref idref="item-005000"/>
+    <itemref idref="item-006"/>
+    <itemref idref="item-006000"/>
+    <itemref idref="item-006001"/>
+    <itemref idref="item-006002"/>
+    <itemref idref="item-006003"/>
+    <itemref idref="item-006004"/>
+    <itemref idref="item-006005"/>
+    <itemref idref="item-007"/>
+    <itemref idref="item-007000"/>
+    <itemref idref="item-007001"/>
+    <itemref idref="item-007002"/>
+    <itemref idref="item-007003"/>
+    <itemref idref="item-008"/>
+    <itemref idref="item-008000"/>
+    <itemref idref="item-008001"/>
+    <itemref idref="item-008002"/>
+    <itemref idref="item-008003"/>
+    <itemref idref="item-008004"/>
+    <itemref idref="item-008005"/>
+    <itemref idref="item-008006"/>
+    <itemref idref="item-008007"/>
+    <itemref idref="item-008008"/>
+    <itemref idref="item-008009"/>
+    <itemref idref="item-009"/>
+    <itemref idref="item-009000"/>
+    <itemref idref="item-009001"/>
+    <itemref idref="item-009002"/>
+    <itemref idref="item-009003"/>
+    <itemref idref="item-010"/>
+    <itemref idref="item-010000"/>
+    <itemref idref="item-010001"/>
+    <itemref idref="item-011"/>
+    <itemref idref="item-011000"/>
+    <itemref idref="item-011001"/>
+    <itemref idref="item-011002"/>
+    <itemref idref="item-011003"/>
+    <itemref idref="item-011004"/>
+    <itemref idref="item-011005"/>
+    <itemref idref="item-012"/>
+    <itemref idref="item-012000"/>
+    <itemref idref="item-012001"/>
+    <itemref idref="item-012002"/>
+    <itemref idref="item-012003"/>
+    <itemref idref="item-012004"/>
+    <itemref idref="item-013"/>
+    <itemref idref="item-013000"/>
+    <itemref idref="item-014"/>
+    <itemref idref="item-014000"/>
+    <itemref idref="item-014001"/>
+    <itemref idref="item-014002"/>
+    <itemref idref="item-014003"/>
+    <itemref idref="item-014004"/>
+    <itemref idref="item-014005"/>
+    <itemref idref="item-014006"/>
+    <itemref idref="item-015"/>
+    <itemref idref="item-015000"/>
+    <itemref idref="item-015001"/>
+    <itemref idref="item-015002"/>
+    <itemref idref="item-016"/>
+    <itemref idref="item-016000"/>
+  </spine>
+  <guide>
+    <reference href="contents.html" type="toc" title="Table of Contents"/>
+    <reference href="sections/000/000.html" type="text" title="Beginning"/>
+  </guide>
+</package>

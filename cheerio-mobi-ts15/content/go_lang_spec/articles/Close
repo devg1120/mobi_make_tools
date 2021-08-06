@@ -1,0 +1,12 @@
+<body><p>
+For a channel <code>c</code>, the built-in function <code>close(c)</code>
+records that no more values will be sent on the channel.
+It is an error if <code>c</code> is a receive-only channel.
+Sending to or closing a closed channel causes a [<a>run-time panic</a>].
+Closing the nil channel also causes a [<a>run-time panic</a>].
+After calling <code>close</code>, and after any previously
+sent values have been received, receive operations will return
+the zero value for the channel's type without blocking.
+The multi-valued [<a>receive operation</a>]
+returns a received value along with an indication of whether the channel is closed.
+</p></body>

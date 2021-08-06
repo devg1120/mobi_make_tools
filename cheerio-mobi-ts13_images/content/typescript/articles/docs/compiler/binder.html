@@ -1,0 +1,24 @@
+<h2 id="binder">Binder</h2>
+<p>Most JavaScript transpilers out there are simpler than TypeScript because they provide little in the way of code analysis. The typical JavaScript transpilers only have the following flow:</p>
+<pre><code class="lang-ts">SourceCode ~~Scanner~~> Tokens ~~Parser~~> AST ~~Emitter~~> JavaScript
+</code></pre>
+<p>While the above architecture is true as a simplified understanding of TypeScript js generation, a key feature of TypeScript is its <em>Semantic</em> system. In order to assist type checking (performed by the <code>checker</code>), the <code>binder</code> (in <code>binder.ts</code>) is used to connect the various parts of the source code into a coherent type system that can then be used by the <code>checker</code>. The main responsibility of the binder is to create <em>Symbols</em>.</p>
+<h3 id="symbol">Symbol</h3>
+<p>Symbols connect declaration nodes in the AST to other declarations contributing to the same entity. Symbols are the basic building blocks of the Semantic system. The symbol constructor is defined in <code>core.ts</code> (and <code>binder</code> actually uses the <code>objectAllocator.getSymbolConstructor</code> to get its hands on it). Here is the symbol constructor:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Symbol</span>(<span class="hljs-params">flags: SymbolFlags, name: <span class="hljs-built_in">string</span></span>) </span>{
+    <span class="hljs-keyword">this</span>.flags = flags;
+    <span class="hljs-keyword">this</span>.name = name;
+    <span class="hljs-keyword">this</span>.declarations = <span class="hljs-literal">undefined</span>;
+}
+</code></pre>
+<p><code>SymbolFlags</code> is a flag enum and is really used to identify additional classifications of the symbol (e.g. variable scope flags <code>FunctionScopedVariable</code> or <code>BlockScopedVariable</code> among others)</p>
+<h3 id="usage-by-checker">Usage by Checker</h3>
+<p>The <code>binder</code> is actually used internally by the type <code>checker</code> which in turn is used by the <code>program</code>. The simplified call stack looks like:</p>
+<pre><code>program.getTypeChecker ->
+    ts.createTypeChecker (in checker)->
+        initializeTypeChecker (in checker) ->
+            for each SourceFile `ts.bindSourceFile` (in binder)
+            // followed by
+            for each SourceFile `ts.mergeSymbolTable` (in checker)
+</code></pre>
+<p>The unit of work for the binder is a SourceFile. The <code>binder.ts</code> is driven by <code>checker.ts</code>.</p>

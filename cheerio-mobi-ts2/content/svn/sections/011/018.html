@@ -1,0 +1,361 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svn log</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts2/css/kindle.css" />
+  </head>
+   <body>
+    <div class="refentry">
+      <a id="svn.ref.svn.c.log"></a>
+      <div class="titlepage"></div>
+      <a id="idm10219" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svn log — Display commit log messages.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm10226"></a>
+        <h2>Synopsis</h2>
+        <p>
+          <code class="literal">svn log [PATH]</code>
+        </p>
+        <p>
+          <code class="literal">svn log URL[@REV] [PATH...]</code>
+        </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm10232"></a>
+        <h2>Description</h2>
+        <p>Shows log messages from the repository.
+            If no arguments are supplied, <span class="command"><strong>svn
+            log</strong></span> shows the log messages for all files and
+            directories inside (and including) the current working
+            directory of your working copy.  You can refine the
+            results by specifying a path, one or more revisions, or
+            any combination of the two.  The default revision range
+            for a local path is <code class="literal">BASE:1</code>.</p>
+        <p>If you specify a URL alone, it prints log
+            messages for everything the URL contains.  If you
+            add paths past the URL, only messages for those paths
+            under that URL will be printed.  The default revision range
+            for a URL is <code class="literal">HEAD:1</code>.</p>
+        <p>With <code class="option">--verbose</code>
+            (<code class="option">-v</code>), <span class="command"><strong>svn log</strong></span> will
+            also print all affected paths with each log message.
+            With <code class="option">--quiet</code>
+            (<code class="option">-q</code>), <span class="command"><strong>svn log</strong></span> will not
+            print the log message body itself, this is compatible
+            with <code class="option">--verbose</code>
+            (<code class="option">-v</code>).</p>
+        <p>Each log message is printed just once, even if more
+            than one of the affected paths for that revision were
+            explicitly requested.  Logs follow copy history by
+            default.  Use <code class="option">--stop-on-copy</code> to disable
+            this behavior, which can be useful for determining branch
+            points.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm10250"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+          <pre class="screen">
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.change"><code class="option">--change</code> (<code class="option">-c</code>) <em class="replaceable"><code>ARG</code></em></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.depth"><code class="option">--depth</code> <em class="replaceable"><code>ARG</code></em></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.diff"><code class="option">--diff</code></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.diff_cmd"><code class="option">--diff-cmd</code> <em class="replaceable"><code>CMD</code></em></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.extensions"><code class="option">--extensions</code> (<code class="option">-x</code>) <em class="replaceable"><code>ARG</code></em></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.incremental"><code class="option">--incremental</code></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.internal_diff"><code class="option">--internal-diff</code></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.limit"><code class="option">--limit</code> (<code class="option">-l</code>) <em class="replaceable"><code>NUM</code></em></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.quiet"><code class="option">--quiet</code> (<code class="option">-q</code>)</a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.revision"><code class="option">--revision</code> (<code class="option">-r</code>) <em class="replaceable"><code>REV</code></em></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.stop_on_copy"><code class="option">--stop-on-copy</code></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.targets"><code class="option">--targets</code> <em class="replaceable"><code>FILENAME</code></em></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.use_merge_history"><code class="option">--use-merge-history</code> (<code class="option">-g</code>)</a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.verbose"><code class="option">--verbose</code> (<code class="option">-v</code>)</a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.with_all_revprops"><code class="option">--with-all-revprops</code></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.with_no_revprops"><code class="option">--with-no-revprops</code></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.with_revprop"><code class="option">--with-revprop</code> <em class="replaceable"><code>ARG</code></em></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.xml"><code class="option">--xml</code></a>
+</pre>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm10272"></a>
+        <h2>Examples</h2>
+        <p>You can see the log messages for all the paths that
+            changed in your working copy by running <strong class="userinput"><code>svn
+            log</code></strong> from the top:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn log
+------------------------------------------------------------------------
+r20 | harry | 2003-01-17 22:56:19 -0600 (Fri, 17 Jan 2003) | 1 line
+Tweak.
+------------------------------------------------------------------------
+r17 | sally | 2003-01-16 23:21:19 -0600 (Thu, 16 Jan 2003) | 2 lines
+…
+</pre>
+        </div>
+        <p>Examine all log messages for a particular file in
+            your working copy:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn log foo.c
+------------------------------------------------------------------------
+r32 | sally | 2003-01-13 00:43:13 -0600 (Mon, 13 Jan 2003) | 1 line
+Added defines.
+------------------------------------------------------------------------
+r28 | sally | 2003-01-07 21:48:33 -0600 (Tue, 07 Jan 2003) | 3 lines
+…
+</pre>
+        </div>
+        <p>If you don't have a working copy handy, you can log
+            a URL:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn log http://svn.red-bean.com/repos/test/foo.c
+------------------------------------------------------------------------
+r32 | sally | 2003-01-13 00:43:13 -0600 (Mon, 13 Jan 2003) | 1 line
+Added defines.
+------------------------------------------------------------------------
+r28 | sally | 2003-01-07 21:48:33 -0600 (Tue, 07 Jan 2003) | 3 lines
+…
+</pre>
+        </div>
+        <p>If you want several distinct paths underneath the
+            same URL, you can use the <code class="literal">URL [PATH...]</code>
+            syntax:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn log http://svn.red-bean.com/repos/test/ foo.c bar.c
+------------------------------------------------------------------------
+r32 | sally | 2003-01-13 00:43:13 -0600 (Mon, 13 Jan 2003) | 1 line
+Added defines.
+------------------------------------------------------------------------
+r31 | harry | 2003-01-10 12:25:08 -0600 (Fri, 10 Jan 2003) | 1 line
+Added new file bar.c
+------------------------------------------------------------------------
+r28 | sally | 2003-01-07 21:48:33 -0600 (Tue, 07 Jan 2003) | 3 lines
+…
+</pre>
+        </div>
+        <p>The <code class="option">--verbose</code> (<code class="option">-v</code>)
+            option causes <span class="command"><strong>svn log</strong></span> to include
+            information about the paths that were changed in each
+            displayed revision.  These paths appear, one path per line
+            of output, with action codes that indicate what type of
+            change was made to the path.</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn log -v http://svn.red-bean.com/repos/test/ foo.c bar.c
+------------------------------------------------------------------------
+r32 | sally | 2003-01-13 00:43:13 -0600 (Mon, 13 Jan 2003) | 1 line
+Changed paths:
+   M /foo.c
+Added defines.
+------------------------------------------------------------------------
+r31 | harry | 2003-01-10 12:25:08 -0600 (Fri, 10 Jan 2003) | 1 line
+Changed paths:
+   A /bar.c
+Added new file bar.c
+------------------------------------------------------------------------
+r28 | sally | 2003-01-07 21:48:33 -0600 (Tue, 07 Jan 2003) | 3 lines
+…
+</pre>
+        </div>
+        <p><span class="command"><strong>svn log</strong></span> uses just a handful of action codes,
+            and they are similar to the
+            ones the <span class="command"><strong>svn update</strong></span>
+            command uses:</p>
+        <div class="variablelist">
+          <dl class="variablelist">
+            <dt>
+              <span class="term">
+                <code class="literal">A</code>
+              </span>
+            </dt>
+            <dd>
+              <p>The item was added.</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">D</code>
+              </span>
+            </dt>
+            <dd>
+              <p>The item was deleted.</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">M</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Properties or textual contents on the
+                item were changed.</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">R</code>
+              </span>
+            </dt>
+            <dd>
+              <p>The item was replaced by a different one
+                at the same location.</p>
+            </dd>
+          </dl>
+        </div>
+        <p>In addition to the action codes which precede the
+            changed paths, <span class="command"><strong>svn log</strong></span> with
+            the <code class="option">--verbose</code> (<code class="option">-v</code>)
+            option will note whether a path was added or replaced as
+            the result of a copy operation.  It does so by
+            printing <code class="literal">(from
+            <em class="replaceable"><code>COPY-FROM-PATH</code></em>:<em class="replaceable"><code>COPY-FROM-REV</code></em>)</code>
+            after such paths.</p>
+        <p>When you're concatenating the results of multiple
+            calls to the log command, you may want to use the
+            <code class="option">--incremental</code> option. <span class="command"><strong>svn
+            log</strong></span> normally prints out a dashed line at the
+            beginning of a log message, after each subsequent log
+            message, and following the final log message.  If you
+            ran <span class="command"><strong>svn log</strong></span> on a range of two
+            revisions, you would get this:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn log -r 14:15
+------------------------------------------------------------------------
+r14 | …
+------------------------------------------------------------------------
+r15 | …
+------------------------------------------------------------------------
+</pre>
+        </div>
+        <p>However, if you wanted to gather two nonsequential log
+            messages into a file, you might do something like
+            this:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn log -r 14 > mylog
+$ svn log -r 19 >> mylog
+$ svn log -r 27 >> mylog
+$ cat mylog
+------------------------------------------------------------------------
+r14 | …
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+r19 | …
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+r27 | …
+------------------------------------------------------------------------
+</pre>
+        </div>
+        <p>You can avoid the clutter of the double dashed lines
+            in your output by using the <code class="option">--incremental</code>
+            option:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn log --incremental -r 14 > mylog
+$ svn log --incremental -r 19 >> mylog
+$ svn log --incremental -r 27 >> mylog
+$ cat mylog
+------------------------------------------------------------------------
+r14 | …
+------------------------------------------------------------------------
+r19 | …
+------------------------------------------------------------------------
+r27 | …
+</pre>
+        </div>
+        <p>The <code class="option">--incremental</code> option provides
+            similar output control when using the
+            <code class="option">--xml</code> option:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn log --xml --incremental -r 1 sandwich.txt
+<logentry
+   revision="1">
+<author>harry</author>
+<date>2008-06-03T06:35:53.048870Z</date>
+<msg>Initial Import.</msg>
+</logentry>
+</pre>
+        </div>
+        <div class="tip" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Tip">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Tip]" src="images/tip.png">
+              </td>
+              <th align="left">Tip</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>Sometimes when you run <span class="command"><strong>svn log</strong></span> on
+              a specific path and a specific revision, you see no log
+              information output at all, as in the following:</p>
+                <div class="informalexample">
+                  <pre class="screen">
+$ svn log -r 20 http://svn.red-bean.com/untouched.txt
+------------------------------------------------------------------------
+</pre>
+                </div>
+                <p>That just means the path wasn't modified in that
+              revision.  To get log information for that revision,
+              either run the log operation against the repository's
+              root URL, or specify a path that you happen to know was
+              changed in that revision:</p>
+                <div class="informalexample">
+                  <pre class="screen">
+$ svn log -r 20 touched.txt 
+------------------------------------------------------------------------
+r20 | sally | 2003-01-17 22:56:19 -0600 (Fri, 17 Jan 2003) | 1 line
+Made a change.
+------------------------------------------------------------------------
+</pre>
+                </div>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <p>Beginning with Subversion 1.7, users can take
+            advantage of a special output mode which combines the
+            information from <span class="command"><strong>svn log</strong></span> with what you
+            would see when running <span class="command"><strong>svn diff</strong></span> on the
+            same targets for each revision of the log.  Simply
+            invoke <span class="command"><strong>svn log</strong></span> with
+            the <code class="option">--diff</code> option to trigger this output
+            mode.</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn log -r 20 touched.txt --diff
+------------------------------------------------------------------------
+r20 | sally | 2003-01-17 22:56:19 -0600 (Fri, 17 Jan 2003) | 1 line
+Made a change.
+Index: touched.txt
+===================================================================
+--- touched.txt	(revision 19)
++++ touched.txt	(revision 20)
+@@ -1 +1,2 @@
+ This is the file 'touched.txt'.
++We add such exciting text to files around here!
+------------------------------------------------------------------------
+$
+</pre>
+        </div>
+        <p>As with <span class="command"><strong>svn diff</strong></span>, you may also make
+            use of many of the various options which control the way
+            the difference is generated,
+            including <code class="option">--depth</code>, <code class="option">--diff-cmd</code>,
+            and <code class="option">--extensions</code>
+            (<code class="option">-x</code>).</p>
+      </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,9 @@
+<h2 id="program">Program</h2>
+<p>Defined in <code>program.ts</code>. The compilation context (<a href="../project/compilation-context.html">a concept we covered previously</a>) is represented within the TypeScript compiler as a <code>Program</code>. It consists of <code>SourceFile</code>s and compiler options.</p>
+<h3 id="usage-of-compilerhost">Usage of <code>CompilerHost</code></h3>
+<p>Its interaction mechanism with the OE:</p>
+<p><code>Program</code> <em>-uses-></em> <code>CompilerHost</code> <em>-uses-></em> <code>System</code></p>
+<p>The reason for having a <code>CompilerHost</code> as a point of indirection is that it allows its interface to be more finely tuned for <code>Program</code> needs and not bother with OE needs (e.g. the <code>Program</code> doesn't care about <code>fileExists</code> a function provided by <code>System</code>).</p>
+<p>There are other users of <code>System</code> as well (e.g. tests).</p>
+<h3 id="sourcefile">SourceFile</h3>
+<p>The program provides an API to get the Source Files <code>getSourceFiles(): SourceFile[];</code>. Each is represented as a root-level node for an AST (called <code>SourceFile</code>).</p>

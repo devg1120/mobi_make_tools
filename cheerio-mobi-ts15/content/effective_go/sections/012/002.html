@@ -1,0 +1,72 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Unused imports and variables</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+It is an error to import a package or to declare a variable without using it.
+Unused imports bloat the program and slow compilation,
+while a variable that is initialized but not used is at least
+a wasted computation and perhaps indicative of a
+larger bug.
+When a program is under active development, however,
+unused imports and variables often arise and it can
+be annoying to delete them just to have the compilation proceed,
+only to have them be needed again later.
+The blank identifier provides a workaround.
+</p><p>
+This half-written program has two unused imports
+(<code>fmt</code> and <code>io</code>)
+and an unused variable (<code>fd</code>),
+so it will not compile, but it would be nice to see if the
+code so far is correct.
+</p><pre>{{code &quot;/doc/progs/eff_unused1.go&quot; `/package/` &quot;$&quot;}}
+package main
+import (
+    &quot;fmt&quot;
+    &quot;io&quot;
+    &quot;log&quot;
+    &quot;os&quot;
+)
+func main() {
+    fd, err := os.Open(&quot;test.go&quot;)
+    if err != nil {
+        log.Fatal(err)
+    }
+    <span>// TODO: use fd.</span>
+}</pre><p>
+To silence complaints about the unused imports, use a
+blank identifier to refer to a symbol from the imported package.
+Similarly, assigning the unused variable <code>fd</code>
+to the blank identifier will silence the unused variable error.
+This version of the program does compile.
+</p><pre>{{code &quot;/doc/progs/eff_unused2.go&quot; `/package/` &quot;$&quot;}}
+package main
+import (
+    &quot;fmt&quot;
+    &quot;io&quot;
+    &quot;log&quot;
+    &quot;os&quot;
+)
+var _ = fmt.Printf <span>// For debugging; delete when done.</span>
+var _ io.Reader    <span>// For debugging; delete when done.</span>
+func main() {
+    fd, err := os.Open(&quot;test.go&quot;)
+    if err != nil {
+        log.Fatal(err)
+    }
+    <span>// TODO: use fd.</span>
+    _ = fd
+}</pre><p>
+By convention, the global declarations to silence import errors
+should come right after the imports and be commented,
+both to make them easy to find and as a reminder to clean things up later.
+</p></body>
+</body>
+</html>

@@ -1,0 +1,53 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Defer statements</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+A &quot;defer&quot; statement invokes a function whose execution is deferred
+to the moment the surrounding function returns, either because the
+surrounding function executed a [<a>return statement</a>],
+reached the end of its [<a>function body</a>],
+or because the corresponding goroutine is [<a>panicking</a>].
+</p><pre>
+[<a>DeferStmt</a>] = &quot;defer&quot; [<a>Expression</a>] .
+</pre><p>
+The expression must be a function or method call; it cannot be parenthesized.
+Calls of built-in functions are restricted as for
+[<a>expression statements</a>].
+</p><p>
+Each time a &quot;defer&quot; statement
+executes, the function value and parameters to the call are
+[<a>evaluated as usual</a>]
+and saved anew but the actual function is not invoked.
+Instead, deferred functions are invoked immediately before
+the surrounding function returns, in the reverse order
+they were deferred. That is, if the surrounding function
+returns through an explicit [<a>return statement</a>],
+deferred functions are executed <i>after</i> any result parameters are set
+by that return statement but <i>before</i> the function returns to its caller.
+If a deferred function value evaluates
+to <code>nil</code>, execution [<a>panics</a>]
+when the function is invoked, not when the &quot;defer&quot; statement is executed.
+</p><p>
+For instance, if the deferred function is
+a [<a>function literal</a>] and the surrounding
+function has [<a>named result parameters</a>] that
+are in scope within the literal, the deferred function may access and modify
+the result parameters before they are returned.
+If the deferred function has any return values, they are discarded when
+the function completes.
+(See also the section on [<a>handling panics</a>].)
+</p><pre>
+lock(l)
+defer unlock(l)  // unlocking happens before surrounding function returns
+// prints 3 2 1 0 before surrounding function returns
+for i := 0; i <= 6 42 3; i++ { defer fmt.print(i) } f returns func f() (result int) func() result is accessed after it was set to by the return statement *="7" }() < pre></=></pre></body>
+</body>
+</html>

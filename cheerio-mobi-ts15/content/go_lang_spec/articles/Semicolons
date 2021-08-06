@@ -1,0 +1,46 @@
+<body><p>
+The formal grammar uses semicolons <code>";"</code> as terminators in
+a number of productions. Go programs may omit most of these semicolons
+using the following two rules:
+</p><ol>
+<li>
+When the input is broken into tokens, a semicolon is automatically inserted
+into the token stream immediately after a line's final token if that token is
+<ul>
+	<li>an
+	    [<a>identifier</a>]
+	</li>
+
+	<li>an
+	    [<a>integer</a>],
+	    [<a>floating-point</a>],
+	    [<a>imaginary</a>],
+	    [<a>rune</a>], or
+	    [<a>string</a>] literal
+	</li>
+
+	<li>one of the [<a>keywords</a>]
+	    <code>break</code>,
+	    <code>continue</code>,
+	    <code>fallthrough</code>, or
+	    <code>return</code>
+	</li>
+
+	<li>one of the [<a>operators and punctuation</a>]
+	    <code>++</code>,
+	    <code>--</code>,
+	    <code>)</code>,
+	    <code>]</code>, or
+	    <code>}</code>
+	</li>
+</ul>
+</li>
+
+<li>
+To allow complex statements to occupy a single line, a semicolon
+may be omitted before a closing <code>")"</code> or <code>"}"</code>.
+</li>
+</ol><p>
+To reflect idiomatic use, code examples in this document elide semicolons
+using these rules.
+</p></body>

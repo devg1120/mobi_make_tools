@@ -1,0 +1,25 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Checker Diagnostics
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts14/undefined" />
+  </head>
+   <body>
+<h3 id="global-namespace-merging">Global Namespace Merging</h3>
+<p>Within <code>initializeTypeChecker</code> the following code exists:</p>
+<pre><code class="lang-ts"><span class="hljs-comment">// Initialize global symbol table</span>
+forEach(host.getSourceFiles(), file =&gt; {
+    <span class="hljs-keyword">if</span> (!isExternalModule(file)) {
+        mergeSymbolTable(globals, file.locals);
+    }
+});
+</code></pre>
+<p>Which basically merges all the <code>global</code> symbols into the <code>let globals: SymbolTable = {};</code> (in <code>createTypeChecker</code>) SymbolTable. <code>mergeSymbolTable</code> primarily calls <code>mergeSymbol</code>.</p>
+</body>
+</html>

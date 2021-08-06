@@ -1,0 +1,25 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Close</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+For a channel <code>c</code>, the built-in function <code>close(c)</code>
+records that no more values will be sent on the channel.
+It is an error if <code>c</code> is a receive-only channel.
+Sending to or closing a closed channel causes a [<a>run-time panic</a>].
+Closing the nil channel also causes a [<a>run-time panic</a>].
+After calling <code>close</code>, and after any previously
+sent values have been received, receive operations will return
+the zero value for the channel&apos;s type without blocking.
+The multi-valued [<a>receive operation</a>]
+returns a received value along with an indication of whether the channel is closed.
+</p></body>
+</body>
+</html>

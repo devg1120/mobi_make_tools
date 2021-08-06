@@ -1,0 +1,25 @@
+<h2 id="which-files">Which files?</h2>
+<p>Use <code>include</code> and <code>exclude</code> to specify files / folders / globs. E.g.:</p>
+<pre><code class="lang-json">{
+    <span class="hljs-string">"include"</span>:[
+        <span class="hljs-string">"./folder"</span>
+    ],
+    <span class="hljs-string">"exclude"</span>:[
+        <span class="hljs-string">"./folder/**/*.spec.ts"</span>,
+        <span class="hljs-string">"./folder/someSubFolder"</span>
+    ]
+}
+</code></pre>
+<h3 id="globs">Globs</h3>
+<ul>
+    <li>For globs : <code>**/*</code> (e.g. sample usage <code>somefolder/**/*</code>) means all folder and any files (the extensions <code>.ts</code>/<code>.tsx</code> will be assumed and if <code>allowJs:true</code> so will <code>.js</code>/<code>.jsx</code>)</li>
+</ul>
+<h3 id="files-option"><code>files</code> option</h3>
+<p>You can either use <code>files</code> to be explicit. </p>
+<pre><code class="lang-json">{
+    <span class="hljs-string">"files"</span>:[
+        <span class="hljs-string">"./some/file.ts"</span>
+    ]
+}
+</code></pre>
+<p>But it is not recommended as you have to keep updating it. Instead use <code>include</code> to just add the containing folder. </p>

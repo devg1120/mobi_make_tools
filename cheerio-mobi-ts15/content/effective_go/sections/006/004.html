@@ -1,0 +1,91 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Switch</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+Go&apos;s <code>switch</code> is more general than C&apos;s.
+The expressions need not be constants or even integers,
+the cases are evaluated top to bottom until a match is found,
+and if the <code>switch</code> has no expression it switches on
+<code>true</code>.
+It&apos;s therefore possible&#x2014;and idiomatic&#x2014;to write an
+<code>if</code>-<code>else</code>-<code>if</code>-<code>else</code>
+chain as a <code>switch</code>.
+</p><pre>
+func unhex(c byte) byte {
+    switch {
+    case &apos;0&apos; <= 0 10 c && <="9" : return - '0' case 'a' + } pre><p>
+There is no automatic fall through, but cases can be presented
+in comma-separated lists.
+</p><pre>
+func shouldEscape(c byte) bool {
+    switch c {
+    case &apos; &apos;, &apos;?&apos;, &apos;&amp;&apos;, &apos;=&apos;, &apos;#&apos;, &apos;+&apos;, &apos;%&apos;:
+        return true
+    }
+    return false
+}
+</pre><p>
+Although they are not nearly as common in Go as some other C-like
+languages, <code>break</code> statements can be used to terminate
+a <code>switch</code> early.
+Sometimes, though, it&apos;s necessary to break out of a surrounding loop,
+not the switch, and in Go that can be accomplished by putting a label
+on the loop and &quot;breaking&quot; to that label.
+This example shows both uses.
+</p><pre>
+Loop:
+	for n := 0; n &lt; len(src); n += size {
+		switch {
+		case src[n] &lt; sizeOne:
+			if validateOnly {
+				break
+			}
+			size = 1
+			update(src[n])
+		case src[n] &lt; sizeTwo:
+			if n+1 &gt;= len(src) {
+				err = errShortInput
+				break Loop
+			}
+			if validateOnly {
+				break
+			}
+			size = 2
+			update(src[n] + src[n+1]&lt;<shift) } < pre><p>
+Of course, the <code>continue</code> statement also accepts an optional label
+but it applies only to loops.
+</p><p>
+To close this section, here&apos;s a comparison routine for byte slices that uses two
+<code>switch</code> statements:
+</p><pre>
+// Compare returns an integer comparing the two byte slices,
+// lexicographically.
+// The result will be 0 if a == b, -1 if a &lt; b, and +1 if a &gt; b
+func Compare(a, b []byte) int {
+    for i := 0; i &lt; len(a) &amp;&amp; i &lt; len(b); i++ {
+        switch {
+        case a[i] &gt; b[i]:
+            return 1
+        case a[i] &lt; b[i]:
+            return -1
+        }
+    }
+    switch {
+    case len(a) &gt; len(b):
+        return 1
+    case len(a) &lt; len(b):
+        return -1
+    }
+    return 0
+}
+</pre></shift)></pre></=></pre></body>
+</body>
+</html>

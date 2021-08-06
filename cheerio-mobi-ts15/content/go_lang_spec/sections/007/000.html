@@ -1,0 +1,51 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Types</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+A type determines a set of values together with operations and methods specific
+to those values. A type may be denoted by a <i>type name</i>, if it has one,
+or specified using a <i>type literal</i>, which composes a type from existing types.
+</p><pre>
+[<a>Type</a>]      = [<a>TypeName</a>] | [<a>TypeLit</a>] | &quot;(&quot; [<a>Type</a>] &quot;)&quot; .
+[<a>TypeName</a>]  = [<a>identifier</a>] | [<a>QualifiedIdent</a>] .
+[<a>TypeLit</a>]   = [<a>ArrayType</a>] | [<a>StructType</a>] | [<a>PointerType</a>] | [<a>FunctionType</a>] | [<a>InterfaceType</a>] |
+	    [<a>SliceType</a>] | [<a>MapType</a>] | [<a>ChannelType</a>] .
+</pre><p>
+The language [<a>predeclares</a>] certain type names.
+Others are introduced with [<a>type declarations</a>].
+<i>Composite types</i>&#x2014;array, struct, pointer, function,
+interface, slice, map, and channel types&#x2014;may be constructed using
+type literals.
+</p><p>
+Each type <code>T</code> has an <i>underlying type</i>: If <code>T</code>
+is one of the predeclared boolean, numeric, or string types, or a type literal,
+the corresponding underlying
+type is <code>T</code> itself. Otherwise, <code>T</code>&apos;s underlying type
+is the underlying type of the type to which <code>T</code> refers in its
+[<a>type declaration</a>].
+</p><pre>
+type (
+	A1 = string
+	A2 = A1
+)
+type (
+	B1 string
+	B2 B1
+	B3 []B1
+	B4 B3
+)
+</pre><p>
+The underlying type of <code>string</code>, <code>A1</code>, <code>A2</code>, <code>B1</code>,
+and <code>B2</code> is <code>string</code>.
+The underlying type of <code>[]B1</code>, <code>B3</code>, and <code>B4</code> is <code>[]B1</code>.
+</p></body>
+</body>
+</html>

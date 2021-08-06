@@ -1,0 +1,70 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>pre-unlock</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts7/undefined" />
+  </head>
+   <body>
+    <div class="refentry">
+      <a id="svn.ref.reposhooks.pre-unlock"></a>
+      <div class="titlepage"></div>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>pre-unlock &#x2014; Notification of a path unlock attempt.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm14621"></a>
+        <h2>Description</h2>
+        <p>The <code class="literal">pre-unlock</code> hook runs whenever
+          someone attempts to remove a lock on a file.  It can be used
+          to create policies that specify which users are allowed to
+          unlock particular paths.  It&apos;s particularly important for
+          determining policies about lock breakage.  If user A locks a
+          file, is user B allowed to break the lock?  What if the lock
+          is more than a week old?  These sorts of things can be
+          decided and enforced by the hook.</p>
+        <p>If the <code class="literal">pre-unlock</code> hook program
+          returns a nonzero exit value, the unlock action is aborted
+          and anything printed to <code class="filename">stderr</code> is marshalled back to the
+          client.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm14628"></a>
+        <h2>Input parameter(s)</h2>
+        <p>The command-line arguments passed to the hook program,
+          in order, are:</p>
+        <div class="orderedlist">
+          <ol class="orderedlist" type="1">
+            <li class="listitem">
+              <p>Repository path</p>
+            </li>
+            <li class="listitem">
+              <p>Versioned path which is to be unlocked</p>
+            </li>
+            <li class="listitem">
+              <p>Authenticated username of the person attempting the 
+              unlock</p>
+            </li>
+            <li class="listitem">
+              <p>Lock token associated with the lock which is to be
+              removed</p>
+            </li>
+            <li class="listitem">
+              <p><code class="literal">1</code> if the user is attempting to
+              break the lock; <code class="literal">0</code> otherwise</p>
+            </li>
+          </ol>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm14644"></a>
+        <h2>Common uses</h2>
+        <p>Access control</p>
+      </div>
+    </div>
+</body>
+</html>

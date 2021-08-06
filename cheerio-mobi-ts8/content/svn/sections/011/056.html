@@ -1,0 +1,59 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svnadmin setuuid</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/tmp/es2015/cheerio-mobi-ts8/undefined" />
+  </head>
+   <body>
+    <div class="refentry">
+      <a id="svn.ref.svnadmin.c.setuuid"></a>
+      <div class="titlepage"></div>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svnadmin setuuid &#x2014; Reset the repository UUID.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm12314"></a>
+        <h2>Synopsis</h2>
+        <p>
+          <code class="literal">svnadmin setuuid REPOS_PATH [NEW_UUID]</code>
+        </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm12318"></a>
+        <h2>Description</h2>
+        <p>Reset the repository UUID for the repository located
+            at <em class="replaceable"><code>REPOS_PATH</code></em>.
+            If <em class="replaceable"><code>NEW_UUID</code></em> is provided, use
+            that as the new repository UUID; otherwise, generate a
+            brand-new UUID for the repository.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm12323"></a>
+        <h2>Options</h2>
+        <p>None</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm12326"></a>
+        <h2>Examples</h2>
+        <p>If you&apos;ve <span class="command"><strong>svnsync</strong></span>ed <code class="filename">/var/svn/repos</code>
+            to <code class="filename">/var/svn/repos-new</code> and intend to use <code class="filename">repos-new</code> as your
+            canonical repository, you may want to change the UUID for
+            <code class="filename">repos-new</code> to the UUID of <code class="filename">repos</code> so that your users don&apos;t
+            have to check out a new working copy to accommodate the
+            change:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svnadmin setuuid /var/svn/repos-new 2109a8dd-854f-0410-ad31-d604008985ab
+</pre>
+        </div>
+        <p>As you can see, <span class="command"><strong>svnadmin setuuid</strong></span>
+            has no output upon success.</p>
+      </div>
+    </div>
+</body>
+</html>

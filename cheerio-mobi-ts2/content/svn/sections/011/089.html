@@ -1,0 +1,99 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svndumpfilter exclude</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts2/css/kindle.css" />
+  </head>
+   <body>
+    <div class="refentry">
+      <a id="svn.ref.svndumpfilter.commands.c.exclude"></a>
+      <div class="titlepage"></div>
+      <a id="idm13837" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svndumpfilter exclude — Filter out nodes with given prefixes from the dump stream.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm13844"></a>
+        <h2>Synopsis</h2>
+        <p>
+          <code class="literal">svndumpfilter exclude PATH_PREFIX...</code>
+        </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm13848"></a>
+        <h2>Description</h2>
+        <p>This can be used to exclude nodes that begin with one or
+            more <em class="replaceable"><code>PATH_PREFIX</code></em>es from a
+            filtered dump file.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm13852"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+          <pre class="screen">
+<a class="xref" href="svn.ref.svndumpfilter.html#svn.ref.svndumpfilter.sw.drop_empty_revs"><code class="option">--drop-empty-revs</code></a>
+<a class="xref" href="svn.ref.svndumpfilter.html#svn.ref.svndumpfilter.sw.pattern"><code class="option">--pattern</code></a>
+<a class="xref" href="svn.ref.svndumpfilter.html#svn.ref.svndumpfilter.sw.preserve_revprops"><code class="option">--preserve-revprops</code></a>
+<a class="xref" href="svn.ref.svndumpfilter.html#svn.ref.svndumpfilter.sw.quiet"><code class="option">--quiet</code></a>
+<a class="xref" href="svn.ref.svndumpfilter.html#svn.ref.svndumpfilter.sw.renumber_revs"><code class="option">--renumber-revs</code></a>
+<a class="xref" href="svn.ref.svndumpfilter.html#svn.ref.svndumpfilter.sw.skip_missing_merge_sources"><code class="option">--skip-missing-merge-sources</code></a>
+<a class="xref" href="svn.ref.svndumpfilter.html#svn.ref.svndumpfilter.sw.targets"><code class="option">--targets</code> <em class="replaceable"><code>FILENAME</code></em></a>
+</pre>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm13863"></a>
+        <h2>Examples</h2>
+        <p>If we have a dump file from a repository with a number
+            of different picnic-related directories in it, but we want
+            to keep everything <span class="emphasis"><em>except</em></span>
+            the <code class="filename">sandwiches</code> part of the
+            repository, we'll exclude only that path:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svndumpfilter exclude sandwiches < dumpfile > filtered-dumpfile
+Excluding prefixes:
+   '/sandwiches'
+Revision 0 committed as 0.
+Revision 1 committed as 1.
+Revision 2 committed as 2.
+Revision 3 committed as 3.
+Revision 4 committed as 4.
+Dropped 1 node(s):
+   '/sandwiches'
+$
+</pre>
+        </div>
+        <p>Beginning in Subversion 1.7,
+            <span class="command"><strong>svndumpfilter</strong></span> can optionally treat
+            the <em class="replaceable"><code>PATH_PREFIX</code></em>s not merely as
+            explicit substrings, but as file patterns instead.  So,
+            for example, if you wished to filter out paths which ended
+            with <code class="filename">.OLD</code>, you would do the
+            following:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svndumpfilter exclude --pattern "*.OLD" < dumpfile > filtered-dumpfile
+Excluding prefix patterns:
+   '/*.OLD'
+Revision 0 committed as 0.
+Revision 1 committed as 1.
+Revision 2 committed as 2.
+Revision 3 committed as 3.
+Revision 4 committed as 4.
+Dropped 3 node(s):
+   '/condiments/salt.OLD'
+   '/condiments/pepper.OLD'
+   '/toppings/cheese.OLD'
+$
+</pre>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

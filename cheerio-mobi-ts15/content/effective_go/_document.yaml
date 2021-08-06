@@ -1,0 +1,909 @@
+doc_uuid: effective_go-documetation-2019-11-07
+title: effective_go
+author: AUTHOR
+publisher: github.com/danchoi/kindlefodder
+subject: SUBJECT
+date: 2019-11-07-02/59/49
+mobi_outfile: effective_go.2019-11-07.mobi
+cover: /home/admin/es2015/cheerio-mobi-ts15/mobi_images/cover-image.gif
+masthead: /home/admin/es2015/cheerio-mobi-ts15/mobi_images/masthead.gif
+spine_items:
+  - idref: item-000
+  - idref: item-000000
+  - idref: item-001
+  - idref: item-001000
+  - idref: item-001001
+  - idref: item-002
+  - idref: item-002000
+  - idref: item-003
+  - idref: item-003000
+  - idref: item-004
+  - idref: item-004000
+  - idref: item-004001
+  - idref: item-004002
+  - idref: item-004003
+  - idref: item-004004
+  - idref: item-005
+  - idref: item-005000
+  - idref: item-006
+  - idref: item-006000
+  - idref: item-006001
+  - idref: item-006002
+  - idref: item-006003
+  - idref: item-006004
+  - idref: item-006005
+  - idref: item-007
+  - idref: item-007000
+  - idref: item-007001
+  - idref: item-007002
+  - idref: item-007003
+  - idref: item-008
+  - idref: item-008000
+  - idref: item-008001
+  - idref: item-008002
+  - idref: item-008003
+  - idref: item-008004
+  - idref: item-008005
+  - idref: item-008006
+  - idref: item-008007
+  - idref: item-008008
+  - idref: item-008009
+  - idref: item-009
+  - idref: item-009000
+  - idref: item-009001
+  - idref: item-009002
+  - idref: item-009003
+  - idref: item-010
+  - idref: item-010000
+  - idref: item-010001
+  - idref: item-011
+  - idref: item-011000
+  - idref: item-011001
+  - idref: item-011002
+  - idref: item-011003
+  - idref: item-011004
+  - idref: item-011005
+  - idref: item-012
+  - idref: item-012000
+  - idref: item-012001
+  - idref: item-012002
+  - idref: item-012003
+  - idref: item-012004
+  - idref: item-013
+  - idref: item-013000
+  - idref: item-014
+  - idref: item-014000
+  - idref: item-014001
+  - idref: item-014002
+  - idref: item-014003
+  - idref: item-014004
+  - idref: item-014005
+  - idref: item-014006
+  - idref: item-015
+  - idref: item-015000
+  - idref: item-015001
+  - idref: item-015002
+  - idref: item-016
+  - idref: item-016000
+sections:
+  - playorder: 2
+    path: sections/000
+    title: Frontmatter
+    idref: item-000
+    href: sections/000/section.html
+    articles:
+      - &ref_0
+        file: sections/000/000.html
+        href: sections/000/000.html
+        title: Title Page
+        short_title: Title Page
+        author: undefined
+        description: undefined
+        playorder: 3
+        idref: item-000000
+  - playorder: 4
+    path: sections/001
+    title: Introduction
+    idref: item-001
+    href: sections/001/section.html
+    articles:
+      - file: sections/001/000.html
+        href: sections/001/000.html
+        title: Introduction
+        short_title: Introduction
+        author: undefined
+        description: undefined
+        playorder: 5
+        idref: item-001000
+      - file: sections/001/001.html
+        href: sections/001/001.html
+        title: Examples
+        short_title: Examples
+        author: undefined
+        description: undefined
+        playorder: 6
+        idref: item-001001
+  - playorder: 7
+    path: sections/002
+    title: Formatting
+    idref: item-002
+    href: sections/002/section.html
+    articles:
+      - file: sections/002/000.html
+        href: sections/002/000.html
+        title: Formatting
+        short_title: Formatting
+        author: undefined
+        description: undefined
+        playorder: 8
+        idref: item-002000
+  - playorder: 9
+    path: sections/003
+    title: Commentary
+    idref: item-003
+    href: sections/003/section.html
+    articles:
+      - file: sections/003/000.html
+        href: sections/003/000.html
+        title: Commentary
+        short_title: Commentary
+        author: undefined
+        description: undefined
+        playorder: 10
+        idref: item-003000
+  - playorder: 11
+    path: sections/004
+    title: Names
+    idref: item-004
+    href: sections/004/section.html
+    articles:
+      - file: sections/004/000.html
+        href: sections/004/000.html
+        title: Names
+        short_title: Names
+        author: undefined
+        description: undefined
+        playorder: 12
+        idref: item-004000
+      - file: sections/004/001.html
+        href: sections/004/001.html
+        title: Package names
+        short_title: Package names
+        author: undefined
+        description: undefined
+        playorder: 13
+        idref: item-004001
+      - file: sections/004/002.html
+        href: sections/004/002.html
+        title: Getters
+        short_title: Getters
+        author: undefined
+        description: undefined
+        playorder: 14
+        idref: item-004002
+      - file: sections/004/003.html
+        href: sections/004/003.html
+        title: Interface names
+        short_title: Interface names
+        author: undefined
+        description: undefined
+        playorder: 15
+        idref: item-004003
+      - file: sections/004/004.html
+        href: sections/004/004.html
+        title: MixedCaps
+        short_title: MixedCaps
+        author: undefined
+        description: undefined
+        playorder: 16
+        idref: item-004004
+  - playorder: 17
+    path: sections/005
+    title: Semicolons
+    idref: item-005
+    href: sections/005/section.html
+    articles:
+      - file: sections/005/000.html
+        href: sections/005/000.html
+        title: Semicolons
+        short_title: Semicolons
+        author: undefined
+        description: undefined
+        playorder: 18
+        idref: item-005000
+  - playorder: 19
+    path: sections/006
+    title: Control structures
+    idref: item-006
+    href: sections/006/section.html
+    articles:
+      - file: sections/006/000.html
+        href: sections/006/000.html
+        title: Control structures
+        short_title: Control structures
+        author: undefined
+        description: undefined
+        playorder: 20
+        idref: item-006000
+      - file: sections/006/001.html
+        href: sections/006/001.html
+        title: If
+        short_title: If
+        author: undefined
+        description: undefined
+        playorder: 21
+        idref: item-006001
+      - file: sections/006/002.html
+        href: sections/006/002.html
+        title: Redeclaration and reassignment
+        short_title: Redeclaration and reassignment
+        author: undefined
+        description: undefined
+        playorder: 22
+        idref: item-006002
+      - file: sections/006/003.html
+        href: sections/006/003.html
+        title: For
+        short_title: For
+        author: undefined
+        description: undefined
+        playorder: 23
+        idref: item-006003
+      - file: sections/006/004.html
+        href: sections/006/004.html
+        title: Switch
+        short_title: Switch
+        author: undefined
+        description: undefined
+        playorder: 24
+        idref: item-006004
+      - file: sections/006/005.html
+        href: sections/006/005.html
+        title: Type switch
+        short_title: Type switch
+        author: undefined
+        description: undefined
+        playorder: 25
+        idref: item-006005
+  - playorder: 26
+    path: sections/007
+    title: Functions
+    idref: item-007
+    href: sections/007/section.html
+    articles:
+      - file: sections/007/000.html
+        href: sections/007/000.html
+        title: Functions
+        short_title: Functions
+        author: undefined
+        description: undefined
+        playorder: 27
+        idref: item-007000
+      - file: sections/007/001.html
+        href: sections/007/001.html
+        title: Multiple return values
+        short_title: Multiple return values
+        author: undefined
+        description: undefined
+        playorder: 28
+        idref: item-007001
+      - file: sections/007/002.html
+        href: sections/007/002.html
+        title: Named result parameters
+        short_title: Named result parameters
+        author: undefined
+        description: undefined
+        playorder: 29
+        idref: item-007002
+      - file: sections/007/003.html
+        href: sections/007/003.html
+        title: Defer
+        short_title: Defer
+        author: undefined
+        description: undefined
+        playorder: 30
+        idref: item-007003
+  - playorder: 31
+    path: sections/008
+    title: Data
+    idref: item-008
+    href: sections/008/section.html
+    articles:
+      - file: sections/008/000.html
+        href: sections/008/000.html
+        title: Data
+        short_title: Data
+        author: undefined
+        description: undefined
+        playorder: 32
+        idref: item-008000
+      - file: sections/008/001.html
+        href: sections/008/001.html
+        title: 'Allocation with '
+        short_title: 'Allocation with '
+        author: undefined
+        description: undefined
+        playorder: 33
+        idref: item-008001
+      - file: sections/008/002.html
+        href: sections/008/002.html
+        title: Constructors and composite literals
+        short_title: Constructors and composite literals
+        author: undefined
+        description: undefined
+        playorder: 34
+        idref: item-008002
+      - file: sections/008/003.html
+        href: sections/008/003.html
+        title: 'Allocation with '
+        short_title: 'Allocation with '
+        author: undefined
+        description: undefined
+        playorder: 35
+        idref: item-008003
+      - file: sections/008/004.html
+        href: sections/008/004.html
+        title: Arrays
+        short_title: Arrays
+        author: undefined
+        description: undefined
+        playorder: 36
+        idref: item-008004
+      - file: sections/008/005.html
+        href: sections/008/005.html
+        title: Slices
+        short_title: Slices
+        author: undefined
+        description: undefined
+        playorder: 37
+        idref: item-008005
+      - file: sections/008/006.html
+        href: sections/008/006.html
+        title: Two-dimensional slices
+        short_title: Two-dimensional slices
+        author: undefined
+        description: undefined
+        playorder: 38
+        idref: item-008006
+      - file: sections/008/007.html
+        href: sections/008/007.html
+        title: Maps
+        short_title: Maps
+        author: undefined
+        description: undefined
+        playorder: 39
+        idref: item-008007
+      - file: sections/008/008.html
+        href: sections/008/008.html
+        title: Printing
+        short_title: Printing
+        author: undefined
+        description: undefined
+        playorder: 40
+        idref: item-008008
+      - file: sections/008/009.html
+        href: sections/008/009.html
+        title: Append
+        short_title: Append
+        author: undefined
+        description: undefined
+        playorder: 41
+        idref: item-008009
+  - playorder: 42
+    path: sections/009
+    title: Initialization
+    idref: item-009
+    href: sections/009/section.html
+    articles:
+      - file: sections/009/000.html
+        href: sections/009/000.html
+        title: Initialization
+        short_title: Initialization
+        author: undefined
+        description: undefined
+        playorder: 43
+        idref: item-009000
+      - file: sections/009/001.html
+        href: sections/009/001.html
+        title: Constants
+        short_title: Constants
+        author: undefined
+        description: undefined
+        playorder: 44
+        idref: item-009001
+      - file: sections/009/002.html
+        href: sections/009/002.html
+        title: Variables
+        short_title: Variables
+        author: undefined
+        description: undefined
+        playorder: 45
+        idref: item-009002
+      - file: sections/009/003.html
+        href: sections/009/003.html
+        title: The init function
+        short_title: The init function
+        author: undefined
+        description: undefined
+        playorder: 46
+        idref: item-009003
+  - playorder: 47
+    path: sections/010
+    title: Methods
+    idref: item-010
+    href: sections/010/section.html
+    articles:
+      - file: sections/010/000.html
+        href: sections/010/000.html
+        title: Methods
+        short_title: Methods
+        author: undefined
+        description: undefined
+        playorder: 48
+        idref: item-010000
+      - file: sections/010/001.html
+        href: sections/010/001.html
+        title: Pointers vs. Values
+        short_title: Pointers vs. Values
+        author: undefined
+        description: undefined
+        playorder: 49
+        idref: item-010001
+  - playorder: 50
+    path: sections/011
+    title: Interfaces and other types
+    idref: item-011
+    href: sections/011/section.html
+    articles:
+      - file: sections/011/000.html
+        href: sections/011/000.html
+        title: Interfaces and other types
+        short_title: Interfaces and other types
+        author: undefined
+        description: undefined
+        playorder: 51
+        idref: item-011000
+      - file: sections/011/001.html
+        href: sections/011/001.html
+        title: Interfaces
+        short_title: Interfaces
+        author: undefined
+        description: undefined
+        playorder: 52
+        idref: item-011001
+      - file: sections/011/002.html
+        href: sections/011/002.html
+        title: Conversions
+        short_title: Conversions
+        author: undefined
+        description: undefined
+        playorder: 53
+        idref: item-011002
+      - file: sections/011/003.html
+        href: sections/011/003.html
+        title: Interface conversions and type assertions
+        short_title: Interface conversions and type assertions
+        author: undefined
+        description: undefined
+        playorder: 54
+        idref: item-011003
+      - file: sections/011/004.html
+        href: sections/011/004.html
+        title: Generality
+        short_title: Generality
+        author: undefined
+        description: undefined
+        playorder: 55
+        idref: item-011004
+      - file: sections/011/005.html
+        href: sections/011/005.html
+        title: Interfaces and methods
+        short_title: Interfaces and methods
+        author: undefined
+        description: undefined
+        playorder: 56
+        idref: item-011005
+  - playorder: 57
+    path: sections/012
+    title: The blank identifier
+    idref: item-012
+    href: sections/012/section.html
+    articles:
+      - file: sections/012/000.html
+        href: sections/012/000.html
+        title: The blank identifier
+        short_title: The blank identifier
+        author: undefined
+        description: undefined
+        playorder: 58
+        idref: item-012000
+      - file: sections/012/001.html
+        href: sections/012/001.html
+        title: The blank identifier in multiple assignment
+        short_title: The blank identifier in multiple assignment
+        author: undefined
+        description: undefined
+        playorder: 59
+        idref: item-012001
+      - file: sections/012/002.html
+        href: sections/012/002.html
+        title: Unused imports and variables
+        short_title: Unused imports and variables
+        author: undefined
+        description: undefined
+        playorder: 60
+        idref: item-012002
+      - file: sections/012/003.html
+        href: sections/012/003.html
+        title: Import for side effect
+        short_title: Import for side effect
+        author: undefined
+        description: undefined
+        playorder: 61
+        idref: item-012003
+      - file: sections/012/004.html
+        href: sections/012/004.html
+        title: Interface checks
+        short_title: Interface checks
+        author: undefined
+        description: undefined
+        playorder: 62
+        idref: item-012004
+  - playorder: 63
+    path: sections/013
+    title: Embedding
+    idref: item-013
+    href: sections/013/section.html
+    articles:
+      - file: sections/013/000.html
+        href: sections/013/000.html
+        title: Embedding
+        short_title: Embedding
+        author: undefined
+        description: undefined
+        playorder: 64
+        idref: item-013000
+  - playorder: 65
+    path: sections/014
+    title: Concurrency
+    idref: item-014
+    href: sections/014/section.html
+    articles:
+      - file: sections/014/000.html
+        href: sections/014/000.html
+        title: Concurrency
+        short_title: Concurrency
+        author: undefined
+        description: undefined
+        playorder: 66
+        idref: item-014000
+      - file: sections/014/001.html
+        href: sections/014/001.html
+        title: Share by communicating
+        short_title: Share by communicating
+        author: undefined
+        description: undefined
+        playorder: 67
+        idref: item-014001
+      - file: sections/014/002.html
+        href: sections/014/002.html
+        title: Goroutines
+        short_title: Goroutines
+        author: undefined
+        description: undefined
+        playorder: 68
+        idref: item-014002
+      - file: sections/014/003.html
+        href: sections/014/003.html
+        title: Channels
+        short_title: Channels
+        author: undefined
+        description: undefined
+        playorder: 69
+        idref: item-014003
+      - file: sections/014/004.html
+        href: sections/014/004.html
+        title: Channels of channels
+        short_title: Channels of channels
+        author: undefined
+        description: undefined
+        playorder: 70
+        idref: item-014004
+      - file: sections/014/005.html
+        href: sections/014/005.html
+        title: Parallelization
+        short_title: Parallelization
+        author: undefined
+        description: undefined
+        playorder: 71
+        idref: item-014005
+      - file: sections/014/006.html
+        href: sections/014/006.html
+        title: A leaky buffer
+        short_title: A leaky buffer
+        author: undefined
+        description: undefined
+        playorder: 72
+        idref: item-014006
+  - playorder: 73
+    path: sections/015
+    title: Errors
+    idref: item-015
+    href: sections/015/section.html
+    articles:
+      - file: sections/015/000.html
+        href: sections/015/000.html
+        title: Errors
+        short_title: Errors
+        author: undefined
+        description: undefined
+        playorder: 74
+        idref: item-015000
+      - file: sections/015/001.html
+        href: sections/015/001.html
+        title: Panic
+        short_title: Panic
+        author: undefined
+        description: undefined
+        playorder: 75
+        idref: item-015001
+      - file: sections/015/002.html
+        href: sections/015/002.html
+        title: Recover
+        short_title: Recover
+        author: undefined
+        description: undefined
+        playorder: 76
+        idref: item-015002
+  - playorder: 77
+    path: sections/016
+    title: A web server
+    idref: item-016
+    href: sections/016/section.html
+    articles:
+      - file: sections/016/000.html
+        href: sections/016/000.html
+        title: A web serverQR Link Generator
+        short_title: A web serverQR Link Generator
+        author: undefined
+        description: undefined
+        playorder: 78
+        idref: item-016000
+first_article: *ref_0
+manifest_items:
+  - href: sections/000/section.html
+    media: application/xhtml+xml
+    idref: item-000
+  - href: sections/000/000.html
+    media: application/xhtml+xml
+    idref: item-000000
+  - href: sections/001/section.html
+    media: application/xhtml+xml
+    idref: item-001
+  - href: sections/001/000.html
+    media: application/xhtml+xml
+    idref: item-001000
+  - href: sections/001/001.html
+    media: application/xhtml+xml
+    idref: item-001001
+  - href: sections/002/section.html
+    media: application/xhtml+xml
+    idref: item-002
+  - href: sections/002/000.html
+    media: application/xhtml+xml
+    idref: item-002000
+  - href: sections/003/section.html
+    media: application/xhtml+xml
+    idref: item-003
+  - href: sections/003/000.html
+    media: application/xhtml+xml
+    idref: item-003000
+  - href: sections/004/section.html
+    media: application/xhtml+xml
+    idref: item-004
+  - href: sections/004/000.html
+    media: application/xhtml+xml
+    idref: item-004000
+  - href: sections/004/001.html
+    media: application/xhtml+xml
+    idref: item-004001
+  - href: sections/004/002.html
+    media: application/xhtml+xml
+    idref: item-004002
+  - href: sections/004/003.html
+    media: application/xhtml+xml
+    idref: item-004003
+  - href: sections/004/004.html
+    media: application/xhtml+xml
+    idref: item-004004
+  - href: sections/005/section.html
+    media: application/xhtml+xml
+    idref: item-005
+  - href: sections/005/000.html
+    media: application/xhtml+xml
+    idref: item-005000
+  - href: sections/006/section.html
+    media: application/xhtml+xml
+    idref: item-006
+  - href: sections/006/000.html
+    media: application/xhtml+xml
+    idref: item-006000
+  - href: sections/006/001.html
+    media: application/xhtml+xml
+    idref: item-006001
+  - href: sections/006/002.html
+    media: application/xhtml+xml
+    idref: item-006002
+  - href: sections/006/003.html
+    media: application/xhtml+xml
+    idref: item-006003
+  - href: sections/006/004.html
+    media: application/xhtml+xml
+    idref: item-006004
+  - href: sections/006/005.html
+    media: application/xhtml+xml
+    idref: item-006005
+  - href: sections/007/section.html
+    media: application/xhtml+xml
+    idref: item-007
+  - href: sections/007/000.html
+    media: application/xhtml+xml
+    idref: item-007000
+  - href: sections/007/001.html
+    media: application/xhtml+xml
+    idref: item-007001
+  - href: sections/007/002.html
+    media: application/xhtml+xml
+    idref: item-007002
+  - href: sections/007/003.html
+    media: application/xhtml+xml
+    idref: item-007003
+  - href: sections/008/section.html
+    media: application/xhtml+xml
+    idref: item-008
+  - href: sections/008/000.html
+    media: application/xhtml+xml
+    idref: item-008000
+  - href: sections/008/001.html
+    media: application/xhtml+xml
+    idref: item-008001
+  - href: sections/008/002.html
+    media: application/xhtml+xml
+    idref: item-008002
+  - href: sections/008/003.html
+    media: application/xhtml+xml
+    idref: item-008003
+  - href: sections/008/004.html
+    media: application/xhtml+xml
+    idref: item-008004
+  - href: sections/008/005.html
+    media: application/xhtml+xml
+    idref: item-008005
+  - href: sections/008/006.html
+    media: application/xhtml+xml
+    idref: item-008006
+  - href: sections/008/007.html
+    media: application/xhtml+xml
+    idref: item-008007
+  - href: sections/008/008.html
+    media: application/xhtml+xml
+    idref: item-008008
+  - href: sections/008/009.html
+    media: application/xhtml+xml
+    idref: item-008009
+  - href: sections/009/section.html
+    media: application/xhtml+xml
+    idref: item-009
+  - href: sections/009/000.html
+    media: application/xhtml+xml
+    idref: item-009000
+  - href: sections/009/001.html
+    media: application/xhtml+xml
+    idref: item-009001
+  - href: sections/009/002.html
+    media: application/xhtml+xml
+    idref: item-009002
+  - href: sections/009/003.html
+    media: application/xhtml+xml
+    idref: item-009003
+  - href: sections/010/section.html
+    media: application/xhtml+xml
+    idref: item-010
+  - href: sections/010/000.html
+    media: application/xhtml+xml
+    idref: item-010000
+  - href: sections/010/001.html
+    media: application/xhtml+xml
+    idref: item-010001
+  - href: sections/011/section.html
+    media: application/xhtml+xml
+    idref: item-011
+  - href: sections/011/000.html
+    media: application/xhtml+xml
+    idref: item-011000
+  - href: sections/011/001.html
+    media: application/xhtml+xml
+    idref: item-011001
+  - href: sections/011/002.html
+    media: application/xhtml+xml
+    idref: item-011002
+  - href: sections/011/003.html
+    media: application/xhtml+xml
+    idref: item-011003
+  - href: sections/011/004.html
+    media: application/xhtml+xml
+    idref: item-011004
+  - href: sections/011/005.html
+    media: application/xhtml+xml
+    idref: item-011005
+  - href: sections/012/section.html
+    media: application/xhtml+xml
+    idref: item-012
+  - href: sections/012/000.html
+    media: application/xhtml+xml
+    idref: item-012000
+  - href: sections/012/001.html
+    media: application/xhtml+xml
+    idref: item-012001
+  - href: sections/012/002.html
+    media: application/xhtml+xml
+    idref: item-012002
+  - href: sections/012/003.html
+    media: application/xhtml+xml
+    idref: item-012003
+  - href: sections/012/004.html
+    media: application/xhtml+xml
+    idref: item-012004
+  - href: sections/013/section.html
+    media: application/xhtml+xml
+    idref: item-013
+  - href: sections/013/000.html
+    media: application/xhtml+xml
+    idref: item-013000
+  - href: sections/014/section.html
+    media: application/xhtml+xml
+    idref: item-014
+  - href: sections/014/000.html
+    media: application/xhtml+xml
+    idref: item-014000
+  - href: sections/014/001.html
+    media: application/xhtml+xml
+    idref: item-014001
+  - href: sections/014/002.html
+    media: application/xhtml+xml
+    idref: item-014002
+  - href: sections/014/003.html
+    media: application/xhtml+xml
+    idref: item-014003
+  - href: sections/014/004.html
+    media: application/xhtml+xml
+    idref: item-014004
+  - href: sections/014/005.html
+    media: application/xhtml+xml
+    idref: item-014005
+  - href: sections/014/006.html
+    media: application/xhtml+xml
+    idref: item-014006
+  - href: sections/015/section.html
+    media: application/xhtml+xml
+    idref: item-015
+  - href: sections/015/000.html
+    media: application/xhtml+xml
+    idref: item-015000
+  - href: sections/015/001.html
+    media: application/xhtml+xml
+    idref: item-015001
+  - href: sections/015/002.html
+    media: application/xhtml+xml
+    idref: item-015002
+  - href: sections/016/section.html
+    media: application/xhtml+xml
+    idref: item-016
+  - href: sections/016/000.html
+    media: application/xhtml+xml
+    idref: item-016000
+  - href: >-
+      /home/admin/es2015/cheerio-mobi-ts15/content/effective_go/processed_images/chart?chs=300x300&cht=qr&choe=UTF-8&chl={{-grayscale.gif
+    media: image/gif
+    idref: img-000
+cover_mimetype: image/gif

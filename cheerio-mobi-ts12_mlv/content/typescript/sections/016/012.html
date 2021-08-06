@@ -1,0 +1,24 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    static constructors
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts12_mlv/undefined" />
+  </head>
+   <body>
+<h1 id="static-constructors-in-typescript">Static Constructors in TypeScript</h1>
+<p>TypeScript <code>class</code> (like JavaScript <code>class</code>) cannot have a static constructor. However, you can get the same effect quite easily by just calling it yourself: </p>
+<pre><code class="lang-ts"><span class="hljs-keyword">class</span> MyClass {
+    <span class="hljs-keyword">static</span> initialize() {
+        <span class="hljs-comment">// Initialization</span>
+    }
+}
+MyClass.initialize();
+</code></pre>
+</body>
+</html>

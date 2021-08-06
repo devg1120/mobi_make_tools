@@ -1,0 +1,15 @@
+<h2 id="caching">Caching<a href="#caching" aria-hidden="true"><span class="icon icon-link"></span></a></h2>
+<p>Every filesystem access is cached, so that multiple parallel or serial requests to the same file occur faster. In <a href="/configuration/watch/#watch">watch mode</a>, only modified files are evicted from the cache. If watch mode is off, then the cache gets purged before every compilation.</p>
+<p>See <a href="/configuration/resolve">Resolve API</a> to learn more on the configuration options mentioned above.</p>
+<h1 id="dependency-graph">Dependency Graph<a href="#dependency-graph" aria-hidden="true"><span class="icon icon-link"></span></a></h1>
+<p>Any time one file depends on another, webpack treats this as a <em>dependency</em>. This allows webpack to take non-code assets, such as images or web fonts, and also provide them as <em>dependencies</em> for your application.</p>
+<p>When webpack processes your application, it starts from a list of modules defined on the command line or in its config file.
+    Starting from these <a href="/concepts/entry-points/"><em>entry points</em></a>, webpack recursively builds a <em>dependency graph</em> that includes every module your application needs, then bundles all of those modules into a small number of <em>bundles</em> - often, just one - to be loaded by the browser.</p>
+<blockquote class="tip">
+    <p>Bundling your application is especially powerful for <em>HTTP/1.1</em> clients, as it minimizes the number of times your app has to wait while the browser starts a new request. For <em>HTTP/2</em>, you can also use <a href="/guides/code-splitting/">Code Splitting</a> to achieve best results.</p>
+</blockquote>
+<h1 id="targets">Targets<a href="#targets" aria-hidden="true"><span class="icon icon-link"></span></a></h1>
+<p>Because JavaScript can be written for both server and browser, webpack offers multiple deployment <em>targets</em> that you can set in your webpack <a href="/configuration">configuration</a>.</p>
+<blockquote class="warning">
+    <p>The webpack <code>target</code> property is not to be confused with the <code>output.libraryTarget</code> property. For more information see <a href="/concepts/output/">our guide</a> on the <code>output</code> property.</p>
+</blockquote>

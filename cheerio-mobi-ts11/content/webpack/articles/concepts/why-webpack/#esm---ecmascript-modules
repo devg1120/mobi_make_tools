@@ -1,0 +1,2 @@
+<h2 id="esm---ecmascript-modules">ESM - ECMAScript Modules<a href="#esm---ecmascript-modules" aria-hidden="true"><span class="icon icon-link"></span></a></h2>
+<p>The good news for web projects is that modules are becoming an official feature in the ECMAScript standard. However, browser support is incomplete and bundling is still faster and currently recommended over these early module implementations.</p>

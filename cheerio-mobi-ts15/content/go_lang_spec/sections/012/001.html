@@ -1,0 +1,77 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Terminating statements</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+A <i>terminating statement</i> prevents execution of all statements that lexically
+appear after it in the same [<a>block</a>]. The following statements
+are terminating:
+</p><ol>
+<li>
+	A [<a>&quot;return&quot;</a>] or
+    	[<a>&quot;goto&quot;</a>] statement.
+	 ul below only for regular layout 
+	<ul> </ul>
+</li>
+<li>
+	A call to the built-in function
+	[<a><code>panic</code></a>].
+	 ul below only for regular layout 
+	<ul> </ul>
+</li>
+<li>
+	A [<a>block</a>] in which the statement list ends in a terminating statement.
+	 ul below only for regular layout 
+	<ul> </ul>
+</li>
+<li>
+	An [<a>&quot;if&quot; statement</a>] in which:
+	<ul>
+	<li>the &quot;else&quot; branch is present, and</li>
+	<li>both branches are terminating statements.</li>
+	</ul>
+</li>
+<li>
+	A [<a>&quot;for&quot; statement</a>] in which:
+	<ul>
+	<li>there are no &quot;break&quot; statements referring to the &quot;for&quot; statement, and</li>
+	<li>the loop condition is absent.</li>
+	</ul>
+</li>
+<li>
+	A [<a>&quot;switch&quot; statement</a>] in which:
+	<ul>
+	<li>there are no &quot;break&quot; statements referring to the &quot;switch&quot; statement,</li>
+	<li>there is a default case, and</li>
+	<li>the statement lists in each case, including the default, end in a terminating
+	    statement, or a possibly labeled [<a>&quot;fallthrough&quot;
+	    statement</a>].</li>
+	</ul>
+</li>
+<li>
+	A [<a>&quot;select&quot; statement</a>] in which:
+	<ul>
+	<li>there are no &quot;break&quot; statements referring to the &quot;select&quot; statement, and</li>
+	<li>the statement lists in each case, including the default if present,
+	    end in a terminating statement.</li>
+	</ul>
+</li>
+<li>
+	A [<a>labeled statement</a>] labeling
+	a terminating statement.
+</li>
+</ol><p>
+All other statements are not terminating.
+</p><p>
+A [<a>statement list</a>] ends in a terminating statement if the list
+is not empty and its final non-empty statement is terminating.
+</p></body>
+</body>
+</html>

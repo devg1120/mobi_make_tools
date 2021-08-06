@@ -1,0 +1,82 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Interfaces
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts13_images/undefined" />
+  </head>
+   <body>
+<h2 id="interfaces">Interfaces</h2>
+<p>Interfaces have <em>zero</em> runtime JS impact. There is a lot of power in TypeScript interfaces to declare the structure of variables.</p>
+<p>The following two are equivalent declarations, the first uses an <em>inline annotation</em>, the second uses an <em>interface</em>:</p>
+<pre><code class="lang-ts"><span class="hljs-comment">// Sample A</span>
+<span class="hljs-keyword">declare</span> <span class="hljs-keyword">var</span> myPoint: { x: <span class="hljs-built_in">number</span>; y: <span class="hljs-built_in">number</span>; };
+<span class="hljs-comment">// Sample B</span>
+<span class="hljs-keyword">interface</span> Point {
+    x: <span class="hljs-built_in">number</span>; y: <span class="hljs-built_in">number</span>;
+}
+<span class="hljs-keyword">declare</span> <span class="hljs-keyword">var</span> myPoint: Point;
+</code></pre>
+<p>However, the beauty of <em>Sample B</em> is that if someone authors a library that builds on the <code>myPoint</code> library to add new members, they can easily add to the existing declaration of <code>myPoint</code>:</p>
+<pre><code class="lang-ts"><span class="hljs-comment">// Lib a.d.ts</span>
+<span class="hljs-keyword">interface</span> Point {
+    x: <span class="hljs-built_in">number</span>; y: <span class="hljs-built_in">number</span>;
+}
+<span class="hljs-keyword">declare</span> <span class="hljs-keyword">var</span> myPoint: Point;
+<span class="hljs-comment">// Lib b.d.ts</span>
+<span class="hljs-keyword">interface</span> Point {
+    z: <span class="hljs-built_in">number</span>;
+}
+<span class="hljs-comment">// Your code</span>
+<span class="hljs-keyword">var</span> myPoint.z; <span class="hljs-comment">// Allowed!</span>
+</code></pre>
+<p>This is because <strong>interfaces in TypeScript are open ended</strong>. This is a vital tenet of TypeScript that it allows you to mimic the extensibility of JavaScript using <em>interfaces</em>.</p>
+<h2 id="classes-can-implement-interfaces">Classes can implement interfaces</h2>
+<p>If you want to use <em>classes</em> that must follow an object structure that someone declared for you in an <code>interface</code> you can use the <code>implements</code> keyword to ensure compatibility:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">interface</span> Point {
+    x: <span class="hljs-built_in">number</span>; y: <span class="hljs-built_in">number</span>;
+}
+<span class="hljs-keyword">class</span> MyPoint <span class="hljs-keyword">implements</span> Point {
+    x: <span class="hljs-built_in">number</span>; y: <span class="hljs-built_in">number</span>; <span class="hljs-comment">// Same as Point</span>
+}
+</code></pre>
+<p>Basically in the presence of that <code>implements</code>, any changes in that external <code>Point</code> interface will result in a compile error in your code base so you can easily keep it in sync:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">interface</span> Point {
+    x: <span class="hljs-built_in">number</span>; y: <span class="hljs-built_in">number</span>;
+    z: <span class="hljs-built_in">number</span>; <span class="hljs-comment">// New member</span>
+}
+<span class="hljs-keyword">class</span> MyPoint <span class="hljs-keyword">implements</span> Point { <span class="hljs-comment">// ERROR : missing member `z`</span>
+    x: <span class="hljs-built_in">number</span>; y: <span class="hljs-built_in">number</span>;
+}
+</code></pre>
+<p>Note that <code>implements</code> restricts the structure of the class <em>instances</em> i.e.:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">var</span> foo: Point = <span class="hljs-keyword">new</span> MyPoint();
+</code></pre>
+<p>And stuff like <code>foo: Point = MyPoint</code> is not the same thing.</p>
+<h2 id="tips">TIPs</h2>
+<h3 id="not-every-interface-is-implementable-easily">Not every interface is implementable easily</h3>
+<p>Interfaces are designed to declare <em>any arbitrarily crazy</em> structure that might be present in JavaScript.</p>
+<p>Consider the following interface where something is callable with <code>new</code>:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">interface</span> Crazy {
+    <span class="hljs-keyword">new</span> (): {
+        hello: <span class="hljs-built_in">number</span>
+    };
+}
+</code></pre>
+<p>You would essentially have something like:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">class</span> CrazyClass <span class="hljs-keyword">implements</span> Crazy {
+    <span class="hljs-keyword">constructor</span>() {
+        <span class="hljs-keyword">return</span> { hello: <span class="hljs-number">123</span> };
+    }
+}
+<span class="hljs-comment">// Because</span>
+<span class="hljs-keyword">const</span> crazy = <span class="hljs-keyword">new</span> CrazyClass(); <span class="hljs-comment">// crazy would be {hello:123}</span>
+</code></pre>
+<p>You can <em>declare</em> all the crazy JS out there with interfaces and even use them safely from TypeScript. Doesn&apos;t mean you can use TypeScript classes to implement them.</p>
+</body>
+</html>

@@ -1,0 +1,1545 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE ncx PUBLIC "-//NISO//DTD ncx 2005-1//EN" "http://www.daisy.org/z3986/2005/ncx-2005-1.dtd">
+<ncx xmlns:mbp="http://mobipocket.com/ns/mbp" xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1" xml:lang="en-US">
+  <head>
+    <meta content="svn-documetation-2019-07-22-035120" name="dtb:uid"/>
+    <meta content="2" name="dtb:depth"/>
+    <meta content="0" name="dtb:totalPageCount"/>
+    <meta content="0" name="dtb:maxPageNumber"/>
+  </head>
+  <docTitle>
+    <text>svn</text>
+  </docTitle>
+  <docAuthor>
+    <text>AUTHOR</text>
+  </docAuthor>
+  <navMap>
+    <navPoint playOrder="1" class="periodical" id="periodical">
+      <mbp:meta-img src="" name="mastheadImage"/>
+      <navLabel><text>Table of Contents</text></navLabel>
+      <content src="contents.html"/>
+      <navPoint playOrder="4" class="section" id="item-content/svn/sections/000">
+        <navLabel><text>Frontmatter</text></navLabel>
+        <content src="content/svn/sections/000/section.html"/>
+        <navPoint playOrder="1" class="article" id="item-content/svn/sections/000/000.html">
+          <navLabel><text>Title Page</text></navLabel>
+          <content src="content/svn/sections/000/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="2" class="article" id="item-content/svn/sections/000/_section.txt">
+          <navLabel><text>no title</text></navLabel>
+          <content src="content/svn/sections/000/_section.txt"/>
+          <mbp:meta name="description"></mbp:meta>
+          <mbp:meta name="author"></mbp:meta>
+        </navPoint>
+        <navPoint playOrder="3" class="article" id="item-content/svn/sections/000/section.html">
+          <navLabel><text>Frontmatter</text></navLabel>
+          <content src="content/svn/sections/000/section.html"/>
+          <mbp:meta name="description">kindlerb</mbp:meta>
+          <mbp:meta name="author">kindlerb</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="8" class="section" id="item-content/svn/sections/001">
+        <navLabel><text>Foreword</text></navLabel>
+        <content src="content/svn/sections/001/section.html"/>
+        <navPoint playOrder="5" class="article" id="item-content/svn/sections/001/000.html">
+          <navLabel><text>Foreword</text></navLabel>
+          <content src="content/svn/sections/001/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="6" class="article" id="item-content/svn/sections/001/_section.txt">
+          <navLabel><text>no title</text></navLabel>
+          <content src="content/svn/sections/001/_section.txt"/>
+          <mbp:meta name="description"></mbp:meta>
+          <mbp:meta name="author"></mbp:meta>
+        </navPoint>
+        <navPoint playOrder="7" class="article" id="item-content/svn/sections/001/section.html">
+          <navLabel><text>Foreword</text></navLabel>
+          <content src="content/svn/sections/001/section.html"/>
+          <mbp:meta name="description">kindlerb</mbp:meta>
+          <mbp:meta name="author">kindlerb</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="18" class="section" id="item-content/svn/sections/002">
+        <navLabel><text>Preface</text></navLabel>
+        <content src="content/svn/sections/002/section.html"/>
+        <navPoint playOrder="9" class="article" id="item-content/svn/sections/002/000.html">
+          <navLabel><text>Preface</text></navLabel>
+          <content src="content/svn/sections/002/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="10" class="article" id="item-content/svn/sections/002/001.html">
+          <navLabel><text>What Is Subversion?</text></navLabel>
+          <content src="content/svn/sections/002/001.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="11" class="article" id="item-content/svn/sections/002/002.html">
+          <navLabel><text>Audience</text></navLabel>
+          <content src="content/svn/sections/002/002.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="12" class="article" id="item-content/svn/sections/002/003.html">
+          <navLabel><text>How to Read This Book</text></navLabel>
+          <content src="content/svn/sections/002/003.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="13" class="article" id="item-content/svn/sections/002/004.html">
+          <navLabel><text>Organization of This Book</text></navLabel>
+          <content src="content/svn/sections/002/004.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="14" class="article" id="item-content/svn/sections/002/005.html">
+          <navLabel><text>This Book Is Free</text></navLabel>
+          <content src="content/svn/sections/002/005.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="15" class="article" id="item-content/svn/sections/002/006.html">
+          <navLabel><text>Acknowledgments</text></navLabel>
+          <content src="content/svn/sections/002/006.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="16" class="article" id="item-content/svn/sections/002/_section.txt">
+          <navLabel><text>no title</text></navLabel>
+          <content src="content/svn/sections/002/_section.txt"/>
+          <mbp:meta name="description"></mbp:meta>
+          <mbp:meta name="author"></mbp:meta>
+        </navPoint>
+        <navPoint playOrder="17" class="article" id="item-content/svn/sections/002/section.html">
+          <navLabel><text>Preface</text></navLabel>
+          <content src="content/svn/sections/002/section.html"/>
+          <mbp:meta name="description">kindlerb</mbp:meta>
+          <mbp:meta name="author">kindlerb</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="25" class="section" id="item-content/svn/sections/003">
+        <navLabel><text>1. Fundamental Concepts</text></navLabel>
+        <content src="content/svn/sections/003/section.html"/>
+        <navPoint playOrder="19" class="article" id="item-content/svn/sections/003/000.html">
+          <navLabel><text>1. Fundamental Concepts</text></navLabel>
+          <content src="content/svn/sections/003/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="20" class="article" id="item-content/svn/sections/003/001.html">
+          <navLabel><text>Version Control Basics</text></navLabel>
+          <content src="content/svn/sections/003/001.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="21" class="article" id="item-content/svn/sections/003/002.html">
+          <navLabel><text>Version Control the Subversion Way</text></navLabel>
+          <content src="content/svn/sections/003/002.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="22" class="article" id="item-content/svn/sections/003/003.html">
+          <navLabel><text>Summary</text></navLabel>
+          <content src="content/svn/sections/003/003.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="23" class="article" id="item-content/svn/sections/003/_section.txt">
+          <navLabel><text>no title</text></navLabel>
+          <content src="content/svn/sections/003/_section.txt"/>
+          <mbp:meta name="description"></mbp:meta>
+          <mbp:meta name="author"></mbp:meta>
+        </navPoint>
+        <navPoint playOrder="24" class="article" id="item-content/svn/sections/003/section.html">
+          <navLabel><text>1. Fundamental Concepts</text></navLabel>
+          <content src="content/svn/sections/003/section.html"/>
+          <mbp:meta name="description">kindlerb</mbp:meta>
+          <mbp:meta name="author">kindlerb</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="37" class="section" id="item-content/svn/sections/004">
+        <navLabel><text>2. Basic Usage</text></navLabel>
+        <content src="content/svn/sections/004/section.html"/>
+        <navPoint playOrder="26" class="article" id="item-content/svn/sections/004/000.html">
+          <navLabel><text>2. Basic Usage</text></navLabel>
+          <content src="content/svn/sections/004/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="27" class="article" id="item-content/svn/sections/004/001.html">
+          <navLabel><text>Help!</text></navLabel>
+          <content src="content/svn/sections/004/001.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="28" class="article" id="item-content/svn/sections/004/002.html">
+          <navLabel><text>Getting Data into Your Repository</text></navLabel>
+          <content src="content/svn/sections/004/002.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="29" class="article" id="item-content/svn/sections/004/003.html">
+          <navLabel><text>Creating a Working Copy</text></navLabel>
+          <content src="content/svn/sections/004/003.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="30" class="article" id="item-content/svn/sections/004/004.html">
+          <navLabel><text>Basic Work Cycle</text></navLabel>
+          <content src="content/svn/sections/004/004.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="31" class="article" id="item-content/svn/sections/004/005.html">
+          <navLabel><text>Examining History</text></navLabel>
+          <content src="content/svn/sections/004/005.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="32" class="article" id="item-content/svn/sections/004/006.html">
+          <navLabel><text>Sometimes You Just Need to Clean Up</text></navLabel>
+          <content src="content/svn/sections/004/006.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="33" class="article" id="item-content/svn/sections/004/007.html">
+          <navLabel><text>Dealing with Structural Conflicts</text></navLabel>
+          <content src="content/svn/sections/004/007.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="34" class="article" id="item-content/svn/sections/004/008.html">
+          <navLabel><text>Summary</text></navLabel>
+          <content src="content/svn/sections/004/008.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="35" class="article" id="item-content/svn/sections/004/_section.txt">
+          <navLabel><text>no title</text></navLabel>
+          <content src="content/svn/sections/004/_section.txt"/>
+          <mbp:meta name="description"></mbp:meta>
+          <mbp:meta name="author"></mbp:meta>
+        </navPoint>
+        <navPoint playOrder="36" class="article" id="item-content/svn/sections/004/section.html">
+          <navLabel><text>2. Basic Usage</text></navLabel>
+          <content src="content/svn/sections/004/section.html"/>
+          <mbp:meta name="description">kindlerb</mbp:meta>
+          <mbp:meta name="author">kindlerb</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="53" class="section" id="item-content/svn/sections/005">
+        <navLabel><text>3. Advanced Topics</text></navLabel>
+        <content src="content/svn/sections/005/section.html"/>
+        <navPoint playOrder="38" class="article" id="item-content/svn/sections/005/000.html">
+          <navLabel><text>3. Advanced Topics</text></navLabel>
+          <content src="content/svn/sections/005/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="39" class="article" id="item-content/svn/sections/005/001.html">
+          <navLabel><text>Revision Specifiers</text></navLabel>
+          <content src="content/svn/sections/005/001.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="40" class="article" id="item-content/svn/sections/005/002.html">
+          <navLabel><text>Peg and Operative Revisions</text></navLabel>
+          <content src="content/svn/sections/005/002.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="41" class="article" id="item-content/svn/sections/005/003.html">
+          <navLabel><text>Properties</text></navLabel>
+          <content src="content/svn/sections/005/003.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="42" class="article" id="item-content/svn/sections/005/004.html">
+          <navLabel><text>File Portability</text></navLabel>
+          <content src="content/svn/sections/005/004.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="43" class="article" id="item-content/svn/sections/005/005.html">
+          <navLabel><text>Ignoring Unversioned Items</text></navLabel>
+          <content src="content/svn/sections/005/005.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="44" class="article" id="item-content/svn/sections/005/006.html">
+          <navLabel><text>Keyword Substitution</text></navLabel>
+          <content src="content/svn/sections/005/006.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="45" class="article" id="item-content/svn/sections/005/007.html">
+          <navLabel><text>Sparse Directories</text></navLabel>
+          <content src="content/svn/sections/005/007.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="46" class="article" id="item-content/svn/sections/005/008.html">
+          <navLabel><text>Locking</text></navLabel>
+          <content src="content/svn/sections/005/008.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="47" class="article" id="item-content/svn/sections/005/009.html">
+          <navLabel><text>Externals Definitions</text></navLabel>
+          <content src="content/svn/sections/005/009.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="48" class="article" id="item-content/svn/sections/005/010.html">
+          <navLabel><text>Changelists</text></navLabel>
+          <content src="content/svn/sections/005/010.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="49" class="article" id="item-content/svn/sections/005/011.html">
+          <navLabel><text>Network Model</text></navLabel>
+          <content src="content/svn/sections/005/011.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="50" class="article" id="item-content/svn/sections/005/012.html">
+          <navLabel><text>Summary</text></navLabel>
+          <content src="content/svn/sections/005/012.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="51" class="article" id="item-content/svn/sections/005/_section.txt">
+          <navLabel><text>no title</text></navLabel>
+          <content src="content/svn/sections/005/_section.txt"/>
+          <mbp:meta name="description"></mbp:meta>
+          <mbp:meta name="author"></mbp:meta>
+        </navPoint>
+        <navPoint playOrder="52" class="article" id="item-content/svn/sections/005/section.html">
+          <navLabel><text>3. Advanced Topics</text></navLabel>
+          <content src="content/svn/sections/005/section.html"/>
+          <mbp:meta name="description">kindlerb</mbp:meta>
+          <mbp:meta name="author">kindlerb</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="68" class="section" id="item-content/svn/sections/006">
+        <navLabel><text>4. Branching and Merging</text></navLabel>
+        <content src="content/svn/sections/006/section.html"/>
+        <navPoint playOrder="54" class="article" id="item-content/svn/sections/006/000.html">
+          <navLabel><text>4. Branching and Merging</text></navLabel>
+          <content src="content/svn/sections/006/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="55" class="article" id="item-content/svn/sections/006/001.html">
+          <navLabel><text>What&#x27;s a Branch?</text></navLabel>
+          <content src="content/svn/sections/006/001.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="56" class="article" id="item-content/svn/sections/006/002.html">
+          <navLabel><text>Using Branches</text></navLabel>
+          <content src="content/svn/sections/006/002.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="57" class="article" id="item-content/svn/sections/006/003.html">
+          <navLabel><text>Basic Merging</text></navLabel>
+          <content src="content/svn/sections/006/003.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="58" class="article" id="item-content/svn/sections/006/004.html">
+          <navLabel><text>Advanced Merging</text></navLabel>
+          <content src="content/svn/sections/006/004.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="59" class="article" id="item-content/svn/sections/006/005.html">
+          <navLabel><text>Traversing Branches</text></navLabel>
+          <content src="content/svn/sections/006/005.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="60" class="article" id="item-content/svn/sections/006/006.html">
+          <navLabel><text>Tags</text></navLabel>
+          <content src="content/svn/sections/006/006.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="61" class="article" id="item-content/svn/sections/006/007.html">
+          <navLabel><text>Branch Maintenance</text></navLabel>
+          <content src="content/svn/sections/006/007.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="62" class="article" id="item-content/svn/sections/006/008.html">
+          <navLabel><text>Common Branching Patterns</text></navLabel>
+          <content src="content/svn/sections/006/008.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="63" class="article" id="item-content/svn/sections/006/009.html">
+          <navLabel><text>Vendor Branches</text></navLabel>
+          <content src="content/svn/sections/006/009.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="64" class="article" id="item-content/svn/sections/006/010.html">
+          <navLabel><text>To Branch or Not to Branch?</text></navLabel>
+          <content src="content/svn/sections/006/010.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="65" class="article" id="item-content/svn/sections/006/011.html">
+          <navLabel><text>Summary</text></navLabel>
+          <content src="content/svn/sections/006/011.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="66" class="article" id="item-content/svn/sections/006/_section.txt">
+          <navLabel><text>no title</text></navLabel>
+          <content src="content/svn/sections/006/_section.txt"/>
+          <mbp:meta name="description"></mbp:meta>
+          <mbp:meta name="author"></mbp:meta>
+        </navPoint>
+        <navPoint playOrder="67" class="article" id="item-content/svn/sections/006/section.html">
+          <navLabel><text>4. Branching and Merging</text></navLabel>
+          <content src="content/svn/sections/006/section.html"/>
+          <mbp:meta name="description">kindlerb</mbp:meta>
+          <mbp:meta name="author">kindlerb</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="78" class="section" id="item-content/svn/sections/007">
+        <navLabel><text>5. Repository Administration</text></navLabel>
+        <content src="content/svn/sections/007/section.html"/>
+        <navPoint playOrder="69" class="article" id="item-content/svn/sections/007/000.html">
+          <navLabel><text>5. Repository Administration</text></navLabel>
+          <content src="content/svn/sections/007/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="70" class="article" id="item-content/svn/sections/007/001.html">
+          <navLabel><text>The Subversion Repository, Defined</text></navLabel>
+          <content src="content/svn/sections/007/001.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="71" class="article" id="item-content/svn/sections/007/002.html">
+          <navLabel><text>Strategies for Repository Deployment</text></navLabel>
+          <content src="content/svn/sections/007/002.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="72" class="article" id="item-content/svn/sections/007/003.html">
+          <navLabel><text>Creating and Configuring Your Repository</text></navLabel>
+          <content src="content/svn/sections/007/003.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="73" class="article" id="item-content/svn/sections/007/004.html">
+          <navLabel><text>Repository Maintenance</text></navLabel>
+          <content src="content/svn/sections/007/004.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="74" class="article" id="item-content/svn/sections/007/005.html">
+          <navLabel><text>Moving and Removing Repositories</text></navLabel>
+          <content src="content/svn/sections/007/005.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="75" class="article" id="item-content/svn/sections/007/006.html">
+          <navLabel><text>Summary</text></navLabel>
+          <content src="content/svn/sections/007/006.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="76" class="article" id="item-content/svn/sections/007/_section.txt">
+          <navLabel><text>no title</text></navLabel>
+          <content src="content/svn/sections/007/_section.txt"/>
+          <mbp:meta name="description"></mbp:meta>
+          <mbp:meta name="author"></mbp:meta>
+        </navPoint>
+        <navPoint playOrder="77" class="article" id="item-content/svn/sections/007/section.html">
+          <navLabel><text>5. Repository Administration</text></navLabel>
+          <content src="content/svn/sections/007/section.html"/>
+          <mbp:meta name="description">kindlerb</mbp:meta>
+          <mbp:meta name="author">kindlerb</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="90" class="section" id="item-content/svn/sections/008">
+        <navLabel><text>6. Server Configuration</text></navLabel>
+        <content src="content/svn/sections/008/section.html"/>
+        <navPoint playOrder="79" class="article" id="item-content/svn/sections/008/000.html">
+          <navLabel><text>6. Server Configuration</text></navLabel>
+          <content src="content/svn/sections/008/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="80" class="article" id="item-content/svn/sections/008/001.html">
+          <navLabel><text>Overview</text></navLabel>
+          <content src="content/svn/sections/008/001.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="81" class="article" id="item-content/svn/sections/008/002.html">
+          <navLabel><text>Choosing a Server Configuration</text></navLabel>
+          <content src="content/svn/sections/008/002.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="82" class="article" id="item-content/svn/sections/008/003.html">
+          <navLabel><text>svnserve, a Custom Server</text></navLabel>
+          <content src="content/svn/sections/008/003.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="83" class="article" id="item-content/svn/sections/008/004.html">
+          <navLabel><text>httpd, the Apache HTTP Server</text></navLabel>
+          <content src="content/svn/sections/008/004.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="84" class="article" id="item-content/svn/sections/008/005.html">
+          <navLabel><text>Path-Based Authorization</text></navLabel>
+          <content src="content/svn/sections/008/005.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="85" class="article" id="item-content/svn/sections/008/006.html">
+          <navLabel><text>High-level Logging</text></navLabel>
+          <content src="content/svn/sections/008/006.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="86" class="article" id="item-content/svn/sections/008/007.html">
+          <navLabel><text>Server Optimization</text></navLabel>
+          <content src="content/svn/sections/008/007.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="87" class="article" id="item-content/svn/sections/008/008.html">
+          <navLabel><text>Supporting Multiple Repository Access Methods</text></navLabel>
+          <content src="content/svn/sections/008/008.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="88" class="article" id="item-content/svn/sections/008/_section.txt">
+          <navLabel><text>no title</text></navLabel>
+          <content src="content/svn/sections/008/_section.txt"/>
+          <mbp:meta name="description"></mbp:meta>
+          <mbp:meta name="author"></mbp:meta>
+        </navPoint>
+        <navPoint playOrder="89" class="article" id="item-content/svn/sections/008/section.html">
+          <navLabel><text>6. Server Configuration</text></navLabel>
+          <content src="content/svn/sections/008/section.html"/>
+          <mbp:meta name="description">kindlerb</mbp:meta>
+          <mbp:meta name="author">kindlerb</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="99" class="section" id="item-content/svn/sections/009">
+        <navLabel><text>7. Customizing Your Subversion Experienc</text></navLabel>
+        <content src="content/svn/sections/009/section.html"/>
+        <navPoint playOrder="91" class="article" id="item-content/svn/sections/009/000.html">
+          <navLabel><text>7. Customizing Your Subversion Experience</text></navLabel>
+          <content src="content/svn/sections/009/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="92" class="article" id="item-content/svn/sections/009/001.html">
+          <navLabel><text>Runtime Configuration Area</text></navLabel>
+          <content src="content/svn/sections/009/001.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="93" class="article" id="item-content/svn/sections/009/002.html">
+          <navLabel><text>Localization</text></navLabel>
+          <content src="content/svn/sections/009/002.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="94" class="article" id="item-content/svn/sections/009/003.html">
+          <navLabel><text>Using External Editors</text></navLabel>
+          <content src="content/svn/sections/009/003.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="95" class="article" id="item-content/svn/sections/009/004.html">
+          <navLabel><text>Using External Differencing and Merge Tools</text></navLabel>
+          <content src="content/svn/sections/009/004.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="96" class="article" id="item-content/svn/sections/009/005.html">
+          <navLabel><text>Summary</text></navLabel>
+          <content src="content/svn/sections/009/005.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="97" class="article" id="item-content/svn/sections/009/_section.txt">
+          <navLabel><text>no title</text></navLabel>
+          <content src="content/svn/sections/009/_section.txt"/>
+          <mbp:meta name="description"></mbp:meta>
+          <mbp:meta name="author"></mbp:meta>
+        </navPoint>
+        <navPoint playOrder="98" class="article" id="item-content/svn/sections/009/section.html">
+          <navLabel><text>7. Customizing Your Subversion Experienc</text></navLabel>
+          <content src="content/svn/sections/009/section.html"/>
+          <mbp:meta name="description">kindlerb</mbp:meta>
+          <mbp:meta name="author">kindlerb</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="106" class="section" id="item-content/svn/sections/010">
+        <navLabel><text>8. Embedding Subversion</text></navLabel>
+        <content src="content/svn/sections/010/section.html"/>
+        <navPoint playOrder="100" class="article" id="item-content/svn/sections/010/000.html">
+          <navLabel><text>8. Embedding Subversion</text></navLabel>
+          <content src="content/svn/sections/010/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="101" class="article" id="item-content/svn/sections/010/001.html">
+          <navLabel><text>Layered Library Design</text></navLabel>
+          <content src="content/svn/sections/010/001.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="102" class="article" id="item-content/svn/sections/010/002.html">
+          <navLabel><text>Using the APIs</text></navLabel>
+          <content src="content/svn/sections/010/002.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="103" class="article" id="item-content/svn/sections/010/003.html">
+          <navLabel><text>Summary</text></navLabel>
+          <content src="content/svn/sections/010/003.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="104" class="article" id="item-content/svn/sections/010/_section.txt">
+          <navLabel><text>no title</text></navLabel>
+          <content src="content/svn/sections/010/_section.txt"/>
+          <mbp:meta name="description"></mbp:meta>
+          <mbp:meta name="author"></mbp:meta>
+        </navPoint>
+        <navPoint playOrder="105" class="article" id="item-content/svn/sections/010/section.html">
+          <navLabel><text>8. Embedding Subversion</text></navLabel>
+          <content src="content/svn/sections/010/section.html"/>
+          <mbp:meta name="description">kindlerb</mbp:meta>
+          <mbp:meta name="author">kindlerb</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="204" class="section" id="item-content/svn/sections/011">
+        <navLabel><text>9. Subversion Complete Reference</text></navLabel>
+        <content src="content/svn/sections/011/section.html"/>
+        <navPoint playOrder="107" class="article" id="item-content/svn/sections/011/000.html">
+          <navLabel><text>9. Subversion Complete Reference</text></navLabel>
+          <content src="content/svn/sections/011/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="108" class="article" id="item-content/svn/sections/011/001.html">
+          <navLabel><text>svn—Subversion Command-Line Client</text></navLabel>
+          <content src="content/svn/sections/011/001.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="109" class="article" id="item-content/svn/sections/011/002.html">
+          <navLabel><text>svn add</text></navLabel>
+          <content src="content/svn/sections/011/002.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="110" class="article" id="item-content/svn/sections/011/003.html">
+          <navLabel><text>svn blame (praise, annotate, ann)</text></navLabel>
+          <content src="content/svn/sections/011/003.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="111" class="article" id="item-content/svn/sections/011/004.html">
+          <navLabel><text>svn cat</text></navLabel>
+          <content src="content/svn/sections/011/004.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="112" class="article" id="item-content/svn/sections/011/005.html">
+          <navLabel><text>svn changelist (cl)</text></navLabel>
+          <content src="content/svn/sections/011/005.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="113" class="article" id="item-content/svn/sections/011/006.html">
+          <navLabel><text>svn checkout (co)</text></navLabel>
+          <content src="content/svn/sections/011/006.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="114" class="article" id="item-content/svn/sections/011/007.html">
+          <navLabel><text>svn cleanup</text></navLabel>
+          <content src="content/svn/sections/011/007.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="115" class="article" id="item-content/svn/sections/011/008.html">
+          <navLabel><text>svn commit (ci)</text></navLabel>
+          <content src="content/svn/sections/011/008.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="116" class="article" id="item-content/svn/sections/011/009.html">
+          <navLabel><text>svn copy (cp)</text></navLabel>
+          <content src="content/svn/sections/011/009.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="117" class="article" id="item-content/svn/sections/011/010.html">
+          <navLabel><text>svn delete (del, remove, rm)</text></navLabel>
+          <content src="content/svn/sections/011/010.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="118" class="article" id="item-content/svn/sections/011/011.html">
+          <navLabel><text>svn diff (di)</text></navLabel>
+          <content src="content/svn/sections/011/011.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="119" class="article" id="item-content/svn/sections/011/012.html">
+          <navLabel><text>svn export</text></navLabel>
+          <content src="content/svn/sections/011/012.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="120" class="article" id="item-content/svn/sections/011/013.html">
+          <navLabel><text>svn help (h, ?)</text></navLabel>
+          <content src="content/svn/sections/011/013.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="121" class="article" id="item-content/svn/sections/011/014.html">
+          <navLabel><text>svn import</text></navLabel>
+          <content src="content/svn/sections/011/014.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="122" class="article" id="item-content/svn/sections/011/015.html">
+          <navLabel><text>svn info</text></navLabel>
+          <content src="content/svn/sections/011/015.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="123" class="article" id="item-content/svn/sections/011/016.html">
+          <navLabel><text>svn list (ls)</text></navLabel>
+          <content src="content/svn/sections/011/016.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="124" class="article" id="item-content/svn/sections/011/017.html">
+          <navLabel><text>svn lock</text></navLabel>
+          <content src="content/svn/sections/011/017.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="125" class="article" id="item-content/svn/sections/011/018.html">
+          <navLabel><text>svn log</text></navLabel>
+          <content src="content/svn/sections/011/018.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="126" class="article" id="item-content/svn/sections/011/019.html">
+          <navLabel><text>svn merge</text></navLabel>
+          <content src="content/svn/sections/011/019.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="127" class="article" id="item-content/svn/sections/011/020.html">
+          <navLabel><text>svn mergeinfo</text></navLabel>
+          <content src="content/svn/sections/011/020.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="128" class="article" id="item-content/svn/sections/011/021.html">
+          <navLabel><text>svn mkdir</text></navLabel>
+          <content src="content/svn/sections/011/021.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="129" class="article" id="item-content/svn/sections/011/022.html">
+          <navLabel><text>svn move (mv)</text></navLabel>
+          <content src="content/svn/sections/011/022.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="130" class="article" id="item-content/svn/sections/011/023.html">
+          <navLabel><text>svn patch</text></navLabel>
+          <content src="content/svn/sections/011/023.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="131" class="article" id="item-content/svn/sections/011/024.html">
+          <navLabel><text>svn propdel (pdel, pd)</text></navLabel>
+          <content src="content/svn/sections/011/024.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="132" class="article" id="item-content/svn/sections/011/025.html">
+          <navLabel><text>svn propedit (pedit, pe)</text></navLabel>
+          <content src="content/svn/sections/011/025.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="133" class="article" id="item-content/svn/sections/011/026.html">
+          <navLabel><text>svn propget (pget, pg)</text></navLabel>
+          <content src="content/svn/sections/011/026.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="134" class="article" id="item-content/svn/sections/011/027.html">
+          <navLabel><text>svn proplist (plist, pl)</text></navLabel>
+          <content src="content/svn/sections/011/027.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="135" class="article" id="item-content/svn/sections/011/028.html">
+          <navLabel><text>svn propset (pset, ps)</text></navLabel>
+          <content src="content/svn/sections/011/028.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="136" class="article" id="item-content/svn/sections/011/029.html">
+          <navLabel><text>svn relocate</text></navLabel>
+          <content src="content/svn/sections/011/029.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="137" class="article" id="item-content/svn/sections/011/030.html">
+          <navLabel><text>svn resolve</text></navLabel>
+          <content src="content/svn/sections/011/030.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="138" class="article" id="item-content/svn/sections/011/031.html">
+          <navLabel><text>svn resolved</text></navLabel>
+          <content src="content/svn/sections/011/031.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="139" class="article" id="item-content/svn/sections/011/032.html">
+          <navLabel><text>svn revert</text></navLabel>
+          <content src="content/svn/sections/011/032.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="140" class="article" id="item-content/svn/sections/011/033.html">
+          <navLabel><text>svn status (stat, st)</text></navLabel>
+          <content src="content/svn/sections/011/033.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="141" class="article" id="item-content/svn/sections/011/034.html">
+          <navLabel><text>svn switch (sw)</text></navLabel>
+          <content src="content/svn/sections/011/034.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="142" class="article" id="item-content/svn/sections/011/035.html">
+          <navLabel><text>svn unlock</text></navLabel>
+          <content src="content/svn/sections/011/035.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="143" class="article" id="item-content/svn/sections/011/036.html">
+          <navLabel><text>svn update (up)</text></navLabel>
+          <content src="content/svn/sections/011/036.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="144" class="article" id="item-content/svn/sections/011/037.html">
+          <navLabel><text>svn upgrade</text></navLabel>
+          <content src="content/svn/sections/011/037.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="145" class="article" id="item-content/svn/sections/011/038.html">
+          <navLabel><text>svnadmin—Subversion Repository Administration</text></navLabel>
+          <content src="content/svn/sections/011/038.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="146" class="article" id="item-content/svn/sections/011/039.html">
+          <navLabel><text>svnadmin crashtest</text></navLabel>
+          <content src="content/svn/sections/011/039.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="147" class="article" id="item-content/svn/sections/011/040.html">
+          <navLabel><text>svnadmin create</text></navLabel>
+          <content src="content/svn/sections/011/040.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="148" class="article" id="item-content/svn/sections/011/041.html">
+          <navLabel><text>svnadmin deltify</text></navLabel>
+          <content src="content/svn/sections/011/041.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="149" class="article" id="item-content/svn/sections/011/042.html">
+          <navLabel><text>svnadmin dump</text></navLabel>
+          <content src="content/svn/sections/011/042.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="150" class="article" id="item-content/svn/sections/011/043.html">
+          <navLabel><text>svnadmin help (h, ?)</text></navLabel>
+          <content src="content/svn/sections/011/043.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="151" class="article" id="item-content/svn/sections/011/044.html">
+          <navLabel><text>svnadmin hotcopy</text></navLabel>
+          <content src="content/svn/sections/011/044.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="152" class="article" id="item-content/svn/sections/011/045.html">
+          <navLabel><text>svnadmin list-dblogs</text></navLabel>
+          <content src="content/svn/sections/011/045.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="153" class="article" id="item-content/svn/sections/011/046.html">
+          <navLabel><text>svnadmin list-unused-dblogs</text></navLabel>
+          <content src="content/svn/sections/011/046.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="154" class="article" id="item-content/svn/sections/011/047.html">
+          <navLabel><text>svnadmin load</text></navLabel>
+          <content src="content/svn/sections/011/047.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="155" class="article" id="item-content/svn/sections/011/048.html">
+          <navLabel><text>svnadmin lslocks</text></navLabel>
+          <content src="content/svn/sections/011/048.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="156" class="article" id="item-content/svn/sections/011/049.html">
+          <navLabel><text>svnadmin lstxns</text></navLabel>
+          <content src="content/svn/sections/011/049.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="157" class="article" id="item-content/svn/sections/011/050.html">
+          <navLabel><text>svnadmin pack</text></navLabel>
+          <content src="content/svn/sections/011/050.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="158" class="article" id="item-content/svn/sections/011/051.html">
+          <navLabel><text>svnadmin recover</text></navLabel>
+          <content src="content/svn/sections/011/051.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="159" class="article" id="item-content/svn/sections/011/052.html">
+          <navLabel><text>svnadmin rmlocks</text></navLabel>
+          <content src="content/svn/sections/011/052.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="160" class="article" id="item-content/svn/sections/011/053.html">
+          <navLabel><text>svnadmin rmtxns</text></navLabel>
+          <content src="content/svn/sections/011/053.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="161" class="article" id="item-content/svn/sections/011/054.html">
+          <navLabel><text>svnadmin setlog</text></navLabel>
+          <content src="content/svn/sections/011/054.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="162" class="article" id="item-content/svn/sections/011/055.html">
+          <navLabel><text>svnadmin setrevprop</text></navLabel>
+          <content src="content/svn/sections/011/055.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="163" class="article" id="item-content/svn/sections/011/056.html">
+          <navLabel><text>svnadmin setuuid</text></navLabel>
+          <content src="content/svn/sections/011/056.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="164" class="article" id="item-content/svn/sections/011/057.html">
+          <navLabel><text>svnadmin upgrade</text></navLabel>
+          <content src="content/svn/sections/011/057.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="165" class="article" id="item-content/svn/sections/011/058.html">
+          <navLabel><text>svnadmin verify</text></navLabel>
+          <content src="content/svn/sections/011/058.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="166" class="article" id="item-content/svn/sections/011/059.html">
+          <navLabel><text>svnlook—Subversion Repository Examination</text></navLabel>
+          <content src="content/svn/sections/011/059.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="167" class="article" id="item-content/svn/sections/011/060.html">
+          <navLabel><text>svnlook author</text></navLabel>
+          <content src="content/svn/sections/011/060.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="168" class="article" id="item-content/svn/sections/011/061.html">
+          <navLabel><text>svnlook cat</text></navLabel>
+          <content src="content/svn/sections/011/061.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="169" class="article" id="item-content/svn/sections/011/062.html">
+          <navLabel><text>svnlook changed</text></navLabel>
+          <content src="content/svn/sections/011/062.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="170" class="article" id="item-content/svn/sections/011/063.html">
+          <navLabel><text>svnlook date</text></navLabel>
+          <content src="content/svn/sections/011/063.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="171" class="article" id="item-content/svn/sections/011/064.html">
+          <navLabel><text>svnlook diff</text></navLabel>
+          <content src="content/svn/sections/011/064.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="172" class="article" id="item-content/svn/sections/011/065.html">
+          <navLabel><text>svnlook dirs-changed</text></navLabel>
+          <content src="content/svn/sections/011/065.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="173" class="article" id="item-content/svn/sections/011/066.html">
+          <navLabel><text>svnlook filesize</text></navLabel>
+          <content src="content/svn/sections/011/066.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="174" class="article" id="item-content/svn/sections/011/067.html">
+          <navLabel><text>svnlook help (h, ?)</text></navLabel>
+          <content src="content/svn/sections/011/067.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="175" class="article" id="item-content/svn/sections/011/068.html">
+          <navLabel><text>svnlook history</text></navLabel>
+          <content src="content/svn/sections/011/068.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="176" class="article" id="item-content/svn/sections/011/069.html">
+          <navLabel><text>svnlook info</text></navLabel>
+          <content src="content/svn/sections/011/069.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="177" class="article" id="item-content/svn/sections/011/070.html">
+          <navLabel><text>svnlook lock</text></navLabel>
+          <content src="content/svn/sections/011/070.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="178" class="article" id="item-content/svn/sections/011/071.html">
+          <navLabel><text>svnlook log</text></navLabel>
+          <content src="content/svn/sections/011/071.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="179" class="article" id="item-content/svn/sections/011/072.html">
+          <navLabel><text>svnlook propget (pget, pg)</text></navLabel>
+          <content src="content/svn/sections/011/072.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="180" class="article" id="item-content/svn/sections/011/073.html">
+          <navLabel><text>svnlook proplist (plist, pl)</text></navLabel>
+          <content src="content/svn/sections/011/073.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="181" class="article" id="item-content/svn/sections/011/074.html">
+          <navLabel><text>svnlook tree</text></navLabel>
+          <content src="content/svn/sections/011/074.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="182" class="article" id="item-content/svn/sections/011/075.html">
+          <navLabel><text>svnlook uuid</text></navLabel>
+          <content src="content/svn/sections/011/075.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="183" class="article" id="item-content/svn/sections/011/076.html">
+          <navLabel><text>svnlook youngest</text></navLabel>
+          <content src="content/svn/sections/011/076.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="184" class="article" id="item-content/svn/sections/011/077.html">
+          <navLabel><text>svnsync—Subversion Repository Mirroring</text></navLabel>
+          <content src="content/svn/sections/011/077.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="185" class="article" id="item-content/svn/sections/011/078.html">
+          <navLabel><text>svnsync copy-revprops</text></navLabel>
+          <content src="content/svn/sections/011/078.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="186" class="article" id="item-content/svn/sections/011/079.html">
+          <navLabel><text>svnsync help</text></navLabel>
+          <content src="content/svn/sections/011/079.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="187" class="article" id="item-content/svn/sections/011/080.html">
+          <navLabel><text>svnsync info</text></navLabel>
+          <content src="content/svn/sections/011/080.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="188" class="article" id="item-content/svn/sections/011/081.html">
+          <navLabel><text>svnsync initialize (init)</text></navLabel>
+          <content src="content/svn/sections/011/081.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="189" class="article" id="item-content/svn/sections/011/082.html">
+          <navLabel><text>svnsync synchronize (sync)</text></navLabel>
+          <content src="content/svn/sections/011/082.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="190" class="article" id="item-content/svn/sections/011/083.html">
+          <navLabel><text>svnrdump—Remote Subversion Repository Data Migration</text></navLabel>
+          <content src="content/svn/sections/011/083.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="191" class="article" id="item-content/svn/sections/011/084.html">
+          <navLabel><text>svnrdump dump</text></navLabel>
+          <content src="content/svn/sections/011/084.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="192" class="article" id="item-content/svn/sections/011/085.html">
+          <navLabel><text>svnrdump help</text></navLabel>
+          <content src="content/svn/sections/011/085.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="193" class="article" id="item-content/svn/sections/011/086.html">
+          <navLabel><text>svnrdump load</text></navLabel>
+          <content src="content/svn/sections/011/086.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="194" class="article" id="item-content/svn/sections/011/087.html">
+          <navLabel><text>svnserve—Custom Subversion Server</text></navLabel>
+          <content src="content/svn/sections/011/087.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="195" class="article" id="item-content/svn/sections/011/088.html">
+          <navLabel><text>svndumpfilter—Subversion History Filtering</text></navLabel>
+          <content src="content/svn/sections/011/088.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="196" class="article" id="item-content/svn/sections/011/089.html">
+          <navLabel><text>svndumpfilter exclude</text></navLabel>
+          <content src="content/svn/sections/011/089.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="197" class="article" id="item-content/svn/sections/011/090.html">
+          <navLabel><text>svndumpfilter include</text></navLabel>
+          <content src="content/svn/sections/011/090.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="198" class="article" id="item-content/svn/sections/011/091.html">
+          <navLabel><text>svndumpfilter help</text></navLabel>
+          <content src="content/svn/sections/011/091.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="199" class="article" id="item-content/svn/sections/011/092.html">
+          <navLabel><text>svnversion—Subversion Working Copy Version Info</text></navLabel>
+          <content src="content/svn/sections/011/092.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="200" class="article" id="item-content/svn/sections/011/093.html">
+          <navLabel><text>svnversion</text></navLabel>
+          <content src="content/svn/sections/011/093.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="201" class="article" id="item-content/svn/sections/011/094.html">
+          <navLabel><text>mod_dav_svn—Subversion Apache HTTP Server Module</text></navLabel>
+          <content src="content/svn/sections/011/094.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="202" class="article" id="item-content/svn/sections/011/_section.txt">
+          <navLabel><text>no title</text></navLabel>
+          <content src="content/svn/sections/011/_section.txt"/>
+          <mbp:meta name="description"></mbp:meta>
+          <mbp:meta name="author"></mbp:meta>
+        </navPoint>
+        <navPoint playOrder="203" class="article" id="item-content/svn/sections/011/section.html">
+          <navLabel><text>9. Subversion Complete Reference</text></navLabel>
+          <content src="content/svn/sections/011/section.html"/>
+          <mbp:meta name="description">kindlerb</mbp:meta>
+          <mbp:meta name="author">kindlerb</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="209" class="section" id="item-content/svn/sections/012">
+        <navLabel><text>mod_dav_svn Configuration Directives</text></navLabel>
+        <content src="content/svn/sections/012/section.html"/>
+        <navPoint playOrder="205" class="article" id="item-content/svn/sections/012/000.html">
+          <navLabel><text>mod_dav_svn Configuration Directives</text></navLabel>
+          <content src="content/svn/sections/012/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="206" class="article" id="item-content/svn/sections/012/001.html">
+          <navLabel><text>mod_authz_svn—Subversion Apache HTTP Authorization Module</text></navLabel>
+          <content src="content/svn/sections/012/001.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="207" class="article" id="item-content/svn/sections/012/_section.txt">
+          <navLabel><text>no title</text></navLabel>
+          <content src="content/svn/sections/012/_section.txt"/>
+          <mbp:meta name="description"></mbp:meta>
+          <mbp:meta name="author"></mbp:meta>
+        </navPoint>
+        <navPoint playOrder="208" class="article" id="item-content/svn/sections/012/section.html">
+          <navLabel><text>mod_dav_svn Configuration Directives</text></navLabel>
+          <content src="content/svn/sections/012/section.html"/>
+          <mbp:meta name="description">kindlerb</mbp:meta>
+          <mbp:meta name="author">kindlerb</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="224" class="section" id="item-content/svn/sections/013">
+        <navLabel><text>mod_authz_svn Configuration Directives</text></navLabel>
+        <content src="content/svn/sections/013/section.html"/>
+        <navPoint playOrder="210" class="article" id="item-content/svn/sections/013/000.html">
+          <navLabel><text>mod_authz_svn Configuration Directives</text></navLabel>
+          <content src="content/svn/sections/013/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="211" class="article" id="item-content/svn/sections/013/001.html">
+          <navLabel><text>Subversion Properties</text></navLabel>
+          <content src="content/svn/sections/013/001.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="212" class="article" id="item-content/svn/sections/013/002.html">
+          <navLabel><text>Repository Hooks</text></navLabel>
+          <content src="content/svn/sections/013/002.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="213" class="article" id="item-content/svn/sections/013/003.html">
+          <navLabel><text>start-commit</text></navLabel>
+          <content src="content/svn/sections/013/003.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="214" class="article" id="item-content/svn/sections/013/004.html">
+          <navLabel><text>pre-commit</text></navLabel>
+          <content src="content/svn/sections/013/004.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="215" class="article" id="item-content/svn/sections/013/005.html">
+          <navLabel><text>post-commit</text></navLabel>
+          <content src="content/svn/sections/013/005.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="216" class="article" id="item-content/svn/sections/013/006.html">
+          <navLabel><text>pre-revprop-change</text></navLabel>
+          <content src="content/svn/sections/013/006.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="217" class="article" id="item-content/svn/sections/013/007.html">
+          <navLabel><text>post-revprop-change</text></navLabel>
+          <content src="content/svn/sections/013/007.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="218" class="article" id="item-content/svn/sections/013/008.html">
+          <navLabel><text>pre-lock</text></navLabel>
+          <content src="content/svn/sections/013/008.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="219" class="article" id="item-content/svn/sections/013/009.html">
+          <navLabel><text>post-lock</text></navLabel>
+          <content src="content/svn/sections/013/009.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="220" class="article" id="item-content/svn/sections/013/010.html">
+          <navLabel><text>pre-unlock</text></navLabel>
+          <content src="content/svn/sections/013/010.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="221" class="article" id="item-content/svn/sections/013/011.html">
+          <navLabel><text>post-unlock</text></navLabel>
+          <content src="content/svn/sections/013/011.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="222" class="article" id="item-content/svn/sections/013/_section.txt">
+          <navLabel><text>no title</text></navLabel>
+          <content src="content/svn/sections/013/_section.txt"/>
+          <mbp:meta name="description"></mbp:meta>
+          <mbp:meta name="author"></mbp:meta>
+        </navPoint>
+        <navPoint playOrder="223" class="article" id="item-content/svn/sections/013/section.html">
+          <navLabel><text>mod_authz_svn Configuration Directives</text></navLabel>
+          <content src="content/svn/sections/013/section.html"/>
+          <mbp:meta name="description">kindlerb</mbp:meta>
+          <mbp:meta name="author">kindlerb</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="230" class="section" id="item-content/svn/sections/014">
+        <navLabel><text>A. Subversion Quick-Start Guide</text></navLabel>
+        <content src="content/svn/sections/014/section.html"/>
+        <navPoint playOrder="225" class="article" id="item-content/svn/sections/014/000.html">
+          <navLabel><text>A. Subversion Quick-Start Guide</text></navLabel>
+          <content src="content/svn/sections/014/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="226" class="article" id="item-content/svn/sections/014/001.html">
+          <navLabel><text>Installing Subversion</text></navLabel>
+          <content src="content/svn/sections/014/001.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="227" class="article" id="item-content/svn/sections/014/002.html">
+          <navLabel><text>High-Speed Tutorial</text></navLabel>
+          <content src="content/svn/sections/014/002.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="228" class="article" id="item-content/svn/sections/014/_section.txt">
+          <navLabel><text>no title</text></navLabel>
+          <content src="content/svn/sections/014/_section.txt"/>
+          <mbp:meta name="description"></mbp:meta>
+          <mbp:meta name="author"></mbp:meta>
+        </navPoint>
+        <navPoint playOrder="229" class="article" id="item-content/svn/sections/014/section.html">
+          <navLabel><text>A. Subversion Quick-Start Guide</text></navLabel>
+          <content src="content/svn/sections/014/section.html"/>
+          <mbp:meta name="description">kindlerb</mbp:meta>
+          <mbp:meta name="author">kindlerb</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="245" class="section" id="item-content/svn/sections/015">
+        <navLabel><text>B. Subversion for CVS Users</text></navLabel>
+        <content src="content/svn/sections/015/section.html"/>
+        <navPoint playOrder="231" class="article" id="item-content/svn/sections/015/000.html">
+          <navLabel><text>B. Subversion for CVS Users</text></navLabel>
+          <content src="content/svn/sections/015/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="232" class="article" id="item-content/svn/sections/015/001.html">
+          <navLabel><text>Revision Numbers Are Different Now</text></navLabel>
+          <content src="content/svn/sections/015/001.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="233" class="article" id="item-content/svn/sections/015/002.html">
+          <navLabel><text>Directory Versions</text></navLabel>
+          <content src="content/svn/sections/015/002.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="234" class="article" id="item-content/svn/sections/015/003.html">
+          <navLabel><text>More Disconnected Operations</text></navLabel>
+          <content src="content/svn/sections/015/003.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="235" class="article" id="item-content/svn/sections/015/004.html">
+          <navLabel><text>Distinction Between Status and Update</text></navLabel>
+          <content src="content/svn/sections/015/004.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="236" class="article" id="item-content/svn/sections/015/005.html">
+          <navLabel><text>Branches and Tags</text></navLabel>
+          <content src="content/svn/sections/015/005.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="237" class="article" id="item-content/svn/sections/015/006.html">
+          <navLabel><text>Metadata Properties</text></navLabel>
+          <content src="content/svn/sections/015/006.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="238" class="article" id="item-content/svn/sections/015/007.html">
+          <navLabel><text>Conflict Resolution</text></navLabel>
+          <content src="content/svn/sections/015/007.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="239" class="article" id="item-content/svn/sections/015/008.html">
+          <navLabel><text>Binary Files and Translation</text></navLabel>
+          <content src="content/svn/sections/015/008.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="240" class="article" id="item-content/svn/sections/015/009.html">
+          <navLabel><text>Versioned Modules</text></navLabel>
+          <content src="content/svn/sections/015/009.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="241" class="article" id="item-content/svn/sections/015/010.html">
+          <navLabel><text>Authentication</text></navLabel>
+          <content src="content/svn/sections/015/010.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="242" class="article" id="item-content/svn/sections/015/011.html">
+          <navLabel><text>Converting a Repository from CVS to Subversion</text></navLabel>
+          <content src="content/svn/sections/015/011.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="243" class="article" id="item-content/svn/sections/015/_section.txt">
+          <navLabel><text>no title</text></navLabel>
+          <content src="content/svn/sections/015/_section.txt"/>
+          <mbp:meta name="description"></mbp:meta>
+          <mbp:meta name="author"></mbp:meta>
+        </navPoint>
+        <navPoint playOrder="244" class="article" id="item-content/svn/sections/015/section.html">
+          <navLabel><text>B. Subversion for CVS Users</text></navLabel>
+          <content src="content/svn/sections/015/section.html"/>
+          <mbp:meta name="description">kindlerb</mbp:meta>
+          <mbp:meta name="author">kindlerb</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="252" class="section" id="item-content/svn/sections/016">
+        <navLabel><text>C. WebDAV and Autoversioning</text></navLabel>
+        <content src="content/svn/sections/016/section.html"/>
+        <navPoint playOrder="246" class="article" id="item-content/svn/sections/016/000.html">
+          <navLabel><text>C. WebDAV and Autoversioning</text></navLabel>
+          <content src="content/svn/sections/016/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="247" class="article" id="item-content/svn/sections/016/001.html">
+          <navLabel><text>What Is WebDAV?</text></navLabel>
+          <content src="content/svn/sections/016/001.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="248" class="article" id="item-content/svn/sections/016/002.html">
+          <navLabel><text>Autoversioning</text></navLabel>
+          <content src="content/svn/sections/016/002.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="249" class="article" id="item-content/svn/sections/016/003.html">
+          <navLabel><text>Client Interoperability</text></navLabel>
+          <content src="content/svn/sections/016/003.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="250" class="article" id="item-content/svn/sections/016/_section.txt">
+          <navLabel><text>no title</text></navLabel>
+          <content src="content/svn/sections/016/_section.txt"/>
+          <mbp:meta name="description"></mbp:meta>
+          <mbp:meta name="author"></mbp:meta>
+        </navPoint>
+        <navPoint playOrder="251" class="article" id="item-content/svn/sections/016/section.html">
+          <navLabel><text>C. WebDAV and Autoversioning</text></navLabel>
+          <content src="content/svn/sections/016/section.html"/>
+          <mbp:meta name="description">kindlerb</mbp:meta>
+          <mbp:meta name="author">kindlerb</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="256" class="section" id="item-content/svn/sections/017">
+        <navLabel><text>D. Copyright</text></navLabel>
+        <content src="content/svn/sections/017/section.html"/>
+        <navPoint playOrder="253" class="article" id="item-content/svn/sections/017/000.html">
+          <navLabel><text>D. Copyright</text></navLabel>
+          <content src="content/svn/sections/017/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="254" class="article" id="item-content/svn/sections/017/_section.txt">
+          <navLabel><text>no title</text></navLabel>
+          <content src="content/svn/sections/017/_section.txt"/>
+          <mbp:meta name="description"></mbp:meta>
+          <mbp:meta name="author"></mbp:meta>
+        </navPoint>
+        <navPoint playOrder="255" class="article" id="item-content/svn/sections/017/section.html">
+          <navLabel><text>D. Copyright</text></navLabel>
+          <content src="content/svn/sections/017/section.html"/>
+          <mbp:meta name="description">kindlerb</mbp:meta>
+          <mbp:meta name="author">kindlerb</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="260" class="section" id="item-content/svn/sections/018">
+        <navLabel><text>Index</text></navLabel>
+        <content src="content/svn/sections/018/section.html"/>
+        <navPoint playOrder="257" class="article" id="item-content/svn/sections/018/000.html">
+          <navLabel><text>Index</text></navLabel>
+          <content src="content/svn/sections/018/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="258" class="article" id="item-content/svn/sections/018/_section.txt">
+          <navLabel><text>no title</text></navLabel>
+          <content src="content/svn/sections/018/_section.txt"/>
+          <mbp:meta name="description"></mbp:meta>
+          <mbp:meta name="author"></mbp:meta>
+        </navPoint>
+        <navPoint playOrder="259" class="article" id="item-content/svn/sections/018/section.html">
+          <navLabel><text>Index</text></navLabel>
+          <content src="content/svn/sections/018/section.html"/>
+          <mbp:meta name="description">kindlerb</mbp:meta>
+          <mbp:meta name="author">kindlerb</mbp:meta>
+        </navPoint>
+      </navPoint>
+    </navPoint>
+  </navMap>
+</ncx>

@@ -1,0 +1,18 @@
+
+ DEBUG  機能実装
+
+ node test.js ./config/webpack_config.yaml
+
+   -d debug   msgout
+   -t test    phese control
+
+
+ex.
+
+function mobi_move() {
+  const _D = DEBUG('mobi_move')
+
+ _D(file.atime + ' ' + file.size + ' ' + file.name); 
+
+}
+

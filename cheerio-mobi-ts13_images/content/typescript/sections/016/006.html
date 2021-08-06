@@ -1,0 +1,70 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Lazy Object Literal Initialization
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts13_images/undefined" />
+  </head>
+   <body>
+<h2 id="lazy-object-literal-initialization">Lazy Object Literal Initialization</h2>
+<p>Quite commonly in JavaScript code bases you would initialize object literals in the following manner:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">let</span> foo = {};
+foo.bar = <span class="hljs-number">123</span>;
+foo.bas = <span class="hljs-string">&quot;Hello World&quot;</span>;
+</code></pre>
+<p>As soon as you move the code to TypeScript you will start to get Errors like the following:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">let</span> foo = {};
+foo.bar = <span class="hljs-number">123</span>; <span class="hljs-comment">// Error: Property &apos;bar&apos; does not exist on type &apos;{}&apos;</span>
+foo.bas = <span class="hljs-string">&quot;Hello World&quot;</span>; <span class="hljs-comment">// Error: Property &apos;bas&apos; does not exist on type &apos;{}&apos;</span>
+</code></pre>
+<p>This is because from the state <code>let foo = {}</code>, TypeScript <em>infers</em> the type of <code>foo</code> (left hand side of initializing assignment) to be the type of the right hand side <code>{}</code> (i.e. an object with no properties). So, it error if you try to assign to a property it doesn&apos;t know about.</p>
+<h3 id="ideal-fix">Ideal Fix</h3>
+<p>The <em>proper</em> way to initialize an object in TypeScript is to do it in the assignment:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">let</span> foo = {
+    bar: <span class="hljs-number">123</span>,
+    bas: <span class="hljs-string">&quot;Hello World&quot;</span>,
+};
+</code></pre>
+<p>This is also great for code review and code maintainability purposes.</p>
+<blockquote>
+    <p>The quick fix and middle ground <em>lazy</em> initialization patterns described below suffer from <em>mistakenly forgetting to initialize a property</em>. </p>
+</blockquote>
+<h3 id="quick-fix">Quick Fix</h3>
+<p>If you have a large JavaScript code base that you are migrating to TypeScript the ideal fix might not be a viable solution for you. In that case you can carefully use a <em>type assertion</em> to silence the compiler:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">let</span> foo = {} as <span class="hljs-built_in">any</span>;
+foo.bar = <span class="hljs-number">123</span>;
+foo.bas = <span class="hljs-string">&quot;Hello World&quot;</span>;
+</code></pre>
+<h3 id="middle-ground">Middle Ground</h3>
+<p>Of course using the <code>any</code> assertion can be very bad as it sort of defeats the safety of TypeScript. The middle ground fix is to create an <code>interface</code> to ensure</p>
+<ul>
+    <li>Good Docs</li>
+    <li>Safe assignment</li>
+</ul>
+<p>This is shown below:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">interface</span> Foo {
+    bar: <span class="hljs-built_in">number</span>
+    bas: <span class="hljs-built_in">string</span>
+}
+<span class="hljs-keyword">let</span> foo = {} as Foo;
+foo.bar = <span class="hljs-number">123</span>;
+foo.bas = <span class="hljs-string">&quot;Hello World&quot;</span>;
+</code></pre>
+<p>Here is a quick example that shows the fact that using the interface can save you:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">interface</span> Foo {
+    bar: <span class="hljs-built_in">number</span>
+    bas: <span class="hljs-built_in">string</span>
+}
+<span class="hljs-keyword">let</span> foo = {} as Foo;
+foo.bar = <span class="hljs-number">123</span>;
+foo.bas = <span class="hljs-string">&quot;Hello World&quot;</span>;
+<span class="hljs-comment">// later in the codebase:</span>
+foo.bar = <span class="hljs-string">&apos;Hello Stranger&apos;</span>; <span class="hljs-comment">// Error: You probably misspelled `bas` as `bar`, cannot assign string to number</span>
+</code></pre>
+</body>
+</html>

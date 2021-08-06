@@ -1,0 +1,74 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Emitter SourceMaps
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts12_mlv/undefined" />
+  </head>
+   <body>
+<h3 id="emitter-sourcemaps">Emitter SourceMaps</h3>
+<p>We said that the bulk of the <code>emitter.ts</code> is the local function <code>emitJavaScript</code> (we showed the initialization routine of this function before). It basically sets up a bunch of locals and hits off to <code>emitSourceFile</code>. The following is a revisiting of the function, this time focusing on <code>SourceMap</code> stuff:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">emitJavaScript</span>(<span class="hljs-params">jsFilePath: <span class="hljs-built_in">string</span>, root?: SourceFile</span>) </span>{
+    <span class="hljs-comment">// STUFF ........... removed</span>
+    <span class="hljs-keyword">let</span> writeComment = writeCommentRange;
+    <span class="hljs-comment">/** Write emitted output to disk */</span>
+    <span class="hljs-keyword">let</span> writeEmittedFiles = writeJavaScriptFile;
+    <span class="hljs-comment">/** Emit a node */</span>
+    <span class="hljs-keyword">let</span> emit = emitNodeWithoutSourceMap;
+    <span class="hljs-comment">/** Called just before starting emit of a node */</span>
+    <span class="hljs-keyword">let</span> emitStart = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">node: Node</span>) </span>{ };
+    <span class="hljs-comment">/** Called once the emit of the node is done */</span>
+    <span class="hljs-keyword">let</span> emitEnd = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">node: Node</span>) </span>{ };
+    <span class="hljs-comment">/** Emit the text for the given token that comes after startPos
+      * This by default writes the text provided with the given tokenKind
+      * but if optional emitFn callback is provided the text is emitted using the callback instead of default text
+      * @param tokenKind the kind of the token to search and emit
+      * @param startPos the position in the source to start searching for the token
+      * @param emitFn if given will be invoked to emit the text instead of actual token emit */</span>
+    <span class="hljs-keyword">let</span> emitToken = emitTokenText;
+    <span class="hljs-comment">/** Called to before starting the lexical scopes as in function/class in the emitted code because of node
+      * @param scopeDeclaration node that starts the lexical scope
+      * @param scopeName Optional name of this scope instead of deducing one from the declaration node */</span>
+    <span class="hljs-keyword">let</span> scopeEmitStart = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">scopeDeclaration: Node, scopeName?: <span class="hljs-built_in">string</span></span>) </span>{ };
+    <span class="hljs-comment">/** Called after coming out of the scope */</span>
+    <span class="hljs-keyword">let</span> scopeEmitEnd = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{ };
+    <span class="hljs-comment">/** Sourcemap data that will get encoded */</span>
+    <span class="hljs-keyword">let</span> sourceMapData: SourceMapData;
+    <span class="hljs-keyword">if</span> (compilerOptions.sourceMap || compilerOptions.inlineSourceMap) {
+        initializeEmitterWithSourceMaps();
+    }
+    <span class="hljs-keyword">if</span> (root) {
+        <span class="hljs-comment">// Do not call emit directly. It does not set the currentSourceFile.</span>
+        emitSourceFile(root);
+    }
+    <span class="hljs-keyword">else</span> {
+        forEach(host.getSourceFiles(), sourceFile =&gt; {
+            <span class="hljs-keyword">if</span> (!isExternalModuleOrDeclarationFile(sourceFile)) {
+                emitSourceFile(sourceFile);
+            }
+        });
+    }
+    writeLine();
+    writeEmittedFiles(writer.getText(), <span class="hljs-comment">/*writeByteOrderMark*/</span> compilerOptions.emitBOM);
+    <span class="hljs-keyword">return</span>;
+    <span class="hljs-comment">/// BUNCH OF LOCAL FUNCTIONS</span>
+</code></pre>
+<p>The important function call here : <code>initializeEmitterWithSourceMaps</code> which is a function local to <code>emitJavaScript</code> that overrides some locals that were already defined here. At the bottom of <code>initializeEmitterWithSourceMaps</code> you will notice the overriding:</p>
+<pre><code class="lang-ts">    <span class="hljs-comment">// end of `initializeEmitterWithSourceMaps`</span>
+    writeEmittedFiles = writeJavaScriptAndSourceMapFile;
+    emit = emitNodeWithSourceMap;
+    emitStart = recordEmitNodeStartSpan;
+    emitEnd = recordEmitNodeEndSpan;
+    emitToken = writeTextWithSpanRecord;
+    scopeEmitStart = recordScopeNameOfNode;
+    scopeEmitEnd = recordScopeNameEnd;
+    writeComment = writeCommentRangeWithMap;
+</code></pre>
+<p>This means that the bulk of emitter code can not care about <code>SourceMap</code> and just use these local functions the same way with or without SourceMaps.</p>
+</body>
+</html>

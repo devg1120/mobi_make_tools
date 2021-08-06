@@ -1,0 +1,155 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Supporting Multiple Repository Access Methods</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/tmp/es2015/cheerio-mobi-ts4/css/kindle.css" />
+  </head>
+   <body>
+    <div class="sect1">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="svn.serverconfig.multimethod"></a>Supporting Multiple Repository Access Methods</h2>
+          </div>
+        </div>
+      </div>
+      <p>You&apos;ve seen how a repository can be accessed in many
+      different ways.  But is it possible&#x2014;or safe&#x2014;for your
+      repository to be accessed by multiple methods simultaneously?
+      The answer is yes, provided you use a bit of foresight.</p>
+      <p>At any given time, these processes may require read and
+      write access to your repository:</p>
+      <div class="itemizedlist">
+        <ul class="itemizedlist" style="list-style-type: disc; ">
+          <li class="listitem">
+            <p>Regular system users using a Subversion client (as
+          themselves) to access the repository directly via
+          <code class="literal">file://</code> URLs</p>
+          </li>
+          <li class="listitem">
+            <p>Regular system users connecting to SSH-spawned private
+          <span class="command"><strong>svnserve</strong></span> processes (running as
+          themselves), which access the repository</p>
+          </li>
+          <li class="listitem">
+            <p>An <span class="command"><strong>svnserve</strong></span> process&#x2014;either a
+          daemon or one launched by
+          <span class="command"><strong>inetd</strong></span>&#x2014;running as a particular fixed
+          user</p>
+          </li>
+          <li class="listitem">
+            <p>An Apache <span class="command"><strong>httpd</strong></span> process, running as a
+          particular fixed user</p>
+          </li>
+        </ul>
+      </div>
+      <p>The most common problem administrators run into is
+      repository ownership and permissions.  Does every process (or
+      user) in the preceding list have the rights to read and write the
+      repository&apos;s underlying data files?  Assuming you have a
+      Unix-like operating system, a straightforward approach might be
+      to place every potential repository user into a
+      new <code class="literal">svn</code> group, and make the repository wholly
+      owned by that group.  But even that&apos;s not enough, because a
+      process may write to the database files using an unfriendly
+      umask&#x2014;one that prevents access by other users.</p>
+      <p>So the next step beyond setting up a common group for
+      repository users is to force every repository-accessing process
+      to use a sane umask.  For users accessing the repository
+      directly, you can make the <span class="command"><strong>svn</strong></span> program into a
+      wrapper script that first runs <strong class="userinput"><code>umask 002</code></strong> and
+      then runs the real <span class="command"><strong>svn</strong></span> client program.  You
+      can write a similar wrapper script for the
+      <span class="command"><strong>svnserve</strong></span> program, and add a <strong class="userinput"><code>umask
+      002</code></strong> command to Apache&apos;s own startup script,
+      <code class="filename">apachectl</code>.  For example:</p>
+      <div class="informalexample">
+        <pre class="screen">
+$ cat /usr/bin/svn
+#!/bin/sh
+umask 002
+/usr/bin/svn-real &quot;$@&quot;
+</pre>
+      </div>
+      <p>Another common problem is often encountered on Unix-like
+      systems.  If your repository is backed by Berkeley DB, for
+      example, it occasionally creates new log files to journal its
+      actions.  Even if the Berkeley DB repository is wholly owned by
+      the <span class="command"><strong>svn</strong></span> group, these newly created log files
+      won&apos;t necessarily be owned by that same group, which then
+      creates more permissions problems for your users.  A good
+      workaround is to set the group SUID bit on the
+      repository&apos;s <code class="filename">db</code> directory.  This causes all
+      newly created log files to have the same group owner as the
+      parent directory.</p>
+      <p>Once you&apos;ve jumped through these hoops, your repository
+      should be accessible by all the necessary processes.  It may
+      seem a bit messy and complicated, but the problems of having
+      multiple users sharing write access to common files are classic
+      ones that are not often elegantly solved.</p>
+      <p>Fortunately, most repository administrators will never
+      <span class="emphasis"><em>need</em></span> to have such a complex configuration.
+      Users who wish to access repositories that live on the same
+      machine are not limited to using <code class="literal">file://</code>
+      access URLs&#x2014;they can typically contact the Apache HTTP
+      server or <span class="command"><strong>svnserve</strong></span> using
+      <code class="literal">localhost</code> for the server name in their
+      <code class="literal">http://</code> or <code class="literal">svn://</code> URL.
+      And maintaining multiple server processes for your Subversion
+      repositories is likely to be more of a headache than necessary.
+      We recommend that you choose a single server that best meets your
+      needs and stick with it!</p>
+      <div class="sidebar">
+        <div class="titlepage">
+          <div>
+            <div>
+              <p class="title">
+                <strong>The svn+ssh:// Server Checklist</strong>
+              </p>
+            </div>
+          </div>
+        </div>
+        <p>It can be quite tricky to get a bunch of users with
+        existing SSH accounts to share a repository without
+        permissions problems.  If you&apos;re confused about all the things
+        that you (as an administrator) need to do on a Unix-like
+        system, here&apos;s a quick checklist that resummarizes some of the
+        topics discussed in this section:</p>
+        <div class="itemizedlist">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+              <p>All of your SSH users need to be able to read and
+            write to the repository, so put all the SSH users into a
+            single group.</p>
+            </li>
+            <li class="listitem">
+              <p>Make the repository wholly owned by that group.</p>
+            </li>
+            <li class="listitem">
+              <p>Set the group permissions to read/write.</p>
+            </li>
+            <li class="listitem">
+              <p>Your users need to use a sane umask when accessing the
+            repository, so make sure <span class="command"><strong>svnserve</strong></span>
+            (<code class="filename">/usr/bin/svnserve</code>, or wherever it
+            lives in <code class="literal">$PATH</code>) is actually a wrapper
+            script that runs <strong class="userinput"><code>umask 002</code></strong> and
+            executes the real <span class="command"><strong>svnserve</strong></span>
+            binary.</p>
+            </li>
+            <li class="listitem">
+              <p>Take similar measures when using
+            <span class="command"><strong>svnlook</strong></span> and
+            <span class="command"><strong>svnadmin</strong></span>.  Either run them with a sane
+            umask or wrap them as just described.</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

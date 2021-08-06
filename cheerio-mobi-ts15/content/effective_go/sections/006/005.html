@@ -1,0 +1,37 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Type switch</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+A switch can also be used to discover the dynamic type of an interface
+variable.  Such a <em>type switch</em> uses the syntax of a type
+assertion with the keyword <code>type</code> inside the parentheses.
+If the switch declares a variable in the expression, the variable will
+have the corresponding type in each clause.
+It&apos;s also idiomatic to reuse the name in such cases, in effect declaring
+a new variable with the same name but a different type in each case.
+</p><pre>
+var t interface{}
+t = functionOfSomeType()
+switch t := t.(type) {
+default:
+    fmt.Printf(&quot;unexpected type %T\n&quot;, t)     // %T prints whatever type t has
+case bool:
+    fmt.Printf(&quot;boolean %t\n&quot;, t)             // t has type bool
+case int:
+    fmt.Printf(&quot;integer %d\n&quot;, t)             // t has type int
+case *bool:
+    fmt.Printf(&quot;pointer to boolean %t\n&quot;, *t) // t has type *bool
+case *int:
+    fmt.Printf(&quot;pointer to integer %d\n&quot;, *t) // t has type *int
+}
+</pre></body>
+</body>
+</html>

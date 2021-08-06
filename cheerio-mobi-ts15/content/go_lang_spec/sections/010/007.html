@@ -1,0 +1,46 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Iota</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+Within a [<a>constant declaration</a>], the predeclared identifier
+<code>iota</code> represents successive untyped integer [<a>
+constants</a>]. Its value is the index of the respective [<a>ConstSpec</a>]
+in that constant declaration, starting at zero.
+It can be used to construct a set of related constants:
+</p><pre>
+const (
+	c0 = iota  // c0 == 0
+	c1 = iota  // c1 == 1
+	c2 = iota  // c2 == 2
+)
+const (
+	a = 1 &lt;&lt; iota  // a == 1  (iota == 0)
+	b = 1 &lt;&lt; iota  // b == 2  (iota == 1)
+	c = 3          // c == 3  (iota == 2, unused)
+	d = 1 &lt;&lt; iota  // d == 8  (iota == 3)
+)
+const (
+	u         = iota * 42  // u == 0     (untyped integer constant)
+	v float64 = iota * 42  // v == 42.0  (float64 constant)
+	w         = iota * 42  // w == 84    (untyped integer constant)
+)
+const x = iota  // x == 0
+const y = iota  // y == 0
+</pre><p>
+By definition, multiple uses of <code>iota</code> in the same ConstSpec all have the same value:
+</p><pre>
+const (
+	bit0, mask0 = 1 &lt;&lt; iota, 1&lt;<iota 0 1 7 - bit0="=" 1, mask0="=" (iota="=" 0) bit1, mask1 bit1="=" 2, 1) _, _ unused) bit3, mask3 bit3="=" 8, 3) ) < pre><p>
+This last example exploits the [<a>implicit repetition</a>]
+of the last non-empty expression list.
+</p></iota></pre></body>
+</body>
+</html>

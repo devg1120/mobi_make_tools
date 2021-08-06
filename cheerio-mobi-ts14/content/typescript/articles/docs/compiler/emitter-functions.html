@@ -1,0 +1,326 @@
+<h3 id="emitfiles"><code>emitFiles</code></h3>
+<p>Defined in <code>emitter.ts</code> here is the function signature:</p>
+<pre><code class="lang-ts"><span class="hljs-comment">// targetSourceFile is when users only want one file in entire project to be emitted. This is used in compileOnSave feature</span>
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">emitFiles</span>(<span class="hljs-params">resolver: EmitResolver, host: EmitHost, targetSourceFile?: SourceFile</span>): <span class="hljs-title">EmitResult</span> </span>{
+</code></pre>
+<p><code>EmitHost</code> is just a simplified (as in narrowed down) version of <code>CompilerHost</code> (and is at runtime actually a <code>CompilerHost</code> for many use cases).</p>
+<p>The most interesting call stack from <code>emitFiles</code> is the following:</p>
+<pre><code>emitFiles ->
+    emitFile(jsFilePath, targetSourceFile) ->
+        emitJavaScript(jsFilePath, targetSourceFile);
+</code></pre>
+<h3 id="emitjavascript"><code>emitJavaScript</code></h3>
+<p>There is a lot of good comments in this function so we present it below :</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">emitJavaScript</span>(<span class="hljs-params">jsFilePath: <span class="hljs-built_in">string</span>, root?: SourceFile</span>) </span>{
+    <span class="hljs-keyword">let</span> writer = createTextWriter(newLine);
+    <span class="hljs-keyword">let</span> write = writer.write;
+    <span class="hljs-keyword">let</span> writeTextOfNode = writer.writeTextOfNode;
+    <span class="hljs-keyword">let</span> writeLine = writer.writeLine;
+    <span class="hljs-keyword">let</span> increaseIndent = writer.increaseIndent;
+    <span class="hljs-keyword">let</span> decreaseIndent = writer.decreaseIndent;
+
+    <span class="hljs-keyword">let</span> currentSourceFile: SourceFile;
+    <span class="hljs-comment">// name of an exporter function if file is a System external module</span>
+    <span class="hljs-comment">// System.register([...], function (<exporter>) {...})</span>
+    <span class="hljs-comment">// exporting in System modules looks like:</span>
+    <span class="hljs-comment">// export var x; ... x = 1</span>
+    <span class="hljs-comment">// =></span>
+    <span class="hljs-comment">// var x;... exporter("x", x = 1)</span>
+    <span class="hljs-keyword">let</span> exportFunctionForFile: <span class="hljs-built_in">string</span>;
+
+    <span class="hljs-keyword">let</span> generatedNameSet: Map<<span class="hljs-built_in">string</span>> = {};
+    <span class="hljs-keyword">let</span> nodeToGeneratedName: <span class="hljs-built_in">string</span>[] = [];
+    <span class="hljs-keyword">let</span> computedPropertyNamesToGeneratedNames: <span class="hljs-built_in">string</span>[];
+
+    <span class="hljs-keyword">let</span> extendsEmitted = <span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">let</span> decorateEmitted = <span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">let</span> paramEmitted = <span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">let</span> awaiterEmitted = <span class="hljs-literal">false</span>;
+    <span class="hljs-keyword">let</span> tempFlags = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">let</span> tempVariables: Identifier[];
+    <span class="hljs-keyword">let</span> tempParameters: Identifier[];
+    <span class="hljs-keyword">let</span> externalImports: (ImportDeclaration | ImportEqualsDeclaration | ExportDeclaration)[];
+    <span class="hljs-keyword">let</span> exportSpecifiers: Map<ExportSpecifier[]>;
+    <span class="hljs-keyword">let</span> exportEquals: ExportAssignment;
+    <span class="hljs-keyword">let</span> hasExportStars: <span class="hljs-built_in">boolean</span>;
+
+    <span class="hljs-comment">/** Write emitted output to disk */</span>
+    <span class="hljs-keyword">let</span> writeEmittedFiles = writeJavaScriptFile;
+
+    <span class="hljs-keyword">let</span> detachedCommentsInfo: { nodePos: <span class="hljs-built_in">number</span>; detachedCommentEndPos: <span class="hljs-built_in">number</span> }[];
+
+    <span class="hljs-keyword">let</span> writeComment = writeCommentRange;
+
+    <span class="hljs-comment">/** Emit a node */</span>
+    <span class="hljs-keyword">let</span> emit = emitNodeWithoutSourceMap;
+
+    <span class="hljs-comment">/** Called just before starting emit of a node */</span>
+    <span class="hljs-keyword">let</span> emitStart = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">node: Node</span>) </span>{ };
+
+    <span class="hljs-comment">/** Called once the emit of the node is done */</span>
+    <span class="hljs-keyword">let</span> emitEnd = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">node: Node</span>) </span>{ };
+
+    <span class="hljs-comment">/** Emit the text for the given token that comes after startPos
+      * This by default writes the text provided with the given tokenKind
+      * but if optional emitFn callback is provided the text is emitted using the callback instead of default text
+      * @param tokenKind the kind of the token to search and emit
+      * @param startPos the position in the source to start searching for the token
+      * @param emitFn if given will be invoked to emit the text instead of actual token emit */</span>
+    <span class="hljs-keyword">let</span> emitToken = emitTokenText;
+
+    <span class="hljs-comment">/** Called to before starting the lexical scopes as in function/class in the emitted code because of node
+      * @param scopeDeclaration node that starts the lexical scope
+      * @param scopeName Optional name of this scope instead of deducing one from the declaration node */</span>
+    <span class="hljs-keyword">let</span> scopeEmitStart = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">scopeDeclaration: Node, scopeName?: <span class="hljs-built_in">string</span></span>) </span>{ };
+
+    <span class="hljs-comment">/** Called after coming out of the scope */</span>
+    <span class="hljs-keyword">let</span> scopeEmitEnd = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{ };
+
+    <span class="hljs-comment">/** Sourcemap data that will get encoded */</span>
+    <span class="hljs-keyword">let</span> sourceMapData: SourceMapData;
+
+    <span class="hljs-keyword">if</span> (compilerOptions.sourceMap || compilerOptions.inlineSourceMap) {
+        initializeEmitterWithSourceMaps();
+    }
+
+    <span class="hljs-keyword">if</span> (root) {
+        <span class="hljs-comment">// Do not call emit directly. It does not set the currentSourceFile.</span>
+        emitSourceFile(root);
+    }
+    <span class="hljs-keyword">else</span> {
+        forEach(host.getSourceFiles(), sourceFile => {
+            <span class="hljs-keyword">if</span> (!isExternalModuleOrDeclarationFile(sourceFile)) {
+                emitSourceFile(sourceFile);
+            }
+        });
+    }
+
+    writeLine();
+    writeEmittedFiles(writer.getText(), <span class="hljs-comment">/*writeByteOrderMark*/</span> compilerOptions.emitBOM);
+    <span class="hljs-keyword">return</span>;
+
+    <span class="hljs-comment">/// BUNCH OF LOCAL FUNCTIONS</span>
+}
+</code></pre>
+<p>Basically it sets up a bunch of locals (these functions form the <em>bulk</em> of <code>emitter.ts</code>) and then hands off to a local function <code>emitSourceFile</code> which kicks off the emit. The <code>emitSourceFile</code> function just sets up the <code>currentSourceFile</code> and in turn hands off to a local <code>emit</code> function.</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">emitSourceFile</span>(<span class="hljs-params">sourceFile: SourceFile</span>): <span class="hljs-title">void</span> </span>{
+    currentSourceFile = sourceFile;
+    exportFunctionForFile = <span class="hljs-literal">undefined</span>;
+    emit(sourceFile);
+}
+</code></pre>
+<p>The <code>emit</code> function handles <em>comment</em> emit + <em>actual JavaScript</em> emit. The <em>actual JavaScript</em> emit is the job of <code>emitJavaScriptWorker</code> function.</p>
+<h3 id="emitjavascriptworker"><code>emitJavaScriptWorker</code></h3>
+<p>The complete function:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">emitJavaScriptWorker</span>(<span class="hljs-params">node: Node</span>) </span>{
+    <span class="hljs-comment">// Check if the node can be emitted regardless of the ScriptTarget</span>
+    <span class="hljs-keyword">switch</span> (node.kind) {
+        <span class="hljs-keyword">case</span> SyntaxKind.Identifier:
+            <span class="hljs-keyword">return</span> emitIdentifier(<Identifier>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.Parameter:
+            <span class="hljs-keyword">return</span> emitParameter(<ParameterDeclaration>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.MethodDeclaration:
+        <span class="hljs-keyword">case</span> SyntaxKind.MethodSignature:
+            <span class="hljs-keyword">return</span> emitMethod(<MethodDeclaration>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.GetAccessor:
+        <span class="hljs-keyword">case</span> SyntaxKind.SetAccessor:
+            <span class="hljs-keyword">return</span> emitAccessor(<AccessorDeclaration>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.ThisKeyword:
+            <span class="hljs-keyword">return</span> emitThis(node);
+        <span class="hljs-keyword">case</span> SyntaxKind.SuperKeyword:
+            <span class="hljs-keyword">return</span> emitSuper(node);
+        <span class="hljs-keyword">case</span> SyntaxKind.NullKeyword:
+            <span class="hljs-keyword">return</span> write(<span class="hljs-string">"null"</span>);
+        <span class="hljs-keyword">case</span> SyntaxKind.TrueKeyword:
+            <span class="hljs-keyword">return</span> write(<span class="hljs-string">"true"</span>);
+        <span class="hljs-keyword">case</span> SyntaxKind.FalseKeyword:
+            <span class="hljs-keyword">return</span> write(<span class="hljs-string">"false"</span>);
+        <span class="hljs-keyword">case</span> SyntaxKind.NumericLiteral:
+        <span class="hljs-keyword">case</span> SyntaxKind.StringLiteral:
+        <span class="hljs-keyword">case</span> SyntaxKind.RegularExpressionLiteral:
+        <span class="hljs-keyword">case</span> SyntaxKind.NoSubstitutionTemplateLiteral:
+        <span class="hljs-keyword">case</span> SyntaxKind.TemplateHead:
+        <span class="hljs-keyword">case</span> SyntaxKind.TemplateMiddle:
+        <span class="hljs-keyword">case</span> SyntaxKind.TemplateTail:
+            <span class="hljs-keyword">return</span> emitLiteral(<LiteralExpression>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.TemplateExpression:
+            <span class="hljs-keyword">return</span> emitTemplateExpression(<TemplateExpression>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.TemplateSpan:
+            <span class="hljs-keyword">return</span> emitTemplateSpan(<TemplateSpan>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.JsxElement:
+        <span class="hljs-keyword">case</span> SyntaxKind.JsxSelfClosingElement:
+            <span class="hljs-keyword">return</span> emitJsxElement(<JsxElement|JsxSelfClosingElement>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.JsxText:
+            <span class="hljs-keyword">return</span> emitJsxText(<JsxText>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.JsxExpression:
+            <span class="hljs-keyword">return</span> emitJsxExpression(<JsxExpression>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.QualifiedName:
+            <span class="hljs-keyword">return</span> emitQualifiedName(<QualifiedName>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.ObjectBindingPattern:
+            <span class="hljs-keyword">return</span> emitObjectBindingPattern(<BindingPattern>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.ArrayBindingPattern:
+            <span class="hljs-keyword">return</span> emitArrayBindingPattern(<BindingPattern>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.BindingElement:
+            <span class="hljs-keyword">return</span> emitBindingElement(<BindingElement>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.ArrayLiteralExpression:
+            <span class="hljs-keyword">return</span> emitArrayLiteral(<ArrayLiteralExpression>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.ObjectLiteralExpression:
+            <span class="hljs-keyword">return</span> emitObjectLiteral(<ObjectLiteralExpression>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.PropertyAssignment:
+            <span class="hljs-keyword">return</span> emitPropertyAssignment(<PropertyDeclaration>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.ShorthandPropertyAssignment:
+            <span class="hljs-keyword">return</span> emitShorthandPropertyAssignment(<ShorthandPropertyAssignment>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.ComputedPropertyName:
+            <span class="hljs-keyword">return</span> emitComputedPropertyName(<ComputedPropertyName>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.PropertyAccessExpression:
+            <span class="hljs-keyword">return</span> emitPropertyAccess(<PropertyAccessExpression>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.ElementAccessExpression:
+            <span class="hljs-keyword">return</span> emitIndexedAccess(<ElementAccessExpression>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.CallExpression:
+            <span class="hljs-keyword">return</span> emitCallExpression(<CallExpression>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.NewExpression:
+            <span class="hljs-keyword">return</span> emitNewExpression(<NewExpression>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.TaggedTemplateExpression:
+            <span class="hljs-keyword">return</span> emitTaggedTemplateExpression(<TaggedTemplateExpression>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.TypeAssertionExpression:
+            <span class="hljs-keyword">return</span> emit((<TypeAssertion>node).expression);
+        <span class="hljs-keyword">case</span> SyntaxKind.AsExpression:
+            <span class="hljs-keyword">return</span> emit((<AsExpression>node).expression);
+        <span class="hljs-keyword">case</span> SyntaxKind.ParenthesizedExpression:
+            <span class="hljs-keyword">return</span> emitParenExpression(<ParenthesizedExpression>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.FunctionDeclaration:
+        <span class="hljs-keyword">case</span> SyntaxKind.FunctionExpression:
+        <span class="hljs-keyword">case</span> SyntaxKind.ArrowFunction:
+            <span class="hljs-keyword">return</span> emitFunctionDeclaration(<FunctionLikeDeclaration>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.DeleteExpression:
+            <span class="hljs-keyword">return</span> emitDeleteExpression(<DeleteExpression>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.TypeOfExpression:
+            <span class="hljs-keyword">return</span> emitTypeOfExpression(<TypeOfExpression>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.VoidExpression:
+            <span class="hljs-keyword">return</span> emitVoidExpression(<VoidExpression>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.AwaitExpression:
+            <span class="hljs-keyword">return</span> emitAwaitExpression(<AwaitExpression>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.PrefixUnaryExpression:
+            <span class="hljs-keyword">return</span> emitPrefixUnaryExpression(<PrefixUnaryExpression>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.PostfixUnaryExpression:
+            <span class="hljs-keyword">return</span> emitPostfixUnaryExpression(<PostfixUnaryExpression>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.BinaryExpression:
+            <span class="hljs-keyword">return</span> emitBinaryExpression(<BinaryExpression>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.ConditionalExpression:
+            <span class="hljs-keyword">return</span> emitConditionalExpression(<ConditionalExpression>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.SpreadElementExpression:
+            <span class="hljs-keyword">return</span> emitSpreadElementExpression(<SpreadElementExpression>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.YieldExpression:
+            <span class="hljs-keyword">return</span> emitYieldExpression(<YieldExpression>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.OmittedExpression:
+            <span class="hljs-keyword">return</span>;
+        <span class="hljs-keyword">case</span> SyntaxKind.Block:
+        <span class="hljs-keyword">case</span> SyntaxKind.ModuleBlock:
+            <span class="hljs-keyword">return</span> emitBlock(<Block>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.VariableStatement:
+            <span class="hljs-keyword">return</span> emitVariableStatement(<VariableStatement>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.EmptyStatement:
+            <span class="hljs-keyword">return</span> write(<span class="hljs-string">";"</span>);
+        <span class="hljs-keyword">case</span> SyntaxKind.ExpressionStatement:
+            <span class="hljs-keyword">return</span> emitExpressionStatement(<ExpressionStatement>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.IfStatement:
+            <span class="hljs-keyword">return</span> emitIfStatement(<IfStatement>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.DoStatement:
+            <span class="hljs-keyword">return</span> emitDoStatement(<DoStatement>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.WhileStatement:
+            <span class="hljs-keyword">return</span> emitWhileStatement(<WhileStatement>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.ForStatement:
+            <span class="hljs-keyword">return</span> emitForStatement(<ForStatement>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.ForOfStatement:
+        <span class="hljs-keyword">case</span> SyntaxKind.ForInStatement:
+            <span class="hljs-keyword">return</span> emitForInOrForOfStatement(<ForInStatement>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.ContinueStatement:
+        <span class="hljs-keyword">case</span> SyntaxKind.BreakStatement:
+            <span class="hljs-keyword">return</span> emitBreakOrContinueStatement(<BreakOrContinueStatement>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.ReturnStatement:
+            <span class="hljs-keyword">return</span> emitReturnStatement(<ReturnStatement>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.WithStatement:
+            <span class="hljs-keyword">return</span> emitWithStatement(<WithStatement>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.SwitchStatement:
+            <span class="hljs-keyword">return</span> emitSwitchStatement(<SwitchStatement>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.CaseClause:
+        <span class="hljs-keyword">case</span> SyntaxKind.DefaultClause:
+            <span class="hljs-keyword">return</span> emitCaseOrDefaultClause(<CaseOrDefaultClause>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.LabeledStatement:
+            <span class="hljs-keyword">return</span> emitLabelledStatement(<LabeledStatement>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.ThrowStatement:
+            <span class="hljs-keyword">return</span> emitThrowStatement(<ThrowStatement>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.TryStatement:
+            <span class="hljs-keyword">return</span> emitTryStatement(<TryStatement>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.CatchClause:
+            <span class="hljs-keyword">return</span> emitCatchClause(<CatchClause>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.DebuggerStatement:
+            <span class="hljs-keyword">return</span> emitDebuggerStatement(node);
+        <span class="hljs-keyword">case</span> SyntaxKind.VariableDeclaration:
+            <span class="hljs-keyword">return</span> emitVariableDeclaration(<VariableDeclaration>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.ClassExpression:
+            <span class="hljs-keyword">return</span> emitClassExpression(<ClassExpression>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.ClassDeclaration:
+            <span class="hljs-keyword">return</span> emitClassDeclaration(<ClassDeclaration>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.InterfaceDeclaration:
+            <span class="hljs-keyword">return</span> emitInterfaceDeclaration(<InterfaceDeclaration>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.EnumDeclaration:
+            <span class="hljs-keyword">return</span> emitEnumDeclaration(<EnumDeclaration>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.EnumMember:
+            <span class="hljs-keyword">return</span> emitEnumMember(<EnumMember>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.ModuleDeclaration:
+            <span class="hljs-keyword">return</span> emitModuleDeclaration(<ModuleDeclaration>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.ImportDeclaration:
+            <span class="hljs-keyword">return</span> emitImportDeclaration(<ImportDeclaration>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.ImportEqualsDeclaration:
+            <span class="hljs-keyword">return</span> emitImportEqualsDeclaration(<ImportEqualsDeclaration>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.ExportDeclaration:
+            <span class="hljs-keyword">return</span> emitExportDeclaration(<ExportDeclaration>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.ExportAssignment:
+            <span class="hljs-keyword">return</span> emitExportAssignment(<ExportAssignment>node);
+        <span class="hljs-keyword">case</span> SyntaxKind.SourceFile:
+            <span class="hljs-keyword">return</span> emitSourceFileNode(<SourceFile>node);
+    }
+}
+</code></pre>
+<p>Recursion is done by simply calling other <code>emitFoo</code> function from these functions as needed e.g. from <code>emitFunctionDeclaration</code> :</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">emitFunctionDeclaration</span>(<span class="hljs-params">node: FunctionLikeDeclaration</span>) </span>{
+    <span class="hljs-keyword">if</span> (nodeIsMissing(node.body)) {
+        <span class="hljs-keyword">return</span> emitOnlyPinnedOrTripleSlashComments(node);
+    }
+
+    <span class="hljs-keyword">if</span> (node.kind !== SyntaxKind.MethodDeclaration && node.kind !== SyntaxKind.MethodSignature) {
+        <span class="hljs-comment">// Methods will emit the comments as part of emitting method declaration</span>
+        emitLeadingComments(node);
+    }
+
+    <span class="hljs-comment">// For targeting below es6, emit functions-like declaration including arrow function using function keyword.</span>
+    <span class="hljs-comment">// When targeting ES6, emit arrow function natively in ES6 by omitting function keyword and using fat arrow instead</span>
+    <span class="hljs-keyword">if</span> (!shouldEmitAsArrowFunction(node)) {
+        <span class="hljs-keyword">if</span> (isES6ExportedDeclaration(node)) {
+            write(<span class="hljs-string">"export "</span>);
+            <span class="hljs-keyword">if</span> (node.flags & NodeFlags.Default) {
+                write(<span class="hljs-string">"default "</span>);
+            }
+        }
+
+        write(<span class="hljs-string">"function"</span>);
+        <span class="hljs-keyword">if</span> (languageVersion >= ScriptTarget.ES6 && node.asteriskToken) {
+            write(<span class="hljs-string">"*"</span>);
+        }
+        write(<span class="hljs-string">" "</span>);
+    }
+
+    <span class="hljs-keyword">if</span> (shouldEmitFunctionName(node)) {
+        emitDeclarationName(node);
+    }
+
+    emitSignatureAndBody(node);
+    <span class="hljs-keyword">if</span> (languageVersion < ScriptTarget.ES6 && node.kind === SyntaxKind.FunctionDeclaration && node.parent === currentSourceFile && node.name) {
+        emitExportMemberAssignments((<FunctionDeclaration>node).name);
+    }
+    <span class="hljs-keyword">if</span> (node.kind !== SyntaxKind.MethodDeclaration && node.kind !== SyntaxKind.MethodSignature) {
+        emitTrailingComments(node);
+    }
+}
+</code></pre>

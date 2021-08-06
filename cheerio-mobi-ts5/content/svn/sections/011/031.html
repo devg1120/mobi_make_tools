@@ -1,0 +1,100 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svn resolved</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts5/css/kindle.css" />
+  </head>
+   <body>
+    <div class="refentry">
+      <a id="svn.ref.svn.c.resolved"></a>
+      <div class="titlepage"></div>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svn resolved &#x2014; <span class="emphasis"><em>Deprecated</em></span>.
+            Remove <span class="quote">&#x201C;<span class="quote">conflicted</span>&#x201D;</span> state on working copy
+            files or directories.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm11066"></a>
+        <h2>Synopsis</h2>
+        <p>
+          <code class="literal">svn resolved PATH...</code>
+        </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm11070"></a>
+        <h2>Description</h2>
+        <p>This command has been deprecated in favor of
+            running <strong class="userinput"><code>svn resolve --accept working <em class="replaceable"><code>PATH</code></em></code></strong>.
+            See  in the preceding section for
+            details.</p>
+        <p>Remove <span class="quote">&#x201C;<span class="quote">conflicted</span>&#x201D;</span> state on working copy
+            files or directories.  This routine does not semantically
+            resolve conflict markers; it merely removes
+            conflict-related artifact files and allows
+            <em class="replaceable"><code>PATH</code></em> to be committed again;
+            that is, it tells Subversion that the conflicts have been
+            <span class="quote">&#x201C;<span class="quote">resolved.</span>&#x201D;</span>  See  for an in-depth look at
+            resolving conflicts.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm11081"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+          <pre class="screen">
+</pre>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm11089"></a>
+        <h2>Examples</h2>
+        <p>If you get a conflict on an update, your working
+            copy will sprout three new files:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn update
+Updating &apos;.&apos;:
+C    foo.c
+Updated to revision 31.
+Summary of conflicts:
+  Text conflicts: 1
+$ ls foo.c*
+foo.c
+foo.c.mine
+foo.c.r30
+foo.c.r31
+$
+</pre>
+        </div>
+        <p>Once you&apos;ve resolved the conflict and
+            <code class="filename">foo.c</code> is ready to be committed, run
+            <span class="command"><strong>svn resolved</strong></span> to let your working copy
+            know you&apos;ve taken care of everything.</p>
+        <div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Warning">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Warning]" src="/home/gusa1120/es2015/cheerio-mobi-ts5/content/svn/processed_images/warning-grayscale.gif">
+              </td>
+              <th align="left">Warning</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>You <span class="emphasis"><em>can</em></span> just remove the
+              conflict files and commit, but <span class="command"><strong>svn
+              resolved</strong></span> fixes up some bookkeeping data
+              in the working copy administrative area in addition
+              to removing the conflict files, so we recommend that
+              you use this command.</p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Designing for Maintainability</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/tmp/es2015/cheerio-mobi-ts8/undefined" />
+  </head>
+   <body>
+<div class="sect1" lang="en"><div class="titlepage"><div><h2 class="title" style="clear: both"><a id="id2915209">Designing for Maintainability</a></h2></div></div><p>Software is maintainable to the extent that people who are not
+its author can successfully understand and modify it. Maintainability
+demands more than code that works; it demands code that follows
+the Rule of Clarity and communicates successfully to human beings
+as well as the computer.</p><p>Unix programmers have a lot of implicit knowledge available to
+them about what makes for maintainable code, because Unix hosts source
+code that goes back decades.  For reasons we&apos;ll discuss in <a href="portabilitychapter.html" title="Chapter&#xFFFD;17.&#xFFFD;Portability">Chapter&#xFFFD;17</a>, Unix programmers learn a tendency to
+scrap and rebuild rather than patching grubby code (see Rob Pike&apos;s
+meditation on this subject in <a href="philosophychapter.html" title="Chapter&#xFFFD;1.&#xFFFD;Philosophy">Chapter&#xFFFD;1</a>).  Thus, any sources that have survived
+more than a decade of evolutionary pressure have been selected for
+maintainability. These old, successful, well-established projects with
+maintainable code are the community&apos;s models for practice.</p><p>A question Unix programmers &#x2014; and especially Unix
+programmers in the open-source world &#x2014; learn to ask about tools
+they are evaluating for use is: &#x201C;Is this code live, dormant, or
+dead?&#x201D;  Live code has an active developer community attached
+to it.  Dormant code has often become dormant because the pain of
+maintaining it exceeded its utility to its originators.  Dead code has
+been dormant for so long that it would be easier to reimplement an
+equivalent from scratch.  If you want your code to live, investing
+effort to make it maintainable (and therefore attractive to future
+maintainers) will be one of the most effective ways you can spend your
+time.</p><p>Code that is designed to be both transparent and
+discoverable</p><p>One very important practice is an application of the Rule of
+Clarity: choosing simple algorithms.  In <a href="philosophychapter.html" title="Chapter&#xFFFD;1.&#xFFFD;Philosophy">Chapter&#xFFFD;1</a> we quoted Ken Thompson: &#x201C;When in
+doubt, use brute force&#x201D;.  Thompson</p><p>Another important practice is the inclusion of hacker&apos;s guides.
+It has always been highly approved behavior for source code
+distributions to include guide documents informally describing the key
+data structures and algorithms in the code. In fact, Unix programmers
+have often been better about producing hacker&apos;s guides than they are
+about writing end-user documentation.</p><p>The open-source community has seized on and elaborated this
+custom.  Besides being advice to future maintainers, hacker&apos;s guides
+for open-source projects are also designed to make it easy for casual
+contributors to add features or fix bugs.  The Design Notes file
+shipped with
+<i>fetchmail</i></p><p>In <a href="opensourcechapter.html" title="Chapter&#xFFFD;19.&#xFFFD;Open Source">Chapter&#xFFFD;19</a> we&apos;ll
+describe conventions that Unix developers have evolved for making
+source code distributions easy to examine and easy to build running
+code from. These practices, too, promote maintainability.</p></div>
+</body>
+</html>

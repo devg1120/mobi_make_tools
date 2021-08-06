@@ -1,0 +1,172 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Problems and Methods to Avoid</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts7/undefined" />
+  </head>
+   <body>
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?><div class="sect1" lang="en"><div class="titlepage"><div>
+<div align="center">
+<center>
+<table border="0" cellpadding="3" cellspacing="3" width="100%">
+<tr><td width="70%"><div class="titlepage"><div><h2 class="title" style="clear: both"><a id="id2923342">Problems and Methods to Avoid</a></h2></div></div><p>While BSD-style sockets</p><div class="titlepage"><div><h3 class="title"><a id="id2923376">Obsolescent Unix IPC Methods</a></h3></div></div><p>Unix (born 1969) long predates
+TCP/IP</p><p>Eventually BSD sockets</p><div class="blockquote"><table border="0" width="100%" cellspacing="0" cellpadding="0" class="blockquote" summary="Block quote"><tr><td width="10%" valign="top">&#xFFFD;</td><td width="80%" valign="top"><p>The real explanation for all the dead IPC facilities in old AT&amp;T
+Unixes was politics.  The Unix Support Group was headed by a low-level
+manager, while some projects that used Unix were headed by vice
+presidents.  They had ways to make irresistible requests, and would
+not brook the objection that most IPC mechanisms are
+interchangeable.</p></td><td width="10%" valign="top">&#xFFFD;</td></tr><tr><td colspan="2" align="right" valign="top">--<span class="attribution">
+<span class="author">Doug McIlroy</span>
+</span></td><td width="10%" valign="top">&#xFFFD;</td></tr></table></div>
+<p>&#xA0;</p></td><td width="30%" valign="top">
+<script language="JavaScript">
+<!--
+google_ad_client = 'pub-5788426211617053';
+google_ad_width = 120;
+google_ad_height = 600;
+google_ad_format = '120x600_as';
+// -->
+</script>
+<script language="JavaScript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</td></tr>
+</table>
+</center>
+</div>
+</div></div><div class="sect2" lang="en"><div class="sect3" lang="en"><div class="titlepage"><div><h4 class="title"><a id="messages">System V IPC</a></h4></div></div><p>The System V IPC facilities are message-passing facilities based
+on the System V shared memory facility we described earlier.</p><p>Programs that cooperate using System V IPC usually define
+shared protocols based on exchanging short (up to 8K) binary messages.
+The relevant manual pages are
+msgctl(2)
+and friends.  As this style has been largely superseded by text
+protocols passed between sockets, we do not give an example
+here.</p><p>The System V IPC facilities are present in
+Linux</p></div><div class="sect3" lang="en"><div class="titlepage"><div><h4 class="title"><a id="id2923528">Streams</a></h4></div></div><p>Streams networking was invented for Unix Version 8 (1985) by
+Dennis Ritchie</p><p>An interesting feature of both streams and
+STREAMS<sup>[<a id="id2923595" href="ch07s03.html#ftn.id2923595">76</a>]</sup> is that it is possible to push
+protocol-translation modules into the kernel&apos;s processing path, so
+that the device the user process &#x2018;sees&#x2019; through the
+full-duplex channel is actually filtered.  This capability could be
+used, for example, to implement a line-editing protocol for a terminal
+device.  Or one could implement protocols such as IP or TCP without
+wiring them directly into the kernel.</p><p>Streams originated as an attempt to clean up a messy feature of the
+kernel called &#x2018;line disciplines&#x2019; &#x2014; alternative modes
+of processing character streams coming from serial terminals and early
+local-area networks.  But as serial terminals faded from view,
+Ethernet LANs became ubiquitous, and TCP/IP drove out other protocol
+stacks and migrated into Unix kernels, the extra flexibility provided
+by STREAMS had less and less utility.  In 2003, System V
+Unix</p><p>Linux</p></div></div><div class="sect2" lang="en"><div class="titlepage"><div><h3 class="title"><a id="id2923675">Remote Procedure Calls</a></h3></div></div><p>Despite occasional exceptions such as NFS (Network File System)
+and the GNOME project, attempts to import CORBA, ASN.1, and other
+forms of remote-procedure-call interface have largely failed &#x2014;
+these technologies have not been naturalized into the Unix
+culture.</p><p>There seem to be several underlying reasons for this.  One is
+that RPC interfaces are not readily
+discoverable</p><p>As a related issue, interfaces that have richer type signatures
+also tend to be more complex, therefore more brittle. Over time, they
+tend to succumb to ontology creep as the inventory of types that get
+passed across interfaces grows steadily larger and the individual types
+more elaborate.  Ontology creep is a problem because structs are more
+likely to mismatch than strings; if the ontologies of the programs on
+each side don&apos;t exactly match, it can be very hard to teach them to
+communicate at all, and fiendishly difficult to resolve bugs.  The
+most successful RPC applications, such as the Network File System, 
+are those in which the application domain naturally has only a
+few simple data types.</p><p>The usual argument for RPC is that it permits
+&#x201C;richer&#x201D; interfaces than methods like text streams
+&#x2014; that is, interfaces with a more elaborate and
+application-specific ontology of data types. But the Rule of
+Simplicity applies!  We observed in <a href="modularitychapter.html" title="Chapter&#xFFFD;4.&#xFFFD;Modularity">Chapter&#xFFFD;4</a> that one of the functions of interfaces
+is as choke points that prevent the implementation details of modules
+from leaking into each other.  Therefore, the main argument in favor
+of RPC is also an argument that it increases global complexity rather
+than minimizing it.</p><p>With classical RPC, it&apos;s too easy to do things in a complicated
+and obscure way instead of keeping them simple.  RPC seems to
+encourage the production of large, baroque, over-engineered systems with
+obfuscated interfaces, high global complexity, and serious
+version-skew and reliability problems &#x2014; a perfect example of
+thick glue layers run amok.</p><p>Windows COM and DCOM are perhaps the archetypal examples of how
+bad this can get, but there are plenty of others.  Apple abandoned
+OpenDoc, and both CORBA and the once wildly hyped Java
+RMI</p><p>Andrew S. Tanenbaum and Robbert van Renesse have given us a
+detailed analysis of the general problem in <i>A Critique of
+the Remote Procedure Call Paradigm</i> [<a href="apb.html#Tanenbaum-VanRenesse" title="[Tanenbaum-VanRenesse]">Tanenbaum-VanRenesse</a>], a paper which should serve as a
+strong cautionary note to anyone considering an architecture based on
+RPC.</p><p>All these problems may predict long-term difficulties for the
+relatively few Unix projects that use RPC.  Of these projects, perhaps
+the best known is the GNOME desktop effort.<sup>[<a id="id2923816" href="ch07s03.html#ftn.id2923816">77</a>]</sup>  These problems also contribute to the
+notorious security vulnerabilities of exposing NFS servers. </p><p>Unix tradition, on the other hand, strongly favors
+transparent</p><p>Even if text streams were less efficient than RPC, the
+performance loss would be marginal and linear, the kind better
+addressed by upgrading your hardware than by expending development
+time or adding architectural complexity. Anything you might lose in
+performance by using text streams, you gain back in the ability to
+design systems that are simpler &#x2014; easier to monitor, to model,
+and to understand.</p><p>Today, RPC and the Unix attachment to text streams are
+converging in an interesting way, through protocols like XML-RPC and
+SOAP. These, being textual and transparent, are more palatable to Unix
+programmers than the ugly and heavyweight binary serialization formats
+they replace.  While they don&apos;t solve all the more general
+problems pointed out by Tanenbaum and van Renesse, they do in some
+ways combine the advantages of both text-stream and RPC worlds.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><h3 class="title"><a id="id2923889">Threads &#x2014; Threat or Menace?</a></h3></div></div><p>Though Unix developers have long been comfortable with
+computation by multiple cooperating processes, they do not have a
+native tradition of using threads (processes that share their entire
+address spaces).  These are a recent import from elsewhere, and the
+fact that Unix programmers generally dislike them is not merely
+accident or historical contingency.</p><p>From a complexity-control point of view, threads are a bad
+substitute for lightweight processes with their own address spaces;
+the idea of threads is native to operating systems with expensive
+process-spawning and weak IPC facilities. </p><p>By definition, though daughter threads of a process typically
+have separate local-variable stacks, they share the same global
+memory. The task of managing contentions and critical regions in this
+shared address space is quite difficult and a fertile source of global
+complexity and bugs. It can be done, but as the complexity of one&apos;s
+locking regime rises, the chance of races and deadlocks due to
+unanticipated interactions rises correspondingly.</p><p>Threads are a fertile source of bugs because they can too easily
+know too much about each others&apos; internal states.  There is no
+automatic encapsulation, as there would be between processes with
+separate address spaces that must do explicit IPC to communicate.
+Thus, threaded programs suffer from not just ordinary contention
+problems, but from entire new categories of timing-dependent bugs that
+are excruciatingly difficult to even reproduce, let alone fix.</p><p>Thread developers have been waking up to this problem.  Recent
+thread implementations and standards show an increasing concern with
+providing thread-local storage, which is intended to limit problems
+arising from the shared global address space.  As threading APIs move
+in this direction, thread programming starts to look more and more
+like a controlled use of shared memory.</p><div class="blockquote"><table border="0" width="100%" cellspacing="0" cellpadding="0" class="blockquote" summary="Block quote"><tr><td width="10%" valign="top">&#xFFFD;</td><td width="80%" valign="top"><p>Threads often prevent abstraction.  In order to prevent
+deadlock, you often need to know how and if the library you are using
+uses threads in order to avoid deadlock problems.  Similarly, the use
+of threads in a library could be affected by the use of threads at the
+application layer.</p></td><td width="10%" valign="top">&#xFFFD;</td></tr><tr><td colspan="2" align="right" valign="top">--<span class="attribution">
+<span class="author">David Korn</span>
+</span></td><td width="10%" valign="top">&#xFFFD;</td></tr></table></div><p>To add insult to injury, threading has performance costs that
+erode its advantages over conventional process partitioning.  While
+threading can get rid of some of the overhead of rapidly switching
+process contexts, locking shared data structures so threads won&apos;t step
+on each other can be just as expensive.</p><div class="blockquote"><table border="0" width="100%" cellspacing="0" cellpadding="0" class="blockquote" summary="Block quote"><tr><td width="10%" valign="top">&#xFFFD;</td><td width="80%" valign="top"><p>The X server, able to execute literally millions of ops/second,
+is <span class="emphasis"><em>not</em></span> threaded; it uses a poll/select loop.
+Various efforts to make a multithreaded implementation have come to no
+good result.  The costs of locking and unlocking get too high for
+something as performance-sensitive as graphics servers.</p></td><td width="10%" valign="top">&#xFFFD;</td></tr><tr><td colspan="2" align="right" valign="top">--<span class="attribution">
+<span class="author">Jim Gettys</span>
+</span></td><td width="10%" valign="top">&#xFFFD;</td></tr></table></div><p>This problem is fundamental, and has also been a continuing issue
+in the design of Unix kernels for symmetric multiprocessing.
+As your resource-locking gets finer-grained, latency due to locking
+overhead can increase fast enough to swamp the gains from locking
+less core memory.</p><p>One final difficulty with threads is that threading standards
+still tend to be weak and underspecified as of
+mid-2003. Theoretically conforming libraries for Unix standards
+such as POSIX</p><p>For more discussion and a lucid contrast with event-driven
+programming, see <i>Why Threads Are a Bad Idea</i>
+[<a href="apb.html#Ousterhout96" title="[Ousterhout96]">Ousterhout96</a>].</p></div><div class="footnotes"><br><hr width="100" align="left"><div class="footnote"><p><sup>[<a id="ftn.id2923595" href="ch07s03.html#id2923595">76</a>] </sup>STREAMS was much more complex. Dennis Ritchie
+is reputed to have said &#x201C;Streams means something different when
+shouted&#x201D;.</p></div><div class="footnote"><p><sup>[<a id="ftn.id2923816" href="ch07s03.html#id2923816">77</a>] </sup>GNOME&apos;s main
+competitor, KDE, started with CORBA but abandoned it in their 2.0
+release. They have been on a quest for lighter-weight IPC methods ever
+since.</p></div></div></div>
+</body>
+</html>

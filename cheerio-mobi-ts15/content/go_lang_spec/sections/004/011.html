@@ -1,0 +1,75 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>String literals</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+A string literal represents a [<a>string constant</a>]
+obtained from concatenating a sequence of characters. There are two forms:
+raw string literals and interpreted string literals.
+</p><p>
+Raw string literals are character sequences between back quotes, as in
+<code>`foo`</code>.  Within the quotes, any character may appear except
+back quote. The value of a raw string literal is the
+string composed of the uninterpreted (implicitly UTF-8-encoded) characters
+between the quotes;
+in particular, backslashes have no special meaning and the string may
+contain newlines.
+Carriage return characters (&apos;\r&apos;) inside raw string literals
+are discarded from the raw string value.
+</p><p>
+Interpreted string literals are character sequences between double
+quotes, as in <code>&quot;bar&quot;</code>.
+Within the quotes, any character may appear except newline and unescaped double quote.
+The text between the quotes forms the
+value of the literal, with backslash escapes interpreted as they
+are in [<a>rune literals</a>] (except that <code>\&apos;</code> is illegal and
+<code>\&quot;</code> is legal), with the same restrictions.
+The three-digit octal (<code>\</code><i>nnn</i>)
+and two-digit hexadecimal (<code>\x</code><i>nn</i>) escapes represent individual
+<i>bytes</i> of the resulting string; all other escapes represent
+the (possibly multi-byte) UTF-8 encoding of individual <i>characters</i>.
+Thus inside a string literal <code>\377</code> and <code>\xFF</code> represent
+a single byte of value <code>0xFF</code>=255, while <code>&#xFF;</code>,
+<code>\u00FF</code>, <code>\U000000FF</code> and <code>\xc3\xbf</code> represent
+the two bytes <code>0xc3</code> <code>0xbf</code> of the UTF-8 encoding of character
+U+00FF.
+</p><pre>
+[<a>string_lit</a>]             = [<a>raw_string_lit</a>] | [<a>interpreted_string_lit</a>] .
+[<a>raw_string_lit</a>]         = &quot;`&quot; { [<a>unicode_char</a>] | [<a>newline</a>] } &quot;`&quot; .
+[<a>interpreted_string_lit</a>] = `&quot;` { [<a>unicode_value</a>] | [<a>byte_value</a>] } `&quot;` .
+</pre><pre>
+`abc`                // same as &quot;abc&quot;
+`\n
+\n`                  // same as &quot;\\n\n\\n&quot;
+&quot;\n&quot;
+&quot;\&quot;&quot;                 // same as `&quot;`
+&quot;Hello, world!\n&quot;
+&quot;&#x65E5;&#x672C;&#x8A9E;&quot;
+&quot;\u65e5&#x672C;\U00008a9e&quot;
+&quot;\xff\u00FF&quot;
+&quot;\uD800&quot;             // illegal: surrogate half
+&quot;\U00110000&quot;         // illegal: invalid Unicode code point
+</pre><p>
+These examples all represent the same string:
+</p><pre>
+&quot;&#x65E5;&#x672C;&#x8A9E;&quot;                                 // UTF-8 input text
+`&#x65E5;&#x672C;&#x8A9E;`                                 // UTF-8 input text as a raw literal
+&quot;\u65e5\u672c\u8a9e&quot;                    // the explicit Unicode code points
+&quot;\U000065e5\U0000672c\U00008a9e&quot;        // the explicit Unicode code points
+&quot;\xe6\x97\xa5\xe6\x9c\xac\xe8\xaa\x9e&quot;  // the explicit UTF-8 bytes
+</pre><p>
+If the source code represents a character as two code points, such as
+a combining form involving an accent and a letter, the result will be
+an error if placed in a rune literal (it is not a single code
+point), and will appear as two code points if placed in a string
+literal.
+</p></body>
+</body>
+</html>

@@ -1,0 +1,38 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Conflict Resolution</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/tmp/es2015/cheerio-mobi-ts4/css/kindle.css" />
+  </head>
+   <body>
+    <div class="sect1">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="svn.forcvs.conflicts"></a>Conflict Resolution</h2>
+          </div>
+        </div>
+      </div>
+      <p>CVS marks conflicts with inline <span class="quote">&#x201C;<span class="quote">conflict
+      markers,</span>&#x201D;</span> and then prints a <code class="literal">C</code> during
+      an update or merge operation.  Historically, this has caused
+      problems, because CVS isn&apos;t doing enough.  Many users forget
+      about (or don&apos;t see) the <code class="literal">C</code> after it whizzes
+      by on their terminal.  They often forget that the conflict
+      markers are even present, and then accidentally commit files
+      containing those conflict markers.</p>
+      <p>Subversion solves this problem in a pair of ways.  First,
+      when a conflict occurs in a file, Subversion records the fact
+      that the file is in a state of conflict, and won&apos;t allow you to
+      commit changes to that file until you explicitly resolve the
+      conflict.  Second, Subversion provides interactive conflict
+      resolution, which allows you to resolve conflicts as they happen
+      instead of having to go back and do so after the update or merge
+      operation completes.  See  for more about conflict resolution in Subversion.</p>
+    </div>
+</body>
+</html>

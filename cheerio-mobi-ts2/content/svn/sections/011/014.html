@@ -1,0 +1,102 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svn import</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts2/css/kindle.css" />
+  </head>
+   <body>
+    <div class="refentry">
+      <a id="svn.ref.svn.c.import"></a>
+      <div class="titlepage"></div>
+      <a id="idm9993" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svn import — Commit an unversioned file or tree into the 
+            repository.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm10000"></a>
+        <h2>Synopsis</h2>
+        <p>
+          <code class="literal">svn import [PATH] URL</code>
+        </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm10004"></a>
+        <h2>Description</h2>
+        <p>Recursively commit a copy of
+            <em class="replaceable"><code>PATH</code></em> to
+            <em class="replaceable"><code>URL</code></em>.  If
+            <em class="replaceable"><code>PATH</code></em> is omitted,
+            <span class="quote">“<span class="quote"><code class="filename">.</code></span>”</span> is assumed.  Parent
+            directories are created in the repository as necessary.
+            Unversionable items such as device files and pipes are
+            ignored even if <code class="option">--force</code> is
+            specified.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm10013"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+          <pre class="screen">
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.auto_props"><code class="option">--auto-props</code></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.depth"><code class="option">--depth</code> <em class="replaceable"><code>ARG</code></em></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.editor_cmd"><code class="option">--editor-cmd</code> <em class="replaceable"><code>CMD</code></em></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.encoding"><code class="option">--encoding</code> <em class="replaceable"><code>ENC</code></em></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.file"><code class="option">--file</code> (<code class="option">-F</code>) <em class="replaceable"><code>FILENAME</code></em></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.force"><code class="option">--force</code></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.force_log"><code class="option">--force-log</code></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.message"><code class="option">--message</code> (<code class="option">-m</code>) <em class="replaceable"><code>MESSAGE</code></em></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.no_auto_props"><code class="option">--no-auto-props</code></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.no_ignore"><code class="option">--no-ignore</code></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.quiet"><code class="option">--quiet</code> (<code class="option">-q</code>)</a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.with_revprop"><code class="option">--with-revprop</code> <em class="replaceable"><code>ARG</code></em></a>
+</pre>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm10029"></a>
+        <h2>Examples</h2>
+        <p>This imports the local directory
+            <code class="filename">myproj</code> into
+            <code class="filename">trunk/misc</code> in your repository.  The
+            directory <code class="filename">trunk/misc</code> need not exist
+            before you import into it—<span class="command"><strong>svn
+            import</strong></span> will recursively create directories for
+            you.</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn import -m "New import" myproj \
+             http://svn.red-bean.com/repos/trunk/misc
+Adding         myproj/sample.txt
+…
+Transmitting file data .........
+Committed revision 16.
+</pre>
+        </div>
+        <p>Be aware that this will <span class="emphasis"><em>not</em></span>
+            create a directory named <code class="filename">myproj</code> in
+            the repository.  If that's what you want, simply add
+            <code class="filename">myproj</code> to the end of the URL:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn import -m "New import" myproj \
+            http://svn.red-bean.com/repos/trunk/misc/myproj
+Adding         myproj/sample.txt
+…
+Transmitting file data .........
+Committed revision 16.
+</pre>
+        </div>
+        <p>After importing data, note that the original tree is
+            <span class="emphasis"><em>not</em></span> under version control.  To start
+            working, you still need to <span class="command"><strong>svn checkout</strong></span>
+            a fresh working copy of the tree.</p>
+      </div>
+    </div>
+</body>
+</html>

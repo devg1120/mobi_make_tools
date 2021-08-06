@@ -1,0 +1,62 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svnadmin verify</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/tmp/es2015/cheerio-mobi-ts4/css/kindle.css" />
+  </head>
+   <body>
+    <div class="refentry">
+      <a id="svn.ref.svnadmin.c.verify"></a>
+      <div class="titlepage"></div>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svnadmin verify &#x2014; Verify the data stored in the repository.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm12377"></a>
+        <h2>Synopsis</h2>
+        <p>
+          <code class="literal">svnadmin verify REPOS_PATH</code>
+        </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm12381"></a>
+        <h2>Description</h2>
+        <p>Run this command if you wish to verify the integrity
+            of your repository.  This basically iterates through all
+            revisions in the repository by internally dumping all
+            revisions and discarding the output&#x2014;it&apos;s a good idea
+            to run this on a regular basis to guard against latent
+            hard disk failures and <span class="quote">&#x201C;<span class="quote">bitrot.</span>&#x201D;</span>  If this
+            command fails&#x2014;which it will do at the first sign of
+            a problem&#x2014;that means your repository has at
+            least one corrupted revision, and you should restore the
+            corrupted revision from a backup (you did make a backup,
+            didn&apos;t you?).</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm12385"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+          <pre class="screen">
+</pre>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm12392"></a>
+        <h2>Examples</h2>
+        <p>Verify a hung repository:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svnadmin verify /var/svn/repos/ 
+* Verified revision 1729.
+</pre>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

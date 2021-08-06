@@ -1,0 +1,20 @@
+<body><p>
+A type may have a <i>method set</i> associated with it.
+The method set of an [<a>interface type</a>] is its interface.
+The method set of any other type <code>T</code> consists of all
+[<a>methods</a>] declared with receiver type <code>T</code>.
+The method set of the corresponding [<a>pointer type</a>] <code>*T</code>
+is the set of all methods declared with receiver <code>*T</code> or <code>T</code>
+(that is, it also contains the method set of <code>T</code>).
+Further rules apply to structs containing embedded fields, as described
+in the section on [<a>struct types</a>].
+Any other type has an empty method set.
+In a method set, each method must have a
+[<a>unique</a>]
+non-[<a>blank</a>] [<a>method name</a>].
+</p><p>
+The method set of a type determines the interfaces that the
+type [<a>implements</a>]
+and the methods that can be [<a>called</a>]
+using a receiver of that type.
+</p></body>

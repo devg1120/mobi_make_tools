@@ -1,0 +1,1803 @@
+doc_uuid: webpack-documetation-2019-11-10
+title: webpack
+author: AUTHOR
+publisher: github.com/danchoi/kindlefodder
+subject: SUBJECT
+date: 2019-11-10-06/10/18
+mobi_outfile: webpack.2019-11-10.mobi
+cover: /home/gusa1120/es2015/cheerio-mobi-ts15/mobi_images/cover-image.gif
+masthead: /home/gusa1120/es2015/cheerio-mobi-ts15/mobi_images/masthead.gif
+spine_items:
+  - idref: item-000
+  - idref: item-000000
+  - idref: item-001
+  - idref: item-001000
+  - idref: item-002
+  - idref: item-002000
+  - idref: item-002001
+  - idref: item-002002
+  - idref: item-002003
+  - idref: item-002004
+  - idref: item-002005
+  - idref: item-002006
+  - idref: item-003
+  - idref: item-003000
+  - idref: item-003001
+  - idref: item-003002
+  - idref: item-003003
+  - idref: item-003004
+  - idref: item-003005
+  - idref: item-004
+  - idref: item-004000
+  - idref: item-004001
+  - idref: item-004002
+  - idref: item-004003
+  - idref: item-005
+  - idref: item-005000
+  - idref: item-005001
+  - idref: item-005002
+  - idref: item-005003
+  - idref: item-005004
+  - idref: item-005005
+  - idref: item-005006
+  - idref: item-005007
+  - idref: item-006
+  - idref: item-006000
+  - idref: item-006001
+  - idref: item-006002
+  - idref: item-006003
+  - idref: item-006004
+  - idref: item-007
+  - idref: item-007000
+  - idref: item-007001
+  - idref: item-007002
+  - idref: item-007003
+  - idref: item-008
+  - idref: item-008000
+  - idref: item-008001
+  - idref: item-008002
+  - idref: item-009
+  - idref: item-009000
+  - idref: item-009001
+  - idref: item-009002
+  - idref: item-009003
+  - idref: item-009004
+  - idref: item-009005
+  - idref: item-009006
+  - idref: item-010
+  - idref: item-010000
+  - idref: item-011
+  - idref: item-011000
+  - idref: item-011001
+  - idref: item-011002
+  - idref: item-011003
+  - idref: item-012
+  - idref: item-012000
+  - idref: item-012001
+  - idref: item-012002
+  - idref: item-012003
+  - idref: item-013
+  - idref: item-013000
+  - idref: item-013001
+  - idref: item-013002
+  - idref: item-013003
+  - idref: item-013004
+  - idref: item-013005
+  - idref: item-013006
+  - idref: item-014
+  - idref: item-014000
+  - idref: item-014001
+  - idref: item-014002
+  - idref: item-014003
+  - idref: item-014004
+  - idref: item-014005
+  - idref: item-015
+  - idref: item-015000
+  - idref: item-015001
+  - idref: item-015002
+  - idref: item-015003
+  - idref: item-015004
+  - idref: item-015005
+  - idref: item-015006
+  - idref: item-015007
+  - idref: item-015008
+  - idref: item-015009
+  - idref: item-015010
+  - idref: item-015011
+  - idref: item-015012
+  - idref: item-015013
+  - idref: item-015014
+  - idref: item-015015
+  - idref: item-015016
+  - idref: item-015017
+  - idref: item-015018
+  - idref: item-015019
+  - idref: item-015020
+  - idref: item-015021
+  - idref: item-015022
+  - idref: item-015023
+  - idref: item-015024
+  - idref: item-015025
+  - idref: item-015026
+  - idref: item-015027
+  - idref: item-015028
+  - idref: item-015029
+  - idref: item-015030
+  - idref: item-015031
+  - idref: item-015032
+  - idref: item-015033
+  - idref: item-015034
+  - idref: item-015035
+  - idref: item-015036
+  - idref: item-015037
+  - idref: item-015038
+  - idref: item-015039
+  - idref: item-015040
+  - idref: item-015041
+  - idref: item-015042
+  - idref: item-015043
+  - idref: item-015044
+  - idref: item-015045
+  - idref: item-015046
+  - idref: item-015047
+  - idref: item-015048
+  - idref: item-015049
+  - idref: item-015050
+  - idref: item-015051
+  - idref: item-015052
+  - idref: item-015053
+  - idref: item-015054
+  - idref: item-015055
+  - idref: item-015056
+  - idref: item-015057
+  - idref: item-015058
+  - idref: item-015059
+  - idref: item-015060
+  - idref: item-015061
+  - idref: item-015062
+  - idref: item-015063
+  - idref: item-015064
+  - idref: item-015065
+  - idref: item-015066
+sections:
+  - playorder: 2
+    path: sections/000
+    title: Frontmatter
+    idref: item-000
+    href: sections/000/section.html
+    articles:
+      - &ref_0
+        file: sections/000/000.html
+        href: sections/000/000.html
+        title: Title Page
+        short_title: Title Page
+        author: undefined
+        description: undefined
+        playorder: 3
+        idref: item-000000
+  - playorder: 4
+    path: sections/001
+    title: Print Section
+    idref: item-001
+    href: sections/001/section.html
+    articles:
+      - file: sections/001/000.html
+        href: sections/001/000.html
+        title: Print Section
+        short_title: Print Section
+        author: undefined
+        description: undefined
+        playorder: 5
+        idref: item-001000
+  - playorder: 6
+    path: sections/002
+    title: Concepts
+    idref: item-002
+    href: sections/002/section.html
+    articles:
+      - file: sections/002/000.html
+        href: sections/002/000.html
+        title: Concepts
+        short_title: Concepts
+        author: undefined
+        description: undefined
+        playorder: 7
+        idref: item-002000
+      - file: sections/002/001.html
+        href: sections/002/001.html
+        title: Entry
+        short_title: Entry
+        author: undefined
+        description: undefined
+        playorder: 8
+        idref: item-002001
+      - file: sections/002/002.html
+        href: sections/002/002.html
+        title: Output
+        short_title: Output
+        author: undefined
+        description: undefined
+        playorder: 9
+        idref: item-002002
+      - file: sections/002/003.html
+        href: sections/002/003.html
+        title: Loaders
+        short_title: Loaders
+        author: undefined
+        description: undefined
+        playorder: 10
+        idref: item-002003
+      - file: sections/002/004.html
+        href: sections/002/004.html
+        title: Plugins
+        short_title: Plugins
+        author: undefined
+        description: undefined
+        playorder: 11
+        idref: item-002004
+      - file: sections/002/005.html
+        href: sections/002/005.html
+        title: Mode
+        short_title: Mode
+        author: undefined
+        description: undefined
+        playorder: 12
+        idref: item-002005
+      - file: sections/002/006.html
+        href: sections/002/006.html
+        title: Browser Compatibility
+        short_title: Browser Compatibility
+        author: undefined
+        description: undefined
+        playorder: 13
+        idref: item-002006
+  - playorder: 14
+    path: sections/003
+    title: Entry Points
+    idref: item-003
+    href: sections/003/section.html
+    articles:
+      - file: sections/003/000.html
+        href: sections/003/000.html
+        title: Entry Points
+        short_title: Entry Points
+        author: undefined
+        description: undefined
+        playorder: 15
+        idref: item-003000
+      - file: sections/003/001.html
+        href: sections/003/001.html
+        title: Single Entry (Shorthand) Syntax
+        short_title: Single Entry (Shorthand) Syntax
+        author: undefined
+        description: undefined
+        playorder: 16
+        idref: item-003001
+      - file: sections/003/002.html
+        href: sections/003/002.html
+        title: Object Syntax
+        short_title: Object Syntax
+        author: undefined
+        description: undefined
+        playorder: 17
+        idref: item-003002
+      - file: sections/003/003.html
+        href: sections/003/003.html
+        title: Scenarios
+        short_title: Scenarios
+        author: undefined
+        description: undefined
+        playorder: 18
+        idref: item-003003
+      - file: sections/003/004.html
+        href: sections/003/004.html
+        title: Separate App and Vendor Entries
+        short_title: Separate App and Vendor Entries
+        author: undefined
+        description: undefined
+        playorder: 19
+        idref: item-003004
+      - file: sections/003/005.html
+        href: sections/003/005.html
+        title: Multi Page Application
+        short_title: Multi Page Application
+        author: undefined
+        description: undefined
+        playorder: 20
+        idref: item-003005
+  - playorder: 21
+    path: sections/004
+    title: Output
+    idref: item-004
+    href: sections/004/section.html
+    articles:
+      - file: sections/004/000.html
+        href: sections/004/000.html
+        title: Output
+        short_title: Output
+        author: undefined
+        description: undefined
+        playorder: 22
+        idref: item-004000
+      - file: sections/004/001.html
+        href: sections/004/001.html
+        title: Usage
+        short_title: Usage
+        author: undefined
+        description: undefined
+        playorder: 23
+        idref: item-004001
+      - file: sections/004/002.html
+        href: sections/004/002.html
+        title: Multiple Entry Points
+        short_title: Multiple Entry Points
+        author: undefined
+        description: undefined
+        playorder: 24
+        idref: item-004002
+      - file: sections/004/003.html
+        href: sections/004/003.html
+        title: Advanced
+        short_title: Advanced
+        author: undefined
+        description: undefined
+        playorder: 25
+        idref: item-004003
+  - playorder: 26
+    path: sections/005
+    title: Loaders
+    idref: item-005
+    href: sections/005/section.html
+    articles:
+      - file: sections/005/000.html
+        href: sections/005/000.html
+        title: Loaders
+        short_title: Loaders
+        author: undefined
+        description: undefined
+        playorder: 27
+        idref: item-005000
+      - file: sections/005/001.html
+        href: sections/005/001.html
+        title: Example
+        short_title: Example
+        author: undefined
+        description: undefined
+        playorder: 28
+        idref: item-005001
+      - file: sections/005/002.html
+        href: sections/005/002.html
+        title: Using Loaders
+        short_title: Using Loaders
+        author: undefined
+        description: undefined
+        playorder: 29
+        idref: item-005002
+      - file: sections/005/003.html
+        href: sections/005/003.html
+        title: Configuration
+        short_title: Configuration
+        author: undefined
+        description: undefined
+        playorder: 30
+        idref: item-005003
+      - file: sections/005/004.html
+        href: sections/005/004.html
+        title: Inline
+        short_title: Inline
+        author: undefined
+        description: undefined
+        playorder: 31
+        idref: item-005004
+      - file: sections/005/005.html
+        href: sections/005/005.html
+        title: CLI
+        short_title: CLI
+        author: undefined
+        description: undefined
+        playorder: 32
+        idref: item-005005
+      - file: sections/005/006.html
+        href: sections/005/006.html
+        title: Loader Features
+        short_title: Loader Features
+        author: undefined
+        description: undefined
+        playorder: 33
+        idref: item-005006
+      - file: sections/005/007.html
+        href: sections/005/007.html
+        title: Resolving Loaders
+        short_title: Resolving Loaders
+        author: undefined
+        description: undefined
+        playorder: 34
+        idref: item-005007
+  - playorder: 35
+    path: sections/006
+    title: Plugins
+    idref: item-006
+    href: sections/006/section.html
+    articles:
+      - file: sections/006/000.html
+        href: sections/006/000.html
+        title: Plugins
+        short_title: Plugins
+        author: undefined
+        description: undefined
+        playorder: 36
+        idref: item-006000
+      - file: sections/006/001.html
+        href: sections/006/001.html
+        title: Anatomy
+        short_title: Anatomy
+        author: undefined
+        description: undefined
+        playorder: 37
+        idref: item-006001
+      - file: sections/006/002.html
+        href: sections/006/002.html
+        title: Usage
+        short_title: Usage
+        author: undefined
+        description: undefined
+        playorder: 38
+        idref: item-006002
+      - file: sections/006/003.html
+        href: sections/006/003.html
+        title: Configuration
+        short_title: Configuration
+        author: undefined
+        description: undefined
+        playorder: 39
+        idref: item-006003
+      - file: sections/006/004.html
+        href: sections/006/004.html
+        title: Node API
+        short_title: Node API
+        author: undefined
+        description: undefined
+        playorder: 40
+        idref: item-006004
+  - playorder: 41
+    path: sections/007
+    title: Configuration
+    idref: item-007
+    href: sections/007/section.html
+    articles:
+      - file: sections/007/000.html
+        href: sections/007/000.html
+        title: Configuration
+        short_title: Configuration
+        author: undefined
+        description: undefined
+        playorder: 42
+        idref: item-007000
+      - file: sections/007/001.html
+        href: sections/007/001.html
+        title: Simple Configuration
+        short_title: Simple Configuration
+        author: undefined
+        description: undefined
+        playorder: 43
+        idref: item-007001
+      - file: sections/007/002.html
+        href: sections/007/002.html
+        title: Multiple Targets
+        short_title: Multiple Targets
+        author: undefined
+        description: undefined
+        playorder: 44
+        idref: item-007002
+      - file: sections/007/003.html
+        href: sections/007/003.html
+        title: Using other Configuration Languages
+        short_title: Using other Configuration Languages
+        author: undefined
+        description: undefined
+        playorder: 45
+        idref: item-007003
+  - playorder: 46
+    path: sections/008
+    title: Modules
+    idref: item-008
+    href: sections/008/section.html
+    articles:
+      - file: sections/008/000.html
+        href: sections/008/000.html
+        title: Modules
+        short_title: Modules
+        author: undefined
+        description: undefined
+        playorder: 47
+        idref: item-008000
+      - file: sections/008/001.html
+        href: sections/008/001.html
+        title: What is a webpack Module
+        short_title: What is a webpack Module
+        author: undefined
+        description: undefined
+        playorder: 48
+        idref: item-008001
+      - file: sections/008/002.html
+        href: sections/008/002.html
+        title: Supported Module Types
+        short_title: Supported Module Types
+        author: undefined
+        description: undefined
+        playorder: 49
+        idref: item-008002
+  - playorder: 50
+    path: sections/009
+    title: Module Resolution
+    idref: item-009
+    href: sections/009/section.html
+    articles:
+      - file: sections/009/000.html
+        href: sections/009/000.html
+        title: Module Resolution
+        short_title: Module Resolution
+        author: undefined
+        description: undefined
+        playorder: 51
+        idref: item-009000
+      - file: sections/009/001.html
+        href: sections/009/001.html
+        title: Resolving rules in webpack
+        short_title: Resolving rules in webpack
+        author: undefined
+        description: undefined
+        playorder: 52
+        idref: item-009001
+      - file: sections/009/002.html
+        href: sections/009/002.html
+        title: Absolute paths
+        short_title: Absolute paths
+        author: undefined
+        description: undefined
+        playorder: 53
+        idref: item-009002
+      - file: sections/009/003.html
+        href: sections/009/003.html
+        title: Relative paths
+        short_title: Relative paths
+        author: undefined
+        description: undefined
+        playorder: 54
+        idref: item-009003
+      - file: sections/009/004.html
+        href: sections/009/004.html
+        title: Module paths
+        short_title: Module paths
+        author: undefined
+        description: undefined
+        playorder: 55
+        idref: item-009004
+      - file: sections/009/005.html
+        href: sections/009/005.html
+        title: Resolving Loaders
+        short_title: Resolving Loaders
+        author: undefined
+        description: undefined
+        playorder: 56
+        idref: item-009005
+      - file: sections/009/006.html
+        href: sections/009/006.html
+        title: Caching
+        short_title: Caching
+        author: undefined
+        description: undefined
+        playorder: 57
+        idref: item-009006
+  - playorder: 58
+    path: sections/010
+    title: Dependency Graph
+    idref: item-010
+    href: sections/010/section.html
+    articles:
+      - file: sections/010/000.html
+        href: sections/010/000.html
+        title: Dependency Graph
+        short_title: Dependency Graph
+        author: undefined
+        description: undefined
+        playorder: 59
+        idref: item-010000
+  - playorder: 60
+    path: sections/011
+    title: Targets
+    idref: item-011
+    href: sections/011/section.html
+    articles:
+      - file: sections/011/000.html
+        href: sections/011/000.html
+        title: Targets
+        short_title: Targets
+        author: undefined
+        description: undefined
+        playorder: 61
+        idref: item-011000
+      - file: sections/011/001.html
+        href: sections/011/001.html
+        title: Usage
+        short_title: Usage
+        author: undefined
+        description: undefined
+        playorder: 62
+        idref: item-011001
+      - file: sections/011/002.html
+        href: sections/011/002.html
+        title: Multiple Targets
+        short_title: Multiple Targets
+        author: undefined
+        description: undefined
+        playorder: 63
+        idref: item-011002
+      - file: sections/011/003.html
+        href: sections/011/003.html
+        title: Resources
+        short_title: Resources
+        author: undefined
+        description: undefined
+        playorder: 64
+        idref: item-011003
+  - playorder: 65
+    path: sections/012
+    title: The Manifest
+    idref: item-012
+    href: sections/012/section.html
+    articles:
+      - file: sections/012/000.html
+        href: sections/012/000.html
+        title: The Manifest
+        short_title: The Manifest
+        author: undefined
+        description: undefined
+        playorder: 66
+        idref: item-012000
+      - file: sections/012/001.html
+        href: sections/012/001.html
+        title: Runtime
+        short_title: Runtime
+        author: undefined
+        description: undefined
+        playorder: 67
+        idref: item-012001
+      - file: sections/012/002.html
+        href: sections/012/002.html
+        title: Manifest
+        short_title: Manifest
+        author: undefined
+        description: undefined
+        playorder: 68
+        idref: item-012002
+      - file: sections/012/003.html
+        href: sections/012/003.html
+        title: The Problem
+        short_title: The Problem
+        author: undefined
+        description: undefined
+        playorder: 69
+        idref: item-012003
+  - playorder: 70
+    path: sections/013
+    title: Hot Module Replacement
+    idref: item-013
+    href: sections/013/section.html
+    articles:
+      - file: sections/013/000.html
+        href: sections/013/000.html
+        title: Hot Module Replacement
+        short_title: Hot Module Replacement
+        author: undefined
+        description: undefined
+        playorder: 71
+        idref: item-013000
+      - file: sections/013/001.html
+        href: sections/013/001.html
+        title: How It Works
+        short_title: How It Works
+        author: undefined
+        description: undefined
+        playorder: 72
+        idref: item-013001
+      - file: sections/013/002.html
+        href: sections/013/002.html
+        title: In the Application
+        short_title: In the Application
+        author: undefined
+        description: undefined
+        playorder: 73
+        idref: item-013002
+      - file: sections/013/003.html
+        href: sections/013/003.html
+        title: In the Compiler
+        short_title: In the Compiler
+        author: undefined
+        description: undefined
+        playorder: 74
+        idref: item-013003
+      - file: sections/013/004.html
+        href: sections/013/004.html
+        title: In a Module
+        short_title: In a Module
+        author: undefined
+        description: undefined
+        playorder: 75
+        idref: item-013004
+      - file: sections/013/005.html
+        href: sections/013/005.html
+        title: In the Runtime
+        short_title: In the Runtime
+        author: undefined
+        description: undefined
+        playorder: 76
+        idref: item-013005
+      - file: sections/013/006.html
+        href: sections/013/006.html
+        title: Get Started
+        short_title: Get Started
+        author: undefined
+        description: undefined
+        playorder: 77
+        idref: item-013006
+  - playorder: 78
+    path: sections/014
+    title: Why webpack
+    idref: item-014
+    href: sections/014/section.html
+    articles:
+      - file: sections/014/000.html
+        href: sections/014/000.html
+        title: Why webpack
+        short_title: Why webpack
+        author: undefined
+        description: undefined
+        playorder: 79
+        idref: item-014000
+      - file: sections/014/001.html
+        href: sections/014/001.html
+        title: IIFE's - Immediately invoked function expressions
+        short_title: IIFE's - Immediately invoked function expressions
+        author: undefined
+        description: undefined
+        playorder: 80
+        idref: item-014001
+      - file: sections/014/002.html
+        href: sections/014/002.html
+        title: Birth of JavaScript Modules happened thanks to Node.js
+        short_title: Birth of JavaScript Modules happened thanks to Node.js
+        author: undefined
+        description: undefined
+        playorder: 81
+        idref: item-014002
+      - file: sections/014/003.html
+        href: sections/014/003.html
+        title: npm + Node.js + modules -- mass distribution
+        short_title: npm + Node.js + modules -- mass distribution
+        author: undefined
+        description: undefined
+        playorder: 82
+        idref: item-014003
+      - file: sections/014/004.html
+        href: sections/014/004.html
+        title: ESM - ECMAScript Modules
+        short_title: ESM - ECMAScript Modules
+        author: undefined
+        description: undefined
+        playorder: 83
+        idref: item-014004
+      - file: sections/014/005.html
+        href: sections/014/005.html
+        title: Wouldn't it be nice…
+        short_title: Wouldn't it be nice…
+        author: undefined
+        description: undefined
+        playorder: 84
+        idref: item-014005
+  - playorder: 85
+    path: sections/015
+    title: Printable
+    idref: item-015
+    href: sections/015/section.html
+    articles:
+      - file: sections/015/000.html
+        href: sections/015/000.html
+        title: Printable
+        short_title: Printable
+        author: undefined
+        description: undefined
+        playorder: 86
+        idref: item-015000
+      - file: sections/015/001.html
+        href: sections/015/001.html
+        title: Concepts
+        short_title: Concepts
+        author: undefined
+        description: undefined
+        playorder: 87
+        idref: item-015001
+      - file: sections/015/002.html
+        href: sections/015/002.html
+        title: Entry
+        short_title: Entry
+        author: undefined
+        description: undefined
+        playorder: 88
+        idref: item-015002
+      - file: sections/015/003.html
+        href: sections/015/003.html
+        title: Output
+        short_title: Output
+        author: undefined
+        description: undefined
+        playorder: 89
+        idref: item-015003
+      - file: sections/015/004.html
+        href: sections/015/004.html
+        title: Loaders
+        short_title: Loaders
+        author: undefined
+        description: undefined
+        playorder: 90
+        idref: item-015004
+      - file: sections/015/005.html
+        href: sections/015/005.html
+        title: Plugins
+        short_title: Plugins
+        author: undefined
+        description: undefined
+        playorder: 91
+        idref: item-015005
+      - file: sections/015/006.html
+        href: sections/015/006.html
+        title: Mode
+        short_title: Mode
+        author: undefined
+        description: undefined
+        playorder: 92
+        idref: item-015006
+      - file: sections/015/007.html
+        href: sections/015/007.html
+        title: Browser Compatibility
+        short_title: Browser Compatibility
+        author: undefined
+        description: undefined
+        playorder: 93
+        idref: item-015007
+      - file: sections/015/008.html
+        href: sections/015/008.html
+        title: Entry Points
+        short_title: Entry Points
+        author: undefined
+        description: undefined
+        playorder: 94
+        idref: item-015008
+      - file: sections/015/009.html
+        href: sections/015/009.html
+        title: Single Entry (Shorthand) Syntax
+        short_title: Single Entry (Shorthand) Syntax
+        author: undefined
+        description: undefined
+        playorder: 95
+        idref: item-015009
+      - file: sections/015/010.html
+        href: sections/015/010.html
+        title: Object Syntax
+        short_title: Object Syntax
+        author: undefined
+        description: undefined
+        playorder: 96
+        idref: item-015010
+      - file: sections/015/011.html
+        href: sections/015/011.html
+        title: Scenarios
+        short_title: Scenarios
+        author: undefined
+        description: undefined
+        playorder: 97
+        idref: item-015011
+      - file: sections/015/012.html
+        href: sections/015/012.html
+        title: Separate App and Vendor Entries
+        short_title: Separate App and Vendor Entries
+        author: undefined
+        description: undefined
+        playorder: 98
+        idref: item-015012
+      - file: sections/015/013.html
+        href: sections/015/013.html
+        title: Multi Page Application
+        short_title: Multi Page Application
+        author: undefined
+        description: undefined
+        playorder: 99
+        idref: item-015013
+      - file: sections/015/014.html
+        href: sections/015/014.html
+        title: Output
+        short_title: Output
+        author: undefined
+        description: undefined
+        playorder: 100
+        idref: item-015014
+      - file: sections/015/015.html
+        href: sections/015/015.html
+        title: Usage
+        short_title: Usage
+        author: undefined
+        description: undefined
+        playorder: 101
+        idref: item-015015
+      - file: sections/015/016.html
+        href: sections/015/016.html
+        title: Multiple Entry Points
+        short_title: Multiple Entry Points
+        author: undefined
+        description: undefined
+        playorder: 102
+        idref: item-015016
+      - file: sections/015/017.html
+        href: sections/015/017.html
+        title: Advanced
+        short_title: Advanced
+        author: undefined
+        description: undefined
+        playorder: 103
+        idref: item-015017
+      - file: sections/015/018.html
+        href: sections/015/018.html
+        title: Loaders
+        short_title: Loaders
+        author: undefined
+        description: undefined
+        playorder: 104
+        idref: item-015018
+      - file: sections/015/019.html
+        href: sections/015/019.html
+        title: Example
+        short_title: Example
+        author: undefined
+        description: undefined
+        playorder: 105
+        idref: item-015019
+      - file: sections/015/020.html
+        href: sections/015/020.html
+        title: Using Loaders
+        short_title: Using Loaders
+        author: undefined
+        description: undefined
+        playorder: 106
+        idref: item-015020
+      - file: sections/015/021.html
+        href: sections/015/021.html
+        title: Configuration
+        short_title: Configuration
+        author: undefined
+        description: undefined
+        playorder: 107
+        idref: item-015021
+      - file: sections/015/022.html
+        href: sections/015/022.html
+        title: Inline
+        short_title: Inline
+        author: undefined
+        description: undefined
+        playorder: 108
+        idref: item-015022
+      - file: sections/015/023.html
+        href: sections/015/023.html
+        title: CLI
+        short_title: CLI
+        author: undefined
+        description: undefined
+        playorder: 109
+        idref: item-015023
+      - file: sections/015/024.html
+        href: sections/015/024.html
+        title: Loader Features
+        short_title: Loader Features
+        author: undefined
+        description: undefined
+        playorder: 110
+        idref: item-015024
+      - file: sections/015/025.html
+        href: sections/015/025.html
+        title: Resolving Loaders
+        short_title: Resolving Loaders
+        author: undefined
+        description: undefined
+        playorder: 111
+        idref: item-015025
+      - file: sections/015/026.html
+        href: sections/015/026.html
+        title: Plugins
+        short_title: Plugins
+        author: undefined
+        description: undefined
+        playorder: 112
+        idref: item-015026
+      - file: sections/015/027.html
+        href: sections/015/027.html
+        title: Anatomy
+        short_title: Anatomy
+        author: undefined
+        description: undefined
+        playorder: 113
+        idref: item-015027
+      - file: sections/015/028.html
+        href: sections/015/028.html
+        title: Usage
+        short_title: Usage
+        author: undefined
+        description: undefined
+        playorder: 114
+        idref: item-015028
+      - file: sections/015/029.html
+        href: sections/015/029.html
+        title: Configuration
+        short_title: Configuration
+        author: undefined
+        description: undefined
+        playorder: 115
+        idref: item-015029
+      - file: sections/015/030.html
+        href: sections/015/030.html
+        title: Node API
+        short_title: Node API
+        author: undefined
+        description: undefined
+        playorder: 116
+        idref: item-015030
+      - file: sections/015/031.html
+        href: sections/015/031.html
+        title: Configuration
+        short_title: Configuration
+        author: undefined
+        description: undefined
+        playorder: 117
+        idref: item-015031
+      - file: sections/015/032.html
+        href: sections/015/032.html
+        title: Simple Configuration
+        short_title: Simple Configuration
+        author: undefined
+        description: undefined
+        playorder: 118
+        idref: item-015032
+      - file: sections/015/033.html
+        href: sections/015/033.html
+        title: Multiple Targets
+        short_title: Multiple Targets
+        author: undefined
+        description: undefined
+        playorder: 119
+        idref: item-015033
+      - file: sections/015/034.html
+        href: sections/015/034.html
+        title: Using other Configuration Languages
+        short_title: Using other Configuration Languages
+        author: undefined
+        description: undefined
+        playorder: 120
+        idref: item-015034
+      - file: sections/015/035.html
+        href: sections/015/035.html
+        title: Modules
+        short_title: Modules
+        author: undefined
+        description: undefined
+        playorder: 121
+        idref: item-015035
+      - file: sections/015/036.html
+        href: sections/015/036.html
+        title: What is a webpack Module
+        short_title: What is a webpack Module
+        author: undefined
+        description: undefined
+        playorder: 122
+        idref: item-015036
+      - file: sections/015/037.html
+        href: sections/015/037.html
+        title: Supported Module Types
+        short_title: Supported Module Types
+        author: undefined
+        description: undefined
+        playorder: 123
+        idref: item-015037
+      - file: sections/015/038.html
+        href: sections/015/038.html
+        title: Module Resolution
+        short_title: Module Resolution
+        author: undefined
+        description: undefined
+        playorder: 124
+        idref: item-015038
+      - file: sections/015/039.html
+        href: sections/015/039.html
+        title: Resolving rules in webpack
+        short_title: Resolving rules in webpack
+        author: undefined
+        description: undefined
+        playorder: 125
+        idref: item-015039
+      - file: sections/015/040.html
+        href: sections/015/040.html
+        title: Absolute paths
+        short_title: Absolute paths
+        author: undefined
+        description: undefined
+        playorder: 126
+        idref: item-015040
+      - file: sections/015/041.html
+        href: sections/015/041.html
+        title: Relative paths
+        short_title: Relative paths
+        author: undefined
+        description: undefined
+        playorder: 127
+        idref: item-015041
+      - file: sections/015/042.html
+        href: sections/015/042.html
+        title: Module paths
+        short_title: Module paths
+        author: undefined
+        description: undefined
+        playorder: 128
+        idref: item-015042
+      - file: sections/015/043.html
+        href: sections/015/043.html
+        title: Resolving Loaders
+        short_title: Resolving Loaders
+        author: undefined
+        description: undefined
+        playorder: 129
+        idref: item-015043
+      - file: sections/015/044.html
+        href: sections/015/044.html
+        title: Caching
+        short_title: Caching
+        author: undefined
+        description: undefined
+        playorder: 130
+        idref: item-015044
+      - file: sections/015/045.html
+        href: sections/015/045.html
+        title: Dependency Graph
+        short_title: Dependency Graph
+        author: undefined
+        description: undefined
+        playorder: 131
+        idref: item-015045
+      - file: sections/015/046.html
+        href: sections/015/046.html
+        title: Targets
+        short_title: Targets
+        author: undefined
+        description: undefined
+        playorder: 132
+        idref: item-015046
+      - file: sections/015/047.html
+        href: sections/015/047.html
+        title: Usage
+        short_title: Usage
+        author: undefined
+        description: undefined
+        playorder: 133
+        idref: item-015047
+      - file: sections/015/048.html
+        href: sections/015/048.html
+        title: Multiple Targets
+        short_title: Multiple Targets
+        author: undefined
+        description: undefined
+        playorder: 134
+        idref: item-015048
+      - file: sections/015/049.html
+        href: sections/015/049.html
+        title: Resources
+        short_title: Resources
+        author: undefined
+        description: undefined
+        playorder: 135
+        idref: item-015049
+      - file: sections/015/050.html
+        href: sections/015/050.html
+        title: The Manifest
+        short_title: The Manifest
+        author: undefined
+        description: undefined
+        playorder: 136
+        idref: item-015050
+      - file: sections/015/051.html
+        href: sections/015/051.html
+        title: Runtime
+        short_title: Runtime
+        author: undefined
+        description: undefined
+        playorder: 137
+        idref: item-015051
+      - file: sections/015/052.html
+        href: sections/015/052.html
+        title: Manifest
+        short_title: Manifest
+        author: undefined
+        description: undefined
+        playorder: 138
+        idref: item-015052
+      - file: sections/015/053.html
+        href: sections/015/053.html
+        title: The Problem
+        short_title: The Problem
+        author: undefined
+        description: undefined
+        playorder: 139
+        idref: item-015053
+      - file: sections/015/054.html
+        href: sections/015/054.html
+        title: Hot Module Replacement
+        short_title: Hot Module Replacement
+        author: undefined
+        description: undefined
+        playorder: 140
+        idref: item-015054
+      - file: sections/015/055.html
+        href: sections/015/055.html
+        title: How It Works
+        short_title: How It Works
+        author: undefined
+        description: undefined
+        playorder: 141
+        idref: item-015055
+      - file: sections/015/056.html
+        href: sections/015/056.html
+        title: In the Application
+        short_title: In the Application
+        author: undefined
+        description: undefined
+        playorder: 142
+        idref: item-015056
+      - file: sections/015/057.html
+        href: sections/015/057.html
+        title: In the Compiler
+        short_title: In the Compiler
+        author: undefined
+        description: undefined
+        playorder: 143
+        idref: item-015057
+      - file: sections/015/058.html
+        href: sections/015/058.html
+        title: In a Module
+        short_title: In a Module
+        author: undefined
+        description: undefined
+        playorder: 144
+        idref: item-015058
+      - file: sections/015/059.html
+        href: sections/015/059.html
+        title: In the Runtime
+        short_title: In the Runtime
+        author: undefined
+        description: undefined
+        playorder: 145
+        idref: item-015059
+      - file: sections/015/060.html
+        href: sections/015/060.html
+        title: Get Started
+        short_title: Get Started
+        author: undefined
+        description: undefined
+        playorder: 146
+        idref: item-015060
+      - file: sections/015/061.html
+        href: sections/015/061.html
+        title: Why webpack
+        short_title: Why webpack
+        author: undefined
+        description: undefined
+        playorder: 147
+        idref: item-015061
+      - file: sections/015/062.html
+        href: sections/015/062.html
+        title: IIFE's - Immediately invoked function expressions
+        short_title: IIFE's - Immediately invoked function expressions
+        author: undefined
+        description: undefined
+        playorder: 148
+        idref: item-015062
+      - file: sections/015/063.html
+        href: sections/015/063.html
+        title: Birth of JavaScript Modules happened thanks to Node.js
+        short_title: Birth of JavaScript Modules happened thanks to Node.js
+        author: undefined
+        description: undefined
+        playorder: 149
+        idref: item-015063
+      - file: sections/015/064.html
+        href: sections/015/064.html
+        title: npm + Node.js + modules -- mass distribution
+        short_title: npm + Node.js + modules -- mass distribution
+        author: undefined
+        description: undefined
+        playorder: 150
+        idref: item-015064
+      - file: sections/015/065.html
+        href: sections/015/065.html
+        title: ESM - ECMAScript Modules
+        short_title: ESM - ECMAScript Modules
+        author: undefined
+        description: undefined
+        playorder: 151
+        idref: item-015065
+      - file: sections/015/066.html
+        href: sections/015/066.html
+        title: Wouldn't it be nice…
+        short_title: Wouldn't it be nice…
+        author: undefined
+        description: undefined
+        playorder: 152
+        idref: item-015066
+first_article: *ref_0
+manifest_items:
+  - href: sections/000/section.html
+    media: application/xhtml+xml
+    idref: item-000
+  - href: sections/000/000.html
+    media: application/xhtml+xml
+    idref: item-000000
+  - href: sections/001/section.html
+    media: application/xhtml+xml
+    idref: item-001
+  - href: sections/001/000.html
+    media: application/xhtml+xml
+    idref: item-001000
+  - href: sections/002/section.html
+    media: application/xhtml+xml
+    idref: item-002
+  - href: sections/002/000.html
+    media: application/xhtml+xml
+    idref: item-002000
+  - href: sections/002/001.html
+    media: application/xhtml+xml
+    idref: item-002001
+  - href: sections/002/002.html
+    media: application/xhtml+xml
+    idref: item-002002
+  - href: sections/002/003.html
+    media: application/xhtml+xml
+    idref: item-002003
+  - href: sections/002/004.html
+    media: application/xhtml+xml
+    idref: item-002004
+  - href: sections/002/005.html
+    media: application/xhtml+xml
+    idref: item-002005
+  - href: sections/002/006.html
+    media: application/xhtml+xml
+    idref: item-002006
+  - href: sections/003/section.html
+    media: application/xhtml+xml
+    idref: item-003
+  - href: sections/003/000.html
+    media: application/xhtml+xml
+    idref: item-003000
+  - href: sections/003/001.html
+    media: application/xhtml+xml
+    idref: item-003001
+  - href: sections/003/002.html
+    media: application/xhtml+xml
+    idref: item-003002
+  - href: sections/003/003.html
+    media: application/xhtml+xml
+    idref: item-003003
+  - href: sections/003/004.html
+    media: application/xhtml+xml
+    idref: item-003004
+  - href: sections/003/005.html
+    media: application/xhtml+xml
+    idref: item-003005
+  - href: sections/004/section.html
+    media: application/xhtml+xml
+    idref: item-004
+  - href: sections/004/000.html
+    media: application/xhtml+xml
+    idref: item-004000
+  - href: sections/004/001.html
+    media: application/xhtml+xml
+    idref: item-004001
+  - href: sections/004/002.html
+    media: application/xhtml+xml
+    idref: item-004002
+  - href: sections/004/003.html
+    media: application/xhtml+xml
+    idref: item-004003
+  - href: sections/005/section.html
+    media: application/xhtml+xml
+    idref: item-005
+  - href: sections/005/000.html
+    media: application/xhtml+xml
+    idref: item-005000
+  - href: sections/005/001.html
+    media: application/xhtml+xml
+    idref: item-005001
+  - href: sections/005/002.html
+    media: application/xhtml+xml
+    idref: item-005002
+  - href: sections/005/003.html
+    media: application/xhtml+xml
+    idref: item-005003
+  - href: sections/005/004.html
+    media: application/xhtml+xml
+    idref: item-005004
+  - href: sections/005/005.html
+    media: application/xhtml+xml
+    idref: item-005005
+  - href: sections/005/006.html
+    media: application/xhtml+xml
+    idref: item-005006
+  - href: sections/005/007.html
+    media: application/xhtml+xml
+    idref: item-005007
+  - href: sections/006/section.html
+    media: application/xhtml+xml
+    idref: item-006
+  - href: sections/006/000.html
+    media: application/xhtml+xml
+    idref: item-006000
+  - href: sections/006/001.html
+    media: application/xhtml+xml
+    idref: item-006001
+  - href: sections/006/002.html
+    media: application/xhtml+xml
+    idref: item-006002
+  - href: sections/006/003.html
+    media: application/xhtml+xml
+    idref: item-006003
+  - href: sections/006/004.html
+    media: application/xhtml+xml
+    idref: item-006004
+  - href: sections/007/section.html
+    media: application/xhtml+xml
+    idref: item-007
+  - href: sections/007/000.html
+    media: application/xhtml+xml
+    idref: item-007000
+  - href: sections/007/001.html
+    media: application/xhtml+xml
+    idref: item-007001
+  - href: sections/007/002.html
+    media: application/xhtml+xml
+    idref: item-007002
+  - href: sections/007/003.html
+    media: application/xhtml+xml
+    idref: item-007003
+  - href: sections/008/section.html
+    media: application/xhtml+xml
+    idref: item-008
+  - href: sections/008/000.html
+    media: application/xhtml+xml
+    idref: item-008000
+  - href: sections/008/001.html
+    media: application/xhtml+xml
+    idref: item-008001
+  - href: sections/008/002.html
+    media: application/xhtml+xml
+    idref: item-008002
+  - href: sections/009/section.html
+    media: application/xhtml+xml
+    idref: item-009
+  - href: sections/009/000.html
+    media: application/xhtml+xml
+    idref: item-009000
+  - href: sections/009/001.html
+    media: application/xhtml+xml
+    idref: item-009001
+  - href: sections/009/002.html
+    media: application/xhtml+xml
+    idref: item-009002
+  - href: sections/009/003.html
+    media: application/xhtml+xml
+    idref: item-009003
+  - href: sections/009/004.html
+    media: application/xhtml+xml
+    idref: item-009004
+  - href: sections/009/005.html
+    media: application/xhtml+xml
+    idref: item-009005
+  - href: sections/009/006.html
+    media: application/xhtml+xml
+    idref: item-009006
+  - href: sections/010/section.html
+    media: application/xhtml+xml
+    idref: item-010
+  - href: sections/010/000.html
+    media: application/xhtml+xml
+    idref: item-010000
+  - href: sections/011/section.html
+    media: application/xhtml+xml
+    idref: item-011
+  - href: sections/011/000.html
+    media: application/xhtml+xml
+    idref: item-011000
+  - href: sections/011/001.html
+    media: application/xhtml+xml
+    idref: item-011001
+  - href: sections/011/002.html
+    media: application/xhtml+xml
+    idref: item-011002
+  - href: sections/011/003.html
+    media: application/xhtml+xml
+    idref: item-011003
+  - href: sections/012/section.html
+    media: application/xhtml+xml
+    idref: item-012
+  - href: sections/012/000.html
+    media: application/xhtml+xml
+    idref: item-012000
+  - href: sections/012/001.html
+    media: application/xhtml+xml
+    idref: item-012001
+  - href: sections/012/002.html
+    media: application/xhtml+xml
+    idref: item-012002
+  - href: sections/012/003.html
+    media: application/xhtml+xml
+    idref: item-012003
+  - href: sections/013/section.html
+    media: application/xhtml+xml
+    idref: item-013
+  - href: sections/013/000.html
+    media: application/xhtml+xml
+    idref: item-013000
+  - href: sections/013/001.html
+    media: application/xhtml+xml
+    idref: item-013001
+  - href: sections/013/002.html
+    media: application/xhtml+xml
+    idref: item-013002
+  - href: sections/013/003.html
+    media: application/xhtml+xml
+    idref: item-013003
+  - href: sections/013/004.html
+    media: application/xhtml+xml
+    idref: item-013004
+  - href: sections/013/005.html
+    media: application/xhtml+xml
+    idref: item-013005
+  - href: sections/013/006.html
+    media: application/xhtml+xml
+    idref: item-013006
+  - href: sections/014/section.html
+    media: application/xhtml+xml
+    idref: item-014
+  - href: sections/014/000.html
+    media: application/xhtml+xml
+    idref: item-014000
+  - href: sections/014/001.html
+    media: application/xhtml+xml
+    idref: item-014001
+  - href: sections/014/002.html
+    media: application/xhtml+xml
+    idref: item-014002
+  - href: sections/014/003.html
+    media: application/xhtml+xml
+    idref: item-014003
+  - href: sections/014/004.html
+    media: application/xhtml+xml
+    idref: item-014004
+  - href: sections/014/005.html
+    media: application/xhtml+xml
+    idref: item-014005
+  - href: sections/015/section.html
+    media: application/xhtml+xml
+    idref: item-015
+  - href: sections/015/000.html
+    media: application/xhtml+xml
+    idref: item-015000
+  - href: sections/015/001.html
+    media: application/xhtml+xml
+    idref: item-015001
+  - href: sections/015/002.html
+    media: application/xhtml+xml
+    idref: item-015002
+  - href: sections/015/003.html
+    media: application/xhtml+xml
+    idref: item-015003
+  - href: sections/015/004.html
+    media: application/xhtml+xml
+    idref: item-015004
+  - href: sections/015/005.html
+    media: application/xhtml+xml
+    idref: item-015005
+  - href: sections/015/006.html
+    media: application/xhtml+xml
+    idref: item-015006
+  - href: sections/015/007.html
+    media: application/xhtml+xml
+    idref: item-015007
+  - href: sections/015/008.html
+    media: application/xhtml+xml
+    idref: item-015008
+  - href: sections/015/009.html
+    media: application/xhtml+xml
+    idref: item-015009
+  - href: sections/015/010.html
+    media: application/xhtml+xml
+    idref: item-015010
+  - href: sections/015/011.html
+    media: application/xhtml+xml
+    idref: item-015011
+  - href: sections/015/012.html
+    media: application/xhtml+xml
+    idref: item-015012
+  - href: sections/015/013.html
+    media: application/xhtml+xml
+    idref: item-015013
+  - href: sections/015/014.html
+    media: application/xhtml+xml
+    idref: item-015014
+  - href: sections/015/015.html
+    media: application/xhtml+xml
+    idref: item-015015
+  - href: sections/015/016.html
+    media: application/xhtml+xml
+    idref: item-015016
+  - href: sections/015/017.html
+    media: application/xhtml+xml
+    idref: item-015017
+  - href: sections/015/018.html
+    media: application/xhtml+xml
+    idref: item-015018
+  - href: sections/015/019.html
+    media: application/xhtml+xml
+    idref: item-015019
+  - href: sections/015/020.html
+    media: application/xhtml+xml
+    idref: item-015020
+  - href: sections/015/021.html
+    media: application/xhtml+xml
+    idref: item-015021
+  - href: sections/015/022.html
+    media: application/xhtml+xml
+    idref: item-015022
+  - href: sections/015/023.html
+    media: application/xhtml+xml
+    idref: item-015023
+  - href: sections/015/024.html
+    media: application/xhtml+xml
+    idref: item-015024
+  - href: sections/015/025.html
+    media: application/xhtml+xml
+    idref: item-015025
+  - href: sections/015/026.html
+    media: application/xhtml+xml
+    idref: item-015026
+  - href: sections/015/027.html
+    media: application/xhtml+xml
+    idref: item-015027
+  - href: sections/015/028.html
+    media: application/xhtml+xml
+    idref: item-015028
+  - href: sections/015/029.html
+    media: application/xhtml+xml
+    idref: item-015029
+  - href: sections/015/030.html
+    media: application/xhtml+xml
+    idref: item-015030
+  - href: sections/015/031.html
+    media: application/xhtml+xml
+    idref: item-015031
+  - href: sections/015/032.html
+    media: application/xhtml+xml
+    idref: item-015032
+  - href: sections/015/033.html
+    media: application/xhtml+xml
+    idref: item-015033
+  - href: sections/015/034.html
+    media: application/xhtml+xml
+    idref: item-015034
+  - href: sections/015/035.html
+    media: application/xhtml+xml
+    idref: item-015035
+  - href: sections/015/036.html
+    media: application/xhtml+xml
+    idref: item-015036
+  - href: sections/015/037.html
+    media: application/xhtml+xml
+    idref: item-015037
+  - href: sections/015/038.html
+    media: application/xhtml+xml
+    idref: item-015038
+  - href: sections/015/039.html
+    media: application/xhtml+xml
+    idref: item-015039
+  - href: sections/015/040.html
+    media: application/xhtml+xml
+    idref: item-015040
+  - href: sections/015/041.html
+    media: application/xhtml+xml
+    idref: item-015041
+  - href: sections/015/042.html
+    media: application/xhtml+xml
+    idref: item-015042
+  - href: sections/015/043.html
+    media: application/xhtml+xml
+    idref: item-015043
+  - href: sections/015/044.html
+    media: application/xhtml+xml
+    idref: item-015044
+  - href: sections/015/045.html
+    media: application/xhtml+xml
+    idref: item-015045
+  - href: sections/015/046.html
+    media: application/xhtml+xml
+    idref: item-015046
+  - href: sections/015/047.html
+    media: application/xhtml+xml
+    idref: item-015047
+  - href: sections/015/048.html
+    media: application/xhtml+xml
+    idref: item-015048
+  - href: sections/015/049.html
+    media: application/xhtml+xml
+    idref: item-015049
+  - href: sections/015/050.html
+    media: application/xhtml+xml
+    idref: item-015050
+  - href: sections/015/051.html
+    media: application/xhtml+xml
+    idref: item-015051
+  - href: sections/015/052.html
+    media: application/xhtml+xml
+    idref: item-015052
+  - href: sections/015/053.html
+    media: application/xhtml+xml
+    idref: item-015053
+  - href: sections/015/054.html
+    media: application/xhtml+xml
+    idref: item-015054
+  - href: sections/015/055.html
+    media: application/xhtml+xml
+    idref: item-015055
+  - href: sections/015/056.html
+    media: application/xhtml+xml
+    idref: item-015056
+  - href: sections/015/057.html
+    media: application/xhtml+xml
+    idref: item-015057
+  - href: sections/015/058.html
+    media: application/xhtml+xml
+    idref: item-015058
+  - href: sections/015/059.html
+    media: application/xhtml+xml
+    idref: item-015059
+  - href: sections/015/060.html
+    media: application/xhtml+xml
+    idref: item-015060
+  - href: sections/015/061.html
+    media: application/xhtml+xml
+    idref: item-015061
+  - href: sections/015/062.html
+    media: application/xhtml+xml
+    idref: item-015062
+  - href: sections/015/063.html
+    media: application/xhtml+xml
+    idref: item-015063
+  - href: sections/015/064.html
+    media: application/xhtml+xml
+    idref: item-015064
+  - href: sections/015/065.html
+    media: application/xhtml+xml
+    idref: item-015065
+  - href: sections/015/066.html
+    media: application/xhtml+xml
+    idref: item-015066
+  - href: >-
+      /home/gusa1120/es2015/cheerio-mobi-ts15/content/webpack/processed_images/cb0093496837d3dc43dfae5a9104d663-grayscale.gif
+    media: image/gif
+    idref: img-000
+  - href: >-
+      /home/gusa1120/es2015/cheerio-mobi-ts15/content/webpack/processed_images/cb0093496837d3dc43dfae5a9104d663-grayscale.gif
+    media: image/gif
+    idref: img-001
+cover_mimetype: image/gif

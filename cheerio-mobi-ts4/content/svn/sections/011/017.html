@@ -1,0 +1,79 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svn lock</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/tmp/es2015/cheerio-mobi-ts4/css/kindle.css" />
+  </head>
+   <body>
+    <div class="refentry">
+      <a id="svn.ref.svn.c.lock"></a>
+      <div class="titlepage"></div>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svn lock &#x2014; Lock working copy paths or URLs in the
+              repository so that no other user can commit changes to
+              them.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm10184"></a>
+        <h2>Synopsis</h2>
+        <p>
+          <code class="literal">svn lock TARGET...</code>
+        </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm10188"></a>
+        <h2>Description</h2>
+        <p>Lock each <em class="replaceable"><code>TARGET</code></em>.  If any
+            <em class="replaceable"><code>TARGET</code></em> is already locked by
+            another user, print a warning and continue locking the
+            rest of the <em class="replaceable"><code>TARGET</code></em>s.  Use
+            <code class="option">--force</code> to steal a lock from another user
+            or working copy.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm10195"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+          <pre class="screen">
+</pre>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm10205"></a>
+        <h2>Examples</h2>
+        <p>Lock two files in your working copy:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn lock tree.jpg house.jpg
+&apos;tree.jpg&apos; locked by user &apos;harry&apos;.
+&apos;house.jpg&apos; locked by user &apos;harry&apos;.
+</pre>
+        </div>
+        <p>Lock a file in your working copy that is currently
+            locked by another user:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn lock tree.jpg
+svn: warning: W160035: Path &apos;/tree.jpg is already locked by user &apos;sally&apos; in fi
+lesystem &apos;/var/svn/repos/db&apos;
+$ svn lock --force tree.jpg
+&apos;tree.jpg&apos; locked by user &apos;harry&apos;.
+</pre>
+        </div>
+        <p>Lock a file without a working copy:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn lock http://svn.red-bean.com/repos/test/tree.jpg
+&apos;tree.jpg&apos; locked by user &apos;harry&apos;.
+</pre>
+        </div>
+        <p>For further details, see .</p>
+      </div>
+    </div>
+</body>
+</html>

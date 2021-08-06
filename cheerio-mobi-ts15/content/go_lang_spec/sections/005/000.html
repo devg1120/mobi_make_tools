@@ -1,0 +1,92 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Constants</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>There are <i>boolean constants</i>,
+<i>rune constants</i>,
+<i>integer constants</i>,
+<i>floating-point constants</i>, <i>complex constants</i>,
+and <i>string constants</i>. Rune, integer, floating-point,
+and complex constants are
+collectively called <i>numeric constants</i>.
+</p><p>
+A constant value is represented by a
+[<a>rune</a>],
+[<a>integer</a>],
+[<a>floating-point</a>],
+[<a>imaginary</a>],
+or
+[<a>string</a>] literal,
+an identifier denoting a constant,
+a [<a>constant expression</a>],
+a [<a>conversion</a>] with a result that is a constant, or
+the result value of some built-in functions such as
+<code>unsafe.Sizeof</code> applied to any value,
+<code>cap</code> or <code>len</code> applied to
+[<a>some expressions</a>],
+<code>real</code> and <code>imag</code> applied to a complex constant
+and <code>complex</code> applied to numeric constants.
+The boolean truth values are represented by the predeclared constants
+<code>true</code> and <code>false</code>. The predeclared identifier
+[<a>iota</a>] denotes an integer constant.
+</p><p>
+In general, complex constants are a form of
+[<a>constant expression</a>]
+and are discussed in that section.
+</p><p>
+Numeric constants represent exact values of arbitrary precision and do not overflow.
+Consequently, there are no constants denoting the IEEE-754 negative zero, infinity,
+and not-a-number values.
+</p><p>
+Constants may be [<a>typed</a>] or <i>untyped</i>.
+Literal constants, <code>true</code>, <code>false</code>, <code>iota</code>,
+and certain [<a>constant expressions</a>]
+containing only untyped constant operands are untyped.
+</p><p>
+A constant may be given a type explicitly by a [<a>constant declaration</a>]
+or [<a>conversion</a>], or implicitly when used in a
+[<a>variable declaration</a>] or an
+[<a>assignment</a>] or as an
+operand in an [<a>expression</a>].
+It is an error if the constant value
+cannot be [<a>represented</a>] as a value of the respective type.
+</p><p>
+An untyped constant has a <i>default type</i> which is the type to which the
+constant is implicitly converted in contexts where a typed value is required,
+for instance, in a [<a>short variable declaration</a>]
+such as <code>i := 0</code> where there is no explicit type.
+The default type of an untyped constant is <code>bool</code>, <code>rune</code>,
+<code>int</code>, <code>float64</code>, <code>complex128</code> or <code>string</code>
+respectively, depending on whether it is a boolean, rune, integer, floating-point,
+complex, or string constant.
+</p><p>
+Implementation restriction: Although numeric constants have arbitrary
+precision in the language, a compiler may implement them using an
+internal representation with limited precision.  That said, every
+implementation must:
+</p><ul>
+	<li>Represent integer constants with at least 256 bits.</li>
+	<li>Represent floating-point constants, including the parts of
+	    a complex constant, with a mantissa of at least 256 bits
+	    and a signed binary exponent of at least 16 bits.</li>
+	<li>Give an error if unable to represent an integer constant
+	    precisely.</li>
+	<li>Give an error if unable to represent a floating-point or
+	    complex constant due to overflow.</li>
+	<li>Round to the nearest representable constant if unable to
+	    represent a floating-point or complex constant due to limits
+	    on precision.</li>
+</ul><p>
+These requirements apply both to literal constants and to the result
+of evaluating [<a>constant
+expressions</a>].
+</p></body>
+</body>
+</html>

@@ -1,0 +1,302 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svnadmin—Subversion Repository Administration</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts10/undefined" />
+  </head>
+   <body>
+<div class="sect1">
+    <div class="titlepage">
+        <div>
+            <div>
+                <h2 class="title" style="clear: both"><a id="svn.ref.svnadmin"></a>svnadmin&#x2014;Subversion Repository Administration</h2>
+            </div>
+        </div>
+    </div>
+    <p><span class="command"><strong>svnadmin</strong></span> is the administrative tool for
+        monitoring and repairing your Subversion repository. For
+        detailed information on repository administration, see the maintenance section for .</p>
+    <p>Since <span class="command"><strong>svnadmin</strong></span> works via direct repository access
+        (and thus can only be used on the machine that holds the
+        repository), it refers to the repository with a path, not a URL.</p>
+    <div class="sect2">
+        <div class="titlepage">
+            <div>
+                <div>
+                    <h3 class="title"><a id="svn.ref.svnadmin.sw"></a>svnadmin Options</h3>
+                </div>
+            </div>
+        </div>
+        <p>Options in <span class="command"><strong>svnadmin</strong></span> are global, just
+            as they are in <span class="command"><strong>svn</strong></span>:</p>
+        <div class="variablelist">
+            <dl class="variablelist">
+                <dt>
+                    <a id="svn.ref.svnadmin.sw.bdb_log_keep"></a>
+                    <span class="term">
+                        <code class="option">--bdb-log-keep</code>
+                    </span>
+                </dt>
+                <dd>
+                    <p>(Berkeley DB-specific.) Disable automatic log removal
+                        of database logfiles. Having these logfiles around
+                        can be convenient if you need to restore from a
+                        catastrophic repository failure.</p>
+                </dd>
+                <dt>
+                    <a id="svn.ref.svnadmin.sw.bdb_txn_nosync"></a>
+                    <span class="term">
+                        <code class="option">--bdb-txn-nosync</code>
+                    </span>
+                </dt>
+                <dd>
+                    <p>(Berkeley DB-specific.) Disables fsync when
+                        committing database transactions. Used with the
+                        <span class="command"><strong>svnadmin create</strong></span> command to create a
+                        Berkeley DB-backed repository with
+                        <code class="literal">DB_TXN_NOSYNC</code> enabled (which improves
+                        speed but has some risks associated with it).</p>
+                </dd>
+                <dt>
+                    <a id="svn.ref.svnadmin.sw.bypass_hooks"></a>
+                    <span class="term">
+                        <code class="option">--bypass-hooks</code>
+                    </span>
+                </dt>
+                <dd>
+                    <p>Bypass the repository hook system.</p>
+                </dd>
+                <dt>
+                    <a id="svn.ref.svnadmin.sw.bypass_prop_validation"></a>
+                    <span class="term">
+                        <code class="option">--bypass-prop-validation</code>
+                    </span>
+                </dt>
+                <dd>
+                    <p>When loading a dump file, disable the logic which
+                        validates property values.</p>
+                </dd>
+                <dt>
+                    <a id="svn.ref.svnadmin.sw.clean_logs"></a>
+                    <span class="term">
+                        <code class="option">--clean-logs</code>
+                    </span>
+                </dt>
+                <dd>
+                    <p>Remove unused Berkeley DB logs.</p>
+                </dd>
+                <dt>
+                    <a id="svn.ref.svnadmin.sw.config_dir"></a>
+                    <span class="term"><code class="option">--config-dir</code> <em class="replaceable"><code>DIR</code></em></span>
+                </dt>
+                <dd>
+                    <p>Instructs Subversion to read configuration
+                        information from the specified directory instead of the
+                        default location (<code class="filename">.subversion</code> in
+                        the user&apos;s home directory).</p>
+                </dd>
+                <dt>
+                    <a id="svn.ref.svnadmin.sw.deltas"></a>
+                    <span class="term">
+                        <code class="option">--deltas</code>
+                    </span>
+                </dt>
+                <dd>
+                    <p>When creating a repository dump file, specify
+                        changes in versioned properties and file contents as
+                        deltas against their previous state.</p>
+                </dd>
+                <dt>
+                    <a id="svn.ref.svnadmin.sw.fs_type"></a>
+                    <span class="term"><code class="option">--fs-type</code> <em class="replaceable"><code>ARG</code></em></span>
+                </dt>
+                <dd>
+                    <p>When creating a repository,
+                        use <em class="replaceable"><code>ARG</code></em> as the requested
+                        filesyste type. <em class="replaceable"><code>ARG</code></em> may be
+                        either <code class="literal">bdb</code>
+                        or <code class="literal">fsfs</code>.</p>
+                </dd>
+                <dt>
+                    <a id="svn.ref.svnadmin.sw.force_uuid"></a>
+                    <span class="term">
+                        <code class="option">--force-uuid</code>
+                    </span>
+                </dt>
+                <dd>
+                    <p>By default, when loading data into a repository that
+                        already contains revisions, <span class="command"><strong>svnadmin</strong></span>
+                        will ignore the UUID from the dump stream. This option
+                        will cause the repository&apos;s UUID to be set to the UUID
+                        from the stream.</p>
+                </dd>
+                <dt>
+                    <a id="svn.ref.svnadmin.sw.ignore_uuid"></a>
+                    <span class="term">
+                        <code class="option">--ignore-uuid</code>
+                    </span>
+                </dt>
+                <dd>
+                    <p>By default, when loading data into an empty repository,
+                        <span class="command"><strong>svnadmin</strong></span> will set the repository&apos;s UUID
+                        to the UUID from the dump stream. This option will cause
+                        the UUID from the stream to be ignored.</p>
+                </dd>
+                <dt>
+                    <a id="svn.ref.svnadmin.sw.incremental"></a>
+                    <span class="term">
+                        <code class="option">--incremental</code>
+                    </span>
+                </dt>
+                <dd>
+                    <p>Dump a revision only as a diff against the
+                        previous revision, instead of the usual
+                        fulltext.</p>
+                </dd>
+                <dt>
+                    <a id="svn.ref.svnadmin.sw.memory_cache_size"></a>
+                    <span class="term"><code class="option">--memory-cache-size</code> (<code class="option">-M</code>) <em class="replaceable"><code>ARG</code></em></span>
+                </dt>
+                <dd>
+                    <p>Configures the size (in Megabytes) of the extra
+                        in-memory cache used to minimize redundant operations.
+                        The default value is <code class="literal">16</code>. (This cache
+                        is used for FSFS-backed repositories only.)</p>
+                </dd>
+                <dt>
+                    <a id="svn.ref.svnadmin.sw.parent_dir"></a>
+                    <span class="term"><code class="option">--parent-dir</code> <em class="replaceable"><code>DIR</code></em></span>
+                </dt>
+                <dd>
+                    <p>When loading a dump file, root paths at
+                        <em class="replaceable"><code>DIR</code></em> instead of
+                        <code class="filename">/</code>.</p>
+                </dd>
+                <dt>
+                    <a id="svn.ref.svnadmin.sw.pre_1.4_compatible"></a>
+                    <span class="term">
+                        <code class="option">--pre-1.4-compatible</code>
+                    </span>
+                </dt>
+                <dd>
+                    <p>When creating a new repository, use a format that is
+                        compatible with versions of Subversion earlier than
+                        Subversion 1.4.</p>
+                </dd>
+                <dt>
+                    <a id="svn.ref.svnadmin.sw.pre_1.5_compatible"></a>
+                    <span class="term">
+                        <code class="option">--pre-1.5-compatible</code>
+                    </span>
+                </dt>
+                <dd>
+                    <p>When creating a new repository, use a format that is
+                        compatible with versions of Subversion earlier than
+                        Subversion 1.5.</p>
+                </dd>
+                <dt>
+                    <a id="svn.ref.svnadmin.sw.pre_1.6_compatible"></a>
+                    <span class="term">
+                        <code class="option">--pre-1.6-compatible</code>
+                    </span>
+                </dt>
+                <dd>
+                    <p>When creating a new repository, use a format that is
+                        compatible with versions of Subversion earlier than
+                        Subversion 1.6.</p>
+                </dd>
+                <dt>
+                    <a id="svn.ref.svnadmin.sw.revision"></a>
+                    <span class="term"><code class="option">--revision</code> (<code class="option">-r</code>) <em class="replaceable"><code>ARG</code></em></span>
+                </dt>
+                <dd>
+                    <p>Specify a particular revision to operate
+                        on.</p>
+                </dd>
+                <dt>
+                    <a id="svn.ref.svnadmin.sw.quiet"></a>
+                    <span class="term"><code class="option">--quiet</code> (<code class="option">-q</code>)</span>
+                </dt>
+                <dd>
+                    <p>Do not show normal progress&#x2014;show only
+                        errors.</p>
+                </dd>
+                <dt>
+                    <a id="svn.ref.svnadmin.sw.use_post_commit_hook"></a>
+                    <span class="term">
+                        <code class="option">--use-post-commit-hook</code>
+                    </span>
+                </dt>
+                <dd>
+                    <p>When loading a dump file, runs the repository&apos;s
+                        <code class="literal">post-commit</code> hook after finalizing each newly loaded
+                        revision.</p>
+                </dd>
+                <dt>
+                    <a id="svn.ref.svnadmin.sw.use_post_revprop_change_hook"></a>
+                    <span class="term">
+                        <code class="option">--use-post-revprop-change-hook</code>
+                    </span>
+                </dt>
+                <dd>
+                    <p>When changing a revision property, runs the
+                        repository&apos;s <code class="literal">post-revprop-change</code> hook after changing the
+                        revision property.</p>
+                </dd>
+                <dt>
+                    <a id="svn.ref.svnadmin.sw.use_pre_commit_hook"></a>
+                    <span class="term">
+                        <code class="option">--use-pre-commit-hook</code>
+                    </span>
+                </dt>
+                <dd>
+                    <p>When loading a dump file, runs the repository&apos;s
+                        <code class="literal">pre-commit</code> hook before finalizing each newly loaded
+                        revision. If the hook fails, aborts the commit and
+                        terminates the load process.</p>
+                </dd>
+                <dt>
+                    <a id="svn.ref.svnadmin.sw.use_pre_revprop_change_hook"></a>
+                    <span class="term">
+                        <code class="option">--use-pre-revprop-change-hook</code>
+                    </span>
+                </dt>
+                <dd>
+                    <p>When changing a revision property, runs the
+                        repository&apos;s <code class="literal">pre-revprop-change</code> hook before changing the
+                        revision property. If the hook fails, aborts the
+                        modification and terminates.</p>
+                </dd>
+                <dt>
+                    <a id="svn.ref.svnadmin.sw.wait"></a>
+                    <span class="term">
+                        <code class="option">--wait</code>
+                    </span>
+                </dt>
+                <dd>
+                    <p>For operations which require exclusive repository
+                        access, wait until the requisite repository lock has
+                        been obtained instead of immediately erroring out when
+                        it cannot be.</p>
+                </dd>
+            </dl>
+        </div>
+    </div>
+    <div class="sect2">
+        <div class="titlepage">
+            <div>
+                <div>
+                    <h3 class="title"><a id="svn.ref.svnadmin.c"></a>svnadmin Subcommands</h3>
+                </div>
+            </div>
+        </div>
+        <p>Here are the various subcommands
+            for the <span class="command"><strong>svnadmin</strong></span> program.</p>
+    </div>
+</div>
+</body>
+</html>

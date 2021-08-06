@@ -1,0 +1,79 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    tsconfig.json
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts13_images/undefined" />
+  </head>
+   <body>
+<h3 id="basic">Basic</h3>
+<p>It is extremely easy to get started with tsconfig.json as the basic file you need is:</p>
+<pre><code class="lang-json">{}
+</code></pre>
+<p>i.e. an empty JSON file at the <em>root</em> of your project. This way TypeScript will include <em>all</em> the <code>.ts</code> files in this directory (and sub directories) as a part of the compilation context. It will also select a few sane default compiler options.</p>
+<h3 id="compileroptions">compilerOptions</h3>
+<p>You can customize the compiler options using <code>compilerOptions</code>:</p>
+<pre><code class="lang-json">{
+  <span class="hljs-string">&quot;compilerOptions&quot;</span>: {
+    <span class="hljs-comment">/* Basic Options */</span>                       
+    <span class="hljs-string">&quot;target&quot;</span>: <span class="hljs-string">&quot;es5&quot;</span>,                       <span class="hljs-comment">/* Specify ECMAScript target version: &apos;ES3&apos; (default), &apos;ES5&apos;, &apos;ES2015&apos;, &apos;ES2016&apos;, &apos;ES2017&apos;, or &apos;ESNEXT&apos;. */</span>
+    <span class="hljs-string">&quot;module&quot;</span>: <span class="hljs-string">&quot;commonjs&quot;</span>,                  <span class="hljs-comment">/* Specify module code generation: &apos;commonjs&apos;, &apos;amd&apos;, &apos;system&apos;, &apos;umd&apos; or &apos;es2015&apos;. */</span>
+    <span class="hljs-string">&quot;lib&quot;</span>: [],                             <span class="hljs-comment">/* Specify library files to be included in the compilation:  */</span>
+    <span class="hljs-string">&quot;allowJs&quot;</span>: <span class="hljs-literal">true</span>,                       <span class="hljs-comment">/* Allow JavaScript files to be compiled. */</span>
+    <span class="hljs-string">&quot;checkJs&quot;</span>: <span class="hljs-literal">true</span>,                       <span class="hljs-comment">/* Report errors in .js files. */</span>
+    <span class="hljs-string">&quot;jsx&quot;</span>: <span class="hljs-string">&quot;preserve&quot;</span>,                     <span class="hljs-comment">/* Specify JSX code generation: &apos;preserve&apos;, &apos;react-native&apos;, or &apos;react&apos;. */</span>
+    <span class="hljs-string">&quot;declaration&quot;</span>: <span class="hljs-literal">true</span>,                   <span class="hljs-comment">/* Generates corresponding &apos;.d.ts&apos; file. */</span>
+    <span class="hljs-string">&quot;sourceMap&quot;</span>: <span class="hljs-literal">true</span>,                     <span class="hljs-comment">/* Generates corresponding &apos;.map&apos; file. */</span>
+    <span class="hljs-string">&quot;outFile&quot;</span>: <span class="hljs-string">&quot;./&quot;</span>,                       <span class="hljs-comment">/* Concatenate and emit output to single file. */</span>
+    <span class="hljs-string">&quot;outDir&quot;</span>: <span class="hljs-string">&quot;./&quot;</span>,                        <span class="hljs-comment">/* Redirect output structure to the directory. */</span>
+    <span class="hljs-string">&quot;rootDir&quot;</span>: <span class="hljs-string">&quot;./&quot;</span>,                       <span class="hljs-comment">/* Specify the root directory of input files. Use to control the output directory structure with --outDir. */</span>
+    <span class="hljs-string">&quot;removeComments&quot;</span>: <span class="hljs-literal">true</span>,                <span class="hljs-comment">/* Do not emit comments to output. */</span>
+    <span class="hljs-string">&quot;noEmit&quot;</span>: <span class="hljs-literal">true</span>,                        <span class="hljs-comment">/* Do not emit outputs. */</span>
+    <span class="hljs-string">&quot;importHelpers&quot;</span>: <span class="hljs-literal">true</span>,                 <span class="hljs-comment">/* Import emit helpers from &apos;tslib&apos;. */</span>
+    <span class="hljs-string">&quot;downlevelIteration&quot;</span>: <span class="hljs-literal">true</span>,            <span class="hljs-comment">/* Provide full support for iterables in &apos;for-of&apos;, spread, and destructuring when targeting &apos;ES5&apos; or &apos;ES3&apos;. */</span>
+    <span class="hljs-string">&quot;isolatedModules&quot;</span>: <span class="hljs-literal">true</span>,               <span class="hljs-comment">/* Transpile each file as a separate module (similar to &apos;ts.transpileModule&apos;). */</span>
+    <span class="hljs-comment">/* Strict Type-Checking Options */</span>        
+    <span class="hljs-string">&quot;strict&quot;</span>: <span class="hljs-literal">true</span>,                        <span class="hljs-comment">/* Enable all strict type-checking options. */</span>
+    <span class="hljs-string">&quot;noImplicitAny&quot;</span>: <span class="hljs-literal">true</span>,                 <span class="hljs-comment">/* Raise error on expressions and declarations with an implied &apos;any&apos; type. */</span>
+    <span class="hljs-string">&quot;strictNullChecks&quot;</span>: <span class="hljs-literal">true</span>,              <span class="hljs-comment">/* Enable strict null checks. */</span>
+    <span class="hljs-string">&quot;noImplicitThis&quot;</span>: <span class="hljs-literal">true</span>,                <span class="hljs-comment">/* Raise error on &apos;this&apos; expressions with an implied &apos;any&apos; type. */</span>
+    <span class="hljs-string">&quot;alwaysStrict&quot;</span>: <span class="hljs-literal">true</span>,                  <span class="hljs-comment">/* Parse in strict mode and emit &quot;use strict&quot; for each source file. */</span>
+    <span class="hljs-comment">/* Additional Checks */</span>                   
+    <span class="hljs-string">&quot;noUnusedLocals&quot;</span>: <span class="hljs-literal">true</span>,                <span class="hljs-comment">/* Report errors on unused locals. */</span>
+    <span class="hljs-string">&quot;noUnusedParameters&quot;</span>: <span class="hljs-literal">true</span>,            <span class="hljs-comment">/* Report errors on unused parameters. */</span>
+    <span class="hljs-string">&quot;noImplicitReturns&quot;</span>: <span class="hljs-literal">true</span>,             <span class="hljs-comment">/* Report error when not all code paths in function return a value. */</span>
+    <span class="hljs-string">&quot;noFallthroughCasesInSwitch&quot;</span>: <span class="hljs-literal">true</span>,    <span class="hljs-comment">/* Report errors for fallthrough cases in switch statement. */</span>
+    <span class="hljs-comment">/* Module Resolution Options */</span>           
+    <span class="hljs-string">&quot;moduleResolution&quot;</span>: <span class="hljs-string">&quot;node&quot;</span>,            <span class="hljs-comment">/* Specify module resolution strategy: &apos;node&apos; (Node.js) or &apos;classic&apos; (TypeScript pre-1.6). */</span>
+    <span class="hljs-string">&quot;baseUrl&quot;</span>: <span class="hljs-string">&quot;./&quot;</span>,                       <span class="hljs-comment">/* Base directory to resolve non-absolute module names. */</span>
+    <span class="hljs-string">&quot;paths&quot;</span>: {},                           <span class="hljs-comment">/* A series of entries which re-map imports to lookup locations relative to the &apos;baseUrl&apos;. */</span>
+    <span class="hljs-string">&quot;rootDirs&quot;</span>: [],                        <span class="hljs-comment">/* List of root folders whose combined content represents the structure of the project at runtime. */</span>
+    <span class="hljs-string">&quot;typeRoots&quot;</span>: [],                       <span class="hljs-comment">/* List of folders to include type definitions from. */</span>
+    <span class="hljs-string">&quot;types&quot;</span>: [],                           <span class="hljs-comment">/* Type declaration files to be included in compilation. */</span>
+    <span class="hljs-string">&quot;allowSyntheticDefaultImports&quot;</span>: <span class="hljs-literal">true</span>,  <span class="hljs-comment">/* Allow default imports from modules with no default export. This does not affect code emit, just typechecking. */</span>
+    <span class="hljs-comment">/* Source Map Options */</span>                  
+    <span class="hljs-string">&quot;sourceRoot&quot;</span>: <span class="hljs-string">&quot;./&quot;</span>,                    <span class="hljs-comment">/* Specify the location where debugger should locate TypeScript files instead of source locations. */</span>
+    <span class="hljs-string">&quot;mapRoot&quot;</span>: <span class="hljs-string">&quot;./&quot;</span>,                       <span class="hljs-comment">/* Specify the location where debugger should locate map files instead of generated locations. */</span>
+    <span class="hljs-string">&quot;inlineSourceMap&quot;</span>: <span class="hljs-literal">true</span>,               <span class="hljs-comment">/* Emit a single file with source maps instead of having a separate file. */</span>
+    <span class="hljs-string">&quot;inlineSources&quot;</span>: <span class="hljs-literal">true</span>,                 <span class="hljs-comment">/* Emit the source alongside the sourcemaps within a single file; requires &apos;--inlineSourceMap&apos; or &apos;--sourceMap&apos; to be set. */</span>
+    <span class="hljs-comment">/* Experimental Options */</span>                
+    <span class="hljs-string">&quot;experimentalDecorators&quot;</span>: <span class="hljs-literal">true</span>,        <span class="hljs-comment">/* Enables experimental support for ES7 decorators. */</span>
+    <span class="hljs-string">&quot;emitDecoratorMetadata&quot;</span>: <span class="hljs-literal">true</span>          <span class="hljs-comment">/* Enables experimental support for emitting type metadata for decorators. */</span>
+  }
+}
+</code></pre>
+<p>These (and more) compiler options will be discussed later.</p>
+<h3 id="typescript-compiler">TypeScript compiler</h3>
+<p>Good IDEs come with built in support for on the fly <code>ts</code> to <code>js</code> compilation. However, if you want to run the TypeScript compiler manually from the command line when using <code>tsconfig.json</code>, you can do it in a few ways:</p>
+<ul>
+    <li>Just run <code>tsc</code> and it will look for <code>tsconfig.json</code> in the current as well as all parent folders till it finds it.</li>
+    <li>Run <code>tsc -p ./path-to-project-directory</code>. Of course the path can be absolute or relative to the current directory.</li>
+</ul>
+<p>You can even start the TypeScript compiler in <em>watch</em> mode using <code>tsc -w</code> and it will watch your TypeScript project files for changes.</p>
+</body>
+</html>

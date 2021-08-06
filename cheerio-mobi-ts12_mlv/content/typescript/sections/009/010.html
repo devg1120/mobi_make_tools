@@ -1,0 +1,74 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Callable
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts12_mlv/undefined" />
+  </head>
+   <body>
+<h2 id="callable">Callable</h2>
+<p>You can annotate callables as a part of a type or an interface as follows</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">interface</span> ReturnString {
+  (): <span class="hljs-built_in">string</span>
+}
+</code></pre>
+<p>An instance of such an interface would be a function that returns a string e.g.</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">declare</span> <span class="hljs-keyword">const</span> foo: ReturnString;
+<span class="hljs-keyword">const</span> bar = foo(); <span class="hljs-comment">// bar is inferred as a string</span>
+</code></pre>
+<h3 id="obvious-examples">Obvious examples</h3>
+<p>Of course such a <em>callable</em> annotation can also specify any arguments / optional arguments / rest arguments as needed. e.g. here is a complex example:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">interface</span> Complex {
+  (foo: <span class="hljs-built_in">string</span>, bar?: <span class="hljs-built_in">number</span>, ...others: <span class="hljs-built_in">boolean</span>[]): <span class="hljs-built_in">number</span>;
+}
+</code></pre>
+<p>An interface can provide multiple callable annotations to specify function overloading. For example:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">interface</span> Overloaded {
+    (foo: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">string</span>
+    (foo: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">number</span>
+}
+<span class="hljs-comment">// example implementation</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">stringOrNumber</span>(<span class="hljs-params">foo: <span class="hljs-built_in">number</span></span>): <span class="hljs-title">number</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">stringOrNumber</span>(<span class="hljs-params">foo: <span class="hljs-built_in">string</span></span>): <span class="hljs-title">string</span></span>;
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">stringOrNumber</span>(<span class="hljs-params">foo: <span class="hljs-built_in">any</span></span>): <span class="hljs-title">any</span> </span>{
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> foo === <span class="hljs-string">&apos;number&apos;</span>) {
+        <span class="hljs-keyword">return</span> foo * foo;
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> foo === <span class="hljs-string">&apos;string&apos;</span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-string">`hello <span class="hljs-subst">${foo}</span>`</span>;
+    }
+}
+<span class="hljs-keyword">const</span> overloaded: Overloaded = stringOrNumber;
+<span class="hljs-comment">// example usage</span>
+<span class="hljs-keyword">const</span> str = overloaded(<span class="hljs-string">&apos;&apos;</span>); <span class="hljs-comment">// type of `str` is inferred as `string`</span>
+<span class="hljs-keyword">const</span> num = overloaded(<span class="hljs-number">123</span>); <span class="hljs-comment">// type of `num` is inferred as `number`</span>
+</code></pre>
+<p>Of course, like the body of <em>any</em> interface, you can use the body of a callable interface as a type annotation for a variable. For example:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">const</span> overloaded: {
+  (foo: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">string</span>
+  (foo: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">number</span>
+} = (foo: <span class="hljs-built_in">any</span>) =&gt; foo;
+</code></pre>
+<h3 id="arrow-syntax">Arrow Syntax</h3>
+<p>To make it easy to specify callable signatures, TypeScript also allows simple arrow type annotations. For example, a function that takes a <code>number</code> and returns a <code>string</code> can be annotated as:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">const</span> simple: (foo: <span class="hljs-built_in">number</span>) =&gt; <span class="hljs-built_in">string</span>
+    = (foo) =&gt; foo.toString();
+</code></pre>
+<blockquote>
+    <p>Only limitation of the arrow syntax: You can&apos;t specify overloads. For overloads you must use the full bodied <code>{ (someArgs): someReturn }</code> syntax.</p>
+</blockquote>
+<h3 id="newable">Newable</h3>
+<p>Newable is just a special type of <em>callable</em> type annotation with the prefix <code>new</code>. It simply means that you need to <em>invoke</em> with <code>new</code> e.g.</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">interface</span> CallMeWithNewToGetString {
+  <span class="hljs-keyword">new</span>(): <span class="hljs-built_in">string</span>
+}
+<span class="hljs-comment">// Usage</span>
+<span class="hljs-keyword">declare</span> <span class="hljs-keyword">const</span> Foo: CallMeWithNewToGetString;
+<span class="hljs-keyword">const</span> bar = <span class="hljs-keyword">new</span> Foo(); <span class="hljs-comment">// bar is inferred to be of type string</span>
+</code></pre>
+</body>
+</html>

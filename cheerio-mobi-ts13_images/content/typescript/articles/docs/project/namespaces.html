@@ -1,0 +1,48 @@
+<h2 id="namespaces">Namespaces</h2>
+<p>Namespaces provide you with a convenient syntax around a common pattern used in JavaScript:</p>
+<pre><code class="lang-ts">(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">something</span>) </span>{
+
+    something.foo = <span class="hljs-number">123</span>;
+
+})(something || (something = {}))
+</code></pre>
+<p>Basically <code>something || (something = {})</code> allows an anonymous function <code>function(something) {}</code> to <em>add stuff to an existing object</em> (the <code>something ||</code> portion) or <em>start a new object then add stuff to that object</em> (the <code>|| (something = {})</code> portion). This means that you can have two such blocks split by some execution boundary:</p>
+<pre><code class="lang-ts">(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">something</span>) </span>{
+
+    something.foo = <span class="hljs-number">123</span>;
+
+})(something || (something = {}))
+
+<span class="hljs-built_in">console</span>.log(something); <span class="hljs-comment">// {foo:123}</span>
+
+(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">something</span>) </span>{
+
+    something.bar = <span class="hljs-number">456</span>;
+
+})(something || (something = {}))
+
+<span class="hljs-built_in">console</span>.log(something); <span class="hljs-comment">// {foo:123, bar:456}</span>
+</code></pre>
+<p>This is commonly used in the JavaScript land for making sure that stuff doesn't leak into the global namespace. With file based modules you don't need to worry about this, but the pattern is still useful for <em>logical grouping</em> of a bunch of functions. Therefore TypeScript provides the <code>namespace</code> keyword to group these e.g.:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">namespace</span> Utility {
+    <span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">log</span>(<span class="hljs-params">msg</span>) </span>{
+        <span class="hljs-built_in">console</span>.log(msg);
+    }
+    <span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">error</span>(<span class="hljs-params">msg</span>) </span>{
+        <span class="hljs-built_in">console</span>.error(msg);
+    }
+}
+
+<span class="hljs-comment">// usage</span>
+Utility.log(<span class="hljs-string">'Call me'</span>);
+Utility.error(<span class="hljs-string">'maybe!'</span>);
+</code></pre>
+<p>The <code>namespace</code> keyword generates the same JavaScript that we saw earlier:</p>
+<pre><code class="lang-ts">(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">Utility</span>) </span>{
+
+<span class="hljs-comment">// Add stuff to Utility</span>
+
+})(Utility || (Utility = {}));
+</code></pre>
+<p>One thing to note is that namespaces can be nested so you can do stuff like <code>namespace Utility.Messaging</code> to nest a <code>Messaging</code> namespace under <code>Utility</code>.</p>
+<p>For most projects we recommend using external modules and using <code>namespace</code> for quick demos and porting old JavaScript code.</p>

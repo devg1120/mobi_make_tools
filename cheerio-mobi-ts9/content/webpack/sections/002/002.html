@@ -1,0 +1,23 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Output</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts9/undefined" />
+  </head>
+   <body>
+<h2 id="output">Output<a href="#output" aria-hidden="true"><span class="icon icon-link"></span></a></h2><p>The <strong>output</strong> property tells webpack where to emit the <em>bundles</em> it creates and how to name these files. It defaults to <code>./dist/main.js</code> for the main output file and to the <code>./dist</code> folder for any other generated file.</p><p>You can configure this part of the process by specifying an <code>output</code> field in your configuration:</p><p><strong>webpack.config.js</strong></p><pre><code class="hljs language-javascript"><span class="token keyword">const</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;path&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  entry<span class="token punctuation">:</span> <span class="token string">&apos;./path/to/my/entry/file.js&apos;</span><span class="token punctuation">,</span>
+  output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    path<span class="token punctuation">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&apos;dist&apos;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    filename<span class="token punctuation">:</span> <span class="token string">&apos;my-first-webpack.bundle.js&apos;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><p>In the example above, we use the <code>output.filename</code> and the <code>output.path</code> properties to tell webpack the name of our bundle and where we want it to be emitted to. In case you&apos;re wondering about the path module being imported at the top, it is a core <a href="https://nodejs.org/api/modules.html">Node.js module</a> that gets used to manipulate file paths.</p><blockquote class="tip">
+<p>The <code>output</code> property has <a href="/configuration/output">many more configurable features</a>. If you want to learn about the concepts behind it, you can <a href="/concepts/output">read more in the output section</a>.</p>
+</blockquote>
+</body>
+</html>

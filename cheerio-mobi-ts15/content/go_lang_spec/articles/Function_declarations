@@ -1,0 +1,33 @@
+<body><p>
+A function declaration binds an identifier, the <i>function name</i>,
+to a function.
+</p><pre>
+[<a>FunctionDecl</a>] = "func" [<a>FunctionName</a>] [<a>Signature</a>] [ [<a>FunctionBody</a>] ] .
+[<a>FunctionName</a>] = [<a>identifier</a>] .
+[<a>FunctionBody</a>] = [<a>Block</a>] .
+</pre><p>
+If the function's [<a>signature</a>] declares
+result parameters, the function body's statement list must end in
+a [<a>terminating statement</a>].
+</p><pre>
+func IndexRune(s string, r rune) int {
+	for i, c := range s {
+		if c == r {
+			return i
+		}
+	}
+	// invalid: missing return statement
+}
+</pre><p>
+A function declaration may omit the body. Such a declaration provides the
+signature for a function implemented outside Go, such as an assembly routine.
+</p><pre>
+func min(x int, y int) int {
+	if x < y {
+		return x
+	}
+	return y
+}
+
+func flushICache(begin, end uintptr)  // implemented externally
+</pre></body>

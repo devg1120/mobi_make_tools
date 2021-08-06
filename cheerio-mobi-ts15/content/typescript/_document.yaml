@@ -1,0 +1,37 @@
+doc_uuid: typescript-documetation-2019-11-10
+title: typescript
+author: AUTHOR
+publisher: github.com/danchoi/kindlefodder
+subject: SUBJECT
+date: 2019-11-10-04/49/05
+mobi_outfile: typescript.2019-11-10.mobi
+cover: /home/gusa1120/es2015/cheerio-mobi-ts15/mobi_images/cover-image.gif
+masthead: /home/gusa1120/es2015/cheerio-mobi-ts15/mobi_images/masthead.gif
+spine_items:
+  - idref: item-000
+  - idref: item-000000
+sections:
+  - playorder: 2
+    path: sections/000
+    title: Frontmatter
+    idref: item-000
+    href: sections/000/section.html
+    articles:
+      - &ref_0
+        file: sections/000/000.html
+        href: sections/000/000.html
+        title: Title Page
+        short_title: Title Page
+        author: undefined
+        description: undefined
+        playorder: 3
+        idref: item-000000
+first_article: *ref_0
+manifest_items:
+  - href: sections/000/section.html
+    media: application/xhtml+xml
+    idref: item-000
+  - href: sections/000/000.html
+    media: application/xhtml+xml
+    idref: item-000000
+cover_mimetype: image/gif

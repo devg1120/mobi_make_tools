@@ -1,0 +1,197 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Designing for Transparency and Discoverability</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/tmp/es2015/cheerio-mobi-ts8/undefined" />
+  </head>
+   <body>
+<div class="sect1" lang="en"><div class="titlepage"><div><h2 class="title" style="clear: both"><a id="id2914317">Designing for Transparency and Discoverability</a></h2></div></div><p>To design for transparency and discoverability, you need to
+apply every tactic for keeping your code simple, and also concentrate
+on the ways in which your code is a communication to other human
+beings.  The first questions to ask, after &#x201C;Will this design
+work?&#x201D; are &#x201C;Will it be readable to other people?  Is it
+elegant?&#x201D; We hope it is clear by now that these questions are
+not fluff and that elegance is not a luxury.  These qualities in the
+human reaction to software are essential for reducing its bugginess
+and increasing its long-term maintainability.</p><div class="sect2" lang="en"><div class="titlepage"><div><h3 class="title"><a id="zen_of_transparency">The Zen of Transparency</a></h3></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><h3 class="title"><a id="id2914509">Coding for Transparency and Discoverability</a></h3></div></div><p>Transparency and
+discoverability</p><div class="itemizedlist"><ul type="disc"><li><p>What is the maximum static depth of your procedure-call
+hierarchy?  That is, leaving out recursions, how many levels of call
+might a human have to model mentally to understand the operation of
+the code?  Hint: If it&apos;s more than four, beware.</p></li><li><p>Does the code have invariant properties<sup>[<a id="id2914557" href="ch06s02.html#ftn.id2914557">64</a>]</sup> that are both strong and visible?  Invariant
+properties help human beings reason about code and detect problem
+cases.</p></li><li><p>Are the function calls in your APIs individually orthogonal, or
+do they have too many magic flags and mode bits that have a single call doing
+multiple tasks?  Avoiding mode flags entirely can lead to a cluttered
+API with too many nigh-identical functions, but the obverse error (lots of
+easily-forgotten and confusable mode flags) is even more common.</p></li><li><p>Are there a handful of prominent data structures or a single
+global scoreboard that captures the high-level state of the system?
+Is this state easy to visualize and inspect, or is it diffused among
+many individual global variables or objects that are hard to
+find?</p></li><li><p>Is there a clean, one-to-one mapping between data structures
+or classes in your program and the entities in the world that they 
+represent?</p></li><li><p>Is it easy to find the portion of the code responsible for any
+given function? How much attention have you paid to the readability
+not just of individual functions and modules but of the whole codebase?</p></li><li><p>Does the code proliferate special cases or avoid them?  Every
+special case could interact with every other special case; all those
+potential collisions are bugs waiting to happen. But even more
+importantly, special cases make the code harder to understand.</p></li><li><p>How many magic numbers (unexplained constants) does the code have in
+it?  Is it easy to discover the implementation&apos;s limits (such as
+critical buffer sizes) by inspection?</p></li></ul></div><p>It&apos;s best for code to be simple.  But if it answers these sorts
+of questions well, it can be very complex without putting an
+impossible cognitive burden on a human maintainer.</p><p>The reader might find it instructive to compare these with our
+checklist questions about modularity in <a href="modularitychapter.html" title="Chapter&#xFFFD;4.&#xFFFD;Modularity">Chapter&#xFFFD;4</a>.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><h3 class="title"><a id="id2914680">Transparency and Avoiding Overprotectiveness</a></h3></div></div><p>Close kin to the programmer tendency to build overelaborate
+castles of abstractions is a tendency to overprotect others from the
+low-level details.  While it&apos;s not bad practice to hide those details
+in the program&apos;s normal mode of operation
+(<i>fetchmail</i>&apos;s <tt>-v</tt> switch is
+off by default), they should be discoverable.  There&apos;s an important
+difference between hiding them and making them inaccessible.</p><p>Programs that <span class="emphasis"><em>cannot</em></span> reveal what they are
+doing make troubleshooting far more difficult. Thus, experienced Unix
+users actually take the presence of debugging and instrumentation
+switches as a good sign, and their absence as possibly a bad one.
+Absence suggests an inexperienced or careless developer; presence
+suggests one with enough wisdom to follow the Rule of
+Transparency.</p><p>The temptation to overprotect is especially strong in GUI
+applications targeted for end users, like mail readers.  One reason 
+Unix developers have been cool toward GUI interfaces is that, in
+their designers&apos; haste to make them &#x2018;user-friendly&#x2019; each one
+often becomes frustratingly opaque to anyone who has to solve user problems
+&#x2014; or, indeed, interact with it anywhere outside the narrow
+range predicted by the user-interface designer.</p><p>Worse, programs that are opaque about what they are doing tend
+to have a lot of assumptions baked into them, and to be frustrating or
+brittle or both in any use case not anticipated by the designer.
+Tools that look glossy but shatter under stress are not good long-term
+value.</p><p>Unix tradition pushes for programs that are flexible for a 
+broader range of uses and troubleshooting situations, including the
+ability to present as much state and activity information to the user
+as the user indicates he is willing to handle.  This is good for
+troubleshooting; it is also good for growing smarter, more
+self-reliant users.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><h3 class="title"><a id="id2914758">Transparency and Editable Representations</a></h3></div></div><p>Another theme that emerges from these examples is the value of
+programs that flip a problem out of a domain in which transparency is
+hard into one in which it is easy.  Audacity,
+sng(1)
+and the
+tic(1)/infocmp(1)
+pair all have this property.  The objects they manipulate are not
+readily conformable to the hand and eye; audio files are not visual
+objects, and although images expressed in
+PNG</p><p>A rule all these examples follow is that they degrade the
+representation as little as possible &#x2014; in fact, they translate
+it reversibly and losslessly.  This property is very important, and
+worth implementing even if there is no obvious application demand for
+that kind of 100% fidelity.  It gives potential users confidence that
+they can experiment without degrading their data.</p><p>All the advantages of textual data-file formats that we
+discussed in <a href="textualitychapter.html" title="Chapter&#xFFFD;5.&#xFFFD;Textuality">Chapter&#xFFFD;5</a>
+also apply to the textual formats that
+sng(1),
+infocmp(1)
+and their kin generate.  One important application for
+sng(1)
+is robotic generation of
+PNG</p><p>Whenever you face a design problem that involves editing some
+kind of complex binary object, the Unix tradition encourages asking
+first off whether you can write a tool analogous to
+sng(1)
+or the
+tic(1)/infocmp(1)
+pair that can do a lossless mapping to an editable textual format and
+back. There is no established term for programs of this kind, but
+we&apos;ll call them <i>textualizers</i>.</p><p>If the binary object is dynamically generated or very large,
+then it may not be practical or possible to capture all the state with
+a textualizer.  In that case, the equivalent task is to write a
+browser. The paradigm example is
+fsdb(1),
+the file-system debugger supported under various Unixes; there is a
+Linux equivalent called
+debugfs(1).
+The
+psql(1)
+used to browse PostgreSQL databases, and the
+smbclient(1)
+program that can be used to query Windows file shares on a
+SAMBA-equipped Linux machine, are two more.  All five are simple CLI
+programs that could be driven by scripts and test harnesses.</p><p>Writing a textualizer or browser is a valuable exercise for at
+least four reasons:</p><div class="itemizedlist"><ul type="disc"><li><p>
+<span class="emphasis"><em>You gain an excellent learning experience.</em></span>
+There may be other ways that are as good to learn about the structure
+of the object, but none that are obviously better.
+</p></li><li><p> 
+<span class="emphasis"><em>You gain the ability to dump the contents of the structure for
+inspection and debugging.</em></span> Because such a tool makes dumping
+easy, you&apos;ll do it more. You&apos;ll get more information, probably leading
+to more insight.
+</p></li><li><p>
+<span class="emphasis"><em>You gain the ability to easily generate test loads and unusual 
+cases.</em></span>  This means you are more likely to probe the
+odd corners of the object&apos;s state space &#x2014; and to break the
+associated software, so you can fix it before your users break it.
+</p></li><li><p>
+<span class="emphasis"><em>You gain code you may be able to reuse.</em></span> If you&apos;re
+careful about how you write the browser/textualizer and keep the CLI
+interpreter properly separated from the marshaling/unmarshaling library,
+you may find you have code that can be reused for your actual
+application.
+</p></li></ul></div><p>After you&apos;ve done this, you may well discover that it&apos;s possible
+to apply the &#x201C;separated engine and interface&#x201D; pattern
+(see <a href="interfacechapter.html" title="Chapter&#xFFFD;11.&#xFFFD;Interfaces">Chapter&#xFFFD;11</a>) using
+your textualizer/debugger as the engine.  All the usual benefits of
+this pattern will apply.</p><div class="blockquote"><table border="0" width="100%" cellspacing="0" cellpadding="0" class="blockquote" summary="Block quote"><tr><td width="10%" valign="top">&#xFFFD;</td><td width="80%" valign="top"><p>It is desirable, although often difficult, for a textualizer to
+be able to read and write even a damaged binary object.  For one
+thing, it lets you generate damaged test cases to stress-test
+software; for another, it can make emergency repairs a whole lot
+easier.  It may be hard to handle cases in which the
+<span class="emphasis"><em>structure</em></span> of the object is messed up, but at
+least you should handle cases in which the <span class="emphasis"><em>content</em></span>
+of the structure is nonsense, e.g., by showing nonsense values in hex
+and converting the hex back to the values.</p></td><td width="10%" valign="top">&#xFFFD;</td></tr><tr><td colspan="2" align="right" valign="top">--<span class="attribution">
+<span class="author">Henry Spencer</span>
+</span></td><td width="10%" valign="top">&#xFFFD;</td></tr></table></div></div><div class="sect2" lang="en"><div class="titlepage"><div><h3 class="title"><a id="id2915107">Transparency, Fault Diagnosis, and Fault Recovery</a></h3></div></div><p>Yet another benefit of transparency, related to ease of
+debugging, is that transparent systems are easier to perform recovery
+actions on after a bug bites &#x2014; and, often, more resistant to
+damage from bugs in the first place.</p><p>In comparing the terminfo database with Windows registries
+we noted that registries are notoriously subject to being corrupted
+by buggy application code.  This can make the entire system unusable.  
+Even if it doesn&apos;t, recovery can be difficult if the corruption
+confuses the specialized registry-editing tools.</p><p>Our Unix case studies illustrate ways that designing for
+transparency can prevent this class of problem.  Because the terminfo
+database is not one big file, botching one terminfo entry does not
+make the whole terminfo data set unusable.  Fully textual one-big-file
+formats like termcap are usually parsed with methods which (unlike
+block reads of binary structure dumps) can recover from single-point
+errors.  Syntax errors in an SNG file can be corrected by hand without
+requiring specialized editors that might refuse to load a damaged PNG
+image.</p><p>Going back to the <i>kmail</i> case study,
+that program makes fault diagnosis easier because it obeys the Rule of
+Repair: SMTP failures are noisy, usefully so.
+You don&apos;t have to decode a layer of obfuscatory messages
+generated by <i>kmail</i> itself to see
+what the interaction with the SMTP server looks like.  All you have to
+do is look in the right place, because
+<i>kmail</i> is being transparent and not throwing
+away information about the error state.  (It helps that SMTP itself is
+textual and includes human-readable status messages in its
+transactions.)</p><p>Discoverability tools like textualizers and browsers also make
+fault diagnosis easier.  We&apos;ve already touched on one reason: they
+make inspecting the state of the system easier.  But there is another
+effect at work as well; textualized versions of data tend to have
+useful redundancies (such as using whitespace for visual separation as
+well as explicit delimiters for parsing). These are present to make
+them easier to read for humans, but also have the effect of making them
+more resistant to being irreparably trashed by point failures.  A
+corrupted chunk in a PNG file is seldom recoverable, but the human
+capacity for pattern recognition and reasoning from context might be
+able to repair the equivalent SNG form.</p><p>Over and over again, the Rule of Robustness is clear.
+Simplicity plus transparency lowers costs, reduces everybody&apos;s stress,
+and frees people to concentrate on new problems rather than cleaning
+up after old mistakes.</p></div><div class="footnotes"><br><hr width="100" align="left"><div class="footnote"><p><sup>[<a id="ftn.id2914429" href="ch06s02.html#id2914429">63</a>] </sup>See the koan called <i>Tozan&apos;s Three
+Pounds</i> in the <i>Gateless Gate</i> [<a href="apb.html#Mumon" title="[Mumon]">Mumon</a>].</p></div><div class="footnote"><p><sup>[<a id="ftn.id2914557" href="ch06s02.html#id2914557">64</a>] </sup>An
+invariant is a property of a software design that is preserved by
+every operation in it.  For example, in most databases it is an
+invariant that no two records may have the same key. In a
+C</p></div></div></div>
+</body>
+</html>

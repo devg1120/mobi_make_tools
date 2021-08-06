@@ -1,0 +1,61 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Unix's Cornucopia of Languages</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/tmp/es2015/cheerio-mobi-ts8/undefined" />
+  </head>
+   <body>
+<div class="sect1" lang="en"><div class="titlepage"><div><h2 class="title" style="clear: both"><a id="id2970785">Unix&apos;s Cornucopia of Languages</a></h2></div></div><p>Unix supports a wider variety of application languages than does
+any other single operating system; indeed, it may well have hosted
+more different languages than every other operating system in the
+history of computing combined.<sup>[<a id="id2970798" href="ch14s01.html#ftn.id2970798">122</a>]</sup></p><p>There are at least two excellent reasons for this huge
+diversity. One is the wide use of Unix as a research and teaching
+platform. The other (far more relevant for working programmers) is the
+fact that matching your application design with the proper
+implementation language(s) can make an immense difference in your
+productivity. Therefore the Unix tradition encourages the design of
+domain-specific languages (as we mentioned in <a href="multiprogramchapter.html" title="Chapter&#xFFFD;7.&#xFFFD;Multiprogramming">Chapter&#xFFFD;7</a> and <a href="generationchapter.html" title="Chapter&#xFFFD;9.&#xFFFD;Generation">Chapter&#xFFFD;9</a>) and what are now generally
+called <i>scripting languages</i></p><div class="blockquote"><table border="0" width="100%" cellspacing="0" cellpadding="0" class="blockquote" summary="Block quote"><tr><td width="10%" valign="top">&#xFFFD;</td><td width="80%" valign="top"><p>The term &#x201C;scripting language&#x201D; probably derives from
+the term &#x201C;script&#x201D; that was applied to a potted input for
+a normally interactive program, in particular sh or ed &#x2014; a much
+more felicitous term than the &#x201C;runcom&#x201D; we inherited from
+Unix&apos;s ancestor CTSS</p></td><td width="10%" valign="top">&#xFFFD;</td></tr><tr><td colspan="2" align="right" valign="top">--<span class="attribution">
+<span class="author">Doug McIlroy</span>
+</span></td><td width="10%" valign="top">&#xFFFD;</td></tr></table></div><p>In truth, the term &#x2018;scripting language&#x2019; is a
+somewhat awkward one.  Many of the the major languages usually so
+described (Perl, Tcl, Python, etc.) have outgrown the group&apos;s
+scripting origins and are now standalone general-purpose programming
+languages of considerable power.  The term tends to obscure strong
+similarities in style with other languages that are not usually lumped
+in with this group, notably Lisp and Java.  The only argument for
+continuing to use it is that nobody has yet invented a better
+term.</p><p>Part of the reason all these can be lumped together under the
+rubric of &#x2018;scripting language&#x2019; is that they all have
+pretty much the same ontogeny.  Having a runtime to do interpretation
+also makes it relatively easy to automate dynamic storage management.
+Automating dynamic storage management almost requires using references
+(opaque memory addresses that you can&apos;t do arithmetic on) rather than
+passing value copies or explicit pointers around.  Using references
+makes runtime polymorphism and OO an easy next step.
+<span class="foreignphrase"><i>Voila:</i></span> the modern scripting
+language!</p><p>To apply the Unix philosophy effectively, you&apos;ll need to have
+more than just C</p><p>In this chapter we&apos;ll survey C and its most important
+alternatives, discussing their strengths and weaknesses and the
+sorts of tasks to which they are best matched. The languages
+covered will be C, C++, shell, Perl, Tcl, Python, Java, and Emacs
+Lisp. Each survey section will include case studies on applications
+written using these languages, and references to other examples and
+tutorial material. High-quality implementations of all these
+languages are available in open source on the Internet.</p><p>Warning: Choice of application language is one of the archetypal
+religious issues in the Internet/Unix world. People get very attached
+to these tools and will sometimes defend them past all reason. If this
+chapter achieves its aim, zealots of all stripes may be offended by
+this chapter, but everyone else will learn from it.</p><div class="footnotes"><br><hr width="100" align="left"><div class="footnote"><p><sup>[<a id="ftn.id2970798" href="ch14s01.html#id2970798">122</a>] </sup>See the <a href="ftp://ftp.idiom.com/pub/compilers-list/free-compilers" target="_top">Free
+Compiler and Interpreter List</a> for
+details.</p></div></div></div>
+</body>
+</html>

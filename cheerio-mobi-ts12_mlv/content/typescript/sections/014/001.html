@@ -1,0 +1,173 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Jest
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts12_mlv/undefined" />
+  </head>
+   <body>
+<h1 id="using-jest-with-typescript">Using Jest with TypeScript</h1>
+<blockquote>
+    <p><a href="https://egghead.io/lessons/typescript-getting-started-with-jest-using-typescript" target="_blank">Pro egghead lesson on Jest / TypeScript</a></p>
+</blockquote>
+<p>No testing solution out there is perfect. That said, jest is an excellent unit testing option which provides great TypeScript support.</p>
+<blockquote>
+    <p>Note: We assume you start off with a simple node package.json setup. Also all TypeScript files should be in a <code>src</code> folder which is always recommended (even without Jest) for a clean project setup.</p>
+</blockquote>
+<h2 id="step-1-install">Step 1: Install</h2>
+<p>Install the following using npm:</p>
+<pre><code class="lang-shell">npm i jest @types/jest ts-jest -D
+</code></pre>
+<p>Explanation:</p>
+<ul>
+    <li>Install <code>jest</code> framework (<code>jest</code>)</li>
+    <li>Install the types for <code>jest</code> (<code>@types/jest</code>)</li>
+    <li>Install the TypeScript preprocessor for jest (<code>ts-jest</code>) which allows jest to transpile TypeScript on the fly and have source-map support built in.</li>
+    <li>Save all of these to your dev dependencies (testing is almost always a npm dev-dependency)</li>
+</ul>
+<h2 id="step-2-configure-jest">Step 2: Configure Jest</h2>
+<p>Add the following <code>jest.config.js</code> file to the root of your project:</p>
+<pre><code class="lang-js"><span class="hljs-built_in">module</span>.exports = {
+  <span class="hljs-string">&quot;roots&quot;</span>: [
+    <span class="hljs-string">&quot;<rootdir>/src&quot;</rootdir></span>
+  ],
+  <span class="hljs-string">&quot;transform&quot;</span>: {
+    <span class="hljs-string">&quot;^.+\\.tsx?$&quot;</span>: <span class="hljs-string">&quot;ts-jest&quot;</span>
+  },
+}
+</code></pre>
+<p>Explanation:</p>
+<ul>
+    <li>We always recommend having <em>all</em> TypeScript files in a <code>src</code> folder in your project. We assume this is true and specify this using the <code>roots</code> option.</li>
+    <li>The <code>transform</code> config just tells <code>jest</code> to use <code>ts-jest</code> for ts / tsx files.</li>
+</ul>
+<h2 id="step-3-run-tests">Step 3: Run tests</h2>
+<p>Run <code>npx jest</code> from your project root and jest will execute any tests you have.</p>
+<h3 id="optional-add-script-target-for-npm-scripts">Optional: Add script target for npm scripts</h3>
+<p>Add <code>package.json</code>:</p>
+<pre><code class="lang-json">{
+  <span class="hljs-string">&quot;test&quot;</span>: <span class="hljs-string">&quot;jest&quot;</span>
+}
+</code></pre>
+<ul>
+    <li>This allows you to run the tests with a simple <code>npm t</code>.</li>
+    <li>And even in watch mode with <code>npm t -- --watch</code>.</li>
+</ul>
+<h3 id="optional-run-jest-in-watch-mode">Optional: Run jest in watch mode</h3>
+<ul>
+    <li><code>npx jest --watch</code></li>
+</ul>
+<h3 id="example">Example</h3>
+<ul>
+    <li>For a file <code>foo.ts</code>:</li>
+</ul>
+<pre><code class="lang-js"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> sum
+  = (...a: number[]) =&gt;
+    a.reduce((acc, val) =&gt; acc + val, <span class="hljs-number">0</span>);
+</code></pre>
+<ul>
+    <li>A simple <code>foo.test.ts</code>:</li>
+</ul>
+<pre><code class="lang-js"><span class="hljs-keyword">import</span> { sum } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;../foo&apos;</span>;
+test(<span class="hljs-string">&apos;basic&apos;</span>, () =&gt; {
+  expect(sum()).toBe(<span class="hljs-number">0</span>);
+});
+test(<span class="hljs-string">&apos;basic again&apos;</span>, () =&gt; {
+  expect(sum(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)).toBe(<span class="hljs-number">3</span>);
+});
+</code></pre>
+<p>Notes:</p>
+<ul>
+    <li>Jest provides the global <code>test</code> function.</li>
+    <li>Jest comes prebuilt with assertions in the form of the global <code>expect</code>.</li>
+</ul>
+<h3 id="example-async">Example async</h3>
+<p>Jest has built-in async/await support. e.g.</p>
+<pre><code class="lang-js">test(<span class="hljs-string">&apos;basic&apos;</span>,<span class="hljs-keyword">async</span> () =&gt; {
+  expect(sum()).toBe(<span class="hljs-number">0</span>);
+});
+test(<span class="hljs-string">&apos;basic again&apos;</span>, <span class="hljs-keyword">async</span> () =&gt; {
+  expect(sum(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)).toBe(<span class="hljs-number">3</span>);
+}, <span class="hljs-number">1000</span> <span class="hljs-comment">/* optional timeout */</span>);
+</code></pre>
+<h3 id="example-enzyme">Example enzyme</h3>
+<blockquote>
+    <p><a href="https://egghead.io/lessons/react-test-react-components-and-dom-using-enzyme" target="_blank">Pro egghead lesson on Enzyme / Jest / TypeScript</a></p>
+</blockquote>
+<p>Enzyme allows you to test react components with dom support. There are three steps to setting up enzyme:</p>
+<ol>
+    <li>Install enzyme, types for enzyme, a better snapshot serializer for enzyme, enzyme-adapter-react for your react version <code>npm i enzyme @types/enzyme enzyme-to-json enzyme-adapter-react-16 -D</code></li>
+    <li>Add <code>&quot;snapshotSerializers&quot;</code> and <code>&quot;setupTestFrameworkScriptFile&quot;</code> to your <code>jest.config.js</code>: </li>
+</ol>
+<pre><code class="lang-js"><span class="hljs-built_in">module</span>.exports = {
+  <span class="hljs-comment">// OTHER PORTIONS AS MENTIONED BEFORE</span>
+  <span class="hljs-comment">// Setup Enzyme</span>
+  <span class="hljs-string">&quot;snapshotSerializers&quot;</span>: [<span class="hljs-string">&quot;enzyme-to-json/serializer&quot;</span>],
+  <span class="hljs-string">&quot;setupTestFrameworkScriptFile&quot;</span>: <span class="hljs-string">&quot;<rootdir>/src/setupEnzyme.ts&quot;</rootdir></span>,
+}
+</code></pre>
+<ol>
+    <li>Create <code>src/setupEnzyme.ts</code> file.</li>
+</ol>
+<pre><code class="lang-js"><span class="hljs-keyword">import</span> { configure } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;enzyme&apos;</span>;
+<span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> EnzymeAdapter <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;enzyme-adapter-react-16&apos;</span>;
+configure({ adapter: <span class="hljs-keyword">new</span> EnzymeAdapter() });
+</code></pre>
+<p>Now here is an example react component and test:</p>
+<ul>
+    <li><code>checkboxWithLabel.tsx</code>:</li>
+</ul>
+<pre><code class="lang-ts">import * as React from &apos;react&apos;;
+export class CheckboxWithLabel extends React.Component<{ labelon: string, labeloff: string }, { ischecked: boolean }> {
+  constructor(props) {
+    super(props);
+    this.state = { isChecked: false };
+  }
+  onChange = () =&gt; {
+    this.setState({ isChecked: !this.state.isChecked });
+  }
+  render() {
+    return (
+      <label>
+        <input type="checkbox" checked="{this.state.isChecked}" onchange="{this.onChange}">
+        {this.state.isChecked ? this.props.labelOn : this.props.labelOff}
+      </label>
+    );
+  }
+}
+</{></code></pre>
+<ul>
+    <li><code>checkboxWithLabel.test.tsx</code>:</li>
+</ul>
+<pre><code class="lang-ts"><span class="hljs-keyword">import</span> * as React from <span class="hljs-string">&apos;react&apos;</span>;
+<span class="hljs-keyword">import</span> { shallow } from <span class="hljs-string">&apos;enzyme&apos;</span>;
+<span class="hljs-keyword">import</span> { CheckboxWithLabel } from <span class="hljs-string">&apos;./checkboxWithLabel&apos;</span>;
+test(<span class="hljs-string">&apos;CheckboxWithLabel changes the text after click&apos;</span>, () =&gt; {
+  <span class="hljs-keyword">const</span> checkbox = shallow(<checkboxwithlabel labelon="&lt;span" class="hljs-string">&quot;On&quot; labelOff=<span class="hljs-string">&quot;Off&quot;</span> /&gt;);
+  <span class="hljs-comment">// Interaction demo</span>
+  expect(checkbox.text()).toEqual(<span class="hljs-string">&apos;Off&apos;</span>);
+  checkbox.find(<span class="hljs-string">&apos;input&apos;</span>).simulate(<span class="hljs-string">&apos;change&apos;</span>);
+  expect(checkbox.text()).toEqual(<span class="hljs-string">&apos;On&apos;</span>);
+  <span class="hljs-comment">// Snapshot demo</span>
+  expect(checkbox).toMatchSnapshot();
+});
+</checkboxwithlabel></code></pre>
+<h2 id="reasons-why-we-like-jest">Reasons why we like jest</h2>
+<blockquote>
+    <p><a href="http://facebook.github.io/jest/" target="_blank">For details on these features see jest website</a></p>
+</blockquote>
+<ul>
+    <li>Built-in assertion library.</li>
+    <li>Great TypeScript support.</li>
+    <li>Very reliable test watcher.</li>
+    <li>Snapshot testing.</li>
+    <li>Built-in coverage reports.</li>
+    <li>Built-in async/await support.</li>
+</ul>
+</body>
+</html>

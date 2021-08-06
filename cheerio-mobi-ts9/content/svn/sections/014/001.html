@@ -1,0 +1,89 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Installing Subversion</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/tmp/es2015/cheerio-mobi-ts8/undefined" />
+  </head>
+   <body>
+    <div class="sect1">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="svn.intro.install"></a>Installing Subversion</h2>
+          </div>
+        </div>
+      </div>
+      <p>Subversion is built on a portability layer called
+      APR&#x2014;the Apache Portable Runtime library.  The APR library
+      provides all the interfaces that Subversion needs to function on
+      different operating systems: disk access, network access, memory
+      management, and so on.  While Subversion is able to use Apache
+      HTTP Server (or, <span class="command"><strong>httpd</strong></span>) as one of its network
+      server programs, its dependence on APR <span class="emphasis"><em>does
+      not</em></span> mean that <span class="command"><strong>httpd</strong></span> is a required
+      component.  APR is a standalone library usable by any
+      application.  It does mean, however, that Subversion clients and
+      servers run on any operating system
+      that <span class="command"><strong>httpd</strong></span> runs on: Windows, Linux, all
+      flavors of BSD, Mac OS X, NetWare, and others.</p>
+      <p>The easiest way to get Subversion is to download a binary
+      package built for your operating system.  Subversion&apos;s web site
+      (<a class="ulink" href="http://subversion.apache.org" target="_top">http://subversion.apache.org</a>) often has these
+      packages available for download, posted by volunteers.  The site
+      usually contains graphical installer packages for users of
+      Microsoft operating systems.  If you run a Unix-like operating
+      system, you can use your system&apos;s native package distribution
+      system (RPMs, DEBs, the ports tree, etc.) to get
+      Subversion.</p>
+      <p>Alternatively, you can build Subversion directly from source
+      code, though it&apos;s not always an easy task. (If you&apos;re not
+      experienced at building open source software packages, you&apos;re
+      probably better off downloading a binary distribution instead!)
+      From the Subversion web site, download the latest source code
+      release.  After unpacking it, follow the instructions in
+      the <code class="filename">INSTALL</code> file to build it.</p>
+      <p>If you&apos;re one of those folks that likes to use bleeding-edge
+      software, you can also get the Subversion source code from the
+      Subversion repository in which it lives.  Obviously, you&apos;ll need
+      to already have a Subversion client on hand to do this.  But
+      once you do, you can check out a working copy from
+      <a class="ulink" href="http://svn.apache.org/repos/asf/subversion" target="_top">http://svn.apache.org/repos/asf/subversion</a><a href="#ftn.idm14695" class="footnote" id="idm14695"><sup class="footnote">[73]</sup></a>:</p>
+      <div class="informalexample">
+        <pre class="screen">
+$ svn checkout http://svn.apache.org/repos/asf/subversion/trunk subversion
+A    subversion/HACKING
+A    subversion/INSTALL
+A    subversion/README
+A    subversion/autogen.sh
+A    subversion/build.conf
+&#x2026;
+</pre>
+      </div>
+      <p>The preceding command will create a working copy of the
+      latest (unreleased) Subversion source code into a subdirectory
+      named <code class="filename">subversion</code> in your current working
+      directory.  You can adjust that last argument as you see fit.
+      Regardless of what you call the new working copy directory,
+      though, after this operation completes, you will now have the
+      Subversion source code.  Of course, you will still need to fetch
+      a few helper libraries (apr, apr-util, etc.)&#x2014;see the
+      <code class="filename">INSTALL</code> file in the top level of the
+      working copy for details.</p>
+      <div class="footnotes">
+        <br>
+        <hr style="width:100; text-align:left;margin-left: 0">
+        <div id="ftn.idm14695" class="footnote">
+          <p><a href="#idm14695" class="para"><sup class="para">[73] </sup></a>Note that the URL checked out in the example
+      ends not with <code class="literal">subversion</code>, but with a
+      subdirectory thereof called <code class="literal">trunk</code>.  See our
+      discussion of Subversion&apos;s branching and tagging model for the
+      reasoning behind this.</p>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

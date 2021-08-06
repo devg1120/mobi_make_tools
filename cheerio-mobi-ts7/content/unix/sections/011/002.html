@@ -1,0 +1,32 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Where Configurations Live</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts7/undefined" />
+  </head>
+   <body>
+<div class="sect1" lang="en"><div class="titlepage"><div><h2 class="title" style="clear: both"><a id="id2941727">Where Configurations Live</a></h2></div></div><p>Classically, a Unix program can look for control information in
+five places in its startup-time environment:</p><div class="itemizedlist"><ul type="disc"><li><p>Run-control files under <tt>/etc</tt> (or at fixed location elsewhere in
+systemland).</p></li><li><p>System-set environment variables.</p></li><li><p>Run-control files (or &#x2018;dotfiles&#x2019;) in the
+user&apos;s home directory. (See <a href="contrastchapter.html" title="Chapter&#xFFFD;3.&#xFFFD;Contrasts">Chapter&#xFFFD;3</a> for a discussion of this important
+concept, if it is unfamiliar.)</p></li><li><p>User-set environment variables.</p></li><li><p>Switches and arguments passed to the program on the command
+line that invoked it.</p></li></ul></div><p>These queries are usually done in the order listed above.  That
+way, later (more local) settings override earlier (more global)
+ones. Settings found earlier can help the program compute locations
+for later retrievals of configuration data.</p><p>When thinking about which mechanism to use to pass configuration
+data to a program, bear in mind that good Unix practice demands using
+whichever one most closely matches the expected lifetime of the
+preference.  Thus: for preferences which are very likely to change
+between invocations, use command-line switches.  For preferences which
+change seldom, but that should be under individual user control, use
+a run-control file in the user&apos;s home directory.  For preference
+information that needs to be set site-wide by a system administrator
+and <span class="emphasis"><em>not</em></span> changed by users, use a run-control file
+in system space.</p><p>We&apos;ll discuss each of these places in more detail, then examine
+some case studies.</p></div>
+</body>
+</html>

@@ -1,0 +1,81 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svnrdump load</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/tmp/es2015/cheerio-mobi-ts8/undefined" />
+  </head>
+   <body>
+    <div class="refentry">
+      <a id="svn.ref.svnrdump.c.load"></a>
+      <div class="titlepage"></div>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svnrdump load</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm13566"></a>
+        <h2>Synopsis</h2>
+        <p>
+          <code class="literal">svnrdump load DEST_URL</code>
+        </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm13570"></a>
+        <h2>Description</h2>
+        <p>Read from standard input revision information
+            described in a Subversion repository dump stream, and load
+            that information into the repository located
+            at <em class="replaceable"><code>DEST_URL</code></em>.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm13574"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+          <pre class="screen">
+</pre>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm13586"></a>
+        <h2>Examples</h2>
+        <p>Dump the contents of a local repository, and
+            use <span class="command"><strong>svnrdump load</strong></span> to transfer that
+            revision information into an existing remote
+            repository:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svnadmin dump -q /var/svn/repos/new-project | \
+      svnrdump load http://svn.example.com/repos/new-project
+* Loaded revision 0
+* Loaded revision 1.
+* Loaded revision 2.
+&#x2026;
+</pre>
+        </div>
+        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Note">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Note]" src="/tmp/es2015/cheerio-mobi-ts8/content/svn/processed_images/note-grayscale.gif">
+              </td>
+              <th align="left">Note</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>To operate properly <span class="command"><strong>svnrdump load</strong></span>
+              requires that the target repository have revision
+              property modification enabled via the pre-revprop-change
+              hook.  For details about that hook, see
+              .</p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

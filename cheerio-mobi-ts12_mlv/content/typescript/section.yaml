@@ -1,0 +1,1140 @@
+- title: Frontmatter
+  articles:
+    - title: Title Page
+      path: articles/titlepage
+- title: |2-
+
+                
+                        
+                        Introduction
+                
+                    
+  articles:
+    - title: |2-
+
+                    
+                            
+                            Introduction
+                    
+                        
+      path: articles/./root.html
+- title: |2-
+
+                
+                        
+                        Getting Started
+                
+                    
+  articles:
+    - title: |2-
+
+                    
+                            
+                            Getting Started
+                    
+                        
+      path: articles/docs/getting-started.html
+    - title: |2-
+
+                    
+                            
+                            Why TypeScript
+                    
+                        
+      path: articles/docs/why-typescript.html
+- title: |2-
+
+                
+                        
+                        JavaScript
+                
+                    
+  articles:
+    - title: |2-
+
+                    
+                            
+                            JavaScript
+                    
+                        
+      path: articles/docs/javascript/recap.html
+    - title: |2-
+
+                    
+                            
+                            Equality
+                    
+                        
+      path: articles/docs/javascript/equality.html
+    - title: |2-
+
+                    
+                            
+                            References
+                    
+                        
+      path: articles/docs/javascript/references.html
+    - title: |2-
+
+                    
+                            
+                            Null vs. Undefined
+                    
+                        
+      path: articles/docs/javascript/null-undefined.html
+    - title: |2-
+
+                    
+                            
+                            this
+                    
+                        
+      path: articles/docs/javascript/this.html
+    - title: |2-
+
+                    
+                            
+                            Closure
+                    
+                        
+      path: articles/docs/javascript/closure.html
+    - title: |2-
+
+                    
+                            
+                            Number
+                    
+                        
+      path: articles/docs/javascript/number.html
+    - title: |2-
+
+                    
+                            
+                            Truthy
+                    
+                        
+      path: articles/docs/javascript/truthy.html
+- title: |2-
+
+                
+                        
+                        Future JavaScript Now
+                
+                    
+  articles:
+    - title: |2-
+
+                    
+                            
+                            Future JavaScript Now
+                    
+                        
+      path: articles/docs/future-javascript.html
+    - title: |2-
+
+                    
+                            
+                            Classes
+                    
+                        
+      path: articles/docs/classes.html
+    - title: |2-
+
+                    
+                            
+                            Classes Emit
+                    
+                        
+      path: articles/docs/classes-emit.html
+    - title: |2-
+
+                    
+                            
+                            Arrow Functions
+                    
+                        
+      path: articles/docs/arrow-functions.html
+    - title: |2-
+
+                    
+                            
+                            Rest Parameters
+                    
+                        
+      path: articles/docs/rest-parameters.html
+    - title: |2-
+
+                    
+                            
+                            let
+                    
+                        
+      path: articles/docs/let.html
+    - title: |2-
+
+                    
+                            
+                            const
+                    
+                        
+      path: articles/docs/const.html
+    - title: |2-
+
+                    
+                            
+                            Destructuring
+                    
+                        
+      path: articles/docs/destructuring.html
+    - title: |2-
+
+                    
+                            
+                            Spread Operator
+                    
+                        
+      path: articles/docs/spread-operator.html
+    - title: |2-
+
+                    
+                            
+                            for...of
+                    
+                        
+      path: articles/docs/for...of.html
+    - title: |2-
+
+                    
+                            
+                            Iterators
+                    
+                        
+      path: articles/docs/iterators.html
+    - title: |2-
+
+                    
+                            
+                            Template Strings
+                    
+                        
+      path: articles/docs/template-strings.html
+    - title: |2-
+
+                    
+                            
+                            Promise
+                    
+                        
+      path: articles/docs/promise.html
+    - title: |2-
+
+                    
+                            
+                            Generators
+                    
+                        
+      path: articles/docs/generators.html
+    - title: |2-
+
+                    
+                            
+                            Async Await
+                    
+                        
+      path: articles/docs/async-await.html
+- title: |2-
+
+                
+                        
+                        Project
+                
+                    
+  articles:
+    - title: |2-
+
+                    
+                            
+                            Project
+                    
+                        
+      path: articles/docs/project/project.html
+    - title: |2-
+
+                    
+                            
+                            Compilation Context
+                    
+                        
+      path: articles/docs/project/compilation-context.html
+    - title: |2-
+
+                    
+                            
+                            tsconfig.json
+                    
+                        
+      path: articles/docs/project/tsconfig.html
+    - title: |2-
+
+                    
+                            
+                            Which Files?
+                    
+                        
+      path: articles/docs/project/files.html
+    - title: |2-
+
+                    
+                            
+                            Declaration Spaces
+                    
+                        
+      path: articles/docs/project/declarationspaces.html
+    - title: |2-
+
+                    
+                            
+                            Modules
+                    
+                        
+      path: articles/docs/project/modules.html
+    - title: |2-
+
+                    
+                            
+                            File Module Details
+                    
+                        
+      path: articles/docs/project/external-modules.html
+    - title: |2-
+
+                    
+                            
+                            globals.d.ts
+                    
+                        
+      path: articles/docs/project/globals.html
+    - title: |2-
+
+                    
+                            
+                            Namespaces
+                    
+                        
+      path: articles/docs/project/namespaces.html
+    - title: |2-
+
+                    
+                            
+                            Dynamic Import Expressions
+                    
+                        
+      path: articles/docs/project/dynamic-import-expressions.html
+- title: |2-
+
+                
+                        
+                        Node.js QuickStart
+                
+                    
+  articles:
+    - title: |2-
+
+                    
+                            
+                            Node.js QuickStart
+                    
+                        
+      path: articles/docs/quick/nodejs.html
+- title: |2-
+
+                
+                        
+                        Browser QuickStart
+                
+                    
+  articles:
+    - title: |2-
+
+                    
+                            
+                            Browser QuickStart
+                    
+                        
+      path: articles/docs/quick/browser.html
+- title: |2-
+
+                
+                        
+                        Library QuickStart
+                
+                    
+  articles:
+    - title: |2-
+
+                    
+                            
+                            Library QuickStart
+                    
+                        
+      path: articles/docs/quick/library.html
+- title: |2-
+
+                
+                        
+                        TypeScript's Type System
+                
+                    
+  articles:
+    - title: |2-
+
+                    
+                            
+                            TypeScript's Type System
+                    
+                        
+      path: articles/docs/types/type-system.html
+    - title: |2-
+
+                    
+                            
+                            JS Migration Guide
+                    
+                        
+      path: articles/docs/types/migrating.html
+    - title: |2-
+
+                    
+                            
+                            @types
+                    
+                        
+      path: articles/docs/types/@types.html
+    - title: |2-
+
+                    
+                            
+                            Ambient Declarations
+                    
+                        
+      path: articles/docs/types/ambient/intro.html
+    - title: |2-
+
+                    
+                            
+                            Declaration Files
+                    
+                        
+      path: articles/docs/types/ambient/d.ts.html
+    - title: |2-
+
+                    
+                            
+                            Variables
+                    
+                        
+      path: articles/docs/types/ambient/variables.html
+    - title: |2-
+
+                    
+                            
+                            Interfaces
+                    
+                        
+      path: articles/docs/types/interfaces.html
+    - title: |2-
+
+                    
+                            
+                            Enums
+                    
+                        
+      path: articles/docs/enums.html
+    - title: |2-
+
+                    
+                            
+                            lib.d.ts
+                    
+                        
+      path: articles/docs/types/lib.d.ts.html
+    - title: |2-
+
+                    
+                            
+                            Functions
+                    
+                        
+      path: articles/docs/types/functions.html
+    - title: |2-
+
+                    
+                            
+                            Callable
+                    
+                        
+      path: articles/docs/types/callable.html
+    - title: |2-
+
+                    
+                            
+                            Type Assertion
+                    
+                        
+      path: articles/docs/types/type-assertion.html
+    - title: |2-
+
+                    
+                            
+                            Freshness
+                    
+                        
+      path: articles/docs/types/freshness.html
+    - title: |2-
+
+                    
+                            
+                            Type Guard
+                    
+                        
+      path: articles/docs/types/typeGuard.html
+    - title: |2-
+
+                    
+                            
+                            Literal Types
+                    
+                        
+      path: articles/docs/types/literal-types.html
+    - title: |2-
+
+                    
+                            
+                            Readonly
+                    
+                        
+      path: articles/docs/types/readonly.html
+    - title: |2-
+
+                    
+                            
+                            Generics
+                    
+                        
+      path: articles/docs/types/generics.html
+    - title: |2-
+
+                    
+                            
+                            Type Inference
+                    
+                        
+      path: articles/docs/types/type-inference.html
+    - title: |2-
+
+                    
+                            
+                            Type Compatibility
+                    
+                        
+      path: articles/docs/types/type-compatibility.html
+    - title: |2-
+
+                    
+                            
+                            Never Type
+                    
+                        
+      path: articles/docs/types/never.html
+    - title: |2-
+
+                    
+                            
+                            Discriminated Unions
+                    
+                        
+      path: articles/docs/types/discriminated-unions.html
+    - title: |2-
+
+                    
+                            
+                            Index Signatures
+                    
+                        
+      path: articles/docs/types/index-signatures.html
+    - title: |2-
+
+                    
+                            
+                            Moving Types
+                    
+                        
+      path: articles/docs/types/moving-types.html
+    - title: |2-
+
+                    
+                            
+                            Exception Handling
+                    
+                        
+      path: articles/docs/types/exceptions.html
+    - title: |2-
+
+                    
+                            
+                            Mixins
+                    
+                        
+      path: articles/docs/types/mixins.html
+- title: |2-
+
+                
+                        
+                        JSX
+                
+                    
+  articles:
+    - title: |2-
+
+                    
+                            
+                            JSX
+                    
+                        
+      path: articles/docs/jsx/tsx.html
+    - title: |2-
+
+                    
+                            
+                            React
+                    
+                        
+      path: articles/docs/jsx/react.html
+    - title: |2-
+
+                    
+                            
+                            Non React JSX
+                    
+                        
+      path: articles/docs/jsx/others.html
+- title: |2-
+
+                
+                        
+                        Options
+                
+                    
+  articles:
+    - title: |2-
+
+                    
+                            
+                            Options
+                    
+                        
+      path: articles/docs/options/intro.html
+    - title: |2-
+
+                    
+                            
+                            noImplicitAny
+                    
+                        
+      path: articles/docs/options/noImplicitAny.html
+    - title: |2-
+
+                    
+                            
+                            strictNullChecks
+                    
+                        
+      path: articles/docs/options/strictNullChecks.html
+- title: |2-
+
+                
+                        
+                        Errors in TypeScript
+                
+                    
+  articles:
+    - title: |2-
+
+                    
+                            
+                            Errors in TypeScript
+                    
+                        
+      path: articles/docs/errors/main.html
+    - title: |2-
+
+                    
+                            
+                            Interpreting Errors
+                    
+                        
+      path: articles/docs/errors/interpreting-errors.html
+    - title: |2-
+
+                    
+                            
+                            Common Errors
+                    
+                        
+      path: articles/docs/errors/common-errors.html
+- title: |2-
+
+                
+                        
+                        NPM
+                
+                    
+  articles:
+    - title: |2-
+
+                    
+                            
+                            NPM
+                    
+                        
+      path: articles/docs/npm/root.html
+- title: |2-
+
+                
+                        
+                        Testing
+                
+                    
+  articles:
+    - title: |2-
+
+                    
+                            
+                            Testing
+                    
+                        
+      path: articles/docs/testing/intro.html
+    - title: |2-
+
+                    
+                            
+                            Jest
+                    
+                        
+      path: articles/docs/testing/jest.html
+    - title: |2-
+
+                    
+                            
+                            Cypress
+                    
+                        
+      path: articles/docs/testing/cypress.html
+- title: |2-
+
+                
+                        
+                        Tools
+                
+                    
+  articles:
+    - title: |2-
+
+                    
+                            
+                            Tools
+                    
+                        
+      path: articles/docs/tools/intro.html
+    - title: |2-
+
+                    
+                            
+                            Prettier
+                    
+                        
+      path: articles/docs/tools/prettier.html
+    - title: |2-
+
+                    
+                            
+                            Husky
+                    
+                        
+      path: articles/docs/tools/husky.html
+    - title: |2-
+
+                    
+                            
+                            ESLint
+                    
+                        
+      path: articles/docs/tools/eslint.html
+    - title: |2-
+
+                    
+                            
+                            Changelog
+                    
+                        
+      path: articles/docs/tools/changelog.html
+- title: |2-
+
+                
+                        
+                        TIPs
+                
+                    
+  articles:
+    - title: |2-
+
+                    
+                            
+                            TIPs
+                    
+                        
+      path: articles/docs/tips/main.html
+    - title: |2-
+
+                    
+                            
+                            String Based Enums
+                    
+                        
+      path: articles/docs/tips/stringEnums.html
+    - title: |2-
+
+                    
+                            
+                            Nominal Typing
+                    
+                        
+      path: articles/docs/tips/nominalTyping.html
+    - title: |2-
+
+                    
+                            
+                            Stateful Functions
+                    
+                        
+      path: articles/docs/tips/statefulFunctions.html
+    - title: |2-
+
+                    
+                            
+                            Currying
+                    
+                        
+      path: articles/docs/tips/currying.html
+    - title: |2-
+
+                    
+                            
+                            Type Instantiation
+                    
+                        
+      path: articles/docs/tips/typeInstantiation.html
+    - title: |2-
+
+                    
+                            
+                            Lazy Object Literal Initialization
+                    
+                        
+      path: articles/docs/tips/lazyObjectLiteralInitialization.html
+    - title: |2-
+
+                    
+                            
+                            Classes are Useful
+                    
+                        
+      path: articles/docs/tips/classesAreUseful.html
+    - title: |2-
+
+                    
+                            
+                            Avoid Export Default
+                    
+                        
+      path: articles/docs/tips/defaultIsBad.html
+    - title: |2-
+
+                    
+                            
+                            Limit Property Setters
+                    
+                        
+      path: articles/docs/tips/propertySetters.html
+    - title: |2-
+
+                    
+                            
+                            outFile caution
+                    
+                        
+      path: articles/docs/tips/outFile.html
+    - title: |2-
+
+                    
+                            
+                            JQuery tips
+                    
+                        
+      path: articles/docs/tips/jquery.html
+    - title: |2-
+
+                    
+                            
+                            static constructors
+                    
+                        
+      path: articles/docs/tips/staticConstructor.html
+    - title: |2-
+
+                    
+                            
+                            singleton pattern
+                    
+                        
+      path: articles/docs/tips/singleton.html
+    - title: |2-
+
+                    
+                            
+                            Function parameters
+                    
+                        
+      path: articles/docs/tips/functionParameters.html
+    - title: |2-
+
+                    
+                            
+                            Build Toggles
+                    
+                        
+      path: articles/docs/tips/build-toggles.html
+    - title: |2-
+
+                    
+                            
+                            Barrel
+                    
+                        
+      path: articles/docs/tips/barrel.html
+    - title: |2-
+
+                    
+                            
+                            Create Arrays
+                    
+                        
+      path: articles/docs/tips/create-arrays.html
+    - title: |2-
+
+                    
+                            
+                            Typesafe Event Emitter
+                    
+                        
+      path: articles/docs/tips/typed-event.html
+- title: |2-
+
+                
+                        
+                        StyleGuide
+                
+                    
+  articles:
+    - title: |2-
+
+                    
+                            
+                            StyleGuide
+                    
+                        
+      path: articles/docs/styleguide/styleguide.html
+- title: |2-
+
+                
+                        
+                        TypeScript Compiler Internals
+                
+                    
+  articles:
+    - title: |2-
+
+                    
+                            
+                            TypeScript Compiler Internals
+                    
+                        
+      path: articles/docs/compiler/overview.html
+    - title: |2-
+
+                    
+                            
+                            Program
+                    
+                        
+      path: articles/docs/compiler/program.html
+    - title: |2-
+
+                    
+                            
+                            AST
+                    
+                        
+      path: articles/docs/compiler/ast.html
+    - title: |2-
+
+                    
+                            
+                            TIP: Visit Children
+                    
+                        
+      path: articles/docs/compiler/ast-tip-children.html
+    - title: |2-
+
+                    
+                            
+                            TIP: SyntaxKind enum
+                    
+                        
+      path: articles/docs/compiler/ast-tip-syntaxkind.html
+    - title: |2-
+
+                    
+                            
+                            Trivia
+                    
+                        
+      path: articles/docs/compiler/ast-trivia.html
+    - title: |2-
+
+                    
+                            
+                            Scanner
+                    
+                        
+      path: articles/docs/compiler/scanner.html
+    - title: |2-
+
+                    
+                            
+                            Parser
+                    
+                        
+      path: articles/docs/compiler/parser.html
+    - title: |2-
+
+                    
+                            
+                            Parser Functions
+                    
+                        
+      path: articles/docs/compiler/parser-functions.html
+    - title: |2-
+
+                    
+                            
+                            Binder
+                    
+                        
+      path: articles/docs/compiler/binder.html
+    - title: |2-
+
+                    
+                            
+                            Binder Functions
+                    
+                        
+      path: articles/docs/compiler/binder-functions.html
+    - title: |2-
+
+                    
+                            
+                            Binder Declarations
+                    
+                        
+      path: articles/docs/compiler/binder-declarations.html
+    - title: |2-
+
+                    
+                            
+                            Binder Container
+                    
+                        
+      path: articles/docs/compiler/binder-container.html
+    - title: |2-
+
+                    
+                            
+                            Binder SymbolTable
+                    
+                        
+      path: articles/docs/compiler/binder-symboltable.html
+    - title: |2-
+
+                    
+                            
+                            Binder Error Reporting
+                    
+                        
+      path: articles/docs/compiler/binder-diagnostics.html
+    - title: |2-
+
+                    
+                            
+                            Checker
+                    
+                        
+      path: articles/docs/compiler/checker.html
+    - title: |2-
+
+                    
+                            
+                            Checker Diagnostics
+                    
+                        
+      path: articles/docs/compiler/checker-global.html
+    - title: |2-
+
+                    
+                            
+                            Checker Error Reporting
+                    
+                        
+      path: articles/docs/compiler/checker-diagnostics.html
+    - title: |2-
+
+                    
+                            
+                            Emitter
+                    
+                        
+      path: articles/docs/compiler/emitter.html
+    - title: |2-
+
+                    
+                            
+                            Emitter Functions
+                    
+                        
+      path: articles/docs/compiler/emitter-functions.html
+    - title: |2-
+
+                    
+                            
+                            Emitter SourceMaps
+                    
+                        
+      path: articles/docs/compiler/emitter-sourcemaps.html
+    - title: |2-
+
+                    
+                            
+                            Contributing
+                    
+                        
+      path: articles/docs/compiler/contributing.html

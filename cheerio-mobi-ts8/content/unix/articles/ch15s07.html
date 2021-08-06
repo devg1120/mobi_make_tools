@@ -1,0 +1,34 @@
+<div class="sect1" lang="en"><div class="titlepage"><div><h2 class="title" style="clear: both"><a id="id2989334">Profiling</a></h2></div></div><p>As a general rule, 90% of the execution time of your program
+will be spent in 10% of its code. Profilers are tools that help you
+identify the 10% of hot spots that constrain the speed of your
+program. This is a good thing for making it faster.</p><p>But in the Unix tradition, profilers have a far more important
+function. They enable you <span class="emphasis"><em>not</em></span> to optimize the other 90%!
+This is good, and not just because it saves you work. The
+<span class="emphasis"><em>really</em></span> valuable effect is that not optimizing that 90%
+holds down global complexity and reduces bugs.</p><p>You may recall that we quoted Donald
+Knuth<a id="id2989368" class="indexterm">
+observing “Premature optimization is the root of all
+evil”<a id="id2989380" class="indexterm">
+in <a href="philosophychapter.html" title="Chapter�1.�Philosophy">Chapter�1</a>, and that
+Rob Pike<a id="id2989400" class="indexterm"> and Ken
+Thompson<a id="id2989408" class="indexterm"> had a
+few pungent observations on the topic as well. These were the voices
+of experience. Do good design.  Think about what's
+<span class="emphasis"><em>right</em></span> first. Tune for efficiency later.</a></a></a></a></p><p>Profilers help you do this. If you get in the good habit of
+using them, you can get rid of the bad habit of premature
+optimization. Profilers don't just change the way you work; they
+change how you think.</p><p>Profilers for compiled languages rely on instrumenting object
+code, so they are even more platform-dependent than compilers. On the
+other hand, a compiled-language profiler doesn't care about the source
+language of the programs it instruments. Under Unix, the single
+profiler
+gprof(1)
+handles C<a id="id2989450" class="indexterm">,
+C++<a id="id2989458" class="indexterm">, and all
+other compiled languages.</a></a></p><p>Perl<a id="id2989471" class="indexterm">,
+Python<a id="id2989480" class="indexterm">, and
+Emacs Lisp<a id="id2989488" class="indexterm"> have their own profilers included in
+their basic distributions; these are portable across all platforms on
+which the host languages themselves run. Java<a id="id2989500" class="indexterm"> has built-in profiling.
+Tcl<a id="id2989508" class="indexterm"> has no
+profiling support as yet.</a></a></a></a></a></p></div>

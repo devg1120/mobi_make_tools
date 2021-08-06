@@ -1,0 +1,30 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    AST
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts13_images/undefined" />
+  </head>
+   <body>
+<h2 id="node">Node</h2>
+<p>The basic building block of the Abstract Syntax Tree (AST). In general a <code>Node</code> represents non-terminals in the language grammar; however, some terminals are kept in the tree such as identifiers and literals.</p>
+<p>Two key things make up an AST node&apos;s documentation. The node&apos;s <code>SyntaxKind</code> which identifies its type within the AST, and its <code>interface</code>, the API the node provides when instantiated into the AST.</p>
+<p>Here are a few key <code>interface Node</code> members:</p>
+<ul>
+    <li><code>TextRange</code> members that identify the node&apos;s <code>start</code> and <code>end</code> in the source file.</li>
+    <li><code>parent?: Node</code> the parent of the node in the AST.</li>
+</ul>
+<p>There are other additional members for <code>Node</code> flags and modifiers etc. that you can lookup by searching <code>interface Node</code> in the source code but the ones we mentioned are vital for node traversal.</p>
+<h2 id="sourcefile">SourceFile</h2>
+<ul>
+    <li><code>SyntaxKind.SourceFile</code></li>
+    <li><code>interface SourceFile</code>.</li>
+</ul>
+<p>Each <code>SourceFile</code> is a top-level AST node that is contained in the <code>Program</code>.</p>
+</body>
+</html>

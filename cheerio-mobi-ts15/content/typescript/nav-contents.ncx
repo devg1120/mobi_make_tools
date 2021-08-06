@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE ncx PUBLIC "-//NISO//DTD ncx 2005-1//EN" "http://www.daisy.org/z3986/2005/ncx-2005-1.dtd">
+<ncx xmlns:mbp="http://mobipocket.com/ns/mbp" xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1" xml:lang="en-US">
+  <head>
+    <meta content="typescript-documetation-2019-11-10" name="dtb:uid"/>
+    <meta content="2" name="dtb:depth"/>
+    <meta content="0" name="dtb:totalPageCount"/>
+    <meta content="0" name="dtb:maxPageNumber"/>
+  </head>
+  <docTitle>
+    <text>typescript</text>
+  </docTitle>
+  <docAuthor>
+    <text>AUTHOR</text>
+  </docAuthor>
+  <navMap>
+    <navPoint playOrder="1" class="periodical" id="periodical">
+      <mbp:meta-img src="/home/gusa1120/es2015/cheerio-mobi-ts15/mobi_images/masthead.gif" name="mastheadImage"/>
+      <navLabel><text>Table of Contents</text></navLabel>
+      <content src="contents.html"/>
+      <navPoint playOrder="2" class="section" id="item-000">
+        <navLabel><text>Frontmatter</text></navLabel>
+        <content src="sections/000/section.html"/>
+        <navPoint playOrder="3" class="article" id="item-000000">
+          <navLabel><text>Title Page</text></navLabel>
+          <content src="sections/000/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+      </navPoint>
+    </navPoint>
+  </navMap>
+</ncx>

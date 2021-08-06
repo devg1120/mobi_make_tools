@@ -1,0 +1,56 @@
+--- 
+# kindle mobi document genelater
+#
+#
+# //*[@id="root"]/div/nav
+#  #root > div > nav
+#
+#  //*[@id="root"]/div/div[2]/nav
+#  #root > div > div.container.site__content > nav
+#
+#  //*[@id="root"]/div/div[2]/nav/div/div[5]/a
+#  #root > div > div.container.site__content > nav > div > div:nth-child(5) > a
+#  
+#  <a class="sidebar-item__title" href="/concepts/output/">Output</a>
+#
+top_dir: content
+recipe_slug: webpack
+
+base_url: https://webpack.js.org/
+index_url: https://webpack.js.org/concepts/
+kindle_css: css/kindle.css
+images_include: false
+
+extract_sections:
+   href_select_class:  .sidebar-item
+   href_section_regex: "\\/$"
+   href_article_regex: ".+#.+"     
+
+#
+kindlegen:
+  compress:  0     # 0/1/2
+  verbose:   true  # booleran
+  locale:    en
+  output_path:    /tmp/mobi
+
+doe: "a deer, a female deer"
+ray: "a drop of golden sun"
+pi: 3.14159
+xmas: true
+french-hens: 3
+calling-birds: 
+   - huey
+   - dewey
+   - louie
+   - fred
+xmas-fifth-day: 
+   calling-birds: four
+   french-hens: 3
+   golden-rings: 5
+   partridges: 
+     count: 1
+     location: "a pear tree"
+   turtle-doves: two
+
+
+

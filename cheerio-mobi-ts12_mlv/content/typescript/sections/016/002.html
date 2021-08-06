@@ -1,0 +1,110 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Nominal Typing
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts12_mlv/undefined" />
+  </head>
+   <body>
+<h2 id="nominal-typing">Nominal Typing</h2>
+<p>The TypeScript type system is structural <a href="../why-typescript.html">and this is one of the main motivating benefits</a>. However, there are real-world use cases for a system where you want two variables to be differentiated because they have a different <em>type name</em> even if they have the same structure. A very common use case is <em>identity</em> structures (which are generally just strings with semantics associated with their <em>name</em> in languages like C#/Java).</p>
+<p>There are a few patterns that have emerged in the community. I cover them in decreasing order of personal preference:</p>
+<h2 id="using-literal-types">Using literal types</h2>
+<p>This pattern uses generics and literal types: </p>
+<pre><code class="lang-ts"><span class="hljs-comment">/** Generic Id type */</span>
+<span class="hljs-keyword">type</span> Id<t extends <span class="hljs-built_in">string&gt; = {
+  <span class="hljs-keyword">type</span>: T,
+  value: <span class="hljs-built_in">string</span>,
+}
+<span class="hljs-comment">/** Specific Id types */</span>
+<span class="hljs-keyword">type</span> FooId = Id&lt;<span class="hljs-string">&apos;foo&apos;</span>&gt;;
+<span class="hljs-keyword">type</span> BarId = Id&lt;<span class="hljs-string">&apos;bar&apos;</span>&gt;;
+<span class="hljs-comment">/** Optional: contructors functions */</span>
+<span class="hljs-keyword">const</span> createFoo = (value: <span class="hljs-built_in">string</span>): FooId =&gt; ({ <span class="hljs-keyword">type</span>: <span class="hljs-string">&apos;foo&apos;</span>, value });
+<span class="hljs-keyword">const</span> createBar = (value: <span class="hljs-built_in">string</span>): BarId =&gt; ({ <span class="hljs-keyword">type</span>: <span class="hljs-string">&apos;bar&apos;</span>, value });
+<span class="hljs-keyword">let</span> foo = createFoo(<span class="hljs-string">&apos;sample&apos;</span>)
+<span class="hljs-keyword">let</span> bar = createBar(<span class="hljs-string">&apos;sample&apos;</span>);
+foo = bar; <span class="hljs-comment">// Error</span>
+foo = foo; <span class="hljs-comment">// Okay</span>
+</t></code></pre>
+<ul>
+    <li>Advantages<ul>
+            <li>No need for any type assertions </li>
+        </ul>
+    </li>
+    <li>Disadvantage<ul>
+            <li>The structure <code>{type,value}</code> might not be desireable and need server serialization support</li>
+        </ul>
+    </li>
+</ul>
+<h2 id="using-enums">Using Enums</h2>
+<p><a href="../enums.html">Enums in TypeScript</a> offer a certain level of nominal typing. Two enum types aren&apos;t equal if they differ by name. We can use this fact to provide nominal typing for types that are otherwise structurally compatible.</p>
+<p>The workaround involves:</p>
+<ul>
+    <li>Creating a <em>brand</em> enum.</li>
+    <li>Creating the type as an <em>intersection</em> (<code>&amp;</code>) of the brand enum + the actual structure.</li>
+</ul>
+<p>This is demonstrated below where the structure of the types is just a string:</p>
+<pre><code class="lang-ts"><span class="hljs-comment">// FOO</span>
+<span class="hljs-keyword">enum</span> FooIdBrand {}
+<span class="hljs-keyword">type</span> FooId = FooIdBrand &amp; <span class="hljs-built_in">string</span>;
+<span class="hljs-comment">// BAR</span>
+<span class="hljs-keyword">enum</span> BarIdBrand {}
+<span class="hljs-keyword">type</span> BarId = BarIdBrand &amp; <span class="hljs-built_in">string</span>;
+<span class="hljs-comment">/**
+ * Usage Demo
+ */</span>
+<span class="hljs-keyword">var</span> fooId: FooId;
+<span class="hljs-keyword">var</span> barId: BarId;
+<span class="hljs-comment">// Safety!</span>
+fooId = barId; <span class="hljs-comment">// error</span>
+barId = fooId; <span class="hljs-comment">// error</span>
+<span class="hljs-comment">// Newing up</span>
+fooId = <span class="hljs-string">&apos;foo&apos;</span> as FooId;
+barId = <span class="hljs-string">&apos;bar&apos;</span> as BarId;
+<span class="hljs-comment">// Both types are compatible with the base</span>
+<span class="hljs-keyword">var</span> str: <span class="hljs-built_in">string</span>;
+str = fooId;
+str = barId;
+</code></pre>
+<h2 id="using-interfaces">Using Interfaces</h2>
+<p>Because <code>numbers</code> are type compatible with <code>enum</code>s the previous technique cannot be used for them. Instead we can use interfaces to break the structural compatibility. This method is still used by the TypeScript compiler team, so worth mentioning. Using <code>_</code> prefix and a <code>Brand</code> suffix is a convention I strongly recommend (and <a href="https://github.com/Microsoft/TypeScript/blob/7b48a182c05ea4dea81bab73ecbbe9e013a79e99/src/compiler/types.ts#L693-L698" target="_blank">the one followed by the TypeScript team</a>).</p>
+<p>The workaround involves the following:</p>
+<ul>
+    <li>adding an unused property on a type to break structural compatibility.</li>
+    <li>using a type assertion when needing to new up or cast down.</li>
+</ul>
+<p>This is demonstrated below:</p>
+<pre><code class="lang-ts"><span class="hljs-comment">// FOO</span>
+<span class="hljs-keyword">interface</span> FooId <span class="hljs-keyword">extends</span> String {
+    _fooIdBrand: <span class="hljs-built_in">string</span>; <span class="hljs-comment">// To prevent type errors</span>
+}
+<span class="hljs-comment">// BAR</span>
+<span class="hljs-keyword">interface</span> BarId <span class="hljs-keyword">extends</span> String {
+    _barIdBrand: <span class="hljs-built_in">string</span>; <span class="hljs-comment">// To prevent type errors</span>
+}
+<span class="hljs-comment">/**
+ * Usage Demo
+ */</span>
+<span class="hljs-keyword">var</span> fooId: FooId;
+<span class="hljs-keyword">var</span> barId: BarId;
+<span class="hljs-comment">// Safety!</span>
+fooId = barId; <span class="hljs-comment">// error</span>
+barId = fooId; <span class="hljs-comment">// error</span>
+fooId = <fooid>barId; <span class="hljs-comment">// error</span>
+barId = <barid>fooId; <span class="hljs-comment">// error</span>
+<span class="hljs-comment">// Newing up</span>
+fooId = <span class="hljs-string">&apos;foo&apos;</span> as <span class="hljs-built_in">any</span>;
+barId = <span class="hljs-string">&apos;bar&apos;</span> as <span class="hljs-built_in">any</span>;
+<span class="hljs-comment">// If you need the base string</span>
+<span class="hljs-keyword">var</span> str: <span class="hljs-built_in">string</span>;
+str = fooId as <span class="hljs-built_in">any</span>;
+str = barId as <span class="hljs-built_in">any</span>;
+</barid></fooid></code></pre>
+</body>
+</html>

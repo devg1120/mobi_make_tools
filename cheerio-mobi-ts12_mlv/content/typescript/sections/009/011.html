@@ -1,0 +1,97 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Type Assertion
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts12_mlv/undefined" />
+  </head>
+   <body>
+<h2 id="type-assertion">Type Assertion</h2>
+<p>TypeScript allows you to override its inferred and analyzed view of types in any way you want to. This is done by a mechanism called &quot;type assertion&quot;. TypeScript&apos;s type assertion is purely you telling the compiler that you know about the types better than it does, and that it should not second guess you.</p>
+<p>A common use case for type assertion is when you are porting over code from JavaScript to TypeScript. For example consider the following pattern:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">var</span> foo = {};
+foo.bar = <span class="hljs-number">123</span>; <span class="hljs-comment">// Error: property &apos;bar&apos; does not exist on `{}`</span>
+foo.bas = <span class="hljs-string">&apos;hello&apos;</span>; <span class="hljs-comment">// Error: property &apos;bas&apos; does not exist on `{}`</span>
+</code></pre>
+<p>Here the code errors because the <em>inferred</em> type of <code>foo</code> is <code>{}</code> i.e. an object with zero properties. Therefore you are not allowed to add <code>bar</code> or <code>bas</code> to it. You can fix this simply by a type assertion <code>as Foo</code>:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">interface</span> Foo {
+    bar: <span class="hljs-built_in">number</span>;
+    bas: <span class="hljs-built_in">string</span>;
+}
+<span class="hljs-keyword">var</span> foo = {} as Foo;
+foo.bar = <span class="hljs-number">123</span>;
+foo.bas = <span class="hljs-string">&apos;hello&apos;</span>;
+</code></pre>
+<h3 id="as-foo-vs-foo"><code>as foo</code> vs. <code>
+        <foo>
+    </foo></code></h3>
+<p>Originally the syntax that was added was <code>
+        <foo>
+    </foo></code>. This is demonstrated below:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">var</span> foo: <span class="hljs-built_in">any</span>;
+<span class="hljs-keyword">var</span> bar = &lt;<span class="hljs-built_in">string</span>&gt; foo; <span class="hljs-comment">// bar is now of type &quot;string&quot;</span>
+</code></pre>
+<p>However, there is an ambiguity in the language grammar when using <code>
+        <foo>
+    </foo></code> style assertions in JSX:</p>
+<pre><code class="lang-ts">var foo = <string>bar;
+</string>
+</code></pre>
+<p>Therefore it is now recommended that you just use <code>as foo</code> for consistency.</p>
+<h3 id="type-assertion-vs-casting">Type Assertion vs. Casting</h3>
+<p>The reason why it&apos;s not called &quot;type casting&quot; is that <em>casting</em> generally implies some sort of runtime support. However, <em>type assertions</em> are purely a compile time construct and a way for you to provide hints to the compiler on how you want your code to be analyzed.</p>
+<h3 id="assertion-considered-harmful">Assertion considered harmful</h3>
+<p>In many cases assertion will allow you to easily migrate legacy code (and even copy paste other code samples into your codebase). However, you should be careful with your use of assertions. Take our original code as a sample, the compiler will not protect you from forgetting to <em>actually add the properties you promised</em>:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">interface</span> Foo {
+    bar: <span class="hljs-built_in">number</span>;
+    bas: <span class="hljs-built_in">string</span>;
+}
+<span class="hljs-keyword">var</span> foo = {} as Foo;
+<span class="hljs-comment">// ahhhh .... forget something?</span>
+</code></pre>
+<p>Also another common thought is using an assertion as a means of providing <em>autocomplete</em> e.g.:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">interface</span> Foo {
+    bar: <span class="hljs-built_in">number</span>;
+    bas: <span class="hljs-built_in">string</span>;
+}
+<span class="hljs-keyword">var</span> foo = <foo>{
+    <span class="hljs-comment">// the compiler will provide autocomplete for properties of Foo</span>
+    <span class="hljs-comment">// But it is easy for the developer to forget adding all the properties</span>
+    <span class="hljs-comment">// Also this code is likely to break if Foo gets refactored (e.g. a new property added)</span>
+};
+</foo></code></pre>
+<p>but the hazard here is the same, if you forget a property the compiler will not complain. It is better if you do the following:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">interface</span> Foo {
+    bar: <span class="hljs-built_in">number</span>;
+    bas: <span class="hljs-built_in">string</span>;
+}
+<span class="hljs-keyword">var</span> foo:Foo = {
+    <span class="hljs-comment">// the compiler will provide autocomplete for properties of Foo</span>
+};
+</code></pre>
+<p>In some cases you might need to create a temporary variable, but at least you will not be making (possibly false) promises and instead relying on the type inference to do the checking for you.</p>
+<h3 id="double-assertion">Double assertion</h3>
+<p>The type assertion, despite being a bit unsafe as we&apos;ve shown, is not <em>completely open season</em>. E.g. the following is a very valid use case (e.g. the user thinks the event passed in will be a more specific case of an event) and the type assertion works as expected:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handler</span> (<span class="hljs-params">event: Event</span>) </span>{
+    <span class="hljs-keyword">let</span> mouseEvent = event as MouseEvent;
+}
+</code></pre>
+<p>However, the following is most likely an error and TypeScript will complain as shown despite the user&apos;s type assertion:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handler</span>(<span class="hljs-params">event: Event</span>) </span>{
+    <span class="hljs-keyword">let</span> element = event as HTMLElement; <span class="hljs-comment">// Error: Neither &apos;Event&apos; nor type &apos;HTMLElement&apos; is assignable to the other</span>
+}
+</code></pre>
+<p>If you <em>still want that Type, you can use a double assertion</em>, but first asserting to <code>any</code> which is compatible with all types and therefore the compiler no longer complains:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handler</span>(<span class="hljs-params">event: Event</span>) </span>{
+    <span class="hljs-keyword">let</span> element = event as <span class="hljs-built_in">any</span> as HTMLElement; <span class="hljs-comment">// Okay!</span>
+}
+</code></pre>
+<h4 id="how-typescript-determines-if-a-single-assertion-is-not-enough">How TypeScript determines if a single assertion is not enough</h4>
+<p>Basically, the assertion from type <code>S</code> to <code>T</code> succeeds if either <code>S</code> is a subtype of <code>T</code> or <code>T</code> is a subtype of <code>S</code>. This is to provide extra safety when doing type assertions ... completely wild assertions can be very unsafe and you need to use <code>any</code> to be that unsafe.</p>
+</body>
+</html>

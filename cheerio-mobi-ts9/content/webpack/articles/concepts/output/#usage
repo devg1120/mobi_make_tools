@@ -1,0 +1,7 @@
+<h2 id="usage">Usage<a href="#usage" aria-hidden="true"><span class="icon icon-link"></span></a></h2><p>The minimum requirement for the <code>output</code> property in your webpack config is to set its value to an object including the following property:</p><ul>
+<li>A <code>filename</code> to use for the output file(s).</li>
+</ul><p><strong>webpack.config.js</strong></p><pre><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    filename<span class="token punctuation">:</span> <span class="token string">&apos;bundle.js&apos;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre><p>This configuration would output a single <code>bundle.js</code> file into the <code>dist</code> directory.</p>

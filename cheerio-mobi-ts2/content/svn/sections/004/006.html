@@ -1,0 +1,102 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Sometimes You Just Need to Clean Up</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts2/css/kindle.css" />
+  </head>
+   <body>
+    <div class="sect1">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="svn.tour.cleanup"></a>Sometimes You Just Need to Clean Up</h2>
+          </div>
+        </div>
+      </div>
+      <p>Now that we've covered the day-to-day tasks that you'll
+      frequently use Subversion for, we'll review a few administrative
+      tasks relating to your working copy.</p>
+      <div class="sect2">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="svn.tour.cleanup.disposal"></a>Disposing of a Working Copy</h3>
+            </div>
+          </div>
+        </div>
+        <p>Subversion doesn't track either the state or the existence of
+        working copies on the server, so there's no server overhead to
+        keeping working copies around.  Likewise, there's no need to
+        let the server know that you're going to delete a working
+        copy.</p>
+        <p>If you're likely to use a working copy again, there's
+        nothing wrong with just leaving it on disk until you're ready
+        to use it again, at which point all it takes is an
+        <span class="command"><strong>svn update</strong></span> to bring it up to date and ready
+        for use.</p>
+        <p>However, if you're definitely not going to use a working
+        copy again, you can safely delete the entire thing using
+        whatever directory removal capabilities your operating system
+        offers.  We recommend that before you do so you
+        run <strong class="userinput"><code>svn status</code></strong> and review any files
+        listed in its output that are prefixed with a
+        <code class="literal">?</code> to make certain that they're not of
+        importance.</p>
+      </div>
+      <div class="sect2">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="svn.tour.cleanup.interruption"></a>Recovering from an Interruption</h3>
+            </div>
+          </div>
+        </div>
+        <p>When Subversion modifies your working copy—either
+        your files or its own administrative state—it tries to do
+        so as safely as possible.  Before changing the working copy,
+        Subversion logs its intentions in a private <span class="quote">“<span class="quote">to-do
+        list</span>”</span>, of sorts.  Next, it performs those actions to
+        effect the desired change, holding a lock on the relevant part
+        of the working copy while it works.  This prevents other
+        Subversion clients from accessing the working copy mid-change.
+        Finally, Subversion releases its lock and cleans up its
+        private to-do list.  Architecturally, this is similar to a
+        journaled filesystem.  If a Subversion operation is
+        interrupted (e.g, if the process is killed or if the machine
+        crashes), the private to-do list remains on disk.  This allows
+        Subversion to return to that list later to complete any
+        unfinished operations and return your working copy to a
+        consistent state.</p>
+        <p>This is exactly what <span class="command"><strong>svn cleanup</strong></span> does:
+        it searches your working copy and runs any leftover to-do
+        items, removing working copy locks as it completes those
+        operations.  If Subversion ever tells you that some part of
+        your working copy is <span class="quote">“<span class="quote">locked,</span>”</span> run <span class="command"><strong>svn
+        cleanup</strong></span> to remedy the problem.  The <span class="command"><strong>svn
+        status</strong></span> command will inform you about administrative
+        locks in the working copy, too, by displaying
+        an <code class="literal">L</code> next to those locked paths:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn status
+  L     somedir
+M       somedir/foo.c
+$ svn cleanup
+$ svn status
+M       somedir/foo.c
+</pre>
+        </div>
+        <p>Don't confuse these working copy administrative locks with
+        the user-managed locks that Subversion users create when using
+        the lock-modify-unlock model of concurrent version control;
+        see the sidebar
+        <a class="xref" href="svn.advanced.locking.html#svn.advanced.locking.meanings" title="The Three Meanings of “Lock”">The Three Meanings of <span class="quote">“<span class="quote">Lock</span>”</span></a> for
+        clarification.</p>
+      </div>
+    </div>
+</body>
+</html>

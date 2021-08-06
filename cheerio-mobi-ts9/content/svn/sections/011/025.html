@@ -1,0 +1,69 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svn propedit (pedit, pe)</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/tmp/es2015/cheerio-mobi-ts8/undefined" />
+  </head>
+   <body>
+    <div class="refentry">
+      <a id="svn.ref.svn.c.propedit"></a>
+      <div class="titlepage"></div>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svn propedit (pedit, pe) &#x2014; Edit the property of one or more items under
+            version control.  See  later in this chapter.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm10740"></a>
+        <h2>Synopsis</h2>
+        <p>
+          <code class="literal">svn propedit PROPNAME TARGET...</code>
+        </p>
+        <p>
+          <code class="literal">svn propedit PROPNAME --revprop -r REV [TARGET]</code>
+        </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm10746"></a>
+        <h2>Description</h2>
+        <p>Edit one or more properties using your favorite
+            editor.  The first form edits versioned properties in
+            your working copy, and the second edits unversioned
+            remote properties on a repository revision
+            (<em class="replaceable"><code>TARGET</code></em> determines only which
+            repository to access).</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm10750"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+          <pre class="screen">
+</pre>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm10763"></a>
+        <h2>Examples</h2>
+        <p><span class="command"><strong>svn propedit</strong></span> makes it easy to
+            modify properties that have multiple values:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn propedit svn:keywords foo.c 
+    # svn will open in your favorite text editor a temporary file
+    # containing the current contents of the svn:keywords property.  You
+    # can add multiple values to a property easily here by entering one
+    # value per line.  When you save the temporary file and exit,
+    # Subversion will re-read the temporary file and use its updated
+    # contents as the new value of the property.
+Set new value for property &apos;svn:keywords&apos; on &apos;foo.c&apos;
+$
+</pre>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

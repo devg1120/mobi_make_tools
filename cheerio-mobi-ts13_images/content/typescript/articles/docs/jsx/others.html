@@ -1,0 +1,42 @@
+<h1 id="non-react-jsx">Non React JSX</h1>
+<p>TypeScript provides you with the ability to use something other than React with JSX in a type safe manner. The following lists the customizability points, but note that this is for advanced UI framework authors:</p>
+<ul>
+    <li>You can disable <code>react</code> style emit by using <code>"jsx" : "preserve"</code> option. This means that JSX is emitted <em>as is</em> and then you can use your own custom transpiler to transpile the JSX portions.</li>
+    <li>Using the <code>JSX</code> global module:<ul>
+            <li>You can control what HTML tags are available and how they are type checked by customizing the <code>JSX.IntrinsicElements</code> interface members.</li>
+            <li>When using components:<ul>
+                    <li>You can control which <code>class</code> must be inherited by components by customizing the default <code>interface ElementClass extends React.Component<any, any> { }</code> declaration.</li>
+                    <li>You can control which property is used to type check the attributes (the default is <code>props</code>) by customizing the <code>declare module JSX { interface ElementAttributesProperty { props: {}; } }</code> declaration.</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ul>
+<h2 id="jsxfactory"><code>jsxFactory</code></h2>
+<p>Passing <code>--jsxFactory <JSX factory Name></code> along with <code>--jsx react</code> allows for using a different JSX factory from the default <code>React</code>.</p>
+<p>The new factory name will be used to call <code>createElement</code> functions.</p>
+<h3 id="example">Example</h3>
+<pre><code class="lang-ts">import {jsxFactory} from "jsxFactory";
+
+var div = <div>Hello JSX!</div>
+</code></pre>
+<p>Compiled with:</p>
+<pre><code class="lang-shell">tsc --jsx react --reactNamespace jsxFactory --m commonJS
+</code></pre>
+<p>Results in:</p>
+<pre><code class="lang-js"><span class="hljs-meta">"use strict"</span>;
+<span class="hljs-keyword">var</span> jsxFactory_1 = <span class="hljs-built_in">require</span>(<span class="hljs-string">"jsxFactory"</span>);
+<span class="hljs-keyword">var</span> div = jsxFactory_1.jsxFactory.createElement(<span class="hljs-string">"div"</span>, <span class="hljs-literal">null</span>, <span class="hljs-string">"Hello JSX!"</span>);
+</code></pre>
+<h2 id="jsx-pragma"><code>jsx</code> pragma</h2>
+<p>You can even specify a different <code>jsxFactory</code> per file using <code>jsxPragma</code> e.g. </p>
+<pre><code class="lang-js"><span class="hljs-comment">/** @jsx jsxFactory */</span>
+<span class="hljs-keyword">import</span> {jsxFactory} <span class="hljs-keyword">from</span> <span class="hljs-string">"jsxFactory"</span>;
+
+<span class="hljs-keyword">var</span> div = <span class="xml"><span class="hljs-tag"><<span class="hljs-name">div</span>></span>Hello JSX!<span class="hljs-tag"></<span class="hljs-name">div</span>></span></span>
+</code></pre>
+<p>With <code>--jsx react</code> this file will emit to use the factory specfied in the jsx pragma: </p>
+<pre><code class="lang-js"><span class="hljs-meta">"use strict"</span>;
+<span class="hljs-keyword">var</span> jsxFactory_1 = <span class="hljs-built_in">require</span>(<span class="hljs-string">"jsxFactory"</span>);
+<span class="hljs-keyword">var</span> div = jsxFactory_1.jsxFactory.createElement(<span class="hljs-string">"div"</span>, <span class="hljs-literal">null</span>, <span class="hljs-string">"Hello JSX!"</span>);
+</code></pre>

@@ -1,0 +1,281 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Subversion Properties</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts5/css/kindle.css" />
+  </head>
+   <body>
+    <div class="sect1">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="svn.ref.properties"></a>Subversion Properties</h2>
+          </div>
+        </div>
+      </div>
+      <p>Subversion allows users to invent arbitrarily named
+      versioned properties on files and directories, as well as
+      unversioned properties on revisions.  The only restriction is on
+      properties whose names begin with <code class="literal">svn:</code> (those
+      are reserved for Subversion&apos;s own use).  While these properties
+      may be set by users to control Subversion&apos;s behavior, users may
+      not invent new <code class="literal">svn:</code> properties.</p>
+      <div class="sect2">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="svn.ref.properties.versioned-props"></a>Versioned Properties</h3>
+            </div>
+          </div>
+        </div>
+        <p>These are the versioned properties that Subversion reserves
+        for its own use:</p>
+        <div class="variablelist">
+          <dl class="variablelist">
+            <dt>
+              <span class="term">
+                <code class="literal">svn:executable</code>
+              </span>
+            </dt>
+            <dd>
+              <p>If present on a file, the client will make the
+              file executable in Unix-hosted working copies.  See
+              .</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">svn:mime-type</code>
+              </span>
+            </dt>
+            <dd>
+              <p>If present on a file, the value indicates the
+              file&apos;s MIME type.  This allows the client to decide
+              whether line-based contextual merging is safe to
+              perform during updates, and can also affect how the
+              file behaves when fetched via a web browser.  See
+              .</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">svn:ignore</code>
+              </span>
+            </dt>
+            <dd>
+              <p>If present on a directory, the value is a list of
+              <span class="emphasis"><em>unversioned</em></span> file patterns to be ignored
+              by <span class="command"><strong>svn status</strong></span> and other
+              subcommands.  See
+              .</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">svn:keywords</code>
+              </span>
+            </dt>
+            <dd>
+              <p>If present on a file, the value tells the client
+              how to expand particular keywords within the file.
+              See
+              .</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">svn:eol-style</code>
+              </span>
+            </dt>
+            <dd>
+              <p>If present on a file, the value tells the client how
+              to manipulate the file&apos;s line-endings in the working
+              copy and in exported trees.  See  and
+               earlier in this chapter.</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">svn:externals</code>
+              </span>
+            </dt>
+            <dd>
+              <p>If present on a directory, the value is a multiline
+              list of other paths and URLs the client should check
+              out.  See
+              .</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">svn:special</code>
+              </span>
+            </dt>
+            <dd>
+              <p>If present on a file, indicates that the file is not
+              an ordinary file, but a symbolic link or other special
+              object.<a href="#ftn.idm14302" class="footnote" id="idm14302"><sup class="footnote">[72]</sup></a></p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">svn:needs-lock</code>
+              </span>
+            </dt>
+            <dd>
+              <p>If present on a file, tells the client to make the
+              file read-only in the working copy, as a reminder that
+              the file should be locked before editing begins.  See
+              .</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">svn:mergeinfo</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Used by Subversion to track merge data.  See
+              for details, but you should never edit this property
+              unless you <span class="emphasis"><em>really</em></span> know what you&apos;re
+              doing.</p>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="sect2">
+        <div class="titlepage">
+          <div>
+            <div>
+              <h3 class="title"><a id="svn.ref.properties.unversioned-props"></a>Unversioned Properties</h3>
+            </div>
+          </div>
+        </div>
+        <p>These are the unversioned properties that Subversion reserves
+        for its own use:</p>
+        <div class="variablelist">
+          <dl class="variablelist">
+            <dt>
+              <span class="term">
+                <code class="literal">svn:author</code>
+              </span>
+            </dt>
+            <dd>
+              <p>If present, contains the authenticated username of
+              the person who created the revision.  (If not present,
+              the revision was committed anonymously.)</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">svn:autoversioned</code>
+              </span>
+            </dt>
+            <dd>
+              <p>If present, the revision was created via the
+              autoversioning feature.  See
+              .</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">svn:date</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Contains the UTC time the revision was created, in
+              ISO 8601 format.  The value comes from the
+              <span class="emphasis"><em>server</em></span> machine&apos;s clock, not the
+              client&apos;s.</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">svn:log</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Contains the log message describing the
+              revision.</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">svn:rdump-lock</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Used to temporarily enforce mutually exclusive
+              access to the repository by <span class="command"><strong>svnrdump
+              load</strong></span>.  This property is generally only
+              observed when such an operation is active&#x2014;or when
+              an <span class="command"><strong>svnrdump</strong></span> command failed to cleanly
+              disconnect from the repository.  (This property is only
+              relevant when it appears on revision 0.)</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">svn:sync-currently-copying</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Contains the revision number from the source
+              repository which is currently being mirrored to this one
+              by the <span class="command"><strong>svnsync</strong></span> tool.  (This property
+              is only relevant when it appears on revision 0.)</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">svn:sync-from-uuid</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Contains the UUID of the repository of which this
+              repository has been initialized as a mirror by
+              the <span class="command"><strong>svnsync</strong></span> tool.  (This property is
+              only relevant when it appears on revision 0.)</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">svn:sync-from-url</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Contains the URL of the repository directory of
+              which this repository has been initialized as a mirror
+              by the <span class="command"><strong>svnsync</strong></span> tool.  (This property
+              is only relevant when it appears on revision 0.)</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">svn:sync-last-merged-rev</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Contains the revision of the source repository which
+              was most recently and successfully mirrored to this one.
+              (This property is only relevant when it appears on
+              revision 0.)</p>
+            </dd>
+            <dt>
+              <span class="term">
+                <code class="literal">svn:sync-lock</code>
+              </span>
+            </dt>
+            <dd>
+              <p>Used to temporarily enforce mutually exclusive
+              access to the repository by <span class="command"><strong>svnsync</strong></span>
+              mirroring operations.  This property is generally only
+              observed when such an operation is active&#x2014;or when
+              an <span class="command"><strong>svnsync</strong></span> command failed to cleanly
+              disconnect from the repository.  (This property is
+              only relevant when it appears on revision 0.)</p>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="footnotes">
+        <br>
+        <hr style="width:100; text-align:left;margin-left: 0">
+        <div id="ftn.idm14302" class="footnote">
+          <p><a href="#idm14302" class="para"><sup class="para">[72] </sup></a>As of this writing, symbolic
+              links are indeed the only <span class="quote">&#x201C;<span class="quote">special</span>&#x201D;</span>
+              objects.  But there might be more in future releases of
+              Subversion.</p>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

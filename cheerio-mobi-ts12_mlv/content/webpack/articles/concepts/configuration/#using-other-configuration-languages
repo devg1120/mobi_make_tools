@@ -1,0 +1,3 @@
+<h2 id="using-other-configuration-languages">Using other Configuration Languages<a href="#using-other-configuration-languages" aria-hidden="true"><span class="icon icon-link"></span></a></h2>
+<p>webpack accepts configuration files written in multiple programming and data languages.</p>
+<p><em>See</em>: <a href="/configuration/configuration-languages/">Configuration Languages</a></p>

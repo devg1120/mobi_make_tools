@@ -1,0 +1,163 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svn info</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/tmp/es2015/cheerio-mobi-ts8/undefined" />
+  </head>
+   <body>
+    <div class="refentry">
+      <a id="svn.ref.svn.c.info"></a>
+      <div class="titlepage"></div>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svn info &#x2014; Display information about a local or remote 
+            item.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm10055"></a>
+        <h2>Synopsis</h2>
+        <p>
+          <code class="literal">svn info [TARGET[@REV]...]</code>
+        </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm10059"></a>
+        <h2>Description</h2>
+        <p>Print information about the working copy paths or URLs
+            specified.  The information displayed for each path may
+            include (as pertinent to the object at that path):</p>
+        <div class="itemizedlist">
+          <ul class="itemizedlist" style="list-style-type: disc; ">
+            <li class="listitem">
+              <p>information about the repository in which
+              the object is versioned</p>
+            </li>
+            <li class="listitem">
+              <p>the most recent commit made to the
+              specified version of the object</p>
+            </li>
+            <li class="listitem">
+              <p>any user-level locks held on the
+              object</p>
+            </li>
+            <li class="listitem">
+              <p>local scheduling information (added,
+              deleted, copied, etc.)</p>
+            </li>
+            <li class="listitem">
+              <p>local conflict information</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm10073"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+          <pre class="screen">
+</pre>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm10084"></a>
+        <h2>Examples</h2>
+        <p><span class="command"><strong>svn info</strong></span> will show you all the
+            useful information that it has for items in your working
+            copy.  It will show information for files:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn info foo.c
+Path: foo.c
+Name: foo.c
+Working Copy Root Path: /home/sally/projects/test
+URL: http://svn.red-bean.com/repos/test/foo.c
+Repository Root: http://svn.red-bean.com/repos/test
+Repository UUID: 5e7d134a-54fb-0310-bd04-b611643e5c25
+Revision: 4417
+Node Kind: file
+Schedule: normal
+Last Changed Author: sally
+Last Changed Rev: 20
+Last Changed Date: 2003-01-13 16:43:13 -0600 (Mon, 13 Jan 2003)
+Text Last Updated: 2003-01-16 21:18:16 -0600 (Thu, 16 Jan 2003)
+Properties Last Updated: 2003-01-13 21:50:19 -0600 (Mon, 13 Jan 2003)
+Checksum: d6aeb60b0662ccceb6bce4bac344cb66
+</pre>
+        </div>
+        <p>It will also show information for directories:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn info vendors
+Path: vendors
+Working Copy Root Path: /home/sally/projects/test
+URL: http://svn.red-bean.com/repos/test/vendors
+Repository Root: http://svn.red-bean.com/repos/test
+Repository UUID: 5e7d134a-54fb-0310-bd04-b611643e5c25
+Revision: 19
+Node Kind: directory
+Schedule: normal
+Last Changed Author: harry
+Last Changed Rev: 19
+Last Changed Date: 2003-01-16 23:21:19 -0600 (Thu, 16 Jan 2003)
+Properties Last Updated: 2003-01-16 23:39:02 -0600 (Thu, 16 Jan 2003)
+</pre>
+        </div>
+        <p><span class="command"><strong>svn info</strong></span> also acts on URLs (also
+             note that the file <code class="filename">readme.doc</code> in
+             this example is locked, so lock information is also
+             provided):</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn info http://svn.red-bean.com/repos/test/readme.doc
+Path: readme.doc
+Name: readme.doc
+URL: http://svn.red-bean.com/repos/test/readme.doc
+Repository Root: http://svn.red-bean.com/repos/test
+Repository UUID: 5e7d134a-54fb-0310-bd04-b611643e5c25
+Revision: 1
+Node Kind: file
+Schedule: normal
+Last Changed Author: sally
+Last Changed Rev: 42
+Last Changed Date: 2003-01-14 23:21:19 -0600 (Tue, 14 Jan 2003)
+Lock Token: opaquelocktoken:14011d4b-54fb-0310-8541-dbd16bd471b2
+Lock Owner: harry
+Lock Created: 2003-01-15 17:35:12 -0600 (Wed, 15 Jan 2003)
+Lock Comment (1 line):
+My test lock comment
+</pre>
+        </div>
+        <p>Lastly, <span class="command"><strong>svn info</strong></span> output is
+             available in XML format by passing
+             the <code class="option">--xml</code> option:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn info --xml http://svn.red-bean.com/repos/test
+<?xml version="1.0"?>
+<info>
+<entry kind="dir" path="." revision="1">
+<url>http://svn.red-bean.com/repos/test</url>
+<repository>
+<root>http://svn.red-bean.com/repos/test</root>
+<uuid>5e7d134a-54fb-0310-bd04-b611643e5c25</uuid>
+</repository>
+<wc-info>
+<schedule>normal</schedule>
+<depth>infinity</depth>
+</wc-info>
+<commit revision="1">
+<author>sally</author>
+<date>2003-01-15T23:35:12.847647Z</date>
+</commit>
+</entry>
+</info>
+</pre>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

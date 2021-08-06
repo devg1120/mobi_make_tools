@@ -1,0 +1,58 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Parser
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts14/undefined" />
+  </head>
+   <body>
+<h2 id="parser">Parser</h2>
+<p>The sourcecode for the TypeScript parser is located entirely in <code>parser.ts</code>. Scanner is <em>controlled</em> internally by the <code>Parser</code> to convert the source code to an AST. Here is a review of what the desired outcome is.</p>
+<pre><code>SourceCode ~~ scanner ~~&gt; Token Stream ~~ parser ~~&gt; AST
+</code></pre>
+<p>The parser is implemented as a singleton (similar reasons to <code>scanner</code>, don&apos;t want to recreate it if we can reinit it). It is actually implemented as <code>namespace Parser</code> which contains <em>state</em> variables for the Parser as well as a singleton <code>scanner</code>. As mentioned before it contains a <code>const scanner</code>. The parser functions manage this scanner.</p>
+<h3 id="usage-by-program">Usage by program</h3>
+<p>Parser is driven indirectly by Program (indirectly as its actually by <code>CompilerHost</code> which we mentioned previously). Basically this is the simplified call stack:</p>
+<pre><code>Program -&gt;
+    CompilerHost.getSourceFile -&gt;
+        (global function parser.ts).createSourceFile -&gt;
+            Parser.parseSourceFile
+</code></pre>
+<p>The <code>parseSourceFile</code> not only primes the state for the Parser but also primes the state for the <code>scanner</code> by calling <code>initializeState</code>. It then goes on to parse the source file using <code>parseSourceFileWorker</code>.</p>
+<h3 id="sample-usage">Sample Usage</h3>
+<p>Before we dig too deep into the parser internals, here is a sample code that uses the TypeScript&apos;s parser to get the AST of a source file (using <code>ts.createSourceFile</code>), and then print it.</p>
+<p><code>code/compiler/parser/runParser.ts</code></p>
+<pre><code class="lang-ts"><span class="hljs-keyword">import</span> * as ts from <span class="hljs-string">&quot;ntypescript&quot;</span>;
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">printAllChildren</span>(<span class="hljs-params">node: ts.Node, depth = 0</span>) </span>{
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(depth + <span class="hljs-number">1</span>).join(<span class="hljs-string">&apos;----&apos;</span>), ts.formatSyntaxKind(node.kind), node.pos, node.end);
+    depth++;
+    node.getChildren().forEach(c=&gt; printAllChildren(c, depth));
+}
+<span class="hljs-keyword">var</span> sourceCode = <span class="hljs-string">`
+var foo = 123;
+`</span>.trim();
+<span class="hljs-keyword">var</span> sourceFile = ts.createSourceFile(<span class="hljs-string">&apos;foo.ts&apos;</span>, sourceCode, ts.ScriptTarget.ES5, <span class="hljs-literal">true</span>);
+printAllChildren(sourceFile);
+</code></pre>
+<p>This will print out the following:</p>
+<pre><code class="lang-ts">SourceFile <span class="hljs-number">0</span> <span class="hljs-number">14</span>
+---- SyntaxList <span class="hljs-number">0</span> <span class="hljs-number">14</span>
+-------- VariableStatement <span class="hljs-number">0</span> <span class="hljs-number">14</span>
+------------ VariableDeclarationList <span class="hljs-number">0</span> <span class="hljs-number">13</span>
+---------------- VarKeyword <span class="hljs-number">0</span> <span class="hljs-number">3</span>
+---------------- SyntaxList <span class="hljs-number">3</span> <span class="hljs-number">13</span>
+-------------------- VariableDeclaration <span class="hljs-number">3</span> <span class="hljs-number">13</span>
+------------------------ Identifier <span class="hljs-number">3</span> <span class="hljs-number">7</span>
+------------------------ FirstAssignment <span class="hljs-number">7</span> <span class="hljs-number">9</span>
+------------------------ FirstLiteralToken <span class="hljs-number">9</span> <span class="hljs-number">13</span>
+------------ SemicolonToken <span class="hljs-number">13</span> <span class="hljs-number">14</span>
+---- EndOfFileToken <span class="hljs-number">14</span> <span class="hljs-number">14</span>
+</code></pre>
+<p>This looks like a (very right sided) tree if you tilt your head to the left.</p>
+</body>
+</html>

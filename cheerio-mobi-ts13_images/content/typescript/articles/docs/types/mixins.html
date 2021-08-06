@@ -1,0 +1,87 @@
+<h1 id="mixins">Mixins</h1>
+<p>TypeScript (and JavaScript) classes support strict single inheritance. So you <em>cannot</em> do:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">class</span> User extends Tagged, Timestamped { <span class="hljs-comment">// ERROR : no multiple inheritance</span>
+}
+</code></pre>
+<p>Another way of building up classes from reusable components is to build them by combining simpler partial classes called mixins.</p>
+<p>The idea is simple, instead of a <em>class A extending class B</em> to get its functionality, <em>function B takes class A</em> and returns a new class with this added functionality. Function <code>B</code> is a mixin. </p>
+<blockquote>
+    <p>[A mixin is] a function that</p>
+    <ol>
+        <li>takes a constructor,</li>
+        <li>creates a class that extends that constructor with new functionality</li>
+        <li>returns the new class</li>
+    </ol>
+</blockquote>
+<p>A complete example</p>
+<pre><code class="lang-ts"><span class="hljs-comment">// Needed for all mixins</span>
+<span class="hljs-keyword">type</span> Constructor<T = {}> = <span class="hljs-keyword">new</span> (...args: <span class="hljs-built_in">any</span>[]) => T;
+
+<span class="hljs-comment">////////////////////</span>
+<span class="hljs-comment">// Example mixins</span>
+<span class="hljs-comment">////////////////////</span>
+
+<span class="hljs-comment">// A mixin that adds a property</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Timestamped</span><<span class="hljs-title">TBase</span> <span class="hljs-title">extends</span> <span class="hljs-title">Constructor</span>>(<span class="hljs-params">Base: TBase</span>) </span>{
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">class</span> extends Base {
+    timestamp = <span class="hljs-built_in">Date</span>.now();
+  };
+}
+
+<span class="hljs-comment">// a mixin that adds a property and methods</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Activatable</span><<span class="hljs-title">TBase</span> <span class="hljs-title">extends</span> <span class="hljs-title">Constructor</span>>(<span class="hljs-params">Base: TBase</span>) </span>{
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">class</span> extends Base {
+    isActivated = <span class="hljs-literal">false</span>;
+
+    activate() {
+      <span class="hljs-keyword">this</span>.isActivated = <span class="hljs-literal">true</span>;
+    }
+
+    deactivate() {
+      <span class="hljs-keyword">this</span>.isActivated = <span class="hljs-literal">false</span>;
+    }
+  };
+}
+
+<span class="hljs-comment">////////////////////</span>
+<span class="hljs-comment">// Usage to compose classes</span>
+<span class="hljs-comment">////////////////////</span>
+
+<span class="hljs-comment">// Simple class</span>
+<span class="hljs-keyword">class</span> User {
+  name = <span class="hljs-string">''</span>;
+}
+
+<span class="hljs-comment">// User that is Timestamped</span>
+<span class="hljs-keyword">const</span> TimestampedUser = Timestamped(User);
+
+<span class="hljs-comment">// User that is Timestamped and Activatable</span>
+<span class="hljs-keyword">const</span> TimestampedActivatableUser = Timestamped(Activatable(User));
+
+<span class="hljs-comment">////////////////////</span>
+<span class="hljs-comment">// Using the composed classes</span>
+<span class="hljs-comment">////////////////////</span>
+
+<span class="hljs-keyword">const</span> timestampedUserExample = <span class="hljs-keyword">new</span> TimestampedUser();
+<span class="hljs-built_in">console</span>.log(timestampedUserExample.timestamp);
+
+<span class="hljs-keyword">const</span> timestampedActivatableUserExample = <span class="hljs-keyword">new</span> TimestampedActivatableUser();
+<span class="hljs-built_in">console</span>.log(timestampedActivatableUserExample.timestamp);
+<span class="hljs-built_in">console</span>.log(timestampedActivatableUserExample.isActivated);
+</code></pre>
+<p>Let's decompose this example.</p>
+<h2 id="take-a-constructor">Take a constructor</h2>
+<p>Mixins take a class and extend it with new functionality. So we need to define what is a <em>constructor</em>. Easy as:</p>
+<pre><code class="lang-ts"><span class="hljs-comment">// Needed for all mixins</span>
+<span class="hljs-keyword">type</span> Constructor<T = {}> = <span class="hljs-keyword">new</span> (...args: <span class="hljs-built_in">any</span>[]) => T;
+</code></pre>
+<h2 id="extend-the-class-and-return-it">Extend the class and return it</h2>
+<p>Pretty easy:</p>
+<pre><code class="lang-ts"><span class="hljs-comment">// A mixin that adds a property</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Timestamped</span><<span class="hljs-title">TBase</span> <span class="hljs-title">extends</span> <span class="hljs-title">Constructor</span>>(<span class="hljs-params">Base: TBase</span>) </span>{
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">class</span> extends Base {
+    timestamp = <span class="hljs-built_in">Date</span>.now();
+  };
+}
+</code></pre>
+<p>And that is it 🌹</p>

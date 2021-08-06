@@ -1,0 +1,30 @@
+<body><p>
+Primary expressions are the operands for unary and binary expressions.
+</p><pre>
+[<a>PrimaryExpr</a>] =
+	[<a>Operand</a>] |
+	[<a>Conversion</a>] |
+	[<a>MethodExpr</a>] |
+	[<a>PrimaryExpr</a>] [<a>Selector</a>] |
+	[<a>PrimaryExpr</a>] [<a>Index</a>] |
+	[<a>PrimaryExpr</a>] [<a>Slice</a>] |
+	[<a>PrimaryExpr</a>] [<a>TypeAssertion</a>] |
+	[<a>PrimaryExpr</a>] [<a>Arguments</a>] .
+
+[<a>Selector</a>]       = "." [<a>identifier</a>] .
+[<a>Index</a>]          = "[" [<a>Expression</a>] "]" .
+[<a>Slice</a>]          = "[" [ [<a>Expression</a>] ] ":" [ [<a>Expression</a>] ] "]" |
+                 "[" [ [<a>Expression</a>] ] ":" [<a>Expression</a>] ":" [<a>Expression</a>] "]" .
+[<a>TypeAssertion</a>]  = "." "(" [<a>Type</a>] ")" .
+[<a>Arguments</a>]      = "(" [ ( [<a>ExpressionList</a>] | [<a>Type</a>] [ "," [<a>ExpressionList</a>] ] ) [ "..." ] [ "," ] ] ")" .
+</pre><pre>
+x
+2
+(s + ".txt")
+f(3.1415, true)
+Point{1, 2}
+m["foo"]
+s[i : j + 1]
+obj.color
+f.p[i].x()
+</pre></body>

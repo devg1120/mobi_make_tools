@@ -1,0 +1,28 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    TIP: SyntaxKind enum
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts12_mlv/undefined" />
+  </head>
+   <body>
+<h3 id="ast-tip-syntaxkind">AST Tip: SyntaxKind</h3>
+<p><code>SyntaxKind</code> is defined as a <code>const enum</code>, here is a sample:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-keyword">enum</span> SyntaxKind {
+    Unknown,
+    EndOfFileToken,
+    SingleLineCommentTrivia,
+    <span class="hljs-comment">// ... LOTS more</span>
+</code></pre>
+<p>It&apos;s a <code>const enum</code> (a concept <a href="../enums.html">we covered previously</a>) so that it gets <em>inlined</em> (e.g. <code>ts.SyntaxKind.EndOfFileToken</code> becomes <code>1</code>) and we don&apos;t get a dereferencing cost when working with the AST. However, the compiler is compiled with <code>--preserveConstEnums</code> compiler flag so that the enum <em>is still available at runtime</em>. So in JavaScript you can use <code>ts.SyntaxKind.EndOfFileToken</code> if you want. Additionally you can convert these enum members to display strings using the following function:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">syntaxKindToName</span>(<span class="hljs-params">kind: ts.SyntaxKind</span>) </span>{
+    <span class="hljs-keyword">return</span> (&lt;<span class="hljs-built_in">any</span>&gt;ts).SyntaxKind[kind];
+}
+</code></pre>
+</body>
+</html>

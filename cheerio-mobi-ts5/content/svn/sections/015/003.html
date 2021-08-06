@@ -1,0 +1,73 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>More Disconnected Operations</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts5/css/kindle.css" />
+  </head>
+   <body>
+    <div class="sect1">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="svn.forcvs.disconnected"></a>More Disconnected Operations</h2>
+          </div>
+        </div>
+      </div>
+      <p>In recent years, disk space has become outrageously cheap
+      and abundant, but network bandwidth has not.  Therefore, the
+      Subversion working copy has been optimized around the scarcer
+      resource.</p>
+      <p>The <code class="filename">.svn</code> administrative directory
+      serves the same purpose as the <code class="filename">CVS</code>
+      directory, except that it also stores read-only,
+      <span class="quote">&#x201C;<span class="quote">pristine</span>&#x201D;</span> copies of your files.  This allows you
+      to do many things offline:</p>
+      <div class="variablelist">
+        <dl class="variablelist">
+          <dt>
+            <span class="term">
+              <span class="command">
+                <strong>svn status</strong>
+              </span>
+            </span>
+          </dt>
+          <dd>
+            <p>Shows you any local changes you&apos;ve made (see )</p>
+          </dd>
+          <dt>
+            <span class="term">
+              <span class="command">
+                <strong>svn diff</strong>
+              </span>
+            </span>
+          </dt>
+          <dd>
+            <p>Shows you the details of your changes (see )</p>
+          </dd>
+          <dt>
+            <span class="term">
+              <span class="command">
+                <strong>svn revert</strong>
+              </span>
+            </span>
+          </dt>
+          <dd>
+            <p>Removes your local changes (see )</p>
+          </dd>
+        </dl>
+      </div>
+      <p>Also, the cached pristine files allow the Subversion client
+      to send differences when committing, which CVS cannot do.</p>
+      <p>The last subcommand in the list&#x2014;<span class="command"><strong>svn
+      revert</strong></span>&#x2014;is new.  It will not only remove local
+      changes, but also unschedule operations such as adds and
+      deletes.  Although deleting the file and then running <strong class="userinput"><code>svn
+      update</code></strong> will still work, doing so distorts the true
+      purpose of updating.  And, while we&apos;re on this subject&#x2026;</p>
+    </div>
+</body>
+</html>

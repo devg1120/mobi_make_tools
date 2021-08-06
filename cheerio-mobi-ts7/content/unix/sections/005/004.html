@@ -1,0 +1,55 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Libraries</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts7/undefined" />
+  </head>
+   <body>
+<div class="sect1" lang="en"><div class="titlepage"><div><h2 class="title" style="clear: both"><a id="id2900219">Libraries</a></h2></div></div><p>One consequence of the emphasis that the Unix programming style
+put on modularity and well-defined APIs is a strong tendency to
+factor programs into bits of glue connecting collections of
+libraries, especially shared libraries (the equivalents of what are
+called dynamically-linked libraries or DLLs under Windows and
+other operating systems).</p><p>If you are careful and clever about design, it is often possible
+to partition a program so that it consists of a
+user-interface-handling main section (policy) and a collection of
+service routines (mechanism) with effectively no glue at all.  This
+approach is especially appropriate when the program has to do a lot of
+very specific manipulations of data structures like graphic images,
+network-protocol packets, or control blocks for a hardware interface.
+Some good general architectural advice from within the Unix tradition,
+particularly applicable to the resource-management challenges of this
+sort of library is collected in <i>The Discipline and Method
+Architecture for Reusable Libraries</i>&#xFFFD;[<a href="apb.html#Vo" title="[Vo]">Vo</a>].</p><p>Under Unix, it is normal practice to make this layering
+explicit, with the service routines collected in a library that is
+separately documented.  In such programs, the front end gets to
+specialize in user-interface considerations and high-level protocol.
+With a little more care in design, it may be possible to detach the
+original front end and replace it with others adapted for different
+purposes.  Some other advantages should become evident from our case
+study.</p><p>There is a flip side to this. In the Unix world, libraries which
+are delivered <span class="emphasis"><em>as libraries</em></span> should come with
+exerciser programs.</p><div class="blockquote"><table border="0" width="100%" cellspacing="0" cellpadding="0" class="blockquote" summary="Block quote"><tr><td width="10%" valign="top">&#xFFFD;</td><td width="80%" valign="top"><p>APIs should come with programs, and vice versa.  An API that you
+must write C code to use, which cannot be invoked easily from the
+command line, is harder to learn and use.  And contrariwise, it&apos;s a
+royal pain to have interfaces whose <span class="emphasis"><em>only</em></span> open,
+documented form is a program, so you cannot invoke them easily from a
+C program &#x2014; for example,
+route(1)
+in older Linuxes.</p></td><td width="10%" valign="top">&#xFFFD;</td></tr><tr><td colspan="2" align="right" valign="top">--<span class="attribution">
+<span class="author">Henry Spencer</span>
+</span></td><td width="10%" valign="top">&#xFFFD;</td></tr></table></div><p>Besides easing the learning curve, library exercisers often make
+excellent test frameworks.  Experienced Unix programmers therefore see
+them not just as a form of thoughtfulness to the library&apos;s users but
+as an indication that the code has probably been well tested.</p><p>An important form of library layering is the
+<i>plugin</i>, a library with a set of known entry
+points that is dynamically loaded after startup time to perform a
+specialized task.  For plugins to work, the calling program has to be
+organized largely as a documented service library that the plugin can
+call back into.</p><div class="sect2" lang="en"><div class="titlepage"><div><h3 class="title"><a id="gimp_plugins">Case Study: GIMP Plugins</a></h3></div></div></div></div>
+</body>
+</html>

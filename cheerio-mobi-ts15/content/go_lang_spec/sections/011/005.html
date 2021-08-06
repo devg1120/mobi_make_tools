@@ -1,0 +1,42 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Primary expressions</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+Primary expressions are the operands for unary and binary expressions.
+</p><pre>
+[<a>PrimaryExpr</a>] =
+	[<a>Operand</a>] |
+	[<a>Conversion</a>] |
+	[<a>MethodExpr</a>] |
+	[<a>PrimaryExpr</a>] [<a>Selector</a>] |
+	[<a>PrimaryExpr</a>] [<a>Index</a>] |
+	[<a>PrimaryExpr</a>] [<a>Slice</a>] |
+	[<a>PrimaryExpr</a>] [<a>TypeAssertion</a>] |
+	[<a>PrimaryExpr</a>] [<a>Arguments</a>] .
+[<a>Selector</a>]       = &quot;.&quot; [<a>identifier</a>] .
+[<a>Index</a>]          = &quot;[&quot; [<a>Expression</a>] &quot;]&quot; .
+[<a>Slice</a>]          = &quot;[&quot; [ [<a>Expression</a>] ] &quot;:&quot; [ [<a>Expression</a>] ] &quot;]&quot; |
+                 &quot;[&quot; [ [<a>Expression</a>] ] &quot;:&quot; [<a>Expression</a>] &quot;:&quot; [<a>Expression</a>] &quot;]&quot; .
+[<a>TypeAssertion</a>]  = &quot;.&quot; &quot;(&quot; [<a>Type</a>] &quot;)&quot; .
+[<a>Arguments</a>]      = &quot;(&quot; [ ( [<a>ExpressionList</a>] | [<a>Type</a>] [ &quot;,&quot; [<a>ExpressionList</a>] ] ) [ &quot;...&quot; ] [ &quot;,&quot; ] ] &quot;)&quot; .
+</pre><pre>
+x
+2
+(s + &quot;.txt&quot;)
+f(3.1415, true)
+Point{1, 2}
+m[&quot;foo&quot;]
+s[i : j + 1]
+obj.color
+f.p[i].x()
+</pre></body>
+</body>
+</html>

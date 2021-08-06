@@ -1,0 +1,168 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Data-Driven Programming</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts10/undefined" />
+  </head>
+   <body>
+<div class="sect1" lang="en">
+    <div class="titlepage">
+        <div>
+            <h2 class="title" style="clear: both"><a id="id2939658">Data-Driven Programming</a></h2>
+        </div>
+    </div>
+    <p>When doing <i>data-driven programming</i>, one
+        clearly distinguishes code from the data structures on which it acts,
+        and designs both so that one can make changes to the logic of the program
+        by editing not the code but the data structure.</p>
+    <p>Data-driven programming is sometimes confused with object
+        orientation</p>
+    <p>Programming data-driven style is also sometimes confused with
+        writing state machines. It is in fact possible to express the logic
+        of a state machine as a table or data structure, but hand-coded state
+        machines are usually rigid blocks of code that are far harder to
+        modify than a table.</p>
+    <p>An important rule when doing any kind of code generation or
+        data-driven programming is this: always push problems upstream. Don&apos;t
+        hack the generated code or any intermediate representations by hand
+        &#x2014; instead, think of a way to improve or replace your translation
+        tool. Otherwise you&apos;re likely to find that hand-patching bits which
+        should have been generated correctly by machine will have turned into
+        an infinite time sink.</p>
+    <p>At the upper end of its complexity scale, data-driven
+        programming merges into writing interpreters for p-code or simple
+        minilanguages of the kind we surveyed in <a href="minilanguageschapter.html" title="Chapter&#xFFFD;8.&#xFFFD;Minilanguages">Chapter&#xFFFD;8</a>. At other edges, it merges into code
+        generation and state-machine programming. The distinctions are not
+        actually that important; the important part is moving program logic
+        away from hardwired control structures and into data.</p>
+    <div class="sect2" lang="en">
+        <div class="titlepage">
+            <div>
+                <h3 class="title"><a id="id2939746">Case Study: <i>ascii</i></a></h3>
+            </div>
+        </div>
+        <p>I maintain a program called <i>ascii</i>, a
+            very simple little utility that tries to interpret its command-line
+            arguments as names of ASCII (American Standard Code for Information
+            Interchange) characters and report all the equivalent names. Code and
+            documentation for the tool are available from the <a href="http://www.catb.org/~esr/ascii" target="_top">project page</a>. Here is an illustrative
+            screenshot:</p>
+        <pre class="screen">
+esr@snark:~/WWW/writings/taoup$ ascii 10
+ASCII 1/0 is decimal 016, hex 10, octal 020, bits 00010000: called ^P, DLE
+Official name: Data Link Escape
+ASCII 0/10 is decimal 010, hex 0a, octal 012, bits 00001010: called ^J, LF, NL
+Official name: Line Feed
+C escape: &apos;\n&apos;
+Other names: Newline
+ASCII 0/8 is decimal 008, hex 08, octal 010, bits 00001000: called ^H, BS
+Official name: Backspace
+C escape: &apos;\b&apos;
+Other names:
+ASCII 0/2 is decimal 002, hex 02, octal 002, bits 00000010: called ^B, STX
+Official name: Start of Text
+</pre>
+        <p>One indication that this program was a good idea is the fact
+            that it has an unexpected use &#x2014; as a quick CLI aid to converting
+            between decimal, hex, octal, and binary representations of bytes.</p>
+        <p>The main logic of this program could have been coded as a
+            128-branch case statement. This would, however, have made the code
+            bulky and difficult to maintain. It would also have tangled parts
+            that change relatively rapidly (like the list of slang names for
+            characters) with parts that change slowly or not at all (like
+            the official names), putting them both in the same legend string and
+            making errors during editing much more likely to touch data that
+            ought to be stable.</p>
+        <p>Instead, we apply data-driven programming. All the character
+            name strings live in a table structure that is quite a bit larger than
+            any of the functions in the code (indeed, counted in lines it is
+            larger than any <span class="emphasis"><em>three</em></span> of the functions in the
+            program). The code merely navigates the table and does low-level
+            tasks like radix conversions. The initializer actually lives in the
+            file <tt>nametable.h</tt>, which is generated in a way
+            we&apos;ll describe later in this chapter.</p>
+        <p>This organization makes it easy to add new character names,
+            change existing ones, or delete old names by simply editing the table,
+            without disturbing the code.</p>
+        <p>(The way the program is built is good Unix style, but the
+            output format is questionable. It&apos;s hard to see how the output could
+            usefully become the input of any other program, so it does not play
+            well with others.)</p>
+    </div>
+    <div class="sect2" lang="en">
+        <div class="titlepage">
+            <div>
+                <h3 class="title"><a id="bayes_spam">Case Study: Statistical Spam Filtering</a></h3>
+            </div>
+        </div>
+        <p>One interesting case of data-driven programming is statistical
+            learning algorithms for detecting spam (unsolicited bulk email).
+            A whole class of mail filter programs (those easily findable
+            by Web search include <i>popfile</i>,
+            <i>spambayes</i>, and
+            <i>bogofilter</i>) use a database of word
+            correlations to replace the elaborate pattern-matching conditional
+            logic of pattern-matching spam filters.</p>
+        <p>Programs like these became common on the Internet very rapidly
+            following Paul Graham&apos;s landmark paper <i>A Plan for
+                Spam</i> [<a href="apb.html#Graham" title="[Graham]">Graham</a>] in 2002. While the
+            explosion was triggered by the increasing cost of the pattern-matching
+            arms race, the statistical-filtering idea was adopted first and
+            fastest by Unix shops. In part, this was certainly because almost all
+            the Internet service providers (who are most burdened by spam, and
+            thus had most incentive to adopt effective new techniques) are Unix
+            shops &#x2014; but undoubtedly the harmony with some traditional themes
+            in Unix software design helped as well.</p>
+        <p>Conventional spam filters require that a system administrator,
+            or some other responsible party, maintain information on patterns of
+            text found in spam &#x2014; names of sites that emit nothing but spam,
+            come-on phrases often used by pornography sites or Internet scam
+            artists, and the like. In his paper, Graham noted accurately that
+            computer programmers like the idea of pattern-matching filters, and
+            sometimes have difficulty seeing past that approach, because it offers
+            them so many opportunities to be clever.</p>
+        <p>Statistical spam filters, on the other hand, work by collecting
+            feedback about what the user judges to be spam versus nonspam. That
+            feedback is processed into databases of statistical correlation
+            coefficients or <i>weights</i> connecting words or phrases
+            to the user&apos;s spam/nonspam classification. The most popular
+            algorithms use minor variants of Bayes&apos;s Theorem on conditional
+            probabilities, but other techniques (including various sorts of
+            polynomial hashing) are also employed.</p>
+        <p>In all these programs, the correlation check is a relatively
+            trivial mathematical formula. The weights fed into the formula along
+            with the message being checked serve as implicit control
+            structure for the filtering algorithm.</p>
+        <p>The problem with conventional pattern-matching spam filters is
+            that they are brittle. Spammers are constantly gaming against the
+            filter-rule databases, forcing the filter maintainers to constantly
+            reprogram their filters to stay ahead in the arms race. Statistical
+            spam filters generate their own filter rules from the user feedback.</p>
+        <p>In fact, experience with statistical filters seems to show that the
+            particular learning algorithm used is far less important than the
+            quality of the spam and nonspam data sets from which the learning algorithm
+            computes its weights. So the results of statistical filters really
+            are driven more by the shape of the data than by the algorithm.</p>
+        <p><i>A Plan for Spam</i> was something of a
+            bombshell because its author argued convincingly that a simple, even
+            crude, statistical approach gave a lower rate of nonspam being
+            erroneously classified as spam than either elaborate pattern-matching
+            techniques or the human eyeball could manage. For Unix programmers,
+            seeing past the lure of clever pattern-matching was far easier than in
+            other programming cultures without as strong an attachment to
+            &#x201C;Keep It Simple, Stupid!&#x201D;</p>
+    </div>
+    <div class="sect2" lang="en">
+        <div class="titlepage">
+            <div>
+                <h3 class="title"><a id="fetchmailconf">Case Study: Metaclass Hacking in <i>fetchmailconf</i></a></h3>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

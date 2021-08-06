@@ -1,0 +1,25 @@
+<h1 id="noimplicitany">noImplicitAny</h1>
+<p>There are some things that cannot be inferred or inferring them might result in unexpected errors. A fine example is function arguments. If you don't annotate them, its unclear what should and shouldn't be valid e.g.</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">log</span>(<span class="hljs-params">someArg</span>) </span>{
+  sendDataToServer(someArg);
+}
+
+<span class="hljs-comment">// What arg is valid and what isn't?</span>
+log(<span class="hljs-number">123</span>);
+log(<span class="hljs-string">'hello world'</span>);
+</code></pre>
+<p>So if you don't annotate some function argument, TypeScript assumes <code>any</code> and moves on. This essentially turns off type checking for such cases, which is what a JavaScript dev would expect. But this can catch people that want high safety off guard. Hence there is an option, <code>noImplicitAny</code>, that when switched on will flag the cases where the type cannot be inferred e.g.</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">log</span>(<span class="hljs-params">someArg</span>) </span>{ <span class="hljs-comment">// Error : someArg has an implicit `any` type</span>
+  sendDataToServer(someArg);
+}
+</code></pre>
+<p>Of course you can then go ahead and annotate:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">log</span>(<span class="hljs-params">someArg: <span class="hljs-built_in">number</span></span>) </span>{
+  sendDataToServer(someArg);
+}
+</code></pre>
+<p>And if you truly want <em>zero safety</em> you can mark it <em>explicitly</em> as <code>any</code>:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">log</span>(<span class="hljs-params">someArg: <span class="hljs-built_in">any</span></span>) </span>{
+  sendDataToServer(someArg);
+}
+</code></pre>

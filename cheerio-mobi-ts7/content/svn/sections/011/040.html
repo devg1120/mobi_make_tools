@@ -1,0 +1,94 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svnadmin create</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts7/undefined" />
+  </head>
+   <body>
+    <div class="refentry">
+      <a id="svn.ref.svnadmin.c.create"></a>
+      <div class="titlepage"></div>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svnadmin create &#x2014; Create a new, empty repository.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm11825"></a>
+        <h2>Synopsis</h2>
+        <p>
+          <code class="literal">svnadmin create REPOS_PATH</code>
+        </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm11829"></a>
+        <h2>Description</h2>
+        <p>Create a new, empty repository at the path provided.
+              If the provided directory does not exist, it will be
+              created for
+              you.<a href="#ftn.idm11832" class="footnote" id="idm11832"><sup class="footnote">[71]</sup></a>  As of
+              Subversion 1.2, <span class="command"><strong>svnadmin</strong></span> creates new
+              repositories with the
+              <code class="literal">FSFS</code> filesystem backend by
+              default.</p>
+        <p>While <span class="command"><strong>svnadmin create</strong></span> will create
+              the base directory for a new repository, it will not
+              create intermediate directories.  For example, if you
+              have an empty directory named
+              <code class="filename">/var/svn</code>, creating
+              <code class="filename">/var/svn/repos</code> will work, while
+              attempting to create
+              <code class="filename">/var/svn/subdirectory/repos</code> will
+              fail with an error.  Also, keep in mind that, depending
+              on where on your system you are creating your
+              repository, you might need to run <span class="command"><strong>svnadmin
+              create</strong></span> as a user with elevated privileges
+              (such as the <code class="literal">root</code> user).</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm11846"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+          <pre class="screen">
+</pre>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm11857"></a>
+        <h2>Examples</h2>
+        <p>Creating a new repository is this easy:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ cd /var/svn
+$ svnadmin create repos
+$
+</pre>
+        </div>
+        <p>In Subversion 1.0, a Berkeley DB repository is always
+            created.  In Subversion 1.1, a Berkeley DB repository is
+            the default repository type, but an FSFS repository can be
+            created using the <code class="option">--fs-type</code>
+            option:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ cd /var/svn
+$ svnadmin create repos --fs-type fsfs
+$
+</pre>
+        </div>
+      </div>
+      <div class="footnotes">
+        <br>
+        <hr style="width:100; text-align:left;margin-left: 0">
+        <div id="ftn.idm11832" class="footnote">
+          <p><a href="#idm11832" class="para"><sup class="para">[71] </sup></a>Remember, <span class="command"><strong>svnadmin</strong></span>
+              works only with local <span class="emphasis"><em>paths</em></span>, not
+              <span class="emphasis"><em>URLs</em></span>.</p>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

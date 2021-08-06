@@ -1,0 +1,9 @@
+<body><p>
+The underscore character <code>_</code> (U+005F) is considered a letter.
+</p><pre>
+[<a>letter</a>]        = [<a>unicode_letter</a>] | "_" .
+[<a>decimal_digit</a>] = "0" … "9" .
+[<a>binary_digit</a>]  = "0" | "1" .
+[<a>octal_digit</a>]   = "0" … "7" .
+[<a>hex_digit</a>]     = "0" … "9" | "A" … "F" | "a" … "f" .
+</pre></body>

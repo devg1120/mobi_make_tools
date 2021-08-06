@@ -1,0 +1,42 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Stateful Functions
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts13_images/undefined" />
+  </head>
+   <body>
+<h2 id="stateful-functions">Stateful Functions</h2>
+<p>A common feature in other programming languages is usage of the <code>static</code> keyword to increase the <em>lifetime</em> (not <em>scope</em>) of a function variable to live beyond function invocations. Here is a <code>C</code> sample that achieves this:</p>
+<pre><code class="lang-c"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">called</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">static</span> count = <span class="hljs-number">0</span>;
+    count++;
+    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Called : %d&quot;</span>, count);
+}
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span> <span class="hljs-params">()</span> </span>{
+    called(); <span class="hljs-comment">// Called : 1</span>
+    called(); <span class="hljs-comment">// Called : 2</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+<p>Since JavaScript (or TypeScript) doesn&apos;t have function statics you can achieve the same thing using various abstractions that wrap over a local variable e.g. using a <code>class</code> :</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">const</span> {called} = <span class="hljs-keyword">new</span> <span class="hljs-keyword">class</span> {
+    count = <span class="hljs-number">0</span>;
+    called = () =&gt; {
+        <span class="hljs-keyword">this</span>.count++;
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Called : <span class="hljs-subst">${this.count}</span>`</span>);
+    }
+};
+called(); <span class="hljs-comment">// Called : 1</span>
+called(); <span class="hljs-comment">// Called : 2</span>
+</code></pre>
+<blockquote>
+    <p>C++ developers also try and achieve this using a pattern they call <code>functor</code> (a class that overrides the operator <code>()</code>).</p>
+</blockquote>
+</body>
+</html>

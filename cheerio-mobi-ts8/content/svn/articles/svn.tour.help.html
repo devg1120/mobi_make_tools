@@ -1,0 +1,106 @@
+
+    
+    
+    <div class="sect1">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="svn.tour.help"></a>Help!</h2>
+          </div>
+        </div>
+      </div>
+      <a id="idm872" class="indexterm"></a>
+      <p>It goes without saying that this book exists to be a source
+      of information and assistance for Subversion users new and old.
+      Conveniently, though, the Subversion command-line is
+      self-documenting, alleviating the need to grab a book off the
+      shelf (wooden, virtual, or otherwise).  The <span class="command"><strong>svn
+      help</strong></span> command is your gateway to that built-in
+      documentation:</p>
+      <div class="informalexample">
+        <pre class="screen">
+$ svn help
+Subversion command-line client, version 1.7.0.
+Type 'svn help <subcommand>' for help on a specific subcommand.
+Type 'svn --version' to see the program version and RA modules
+  or 'svn --version --quiet' to see just the version number.
+
+Most subcommands take file and/or directory arguments, recursing
+on the directories.  If no arguments are supplied to such a
+command, it recurses on the current directory (inclusive) by default.
+
+Available subcommands:
+   add
+   blame (praise, annotate, ann)
+   cat
+…
+</pre>
+      </div>
+      <p>As described in the previous output, you can ask for help on
+      a particular subcommand by running <strong class="userinput"><code>svn help
+      <em class="replaceable"><code>SUBCOMMAND</code></em></code></strong>.  Subversion
+      will respond with the full usage message for that subcommand,
+      including its syntax, options, and behavior:</p>
+      <div class="informalexample">
+        <pre class="screen">
+$ svn help help
+help (?, h): Describe the usage of this program or its subcommands.
+usage: help [SUBCOMMAND...]
+
+Global options:
+  --username ARG           : specify a username ARG
+  --password ARG           : specify a password ARG
+…
+</pre>
+      </div>
+      <div class="sidebar">
+        <div class="titlepage">
+          <div>
+            <div>
+              <p class="title">
+                <strong>Options and Switches and Flags, Oh My!</strong>
+              </p>
+            </div>
+          </div>
+        </div>
+        <a id="idm887" class="indexterm"></a>
+        <p>The Subversion command-line client has numerous command
+        modifiers.  Some folks refer to such things
+        as <span class="quote">“<span class="quote">switches</span>”</span> or <span class="quote">“<span class="quote">flags</span>”</span>—in
+        this book, we'll call them <span class="quote">“<span class="quote">options</span>”</span>.  You'll
+        find the options supported by a given <span class="command"><strong>svn</strong></span>
+        subcommand, plus a set of options which are globally supported
+        by all subcommands, listed near the bottom of the built-in
+        usage message for that subcommand.</p>
+        <p>Subversion's options have two distinct forms:  short
+        options are a single hyphen followed by a single letter, and
+        long options consist of two hyphens followed by several
+        letters and hyphens (e.g., <code class="literal">-s</code>
+        and <code class="literal">--this-is-a-long-option</code>, respectively).
+        Every option has at least one long format.  Some, such as
+        the <code class="option">--changelist</code> option, feature an
+        abbreviated long-format alias (<code class="option">--cl</code>, in this
+        case).  Only certain options—generally the most-used
+        ones—have an additional short format.  To maintain
+        clarity in this book, we usually use the long form in code
+        examples, but when describing options, if there's a short
+        form, we'll provide the long form (to improve clarity) and the
+        short form (to make it easier to remember).  Use the form
+        you're more comfortable with when executing your own
+        Subversion commands.</p>
+      </div>
+      <p>Many Unix-based distributions of Subversion include manual
+      pages of the sort that can be invoked using
+      the <span class="command"><strong>man</strong></span> program, but those tend to carry only
+      pointers to other sources of real help, such as the project's
+      website and to the website which hosts this book.  Also, several
+      companies offer Subversion help and support, too, usually via a
+      mixture of web-based discussion forums and fee-based consulting.
+      And of course, the Internet holds a decade's worth of
+      Subversion-related discussions just begging to be located by
+      your favorite search engine.  Subversion help is never too far
+      away.</p>
+    </div>
+    
+    
+  

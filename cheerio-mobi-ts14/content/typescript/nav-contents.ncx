@@ -1,0 +1,1097 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE ncx PUBLIC "-//NISO//DTD ncx 2005-1//EN" "http://www.daisy.org/z3986/2005/ncx-2005-1.dtd">
+<ncx xmlns:mbp="http://mobipocket.com/ns/mbp" xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1" xml:lang="en-US">
+  <head>
+    <meta content="typescript-documetation-2019-07-25" name="dtb:uid"/>
+    <meta content="2" name="dtb:depth"/>
+    <meta content="0" name="dtb:totalPageCount"/>
+    <meta content="0" name="dtb:maxPageNumber"/>
+  </head>
+  <docTitle>
+    <text>typescript</text>
+  </docTitle>
+  <docAuthor>
+    <text>AUTHOR</text>
+  </docAuthor>
+  <navMap>
+    <navPoint playOrder="1" class="periodical" id="periodical">
+      <mbp:meta-img src="/home/admin/es2015/cheerio-mobi-ts14/mobi_images/masthead.gif" name="mastheadImage"/>
+      <navLabel><text>Table of Contents</text></navLabel>
+      <content src="contents.html"/>
+      <navPoint playOrder="2" class="section" id="item-000">
+        <navLabel><text>Frontmatter</text></navLabel>
+        <content src="sections/000/section.html"/>
+        <navPoint playOrder="3" class="article" id="item-000000">
+          <navLabel><text>Title Page</text></navLabel>
+          <content src="sections/000/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="4" class="section" id="item-001">
+        <navLabel><text>Introduction</text></navLabel>
+        <content src="sections/001/section.html"/>
+        <navPoint playOrder="5" class="article" id="item-001000">
+          <navLabel><text>
+                    Introduction
+                </text></navLabel>
+          <content src="sections/001/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="6" class="section" id="item-002">
+        <navLabel><text>Getting Started</text></navLabel>
+        <content src="sections/002/section.html"/>
+        <navPoint playOrder="7" class="article" id="item-002000">
+          <navLabel><text>
+                    Getting Started
+                </text></navLabel>
+          <content src="sections/002/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="8" class="article" id="item-002001">
+          <navLabel><text>
+                    Why TypeScript
+                </text></navLabel>
+          <content src="sections/002/001.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="9" class="section" id="item-003">
+        <navLabel><text>JavaScript</text></navLabel>
+        <content src="sections/003/section.html"/>
+        <navPoint playOrder="10" class="article" id="item-003000">
+          <navLabel><text>
+                    JavaScript
+                </text></navLabel>
+          <content src="sections/003/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="11" class="article" id="item-003001">
+          <navLabel><text>
+                    Equality
+                </text></navLabel>
+          <content src="sections/003/001.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="12" class="article" id="item-003002">
+          <navLabel><text>
+                    References
+                </text></navLabel>
+          <content src="sections/003/002.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="13" class="article" id="item-003003">
+          <navLabel><text>
+                    Null vs. Undefined
+                </text></navLabel>
+          <content src="sections/003/003.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="14" class="article" id="item-003004">
+          <navLabel><text>
+                    this
+                </text></navLabel>
+          <content src="sections/003/004.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="15" class="article" id="item-003005">
+          <navLabel><text>
+                    Closure
+                </text></navLabel>
+          <content src="sections/003/005.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="16" class="article" id="item-003006">
+          <navLabel><text>
+                    Number
+                </text></navLabel>
+          <content src="sections/003/006.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="17" class="article" id="item-003007">
+          <navLabel><text>
+                    Truthy
+                </text></navLabel>
+          <content src="sections/003/007.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="18" class="section" id="item-004">
+        <navLabel><text>Future JavaScript Now</text></navLabel>
+        <content src="sections/004/section.html"/>
+        <navPoint playOrder="19" class="article" id="item-004000">
+          <navLabel><text>
+                    Future JavaScript Now
+                </text></navLabel>
+          <content src="sections/004/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="20" class="article" id="item-004001">
+          <navLabel><text>
+                    Classes
+                </text></navLabel>
+          <content src="sections/004/001.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="21" class="article" id="item-004002">
+          <navLabel><text>
+                    Classes Emit
+                </text></navLabel>
+          <content src="sections/004/002.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="22" class="article" id="item-004003">
+          <navLabel><text>
+                    Arrow Functions
+                </text></navLabel>
+          <content src="sections/004/003.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="23" class="article" id="item-004004">
+          <navLabel><text>
+                    Rest Parameters
+                </text></navLabel>
+          <content src="sections/004/004.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="24" class="article" id="item-004005">
+          <navLabel><text>
+                    let
+                </text></navLabel>
+          <content src="sections/004/005.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="25" class="article" id="item-004006">
+          <navLabel><text>
+                    const
+                </text></navLabel>
+          <content src="sections/004/006.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="26" class="article" id="item-004007">
+          <navLabel><text>
+                    Destructuring
+                </text></navLabel>
+          <content src="sections/004/007.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="27" class="article" id="item-004008">
+          <navLabel><text>
+                    Spread Operator
+                </text></navLabel>
+          <content src="sections/004/008.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="28" class="article" id="item-004009">
+          <navLabel><text>
+                    for...of
+                </text></navLabel>
+          <content src="sections/004/009.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="29" class="article" id="item-004010">
+          <navLabel><text>
+                    Iterators
+                </text></navLabel>
+          <content src="sections/004/010.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="30" class="article" id="item-004011">
+          <navLabel><text>
+                    Template Strings
+                </text></navLabel>
+          <content src="sections/004/011.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="31" class="article" id="item-004012">
+          <navLabel><text>
+                    Promise
+                </text></navLabel>
+          <content src="sections/004/012.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="32" class="article" id="item-004013">
+          <navLabel><text>
+                    Generators
+                </text></navLabel>
+          <content src="sections/004/013.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="33" class="article" id="item-004014">
+          <navLabel><text>
+                    Async Await
+                </text></navLabel>
+          <content src="sections/004/014.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="34" class="section" id="item-005">
+        <navLabel><text>Project</text></navLabel>
+        <content src="sections/005/section.html"/>
+        <navPoint playOrder="35" class="article" id="item-005000">
+          <navLabel><text>
+                    Project
+                </text></navLabel>
+          <content src="sections/005/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="36" class="article" id="item-005001">
+          <navLabel><text>
+                    Compilation Context
+                </text></navLabel>
+          <content src="sections/005/001.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="37" class="article" id="item-005002">
+          <navLabel><text>
+                    tsconfig.json
+                </text></navLabel>
+          <content src="sections/005/002.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="38" class="article" id="item-005003">
+          <navLabel><text>
+                    Which Files?
+                </text></navLabel>
+          <content src="sections/005/003.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="39" class="article" id="item-005004">
+          <navLabel><text>
+                    Declaration Spaces
+                </text></navLabel>
+          <content src="sections/005/004.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="40" class="article" id="item-005005">
+          <navLabel><text>
+                    Modules
+                </text></navLabel>
+          <content src="sections/005/005.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="41" class="article" id="item-005006">
+          <navLabel><text>
+                    File Module Details
+                </text></navLabel>
+          <content src="sections/005/006.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="42" class="article" id="item-005007">
+          <navLabel><text>
+                    globals.d.ts
+                </text></navLabel>
+          <content src="sections/005/007.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="43" class="article" id="item-005008">
+          <navLabel><text>
+                    Namespaces
+                </text></navLabel>
+          <content src="sections/005/008.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="44" class="article" id="item-005009">
+          <navLabel><text>
+                    Dynamic Import Expressions
+            </text></navLabel>
+          <content src="sections/005/009.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="45" class="section" id="item-006">
+        <navLabel><text>Node.js QuickStart</text></navLabel>
+        <content src="sections/006/section.html"/>
+        <navPoint playOrder="46" class="article" id="item-006000">
+          <navLabel><text>
+                    Node.js QuickStart
+                </text></navLabel>
+          <content src="sections/006/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="47" class="section" id="item-007">
+        <navLabel><text>Browser QuickStart</text></navLabel>
+        <content src="sections/007/section.html"/>
+        <navPoint playOrder="48" class="article" id="item-007000">
+          <navLabel><text>
+                    Browser QuickStart
+                </text></navLabel>
+          <content src="sections/007/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="49" class="section" id="item-008">
+        <navLabel><text>Library QuickStart</text></navLabel>
+        <content src="sections/008/section.html"/>
+        <navPoint playOrder="50" class="article" id="item-008000">
+          <navLabel><text>
+                    Library QuickStart
+                </text></navLabel>
+          <content src="sections/008/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="51" class="section" id="item-009">
+        <navLabel><text>TypeScript&#x27;s Type System</text></navLabel>
+        <content src="sections/009/section.html"/>
+        <navPoint playOrder="52" class="article" id="item-009000">
+          <navLabel><text>
+                    TypeScript&#x27;s Type System
+              </text></navLabel>
+          <content src="sections/009/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="53" class="article" id="item-009001">
+          <navLabel><text>
+                    JS Migration Guide
+                </text></navLabel>
+          <content src="sections/009/001.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="54" class="article" id="item-009002">
+          <navLabel><text>
+                    @types
+                </text></navLabel>
+          <content src="sections/009/002.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="55" class="article" id="item-009003">
+          <navLabel><text>
+                    Ambient Declarations
+                </text></navLabel>
+          <content src="sections/009/003.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="56" class="article" id="item-009004">
+          <navLabel><text>
+                    Declaration Files
+                </text></navLabel>
+          <content src="sections/009/004.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="57" class="article" id="item-009005">
+          <navLabel><text>
+                    Variables
+                </text></navLabel>
+          <content src="sections/009/005.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="58" class="article" id="item-009006">
+          <navLabel><text>
+                    Interfaces
+                </text></navLabel>
+          <content src="sections/009/006.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="59" class="article" id="item-009007">
+          <navLabel><text>
+                    Enums
+                </text></navLabel>
+          <content src="sections/009/007.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="60" class="article" id="item-009008">
+          <navLabel><text>
+                    lib.d.ts
+                </text></navLabel>
+          <content src="sections/009/008.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="61" class="article" id="item-009009">
+          <navLabel><text>
+                    Functions
+                </text></navLabel>
+          <content src="sections/009/009.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="62" class="article" id="item-009010">
+          <navLabel><text>
+                    Callable
+                </text></navLabel>
+          <content src="sections/009/010.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="63" class="article" id="item-009011">
+          <navLabel><text>
+                    Type Assertion
+                </text></navLabel>
+          <content src="sections/009/011.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="64" class="article" id="item-009012">
+          <navLabel><text>
+                    Freshness
+                </text></navLabel>
+          <content src="sections/009/012.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="65" class="article" id="item-009013">
+          <navLabel><text>
+                    Type Guard
+                </text></navLabel>
+          <content src="sections/009/013.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="66" class="article" id="item-009014">
+          <navLabel><text>
+                    Literal Types
+                </text></navLabel>
+          <content src="sections/009/014.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="67" class="article" id="item-009015">
+          <navLabel><text>
+                    Readonly
+                </text></navLabel>
+          <content src="sections/009/015.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="68" class="article" id="item-009016">
+          <navLabel><text>
+                    Generics
+                </text></navLabel>
+          <content src="sections/009/016.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="69" class="article" id="item-009017">
+          <navLabel><text>
+                    Type Inference
+                </text></navLabel>
+          <content src="sections/009/017.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="70" class="article" id="item-009018">
+          <navLabel><text>
+                    Type Compatibility
+                </text></navLabel>
+          <content src="sections/009/018.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="71" class="article" id="item-009019">
+          <navLabel><text>
+                    Never Type
+                </text></navLabel>
+          <content src="sections/009/019.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="72" class="article" id="item-009020">
+          <navLabel><text>
+                    Discriminated Unions
+                </text></navLabel>
+          <content src="sections/009/020.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="73" class="article" id="item-009021">
+          <navLabel><text>
+                    Index Signatures
+                </text></navLabel>
+          <content src="sections/009/021.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="74" class="article" id="item-009022">
+          <navLabel><text>
+                    Moving Types
+                </text></navLabel>
+          <content src="sections/009/022.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="75" class="article" id="item-009023">
+          <navLabel><text>
+                    Exception Handling
+                </text></navLabel>
+          <content src="sections/009/023.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="76" class="article" id="item-009024">
+          <navLabel><text>
+                    Mixins
+                </text></navLabel>
+          <content src="sections/009/024.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="77" class="section" id="item-010">
+        <navLabel><text>JSX</text></navLabel>
+        <content src="sections/010/section.html"/>
+        <navPoint playOrder="78" class="article" id="item-010000">
+          <navLabel><text>
+                    JSX
+                </text></navLabel>
+          <content src="sections/010/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="79" class="article" id="item-010001">
+          <navLabel><text>
+                    React
+                </text></navLabel>
+          <content src="sections/010/001.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="80" class="article" id="item-010002">
+          <navLabel><text>
+                    Non React JSX
+                </text></navLabel>
+          <content src="sections/010/002.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="81" class="section" id="item-011">
+        <navLabel><text>Options</text></navLabel>
+        <content src="sections/011/section.html"/>
+        <navPoint playOrder="82" class="article" id="item-011000">
+          <navLabel><text>
+                    Options
+                </text></navLabel>
+          <content src="sections/011/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="83" class="article" id="item-011001">
+          <navLabel><text>
+                    noImplicitAny
+                </text></navLabel>
+          <content src="sections/011/001.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="84" class="article" id="item-011002">
+          <navLabel><text>
+                    strictNullChecks
+                </text></navLabel>
+          <content src="sections/011/002.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="85" class="section" id="item-012">
+        <navLabel><text>Errors in TypeScript</text></navLabel>
+        <content src="sections/012/section.html"/>
+        <navPoint playOrder="86" class="article" id="item-012000">
+          <navLabel><text>
+                    Errors in TypeScript
+                </text></navLabel>
+          <content src="sections/012/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="87" class="article" id="item-012001">
+          <navLabel><text>
+                    Interpreting Errors
+                </text></navLabel>
+          <content src="sections/012/001.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="88" class="article" id="item-012002">
+          <navLabel><text>
+                    Common Errors
+                </text></navLabel>
+          <content src="sections/012/002.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="89" class="section" id="item-013">
+        <navLabel><text>NPM</text></navLabel>
+        <content src="sections/013/section.html"/>
+        <navPoint playOrder="90" class="article" id="item-013000">
+          <navLabel><text>
+                    NPM
+                </text></navLabel>
+          <content src="sections/013/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="91" class="section" id="item-014">
+        <navLabel><text>Testing</text></navLabel>
+        <content src="sections/014/section.html"/>
+        <navPoint playOrder="92" class="article" id="item-014000">
+          <navLabel><text>
+                    Testing
+                </text></navLabel>
+          <content src="sections/014/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="93" class="article" id="item-014001">
+          <navLabel><text>
+                    Jest
+                </text></navLabel>
+          <content src="sections/014/001.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="94" class="article" id="item-014002">
+          <navLabel><text>
+                    Cypress
+                </text></navLabel>
+          <content src="sections/014/002.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="95" class="section" id="item-015">
+        <navLabel><text>Tools</text></navLabel>
+        <content src="sections/015/section.html"/>
+        <navPoint playOrder="96" class="article" id="item-015000">
+          <navLabel><text>
+                    Tools
+                </text></navLabel>
+          <content src="sections/015/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="97" class="article" id="item-015001">
+          <navLabel><text>
+                    Prettier
+                </text></navLabel>
+          <content src="sections/015/001.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="98" class="article" id="item-015002">
+          <navLabel><text>
+                    Husky
+                </text></navLabel>
+          <content src="sections/015/002.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="99" class="article" id="item-015003">
+          <navLabel><text>
+                    ESLint
+                </text></navLabel>
+          <content src="sections/015/003.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="100" class="article" id="item-015004">
+          <navLabel><text>
+                    Changelog
+                </text></navLabel>
+          <content src="sections/015/004.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="101" class="section" id="item-016">
+        <navLabel><text>TIPs</text></navLabel>
+        <content src="sections/016/section.html"/>
+        <navPoint playOrder="102" class="article" id="item-016000">
+          <navLabel><text>
+                    TIPs
+                </text></navLabel>
+          <content src="sections/016/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="103" class="article" id="item-016001">
+          <navLabel><text>
+                    String Based Enums
+                </text></navLabel>
+          <content src="sections/016/001.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="104" class="article" id="item-016002">
+          <navLabel><text>
+                    Nominal Typing
+                </text></navLabel>
+          <content src="sections/016/002.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="105" class="article" id="item-016003">
+          <navLabel><text>
+                    Stateful Functions
+                </text></navLabel>
+          <content src="sections/016/003.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="106" class="article" id="item-016004">
+          <navLabel><text>
+                    Currying
+                </text></navLabel>
+          <content src="sections/016/004.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="107" class="article" id="item-016005">
+          <navLabel><text>
+                    Type Instantiation
+                </text></navLabel>
+          <content src="sections/016/005.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="108" class="article" id="item-016006">
+          <navLabel><text>
+                    Lazy Object Literal Initialization
+    </text></navLabel>
+          <content src="sections/016/006.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="109" class="article" id="item-016007">
+          <navLabel><text>
+                    Classes are Useful
+                </text></navLabel>
+          <content src="sections/016/007.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="110" class="article" id="item-016008">
+          <navLabel><text>
+                    Avoid Export Default
+                </text></navLabel>
+          <content src="sections/016/008.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="111" class="article" id="item-016009">
+          <navLabel><text>
+                    Limit Property Setters
+                </text></navLabel>
+          <content src="sections/016/009.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="112" class="article" id="item-016010">
+          <navLabel><text>
+                    outFile caution
+                </text></navLabel>
+          <content src="sections/016/010.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="113" class="article" id="item-016011">
+          <navLabel><text>
+                    JQuery tips
+                </text></navLabel>
+          <content src="sections/016/011.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="114" class="article" id="item-016012">
+          <navLabel><text>
+                    static constructors
+                </text></navLabel>
+          <content src="sections/016/012.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="115" class="article" id="item-016013">
+          <navLabel><text>
+                    singleton pattern
+                </text></navLabel>
+          <content src="sections/016/013.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="116" class="article" id="item-016014">
+          <navLabel><text>
+                    Function parameters
+                </text></navLabel>
+          <content src="sections/016/014.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="117" class="article" id="item-016015">
+          <navLabel><text>
+                    Build Toggles
+                </text></navLabel>
+          <content src="sections/016/015.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="118" class="article" id="item-016016">
+          <navLabel><text>
+                    Barrel
+                </text></navLabel>
+          <content src="sections/016/016.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="119" class="article" id="item-016017">
+          <navLabel><text>
+                    Create Arrays
+                </text></navLabel>
+          <content src="sections/016/017.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="120" class="article" id="item-016018">
+          <navLabel><text>
+                    Typesafe Event Emitter
+                </text></navLabel>
+          <content src="sections/016/018.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="121" class="section" id="item-017">
+        <navLabel><text>StyleGuide</text></navLabel>
+        <content src="sections/017/section.html"/>
+        <navPoint playOrder="122" class="article" id="item-017000">
+          <navLabel><text>
+                    StyleGuide
+                </text></navLabel>
+          <content src="sections/017/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="123" class="section" id="item-018">
+        <navLabel><text>TypeScript Compiler Internals</text></navLabel>
+        <content src="sections/018/section.html"/>
+        <navPoint playOrder="124" class="article" id="item-018000">
+          <navLabel><text>
+                    TypeScript Compiler Internals
+         </text></navLabel>
+          <content src="sections/018/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="125" class="article" id="item-018001">
+          <navLabel><text>
+                    Program
+                </text></navLabel>
+          <content src="sections/018/001.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="126" class="article" id="item-018002">
+          <navLabel><text>
+                    AST
+                </text></navLabel>
+          <content src="sections/018/002.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="127" class="article" id="item-018003">
+          <navLabel><text>
+                    TIP: Visit Children
+                </text></navLabel>
+          <content src="sections/018/003.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="128" class="article" id="item-018004">
+          <navLabel><text>
+                    TIP: SyntaxKind enum
+                </text></navLabel>
+          <content src="sections/018/004.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="129" class="article" id="item-018005">
+          <navLabel><text>
+                    Trivia
+                </text></navLabel>
+          <content src="sections/018/005.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="130" class="article" id="item-018006">
+          <navLabel><text>
+                    Scanner
+                </text></navLabel>
+          <content src="sections/018/006.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="131" class="article" id="item-018007">
+          <navLabel><text>
+                    Parser
+                </text></navLabel>
+          <content src="sections/018/007.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="132" class="article" id="item-018008">
+          <navLabel><text>
+                    Parser Functions
+                </text></navLabel>
+          <content src="sections/018/008.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="133" class="article" id="item-018009">
+          <navLabel><text>
+                    Binder
+                </text></navLabel>
+          <content src="sections/018/009.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="134" class="article" id="item-018010">
+          <navLabel><text>
+                    Binder Functions
+                </text></navLabel>
+          <content src="sections/018/010.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="135" class="article" id="item-018011">
+          <navLabel><text>
+                    Binder Declarations
+                </text></navLabel>
+          <content src="sections/018/011.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="136" class="article" id="item-018012">
+          <navLabel><text>
+                    Binder Container
+                </text></navLabel>
+          <content src="sections/018/012.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="137" class="article" id="item-018013">
+          <navLabel><text>
+                    Binder SymbolTable
+                </text></navLabel>
+          <content src="sections/018/013.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="138" class="article" id="item-018014">
+          <navLabel><text>
+                    Binder Error Reporting
+                </text></navLabel>
+          <content src="sections/018/014.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="139" class="article" id="item-018015">
+          <navLabel><text>
+                    Checker
+                </text></navLabel>
+          <content src="sections/018/015.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="140" class="article" id="item-018016">
+          <navLabel><text>
+                    Checker Diagnostics
+                </text></navLabel>
+          <content src="sections/018/016.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="141" class="article" id="item-018017">
+          <navLabel><text>
+                    Checker Error Reporting
+               </text></navLabel>
+          <content src="sections/018/017.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="142" class="article" id="item-018018">
+          <navLabel><text>
+                    Emitter
+                </text></navLabel>
+          <content src="sections/018/018.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="143" class="article" id="item-018019">
+          <navLabel><text>
+                    Emitter Functions
+                </text></navLabel>
+          <content src="sections/018/019.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="144" class="article" id="item-018020">
+          <navLabel><text>
+                    Emitter SourceMaps
+                </text></navLabel>
+          <content src="sections/018/020.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="145" class="article" id="item-018021">
+          <navLabel><text>
+                    Contributing
+                </text></navLabel>
+          <content src="sections/018/021.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+      </navPoint>
+    </navPoint>
+  </navMap>
+</ncx>

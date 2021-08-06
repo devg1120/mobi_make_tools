@@ -1,0 +1,57 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Variables</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+A variable is a storage location for holding a <i>value</i>.
+The set of permissible values is determined by the
+variable&apos;s <i>[<a>type</a>]</i>.
+</p><p>
+A [<a>variable declaration</a>]
+or, for function parameters and results, the signature
+of a [<a>function declaration</a>]
+or [<a>function literal</a>] reserves
+storage for a named variable.
+Calling the built-in function [<a><code>new</code></a>]
+or taking the address of a [<a>composite literal</a>]
+allocates storage for a variable at run time.
+Such an anonymous variable is referred to via a (possibly implicit)
+[<a>pointer indirection</a>].
+</p><p>
+<i>Structured</i> variables of [<a>array</a>], [<a>slice</a>],
+and [<a>struct</a>] types have elements and fields that may
+be [<a>addressed</a>] individually. Each such element
+acts like a variable.
+</p><p>
+The <i>static type</i> (or just <i>type</i>) of a variable is the
+type given in its declaration, the type provided in the
+<code>new</code> call or composite literal, or the type of
+an element of a structured variable.
+Variables of interface type also have a distinct <i>dynamic type</i>,
+which is the concrete type of the value assigned to the variable at run time
+(unless the value is the predeclared identifier <code>nil</code>,
+which has no type).
+The dynamic type may vary during execution but values stored in interface
+variables are always [<a>assignable</a>]
+to the static type of the variable.
+</p><pre>
+var x interface{}  // x is nil and has static type interface{}
+var v *T           // v has value nil, static type *T
+x = 42             // x has value 42 and dynamic type int
+x = v              // x has value (*T)(nil) and dynamic type *T
+</pre><p>
+A variable&apos;s value is retrieved by referring to the variable in an
+[<a>expression</a>]; it is the most recent value
+[<a>assigned</a>] to the variable.
+If a variable has not yet been assigned a value, its value is the
+[<a>zero value</a>] for its type.
+</p></body>
+</body>
+</html>

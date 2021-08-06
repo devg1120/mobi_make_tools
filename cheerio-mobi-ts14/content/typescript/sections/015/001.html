@@ -1,0 +1,35 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Prettier
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts14/undefined" />
+  </head>
+   <body>
+<h1 id="prettier">Prettier</h1>
+<p>Prettier is a great tool by facebook that makes code formatting so much easier that it&apos;s worth mentioning. Setting up with TypeScript using our recommended project setup (aka everything in <code>src</code> folder) is super easy: </p>
+<h2 id="setup">Setup</h2>
+<ul>
+    <li><code>npm install prettier -D</code> </li>
+    <li>Add <code>scripts</code> to <code>package.json</code>: </li>
+</ul>
+<pre><code>    &quot;prettier:base&quot;: &quot;prettier --parser typescript --single-quote&quot;,
+    &quot;prettier:check&quot;: &quot;npm run prettier:base -- --list-different \&quot;src/**/*.{ts,tsx}\&quot;&quot;,
+    &quot;prettier:write&quot;: &quot;npm run prettier:base -- --write \&quot;src/**/*.{ts,tsx}\&quot;&quot;
+</code></pre>
+<h2 id="usage">Usage</h2>
+<p>On your build server: </p>
+<ul>
+    <li><code>npm run prettier:check</code> </li>
+</ul>
+<p>During dev (or pre commit hook): </p>
+<ul>
+    <li><code>npm run prettier:write</code></li>
+</ul>
+</body>
+</html>

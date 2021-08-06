@@ -1,0 +1,36 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Size and alignment guarantees</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+For the [<a>numeric types</a>], the following sizes are guaranteed:
+</p><pre>
+type                                 size in bytes
+byte, uint8, int8                     1
+uint16, int16                         2
+uint32, int32, float32                4
+uint64, int64, float64, complex64     8
+complex128                           16
+</pre><p>
+The following minimal alignment properties are guaranteed:
+</p><ol>
+<li>For a variable <code>x</code> of any type: <code>unsafe.Alignof(x)</code> is at least 1.
+</li>
+<li>For a variable <code>x</code> of struct type: <code>unsafe.Alignof(x)</code> is the largest of
+   all the values <code>unsafe.Alignof(x.f)</code> for each field <code>f</code> of <code>x</code>, but at least 1.
+</li>
+<li>For a variable <code>x</code> of array type: <code>unsafe.Alignof(x)</code> is the same as
+	the alignment of a variable of the array&apos;s element type.
+</li>
+</ol><p>
+A struct or array type has size zero if it contains no fields (or elements, respectively) that have a size greater than zero. Two distinct zero-size variables may have the same address in memory.
+</p></body>
+</body>
+</html>

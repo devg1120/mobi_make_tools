@@ -1,0 +1,40 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Checker
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts12_mlv/undefined" />
+  </head>
+   <body>
+<h2 id="checker">Checker</h2>
+<p>Like we mentioned before <em>checker</em> is the thing that makes TypeScript uniquely more powerful than <em>just another JavaScript transpiler</em>. The checker is located in <code>checker.ts</code> and at this moment it is 23k+ lines of TypeScript (largest part of the compiler).</p>
+<h3 id="usage-by-program">Usage by Program</h3>
+<p>The <code>checker</code> is initialized by <code>program</code>. The following is a sampling of the call stack (we showed the same one when looking at <code>binder</code>):</p>
+<pre><code>program.getTypeChecker -&gt;
+    ts.createTypeChecker (in checker)-&gt;
+        initializeTypeChecker (in checker) -&gt;
+            for each SourceFile `ts.bindSourceFile` (in binder)
+            // followed by
+            for each SourceFile `ts.mergeSymbolTable` (in checker)
+</code></pre>
+<h3 id="association-with-emitter">Association with Emitter</h3>
+<p>True type checking happens once a call is made to <code>getDiagnostics</code>. This function is called e.g. once a request is made to <code>Program.emit</code>, in which case the checker returns an <code>EmitResolver</code> (program calls the checkers <code>getEmitResolver</code> function) which is just a set of functions local to <code>createTypeChecker</code>. We will mention this again when we look at the emitter.</p>
+<p>Here is the call stack right down to <code>checkSourceFile</code> (a function local to <code>createTypeChecker</code>).</p>
+<pre><code>program.emit -&gt;
+    emitWorker (program local) -&gt;
+        createTypeChecker.getEmitResolver -&gt;
+            // First call the following functions local to createTypeChecker
+            call getDiagnostics -&gt;
+                getDiagnosticsWorker -&gt;
+                    checkSourceFile
+            // then
+            return resolver
+            (already initialized in createTypeChecker using a call to local createResolver())
+</code></pre>
+</body>
+</html>

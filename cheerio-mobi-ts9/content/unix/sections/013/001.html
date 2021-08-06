@@ -1,0 +1,62 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Don't Just Do Something, Stand There!</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts9/undefined" />
+  </head>
+   <body>
+<div class="sect1" lang="en"><div class="titlepage"><div><h2 class="title" style="clear: both"><a id="id2962084">Don&apos;t Just Do Something, Stand There!</a></h2></div></div><p>The most powerful optimization technique in any programmer&apos;s
+toolbox is to do nothing.</p><p>This very Zen advice is true for several reasons.  One is the
+exponential effect of Moore&apos;s Law &#x2014; the smartest, cheapest, and
+often <span class="emphasis"><em>fastest</em></span> way to collect performance gains is
+to wait a few months for your target hardware to become more capable.
+Given the cost ratio between hardware and programmer time, there are
+almost always better things to do with your time than to optimize a
+working system.</p><p>We can get mathematically specific about this.  It is almost
+never worth doing optimizations that reduce resource use by merely a
+constant factor; it&apos;s smarter to concentrate effort on cases in which
+you can reduce average-case running time or space use from
+O(<span class="emphasis"><em>n</em></span><sup>2</sup>) to
+O(<span class="emphasis"><em>n</em></span>) or O(<span class="emphasis"><em>n</em></span> log
+<span class="emphasis"><em>n</em></span>),<sup>[<a id="id2962140" href="ch12s01.html#ftn.id2962140">112</a>]</sup> or similarly reduce from a higher
+order. Linear performance gains tend to be rapidly swamped by Moore&apos;s
+Law.<sup>[<a id="id2960862" href="ch12s01.html#ftn.id2960862">113</a>]</sup></p><p>Another very constructive form of doing nothing is to not write
+code.  The program can&apos;t be slowed down by code that isn&apos;t there.  It
+can be slowed down by code that <span class="emphasis"><em>is</em></span> there but
+less efficient than it could be &#x2014; but that&apos;s a different
+matter.</p><div class="footnotes"><br><hr width="100" align="left"><div class="footnote"><p><sup>[<a id="ftn.id2962140" href="ch12s01.html#id2962140">112</a>] </sup>For readers unfamiliar with O
+notation, it is a way of indicating how the average running time of an
+algorithm changes with the size of its inputs. An O(1) algorithm runs
+in constant time.  An O(<span class="emphasis"><em>n</em></span>) algorithm runs in a
+time that is predicted by <tt>A<span class="emphasis"><em>n</em></span>
++ C</tt>, where <tt>A</tt> is some unknown
+constant of proportionality and <tt>C</tt> is an
+unknown constant representing setup time.  Linear search of a list for
+a specified value is O(<span class="emphasis"><em>n</em></span>).  An
+O(<span class="emphasis"><em>n</em></span><sup>2</sup>) algorithm runs
+in time <tt>A<span class="emphasis"><em>n</em></span><sup>2</sup></tt> plus
+lower-order terms (which might be linear, or logarithmic, of any other
+function lower than a quadratic).  Checking a list for duplicate values
+(by the na&#xFFFD;ve method, not sorting it) is
+O(<span class="emphasis"><em>n</em></span><sup>2</sup>).  Similarly,
+O(<span class="emphasis"><em>n</em></span><sup>3</sup>) algorithms have
+an average run time predicted by the cube of problem size; these tend
+to be too slow for practical use.  O(log
+<span class="emphasis"><em>n</em></span>) is typical of tree searches.  Intelligent
+choice of algorithm can often reduce running time from
+O(<span class="emphasis"><em>n</em></span><sup>2</sup>) to
+O(log <span class="emphasis"><em>n</em></span>).  Sometimes when
+we are interested in predicting an algorithm&apos;s memory utilization, we
+may notice that it varies as O(1) or O(<span class="emphasis"><em>n</em></span>) or
+O(<span class="emphasis"><em>n</em></span><sup>2</sup>); in general,
+algorithms with O(<span class="emphasis"><em>n</em></span><sup>2</sup>)
+or higher memory utilization are not practical
+either.</p></div><div class="footnote"><p><sup>[<a id="ftn.id2960862" href="ch12s01.html#id2960862">113</a>] </sup>The eighteen-month doubling time usually quoted for
+Moore&apos;s Law implies that you can collect a 26% performance gain just
+by buying new hardware in six months.</p></div></div></div>
+</body>
+</html>

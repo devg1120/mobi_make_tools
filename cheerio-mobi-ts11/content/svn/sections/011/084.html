@@ -1,0 +1,74 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svnrdump dump</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts10/undefined" />
+  </head>
+   <body>
+<div class="refentry">
+    <a id="svn.ref.svnrdump.c.dump"></a>
+    <div class="titlepage"></div>
+    <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svnrdump dump</p>
+    </div>
+    <div class="refsect1">
+        <a id="idm13508"></a>
+        <h2>Synopsis</h2>
+        <p>
+            <code class="literal">svnrdump dump SOURCE_URL</code>
+        </p>
+    </div>
+    <div class="refsect1">
+        <a id="idm13512"></a>
+        <h2>Description</h2>
+        <p>Dump&#x2014;that is, generate a repository dump stream
+            of&#x2014;revisions of the repository item located
+            at <em class="replaceable"><code>SOURCE_URL</code></em>, printing the
+            information to standard output. By default, the entire
+            history will be included in the dump stream, but the scope
+            of the operation can be limited via the use of
+            the <code class="option">--revision</code> (<code class="option">-r</code>)
+            option.</p>
+    </div>
+    <div class="refsect1">
+        <a id="idm13518"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+            <pre class="screen">
+</pre>
+        </div>
+    </div>
+    <div class="refsect1">
+        <a id="idm13532"></a>
+        <h2>Examples</h2>
+        <p>Generate a dump stream of the full history of a remote
+            repository (assuming that the user as who this runs has
+            authorization to read all paths in the repository).</p>
+        <div class="informalexample">
+            <pre class="screen">
+$ svnrdump dump http://svn.example.com/repos/calc &gt; full.dump
+* Dumped revision 0.
+* Dumped revision 1.
+* Dumped revision 2.
+&#x2026;
+</pre>
+        </div>
+        <p>Incrementally dump a single revision from that same
+            repository:</p>
+        <div class="informalexample">
+            <pre class="screen">
+$ svnrdump dump http://svn.example.com/repos/calc \
+           -r 21 --incremental &gt; inc.dump
+* Dumped revision 21.
+$
+</pre>
+        </div>
+    </div>
+</div>
+</body>
+</html>

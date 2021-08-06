@@ -1,0 +1,256 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    lib.d.ts
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts12_mlv/undefined" />
+  </head>
+   <body>
+<ul>
+    <li><a href="#libdts">lib.d.ts</a></li>
+    <li><a href="#example-usage">Example Usage</a></li>
+    <li><a href="#libdts-inside-look">Inside look</a></li>
+    <li><a href="#modifying-native-types">Modifying Native types</a></li>
+    <li><a href="#using-your-own-custom-libdts">Using custom lib.d.ts</a></li>
+    <li><a href="#compiler-target-effect-on-libdts">Compiler <code>target</code> effect on lib.d.ts</a></li>
+    <li><a href="#lib-option"><code>lib</code> option</a></li>
+    <li><a href="#polyfill-for-old-javascript-engines">Polyfill for old JavaScript engines</a></li>
+</ul>
+<h2 id="libdts"><code>lib.d.ts</code></h2>
+<p>A special declaration file <code>lib.d.ts</code> ships with every installation of TypeScript. This file contains the ambient declarations for various common JavaScript constructs present in JavaScript runtimes and the DOM.</p>
+<ul>
+    <li>This file is automatically included in the compilation context of a TypeScript project.</li>
+    <li>The objective of this file is to make it easy for you to start writing <em>type checked</em> JavaScript code.</li>
+</ul>
+<p>You can exclude this file from the compilation context by specifying the <code>--noLib</code> compiler command line flag (or <code>&quot;noLib&quot; : true</code> in <code>tsconfig.json</code>).</p>
+<h3 id="example-usage">Example Usage</h3>
+<p>As always let&apos;s look at examples of this file being used in action:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">var</span> foo = <span class="hljs-number">123</span>;
+<span class="hljs-keyword">var</span> bar = foo.toString();
+</code></pre>
+<p>This code type checks fine <em>because</em> the <code>toString</code> function is defined in <code>lib.d.ts</code> for all JavaScript objects.</p>
+<p>If you use the same sample code with the <code>noLib</code> option you get a type check error:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">var</span> foo = <span class="hljs-number">123</span>;
+<span class="hljs-keyword">var</span> bar = foo.toString(); <span class="hljs-comment">// ERROR: Property &apos;toString&apos; does not exist on type &apos;number&apos;.</span>
+</code></pre>
+<p>So now that you understand the importance of <code>lib.d.ts</code>, what do its contents look like? We examine that next.</p>
+<h3 id="libdts-inside-look"><code>lib.d.ts</code> Inside Look</h3>
+<p>The contents of <code>lib.d.ts</code> are primarily a bunch of <em>variable</em> declarations e.g. <code>window</code>, <code>document</code>, <code>math</code> and a bunch of similar <em>interface</em> declarations e.g. <code>Window</code> , <code>Document</code>, <code>Math</code>.</p>
+<p>The simplest way to read the documentation and type annotations of global stuff is to type in code <em>that you know works</em> e.g. <code>Math.floor</code> and then F12 (go to definition) using your IDE (VSCode has great support for this).</p>
+<p>Let&apos;s look at a sample <em>variable</em> declaration, e.g. <code>window</code> is defined as:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">declare</span> <span class="hljs-keyword">var</span> <span class="hljs-built_in">window</span>: Window;
+</code></pre>
+<p>That is just a simple <code>declare var</code> followed by the variable name (here <code>window</code>) and an interface for a type annotation (here the <code>Window</code> interface). These variables generally point to some global <em>interface</em> e.g. here is a small sample of the (actually quite massive) <code>Window</code> interface:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">interface</span> Window <span class="hljs-keyword">extends</span> EventTarget, WindowTimers, WindowSessionStorage, WindowLocalStorage, WindowConsole, GlobalEventHandlers, IDBEnvironment, WindowBase64 {
+    animationStartTime: <span class="hljs-built_in">number</span>;
+    applicationCache: ApplicationCache;
+    clientInformation: Navigator;
+    closed: <span class="hljs-built_in">boolean</span>;
+    crypto: Crypto;
+    <span class="hljs-comment">// so on and so forth...</span>
+}
+</code></pre>
+<p>You can see that there is a <em>lot</em> of type information in these interfaces. In the absence of TypeScript <em>you</em> would need to keep this in <em>your</em> head. Now you can offload that knowledge on the compiler with easy access to it using things like <code>intellisense</code>.</p>
+<p>There is a good reason for using <em>interfaces</em> for these globals. It allows you to <em>add additional properties</em> to these globals <em>without</em> a need to change <code>lib.d.ts</code>. We will cover this concept next.</p>
+<h3 id="modifying-native-types">Modifying Native Types</h3>
+<p>Since an <code>interface</code> in TypeScript is open ended this means that you can just add members to the interfaces declared in <code>lib.d.ts</code> and TypeScript will pick up on the additions. Note that you need to make these changes in a <a href="../project/modules.html"><em>global module</em></a> for these interfaces to be associated with <code>lib.d.ts</code>. We even recommend creating a special file called <a href="../project/globals.html"><code>globals.d.ts</code></a> for this purpose.</p>
+<p>Here are a few example cases where we add stuff to <code>window</code>, <code>Math</code>, <code>Date</code>:</p>
+<h4 id="example-window">Example <code>window</code></h4>
+<p>Just add stuff to the <code>Window</code> interface e.g.:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">interface</span> Window {
+    helloWorld(): <span class="hljs-built_in">void</span>;
+}
+</code></pre>
+<p>This will allow you to use it in a <em>type safe</em> manner:</p>
+<pre><code class="lang-ts"><span class="hljs-comment">// Add it at runtime</span>
+<span class="hljs-built_in">window</span>.helloWorld = () =&gt; <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;hello world&apos;</span>);
+<span class="hljs-comment">// Call it</span>
+<span class="hljs-built_in">window</span>.helloWorld();
+<span class="hljs-comment">// Misuse it and you get an error:</span>
+<span class="hljs-built_in">window</span>.helloWorld(<span class="hljs-string">&apos;gracius&apos;</span>); <span class="hljs-comment">// Error: Supplied parameters do not match the signature of the call target</span>
+</code></pre>
+<h4 id="example-math">Example <code>Math</code></h4>
+<p>The global variable <code>Math</code> is defined in <code>lib.d.ts</code> as (again, use your dev tools to navigate to definition):</p>
+<pre><code class="lang-ts"><span class="hljs-comment">/** An intrinsic object that provides basic mathematics functionality and constants. */</span>
+<span class="hljs-keyword">declare</span> <span class="hljs-keyword">var</span> <span class="hljs-built_in">Math</span>: <span class="hljs-built_in">Math</span>;
+</code></pre>
+<p>i.e. the variable <code>Math</code> is an instance of the <code>Math</code> interface. The <code>Math</code> interface is defined as:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">interface</span> Math {
+    E: <span class="hljs-built_in">number</span>;
+    LN10: <span class="hljs-built_in">number</span>;
+    <span class="hljs-comment">// others ...</span>
+}
+</code></pre>
+<p>This means that if you want to add stuff to the <code>Math</code> global variable you just need to add it to the <code>Math</code> global interface, e.g. consider the <a href="https://www.npmjs.com/package/seedrandom" target="_blank"><code>seedrandom</code> project</a> which adds a <code>seedrandom</code> function to the global <code>Math</code> object. This can be declared quite easily:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">interface</span> Math {
+    seedrandom(seed?: <span class="hljs-built_in">string</span>);
+}
+</code></pre>
+<p>And then you can just use it:</p>
+<pre><code class="lang-ts"><span class="hljs-built_in">Math</span>.seedrandom();
+<span class="hljs-comment">// or</span>
+<span class="hljs-built_in">Math</span>.seedrandom(<span class="hljs-string">&quot;Any string you want!&quot;</span>);
+</code></pre>
+<h4 id="example-date">Example <code>Date</code></h4>
+<p>If you look at the definition of the <code>Date</code> <em>variable</em> in <code>lib.d.ts</code> you will find:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">declare</span> <span class="hljs-keyword">var</span> <span class="hljs-built_in">Date</span>: DateConstructor;
+</code></pre>
+<p>The interface <code>DateConstructor</code> is similar to what you have seen before with <code>Math</code> and <code>Window</code> in that it contains members you can use off of the <code>Date</code> global variable e.g. <code>Date.now()</code>. In addition to these members it contains <em>construct</em> signatures which allow you to create <code>Date</code> instances (e.g. <code>new Date()</code>). A snippet of the <code>DateConstructor</code> interface is shown below:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">interface</span> DateConstructor {
+    <span class="hljs-keyword">new</span> (): <span class="hljs-built_in">Date</span>;
+    <span class="hljs-comment">// ... other construct signatures</span>
+    now(): <span class="hljs-built_in">number</span>;
+    <span class="hljs-comment">// ... other member functions</span>
+}
+</code></pre>
+<p>Consider the project <a href="https://github.com/abritinthebay/datejs" target="_blank"><code>datejs</code></a>. DateJS adds members to both the <code>Date</code> global variable and <code>Date</code> instances. Therefore a TypeScript definition for this library would look like (<a href="https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/types/datejs/index.d.ts" target="_blank">BTW the community has already written this for you in this case</a>):</p>
+<pre><code class="lang-ts"><span class="hljs-comment">/** DateJS Public Static Methods */</span>
+<span class="hljs-keyword">interface</span> DateConstructor {
+    <span class="hljs-comment">/** Gets a date that is set to the current date. The time is set to the start of the day (00:00 or 12:00 AM) */</span>
+    today(): <span class="hljs-built_in">Date</span>;
+    <span class="hljs-comment">// ... so on and so forth</span>
+}
+<span class="hljs-comment">/** DateJS Public Instance Methods */</span>
+<span class="hljs-keyword">interface</span> Date {
+    <span class="hljs-comment">/** Adds the specified number of milliseconds to this instance. */</span>
+    addMilliseconds(milliseconds: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">Date</span>;
+    <span class="hljs-comment">// ... so on and so forth</span>
+}
+</code></pre>
+<p>This allows you to do stuff like the following in a TypeSafe manner:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">var</span> today = <span class="hljs-built_in">Date</span>.today();
+<span class="hljs-keyword">var</span> todayAfter1second = today.addMilliseconds(<span class="hljs-number">1000</span>);
+</code></pre>
+<h4 id="example-string">Example <code>string</code></h4>
+<p>If you look inside <code>lib.d.ts</code> for string you will find stuff similar to what we saw for <code>Date</code> (<code>String</code> global variable, <code>StringConstructor</code> interface, <code>String</code> interface). One thing of note though is that the <code>String</code> interface also impacts string <em>literals</em> as demonstrated in the below code sample:</p>
+<pre><code class="lang-ts">
+<span class="hljs-keyword">interface</span> String {
+    endsWith(suffix: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">boolean</span>;
+}
+<span class="hljs-built_in">String</span>.prototype.endsWith = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">suffix: <span class="hljs-built_in">string</span></span>): <span class="hljs-title">boolean</span> </span>{
+    <span class="hljs-keyword">var</span> str: <span class="hljs-built_in">string</span> = <span class="hljs-keyword">this</span>;
+    <span class="hljs-keyword">return</span> str &amp;&amp; str.indexOf(suffix, str.length - suffix.length) !== <span class="hljs-number">-1</span>;
+}
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;foo bar&apos;</span>.endsWith(<span class="hljs-string">&apos;bas&apos;</span>)); <span class="hljs-comment">// false</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;foo bas&apos;</span>.endsWith(<span class="hljs-string">&apos;bas&apos;</span>)); <span class="hljs-comment">// true</span>
+</code></pre>
+<p>Similar variables and interfaces exist for other things that have both static and instance members like <code>Number</code>, <code>Boolean</code>, <code>RegExp</code>, etc. and these interfaces affect literal instances of these types as well.</p>
+<h3 id="example-string-redux">Example <code>string</code> redux</h3>
+<p>We recommended creating a <code>global.d.ts</code> for maintainability reasons. However, you can break into the <em>global namespace</em> from within <em>a file module</em> if you desire so. This is done using <code>declare global { /*global namespace here*/ }</code>. E.g. the previous example can also be done as:</p>
+<pre><code class="lang-ts"><span class="hljs-comment">// Ensure this is treated as a module.</span>
+<span class="hljs-keyword">export</span> {};
+<span class="hljs-keyword">declare</span> global {
+    <span class="hljs-keyword">interface</span> String {
+        endsWith(suffix: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">boolean</span>;
+    }
+}
+<span class="hljs-built_in">String</span>.prototype.endsWith = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">suffix: <span class="hljs-built_in">string</span></span>): <span class="hljs-title">boolean</span> </span>{
+    <span class="hljs-keyword">var</span> str: <span class="hljs-built_in">string</span> = <span class="hljs-keyword">this</span>;
+    <span class="hljs-keyword">return</span> str &amp;&amp; str.indexOf(suffix, str.length - suffix.length) !== <span class="hljs-number">-1</span>;
+}
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;foo bar&apos;</span>.endsWith(<span class="hljs-string">&apos;bas&apos;</span>)); <span class="hljs-comment">// false</span>
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;foo bas&apos;</span>.endsWith(<span class="hljs-string">&apos;bas&apos;</span>)); <span class="hljs-comment">// true</span>
+</code></pre>
+<h3 id="using-your-own-custom-libdts">Using your own custom lib.d.ts</h3>
+<p>As we mentioned earlier, using the <code>--noLib</code> boolean compiler flag causes TypeScript to exclude the automatic inclusion of <code>lib.d.ts</code>. There are various reasons why this is a useful feature. Here are a few of the common ones:</p>
+<ul>
+    <li>You are running in a custom JavaScript environment that differs <em>significantly</em> from the standard browser based runtime environment.</li>
+    <li>You like to have <em>strict</em> control over the <em>globals</em> available in your code. E.g. lib.d.ts defines <code>item</code> as a global variable and you don&apos;t want this to leak into your code.</li>
+</ul>
+<p>Once you have excluded the default <code>lib.d.ts</code> you can include a similarly named file into your compilation context and TypeScript will pick it up for type checking.</p>
+<blockquote>
+    <p>Note: be careful with <code>--noLib</code>. Once you are in noLib land, if you choose to share your project with others, they will be <em>forced</em> into noLib land (or rather <em>your lib</em> land). Even worse, if you bring <em>their</em> code into your project you might need to port it to <em>your lib</em> based code.</p>
+</blockquote>
+<h3 id="compiler-target-effect-on-libdts">Compiler target effect on <code>lib.d.ts</code></h3>
+<p>Setting the compiler target to <code>es6</code> causes the <code>lib.d.ts</code> to include <em>additional</em> ambient declarations for more modern (es6) stuff like <code>Promise</code>. This magical effect of the compiler target changing the <em>ambience</em> of the code is desirable for some people and for others it&apos;s problematic as it conflates <em>code generation</em> with <em>code ambience</em>.</p>
+<p>However, if you want finer grained control of your environment, you should use the <code>--lib</code> option which we discuss next.</p>
+<h3 id="lib-option">lib option</h3>
+<p>Sometimes (many times) you want to decouple the relationship between the compile target (the generated JavaScript version) and the ambient library support. A common example is <code>Promise</code>, e.g. today (in June 2016) you most likely want to <code>--target es5</code> but still use the latest features like <code>Promise</code>. To support this you can take explicit control of <code>lib</code> using the <code>lib</code> compiler option.</p>
+<blockquote>
+    <p>Note: using <code>--lib</code> decouples any lib magic from <code>--target</code> giving you better control.</p>
+</blockquote>
+<p>You can provide this option on the command line or in <code>tsconfig.json</code> (recommended):</p>
+<p><strong>Command line</strong>:</p>
+<pre><code>tsc --target es5 --lib dom,es6
+</code></pre>
+<p><strong>tsconfig.json</strong>:</p>
+<pre><code class="lang-json"><span class="hljs-string">&quot;compilerOptions&quot;</span>: {
+    <span class="hljs-string">&quot;lib&quot;</span>: [<span class="hljs-string">&quot;dom&quot;</span>, <span class="hljs-string">&quot;es6&quot;</span>]
+}
+</code></pre>
+<p>The libs can be categorized as follows:</p>
+<ul>
+    <li>JavaScript Bulk Feature:<ul>
+            <li>es5</li>
+            <li>es6</li>
+            <li>es2015</li>
+            <li>es7</li>
+            <li>es2016</li>
+            <li>es2017</li>
+            <li>esnext</li>
+        </ul>
+    </li>
+    <li>Runtime Environment<ul>
+            <li>dom</li>
+            <li>dom.iterable</li>
+            <li>webworker</li>
+            <li>scripthost</li>
+        </ul>
+    </li>
+    <li>ESNext By-Feature Options (even smaller than bulk feature)<ul>
+            <li>es2015.core</li>
+            <li>es2015.collection</li>
+            <li>es2015.generator</li>
+            <li>es2015.iterable</li>
+            <li>es2015.promise</li>
+            <li>es2015.proxy</li>
+            <li>es2015.reflect</li>
+            <li>es2015.symbol</li>
+            <li>es2015.symbol.wellknown</li>
+            <li>es2016.array.include</li>
+            <li>es2017.object</li>
+            <li>es2017.sharedmemory</li>
+            <li>esnext.asynciterable</li>
+        </ul>
+    </li>
+</ul>
+<blockquote>
+    <p>NOTE: the <code>--lib</code> option provides extremely fine tuned control. So you most likely want to pick an item from the bulk + environment categories.
+        If --lib is not specified a default library is injected:</p>
+    <ul>
+        <li>For --target es5 =&gt; es5, dom, scripthost</li>
+        <li>For --target es6 =&gt; es6, dom, dom.iterable, scripthost</li>
+    </ul>
+</blockquote>
+<p>My Personal Recommendation:</p>
+<pre><code class="lang-json"><span class="hljs-string">&quot;compilerOptions&quot;</span>: {
+    <span class="hljs-string">&quot;target&quot;</span>: <span class="hljs-string">&quot;es5&quot;</span>,
+    <span class="hljs-string">&quot;lib&quot;</span>: [<span class="hljs-string">&quot;es6&quot;</span>, <span class="hljs-string">&quot;dom&quot;</span>]
+}
+</code></pre>
+<p>Example Including Symbol with ES5:</p>
+<p>Symbol API is not included when target is es5. In fact, we receive an error like: [ts] Cannot find name &apos;Symbol&apos;.
+    We can use &quot;target&quot;: &quot;es5&quot; in combination with &quot;lib&quot; to provide Symbol API in TypeScript:</p>
+<pre><code class="lang-json"><span class="hljs-string">&quot;compilerOptions&quot;</span>: {
+    <span class="hljs-string">&quot;target&quot;</span>: <span class="hljs-string">&quot;es5&quot;</span>,
+    <span class="hljs-string">&quot;lib&quot;</span>: [<span class="hljs-string">&quot;es5&quot;</span>, <span class="hljs-string">&quot;dom&quot;</span>, <span class="hljs-string">&quot;scripthost&quot;</span>, <span class="hljs-string">&quot;es2015.symbol&quot;</span>]
+}
+</code></pre>
+<h2 id="polyfill-for-old-javascript-engines">Polyfill for old JavaScript engines</h2>
+<blockquote>
+    <p><a href="https://egghead.io/lessons/typescript-using-es6-and-esnext-with-typescript" target="_blank">Egghead PRO Video on this subject</a></p>
+</blockquote>
+<p>There are quite a few runtime features that are like <code>Map</code> / <code>Set</code> and even <code>Promise</code> (this list will of course change over time) that you can use with modern <code>lib</code> options. To use these all you need to do is use <code>core-js</code>. Simply install:</p>
+<pre><code>npm install core-js --save-dev
+</code></pre>
+<p>And add an import to your application entry point: </p>
+<pre><code class="lang-js"><span class="hljs-keyword">import</span> <span class="hljs-string">&quot;core-js&quot;</span>;
+</code></pre>
+<p>And it should polyfill these runtime features for you &#x1F339;.</p>
+</body>
+</html>

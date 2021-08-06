@@ -1,0 +1,15 @@
+<body><p>
+The [<a>Go package sources</a>]
+are intended to serve not
+only as the core library but also as examples of how to
+use the language.
+Moreover, many of the packages contain working, self-contained
+executable examples you can run directly from the
+[<a>golang.org</a>] web site, such as
+[<a>this one</a>] (if
+necessary, click on the word "Example" to open it up).
+If you have a question about how to approach a problem or how something
+might be implemented, the documentation, code and examples in the
+library can provide answers, ideas and
+background.
+</p></body>

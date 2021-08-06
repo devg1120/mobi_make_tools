@@ -1,0 +1,49 @@
+--- 
+# kindle mobi document genelater
+#
+#
+# //*[@id="root"]/div/nav
+#  #root > div > nav
+#
+#  //*[@id="root"]/div/div[2]/nav
+#  #root > div > div.container.site__content > nav
+#
+#  //*[@id="root"]/div/div[2]/nav/div/div[5]/a
+#  #root > div > div.container.site__content > nav > div > div:nth-child(5) > a
+#  
+#  <a class="sidebar-item__title" href="/concepts/output/">Output</a>
+#
+top_dir: content
+recipe_slug: svn
+
+base_url: https://webpack.js.org/concepts/
+index_url: http://svnbook.red-bean.com/en/1.7/index.html
+kindle_css: css/kindle.css
+
+#
+kindlegen:
+  compress:  0     # 0/1/2
+  verbose:   true  # booleran
+  locale:    en
+
+doe: "a deer, a female deer"
+ray: "a drop of golden sun"
+pi: 3.14159
+xmas: true
+french-hens: 3
+calling-birds: 
+   - huey
+   - dewey
+   - louie
+   - fred
+xmas-fifth-day: 
+   calling-birds: four
+   french-hens: 3
+   golden-rings: 5
+   partridges: 
+     count: 1
+     location: "a pear tree"
+   turtle-doves: two
+
+
+

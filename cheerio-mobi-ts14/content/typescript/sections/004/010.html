@@ -1,0 +1,172 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Iterators
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts14/undefined" />
+  </head>
+   <body>
+<h3 id="iterators">Iterators</h3>
+<p>Iterator itself is not a TypeScript or ES6 feature, Iterator is a
+    Behavioral Design Pattern common for Object oriented programming languages.
+    It is, generally, an object which implements the following interface:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">interface</span> Iterator<t> {
+    next(value?: <span class="hljs-built_in">any</span>): IteratorResult<t>;
+    <span class="hljs-keyword">return</span>?(value?: <span class="hljs-built_in">any</span>): IteratorResult<t>;
+    <span class="hljs-keyword">throw</span>?(e?: <span class="hljs-built_in">any</span>): IteratorResult<t>;
+}
+</t></t></t></t></code></pre>
+<p>(<a href="types/generics.html">More on that <code>
+            <t>
+        </t></code> notation later</a>)<br>This interface allows to retrieve a value from some collection or sequence
+    which belongs to the object.</p>
+<p>The <code>IteratorResult</code> is simply a <code>value</code>+<code>done</code> pair: </p>
+<pre><code class="lang-ts"><span class="hljs-keyword">interface</span> IteratorResult<t> {
+    done: <span class="hljs-built_in">boolean</span>;
+    value: T;
+}
+</t></code></pre>
+<p>Imagine that there&apos;s an object of some frame, which includes the list of
+    components of which this frame consists. With Iterator interface it is possible
+    to retrieve components from this frame object like below:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">class</span> Component {
+  <span class="hljs-keyword">constructor</span> (public name: string) {}
+}
+<span class="hljs-keyword">class</span> Frame <span class="hljs-keyword">implements</span> Iterator<component> {
+  <span class="hljs-keyword">private</span> pointer = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">constructor</span>(public name: string, public components: Component[]) {}
+  <span class="hljs-keyword">public</span> next(): IteratorResult<component> {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.pointer &lt; <span class="hljs-keyword">this</span>.components.length) {
+      <span class="hljs-keyword">return</span> {
+        done: <span class="hljs-literal">false</span>,
+        value: <span class="hljs-keyword">this</span>.components[<span class="hljs-keyword">this</span>.pointer++]
+      }
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-keyword">return</span> {
+        done: <span class="hljs-literal">true</span>,
+        value: <span class="hljs-literal">null</span>
+      }
+    }
+  }
+}
+<span class="hljs-keyword">let</span> frame = <span class="hljs-keyword">new</span> Frame(<span class="hljs-string">&quot;Door&quot;</span>, [<span class="hljs-keyword">new</span> Component(<span class="hljs-string">&quot;top&quot;</span>), <span class="hljs-keyword">new</span> Component(<span class="hljs-string">&quot;bottom&quot;</span>), <span class="hljs-keyword">new</span> Component(<span class="hljs-string">&quot;left&quot;</span>), <span class="hljs-keyword">new</span> Component(<span class="hljs-string">&quot;right&quot;</span>)]);
+<span class="hljs-keyword">let</span> iteratorResult1 = frame.next(); <span class="hljs-comment">//{ done: false, value: Component { name: &apos;top&apos; } }</span>
+<span class="hljs-keyword">let</span> iteratorResult2 = frame.next(); <span class="hljs-comment">//{ done: false, value: Component { name: &apos;bottom&apos; } }</span>
+<span class="hljs-keyword">let</span> iteratorResult3 = frame.next(); <span class="hljs-comment">//{ done: false, value: Component { name: &apos;left&apos; } }</span>
+<span class="hljs-keyword">let</span> iteratorResult4 = frame.next(); <span class="hljs-comment">//{ done: false, value: Component { name: &apos;right&apos; } }</span>
+<span class="hljs-keyword">let</span> iteratorResult5 = frame.next(); <span class="hljs-comment">//{ done: true, value: null }</span>
+<span class="hljs-comment">//It is possible to access the value of iterator result via the value property:</span>
+<span class="hljs-keyword">let</span> component = iteratorResult1.value; <span class="hljs-comment">//Component { name: &apos;top&apos; }</span>
+</component></component></code></pre>
+<p>Again. Iterator itself is not a TypeScript feature, this code could work without
+    implementing Iterator and IteratorResult interfaces explicitly.
+    However, it is very helpful to use these common
+    ES6 <a href="types/interfaces.html">interfaces</a> for code consistency.</p>
+<p>Ok, Nice, but could be more helpful. ES6 defines the <em>iterable protocol</em>
+    which includes the [Symbol.iterator] <code>symbol</code> if the Iterable interface is implemented:</p>
+<pre><code class="lang-ts"><span class="hljs-comment">//...</span>
+<span class="hljs-keyword">class</span> Frame <span class="hljs-keyword">implements</span> Iterable<component> {
+  <span class="hljs-keyword">constructor</span>(public name: string, public components: Component[]) {}
+  [Symbol.iterator]() {
+    <span class="hljs-keyword">let</span> pointer = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">let</span> components = <span class="hljs-keyword">this</span>.components;
+    <span class="hljs-keyword">return</span> {
+      next(): IteratorResult<component> {
+        <span class="hljs-keyword">if</span> (pointer &lt; components.length) {
+          <span class="hljs-keyword">return</span> {
+            done: <span class="hljs-literal">false</span>,
+            value: components[pointer++]
+          }
+        } <span class="hljs-keyword">else</span> {
+          <span class="hljs-keyword">return</span> {
+            done: <span class="hljs-literal">true</span>,
+            value: <span class="hljs-literal">null</span>
+          }
+        }
+      }
+    }
+  }
+}
+<span class="hljs-keyword">let</span> frame = <span class="hljs-keyword">new</span> Frame(<span class="hljs-string">&quot;Door&quot;</span>, [<span class="hljs-keyword">new</span> Component(<span class="hljs-string">&quot;top&quot;</span>), <span class="hljs-keyword">new</span> Component(<span class="hljs-string">&quot;bottom&quot;</span>), <span class="hljs-keyword">new</span> Component(<span class="hljs-string">&quot;left&quot;</span>), <span class="hljs-keyword">new</span> Component(<span class="hljs-string">&quot;right&quot;</span>)]);
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> cmp of frame) {
+  <span class="hljs-built_in">console</span>.log(cmp);
+}
+</component></component></code></pre>
+<p>Unfortunately <code>frame.next()</code> won&apos;t work with this pattern and it also looks
+    a bit clunky. IterableIterator interface to the rescue!</p>
+<pre><code class="lang-ts"><span class="hljs-comment">//...</span>
+<span class="hljs-keyword">class</span> Frame <span class="hljs-keyword">implements</span> IterableIterator<component> {
+  <span class="hljs-keyword">private</span> pointer = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">constructor</span>(public name: string, public components: Component[]) {}
+  <span class="hljs-keyword">public</span> next(): IteratorResult<component> {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.pointer &lt; <span class="hljs-keyword">this</span>.components.length) {
+      <span class="hljs-keyword">return</span> {
+        done: <span class="hljs-literal">false</span>,
+        value: <span class="hljs-keyword">this</span>.components[<span class="hljs-keyword">this</span>.pointer++]
+      }
+    } <span class="hljs-keyword">else</span> {
+      <span class="hljs-keyword">return</span> {
+        done: <span class="hljs-literal">true</span>,
+        value: <span class="hljs-literal">null</span>
+      }
+    }
+  }
+  [Symbol.iterator](): IterableIterator<component> {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  }
+}
+<span class="hljs-comment">//...</span>
+</component></component></component></code></pre>
+<p>Both <code>frame.next()</code> and <code>for</code> cycle now work fine with IterableIterator interface.</p>
+<p>Iterator does not have to iterate a finite value.
+    The typical example is a Fibonacci sequence:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">class</span> Fib <span class="hljs-keyword">implements</span> IterableIterator&lt;<span class="hljs-built_in">number</span>&gt; {
+  <span class="hljs-keyword">protected</span> fn1 = <span class="hljs-number">0</span>;
+  <span class="hljs-keyword">protected</span> fn2 = <span class="hljs-number">1</span>;
+  <span class="hljs-keyword">constructor</span>(protected maxValue?: number) {}
+  <span class="hljs-keyword">public</span> next(): IteratorResult&lt;<span class="hljs-built_in">number</span>&gt; {
+    <span class="hljs-keyword">var</span> current = <span class="hljs-keyword">this</span>.fn1;
+    <span class="hljs-keyword">this</span>.fn1 = <span class="hljs-keyword">this</span>.fn2;
+    <span class="hljs-keyword">this</span>.fn2 = current + <span class="hljs-keyword">this</span>.fn1;
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.maxValue != <span class="hljs-literal">null</span> &amp;&amp; current &gt;= <span class="hljs-keyword">this</span>.maxValue) {
+      <span class="hljs-keyword">return</span> {
+        done: <span class="hljs-literal">true</span>,
+        value: <span class="hljs-literal">null</span>
+      } 
+    } 
+    <span class="hljs-keyword">return</span> {
+      done: <span class="hljs-literal">false</span>,
+      value: current
+    }
+  }
+  [Symbol.iterator](): IterableIterator&lt;<span class="hljs-built_in">number</span>&gt; {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+  }
+}
+<span class="hljs-keyword">let</span> fib = <span class="hljs-keyword">new</span> Fib();
+fib.next() <span class="hljs-comment">//{ done: false, value: 0 }</span>
+fib.next() <span class="hljs-comment">//{ done: false, value: 1 }</span>
+fib.next() <span class="hljs-comment">//{ done: false, value: 1 }</span>
+fib.next() <span class="hljs-comment">//{ done: false, value: 2 }</span>
+fib.next() <span class="hljs-comment">//{ done: false, value: 3 }</span>
+fib.next() <span class="hljs-comment">//{ done: false, value: 5 }</span>
+<span class="hljs-keyword">let</span> fibMax50 = <span class="hljs-keyword">new</span> Fib(<span class="hljs-number">50</span>);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">Array</span>.from(fibMax50)); <span class="hljs-comment">// [ 0, 1, 1, 2, 3, 5, 8, 13, 21, 34 ]</span>
+<span class="hljs-keyword">let</span> fibMax21 = <span class="hljs-keyword">new</span> Fib(<span class="hljs-number">21</span>);
+<span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> num of fibMax21) {
+  <span class="hljs-built_in">console</span>.log(num); <span class="hljs-comment">//Prints fibonacci sequence 0 to 21</span>
+}
+</code></pre>
+<h4 id="building-code-with-iterators-for-es5-target">Building code with iterators for ES5 target</h4>
+<p>Code examples above require ES6 target. However, it could work
+    with ES5 target as well if target JS engine supports <code>Symbol.iterator</code>.
+    This can be achieved by using ES6 lib with ES5 target
+    (add es6.d.ts to your project) to make it compile.
+    Compiled code should work in node 4+, Google Chrome and in some other browsers.</p>
+</body>
+</html>

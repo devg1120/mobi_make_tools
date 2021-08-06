@@ -1,0 +1,269 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    File Module Details
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts13_images/undefined" />
+  </head>
+   <body>
+<h2 id="external-modules">External modules</h2>
+<p>There is a lot of power and usability packed into the TypeScript external module pattern. Here we discuss its power and some patterns needed to reflect real world usages.</p>
+<h3 id="clarification-commonjs-amd-es-modules-others">Clarification: commonjs, amd, es modules, others</h3>
+<p>First up we need to clarify the (awful) inconsistency of the module systems out there. I&apos;ll just give you my <em>current</em> recommendation and remove the noise i.e. not show you all the <em>other</em> ways things can work.</p>
+<p>From the <em>same TypeScript</em> you can generate different <em>JavaScript</em> depending upon the <code>module</code> option. Here are things you can ignore (I am not interested in explaining dead tech):</p>
+<ul>
+    <li>AMD: Do not use. Was browser only.</li>
+    <li>SystemJS: Was a good experiment. Superseded by ES modules.</li>
+    <li>ES Modules: Not ready yet.</li>
+</ul>
+<p>Now these are just the options for <em>generating the JavaScript</em>. Instead of these options use <code>module:commonjs</code></p>
+<p>How you <em>write</em> TypeScript modules is also a bit of a mess. Again here is how not to do it <em>today</em>:</p>
+<ul>
+    <li><code>import foo = require(&apos;foo&apos;)</code>. i.e. <code>import/require</code>. Use ES module syntax instead.</li>
+</ul>
+<p>Cool, with that out of the way, lets look at the ES module syntax.</p>
+<blockquote>
+    <p>Summary: Use <code>module:commonjs</code> and use the ES module syntax to import / export / author modules.</p>
+</blockquote>
+<h3 id="es-module-syntax">ES Module syntax</h3>
+<ul>
+    <li>Exporting a variable (or type) is as easy as prefixing the keyword <code>export</code> e.g.</li>
+</ul>
+<pre><code class="lang-js"><span class="hljs-comment">// file `foo.ts`</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">let</span> someVar = <span class="hljs-number">123</span>;
+<span class="hljs-keyword">export</span> type SomeType = {
+  foo: string;
+};
+</code></pre>
+<ul>
+    <li>Exporting a variable or type in a dedicated <code>export</code> statement e.g.</li>
+</ul>
+<pre><code class="lang-js"><span class="hljs-comment">// file `foo.ts`</span>
+<span class="hljs-keyword">let</span> someVar = <span class="hljs-number">123</span>;
+type SomeType = {
+  foo: string;
+};
+<span class="hljs-keyword">export</span> {
+  someVar,
+  SomeType
+};
+</code></pre>
+<ul>
+    <li>Exporting a variable or type in a dedicated <code>export</code> statement <em>with renaming</em> e.g.</li>
+</ul>
+<pre><code class="lang-js"><span class="hljs-comment">// file `foo.ts`</span>
+<span class="hljs-keyword">let</span> someVar = <span class="hljs-number">123</span>;
+<span class="hljs-keyword">export</span> { someVar <span class="hljs-keyword">as</span> aDifferentName };
+</code></pre>
+<ul>
+    <li>Import a variable or a type using <code>import</code> e.g.</li>
+</ul>
+<pre><code class="lang-js"><span class="hljs-comment">// file `bar.ts`</span>
+<span class="hljs-keyword">import</span> { someVar, SomeType } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./foo&apos;</span>;
+</code></pre>
+<ul>
+    <li>Import a variable or a type using <code>import</code> <em>with renaming</em> e.g.</li>
+</ul>
+<pre><code class="lang-js"><span class="hljs-comment">// file `bar.ts`</span>
+<span class="hljs-keyword">import</span> { someVar <span class="hljs-keyword">as</span> aDifferentName } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./foo&apos;</span>;
+</code></pre>
+<ul>
+    <li>Import everything from a module into a name with <code>import * as</code> e.g.</li>
+</ul>
+<pre><code class="lang-js"><span class="hljs-comment">// file `bar.ts`</span>
+<span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> foo <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./foo&apos;</span>;
+<span class="hljs-comment">// you can use `foo.someVar` and `foo.SomeType` and anything else that foo might export.</span>
+</code></pre>
+<ul>
+    <li>Import a file <em>only</em> for its side effect with a single import statement:</li>
+</ul>
+<pre><code class="lang-js"><span class="hljs-keyword">import</span> <span class="hljs-string">&apos;core-js&apos;</span>; <span class="hljs-comment">// a common polyfill library</span>
+</code></pre>
+<ul>
+    <li>Re-Exporting all the items from another module</li>
+</ul>
+<pre><code class="lang-js"><span class="hljs-keyword">export</span> * <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./foo&apos;</span>;
+</code></pre>
+<ul>
+    <li>Re-Exporting only some items from another module</li>
+</ul>
+<pre><code class="lang-js"><span class="hljs-keyword">export</span> { someVar } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./foo&apos;</span>;
+</code></pre>
+<ul>
+    <li>Re-Exporting only some items from another module <em>with renaming</em></li>
+</ul>
+<pre><code class="lang-js"><span class="hljs-keyword">export</span> { someVar <span class="hljs-keyword">as</span> aDifferentName } <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./foo&apos;</span>;
+</code></pre>
+<h3 id="default-exportsimports">Default exports/imports</h3>
+<p>As you will learn later, I am not a fan of default exports. Nevertheless here is syntax for export and using default exports</p>
+<ul>
+    <li>Export using <code>export default</code>
+        <ul>
+            <li>before a variable (no <code>let / const / var</code> needed)</li>
+            <li>before a function</li>
+            <li>before a class</li>
+        </ul>
+    </li>
+</ul>
+<pre><code class="lang-js"><span class="hljs-comment">// some var</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> someVar = <span class="hljs-number">123</span>;
+<span class="hljs-comment">// OR Some function</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">someFunction</span>(<span class="hljs-params"></span>) </span>{ }
+<span class="hljs-comment">// OR Some class</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SomeClass</span> </span>{ }
+</code></pre>
+<ul>
+    <li>Import using the <code>import someName from &quot;someModule&quot;</code> syntax (you can name the import whatever you want) e.g.</li>
+</ul>
+<pre><code class="lang-js"><span class="hljs-keyword">import</span> someLocalNameForThisFile <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;../foo&quot;</span>;
+</code></pre>
+<h3 id="module-paths">Module paths</h3>
+<blockquote>
+    <p>I am just going to assume <code>moduleResolution: commonjs</code>. This is the option you should have in your TypeScript config. This setting is implied automatically by <code>module:commonjs</code>.</p>
+</blockquote>
+<p>There are two distinct kinds of modules. The distinction is driven by the path section of the import statement (e.g. <code>import foo from &apos;THIS IS THE PATH SECTION&apos;</code>).</p>
+<ul>
+    <li>Relative path modules (where path starts with <code>.</code> e.g. <code>./someFile</code> or <code>../../someFolder/someFile</code> etc.)</li>
+    <li>Other dynamic lookup modules (e.g. <code>&apos;core-js&apos;</code> or <code>&apos;typestyle&apos;</code> or <code>&apos;react&apos;</code> or even <code>&apos;react/core&apos;</code> etc.)</li>
+</ul>
+<p>The main difference is <em>how the module is resolved on the file system</em>.</p>
+<blockquote>
+    <p>I will use a conceptual term <em>place</em> that I will explain after mentioning the lookup pattern.</p>
+</blockquote>
+<h4 id="relative-path-modules">Relative path modules</h4>
+<p>Easy, just follow the relative path :) e.g.</p>
+<ul>
+    <li>if file <code>bar.ts</code> does <code>import * as foo from &apos;./foo&apos;;</code> then place <code>foo</code> must exist in the same folder.</li>
+    <li>if file <code>bar.ts</code> does <code>import * as foo from &apos;../foo&apos;;</code> then place <code>foo</code> must exist in a folder up.</li>
+    <li>if file <code>bar.ts</code> does <code>import * as foo from &apos;../someFolder/foo&apos;;</code> then one folder up, there must be a folder <code>someFolder</code> with a place <code>foo</code></li>
+</ul>
+<p>Or any other relative path you can think of :)</p>
+<h4 id="dynamic-lookup">Dynamic lookup</h4>
+<p>When the import path is <em>not</em> relative, lookup is driven by <a href="https://nodejs.org/api/modules.html#modules_all_together" target="_blank"><em>node style resolution</em></a>. Here I only give a simple example:</p>
+<ul>
+    <li>
+        <p>You have <code>import * as foo from &apos;foo&apos;</code>, the following are the places that are checked <em>in order</em></p>
+        <ul>
+            <li><code>./node_modules/foo</code></li>
+            <li><code>../node_modules/foo</code></li>
+            <li><code>../../node_modules/foo</code></li>
+            <li>Till root of file system</li>
+        </ul>
+    </li>
+    <li>
+        <p>You have <code>import * as foo from &apos;something/foo&apos;</code>, the following are the places that are checked <em>in order</em></p>
+        <ul>
+            <li><code>./node_modules/something/foo</code></li>
+            <li><code>../node_modules/something/foo</code></li>
+            <li><code>../../node_modules/something/foo</code></li>
+            <li>Till root of file system</li>
+        </ul>
+    </li>
+</ul>
+<h3 id="what-is-place">What is <em>place</em></h3>
+<p>When I say <em>places that are checked</em> I mean that the following things are checked in that place. e.g. for a place <code>foo</code>:</p>
+<ul>
+    <li>If the place is a file, e.g. <code>foo.ts</code>, hurray!</li>
+    <li>else if the place is a folder and there is a file <code>foo/index.ts</code>, hurray!</li>
+    <li>else if the place is a folder and there is a <code>foo/package.json</code> and a file specified in the <code>types</code> key in the package.json that exists, then hurray!</li>
+    <li>else if the place is a folder and there is a <code>package.json</code> and a file specified in the <code>main</code> key in the package.json that exists, then hurray!</li>
+</ul>
+<p>By file I actually mean <code>.ts</code> / <code>.d.ts</code> and <code>.js</code>.</p>
+<p>And that&apos;s it. You are now module lookup experts (not a small feat!).</p>
+<h3 id="overturning-dynamic-lookup-just-for-types">Overturning dynamic lookup <em>just for types</em></h3>
+<p>You can declare a module <em>globally</em> for your project by using <code>declare module &apos;somePath&apos;</code> and then imports will resolve <em>magically</em> to that path</p>
+<p>e.g.</p>
+<pre><code class="lang-ts"><span class="hljs-comment">// globals.d.ts</span>
+<span class="hljs-keyword">declare</span> <span class="hljs-keyword">module</span> &apos;foo&apos; {
+  <span class="hljs-comment">// Some variable declarations</span>
+  <span class="hljs-keyword">export</span> <span class="hljs-keyword">var</span> bar: <span class="hljs-built_in">number</span>; <span class="hljs-comment">/*sample*/</span>
+}
+</code></pre>
+<p>and then:</p>
+<pre><code class="lang-ts"><span class="hljs-comment">// anyOtherTsFileInYourProject.ts</span>
+<span class="hljs-keyword">import</span> * as foo from <span class="hljs-string">&apos;foo&apos;</span>;
+<span class="hljs-comment">// TypeScript assumes (without doing any lookup) that</span>
+<span class="hljs-comment">// foo is {bar:number}</span>
+</code></pre>
+<h3 id="importrequire-for-importing-type-only"><code>import/require</code> for importing type only</h3>
+<p>The following statement:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">import</span> foo = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;foo&apos;</span>);
+</code></pre>
+<p>actually does <em>two</em> things:</p>
+<ul>
+    <li>Imports the type information of the foo module.</li>
+    <li>Specifies a runtime dependency on the foo module.</li>
+</ul>
+<p>You can pick and choose so that only <em>the type information</em> is loaded and no runtime dependency occurs. Before continuing you might want to recap the <a href="declarationspaces.html"><em>declaration spaces</em></a> section of the book.</p>
+<p>If you do not use the imported name in the variable declaration space then the import is completely removed from the generated JavaScript. This is best explained with examples. Once you understand this we will present you with use cases.</p>
+<h4 id="example-1">Example 1</h4>
+<pre><code class="lang-ts"><span class="hljs-keyword">import</span> foo = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;foo&apos;</span>);
+</code></pre>
+<p>will generate the JavaScript:</p>
+<pre><code class="lang-js">
+</code></pre>
+<p>That&apos;s right. An <em>empty</em> file as foo is not used.</p>
+<h4 id="example-2">Example 2</h4>
+<pre><code class="lang-ts"><span class="hljs-keyword">import</span> foo = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;foo&apos;</span>);
+<span class="hljs-keyword">var</span> bar: foo;
+</code></pre>
+<p>will generate the JavaScript:</p>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> bar;
+</code></pre>
+<p>This is because <code>foo</code> (or any of its properties e.g. <code>foo.bas</code>) is never used as a variable.</p>
+<h4 id="example-3">Example 3</h4>
+<pre><code class="lang-ts"><span class="hljs-keyword">import</span> foo = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;foo&apos;</span>);
+<span class="hljs-keyword">var</span> bar = foo;
+</code></pre>
+<p>will generate the JavaScript (assuming commonjs):</p>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> foo = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;foo&apos;</span>);
+<span class="hljs-keyword">var</span> bar = foo;
+</code></pre>
+<p>This is because <code>foo</code> is used as a variable.</p>
+<h3 id="use-case-lazy-loading">Use case: Lazy loading</h3>
+<p>Type inference needs to be done <em>upfront</em>. This means that if you want to use some type from a file <code>foo</code> in a file <code>bar</code> you will have to do:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">import</span> foo = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;foo&apos;</span>);
+<span class="hljs-keyword">var</span> bar: foo.SomeType;
+</code></pre>
+<p>However, you might want to only load the file <code>foo</code> at runtime under certain conditions. For such cases you should use the <code>import</code>ed name only in <em>type annotations</em> and <strong>not</strong> as a <em>variable</em>. This removes any <em>upfront</em> runtime dependency code being injected by TypeScript. Then <em>manually import</em> the actual module using code that is specific to your module loader.</p>
+<p>As an example, consider the following <code>commonjs</code> based code where we only load a module <code>&apos;foo&apos;</code> on a certain function call:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">import</span> foo = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;foo&apos;</span>);
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">loadFoo</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-comment">// This is lazy loading `foo` and using the original module *only* as a type annotation</span>
+    <span class="hljs-keyword">var</span> _foo: <span class="hljs-keyword">typeof</span> foo = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;foo&apos;</span>);
+    <span class="hljs-comment">// Now use `_foo` as a variable instead of `foo`.</span>
+}
+</code></pre>
+<p>A similar sample in <code>amd</code> (using requirejs) would be:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">import</span> foo = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;foo&apos;</span>);
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">loadFoo</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-comment">// This is lazy loading `foo` and using the original module *only* as a type annotation</span>
+    <span class="hljs-built_in">require</span>([<span class="hljs-string">&apos;foo&apos;</span>], (_foo: <span class="hljs-keyword">typeof</span> foo) =&gt; {
+        <span class="hljs-comment">// Now use `_foo` as a variable instead of `foo`.</span>
+    });
+}
+</code></pre>
+<p>This pattern is commonly used:</p>
+<ul>
+    <li>in web apps where you load certain JavaScript on particular routes,</li>
+    <li>in node applications where you only load certain modules if needed to speed up application bootup.</li>
+</ul>
+<h3 id="use-case-breaking-circular-dependencies">Use case: Breaking Circular dependencies</h3>
+<p>Similar to the lazy loading use case certain module loaders (commonjs/node and amd/requirejs) don&apos;t work well with circular dependencies. In such cases it is useful to have <em>lazy loading</em> code in one direction and loading the modules upfront in the other direction.</p>
+<h3 id="use-case-ensure-import">Use case: Ensure Import</h3>
+<p>Sometimes you want to load a file just for the side effect (e.g. the module might register itself with some library like <a href="https://codemirror.net/doc/manual.html#addons" target="_blank">CodeMirror addons</a> etc.). However, if you just do a <code>import/require</code> the transpiled JavaScript will not contain a dependency on the module and your module loader (e.g. webpack) might completely ignore the import. In such cases you can use a <code>ensureImport</code> variable to ensure that the compiled JavaScript takes a dependency on the module e.g.:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">import</span> foo = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;./foo&apos;</span>);
+<span class="hljs-keyword">import</span> bar = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;./bar&apos;</span>);
+<span class="hljs-keyword">import</span> bas = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;./bas&apos;</span>);
+<span class="hljs-keyword">const</span> ensureImport: <span class="hljs-built_in">any</span> =
+    foo
+    || bar
+    || bas;
+</code></pre>
+</body>
+</html>

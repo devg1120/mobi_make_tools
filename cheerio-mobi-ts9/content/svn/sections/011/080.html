@@ -1,0 +1,59 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svnsync info</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/tmp/es2015/cheerio-mobi-ts8/undefined" />
+  </head>
+   <body>
+    <div class="refentry">
+      <a id="svn.ref.svnsync.c.info"></a>
+      <div class="titlepage"></div>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svnsync info &#x2014; Print information about the synchronization
+            of a destination repository.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm13281"></a>
+        <h2>Synopsis</h2>
+        <p>
+          <code class="literal">svnsync info DEST_URL</code>
+        </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm13285"></a>
+        <h2>Description</h2>
+        <p>Print the synchronization source URL, source repository
+            UUID and the last revision merged from the source to the
+            destination repository at <em class="replaceable"><code>DEST_URL</code></em>.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm13289"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+          <pre class="screen">
+</pre>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm13302"></a>
+        <h2>Examples</h2>
+        <p>Print the synchronization information of a mirror
+            repository:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svnsync info file:///var/svn/repos-mirror
+Source URL: http://svn.example.com/repos
+Source Repository UUID: e7fe1b91-8cd5-0310-98dd-2f12e793c5e8
+Last Merged Revision: 47
+$
+</pre>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

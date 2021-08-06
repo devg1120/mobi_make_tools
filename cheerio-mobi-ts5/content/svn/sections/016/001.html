@@ -1,0 +1,107 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>What Is WebDAV?</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts5/css/kindle.css" />
+  </head>
+   <body>
+    <div class="sect1">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="svn.webdav.basic"></a>What Is WebDAV?</h2>
+          </div>
+        </div>
+      </div>
+      <p><em class="firstterm">DAV</em> stands for <span class="quote">&#x201C;<span class="quote">Distributed
+      Authoring and Versioning.</span>&#x201D;</span>  RFC 2518 defines a set of
+      concepts and accompanying extension methods to HTTP 1.1 that
+      make the Web a more universal read/write medium.  The basic
+      idea is that a WebDAV-compliant web server can act like a
+      generic file server; clients can <span class="quote">&#x201C;<span class="quote">mount</span>&#x201D;</span> shared
+      folders over HTTP that behave much like other network
+      filesystems (such as NFS or SMB).</p>
+      <p>The tragedy, though, is that despite the acronym, the RFC
+      specification doesn&apos;t actually describe any sort of version
+      control.  Basic WebDAV clients and servers assume that only one
+      version of each file or directory exists, and that it can be
+      repeatedly overwritten.</p>
+      <p>Because RFC 2518 left out versioning concepts, another
+      committee was left with the responsibility of writing RFC 3253 a
+      few years later.  The new RFC adds versioning concepts to
+      WebDAV, placing the <span class="quote">&#x201C;<span class="quote">V</span>&#x201D;</span> back in
+      <span class="quote">&#x201C;<span class="quote">DAV</span>&#x201D;</span>&#x2014;hence the term <span class="quote">&#x201C;<span class="quote">DeltaV.</span>&#x201D;</span>
+      WebDAV/DeltaV clients and servers are often called just
+      <span class="quote">&#x201C;<span class="quote">DeltaV</span>&#x201D;</span> programs, since DeltaV implies the
+      existence of basic WebDAV.</p>
+      <p>The original WebDAV standard has been widely successful.
+      Every modern computer operating system has a general WebDAV
+      client built in (details to follow), and a number of popular
+      standalone applications are also able to speak
+      WebDAV&#x2014;Microsoft Office, Dreamweaver, and Photoshop, to
+      name a few.  On the server end, Apache HTTP Server has been
+      able to provide WebDAV services since 1998 and is considered the
+      de facto open source standard.  Several other
+      commercial WebDAV servers are available, including Microsoft&apos;s own
+      IIS.</p>
+      <p>DeltaV, unfortunately, has not been so successful.  It&apos;s
+      very difficult to find any DeltaV clients or servers.  The few
+      that do exist are relatively unknown commercial products, and
+      thus it&apos;s very difficult to test interoperability.  It&apos;s not
+      entirely clear as to why DeltaV has remained stagnant.  Some
+      opine that the specification is just too complex.  Others argue
+      that while WebDAV&apos;s features have mass appeal (even the least
+      technical users appreciate network file sharing), its version
+      control features just aren&apos;t interesting or necessary for most
+      users.  Finally, some believe that DeltaV remains unpopular
+      because there&apos;s still no open source server product that
+      implements it well.</p>
+      <p>When Subversion was still in its design phase, it seemed
+      like a great idea to use Apache as a network server.  It already
+      had a module to provide WebDAV services.  DeltaV was a
+      relatively new specification.  The hope was that the Subversion
+      server module (<span class="command"><strong>mod_dav_svn</strong></span>) would eventually
+      evolve into an open source DeltaV reference implementation.
+      Unfortunately, DeltaV has a very specific versioning model that
+      doesn&apos;t quite line up with Subversion&apos;s model.  Some concepts
+      were mappable; others were not.</p>
+      <p>What does this mean, then?</p>
+      <p>First, the Subversion client is not a fully implemented
+      DeltaV client.  It needs certain types of things from the server
+      that DeltaV itself cannot provide, and thus is largely dependent
+      on a number of Subversion-specific
+      HTTP <code class="literal">REPORT</code> requests that
+      only <span class="command"><strong>mod_dav_svn</strong></span> understands.</p>
+      <p>Second, <span class="command"><strong>mod_dav_svn</strong></span> is not a
+      fully realized DeltaV server.  Many portions of the DeltaV
+      specification were irrelevant to Subversion, and thus were left
+      unimplemented.</p>
+      <p>A long-held debate in the Subversion developer community
+      about whether it was worthfile to remedy either of these
+      situations eventually reached closure, with the Subversion
+      developers officially deciding to abandon plans to fully support
+      DeltaV.  As of Subversion 1.7, Subversion clients and servers
+      introduce numerous non-standard simplifications of the DeltaV
+      standards<a href="#ftn.idm15032" class="footnote" id="idm15032"><sup class="footnote">[75]</sup></a>, with more
+      customizations of this sort likely to come.  Those versions of
+      Subversion will, of course, continue to provide the same DeltaV
+      feature support already present in older releases, but no new
+      work will be done to increase coverage of the
+      specification&#x2014;Subversion is intentionally moving away from
+      strict DeltaV as its primary HTTP-based protocol.</p>
+      <div class="footnotes">
+        <br>
+        <hr style="width:100; text-align:left;margin-left: 0">
+        <div id="ftn.idm15032" class="footnote">
+          <p><a href="#idm15032" class="para"><sup class="para">[75] </sup></a>The Subversion developers colloquially
+      refer to this deviation from the DeltaV standard
+      as <span class="quote">&#x201C;<span class="quote">HTTPv2</span>&#x201D;</span>.</p>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

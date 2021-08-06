@@ -1,0 +1,1025 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE ncx PUBLIC "-//NISO//DTD ncx 2005-1//EN" "http://www.daisy.org/z3986/2005/ncx-2005-1.dtd">
+<ncx xmlns:mbp="http://mobipocket.com/ns/mbp" xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1" xml:lang="en-US">
+  <head>
+    <meta content="unix-documetation-2019-08-02" name="dtb:uid"/>
+    <meta content="2" name="dtb:depth"/>
+    <meta content="0" name="dtb:totalPageCount"/>
+    <meta content="0" name="dtb:maxPageNumber"/>
+  </head>
+  <docTitle>
+    <text>unix</text>
+  </docTitle>
+  <docAuthor>
+    <text>AUTHOR</text>
+  </docAuthor>
+  <navMap>
+    <navPoint playOrder="1" class="periodical" id="periodical">
+      <mbp:meta-img src="" name="mastheadImage"/>
+      <navLabel><text>Table of Contents</text></navLabel>
+      <content src="contents.html"/>
+      <navPoint playOrder="2" class="section" id="item-000">
+        <navLabel><text>Frontmatter</text></navLabel>
+        <content src="sections/000/section.html"/>
+        <navPoint playOrder="3" class="article" id="item-000000">
+          <navLabel><text>Title Page</text></navLabel>
+          <content src="sections/000/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="4" class="section" id="item-001">
+        <navLabel><text>Preface</text></navLabel>
+        <content src="sections/001/section.html"/>
+        <navPoint playOrder="5" class="article" id="item-001000">
+          <navLabel><text>Preface</text></navLabel>
+          <content src="sections/001/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="6" class="article" id="item-001001">
+          <navLabel><text>Who Should Read This Book</text></navLabel>
+          <content src="sections/001/001.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="7" class="article" id="item-001002">
+          <navLabel><text>How to Use This Book</text></navLabel>
+          <content src="sections/001/002.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="8" class="article" id="item-001003">
+          <navLabel><text>Related References</text></navLabel>
+          <content src="sections/001/003.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="9" class="article" id="item-001004">
+          <navLabel><text>Conventions Used in This Book</text></navLabel>
+          <content src="sections/001/004.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="10" class="article" id="item-001005">
+          <navLabel><text>Our Case Studies</text></navLabel>
+          <content src="sections/001/005.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="11" class="article" id="item-001006">
+          <navLabel><text>Author&#x27;s Acknowledgements</text></navLabel>
+          <content src="sections/001/006.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="12" class="article" id="item-001007">
+          <navLabel><text>Context</text></navLabel>
+          <content src="sections/001/007.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="13" class="section" id="item-002">
+        <navLabel><text>Philosophy</text></navLabel>
+        <content src="sections/002/section.html"/>
+        <navPoint playOrder="14" class="article" id="item-002000">
+          <navLabel><text>Philosophy</text></navLabel>
+          <content src="sections/002/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="15" class="article" id="item-002001">
+          <navLabel><text>Culture? What Culture?</text></navLabel>
+          <content src="sections/002/001.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="16" class="article" id="item-002002">
+          <navLabel><text>The Durability of Unix</text></navLabel>
+          <content src="sections/002/002.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="17" class="article" id="item-002003">
+          <navLabel><text>The Case against Learning Unix Culture</text></navLabel>
+          <content src="sections/002/003.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="18" class="article" id="item-002004">
+          <navLabel><text>What Unix Gets Wrong</text></navLabel>
+          <content src="sections/002/004.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="19" class="article" id="item-002005">
+          <navLabel><text>What Unix Gets Right</text></navLabel>
+          <content src="sections/002/005.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="20" class="article" id="item-002006">
+          <navLabel><text>Basics of the Unix Philosophy</text></navLabel>
+          <content src="sections/002/006.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="21" class="article" id="item-002007">
+          <navLabel><text>The Unix Philosophy in One Lesson</text></navLabel>
+          <content src="sections/002/007.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="22" class="article" id="item-002008">
+          <navLabel><text>Applying the Unix Philosophy</text></navLabel>
+          <content src="sections/002/008.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="23" class="article" id="item-002009">
+          <navLabel><text>Attitude Matters Too</text></navLabel>
+          <content src="sections/002/009.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="24" class="section" id="item-003">
+        <navLabel><text>History</text></navLabel>
+        <content src="sections/003/section.html"/>
+        <navPoint playOrder="25" class="article" id="item-003000">
+          <navLabel><text>History</text></navLabel>
+          <content src="sections/003/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="26" class="article" id="item-003001">
+          <navLabel><text>Origins and History of Unix, 1969-1995</text></navLabel>
+          <content src="sections/003/001.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="27" class="article" id="item-003002">
+          <navLabel><text>Origins and History of the Hackers, 1961-1995</text></navLabel>
+          <content src="sections/003/002.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="28" class="article" id="item-003003">
+          <navLabel><text>The Open-Source Movement: 1998 and Onward</text></navLabel>
+          <content src="sections/003/003.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="29" class="article" id="item-003004">
+          <navLabel><text>The Lessons of Unix History</text></navLabel>
+          <content src="sections/003/004.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="30" class="section" id="item-004">
+        <navLabel><text>Contrasts</text></navLabel>
+        <content src="sections/004/section.html"/>
+        <navPoint playOrder="31" class="article" id="item-004000">
+          <navLabel><text>Contrasts</text></navLabel>
+          <content src="sections/004/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="32" class="article" id="item-004001">
+          <navLabel><text>The Elements of Operating-System Style</text></navLabel>
+          <content src="sections/004/001.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="33" class="article" id="item-004002">
+          <navLabel><text>Operating-System Comparisons</text></navLabel>
+          <content src="sections/004/002.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="34" class="article" id="item-004003">
+          <navLabel><text>What Goes Around, Comes Around</text></navLabel>
+          <content src="sections/004/003.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="35" class="article" id="item-004004">
+          <navLabel><text>Design</text></navLabel>
+          <content src="sections/004/004.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="36" class="section" id="item-005">
+        <navLabel><text>Modularity</text></navLabel>
+        <content src="sections/005/section.html"/>
+        <navPoint playOrder="37" class="article" id="item-005000">
+          <navLabel><text>Modularity</text></navLabel>
+          <content src="sections/005/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="38" class="article" id="item-005001">
+          <navLabel><text>Encapsulation and Optimal Module Size</text></navLabel>
+          <content src="sections/005/001.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="39" class="article" id="item-005002">
+          <navLabel><text>Compactness and Orthogonality</text></navLabel>
+          <content src="sections/005/002.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="40" class="article" id="item-005003">
+          <navLabel><text>Software Is a Many-Layered Thing</text></navLabel>
+          <content src="sections/005/003.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="41" class="article" id="item-005004">
+          <navLabel><text>Libraries</text></navLabel>
+          <content src="sections/005/004.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="42" class="article" id="item-005005">
+          <navLabel><text>Unix and Object-Oriented Languages</text></navLabel>
+          <content src="sections/005/005.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="43" class="article" id="item-005006">
+          <navLabel><text>Coding for Modularity</text></navLabel>
+          <content src="sections/005/006.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="44" class="section" id="item-006">
+        <navLabel><text>Textuality</text></navLabel>
+        <content src="sections/006/section.html"/>
+        <navPoint playOrder="45" class="article" id="item-006000">
+          <navLabel><text>Textuality</text></navLabel>
+          <content src="sections/006/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="46" class="article" id="item-006001">
+          <navLabel><text>The Importance of Being Textual</text></navLabel>
+          <content src="sections/006/001.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="47" class="article" id="item-006002">
+          <navLabel><text>Data File Metaformats</text></navLabel>
+          <content src="sections/006/002.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="48" class="article" id="item-006003">
+          <navLabel><text>Application Protocol Design</text></navLabel>
+          <content src="sections/006/003.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="49" class="article" id="item-006004">
+          <navLabel><text>Application Protocol Metaformats</text></navLabel>
+          <content src="sections/006/004.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="50" class="section" id="item-007">
+        <navLabel><text>Transparency</text></navLabel>
+        <content src="sections/007/section.html"/>
+        <navPoint playOrder="51" class="article" id="item-007000">
+          <navLabel><text>Transparency</text></navLabel>
+          <content src="sections/007/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="52" class="article" id="item-007001">
+          <navLabel><text>Studying Cases</text></navLabel>
+          <content src="sections/007/001.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="53" class="article" id="item-007002">
+          <navLabel><text>Designing for Transparency and Discoverability</text></navLabel>
+          <content src="sections/007/002.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="54" class="article" id="item-007003">
+          <navLabel><text>Designing for Maintainability</text></navLabel>
+          <content src="sections/007/003.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="55" class="section" id="item-008">
+        <navLabel><text>Multiprogramming</text></navLabel>
+        <content src="sections/008/section.html"/>
+        <navPoint playOrder="56" class="article" id="item-008000">
+          <navLabel><text>Multiprogramming</text></navLabel>
+          <content src="sections/008/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="57" class="article" id="item-008001">
+          <navLabel><text>Separating Complexity Control from Performance Tuning</text></navLabel>
+          <content src="sections/008/001.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="58" class="article" id="item-008002">
+          <navLabel><text>Taxonomy of Unix IPC Methods</text></navLabel>
+          <content src="sections/008/002.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="59" class="article" id="item-008003">
+          <navLabel><text>Problems and Methods to Avoid</text></navLabel>
+          <content src="sections/008/003.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="60" class="article" id="item-008004">
+          <navLabel><text>Process Partitioning at the Design Level</text></navLabel>
+          <content src="sections/008/004.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="61" class="section" id="item-009">
+        <navLabel><text>Minilanguages</text></navLabel>
+        <content src="sections/009/section.html"/>
+        <navPoint playOrder="62" class="article" id="item-009000">
+          <navLabel><text>Minilanguages</text></navLabel>
+          <content src="sections/009/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="63" class="article" id="item-009001">
+          <navLabel><text>Understanding the Taxonomy of Languages</text></navLabel>
+          <content src="sections/009/001.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="64" class="article" id="item-009002">
+          <navLabel><text>Applying Minilanguages</text></navLabel>
+          <content src="sections/009/002.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="65" class="article" id="item-009003">
+          <navLabel><text>Designing Minilanguages</text></navLabel>
+          <content src="sections/009/003.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="66" class="section" id="item-010">
+        <navLabel><text>Generation</text></navLabel>
+        <content src="sections/010/section.html"/>
+        <navPoint playOrder="67" class="article" id="item-010000">
+          <navLabel><text>Generation</text></navLabel>
+          <content src="sections/010/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="68" class="article" id="item-010001">
+          <navLabel><text>Data-Driven Programming</text></navLabel>
+          <content src="sections/010/001.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="69" class="article" id="item-010002">
+          <navLabel><text>Ad-hoc Code Generation</text></navLabel>
+          <content src="sections/010/002.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="70" class="section" id="item-011">
+        <navLabel><text>Configuration</text></navLabel>
+        <content src="sections/011/section.html"/>
+        <navPoint playOrder="71" class="article" id="item-011000">
+          <navLabel><text>Configuration</text></navLabel>
+          <content src="sections/011/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="72" class="article" id="item-011001">
+          <navLabel><text>What Should Be Configurable?</text></navLabel>
+          <content src="sections/011/001.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="73" class="article" id="item-011002">
+          <navLabel><text>Where Configurations Live</text></navLabel>
+          <content src="sections/011/002.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="74" class="article" id="item-011003">
+          <navLabel><text>Run-Control Files</text></navLabel>
+          <content src="sections/011/003.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="75" class="article" id="item-011004">
+          <navLabel><text>Environment Variables</text></navLabel>
+          <content src="sections/011/004.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="76" class="article" id="item-011005">
+          <navLabel><text>Command-Line Options</text></navLabel>
+          <content src="sections/011/005.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="77" class="article" id="item-011006">
+          <navLabel><text>How to Choose among the Methods</text></navLabel>
+          <content src="sections/011/006.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="78" class="article" id="item-011007">
+          <navLabel><text>On Breaking These Rules</text></navLabel>
+          <content src="sections/011/007.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="79" class="section" id="item-012">
+        <navLabel><text>Interfaces</text></navLabel>
+        <content src="sections/012/section.html"/>
+        <navPoint playOrder="80" class="article" id="item-012000">
+          <navLabel><text>Interfaces</text></navLabel>
+          <content src="sections/012/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="81" class="article" id="item-012001">
+          <navLabel><text>Applying the Rule of Least Surprise</text></navLabel>
+          <content src="sections/012/001.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="82" class="article" id="item-012002">
+          <navLabel><text>History of Interface Design on Unix</text></navLabel>
+          <content src="sections/012/002.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="83" class="article" id="item-012003">
+          <navLabel><text>Evaluating Interface Designs</text></navLabel>
+          <content src="sections/012/003.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="84" class="article" id="item-012004">
+          <navLabel><text>Tradeoffs between CLI and Visual Interfaces</text></navLabel>
+          <content src="sections/012/004.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="85" class="article" id="item-012005">
+          <navLabel><text>Transparency, Expressiveness, and Configurability</text></navLabel>
+          <content src="sections/012/005.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="86" class="article" id="item-012006">
+          <navLabel><text>Unix Interface Design Patterns</text></navLabel>
+          <content src="sections/012/006.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="87" class="article" id="item-012007">
+          <navLabel><text>Applying Unix Interface-Design Patterns</text></navLabel>
+          <content src="sections/012/007.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="88" class="article" id="item-012008">
+          <navLabel><text>The Web Browser as a Universal Front End</text></navLabel>
+          <content src="sections/012/008.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="89" class="article" id="item-012009">
+          <navLabel><text>Silence Is Golden</text></navLabel>
+          <content src="sections/012/009.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="90" class="section" id="item-013">
+        <navLabel><text>Optimization</text></navLabel>
+        <content src="sections/013/section.html"/>
+        <navPoint playOrder="91" class="article" id="item-013000">
+          <navLabel><text>Optimization</text></navLabel>
+          <content src="sections/013/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="92" class="article" id="item-013001">
+          <navLabel><text>Don&#x27;t Just Do Something, Stand There!</text></navLabel>
+          <content src="sections/013/001.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="93" class="article" id="item-013002">
+          <navLabel><text>Measure before Optimizing</text></navLabel>
+          <content src="sections/013/002.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="94" class="article" id="item-013003">
+          <navLabel><text>Nonlocality Considered Harmful</text></navLabel>
+          <content src="sections/013/003.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="95" class="article" id="item-013004">
+          <navLabel><text>Throughput vs. Latency</text></navLabel>
+          <content src="sections/013/004.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="96" class="section" id="item-014">
+        <navLabel><text>Complexity</text></navLabel>
+        <content src="sections/014/section.html"/>
+        <navPoint playOrder="97" class="article" id="item-014000">
+          <navLabel><text>Complexity</text></navLabel>
+          <content src="sections/014/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="98" class="article" id="item-014001">
+          <navLabel><text>Speaking of Complexity</text></navLabel>
+          <content src="sections/014/001.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="99" class="article" id="item-014002">
+          <navLabel><text>A Tale of Five Editors</text></navLabel>
+          <content src="sections/014/002.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="100" class="article" id="item-014003">
+          <navLabel><text>The Right Size for an Editor</text></navLabel>
+          <content src="sections/014/003.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="101" class="article" id="item-014004">
+          <navLabel><text>The Right Size of Software</text></navLabel>
+          <content src="sections/014/004.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="102" class="article" id="item-014005">
+          <navLabel><text>Implementation</text></navLabel>
+          <content src="sections/014/005.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="103" class="section" id="item-015">
+        <navLabel><text>Languages</text></navLabel>
+        <content src="sections/015/section.html"/>
+        <navPoint playOrder="104" class="article" id="item-015000">
+          <navLabel><text>Languages</text></navLabel>
+          <content src="sections/015/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="105" class="article" id="item-015001">
+          <navLabel><text>Unix&#x27;s Cornucopia of Languages</text></navLabel>
+          <content src="sections/015/001.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="106" class="article" id="item-015002">
+          <navLabel><text>Why Not C?</text></navLabel>
+          <content src="sections/015/002.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="107" class="article" id="item-015003">
+          <navLabel><text>Interpreted Languages and Mixed Strategies</text></navLabel>
+          <content src="sections/015/003.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="108" class="article" id="item-015004">
+          <navLabel><text>Language Evaluations</text></navLabel>
+          <content src="sections/015/004.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="109" class="article" id="item-015005">
+          <navLabel><text>Trends for the Future</text></navLabel>
+          <content src="sections/015/005.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="110" class="article" id="item-015006">
+          <navLabel><text>Choosing an X Toolkit</text></navLabel>
+          <content src="sections/015/006.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="111" class="section" id="item-016">
+        <navLabel><text>Tools</text></navLabel>
+        <content src="sections/016/section.html"/>
+        <navPoint playOrder="112" class="article" id="item-016000">
+          <navLabel><text>Tools</text></navLabel>
+          <content src="sections/016/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="113" class="article" id="item-016001">
+          <navLabel><text>A Developer-Friendly Operating System</text></navLabel>
+          <content src="sections/016/001.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="114" class="article" id="item-016002">
+          <navLabel><text>Choosing an Editor</text></navLabel>
+          <content src="sections/016/002.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="115" class="article" id="item-016003">
+          <navLabel><text>Special-Purpose Code Generators</text></navLabel>
+          <content src="sections/016/003.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="116" class="article" id="item-016004">
+          <navLabel><text>make: Automating Your Recipes</text></navLabel>
+          <content src="sections/016/004.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="117" class="article" id="item-016005">
+          <navLabel><text>Version-Control Systems</text></navLabel>
+          <content src="sections/016/005.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="118" class="article" id="item-016006">
+          <navLabel><text>Runtime Debugging</text></navLabel>
+          <content src="sections/016/006.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="119" class="article" id="item-016007">
+          <navLabel><text>Profiling</text></navLabel>
+          <content src="sections/016/007.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="120" class="article" id="item-016008">
+          <navLabel><text>Combining Tools with Emacs</text></navLabel>
+          <content src="sections/016/008.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="121" class="section" id="item-017">
+        <navLabel><text>Reuse</text></navLabel>
+        <content src="sections/017/section.html"/>
+        <navPoint playOrder="122" class="article" id="item-017000">
+          <navLabel><text>Reuse</text></navLabel>
+          <content src="sections/017/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="123" class="article" id="item-017001">
+          <navLabel><text>The Tale of J. Random Newbie</text></navLabel>
+          <content src="sections/017/001.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="124" class="article" id="item-017002">
+          <navLabel><text>Transparency as the Key to Reuse</text></navLabel>
+          <content src="sections/017/002.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="125" class="article" id="item-017003">
+          <navLabel><text>From Reuse to Open Source</text></navLabel>
+          <content src="sections/017/003.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="126" class="article" id="item-017004">
+          <navLabel><text>The Best Things in Life Are Open</text></navLabel>
+          <content src="sections/017/004.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="127" class="article" id="item-017005">
+          <navLabel><text>Where to Look?</text></navLabel>
+          <content src="sections/017/005.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="128" class="article" id="item-017006">
+          <navLabel><text>Issues in Using Open-Source Software</text></navLabel>
+          <content src="sections/017/006.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="129" class="article" id="item-017007">
+          <navLabel><text>Licensing Issues</text></navLabel>
+          <content src="sections/017/007.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="130" class="article" id="item-017008">
+          <navLabel><text>Community</text></navLabel>
+          <content src="sections/017/008.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="131" class="section" id="item-018">
+        <navLabel><text>Portability</text></navLabel>
+        <content src="sections/018/section.html"/>
+        <navPoint playOrder="132" class="article" id="item-018000">
+          <navLabel><text>Portability</text></navLabel>
+          <content src="sections/018/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="133" class="article" id="item-018001">
+          <navLabel><text>Evolution of C</text></navLabel>
+          <content src="sections/018/001.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="134" class="article" id="item-018002">
+          <navLabel><text>Unix Standards</text></navLabel>
+          <content src="sections/018/002.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="135" class="article" id="item-018003">
+          <navLabel><text>IETF and the RFC Standards Process</text></navLabel>
+          <content src="sections/018/003.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="136" class="article" id="item-018004">
+          <navLabel><text>Specifications as DNA, Code as RNA</text></navLabel>
+          <content src="sections/018/004.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="137" class="article" id="item-018005">
+          <navLabel><text>Programming for Portability</text></navLabel>
+          <content src="sections/018/005.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="138" class="article" id="item-018006">
+          <navLabel><text>Internationalization</text></navLabel>
+          <content src="sections/018/006.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="139" class="article" id="item-018007">
+          <navLabel><text>Portability, Open Standards, and Open Source</text></navLabel>
+          <content src="sections/018/007.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="140" class="section" id="item-019">
+        <navLabel><text>Documentation</text></navLabel>
+        <content src="sections/019/section.html"/>
+        <navPoint playOrder="141" class="article" id="item-019000">
+          <navLabel><text>Documentation</text></navLabel>
+          <content src="sections/019/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="142" class="article" id="item-019001">
+          <navLabel><text>Documentation Concepts</text></navLabel>
+          <content src="sections/019/001.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="143" class="article" id="item-019002">
+          <navLabel><text>The Unix Style</text></navLabel>
+          <content src="sections/019/002.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="144" class="article" id="item-019003">
+          <navLabel><text>The Zoo of Unix Documentation Formats</text></navLabel>
+          <content src="sections/019/003.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="145" class="article" id="item-019004">
+          <navLabel><text>The Present Chaos and a Possible Way Out</text></navLabel>
+          <content src="sections/019/004.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="146" class="article" id="item-019005">
+          <navLabel><text>DocBook</text></navLabel>
+          <content src="sections/019/005.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="147" class="article" id="item-019006">
+          <navLabel><text>Best Practices for Writing Unix Documentation</text></navLabel>
+          <content src="sections/019/006.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="148" class="section" id="item-020">
+        <navLabel><text>Open Source</text></navLabel>
+        <content src="sections/020/section.html"/>
+        <navPoint playOrder="149" class="article" id="item-020000">
+          <navLabel><text>Open Source</text></navLabel>
+          <content src="sections/020/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="150" class="article" id="item-020001">
+          <navLabel><text>Unix and Open Source</text></navLabel>
+          <content src="sections/020/001.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="151" class="article" id="item-020002">
+          <navLabel><text>Best Practices for Working with Open-Source Developers</text></navLabel>
+          <content src="sections/020/002.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="152" class="article" id="item-020003">
+          <navLabel><text>The Logic of Licenses: How to Pick One</text></navLabel>
+          <content src="sections/020/003.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="153" class="article" id="item-020004">
+          <navLabel><text>Why You Should Use a Standard License</text></navLabel>
+          <content src="sections/020/004.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="154" class="article" id="item-020005">
+          <navLabel><text>Varieties of Open-Source Licensing</text></navLabel>
+          <content src="sections/020/005.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+      </navPoint>
+      <navPoint playOrder="155" class="section" id="item-021">
+        <navLabel><text>Futures</text></navLabel>
+        <content src="sections/021/section.html"/>
+        <navPoint playOrder="156" class="article" id="item-021000">
+          <navLabel><text>Futures</text></navLabel>
+          <content src="sections/021/000.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="157" class="article" id="item-021001">
+          <navLabel><text>Essence and Accident in Unix Tradition</text></navLabel>
+          <content src="sections/021/001.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="158" class="article" id="item-021002">
+          <navLabel><text>Plan 9: The Way the Future Was</text></navLabel>
+          <content src="sections/021/002.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="159" class="article" id="item-021003">
+          <navLabel><text>Problems in the Design of Unix</text></navLabel>
+          <content src="sections/021/003.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="160" class="article" id="item-021004">
+          <navLabel><text>Problems in the Environment of Unix</text></navLabel>
+          <content src="sections/021/004.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="161" class="article" id="item-021005">
+          <navLabel><text>Problems in the Culture of Unix</text></navLabel>
+          <content src="sections/021/005.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="162" class="article" id="item-021006">
+          <navLabel><text>Reasons to Believe</text></navLabel>
+          <content src="sections/021/006.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="163" class="article" id="item-021007">
+          <navLabel><text>Glossary of Abbreviations</text></navLabel>
+          <content src="sections/021/007.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="164" class="article" id="item-021008">
+          <navLabel><text>References</text></navLabel>
+          <content src="sections/021/008.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="165" class="article" id="item-021009">
+          <navLabel><text>Contributors</text></navLabel>
+          <content src="sections/021/009.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="166" class="article" id="item-021010">
+          <navLabel><text>Rootless Root</text></navLabel>
+          <content src="sections/021/010.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="167" class="article" id="item-021011">
+          <navLabel><text>Editor&#x27;s Introduction</text></navLabel>
+          <content src="sections/021/011.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="168" class="article" id="item-021012">
+          <navLabel><text>Master Foo and the Ten Thousand Lines</text></navLabel>
+          <content src="sections/021/012.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="169" class="article" id="item-021013">
+          <navLabel><text>Master Foo and the Script Kiddie</text></navLabel>
+          <content src="sections/021/013.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="170" class="article" id="item-021014">
+          <navLabel><text>Master Foo Discourses on the Two Paths</text></navLabel>
+          <content src="sections/021/014.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="171" class="article" id="item-021015">
+          <navLabel><text>Master Foo and the
+Methodologist</text></navLabel>
+          <content src="sections/021/015.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="172" class="article" id="item-021016">
+          <navLabel><text>Master Foo Discourses on the
+Graphical User Interface</text></navLabel>
+          <content src="sections/021/016.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="173" class="article" id="item-021017">
+          <navLabel><text>Master Foo and the Unix Zealot</text></navLabel>
+          <content src="sections/021/017.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="174" class="article" id="item-021018">
+          <navLabel><text>Master Foo Discourses on the Unix-Nature</text></navLabel>
+          <content src="sections/021/018.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+        <navPoint playOrder="175" class="article" id="item-021019">
+          <navLabel><text>Master Foo and the End User</text></navLabel>
+          <content src="sections/021/019.html"/>
+          <mbp:meta name="description">undefined</mbp:meta>
+          <mbp:meta name="author">undefined</mbp:meta>
+        </navPoint>
+      </navPoint>
+    </navPoint>
+  </navMap>
+</ncx>

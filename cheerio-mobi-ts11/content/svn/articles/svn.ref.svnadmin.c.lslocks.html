@@ -1,0 +1,50 @@
+<div class="refentry">
+    <a id="svn.ref.svnadmin.c.lslocks"></a>
+    <div class="titlepage"></div>
+    <a id="idm12069" class="indexterm"></a>
+    <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svnadmin lslocks — Print descriptions of all locks.</p>
+    </div>
+    <div class="refsect1">
+        <a id="idm12076"></a>
+        <h2>Synopsis</h2>
+        <p>
+            <code class="literal">svnadmin lslocks REPOS_PATH [PATH-IN-REPOS]</code>
+        </p>
+    </div>
+    <div class="refsect1">
+        <a id="idm12080"></a>
+        <h2>Description</h2>
+        <p>Print descriptions of all locks in
+            repository <em class="replaceable"><code>REPOS_PATH</code></em>
+            underneath the
+            path <em class="replaceable"><code>PATH-IN-REPOS</code></em>.
+            If <em class="replaceable"><code>PATH-IN-REPOS</code></em> is not
+            provided, it defaults to the root directory of the
+            repository.</p>
+    </div>
+    <div class="refsect1">
+        <a id="idm12086"></a>
+        <h2>Options</h2>
+        <p>None</p>
+    </div>
+    <div class="refsect1">
+        <a id="idm12089"></a>
+        <h2>Examples</h2>
+        <p>This lists the one locked file in the repository at
+            <code class="filename">/var/svn/repos</code>:</p>
+        <div class="informalexample">
+            <pre class="screen">
+$ svnadmin lslocks /var/svn/repos
+Path: /tree.jpg
+UUID Token: opaquelocktoken:ab00ddf0-6afb-0310-9cd0-dda813329753
+Owner: harry
+Created: 2005-07-08 17:27:36 -0500 (Fri, 08 Jul 2005)
+Expires: 
+Comment (1 line):
+Rework the uppermost branches on the bald cypress in the foreground.
+</pre>
+        </div>
+    </div>
+</div>

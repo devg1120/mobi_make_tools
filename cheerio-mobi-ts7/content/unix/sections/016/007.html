@@ -1,0 +1,31 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Profiling</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts7/undefined" />
+  </head>
+   <body>
+<div class="sect1" lang="en"><div class="titlepage"><div><h2 class="title" style="clear: both"><a id="id2989334">Profiling</a></h2></div></div><p>As a general rule, 90% of the execution time of your program
+will be spent in 10% of its code. Profilers are tools that help you
+identify the 10% of hot spots that constrain the speed of your
+program. This is a good thing for making it faster.</p><p>But in the Unix tradition, profilers have a far more important
+function. They enable you <span class="emphasis"><em>not</em></span> to optimize the other 90%!
+This is good, and not just because it saves you work. The
+<span class="emphasis"><em>really</em></span> valuable effect is that not optimizing that 90%
+holds down global complexity and reduces bugs.</p><p>You may recall that we quoted Donald
+Knuth</p><p>Profilers help you do this. If you get in the good habit of
+using them, you can get rid of the bad habit of premature
+optimization. Profilers don&apos;t just change the way you work; they
+change how you think.</p><p>Profilers for compiled languages rely on instrumenting object
+code, so they are even more platform-dependent than compilers. On the
+other hand, a compiled-language profiler doesn&apos;t care about the source
+language of the programs it instruments. Under Unix, the single
+profiler
+gprof(1)
+handles C</p><p>Perl</p></div>
+</body>
+</html>

@@ -1,0 +1,62 @@
+
+    
+    
+    <div class="refentry">
+      <a id="svn.ref.svn.c.cleanup"></a>
+      <div class="titlepage"></div>
+      <a id="idm9499" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svn cleanup — Recursively clean up the working copy</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm9506"></a>
+        <h2>Synopsis</h2>
+        <p>
+          <code class="literal">svn cleanup [PATH...]</code>
+        </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm9510"></a>
+        <h2>Description</h2>
+        <p>Recursively clean up the working copy, removing
+            working copy locks and resuming unfinished operations.  If
+            you ever get a <code class="literal">working copy locked</code>
+            error, run this command to remove stale locks and get your
+            working copy into a usable state again.</p>
+        <p>If, for some reason, an <span class="command"><strong>svn update</strong></span>
+            fails due to a problem running an external diff program
+            (e.g., user input or network failure), pass the
+            <code class="option">--diff3-cmd</code> to allow the cleanup process
+            to complete any required merging using your external diff
+            program.  You can also specify any configuration directory
+            with the <code class="option">--config-dir</code> option, but you
+            should need these options extremely infrequently.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm9518"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+          <pre class="screen">
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.diff3_cmd"><code class="option">--diff3-cmd</code> <em class="replaceable"><code>CMD</code></em></a>
+</pre>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm9523"></a>
+        <h2>Examples</h2>
+        <p>Well, there's not much to the examples here, as
+            <span class="command"><strong>svn cleanup</strong></span> generates no output.  If
+            you pass no <em class="replaceable"><code>PATH</code></em>, then
+            <span class="quote">“<span class="quote"><code class="filename">.</code></span>”</span> is used:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn cleanup
+$ svn cleanup /var/svn/working-copy
+</pre>
+        </div>
+      </div>
+    </div>
+    
+    
+  

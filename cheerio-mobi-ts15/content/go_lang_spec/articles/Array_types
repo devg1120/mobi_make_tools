@@ -1,0 +1,26 @@
+<body><p>
+An array is a numbered sequence of elements of a single
+type, called the element type.
+The number of elements is called the length of the array and is never negative.
+</p><pre>
+[<a>ArrayType</a>]   = "[" [<a>ArrayLength</a>] "]" [<a>ElementType</a>] .
+[<a>ArrayLength</a>] = [<a>Expression</a>] .
+[<a>ElementType</a>] = [<a>Type</a>] .
+</pre><p>
+The length is part of the array's type; it must evaluate to a
+non-negative [<a>constant</a>]
+[<a>representable</a>] by a value
+of type <code>int</code>.
+The length of array <code>a</code> can be discovered
+using the built-in function [<a><code>len</code></a>].
+The elements can be addressed by integer [<a>indices</a>]
+0 through <code>len(a)-1</code>.
+Array types are always one-dimensional but may be composed to form
+multi-dimensional types.
+</p><pre>
+[32]byte
+[2*N] struct { x, y int32 }
+[1000]*float64
+[3][5]int
+[2][2][2]float64  // same as [2]([2]([2]float64))
+</pre></body>

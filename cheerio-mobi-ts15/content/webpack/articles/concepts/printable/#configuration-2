@@ -1,0 +1,40 @@
+<h1 id="configuration-2">Configuration<a href="#configuration-2" aria-hidden="true"><span class="icon icon-link"></span></a></h1>
+<p>You may have noticed that few webpack configurations look exactly alike. This is because <strong>webpack&apos;s configuration file is a JavaScript file that exports a webpack <a href="/configuration/">configuration</a>.</strong> This configuration is then processed by webpack based upon its defined properties.</p>
+<p>Because it&apos;s a standard Node.js CommonJS module, you <strong>can do the following</strong>:</p>
+<ul>
+    <li>import other files via <code>require(...)</code></li>
+    <li>use utilities on npm via <code>require(...)</code></li>
+    <li>use JavaScript control flow expressions, e.g. the <code>?:</code> operator</li>
+    <li>use constants or variables for often used values</li>
+    <li>write and execute functions to generate a part of the configuration</li>
+</ul>
+<p>Use these features when appropriate.</p>
+<p>While they are technically feasible, <strong>the following practices should be avoided</strong>:</p>
+<ul>
+    <li>Access CLI arguments, when using the webpack CLI (instead write your own CLI, or <a href="/configuration/configuration-types/">use <code>--env</code></a>)</li>
+    <li>Export non-deterministic values (calling webpack twice should result in the same output files)</li>
+    <li>Write long configurations (instead split the configuration into multiple files)</li>
+</ul>
+<blockquote class="tip">
+    <p>The most important part to take away from this document is that there are many different ways to format and style your webpack configuration. The key is to stick with something consistent that you and your team can understand and maintain.</p>
+</blockquote>
+<p>The examples below describe how webpack&apos;s configuration can be both expressive and configurable because <em>it is code</em>:</p>
+<h2 id="simple-configuration">Simple Configuration<a href="#simple-configuration" aria-hidden="true"><span class="icon icon-link"></span></a></h2>
+<p><strong>webpack.config.js</strong></p>
+<pre><code class="hljs language-javascript"><span class="token keyword">var</span> path <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">&apos;path&apos;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  mode<span class="token punctuation">:</span> <span class="token string">&apos;development&apos;</span><span class="token punctuation">,</span>
+  entry<span class="token punctuation">:</span> <span class="token string">&apos;./foo.js&apos;</span><span class="token punctuation">,</span>
+  output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    path<span class="token punctuation">:</span> path<span class="token punctuation">.</span><span class="token function">resolve</span><span class="token punctuation">(</span>__dirname<span class="token punctuation">,</span> <span class="token string">&apos;dist&apos;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    filename<span class="token punctuation">:</span> <span class="token string">&apos;foo.bundle.js&apos;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<p><em>See</em>: <a href="/configuration/">Configuration section</a> for all supported configuration options</p>
+<h2 id="multiple-targets">Multiple Targets<a href="#multiple-targets" aria-hidden="true"><span class="icon icon-link"></span></a></h2>
+<p>Along with exporting a single configuration as an object, <a href="/configuration/configuration-types/#exporting-a-function">function</a> or <a href="/configuration/configuration-types/#exporting-a-promise">Promise</a>, you can export multiple configurations.</p>
+<p><em>See</em>: <a href="/configuration/configuration-types/#exporting-multiple-configurations">Exporting multiple configurations</a></p>
+<h2 id="using-other-configuration-languages">Using other Configuration Languages<a href="#using-other-configuration-languages" aria-hidden="true"><span class="icon icon-link"></span></a></h2>
+<p>webpack accepts configuration files written in multiple programming and data languages.</p>
+<p><em>See</em>: <a href="/configuration/configuration-languages/">Configuration Languages</a></p>

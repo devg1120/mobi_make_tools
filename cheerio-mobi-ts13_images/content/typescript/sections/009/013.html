@@ -1,0 +1,194 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Type Guard
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts13_images/undefined" />
+  </head>
+   <body>
+<ul>
+    <li><a href="#type-guard">Type Guard</a></li>
+    <li><a href="#user-defined-type-guards">User Defined Type Guards</a></li>
+</ul>
+<h2 id="type-guard">Type Guard</h2>
+<p>Type Guards allow you to narrow down the type of an object within a conditional block. </p>
+<h3 id="typeof">typeof</h3>
+<p>TypeScript is aware of the usage of the JavaScript <code>instanceof</code> and <code>typeof</code> operators. If you use these in a conditional block, TypeScript will understand the type of the variable to be different within that conditional block. Here is a quick example where TypeScript realizes that a particular function does not exist on <code>string</code> and points out what was probably a user typo:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">doSomething</span>(<span class="hljs-params">x: <span class="hljs-built_in">number</span> | <span class="hljs-built_in">string</span></span>) </span>{
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> x === <span class="hljs-string">&apos;string&apos;</span>) { <span class="hljs-comment">// Within the block TypeScript knows that `x` must be a string</span>
+        <span class="hljs-built_in">console</span>.log(x.subtr(<span class="hljs-number">1</span>)); <span class="hljs-comment">// Error, &apos;subtr&apos; does not exist on `string`</span>
+        <span class="hljs-built_in">console</span>.log(x.substr(<span class="hljs-number">1</span>)); <span class="hljs-comment">// OK</span>
+    }
+    x.substr(<span class="hljs-number">1</span>); <span class="hljs-comment">// Error: There is no guarantee that `x` is a `string`</span>
+}
+</code></pre>
+<h3 id="instanceof">instanceof</h3>
+<p>Here is an example with a class and <code>instanceof</code>:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">class</span> Foo {
+    foo = <span class="hljs-number">123</span>;
+    common = <span class="hljs-string">&apos;123&apos;</span>;
+}
+<span class="hljs-keyword">class</span> Bar {
+    bar = <span class="hljs-number">123</span>;
+    common = <span class="hljs-string">&apos;123&apos;</span>;
+}
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">doStuff</span>(<span class="hljs-params">arg: Foo | Bar</span>) </span>{
+    <span class="hljs-keyword">if</span> (arg <span class="hljs-keyword">instanceof</span> Foo) {
+        <span class="hljs-built_in">console</span>.log(arg.foo); <span class="hljs-comment">// OK</span>
+        <span class="hljs-built_in">console</span>.log(arg.bar); <span class="hljs-comment">// Error!</span>
+    }
+    <span class="hljs-keyword">if</span> (arg <span class="hljs-keyword">instanceof</span> Bar) {
+        <span class="hljs-built_in">console</span>.log(arg.foo); <span class="hljs-comment">// Error!</span>
+        <span class="hljs-built_in">console</span>.log(arg.bar); <span class="hljs-comment">// OK</span>
+    }
+    <span class="hljs-built_in">console</span>.log(arg.common); <span class="hljs-comment">// OK</span>
+    <span class="hljs-built_in">console</span>.log(arg.foo); <span class="hljs-comment">// Error!</span>
+    <span class="hljs-built_in">console</span>.log(arg.bar); <span class="hljs-comment">// Error!</span>
+}
+doStuff(<span class="hljs-keyword">new</span> Foo());
+doStuff(<span class="hljs-keyword">new</span> Bar());
+</code></pre>
+<p>TypeScript even understands <code>else</code> so when an <code>if</code> narrows out one type it knows that within the else <em>it&apos;s definitely not that type</em>. Here is an example:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">class</span> Foo {
+    foo = <span class="hljs-number">123</span>;
+}
+<span class="hljs-keyword">class</span> Bar {
+    bar = <span class="hljs-number">123</span>;
+}
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">doStuff</span>(<span class="hljs-params">arg: Foo | Bar</span>) </span>{
+    <span class="hljs-keyword">if</span> (arg <span class="hljs-keyword">instanceof</span> Foo) {
+        <span class="hljs-built_in">console</span>.log(arg.foo); <span class="hljs-comment">// OK</span>
+        <span class="hljs-built_in">console</span>.log(arg.bar); <span class="hljs-comment">// Error!</span>
+    }
+    <span class="hljs-keyword">else</span> {  <span class="hljs-comment">// MUST BE Bar!</span>
+        <span class="hljs-built_in">console</span>.log(arg.foo); <span class="hljs-comment">// Error!</span>
+        <span class="hljs-built_in">console</span>.log(arg.bar); <span class="hljs-comment">// OK</span>
+    }
+}
+doStuff(<span class="hljs-keyword">new</span> Foo());
+doStuff(<span class="hljs-keyword">new</span> Bar());
+</code></pre>
+<h3 id="in">in</h3>
+<p>The <code>in</code> operator does a safe check for the existance of a property on an object and can be used as a type guard. E.g. </p>
+<pre><code class="lang-ts"><span class="hljs-keyword">interface</span> A {
+  x: <span class="hljs-built_in">number</span>;
+}
+<span class="hljs-keyword">interface</span> B {
+  y: <span class="hljs-built_in">string</span>;
+}
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">doStuff</span>(<span class="hljs-params">q: A | B</span>) </span>{
+  <span class="hljs-keyword">if</span> (<span class="hljs-string">&apos;x&apos;</span> <span class="hljs-keyword">in</span> q) {
+    <span class="hljs-comment">// q: A</span>
+  }
+  <span class="hljs-keyword">else</span> {
+    <span class="hljs-comment">// q: B</span>
+  }
+}
+</code></pre>
+<h3 id="literal-type-guard">Literal Type Guard</h3>
+<p>You can use <code>===</code> / <code>==</code> / <code>!==</code> / <code>!=</code> to distinguish between literal values</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">type</span> TriState = <span class="hljs-string">&apos;yes&apos;</span> | <span class="hljs-string">&apos;no&apos;</span> | <span class="hljs-string">&apos;unknown&apos;</span>;
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">logOutState</span>(<span class="hljs-params">state:TriState</span>) </span>{
+  <span class="hljs-keyword">if</span> (state == <span class="hljs-string">&apos;yes&apos;</span>) {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;User selected yes&apos;</span>);
+  } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (state == <span class="hljs-string">&apos;no&apos;</span>) {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;User selected no&apos;</span>);
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;User has not made a selection yet&apos;</span>);
+  }
+}
+</code></pre>
+<p>This even works when you have literal types in a union. You can check the value of a shared property name to discriminate the union e.g. </p>
+<pre><code class="lang-ts"><span class="hljs-keyword">type</span> Foo = {
+  kind: <span class="hljs-string">&apos;foo&apos;</span>, <span class="hljs-comment">// Literal type </span>
+  foo: <span class="hljs-built_in">number</span>
+}
+<span class="hljs-keyword">type</span> Bar = {
+  kind: <span class="hljs-string">&apos;bar&apos;</span>, <span class="hljs-comment">// Literal type </span>
+  bar: <span class="hljs-built_in">number</span>
+}
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">doStuff</span>(<span class="hljs-params">arg: Foo | Bar</span>) </span>{
+    <span class="hljs-keyword">if</span> (arg.kind === <span class="hljs-string">&apos;foo&apos;</span>) {
+        <span class="hljs-built_in">console</span>.log(arg.foo); <span class="hljs-comment">// OK</span>
+        <span class="hljs-built_in">console</span>.log(arg.bar); <span class="hljs-comment">// Error!</span>
+    }
+    <span class="hljs-keyword">else</span> {  <span class="hljs-comment">// MUST BE Bar!</span>
+        <span class="hljs-built_in">console</span>.log(arg.foo); <span class="hljs-comment">// Error!</span>
+        <span class="hljs-built_in">console</span>.log(arg.bar); <span class="hljs-comment">// OK</span>
+    }
+}
+</code></pre>
+<h3 id="null-and-undefined-with-strictnullchecks">null and undefined with <code>strictNullChecks</code></h3>
+<p>TypeScript is smart enough to rule out both <code>null</code> and <code>undefined</code> with a <code>== null</code> / <code>!= null</code> check. For example:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">a?: <span class="hljs-built_in">number</span> | <span class="hljs-literal">null</span></span>) </span>{
+  <span class="hljs-keyword">if</span> (a == <span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span>;
+  <span class="hljs-comment">// a is number now.</span>
+}
+</code></pre>
+<h3 id="user-defined-type-guards">User Defined Type Guards</h3>
+<p>JavaScript doesn&apos;t have very rich runtime introspection support built in. When you are using just plain JavaScript Objects (using structural typing to your advantage), you do not even have access to <code>instanceof</code> or <code>typeof</code>. For these cases you can create <em>User Defined Type Guard functions</em>. These are just functions that return <code>someArgumentName is SomeType</code>. Here is an example:</p>
+<pre><code class="lang-ts"><span class="hljs-comment">/**
+ * Just some interfaces
+ */</span>
+<span class="hljs-keyword">interface</span> Foo {
+    foo: <span class="hljs-built_in">number</span>;
+    common: <span class="hljs-built_in">string</span>;
+}
+<span class="hljs-keyword">interface</span> Bar {
+    bar: <span class="hljs-built_in">number</span>;
+    common: <span class="hljs-built_in">string</span>;
+}
+<span class="hljs-comment">/**
+ * User Defined Type Guard!
+ */</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isFoo</span>(<span class="hljs-params">arg: <span class="hljs-built_in">any</span></span>): <span class="hljs-title">arg</span> <span class="hljs-title">is</span> <span class="hljs-title">Foo</span> </span>{
+    <span class="hljs-keyword">return</span> arg.foo !== <span class="hljs-literal">undefined</span>;
+}
+<span class="hljs-comment">/**
+ * Sample usage of the User Defined Type Guard
+ */</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">doStuff</span>(<span class="hljs-params">arg: Foo | Bar</span>) </span>{
+    <span class="hljs-keyword">if</span> (isFoo(arg)) {
+        <span class="hljs-built_in">console</span>.log(arg.foo); <span class="hljs-comment">// OK</span>
+        <span class="hljs-built_in">console</span>.log(arg.bar); <span class="hljs-comment">// Error!</span>
+    }
+    <span class="hljs-keyword">else</span> {
+        <span class="hljs-built_in">console</span>.log(arg.foo); <span class="hljs-comment">// Error!</span>
+        <span class="hljs-built_in">console</span>.log(arg.bar); <span class="hljs-comment">// OK</span>
+    }
+}
+doStuff({ foo: <span class="hljs-number">123</span>, common: <span class="hljs-string">&apos;123&apos;</span> });
+doStuff({ bar: <span class="hljs-number">123</span>, common: <span class="hljs-string">&apos;123&apos;</span> });
+</code></pre>
+<h3 id="type-guards-and-callbacks">Type Guards and callbacks</h3>
+<p>TypeScript doesn&apos;t assume type guards remain active in callbacks as making this assumption is dangerous. e.g. </p>
+<pre><code class="lang-js"><span class="hljs-comment">// Example Setup</span>
+declare <span class="hljs-keyword">var</span> foo:{bar?: {baz: string}};
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">immediate</span>(<span class="hljs-params">callback: (</span>)=&gt;<span class="hljs-title">void</span>) </span>{
+  callback();
+}
+<span class="hljs-comment">// Type Guard</span>
+<span class="hljs-keyword">if</span> (foo.bar) {
+  <span class="hljs-built_in">console</span>.log(foo.bar.baz); <span class="hljs-comment">// Okay</span>
+  functionDoingSomeStuff(() =&gt; {
+    <span class="hljs-built_in">console</span>.log(foo.bar.baz); <span class="hljs-comment">// TS error: Object is possibly &apos;undefined&apos;&quot;</span>
+  });
+}
+</code></pre>
+<p>The fix is as easy as storing the inferred safe value in a local variable, automatically ensuring it doesn&apos;t get changed externally, and TypeScript can easily understand that: </p>
+<pre><code class="lang-js"><span class="hljs-comment">// Type Guard</span>
+<span class="hljs-keyword">if</span> (foo.bar) {
+  <span class="hljs-built_in">console</span>.log(foo.bar.baz); <span class="hljs-comment">// Okay</span>
+  <span class="hljs-keyword">const</span> bar = foo.bar;
+  functionDoingSomeStuff(() =&gt; {
+    <span class="hljs-built_in">console</span>.log(bar.baz); <span class="hljs-comment">// Okay</span>
+  });
+}
+</code></pre>
+</body>
+</html>

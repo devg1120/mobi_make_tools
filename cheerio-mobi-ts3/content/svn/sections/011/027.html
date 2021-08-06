@@ -1,0 +1,105 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svn proplist (plist, pl)</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/tmp/es2015/cheerio-mobi-ts3/css/kindle.css" />
+  </head>
+   <body>
+    <div class="refentry">
+      <a id="svn.ref.svn.c.proplist"></a>
+      <div class="titlepage"></div>
+      <a id="idm10821" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svn proplist (plist, pl) — List all properties.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm10828"></a>
+        <h2>Synopsis</h2>
+        <p>
+          <code class="literal">svn proplist [TARGET[@REV]...]</code>
+        </p>
+        <p>
+          <code class="literal">svn proplist --revprop -r REV [TARGET]</code>
+        </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm10834"></a>
+        <h2>Description</h2>
+        <p>List all properties on files, directories, or
+            revisions.  The first form lists versioned properties in
+            your working copy, and the second lists unversioned remote
+            properties on a repository revision
+            (<em class="replaceable"><code>TARGET</code></em> determines only which
+            repository to access).</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm10838"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+          <pre class="screen">
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.changelist"><code class="option">--changelist</code> (<code class="option">--cl</code>) <em class="replaceable"><code>ARG</code></em></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.depth"><code class="option">--depth</code> <em class="replaceable"><code>ARG</code></em></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.quiet"><code class="option">--quiet</code> (<code class="option">-q</code>)</a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.recursive"><code class="option">--recursive</code> (<code class="option">-R</code>)</a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.revision"><code class="option">--revision</code> (<code class="option">-r</code>) <em class="replaceable"><code>REV</code></em></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.revprop"><code class="option">--revprop</code></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.verbose"><code class="option">--verbose</code> (<code class="option">-v</code>)</a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.xml"><code class="option">--xml</code></a>
+</pre>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm10850"></a>
+        <h2>Examples</h2>
+        <p>You can use <span class="command"><strong>proplist</strong></span> to see the properties on an
+            item in your working copy:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn proplist foo.c
+Properties on 'foo.c':
+  svn:mime-type
+  svn:keywords
+  owner
+</pre>
+        </div>
+        <p>But with the <code class="option">--verbose</code>
+            (<code class="option">-v</code>) flag, <span class="command"><strong>svn
+            proplist</strong></span> is extremely handy as it also shows you
+            the values for the properties:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn proplist -v foo.c
+Properties on 'foo.c':
+  svn:mime-type
+    text/plain
+  svn:keywords
+    Author Date Rev
+  owner
+    sally
+</pre>
+        </div>
+        <p>Lastly, you can get <span class="command"><strong>svn proplist</strong></span>
+            output in xml format with the <code class="option">--xml</code>
+            option:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn proplist --xml 
+<?xml version="1.0"?>
+<properties>
+<target
+   path=".">
+<property
+   name="svn:ignore"/>
+</target>
+</properties>
+</pre>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

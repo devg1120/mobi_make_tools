@@ -1,0 +1,36 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Parser Functions
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts13_images/undefined" />
+  </head>
+   <body>
+<h3 id="parser-functions">Parser Functions</h3>
+<p>As mentioned <code>parseSourceFile</code> sets up the initial state and passes the work onto <code>parseSourceFileWorker</code> function.</p>
+<h4 id="parsesourcefileworker"><code>parseSourceFileWorker</code></h4>
+<p>Starts by creating a <code>SourceFile</code> AST node. Then it goes into parsing source code starting from the <code>parseStatements</code> function. Once that returns, it then completes the <code>SourceFile</code> node with additional information such as its <code>nodeCount</code>, <code>identifierCount</code> and such.</p>
+<h4 id="parsestatements"><code>parseStatements</code></h4>
+<p>One of the most significant <code>parseFoo</code> style functions (a concept we cover next). It switches by the current <code>token</code> returned from the scanner. E.g. if the current token is a <code>SemicolonToken</code> it will call out to <code>parseEmptyStatement</code> to create an AST node for an empty statement.</p>
+<h3 id="node-creation">Node creation</h3>
+<p>The parser has a bunch of <code>parserFoo</code> functions with bodies that create <code>Foo</code> nodes. These are generally called (from other parser functions) at a time where a <code>Foo</code> node is expected. A typical sample of this process is the <code>parseEmptyStatement()</code> function which is used to parse out empty statements like <code>;;;;;;</code>. Here is the function in its entirety</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">parseEmptyStatement</span>(<span class="hljs-params"></span>): <span class="hljs-title">Statement</span> </span>{
+    <span class="hljs-keyword">let</span> node = <statement>createNode(SyntaxKind.EmptyStatement);
+    parseExpected(SyntaxKind.SemicolonToken);
+    <span class="hljs-keyword">return</span> finishNode(node);
+}
+</statement></code></pre>
+<p>It shows three critical functions <code>createNode</code>, <code>parseExpected</code> and <code>finishNode</code>.</p>
+<h4 id="createnode"><code>createNode</code></h4>
+<p>The parser&apos;s <code>createNode</code> function <code>function createNode(kind: SyntaxKind, pos?: number): Node</code> is responsible for creating a Node, setting up its <code>SyntaxKind</code> as passed in, and set the initial position if passed in (or use the position from the current scanner state).</p>
+<h4 id="parseexpected"><code>parseExpected</code></h4>
+<p>The parser&apos;s <code>parseExpected</code> function <code>function parseExpected(kind: SyntaxKind, diagnosticMessage?: DiagnosticMessage): boolean</code> will check that the current token in the parser state matches the desired <code>SyntaxKind</code>. If not it will either report the <code>diagnosticMessage</code> sent in or create a generic one of the form <code>foo expected</code>. It internally uses the <code>parseErrorAtPosition</code> function (which uses the scanning positions) to give good error reporting.</p>
+<h3 id="finishnode"><code>finishNode</code></h3>
+<p>The parser&apos;s <code>finishNode</code> function <code>function finishNode<t extends node>(node: T, end?: number): T</t></code> sets up the <code>end</code> position for the node and additional useful stuff like the <code>parserContextFlags</code> it was parsed under as well as if there were any errors before parsing this node (if there were then we cannot reuse this AST node in incremental parsing).</p>
+</body>
+</html>

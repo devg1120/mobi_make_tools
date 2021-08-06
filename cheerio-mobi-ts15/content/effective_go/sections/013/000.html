@@ -1,0 +1,156 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Embedding</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+Go does not provide the typical, type-driven notion of subclassing,
+but it does have the ability to &#x201C;borrow&#x201D; pieces of an
+implementation by <em>embedding</em> types within a struct or
+interface.
+</p><p>
+Interface embedding is very simple.
+We&apos;ve mentioned the <code>io.Reader</code> and <code>io.Writer</code> interfaces before;
+here are their definitions.
+</p><pre>
+type Reader interface {
+    Read(p []byte) (n int, err error)
+}
+type Writer interface {
+    Write(p []byte) (n int, err error)
+}
+</pre><p>
+The <code>io</code> package also exports several other interfaces
+that specify objects that can implement several such methods.
+For instance, there is <code>io.ReadWriter</code>, an interface
+containing both <code>Read</code> and <code>Write</code>.
+We could specify <code>io.ReadWriter</code> by listing the
+two methods explicitly, but it&apos;s easier and more evocative
+to embed the two interfaces to form the new one, like this:
+</p><pre>
+// ReadWriter is the interface that combines the Reader and Writer interfaces.
+type ReadWriter interface {
+    Reader
+    Writer
+}
+</pre><p>
+This says just what it looks like: A <code>ReadWriter</code> can do
+what a <code>Reader</code> does <em>and</em> what a <code>Writer</code>
+does; it is a union of the embedded interfaces (which must be disjoint
+sets of methods).
+Only interfaces can be embedded within interfaces.
+</p><p>
+The same basic idea applies to structs, but with more far-reaching
+implications.  The <code>bufio</code> package has two struct types,
+<code>bufio.Reader</code> and <code>bufio.Writer</code>, each of
+which of course implements the analogous interfaces from package
+<code>io</code>.
+And <code>bufio</code> also implements a buffered reader/writer,
+which it does by combining a reader and a writer into one struct
+using embedding: it lists the types within the struct
+but does not give them field names.
+</p><pre>
+// ReadWriter stores pointers to a Reader and a Writer.
+// It implements io.ReadWriter.
+type ReadWriter struct {
+    *Reader  // *bufio.Reader
+    *Writer  // *bufio.Writer
+}
+</pre><p>
+The embedded elements are pointers to structs and of course
+must be initialized to point to valid structs before they
+can be used.
+The <code>ReadWriter</code> struct could be written as
+</p><pre>
+type ReadWriter struct {
+    reader *Reader
+    writer *Writer
+}
+</pre><p>
+but then to promote the methods of the fields and to
+satisfy the <code>io</code> interfaces, we would also need
+to provide forwarding methods, like this:
+</p><pre>
+func (rw *ReadWriter) Read(p []byte) (n int, err error) {
+    return rw.reader.Read(p)
+}
+</pre><p>
+By embedding the structs directly, we avoid this bookkeeping.
+The methods of embedded types come along for free, which means that <code>bufio.ReadWriter</code>
+not only has the methods of <code>bufio.Reader</code> and <code>bufio.Writer</code>,
+it also satisfies all three interfaces:
+<code>io.Reader</code>,
+<code>io.Writer</code>, and
+<code>io.ReadWriter</code>.
+</p><p>
+There&apos;s an important way in which embedding differs from subclassing.  When we embed a type,
+the methods of that type become methods of the outer type,
+but when they are invoked the receiver of the method is the inner type, not the outer one.
+In our example, when the <code>Read</code> method of a <code>bufio.ReadWriter</code> is
+invoked, it has exactly the same effect as the forwarding method written out above;
+the receiver is the <code>reader</code> field of the <code>ReadWriter</code>, not the
+<code>ReadWriter</code> itself.
+</p><p>
+Embedding can also be a simple convenience.
+This example shows an embedded field alongside a regular, named field.
+</p><pre>
+type Job struct {
+    Command string
+    *log.Logger
+}
+</pre><p>
+The <code>Job</code> type now has the <code>Print</code>, <code>Printf</code>, <code>Println</code>
+and other
+methods of <code>*log.Logger</code>.  We could have given the <code>Logger</code>
+a field name, of course, but it&apos;s not necessary to do so.  And now, once
+initialized, we can
+log to the <code>Job</code>:
+</p><pre>
+job.Println(&quot;starting now...&quot;)
+</pre><p>
+The <code>Logger</code> is a regular field of the <code>Job</code> struct,
+so we can initialize it in the usual way inside the constructor for <code>Job</code>, like this,
+</p><pre>
+func NewJob(command string, logger *log.Logger) *Job {
+    return &amp;Job{command, logger}
+}
+</pre><p>
+or with a composite literal,
+</p><pre>
+job := &amp;Job{command, log.New(os.Stderr, &quot;Job: &quot;, log.Ldate)}
+</pre><p>
+If we need to refer to an embedded field directly, the type name of the field,
+ignoring the package qualifier, serves as a field name, as it did
+in the <code>Read</code> method of our <code>ReadWriter</code> struct.
+Here, if we needed to access the
+<code>*log.Logger</code> of a <code>Job</code> variable <code>job</code>,
+we would write <code>job.Logger</code>,
+which would be useful if we wanted to refine the methods of <code>Logger</code>.
+</p><pre>
+func (job *Job) Printf(format string, args ...interface{}) {
+    job.Logger.Printf(&quot;%q: %s&quot;, job.Command, fmt.Sprintf(format, args...))
+}
+</pre><p>
+Embedding types introduces the problem of name conflicts but the rules to resolve
+them are simple.
+First, a field or method <code>X</code> hides any other item <code>X</code> in a more deeply
+nested part of the type.
+If <code>log.Logger</code> contained a field or method called <code>Command</code>, the <code>Command</code> field
+of <code>Job</code> would dominate it.
+</p><p>
+Second, if the same name appears at the same nesting level, it is usually an error;
+it would be erroneous to embed <code>log.Logger</code> if the <code>Job</code> struct
+contained another field or method called <code>Logger</code>.
+However, if the duplicate name is never mentioned in the program outside the type definition, it is OK.
+This qualification provides some protection against changes made to types embedded from outside; there
+is no problem if a field is added that conflicts with another field in another subtype if neither field
+is ever used.
+</p></body>
+</body>
+</html>

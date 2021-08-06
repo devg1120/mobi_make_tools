@@ -1,0 +1,77 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svn resolve</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts7/undefined" />
+  </head>
+   <body>
+    <div class="refentry">
+      <a id="svn.ref.svn.c.resolve"></a>
+      <div class="titlepage"></div>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svn resolve &#x2014; Resolve conflicts on working copy files or
+            directories.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm11026"></a>
+        <h2>Synopsis</h2>
+        <p>
+          <code class="literal">svn resolve PATH...</code>
+        </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm11030"></a>
+        <h2>Description</h2>
+        <p>Resolve <span class="quote">&#x201C;<span class="quote">conflicted</span>&#x201D;</span> state on working
+            copy files or directories.  This routine does not
+            semantically resolve conflict markers; however, it
+            replaces <em class="replaceable"><code>PATH</code></em> with the version
+            specified by the <code class="option">--accept</code> argument and
+            then removes conflict-related artifact files.  This allows
+            <em class="replaceable"><code>PATH</code></em> to be committed
+            again&#x2014;that is, it tells Subversion that the
+            conflicts have been <span class="quote">&#x201C;<span class="quote">resolved.</span>&#x201D;</span></p>
+        <p>See  for an in-depth look at
+            resolving conflicts.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm11040"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+          <pre class="screen">
+</pre>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm11049"></a>
+        <h2>Examples</h2>
+        <p>Here&apos;s an example where, after a postponed conflict
+            resolution during update, <span class="command"><strong>svn resolve</strong></span>
+            replaces the all conflicts in
+            file <code class="filename">foo.c</code> with your edits:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn update
+Updating &apos;.&apos;:
+Conflict discovered in &apos;foo.c&apos;.
+Select: (p) postpone, (df) diff-full, (e) edit,
+        (mc) mine-conflict, (tc) theirs-conflict,
+        (s) show all options: p
+C    foo.c
+Updated to revision 5.
+Summary of conflicts:
+  Text conflicts: 1
+$ svn resolve --accept mine-full foo.c
+Resolved conflicted state of &apos;foo.c&apos;
+$
+</pre>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

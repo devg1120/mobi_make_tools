@@ -1,0 +1,54 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Build Toggles
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts13_images/undefined" />
+  </head>
+   <body>
+<h2 id="build-toggles">Build Toggles</h2>
+<p>It is common to switch in JavaScript projects based on where they are being run. You can do this quite easily with webpack as it supports <em>dead code elimination</em> based on environment variables.</p>
+<p>Add different targets in your <code>package.json</code> <code>scripts</code>:</p>
+<pre><code class="lang-json"><span class="hljs-string">&quot;build:test&quot;</span>: <span class="hljs-string">&quot;webpack -p --config ./src/webpack.config.js&quot;</span>,
+<span class="hljs-string">&quot;build:prod&quot;</span>: <span class="hljs-string">&quot;webpack -p --define process.env.NODE_ENV=&apos;\&quot;production\&quot;&apos; --config ./src/webpack.config.js&quot;</span>,
+</code></pre>
+<p>Of course I am assuming you have <code>npm install webpack --save-dev</code>. Now you can run <code>npm run build:test</code> etc.</p>
+<p>Using this variable is super easy as well:</p>
+<pre><code class="lang-ts"><span class="hljs-comment">/**
+ * This interface makes sure we don&apos;t miss adding a property to both `prod` and `test`
+ */</span>
+<span class="hljs-keyword">interface</span> Config {
+  someItem: <span class="hljs-built_in">string</span>;
+}
+<span class="hljs-comment">/**
+ * We only export a single thing. The config.
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">let</span> config: Config;
+<span class="hljs-comment">/**
+ * `process.env.NODE_ENV` definition is driven from webpack
+ *
+ * The whole `else` block will be removed in the emitted JavaScript
+ *  for a production build
+ */</span>
+<span class="hljs-keyword">if</span> (process.env.NODE_ENV === <span class="hljs-string">&apos;production&apos;</span>) {
+  config = {
+    someItem: <span class="hljs-string">&apos;prod&apos;</span>
+  }
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;Running in prod&apos;</span>);
+} <span class="hljs-keyword">else</span> {
+  config = {
+    someItem: <span class="hljs-string">&apos;test&apos;</span>
+  }
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;Running in test&apos;</span>);
+}
+</code></pre>
+<blockquote>
+    <p>We use <code>process.env.NODE_ENV</code> just because it is conventional in a lot of JavaScript libraries themselves e.g. <code>React</code>.</p>
+</blockquote>
+</body>
+</html>

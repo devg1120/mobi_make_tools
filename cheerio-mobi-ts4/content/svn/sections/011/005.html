@@ -1,0 +1,82 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svn changelist (cl)</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/tmp/es2015/cheerio-mobi-ts4/css/kindle.css" />
+  </head>
+   <body>
+    <div class="refentry">
+      <a id="svn.ref.svn.c.changelist"></a>
+      <div class="titlepage"></div>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svn changelist (cl) &#x2014; Associate (or deassociate) local paths with a
+            changelist.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm9413"></a>
+        <h2>Synopsis</h2>
+        <p>
+          <code class="literal">changelist CLNAME TARGET...</code>
+        </p>
+        <p>
+          <code class="literal">changelist --remove TARGET...</code>
+        </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm9419"></a>
+        <h2>Description</h2>
+        <p>Used for dividing files in a working copy into a
+            changelist (logical named grouping) in order to allow
+            users to easily work on multiple file collections within a
+            single working copy.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm9422"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+          <pre class="screen">
+</pre>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm9432"></a>
+        <h2>Example</h2>
+        <p>Edit three files, add them to a changelist, then
+            commit only files in that changelist:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn changelist issue1729 foo.c bar.c baz.c
+A [issue1729] foo.c
+A [issue1729] bar.c
+A [issue1729] baz.c
+$ svn status
+A       someotherfile.c
+A       test/sometest.c
+--- Changelist &apos;issue1729&apos;:
+A       foo.c
+A       bar.c
+A       baz.c
+$ svn commit --changelist issue1729 -m &quot;Fixing Issue 1729.&quot;
+Adding         bar.c
+Adding         baz.c
+Adding         foo.c
+Transmitting file data ...
+Committed revision 2.
+$ svn status
+A       someotherfile.c
+A       test/sometest.c
+$
+</pre>
+        </div>
+        <p>Note that in the previous example, only the files in
+            changelist <code class="literal">issue1729</code> were
+            committed.</p>
+      </div>
+    </div>
+</body>
+</html>

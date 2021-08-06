@@ -1,0 +1,166 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Programming for Portability</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts10/undefined" />
+  </head>
+   <body>
+<div class="sect1" lang="en">
+    <div class="titlepage">
+        <div>
+            <h2 class="title" style="clear: both"><a id="id3000262">Programming for Portability</a></h2>
+        </div>
+    </div>
+    <p>Software portability is usually thought of in quasi-spatial
+        terms: can this code be moved sideways to existing hardware and
+        software platforms other than the one it was built for? But Unix
+        experience over decades tells us that durability down through time is
+        just as important, if not more so. If we could predict the future of
+        software in detail it would probably be the present &#x2014;
+        nevertheless, in programming for portability we should try to think
+        about making choices that will base the software on the features of
+        its environment that are likeliest to persist, and avoid technologies
+        that seem likely to face end-of-life in the foreseeable future.</p>
+    <p>Under Unix, two decades of attention to the issues of
+        specifying portable APIs has largely solved that problem. Facilities
+        described in the Single Unix Specification are likely to be present
+        on all modern Unix platforms today and rather unlikely to go
+        unsupported in the future.</p>
+    <p>But not all platform dependencies have to do with the system
+        or library APIs. Your implementation language can matter; file-system
+        layout and configuration differences between the source and target
+        system can be a problem as well. But Unix practice has evolved ways
+        to cope.</p>
+    <div class="sect2" lang="en">
+        <div class="titlepage">
+            <div>
+                <h3 class="title"><a id="id3000303">Portability and Choice of Language</a></h3>
+            </div>
+        </div>
+        <p>The first issue in programming for portability is your choice of
+            implementation language. All the major languages we surveyed in <a href="languageschapter.html" title="Chapter&#xFFFD;14.&#xFFFD;Languages">Chapter&#xFFFD;14</a> are highly portable
+            in the sense that compatible implementations are available across all
+            modern Unixes; for most, implementations under Windows and MacOS are
+            available as well. Portability problems tend to arise not in the core
+            languages but in support libraries and degree of integration with the
+            local environment (especially IPC and concurrent-process management,
+            including the infrastructure for GUIs).</p>
+        <div class="sect3" lang="en">
+            <div class="titlepage">
+                <div>
+                    <h4 class="title"><a id="c_portability">C Portability</a></h4>
+                </div>
+            </div>
+        </div>
+        <div class="sect3" lang="en">
+            <div class="titlepage">
+                <div>
+                    <h4 class="title"><a id="cc_portability">C++ Portability</a></h4>
+                </div>
+            </div>
+        </div>
+        <div class="sect3" lang="en">
+            <div class="titlepage">
+                <div>
+                    <h4 class="title"><a id="shell_portability">Shell Portability</a></h4>
+                </div>
+            </div>
+        </div>
+        <div class="sect3" lang="en">
+            <div class="titlepage">
+                <div>
+                    <h4 class="title"><a id="perl_portability">Perl Portability</a></h4>
+                </div>
+            </div>
+        </div>
+        <div class="sect3" lang="en">
+            <div class="titlepage">
+                <div>
+                    <h4 class="title"><a id="python_portability">Python Portability</a></h4>
+                </div>
+            </div>
+        </div>
+        <div class="sect3" lang="en">
+            <div class="titlepage">
+                <div>
+                    <h4 class="title"><a id="tcl_portability">Tcl Portability</a></h4>
+                </div>
+            </div>
+        </div>
+        <div class="sect3" lang="en">
+            <div class="titlepage">
+                <div>
+                    <h4 class="title"><a id="java_portability">Java Portability</a></h4>
+                </div>
+            </div>
+        </div>
+        <div class="sect3" lang="en">
+            <div class="titlepage">
+                <div>
+                    <h4 class="title"><a id="emacs_lisp_portability">Emacs Lisp Portability</a></h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sect2" lang="en">
+        <div class="titlepage">
+            <div>
+                <h3 class="title"><a id="id3000882">Avoiding System Dependencies</a></h3>
+            </div>
+        </div>
+        <p>Once your language and support libraries are chosen, the next
+            portability issue is usually the location of key system files and
+            directories: mail spools, logfile directories and the like.
+            The archetype of this sort of problem is whether the mail spool
+            directory is <tt>/var/spool/mail</tt> or
+            <tt>/var/mail</tt>.</p>
+        <p>Often, you can avoid this sort of dependency by stepping back
+            and reframing the problem. Why are you opening a file in the mail
+            spool directory, anyway? If you&apos;re writing to it, wouldn&apos;t it be
+            better to simply invoke the local mail transport agent to do it for
+            you so the file-locking gets done right? If you&apos;re reading from it,
+            might it be better to query it through a POP3 or IMAP server?</p>
+        <p>The same sort of question applies elsewhere. If you find
+            yourself opening logfiles manually, shouldn&apos;t you be using
+            syslog(3)
+            instead? Function-call interfaces through the C library are better
+            standardized than system file locations. Use that fact!</p>
+        <p>If you must have system file locations in your code, your best
+            alternative depends on whether you will be distributing in source code
+            or binary form. If you are distributing in source, the
+            <i>autoconf</i> tools we discuss in the next
+            section will help you. If you&apos;re distributing in binary, then it&apos;s
+            good practice to have your program poke around at runtime and see if
+            it can automatically adapt itself to local conditions &#x2014; say, by
+            actually checking for the existence of <tt>/var/mail</tt> and <tt>/var/spool/mail</tt>.</p>
+    </div>
+    <div class="sect2" lang="en">
+        <div class="titlepage">
+            <div>
+                <h3 class="title"><a id="id3000984">Tools for Portability</a></h3>
+            </div>
+        </div>
+        <p>You can often use the open-source GNU
+            autoconf(1)
+            we surveyed in <a href="toolschapter.html" title="Chapter&#xFFFD;15.&#xFFFD;Tools">Chapter&#xFFFD;15</a> to
+            handle portability issues, do system-configuration probes, and tailor
+            your makefiles. People building from sources today expect to be able
+            to type <b>configure; make; make install</b> and get a
+            clean build. There is a good <a href="http://seul.org/docs/autotut/" target="_top">tutorial on these
+                tools</a>. Even if you&apos;re distributing in binary, the
+            autoconf(1)
+            tools can help automate away the problem of conditionalizing your code
+            for different platforms.</p>
+        <p>Other tools that address this problem; two of the better known
+            are the
+            Imake(1)
+            tool associated with the X windowing system and the <i>Configure</i> tool built by Larry Wall (later
+            the inventor of Perl</p>
+    </div>
+</div>
+</body>
+</html>

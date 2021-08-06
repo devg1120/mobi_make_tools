@@ -1,0 +1,23 @@
+<h2 id="resolving-loaders">Resolving Loaders<a href="#resolving-loaders" aria-hidden="true"><span class="icon icon-link"></span></a></h2>
+<p>Loaders follow the standard <a href="/concepts/module-resolution/">module resolution</a>. In most cases it will be loaded from the <a href="/concepts/module-resolution/#module-paths">module path</a> (think <code>npm install</code>, <code>node_modules</code>).</p>
+<p>A loader module is expected to export a function and be written in Node.js compatible JavaScript. They are most commonly managed with npm, but you can also have custom loaders as files within your application. By convention, loaders are usually named <code>xxx-loader</code> (e.g. <code>json-loader</code>). See <a href="/contribute/writing-a-loader/">&quot;Writing a Loader&quot;</a> for more information.</p>
+<div class="contributors__section">
+    <hr>
+    <h3>Contributors</h3>
+    <div class="contributors">
+        <div class="contributors__list"><a class="contributor" href="https://github.com/manekinekko"><img alt="manekinekko" src="/cb0093496837d3dc43dfae5a9104d663.png"><span class="contributor__name">
+                    <!-- -->manekinekko</span></a><a class="contributor" href="https://github.com/evenstensberg"><img alt="evenstensberg" src="/cb0093496837d3dc43dfae5a9104d663.png"><span class="contributor__name">
+                    <!-- -->evenstensberg</span></a><a class="contributor" href="https://github.com/SpaceK33z"><img alt="SpaceK33z" src="/cb0093496837d3dc43dfae5a9104d663.png"><span class="contributor__name">
+                    <!-- -->SpaceK33z</span></a><a class="contributor" href="https://github.com/gangachris"><img alt="gangachris" src="/cb0093496837d3dc43dfae5a9104d663.png"><span class="contributor__name">
+                    <!-- -->gangachris</span></a><a class="contributor" href="https://github.com/TheLarkInn"><img alt="TheLarkInn" src="/cb0093496837d3dc43dfae5a9104d663.png"><span class="contributor__name">
+                    <!-- -->TheLarkInn</span></a><a class="contributor" href="https://github.com/simon04"><img alt="simon04" src="/cb0093496837d3dc43dfae5a9104d663.png"><span class="contributor__name">
+                    <!-- -->simon04</span></a><a class="contributor" href="https://github.com/jhnns"><img alt="jhnns" src="/cb0093496837d3dc43dfae5a9104d663.png"><span class="contributor__name">
+                    <!-- -->jhnns</span></a><a class="contributor" href="https://github.com/byzyk"><img alt="byzyk" src="/cb0093496837d3dc43dfae5a9104d663.png"><span class="contributor__name">
+                    <!-- -->byzyk</span></a><a class="contributor" href="https://github.com/debs-obrien"><img alt="debs-obrien" src="/cb0093496837d3dc43dfae5a9104d663.png"><span class="contributor__name">
+                    <!-- -->debs-obrien</span></a><a class="contributor" href="https://github.com/EugeneHlushko"><img alt="EugeneHlushko" src="/cb0093496837d3dc43dfae5a9104d663.png"><span class="contributor__name">
+                    <!-- -->EugeneHlushko</span></a><a class="contributor" href="https://github.com/wizardofhogwarts"><img alt="wizardofhogwarts" src="/cb0093496837d3dc43dfae5a9104d663.png"><span class="contributor__name">
+                    <!-- -->wizardofhogwarts</span></a><a class="contributor" href="https://github.com/lukasgeiter"><img alt="lukasgeiter" src="/cb0093496837d3dc43dfae5a9104d663.png"><span class="contributor__name">
+                    <!-- -->lukasgeiter</span></a><a class="contributor" href="https://github.com/furkle"><img alt="furkle" src="/cb0093496837d3dc43dfae5a9104d663.png"><span class="contributor__name">
+                    <!-- -->furkle</span></a></div>
+    </div>
+</div>

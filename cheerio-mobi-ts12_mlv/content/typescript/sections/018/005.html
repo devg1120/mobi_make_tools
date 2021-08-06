@@ -1,0 +1,68 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Trivia
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts12_mlv/undefined" />
+  </head>
+   <body>
+<h3 id="trivia">Trivia</h3>
+<p>Trivia (called that because it&apos;s <code>trivial</code>) represent the parts of the source text that are largely insignificant for normal understanding of the code. For example; whitespace, comments, and even conflict markers. Trivia is <em>not stored</em> in the AST (to keep it lightweight). However, it can be fetched <em>on demand</em> using a few <code>ts.*</code> APIs. </p>
+<p>Before we show them you need to understand the following:</p>
+<h4 id="trivia-ownership">Trivia Ownership</h4>
+<p>In General:</p>
+<ul>
+    <li>A token owns any trivia after it on the <em>same</em> line <em>upto</em> the next token.</li>
+    <li>Any comment <em>after that line</em> is associated with the following token.</li>
+</ul>
+<p>For leading and ending comments in a file:</p>
+<ul>
+    <li>The first token in the source file gets all the initial trivia.</li>
+    <li>The last sequence of trivia in the file is tacked onto the end-of-file token, which otherwise has zero width.</li>
+</ul>
+<h4 id="trivia-apis">Trivia APIs</h4>
+<p>For most basic uses, comments are the &quot;interesting&quot; trivia. The comments that belong to a Node can be fetched through the following functions:</p>
+<table>
+    <thead>
+        <tr>
+            <th>Function</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>ts.getLeadingCommentRanges</code></td>
+            <td>Given the source text and position within that text, returns ranges of comments between the first line break following the given position and the token itself (probably most useful with <code>ts.Node.getFullStart</code>).</td>
+        </tr>
+        <tr>
+            <td><code>ts.getTrailingCommentRanges</code></td>
+            <td>Given the source text and position within that text, returns ranges of comments until the first line break following the given position (probably most useful with <code>ts.Node.getEnd</code>).</td>
+        </tr>
+    </tbody>
+</table>
+<p>As an example, imagine this portion of a source file:</p>
+<pre><code class="lang-ts">debugger;<span class="hljs-comment">/*hello*/</span>
+    <span class="hljs-comment">//bye</span>
+  <span class="hljs-comment">/*hi*/</span>    <span class="hljs-function"><span class="hljs-keyword">function</span>
+</span></code></pre>
+<p><code>getLeadingCommentRanges</code> for the <code>function</code> will only return the last 2 comments <code>//bye</code> and <code>/*hi*/</code>.</p>
+<p>Appropriately, calling <code>getTrailingCommentRanges</code> on the end of the debugger statement will extract the <code>/*hello*/</code> comment.</p>
+<h4 id="token-startfull-start">Token Start/Full Start</h4>
+<p>Nodes have what is called a &quot;token start&quot; and a &quot;full start&quot;.</p>
+<ul>
+    <li>Token Start: the more natural version, which is the position in file where the text of a token begins</li>
+    <li>Full Start: the point at which the scanner began scanning since the last significant token</li>
+</ul>
+<p>AST nodes have an API for <code>getStart</code> and <code>getFullStart</code>. In the following example:</p>
+<pre><code class="lang-ts">debugger;<span class="hljs-comment">/*hello*/</span>
+    <span class="hljs-comment">//bye</span>
+  <span class="hljs-comment">/*hi*/</span>    <span class="hljs-function"><span class="hljs-keyword">function</span>
+</span></code></pre>
+<p>for <code>function</code> the token start is at <code>function</code> whereas <em>full</em> start is at <code>/*hello*/</code>. Note that full start even includes the trivia that would otherwise be owned by the previous node.</p>
+</body>
+</html>

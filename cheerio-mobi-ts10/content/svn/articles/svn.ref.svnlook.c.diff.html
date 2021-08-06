@@ -1,0 +1,130 @@
+<div class="refentry">
+    <a id="svn.ref.svnlook.c.diff"></a>
+    <div class="titlepage"></div>
+    <a id="idm12690" class="indexterm"></a>
+    <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svnlook diff — Print differences of changed files and properties.</p>
+    </div>
+    <div class="refsect1">
+        <a id="idm12697"></a>
+        <h2>Synopsis</h2>
+        <p>
+            <code class="literal">svnlook diff REPOS_PATH</code>
+        </p>
+    </div>
+    <div class="refsect1">
+        <a id="idm12701"></a>
+        <h2>Description</h2>
+        <p>Print GNU-style differences of changed files and
+            properties in a repository.</p>
+    </div>
+    <div class="refsect1">
+        <a id="idm12704"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+            <pre class="screen">
+<a class="xref" href="svn.ref.svnlook.html#svn.ref.svnlook.sw.diff_copy_from"><code class="option">--diff-copy-from</code></a>
+<a class="xref" href="svn.ref.svnlook.html#svn.ref.svnlook.sw.no_diff_added"><code class="option">--no-diff-added</code></a>
+<a class="xref" href="svn.ref.svnlook.html#svn.ref.svnlook.sw.no_diff_deleted"><code class="option">--no-diff-deleted</code></a>
+<a class="xref" href="svn.ref.svnlook.html#svn.ref.svnlook.sw.revision"><code class="option">--revision</code> (<code class="option">-r</code>) <em class="replaceable"><code>REV</code></em></a>
+<a class="xref" href="svn.ref.svnlook.html#svn.ref.svnlook.sw.transaction"><code class="option">--transaction</code> (<code class="option">-t</code>) <em class="replaceable"><code>ID</code></em></a>
+<a class="xref" href="svn.ref.svnlook.html#svn.ref.svnlook.sw.extensions"><code class="option">--extensions</code> (<code class="option">-x</code>) <em class="replaceable"><code>ARG</code></em></a>
+</pre>
+        </div>
+    </div>
+    <div class="refsect1">
+        <a id="idm12714"></a>
+        <h2>Examples</h2>
+        <p>This shows a newly added (empty) file, a modified
+            binary file, and a renamed (that is, copied and deleted)
+            file with modifications:</p>
+        <div class="informalexample">
+            <pre class="screen">
+$ svnlook diff -r 40 /var/svn/repos
+Copied: trunk/relish.txt (from rev 39, trunk/vendors/deli/pickle.txt)
+===================================================================
+--- trunk/relish.txt	                        (rev 0)
++++ trunk/relish.txt	2013-01-29 20:39:17 UTC (rev 40)
+@@ -0,0 +1 @@
++Pickle relish is mostly made from cucumbers.
+
+Deleted: trunk/vendors/deli/pickle.txt
+===================================================================
+--- trunk/vendors/deli/pickle.txt	                        (rev 39)
++++ trunk/vendors/deli/pickle.txt	2013-01-29 20:39:17 UTC (rev 49)
+@@ -1 +0,0 @@
+-Pickles are mostly made from cucumbers.
+
+Modified: trunk/vendors/deli/logo.jpg
+===================================================================
+(Binary files differ)
+
+Added: trunk/vendors/deli/soda.txt
+===================================================================
+$
+</pre>
+        </div>
+        <p>By default, <span class="command"><strong>svnlook diff</strong></span> will treat
+            copied files very much like any other added file,
+            displaying in their entirety the contents of the new file
+            and merely using a different label to draw the copy/add
+            distinction. However, you can use the
+            <code class="option">--diff-copy-from</code> option to cause
+            <span class="command"><strong>svnlook diff</strong></span> to consider a copied
+            file as worthy of mention only if it differs from the file
+            from which it was copied, and to actually describe those
+            differences.</p>
+        <div class="informalexample">
+            <pre class="screen">
+$ svnlook diff -r 40 /var/svn/repos --diff-copy-from
+Copied: trunk/relish.txt (from rev 39, trunk/vendors/deli/pickle.txt)
+===================================================================
+--- trunk/vendors/deli/pickle.txt	2013-01-29 20:39:17 UTC (rev 39)
++++ trunk/relish.txt	2013-01-29 20:47:40 UTC (rev 3)
+@@ -1 +1 @@
+-Pickles are mostly made from cucumbers.
++Pickle relish is mostly made from cucumbers.
+
+Deleted: trunk/vendors/deli/pickle.txt
+===================================================================
+--- trunk/vendors/deli/pickle.txt	(rev 39)
++++ trunk/vendors/deli/pickle.txt	2013-01-29 20:39:17 UTC (rev 40)
+@@ -1 +0,0 @@
+-Pickles are mostly made from cucumbers.
+
+Modified: trunk/vendors/deli/logo.jpg
+===================================================================
+(Binary files differ)
+
+Added: trunk/vendors/deli/soda.txt
+==============================================================================
+$
+</pre>
+        </div>
+        <p>Use the <code class="option">--no-diff-deleted</code> option to
+            silence output regarding deleted files.</p>
+        <div class="informalexample">
+            <pre class="screen">
+$ svnlook diff -r 40 /var/svn/repos --no-diff-deleted
+Copied: trunk/relish.txt (from rev 39, trunk/vendors/deli/pickle.txt)
+===================================================================
+--- trunk/relish.txt	                        (rev 0)
++++ trunk/relish.txt	2013-01-29 20:39:17 UTC (rev 40)
+@@ -0,0 +1 @@
++Pickle relish is mostly made from cucumbers.
+
+Modified: trunk/vendors/deli/logo.jpg
+===================================================================
+(Binary files differ)
+
+Added: trunk/vendors/deli/soda.txt
+==============================================================================
+$
+</pre>
+        </div>
+        <p>Note that in each of the previous examples, when a
+            file has a nontextual <code class="literal">svn:mime-type</code>
+            property, the differences are not explicitly shown.</p>
+    </div>
+</div>

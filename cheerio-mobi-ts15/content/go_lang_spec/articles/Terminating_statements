@@ -1,0 +1,71 @@
+<body><p>
+A <i>terminating statement</i> prevents execution of all statements that lexically
+appear after it in the same [<a>block</a>]. The following statements
+are terminating:
+</p><ol>
+<li>
+	A [<a>"return"</a>] or
+    	[<a>"goto"</a>] statement.
+	 ul below only for regular layout 
+	<ul> </ul>
+</li>
+
+<li>
+	A call to the built-in function
+	[<a><code>panic</code></a>].
+	 ul below only for regular layout 
+	<ul> </ul>
+</li>
+
+<li>
+	A [<a>block</a>] in which the statement list ends in a terminating statement.
+	 ul below only for regular layout 
+	<ul> </ul>
+</li>
+
+<li>
+	An [<a>"if" statement</a>] in which:
+	<ul>
+	<li>the "else" branch is present, and</li>
+	<li>both branches are terminating statements.</li>
+	</ul>
+</li>
+
+<li>
+	A [<a>"for" statement</a>] in which:
+	<ul>
+	<li>there are no "break" statements referring to the "for" statement, and</li>
+	<li>the loop condition is absent.</li>
+	</ul>
+</li>
+
+<li>
+	A [<a>"switch" statement</a>] in which:
+	<ul>
+	<li>there are no "break" statements referring to the "switch" statement,</li>
+	<li>there is a default case, and</li>
+	<li>the statement lists in each case, including the default, end in a terminating
+	    statement, or a possibly labeled [<a>"fallthrough"
+	    statement</a>].</li>
+	</ul>
+</li>
+
+<li>
+	A [<a>"select" statement</a>] in which:
+	<ul>
+	<li>there are no "break" statements referring to the "select" statement, and</li>
+	<li>the statement lists in each case, including the default if present,
+	    end in a terminating statement.</li>
+	</ul>
+</li>
+
+<li>
+	A [<a>labeled statement</a>] labeling
+	a terminating statement.
+</li>
+</ol><p>
+All other statements are not terminating.
+</p><p>
+A [<a>statement list</a>] ends in a terminating statement if the list
+is not empty and its final non-empty statement is terminating.
+</p></body>

@@ -1,0 +1,53 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Variable declarations</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+A variable declaration creates one or more [<a>variables</a>],
+binds corresponding identifiers to them, and gives each a type and an initial value.
+</p><pre>
+[<a>VarDecl</a>]     = &quot;var&quot; ( [<a>VarSpec</a>] | &quot;(&quot; { [<a>VarSpec</a>] &quot;;&quot; } &quot;)&quot; ) .
+[<a>VarSpec</a>]     = [<a>IdentifierList</a>] ( [<a>Type</a>] [ &quot;=&quot; [<a>ExpressionList</a>] ] | &quot;=&quot; [<a>ExpressionList</a>] ) .
+</pre><pre>
+var i int
+var U, V, W float64
+var k = 0
+var x, y float32 = -1, -2
+var (
+	i       int
+	u, v, s = 2.0, 3.0, &quot;bar&quot;
+)
+var re, im = complexSqrt(-1)
+var _, found = entries[name]  // map lookup; only interested in &quot;found&quot;
+</pre><p>
+If a list of expressions is given, the variables are initialized
+with the expressions following the rules for [<a>assignments</a>].
+Otherwise, each variable is initialized to its [<a>zero value</a>].
+</p><p>
+If a type is present, each variable is given that type.
+Otherwise, each variable is given the type of the corresponding
+initialization value in the assignment.
+If that value is an untyped constant, it is first implicitly
+[<a>converted</a>] to its [<a>default type</a>];
+if it is an untyped boolean value, it is first implicitly converted to type <code>bool</code>.
+The predeclared value <code>nil</code> cannot be used to initialize a variable
+with no explicit type.
+</p><pre>
+var d = math.Sin(0.5)  // d is float64
+var i = 42             // i is int
+var t, ok = x.(T)      // t is T, ok is bool
+var n = nil            // illegal
+</pre><p>
+Implementation restriction: A compiler may make it illegal to declare a variable
+inside a [<a>function body</a>] if the variable is
+never used.
+</p></body>
+</body>
+</html>

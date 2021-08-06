@@ -1,0 +1,10 @@
+
+  config/###-config.yaml
+
+  svc
+  unix
+    セクション抽出パラメータ化
+
+    関数 gets_extract_sections
+
+

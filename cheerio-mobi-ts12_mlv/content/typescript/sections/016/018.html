@@ -1,0 +1,82 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Typesafe Event Emitter
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts12_mlv/undefined" />
+  </head>
+   <body>
+<h2 id="typesafe-event-emitter">Typesafe Event Emitter</h2>
+<p>Conventionally in Node.js and traditional JavaScript you have a single event emitter. This event emitter internally tracks listener for different event types e.g. </p>
+<pre><code class="lang-ts"><span class="hljs-keyword">const</span> emitter = <span class="hljs-keyword">new</span> EventEmitter();
+<span class="hljs-comment">// Emit: </span>
+emitter.emit(<span class="hljs-string">&apos;foo&apos;</span>, foo);
+emitter.emit(<span class="hljs-string">&apos;bar&apos;</span>, bar);
+<span class="hljs-comment">// Listen: </span>
+emitter.on(<span class="hljs-string">&apos;foo&apos;</span>, (foo)=&gt;<span class="hljs-built_in">console</span>.log(foo));
+emitter.on(<span class="hljs-string">&apos;bar&apos;</span>, (bar)=&gt;<span class="hljs-built_in">console</span>.log(bar));
+</code></pre>
+<p>Essentially <code>EventEmitter</code> internally stores data in the form of mapped arrays: </p>
+<pre><code class="lang-ts">{foo: [fooListeners], bar: [barListeners]}
+</code></pre>
+<p>Instead, for the sake of <em>event</em> type safety, you can create an emitter <em>per</em> event type:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">const</span> onFoo = <span class="hljs-keyword">new</span> TypedEvent<foo>();
+<span class="hljs-keyword">const</span> onBar = <span class="hljs-keyword">new</span> TypedEvent<bar>();
+<span class="hljs-comment">// Emit: </span>
+onFoo.emit(foo);
+onBar.emit(bar);
+<span class="hljs-comment">// Listen: </span>
+onFoo.on((foo)=&gt;<span class="hljs-built_in">console</span>.log(foo));
+onBar.on((bar)=&gt;<span class="hljs-built_in">console</span>.log(bar));
+</bar></foo></code></pre>
+<p>This has the following advantages: </p>
+<ul>
+    <li>The types of events are easily discoverable as variables.</li>
+    <li>The event emitter variables are easily refactored independently.</li>
+    <li>Type safety for event data structures.</li>
+</ul>
+<h3 id="reference-typedevent">Reference TypedEvent</h3>
+<pre><code class="lang-ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> Listener<t> {
+  (event: T): <span class="hljs-built_in">any</span>;
+}
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> Disposable {
+  dispose();
+}
+<span class="hljs-comment">/** passes through events as they happen. You will not get events from before you start listening */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> TypedEvent<t> {
+  <span class="hljs-keyword">private</span> listeners: Listener<t>[] = [];
+  <span class="hljs-keyword">private</span> listenersOncer: Listener<t>[] = [];
+  on = (listener: Listener<t>): Disposable =&gt; {
+    <span class="hljs-keyword">this</span>.listeners.push(listener);
+    <span class="hljs-keyword">return</span> {
+      dispose: () =&gt; <span class="hljs-keyword">this</span>.off(listener)
+    };
+  }
+  once = (listener: Listener<t>): <span class="hljs-built_in">void</span> =&gt; {
+    <span class="hljs-keyword">this</span>.listenersOncer.push(listener);
+  }
+  off = (listener: Listener<t>) =&gt; {
+    <span class="hljs-keyword">var</span> callbackIndex = <span class="hljs-keyword">this</span>.listeners.indexOf(listener);
+    <span class="hljs-keyword">if</span> (callbackIndex &gt; <span class="hljs-number">-1</span>) <span class="hljs-keyword">this</span>.listeners.splice(callbackIndex, <span class="hljs-number">1</span>);
+  }
+  emit = (event: T) =&gt; {
+    <span class="hljs-comment">/** Update any general listeners */</span>
+    <span class="hljs-keyword">this</span>.listeners.forEach((listener) =&gt; listener(event));
+    <span class="hljs-comment">/** Clear the `once` queue */</span>
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.listenersOncer.length &gt; <span class="hljs-number">0</span>) {
+      <span class="hljs-keyword">this</span>.listenersOncer.forEach((listener) =&gt; listener(event));
+      <span class="hljs-keyword">this</span>.listenersOncer = [];
+    }
+  }
+  pipe = (te: TypedEvent<t>): Disposable =&gt; {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.on((e) =&gt; te.emit(e));
+  }
+}
+</t></t></t></t></t></t></t></t></code></pre>
+</body>
+</html>

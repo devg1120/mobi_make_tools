@@ -1,0 +1,9 @@
+<body><p>
+A labeled statement may be the target of a <code>goto</code>,
+<code>break</code> or <code>continue</code> statement.
+</p><pre>
+[<a>LabeledStmt</a>] = [<a>Label</a>] ":" [<a>Statement</a>] .
+[<a>Label</a>]       = [<a>identifier</a>] .
+</pre><pre>
+Error: log.Panic("error encountered")
+</pre></body>

@@ -1,0 +1,49 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Node.js QuickStart
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts13_images/undefined" />
+  </head>
+   <body>
+<h1 id="typescript-with-nodejs">TypeScript with Node.js</h1>
+<p>TypeScript has had <em>first class</em> support for Node.js since inception. Here&apos;s how to setup a quick Node.js project:</p>
+<blockquote>
+    <p>Note: many of these steps are actually just common practice Node.js setup steps</p>
+</blockquote>
+<ol>
+    <li>Setup a Node.js project <code>package.json</code>. Quick one : <code>npm init -y</code></li>
+    <li>Add TypeScript (<code>npm install typescript --save-dev</code>)</li>
+    <li>Add <code>node.d.ts</code> (<code>npm install @types/node --save-dev</code>)</li>
+    <li>Init a <code>tsconfig.json</code> for TypeScript options with a few key options in your tsconfig.json (<code>npx tsc --init --rootDir src --outDir lib --esModuleInterop --resolveJsonModule --lib es6,dom --module commonjs</code>)</li>
+</ol>
+<p>That&apos;s it! Fire up your IDE (e.g. <code>code .</code>) and play around. Now you can use all the built in node modules (e.g. <code>import * as fs from &apos;fs&apos;;</code>) with all the safety and developer ergonomics of TypeScript! </p>
+<p>All your TypeScript code goes in <code>src</code> and the generated JavaScript goes in <code>lib</code>. </p>
+<h2 id="bonus-live-compile--run">Bonus: Live compile + run</h2>
+<ul>
+    <li>Add <code>ts-node</code> which we will use for live compile + run in node (<code>npm install ts-node --save-dev</code>)</li>
+    <li>Add <code>nodemon</code> which will invoke <code>ts-node</code> whenever a file is changed (<code>npm install nodemon --save-dev</code>)</li>
+</ul>
+<p>Now just add a <code>script</code> target to your <code>package.json</code> based on your application entry e.g. assuming its <code>index.ts</code>:</p>
+<pre><code class="lang-json">  <span class="hljs-string">&quot;scripts&quot;</span>: {
+    <span class="hljs-string">&quot;start&quot;</span>: <span class="hljs-string">&quot;npm run build:live&quot;</span>,
+    <span class="hljs-string">&quot;build&quot;</span>: <span class="hljs-string">&quot;tsc -p .&quot;</span>,
+    <span class="hljs-string">&quot;build:live&quot;</span>: <span class="hljs-string">&quot;nodemon --watch &apos;src/**/*.ts&apos; --exec &apos;ts-node&apos; src/index.ts&quot;</span>
+  },
+</code></pre>
+<p>So you can now run <code>npm start</code> and as you edit <code>index.ts</code>:</p>
+<ul>
+    <li>nodemon reruns its command (ts-node)</li>
+    <li>ts-node transpiles automatically picking up tsconfig.json and the installed TypeScript version,</li>
+    <li>ts-node runs the output JavaScript through Node.js.</li>
+</ul>
+<p>And when you are ready to deploy your JavaScript application run <code>npm run build</code>.</p>
+<h2 id="bonus-points">Bonus points</h2>
+<p>Such NPM modules work just fine with browserify (using tsify) or webpack (using ts-loader).</p>
+</body>
+</html>

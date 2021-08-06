@@ -1,0 +1,34 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Receive operator</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+For an operand <code>ch</code> of [<a>channel type</a>],
+the value of the receive operation <code><-ch< code> is the value received
+from the channel <code>ch</code>. The channel direction must permit receive operations,
+and the type of the receive operation is the element type of the channel.
+The expression blocks until a value is available.
+Receiving from a <code>nil</code> channel blocks forever.
+A receive operation on a [<a>closed</a>] channel can always proceed
+immediately, yielding the element type&apos;s [<a>zero value</a>]
+after any previously sent values have been received.
+</-ch<></code></p><pre>
+v1 := <-ch v2="&lt;-ch" f(<-ch) <-strobe wait until clock pulse and discard received value < pre><p>
+A receive expression used in an [<a>assignment</a>] or initialization of the special form
+</p><pre>
+x, ok = <-ch x, ok :="&lt;-ch" var t="&lt;-ch" < pre><p>
+yields an additional untyped boolean result reporting whether the
+communication succeeded. The value of <code>ok</code> is <code>true</code>
+if the value received was delivered by a successful send operation to the
+channel, or <code>false</code> if it is a zero value generated because the
+channel is closed and empty.
+</p></-ch></pre></-ch></pre></body>
+</body>
+</html>

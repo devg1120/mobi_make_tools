@@ -1,0 +1,94 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svn proplist (plist, pl)</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts7/undefined" />
+  </head>
+   <body>
+    <div class="refentry">
+      <a id="svn.ref.svn.c.proplist"></a>
+      <div class="titlepage"></div>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svn proplist (plist, pl) &#x2014; List all properties.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm10828"></a>
+        <h2>Synopsis</h2>
+        <p>
+          <code class="literal">svn proplist [TARGET[@REV]...]</code>
+        </p>
+        <p>
+          <code class="literal">svn proplist --revprop -r REV [TARGET]</code>
+        </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm10834"></a>
+        <h2>Description</h2>
+        <p>List all properties on files, directories, or
+            revisions.  The first form lists versioned properties in
+            your working copy, and the second lists unversioned remote
+            properties on a repository revision
+            (<em class="replaceable"><code>TARGET</code></em> determines only which
+            repository to access).</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm10838"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+          <pre class="screen">
+</pre>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm10850"></a>
+        <h2>Examples</h2>
+        <p>You can use <span class="command"><strong>proplist</strong></span> to see the properties on an
+            item in your working copy:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn proplist foo.c
+Properties on &apos;foo.c&apos;:
+  svn:mime-type
+  svn:keywords
+  owner
+</pre>
+        </div>
+        <p>But with the <code class="option">--verbose</code>
+            (<code class="option">-v</code>) flag, <span class="command"><strong>svn
+            proplist</strong></span> is extremely handy as it also shows you
+            the values for the properties:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn proplist -v foo.c
+Properties on &apos;foo.c&apos;:
+  svn:mime-type
+    text/plain
+  svn:keywords
+    Author Date Rev
+  owner
+    sally
+</pre>
+        </div>
+        <p>Lastly, you can get <span class="command"><strong>svn proplist</strong></span>
+            output in xml format with the <code class="option">--xml</code>
+            option:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn proplist --xml 
+<?xml version="1.0"?>
+<properties>
+<target path=".">
+<property name="svn:ignore">
+</property></target>
+</properties>
+</pre>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

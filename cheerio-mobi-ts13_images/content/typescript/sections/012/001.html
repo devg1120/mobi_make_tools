@@ -1,0 +1,71 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Interpreting Errors
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts13_images/undefined" />
+  </head>
+   <body>
+<h1 id="interpreting-errors">Interpreting Errors</h1>
+<p>Since TypeScript is a heavily focused <em>Developer Help</em> oriented programming language, its errors messages try to be super helpful when something goes wrong. This can lead to a slight information overload for unsuspecting users of compilers that aren&apos;t so helpful. </p>
+<p>Lets look at an example in an IDE to break apart the process of reading an error message. </p>
+<pre><code class="lang-ts"><span class="hljs-keyword">type</span> SomethingComplex = {
+  foo: <span class="hljs-built_in">number</span>,
+  bar: <span class="hljs-built_in">string</span>
+}
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">takeSomethingComplex</span>(<span class="hljs-params">arg: SomethingComplex</span>) </span>{
+}
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getBar</span>(<span class="hljs-params"></span>): <span class="hljs-title">string</span> </span>{
+  <span class="hljs-keyword">return</span> <span class="hljs-string">&apos;some bar&apos;</span>;
+}
+<span class="hljs-comment">//////////////////////////////////</span>
+<span class="hljs-comment">// Example error production</span>
+<span class="hljs-comment">//////////////////////////////////</span>
+<span class="hljs-keyword">const</span> fail = {
+  foo: <span class="hljs-number">123</span>,
+  bar: getBar
+};
+takeSomethingComplex(fail); <span class="hljs-comment">// TS ERROR HAPPENS HERE</span>
+</code></pre>
+<p>This example demonstrates a common programmer error where they <em>fail</em> to call a function (<code>bar: getBar</code> should be <code>bar: getBar()</code>). Fortunately this mistake is caught by TypeScript as soon as it doesn&apos;t meet the type requirements. </p>
+<h2 id="error-categories">Error Categories</h2>
+<p>There are two categories of TypeScript Error messages (succinct and detailed). </p>
+<h3 id="succinct">Succinct</h3>
+<p>The objective of the succinct error message is to provide an example <em>conventional compiler</em> description of the error number and message. For this example the succinct message looks like: </p>
+<pre><code>TS2345: Argument of type &apos;{ foo: number; bar: () =&gt; string; }&apos; is not assignable to parameter of type &apos;SomethingComplex&apos;.
+</code></pre>
+<p>It is fairly self explanatory. However, it doesn&apos;t provide a deeper breakdown of <em>why</em> the error is happening. That is what the <em>detiled</em> error message is for.</p>
+<h3 id="detailed">Detailed</h3>
+<p>For this example the detailed version looks like: </p>
+<pre><code>[ts]
+Argument of type &apos;{ foo: number; bar: () =&gt; string; }&apos; is not assignable to parameter of type &apos;SomethingComplex&apos;.
+  Types of property &apos;bar&apos; are incompatible.
+    Type &apos;() =&gt; string&apos; is not assignable to type &apos;string&apos;.
+</code></pre>
+<p>The objective of the detailed error message is to <em>guide</em> the user to the reason why some error (type incompatability in this case) is happening. The first line is same as the succinct, followed by a chain. You should read this chain as a series of responses to the developer question <code>WHY?</code> between lines i.e </p>
+<pre><code>ERROR: Argument of type &apos;{ foo: number; bar: () =&gt; string; }&apos; is not assignable to parameter of type &apos;SomethingComplex&apos;.
+WHY? 
+CAUSE ERROR: Types of property &apos;bar&apos; are incompatible.
+WHY? 
+CAUSE ERROR: Type &apos;() =&gt; string&apos; is not assignable to type &apos;string&apos;.
+</code></pre>
+<p>So the root cause is,</p>
+<ul>
+    <li>for property <code>bar</code></li>
+    <li>there is a function <code>() =&gt; string</code> while it was expected as a <code>string</code>. </li>
+</ul>
+<p>This should help the developer fix the bug for the <code>bar</code> property (they forgot to invoke <code>()</code> the function).</p>
+<h2 id="how-it-shows-up-in-an-ide-tooltip">How it shows up in an IDE Tooltip</h2>
+<p>The IDE normally shows the <code>detailed</code> followed by the <code>succinct</code> version in a tooltip as shown below: </p>
+<p><img src="/home/gusa1120/es2015/cheerio-mobi-ts13_images/content/typescript/processed_images/ide-grayscale.gif" alt="IDE error message example"></p>
+<ul>
+    <li>You normally just read the <code>detailed</code> version forming the <code>WHY?</code> chain in your head. </li>
+    <li>You use the succinct version if you want to search for similar errors (using the <code>TSXXXX</code> error code or portions of the error message)</li>
+</ul>
+</body>
+</html>

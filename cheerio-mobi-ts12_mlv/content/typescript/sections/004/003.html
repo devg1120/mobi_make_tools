@@ -1,0 +1,152 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Arrow Functions
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts12_mlv/undefined" />
+  </head>
+   <body>
+<ul>
+    <li><a href="#arrow-functions">Arrow Functions</a></li>
+    <li><a href="#tip-arrow-function-need">Tip: Arrow Function Need</a></li>
+    <li><a href="#tip-arrow-function-danger">Tip: Arrow Function Danger</a></li>
+    <li><a href="#tip-arrow-functions-with-libraries-that-use-this">Tip: Libraries that use <code>this</code></a></li>
+    <li><a href="#tip-arrow-functions-and-inheritance">Tip: Arrow Function inheritance</a></li>
+    <li><a href="#tip-quick-object-return">Tip: Quick object return</a></li>
+</ul>
+<h3 id="arrow-functions">Arrow Functions</h3>
+<p>Lovingly called the <em>fat arrow</em> (because <code>-&gt;</code> is a thin arrow and <code>=&gt;</code> is a fat arrow) and also called a <em>lambda function</em> (because of other languages). Another commonly used feature is the fat arrow function <code>()=&gt;something</code>. The motivation for a <em>fat arrow</em> is:</p>
+<ol>
+    <li>You don&apos;t need to keep typing <code>function</code></li>
+    <li>It lexically captures the meaning of <code>this</code></li>
+    <li>It lexically captures the meaning of <code>arguments</code></li>
+</ol>
+<p>For a language that claims to be functional, in JavaScript you tend to be typing <code>function</code> quite a lot. The fat arrow makes it simple for you to create a function</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">var</span> inc = (x)=&gt;x+<span class="hljs-number">1</span>;
+</code></pre>
+<p><code>this</code> has traditionally been a pain point in JavaScript. As a wise man once said &quot;I hate JavaScript as it tends to lose the meaning of <code>this</code> all too easily&quot;. Fat arrows fix it by capturing the meaning of <code>this</code> from the surrounding context. Consider this pure JavaScript class:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Person</span>(<span class="hljs-params">age</span>) </span>{
+    <span class="hljs-keyword">this</span>.age = age;
+    <span class="hljs-keyword">this</span>.growOld = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-keyword">this</span>.age++;
+    }
+}
+<span class="hljs-keyword">var</span> person = <span class="hljs-keyword">new</span> Person(<span class="hljs-number">1</span>);
+setTimeout(person.growOld,<span class="hljs-number">1000</span>);
+setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{ <span class="hljs-built_in">console</span>.log(person.age); },<span class="hljs-number">2000</span>); <span class="hljs-comment">// 1, should have been 2</span>
+</code></pre>
+<p>If you run this code in the browser <code>this</code> within the function is going to point to <code>window</code> because <code>window</code> is going to be what executes the <code>growOld</code> function. Fix is to use an arrow function:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Person</span>(<span class="hljs-params">age</span>) </span>{
+    <span class="hljs-keyword">this</span>.age = age;
+    <span class="hljs-keyword">this</span>.growOld = () =&gt; {
+        <span class="hljs-keyword">this</span>.age++;
+    }
+}
+<span class="hljs-keyword">var</span> person = <span class="hljs-keyword">new</span> Person(<span class="hljs-number">1</span>);
+setTimeout(person.growOld,<span class="hljs-number">1000</span>);
+setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{ <span class="hljs-built_in">console</span>.log(person.age); },<span class="hljs-number">2000</span>); <span class="hljs-comment">// 2</span>
+</code></pre>
+<p>The reason why this works is the reference to <code>this</code> is captured by the arrow function from outside the function body. This is equivalent to the following JavaScript code (which is what you would write yourself if you didn&apos;t have TypeScript):</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Person</span>(<span class="hljs-params">age</span>) </span>{
+    <span class="hljs-keyword">this</span>.age = age;
+    <span class="hljs-keyword">var</span> _this = <span class="hljs-keyword">this</span>;  <span class="hljs-comment">// capture this</span>
+    <span class="hljs-keyword">this</span>.growOld = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        _this.age++;   <span class="hljs-comment">// use the captured this</span>
+    }
+}
+<span class="hljs-keyword">var</span> person = <span class="hljs-keyword">new</span> Person(<span class="hljs-number">1</span>);
+setTimeout(person.growOld,<span class="hljs-number">1000</span>);
+setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{ <span class="hljs-built_in">console</span>.log(person.age); },<span class="hljs-number">2000</span>); <span class="hljs-comment">// 2</span>
+</code></pre>
+<p>Note that since you are using TypeScript you can be even sweeter in syntax and combine arrows with classes:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">class</span> Person {
+    <span class="hljs-keyword">constructor</span>(public age:number) {}
+    growOld = () =&gt; {
+        <span class="hljs-keyword">this</span>.age++;
+    }
+}
+<span class="hljs-keyword">var</span> person = <span class="hljs-keyword">new</span> Person(<span class="hljs-number">1</span>);
+setTimeout(person.growOld,<span class="hljs-number">1000</span>);
+setTimeout(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{ <span class="hljs-built_in">console</span>.log(person.age); },<span class="hljs-number">2000</span>); <span class="hljs-comment">// 2</span>
+</code></pre>
+<blockquote>
+    <p><a href="https://egghead.io/lessons/typescript-make-usages-of-this-safe-in-class-methods" target="_blank">A sweet video about this pattern &#x1F339;</a></p>
+</blockquote>
+<h4 id="tip-arrow-function-need">Tip: Arrow Function Need</h4>
+<p>Beyond the terse syntax, you only <em>need</em> to use the fat arrow if you are going to give the function to someone else to call. Effectively:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">var</span> growOld = person.growOld;
+<span class="hljs-comment">// Then later someone else calls it:</span>
+growOld();
+</code></pre>
+<p>If you are going to call it yourself, i.e.</p>
+<pre><code class="lang-ts">person.growOld();
+</code></pre>
+<p>then <code>this</code> is going to be the correct calling context (in this example <code>person</code>).</p>
+<h4 id="tip-arrow-function-danger">Tip: Arrow Function Danger</h4>
+<p>In fact if you want <code>this</code> <em>to be the calling context</em> you should <em>not use the arrow function</em>. This is the case with callbacks used by libraries like jquery, underscore, mocha and others. If the documentation mentions functions on <code>this</code> then you should probably just use a <code>function</code> instead of a fat arrow. Similarly if you plan to use <code>arguments</code> don&apos;t use an arrow function.</p>
+<h4 id="tip-arrow-functions-with-libraries-that-use-this">Tip: Arrow functions with libraries that use <code>this</code></h4>
+<p>Many libraries do this e.g. <code>jQuery</code> iterables (one example <a href="https://api.jquery.com/jquery.each/" target="_blank">https://api.jquery.com/jquery.each/</a>) will use <code>this</code> to pass you the object that it is currently iterating over. In this case if you want to access the library passed <code>this</code> as well as the surrounding context just use a temp variable like <code>_self</code> like you would in the absence of arrow functions.</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">let</span> _self = <span class="hljs-keyword">this</span>;
+something.each(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-built_in">console</span>.log(_self); <span class="hljs-comment">// the lexically scoped value</span>
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>); <span class="hljs-comment">// the library passed value</span>
+});
+</code></pre>
+<h4 id="tip-arrow-functions-and-inheritance">Tip: Arrow functions and inheritance</h4>
+<p>Arrow functions as properties on classes work fine with inheritance: </p>
+<pre><code class="lang-ts"><span class="hljs-keyword">class</span> Adder {
+    <span class="hljs-keyword">constructor</span>(public a: number) {}
+    add = (b: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">number</span> =&gt; {
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.a + b;
+    }
+}
+<span class="hljs-keyword">class</span> Child extends Adder {
+    callAdd(b: <span class="hljs-built_in">number</span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.add(b);
+    }
+}
+<span class="hljs-comment">// Demo to show it works</span>
+<span class="hljs-keyword">const</span> child = <span class="hljs-keyword">new</span> Child(<span class="hljs-number">123</span>);
+<span class="hljs-built_in">console</span>.log(child.callAdd(<span class="hljs-number">123</span>)); <span class="hljs-comment">// 246</span>
+</code></pre>
+<p>However, they do not work with the <code>super</code> keyword when you try to override the function in a child class. Properties go on <code>this</code>. Since there is only one <code>this</code> such functions cannot participate in a call to <code>super</code> (<code>super</code> only works on prototype members). You can easily get around it by creating a copy of the method before overriding it in the child.</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">class</span> Adder {
+    <span class="hljs-keyword">constructor</span>(public a: number) {}
+    <span class="hljs-comment">// This function is now safe to pass around</span>
+    add = (b: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">number</span> =&gt; {
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.a + b;
+    }
+}
+<span class="hljs-keyword">class</span> ExtendedAdder extends Adder {
+    <span class="hljs-comment">// Create a copy of parent before creating our own</span>
+    <span class="hljs-keyword">private</span> superAdd = <span class="hljs-keyword">this</span>.add;
+    <span class="hljs-comment">// Now create our override</span>
+    add = (b: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">number</span> =&gt; {
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.superAdd(b);
+    }
+}
+</code></pre>
+<h3 id="tip-quick-object-return">Tip: Quick object return</h3>
+<p>Sometimes you need a function that just returns a simple object literal. However, something like</p>
+<pre><code class="lang-ts"><span class="hljs-comment">// WRONG WAY TO DO IT</span>
+<span class="hljs-keyword">var</span> foo = () =&gt; {
+    bar: <span class="hljs-number">123</span>
+};
+</code></pre>
+<p>is parsed as a <em>block</em> containing a <em>JavaScript Label</em> by JavaScript runtimes (cause of the JavaScript specification).</p>
+<blockquote>
+    <p> If that doesn&apos;t make sense, don&apos;t worry, as you get a nice compiler error from TypeScript saying &quot;unused label&quot; anyways. Labels are an old (and mostly unused) JavaScript feature that you can ignore as a modern GOTO (considered bad by experienced developers &#x1F339;)</p>
+</blockquote>
+<p>You can fix it by surrounding the object literal with <code>()</code>:</p>
+<pre><code class="lang-ts"><span class="hljs-comment">// Correct &#x1F339;</span>
+<span class="hljs-keyword">var</span> foo = () =&gt; ({
+    bar: <span class="hljs-number">123</span>
+});
+</code></pre>
+</body>
+</html>

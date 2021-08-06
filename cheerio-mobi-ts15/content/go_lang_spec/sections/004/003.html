@@ -1,0 +1,55 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Semicolons</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+The formal grammar uses semicolons <code>&quot;;&quot;</code> as terminators in
+a number of productions. Go programs may omit most of these semicolons
+using the following two rules:
+</p><ol>
+<li>
+When the input is broken into tokens, a semicolon is automatically inserted
+into the token stream immediately after a line&apos;s final token if that token is
+<ul>
+	<li>an
+	    [<a>identifier</a>]
+	</li>
+	<li>an
+	    [<a>integer</a>],
+	    [<a>floating-point</a>],
+	    [<a>imaginary</a>],
+	    [<a>rune</a>], or
+	    [<a>string</a>] literal
+	</li>
+	<li>one of the [<a>keywords</a>]
+	    <code>break</code>,
+	    <code>continue</code>,
+	    <code>fallthrough</code>, or
+	    <code>return</code>
+	</li>
+	<li>one of the [<a>operators and punctuation</a>]
+	    <code>++</code>,
+	    <code>--</code>,
+	    <code>)</code>,
+	    <code>]</code>, or
+	    <code>}</code>
+	</li>
+</ul>
+</li>
+<li>
+To allow complex statements to occupy a single line, a semicolon
+may be omitted before a closing <code>&quot;)&quot;</code> or <code>&quot;}&quot;</code>.
+</li>
+</ol><p>
+To reflect idiomatic use, code examples in this document elide semicolons
+using these rules.
+</p></body>
+</body>
+</html>

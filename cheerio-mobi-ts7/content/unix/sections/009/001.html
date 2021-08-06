@@ -1,0 +1,77 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Understanding the Taxonomy of Languages</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts7/undefined" />
+  </head>
+   <body>
+<div class="sect1" lang="en"><div class="titlepage"><div><h2 class="title" style="clear: both"><a id="id2924282">Understanding the Taxonomy of Languages</a></h2></div></div><p>All the languages in <a href="ch08s01.html#taxonomy" title="Figure&#xFFFD;8.1.&#xFFFD;Taxonomy of languages.">Figure&#xFFFD;8.1</a> are described in
+case studies, either in this chapter or elsewhere in this book.  For
+the general-purpose interpreters near the right-hand side, see <a href="languageschapter.html" title="Chapter&#xFFFD;14.&#xFFFD;Languages">Chapter&#xFFFD;14</a>.</p><div class="figure"><a id="taxonomy"><p class="title"><b>Figure&#xFFFD;8.1.&#xFFFD;Taxonomy of languages.</b></p><div class="mediaobject"><img src="/home/gusa1120/es2015/cheerio-mobi-ts7/content/unix/processed_images/taxonomy-grayscale.gif" alt="Taxonomy of languages."></div></a></div><p>In <a href="textualitychapter.html" title="Chapter&#xFFFD;5.&#xFFFD;Textuality">Chapter&#xFFFD;5</a> we
+looked at Unix conventions for data files.  There&apos;s a spectrum of
+complexity in these.  At the low end are files that make simple
+associations between names and properties; the <tt>/etc/passwd</tt>
+and <tt>.newsrc</tt> formats are good examples.  Further up the
+scale we start to get formats that marshal or serialize data
+structures; the PNG</p><p>A structured data-file format starts to border on being a
+minilanguage when it expresses not just structure but actions
+performed on some interpretive context (that is, memory that is
+outside the data file itself).  XML markups tend to straddle this
+border; the example we&apos;ll look at here is <i>Glade</i>, a code generator for building GUI
+interfaces. Formats that are both designed to be read and written by
+humans (rather than just programs) and are used to generate code, are
+firmly in the realm of minilanguages.  <i>yacc</i>
+and <i>lex</i> are the classic examples.  We&apos;ll
+discuss <i>glade</i>,
+<i>yacc</i> and <i>lex</i> in
+<a href="generationchapter.html" title="Chapter&#xFFFD;9.&#xFFFD;Generation">Chapter&#xFFFD;9</a>.</p><p>The Unix macro processor, <i>m4</i>, is
+another very simple declarative minilanguage (that is, one in which
+the program is expressed as a set of desired relationships or
+constraints rather than explicit actions).  It has often been used as a
+preprocessing stage for other minilanguages.</p><p>Unix makefiles, which are designed to automate build processes,
+express dependency relationships between source and derived files<sup>[<a id="id2924480" href="ch08s01.html#ftn.id2924480">79</a>]</sup> and the commands required to make each derived
+file from its sources.
+When you run make, it uses those declarations to walk the implied tree
+of dependencies, doing the least work necessary to bring your build up
+to date.  Like <i>yacc</i> and
+<i>lex</i> specifications, makefiles are a
+declarative minilanguage; they set up constraints that imply actions
+performed on an interpretive context (in this case, the portion of the
+file system where the source and generated files live).  We&apos;ll return
+to makefiles in <a href="toolschapter.html" title="Chapter&#xFFFD;15.&#xFFFD;Tools">Chapter&#xFFFD;15</a>.</p><p>XSLT, the language used to describe transformations of XML,
+is at the high end of complexity for declarative minilanguages.  It&apos;s
+complex enough that it&apos;s not normally thought of as a minilanguage 
+at all, but it shares some important characteristic of such languages
+which we&apos;ll examine when we look at it in more detail below.</p><p>The spectrum of minilanguages ranges from declarative (with
+implicit actions) to imperative (with explicit actions).  The
+run-control syntax of
+fetchmail(1)</p><p>Some task-specific imperative minilanguages start to border on
+being general-purpose interpreters.  They reach this level when they
+are explicitly <i>Turing-complete</i>&#x2014;that is,
+they can do both conditionals and loops (or recursion)<sup>[<a id="id2924589" href="ch08s01.html#ftn.id2924589">80</a>]</sup>
+with features that are
+designed to be used as control structures.  Some languages, by
+contrast, are only accidentally Turing-complete &#x2014; they have
+features that can be used to implement control structures as a 
+sort of side effect of what they are actually designed to do.</p><p>The
+bc(1)
+and
+dc(1)
+interpreters we looked at in <a href="multiprogramchapter.html" title="Chapter&#xFFFD;7.&#xFFFD;Multiprogramming">Chapter&#xFFFD;7</a> are good examples of specialized
+imperative minilanguages that are explicitly Turing-complete.  </p><p>We are over the border into general-purpose interpreters when we
+reach languages like Emacs Lisp</p><p>The spectrum in interpreters is one of increasing generality;
+the flip side of this is that a more general-purpose interpreter
+embodies fewer assumptions about the context in which it runs.  With
+increasing generality there usually comes a richer ontology of data
+types.  Shell and Tcl</p><div class="footnotes"><br><hr width="100" align="left"><div class="footnote"><p><sup>[<a id="ftn.id2924480" href="ch08s01.html#id2924480">79</a>] </sup>For less technical readers: the compiled form of a
+C</p></div><div class="footnote"><p><sup>[<a id="ftn.id2924589" href="ch08s01.html#id2924589">80</a>] </sup>Any Turing-complete language could theoretically be used for
+general-purpose programming, and is theoretically exactly as powerful
+as any other Turing-complete language.  In practice, some
+Turing-complete languages would be far too painful to use for anything
+outside a specified and narrow problem domain.</p></div></div></div>
+</body>
+</html>

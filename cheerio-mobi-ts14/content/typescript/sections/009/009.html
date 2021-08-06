@@ -1,0 +1,140 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Functions
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts14/undefined" />
+  </head>
+   <body>
+<ul>
+    <li><a href="#parameter-annotations">Parameter Annotations</a></li>
+    <li><a href="#return-type-annotation">Return Type Annotation</a></li>
+    <li><a href="#optional-parameters">Optional Parameters</a></li>
+    <li><a href="#overloading">Overloading</a></li>
+</ul>
+<h2 id="functions">Functions</h2>
+<p>The TypeScript type system pays a lot of love to functions, after all they are the core building blocks of a composable system.</p>
+<h3 id="parameter-annotations">Parameter annotations</h3>
+<p>Of course you can annotate function parameters just like you can annotate other variables:</p>
+<pre><code class="lang-ts"><span class="hljs-comment">// variable annotation</span>
+<span class="hljs-keyword">var</span> sampleVariable: { bar: <span class="hljs-built_in">number</span> }
+<span class="hljs-comment">// function parameter annotation</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">sampleParameter: { bar: <span class="hljs-built_in">number</span> }</span>) </span>{ }
+</code></pre>
+<p>Here I used inline type annotations. Of course you can use interfaces etc.</p>
+<h3 id="return-type-annotation">Return type annotation</h3>
+<p>You can annotate the return type after the function parameter list with the same style as you use for a variable, e.g. <code>: Foo</code> in the below example:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">interface</span> Foo {
+    foo: <span class="hljs-built_in">string</span>;
+}
+<span class="hljs-comment">// Return type annotated as `: Foo`</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">sample: Foo</span>): <span class="hljs-title">Foo</span> </span>{
+    <span class="hljs-keyword">return</span> sample;
+}
+</code></pre>
+<p>Of course I used an <code>interface</code> here, but you are free to use other annotations e.g. inline annotations.</p>
+<p>Quite commonly you don&apos;t <em>need</em> to annotate the return type of a function as it can generally be inferred by the compiler.</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">interface</span> Foo {
+    foo: <span class="hljs-built_in">string</span>;
+}
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">sample: Foo</span>) </span>{
+    <span class="hljs-keyword">return</span> sample; <span class="hljs-comment">// inferred return type &apos;Foo&apos;</span>
+}
+</code></pre>
+<p>However, it is generally a good idea to add these annotation to help with errors e.g.:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">return</span> { fou: <span class="hljs-string">&apos;John Doe&apos;</span> }; <span class="hljs-comment">// You might not find this misspelling of `foo` till it&apos;s too late</span>
+}
+sendAsJSON(foo());
+</code></pre>
+<p>If you don&apos;t plan to return anything from a function, you can annotate it as <code>:void</code>. You can generally drop <code>:void</code> and leave it to the inference engine though.</p>
+<h3 id="optional-parameters">Optional Parameters</h3>
+<p>You can mark a parameter as optional:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">bar: <span class="hljs-built_in">number</span>, bas?: <span class="hljs-built_in">string</span></span>): <span class="hljs-title">void</span> </span>{
+    <span class="hljs-comment">// ..</span>
+}
+foo(<span class="hljs-number">123</span>);
+foo(<span class="hljs-number">123</span>, <span class="hljs-string">&apos;hello&apos;</span>);
+</code></pre>
+<p>Alternatively you can even provide a default value (using <code>= someValue</code> after the parameter declaration) which is injected for you if the caller doesn&apos;t provide that argument:</p>
+<pre><code class="lang-ts">function foo(bar: number, bas: string = &apos;hello&apos;) {
+    console.log(bar, bas);
+}
+foo(123);           // 123, hello
+foo(123, &apos;world&apos;);  // 123, world
+</code></pre>
+<h3 id="overloading">Overloading</h3>
+<p>TypeScript allows you to <em>declare</em> function overloads. This is useful for documentation + type safety purpose. Consider the following code:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">padding</span>(<span class="hljs-params">a: <span class="hljs-built_in">number</span>, b?: <span class="hljs-built_in">number</span>, c?: <span class="hljs-built_in">number</span>, d?: <span class="hljs-built_in">any</span></span>) </span>{
+    <span class="hljs-keyword">if</span> (b === <span class="hljs-literal">undefined</span> &amp;&amp; c === <span class="hljs-literal">undefined</span> &amp;&amp; d === <span class="hljs-literal">undefined</span>) {
+        b = c = d = a;
+    }
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (c === <span class="hljs-literal">undefined</span> &amp;&amp; d === <span class="hljs-literal">undefined</span>) {
+        c = a;
+        d = b;
+    }
+    <span class="hljs-keyword">return</span> {
+        top: a,
+        right: b,
+        bottom: c,
+        left: d
+    };
+}
+</code></pre>
+<p>If you look at the code carefully you realize the meaning of <code>a</code>,<code>b</code>,<code>c</code>,<code>d</code> changes based on how many arguments are passed in. Also the function only expects <code>1</code>, <code>2</code> or <code>4</code> arguments. These constraints can be <em>enforced</em> and <em>documented</em> using function overloading. You just declare the function header multiple times. The last function header is the one that is actually active <em>within</em> the function body but is not available to the outside world.</p>
+<p>This is shown below:</p>
+<pre><code class="lang-ts"><span class="hljs-comment">// Overloads</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">padding</span>(<span class="hljs-params">all: <span class="hljs-built_in">number</span></span>)</span>;
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">padding</span>(<span class="hljs-params">topAndBottom: <span class="hljs-built_in">number</span>, leftAndRight: <span class="hljs-built_in">number</span></span>)</span>;
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">padding</span>(<span class="hljs-params">top: <span class="hljs-built_in">number</span>, right: <span class="hljs-built_in">number</span>, bottom: <span class="hljs-built_in">number</span>, left: <span class="hljs-built_in">number</span></span>)</span>;
+<span class="hljs-comment">// Actual implementation that is a true representation of all the cases the function body needs to handle</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">padding</span>(<span class="hljs-params">a: <span class="hljs-built_in">number</span>, b?: <span class="hljs-built_in">number</span>, c?: <span class="hljs-built_in">number</span>, d?: <span class="hljs-built_in">number</span></span>) </span>{
+    <span class="hljs-keyword">if</span> (b === <span class="hljs-literal">undefined</span> &amp;&amp; c === <span class="hljs-literal">undefined</span> &amp;&amp; d === <span class="hljs-literal">undefined</span>) {
+        b = c = d = a;
+    }
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (c === <span class="hljs-literal">undefined</span> &amp;&amp; d === <span class="hljs-literal">undefined</span>) {
+        c = a;
+        d = b;
+    }
+    <span class="hljs-keyword">return</span> {
+        top: a,
+        right: b,
+        bottom: c,
+        left: d
+    };
+}
+</code></pre>
+<p>Here the first three function headers are available as valid calls to <code>padding</code>:</p>
+<pre><code class="lang-ts">padding(<span class="hljs-number">1</span>); <span class="hljs-comment">// Okay: all</span>
+padding(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>); <span class="hljs-comment">// Okay: topAndBottom, leftAndRight</span>
+padding(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>); <span class="hljs-comment">// Okay: top, right, bottom, left</span>
+padding(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>); <span class="hljs-comment">// Error: Not a part of the available overloads</span>
+</code></pre>
+<p>Of course it&apos;s important for the final declaration (the true declaration as seen from inside the function) to be compatible with all the overloads. This is because that is the true nature of the function calls that the function body needs to account for.</p>
+<blockquote>
+    <p>Function overloading in TypeScript doesn&apos;t come with any runtime overhead. It just allows you to document the manner you expect the function to be called in and the compiler holds the rest of your code in check.</p>
+</blockquote>
+<h3 id="declaring-functions">Declaring Functions</h3>
+<blockquote>
+    <p>Quick Tip: <em>Type Declarations</em> are how you describe the types of existing implementations. </p>
+</blockquote>
+<p>There are two ways to <em>declare</em> the type of a function without providing an implementation. E.g. </p>
+<pre><code class="lang-ts"><span class="hljs-keyword">type</span> LongHand = {
+    (a: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">number</span>;
+};
+<span class="hljs-keyword">type</span> ShortHand = (a: <span class="hljs-built_in">number</span>) =&gt; <span class="hljs-built_in">number</span>;
+</code></pre>
+<p>The example above are both <em>exactly</em> equivalent. The differences exist when you want to add overloads. You can only add overloads in the long hand declaration version e.g. </p>
+<pre><code class="lang-ts"><span class="hljs-keyword">type</span> LongHandAllowsOverloadDeclarations = {
+    (a: <span class="hljs-built_in">number</span>): <span class="hljs-built_in">number</span>;
+    (a: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">string</span>;
+};
+</code></pre>
+<p><a href="###%20Type%20Compatibility"></a></p>
+</body>
+</html>

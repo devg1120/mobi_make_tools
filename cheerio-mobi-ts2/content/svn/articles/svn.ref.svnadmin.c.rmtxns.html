@@ -1,0 +1,56 @@
+
+    
+    
+    <div class="refentry">
+      <a id="svn.ref.svnadmin.c.rmtxns"></a>
+      <div class="titlepage"></div>
+      <a id="idm12201" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svnadmin rmtxns — Delete transactions from a repository.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm12208"></a>
+        <h2>Synopsis</h2>
+        <p>
+          <code class="literal">svnadmin rmtxns REPOS_PATH TXN_NAME...</code>
+        </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm12212"></a>
+        <h2>Description</h2>
+        <p>Delete outstanding transactions from a repository.
+            This is covered in detail in <a class="xref" href="svn.reposadmin.maint.html#svn.reposadmin.maint.diskspace.deadtxns" title="Removing dead transactions">the section called “Removing dead transactions”</a>.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm12216"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+          <pre class="screen">
+<a class="xref" href="svn.ref.svnadmin.html#svn.ref.svnadmin.sw.quiet"><code class="option">--quiet</code> (<code class="option">-q</code>)</a>
+</pre>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm12221"></a>
+        <h2>Examples</h2>
+        <p>Remove named transactions:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svnadmin rmtxns /var/svn/repos/ 1w 1x
+</pre>
+        </div>
+        <p>Fortunately, the output of <span class="command"><strong>lstxns</strong></span>
+            works great as the input for <span class="command"><strong>rmtxns</strong></span>:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svnadmin rmtxns /var/svn/repos/  `svnadmin lstxns /var/svn/repos/`
+</pre>
+        </div>
+        <p>This removes all uncommitted transactions from
+            your repository.</p>
+      </div>
+    </div>
+    
+    
+  

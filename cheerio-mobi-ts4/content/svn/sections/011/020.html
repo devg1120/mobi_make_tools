@@ -1,0 +1,89 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svn mergeinfo</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/tmp/es2015/cheerio-mobi-ts4/css/kindle.css" />
+  </head>
+   <body>
+    <div class="refentry">
+      <a id="svn.ref.svn.c.mergeinfo"></a>
+      <div class="titlepage"></div>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svn mergeinfo &#x2014; Query merge-related information.  See  for
+            details.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm10482"></a>
+        <h2>Synopsis</h2>
+        <p>
+          <code class="literal">svn mergeinfo SOURCE_URL[@REV] [TARGET[@REV]]</code>
+        </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm10486"></a>
+        <h2>Description</h2>
+        <p>Query information related to merges (or potential
+            merges) between <em class="replaceable"><code>SOURCE-URL</code></em> and
+            <em class="replaceable"><code>TARGET</code></em>.  If
+            the <code class="option">--show-revs</code> option is not provided,
+            display revisions which have been merged
+            from <em class="replaceable"><code>SOURCE-URL</code></em>
+            to <em class="replaceable"><code>TARGET</code></em>.  Otherwise, display
+            either <code class="literal">merged</code>
+            or <code class="literal">eligible</code> revisions as specified by
+            the <code class="option">--show-revs</code> option.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm10497"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+          <pre class="screen">
+</pre>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm10505"></a>
+        <h2>Examples</h2>
+        <p>Find out which changesets your have been merged from
+            your trunk directory into your test branch:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn propget svn:mergeinfo ^/branches/test
+/branches/other:3-4
+/trunk:11-13,14,16
+$ svn mergeinfo --show-revs merged ^/trunk ^/branches/test
+r11
+r12
+r13
+r14
+r16
+$ 
+</pre>
+        </div>
+        <p>Note that the default output from the <span class="command"><strong>svn
+            mergeinfo</strong></span> command is to display merged revisions, so
+            the <code class="option">--show-revs</code> option shown in the
+            command line of the previous example is not strictly
+            required.</p>
+        <p>Find out which changesets from your trunk directory
+            have not yet been merged into your test branch:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn mergeinfo --show-revs eligible ^/trunk ^/branches/test
+r15
+r17
+r20
+r21
+r22
+$ 
+</pre>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

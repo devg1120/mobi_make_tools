@@ -1,0 +1,176 @@
+//import  chalk from 'chalk';
+import  C from 'chalk';
+import client from 'cheerio-httpcli'
+
+//import * as fs from 'fs-extra'
+import fs from 'fs'
+import path  from 'path'
+import yaml  from 'js-yaml'
+
+var recipe_slug = '';
+var base_url = '';
+
+export default function webget4(source_filepath: string, 
+                                  dist_filepath: string,
+                                  values: any
+                                 ) {
+
+   try {
+
+     console.log("webget4 kick!!!");
+     //----------------------------------------
+     rmdir('content');
+     recipe_slug = 'svc';
+     // 画像保存フォルダ作成
+     var imgdir = path.join(__dirname, 'img');
+     if (! fs.existsSync(imgdir)) {
+       fs.mkdirSync(imgdir);
+     }
+     
+     // ダウンロードマネージャー設定
+     client.download
+     .on('ready', function (stream) {
+       // ダウンロード完了時の処理(各ファイルごとに呼ばれる)
+       var file = stream.url.pathname.match(/([^\/]+)$/)[1];
+       var savepath = path.join(imgdir, file);
+       stream.pipe(fs.createWriteStream(savepath));
+       console.info(C.green('SUCCESS'), C.blue(stream.url.href) + ' => ' + C.yellow(savepath));
+       console.info(C.magenta('STATE'), this.state);
+     })
+     .on('error', function (err:any) {
+       // ダウンロード失敗時の処理(各ファイルごとに呼ばれる)
+       console.error(C.red('ERROR'), err);
+       console.info(C.magenta('STATE'), this.state);
+     })
+     .on('end', function () {
+       // ダウンロードキューが空になった時の処理
+       //console.info(C.green.bold('COMPLETE'), this.state);
+       console.info(C.green('COMPLETE'), this.state);
+     });
+     
+     
+     base_url = 'http://svnbook.red-bean.com/en/1.7/';
+     // fetch start
+     client.fetch('http://svnbook.red-bean.com/en/1.7/index.html')
+     .then(function (result) {
+       var titlepath = titlepage(result);
+       var xs = [];
+        xs.push(  {
+                 title: 'Frontmatter',
+                 articles: [ { title: 'Title Page', path: titlepath } ]
+                });
+       console.dir(xs);
+       var $a = result.$('.toc a');
+       $a.each(function () {
+         var $url = result.$(this).attr('href');
+         if ($url.match(/html$/)) {
+           if ($url.match(/svn\.[a-z]+\.html/)) {
+              //section
+              console.log('S:' + $url);
+              console.log('  ' + result.$(this).text());
+              var savepath =  result.$(this).attr('href');
+              xs.push(  {
+                    title: result.$(this).text(), 
+                    articles:[
+                      {
+                        title: result.$(this).text(), 
+                        //title: $a.text().gsub(/\s{2,}/, ' ').strip, 
+                        path: save_article(savepath)
+                      }
+                    ]
+                  });
+           } else {
+              //article
+              console.log(' A:' + $url);
+              var savepath =  result.$(this).attr('href');
+              xs[xs.length -1].articles.push( {
+                                      title : result.$(this).text() ,
+                                      path: save_article(savepath)
+                                    });
+                       
+           }
+         }
+       });
+ 
+       console.log(xs);
+       const yamlText = yaml.dump(xs);
+       fs.writeFile("content/"+ recipe_slug +  '/session.taml', yamlText, 'utf8', function (err) {
+    if (err) {
+        return console.log(err);
+    }
+
+    console.log("The file was saved!");
+}); 
+     })
+     .catch(function (err) {
+       console.error(C.red('ERROR'), err);
+     })
+     .finally(function () {
+       //$imgs.each(function () {
+       console.info(C.cyan('INFO'), 'スクレイピングが終了しました');
+     });
+     
+     //----------------------------------------
+   } catch(error) {
+     //console.log(chalk.red(`failed to read ${error}`))
+     console.log(C.red(`failed to read ${error}`))
+     return null;
+   }
+}
+
+function rmdir(path) {
+  if( fs.existsSync(path) ) {
+    fs.readdirSync(path).forEach(function(file,index){
+      var curPath = path + "/" + file;
+      if(fs.lstatSync(curPath).isDirectory()) { // recurse
+        //deleteFolderRecursive(curPath);
+        rmdir(curPath);
+      } else { // delete file
+        fs.unlinkSync(curPath);
+      }
+    });
+    fs.rmdirSync(path);
+  }
+};
+
+function titlepage(doc) {
+
+  var path = 'articles/titlepage'
+  //var content = doc.$('.titlepage').text();
+  var content = doc.$('.titlepage').html();
+  //console.log('titlepage:' + content);
+   fs.mkdirSync('content/');
+   fs.mkdirSync('content/'+ recipe_slug);
+   fs.mkdirSync('content/'+ recipe_slug + '/articles');
+   fs.writeFileSync('content/'+recipe_slug + '/' + path, content);
+  return path;
+}
+
+function save_article (filename) {
+   var path = 'articles/' + filename;
+//   console.log('savepath:'+ path);
+   var url = base_url + filename;
+
+    //client.fetch('http://svnbook.red-bean.com/en/1.7/index.html')
+    client.fetch(url)
+     .then(function (result) {
+           result.$('.script').remove();
+           result.$('.navfooter').remove();
+           result.$('.navheader').remove();
+           result.$('#vcws-footer').remove();
+           result.$('#vcws-version-notice').remove();
+           result.$('.toc').remove();
+           var content = result.$('body').html();
+           fs.writeFileSync('content/'+recipe_slug + '/' + path, content);
+
+     })
+     .catch(function (err) {
+       console.error(C.red('ERROR'), err);
+     })
+     .finally(function () {
+       //$imgs.each(function () {
+       //console.info(C.cyan('INFO'), 'スクレイピングが終了しました');
+     });
+
+     return path
+}

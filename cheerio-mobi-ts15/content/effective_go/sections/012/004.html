@@ -1,0 +1,69 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Interface checks</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+As we saw in the discussion of [<a>interfaces</a>] above,
+a type need not declare explicitly that it implements an interface.
+Instead, a type implements the interface just by implementing the interface&apos;s methods.
+In practice, most interface conversions are static and therefore checked at compile time.
+For example, passing an <code>*os.File</code> to a function
+expecting an <code>io.Reader</code> will not compile unless
+<code>*os.File</code> implements the <code>io.Reader</code> interface.
+</p><p>
+Some interface checks do happen at run-time, though.
+One instance is in the <code>[<a>encoding/json</a>]</code>
+package, which defines a <code>[<a>Marshaler</a>]</code>
+interface. When the JSON encoder receives a value that implements that interface,
+the encoder invokes the value&apos;s marshaling method to convert it to JSON
+instead of doing the standard conversion.
+The encoder checks this property at run time with a [<a>type assertion</a>] like:
+</p><pre>
+m, ok := val.(json.Marshaler)
+</pre><p>
+If it&apos;s necessary only to ask whether a type implements an interface, without
+actually using the interface itself, perhaps as part of an error check, use the blank
+identifier to ignore the type-asserted value:
+</p><pre>
+if _, ok := val.(json.Marshaler); ok {
+    fmt.Printf(&quot;value %v of type %T implements json.Marshaler\n&quot;, val, val)
+}
+</pre><p>
+One place this situation arises is when it is necessary to guarantee within the package implementing the type that
+it actually satisfies the interface.
+If a type&#x2014;for example,
+<code>[<a>json.RawMessage</a>]</code>&#x2014;needs
+a custom JSON representation, it should implement
+<code>json.Marshaler</code>, but there are no static conversions that would
+cause the compiler to verify this automatically.
+If the type inadvertently fails to satisfy the interface, the JSON encoder will still work,
+but will not use the custom implementation.
+To guarantee that the implementation is correct,
+a global declaration using the blank identifier can be used in the package:
+</p><pre>
+var _ json.Marshaler = (*RawMessage)(nil)
+</pre><p>
+In this declaration, the assignment involving a conversion of a
+<code>*RawMessage</code> to a <code>Marshaler</code>
+requires that <code>*RawMessage</code> implements <code>Marshaler</code>,
+and that property will be checked at compile time.
+Should the <code>json.Marshaler</code> interface change, this package
+will no longer compile and we will be on notice that it needs to be updated.
+</p><p>
+The appearance of the blank identifier in this construct indicates that
+the declaration exists only for the type checking,
+not to create a variable.
+Don&apos;t do this for every type that satisfies an interface, though.
+By convention, such declarations are only used
+when there are no static conversions already present in the code,
+which is a rare event.
+</p></body>
+</body>
+</html>

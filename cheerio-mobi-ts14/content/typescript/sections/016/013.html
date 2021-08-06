@@ -1,0 +1,52 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    singleton pattern
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts14/undefined" />
+  </head>
+   <body>
+<h1 id="singleton-pattern">Singleton Pattern</h1>
+<p>The conventional singleton pattern is really something that is used to overcome the fact that all code must be in a <code>class</code>.</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">class</span> Singleton {
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> instance: Singleton;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">constructor</span>() {
+        <span class="hljs-comment">// do something construct...</span>
+    }
+    <span class="hljs-keyword">static</span> getInstance() {
+        <span class="hljs-keyword">if</span> (!Singleton.instance) {
+            Singleton.instance = <span class="hljs-keyword">new</span> Singleton();
+            <span class="hljs-comment">// ... any one time initialization goes here ...</span>
+        }
+        <span class="hljs-keyword">return</span> Singleton.instance;
+    }
+    someMethod() { }
+}
+<span class="hljs-keyword">let</span> something = <span class="hljs-keyword">new</span> Singleton() <span class="hljs-comment">// Error: constructor of &apos;Singleton&apos; is private.</span>
+<span class="hljs-keyword">let</span> instance = Singleton.getInstance() <span class="hljs-comment">// do something with the instance...</span>
+</code></pre>
+<p>However, if you don&apos;t want lazy initialization you can instead just use a <code>namespace</code>: </p>
+<pre><code class="lang-ts"><span class="hljs-keyword">namespace</span> Singleton {
+    <span class="hljs-comment">// ... any one time initialization goes here ...</span>
+    <span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">someMethod</span>(<span class="hljs-params"></span>) </span>{ }
+}
+<span class="hljs-comment">// Usage</span>
+Singleton.someMethod();
+</code></pre>
+<blockquote>
+    <p>Warning : Singleton is just a fancy name for <a href="http://stackoverflow.com/a/142450/390330" target="_blank">global</a></p>
+</blockquote>
+<p>For most projects <code>namespace</code> can additionally be replaced by a <em>module</em>.</p>
+<pre><code class="lang-ts"><span class="hljs-comment">// someFile.ts</span>
+<span class="hljs-comment">// ... any one time initialization goes here ...</span>
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">someMethod</span>(<span class="hljs-params"></span>) </span>{ }
+<span class="hljs-comment">// Usage</span>
+<span class="hljs-keyword">import</span> {someMethod} from <span class="hljs-string">&quot;./someFile&quot;</span>;
+</code></pre>
+</body>
+</html>

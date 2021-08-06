@@ -1,0 +1,61 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Interfaces</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+Interfaces in Go provide a way to specify the behavior of an
+object: if something can do <em>this</em>, then it can be used
+<em>here</em>.  We&apos;ve seen a couple of simple examples already;
+custom printers can be implemented by a <code>String</code> method
+while <code>Fprintf</code> can generate output to anything
+with a <code>Write</code> method.
+Interfaces with only one or two methods are common in Go code, and are
+usually given a name derived from the method, such as <code>io.Writer</code>
+for something that implements <code>Write</code>.
+</p><p>
+A type can implement multiple interfaces.
+For instance, a collection can be sorted
+by the routines in package <code>sort</code> if it implements
+<code>sort.Interface</code>, which contains <code>Len()</code>,
+<code>Less(i, j int) bool</code>, and <code>Swap(i, j int)</code>,
+and it could also have a custom formatter.
+In this contrived example <code>Sequence</code> satisfies both.
+</p><pre>{{code &quot;/doc/progs/eff_sequence.go&quot; `/^type/` &quot;$&quot;}}
+type Sequence []int
+<span>// Methods required by sort.Interface.</span>
+func (s Sequence) Len() int {
+    return len(s)
+}
+func (s Sequence) Less(i, j int) bool {
+    return s[i] &lt; s[j]
+}
+func (s Sequence) Swap(i, j int) {
+    s[i], s[j] = s[j], s[i]
+}
+<span>// Copy returns a copy of the Sequence.</span>
+func (s Sequence) Copy() Sequence {
+    copy := make(Sequence, 0, len(s))
+    return append(copy, s...)
+}
+<span>// Method for printing - sorts the elements before printing.</span>
+func (s Sequence) String() string {
+    s = s.Copy() <span>// Make a copy; don&apos;t overwrite argument.</span>
+    sort.Sort(s)
+    str := &quot;[&quot;
+    for i, elem := range s { <span>// Loop is O(N&#xB2;); will fix that in next example.</span>
+        if i &gt; 0 {
+            str += &quot; &quot;
+        }
+        str += fmt.Sprint(elem)
+    }
+    return str + &quot;]&quot;
+}</pre></body>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<body><p>
+Formatting issues are the most contentious
+but the least consequential.
+People can adapt to different formatting styles
+but it's better if they don't have to, and
+less time is devoted to the topic
+if everyone adheres to the same style.
+The problem is how to approach this Utopia without a long
+prescriptive style guide.
+</p><p>
+With Go we take an unusual
+approach and let the machine
+take care of most formatting issues.
+The <code>gofmt</code> program
+(also available as <code>go fmt</code>, which
+operates at the package level rather than source file level)
+reads a Go program
+and emits the source in a standard style of indentation
+and vertical alignment, retaining and if necessary
+reformatting comments.
+If you want to know how to handle some new layout
+situation, run <code>gofmt</code>; if the answer doesn't
+seem right, rearrange your program (or file a bug about <code>gofmt</code>),
+don't work around it.
+</p><p>
+As an example, there's no need to spend time lining up
+the comments on the fields of a structure.
+<code>Gofmt</code> will do that for you.  Given the
+declaration
+</p><pre>
+type T struct {
+    name string // name of the object
+    value int // its value
+}
+</pre><p>
+<code>gofmt</code> will line up the columns:
+</p><pre>
+type T struct {
+    name    string // name of the object
+    value   int    // its value
+}
+</pre><p>
+All Go code in the standard packages has been formatted with <code>gofmt</code>.
+</p><p>
+Some formatting details remain.  Very briefly:
+</p><dl>
+    <dt>Indentation</dt>
+    <dd>We use tabs for indentation and <code>gofmt</code> emits them by default.
+    Use spaces only if you must.
+    </dd>
+    <dt>Line length</dt>
+    <dd>
+    Go has no line length limit.  Don't worry about overflowing a punched card.
+    If a line feels too long, wrap it and indent with an extra tab.
+    </dd>
+    <dt>Parentheses</dt>
+    <dd>
+    Go needs fewer parentheses than C and Java: control structures (<code>if</code>,
+    <code>for</code>, <code>switch</code>) do not have parentheses in
+    their syntax.
+    Also, the operator precedence hierarchy is shorter and clearer, so
+<pre>
+x<<8 + y<<16
+</pre>
+    means what the spacing implies, unlike in the other languages.
+    </dd>
+</dl></body>

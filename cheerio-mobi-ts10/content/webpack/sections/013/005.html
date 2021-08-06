@@ -1,0 +1,24 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>In the Runtime</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts10/undefined" />
+  </head>
+   <body>
+<h3 id="in-the-runtime">In the Runtime<a href="#in-the-runtime" aria-hidden="true"><span class="icon icon-link"></span></a></h3>
+<p>Here things get a bit more technical... if you&apos;re not interested in the internals, feel free to jump to the <a href="/api/hot-module-replacement">HMR API page</a> or <a href="/guides/hot-module-replacement">HMR guide</a>.</p>
+<p>For the module system runtime, additional code is emitted to track module <code>parents</code> and <code>children</code>. On the management side, the runtime supports two methods: <code>check</code> and <code>apply</code>.</p>
+<p>A <code>check</code> makes an HTTP request to the update manifest. If this request fails, there is no update available. If it succeeds, the list of updated chunks is compared to the list of currently loaded chunks. For each loaded chunk, the corresponding update chunk is downloaded. All module updates are stored in the runtime. When all update chunks have been downloaded and are ready to be applied, the runtime switches into the <code>ready</code> state.</p>
+<p>The <code>apply</code> method flags all updated modules as invalid. For each invalid module, there needs to be an update handler in the module or in its parent(s). Otherwise, the invalid flag bubbles up and invalidates parent(s) as well. Each bubble continues until the app&apos;s entry point or a module with an update handler is reached (whichever comes first). If it bubbles up from an entry point, the process fails.</p>
+<p>Afterwards, all invalid modules are disposed (via the dispose handler) and unloaded. The current hash is then updated and all <code>accept</code> handlers are called. The runtime switches back to the <code>idle</code> state and everything continues as normal.</p>
+<h2 id="get-started">Get Started<a href="#get-started" aria-hidden="true"><span class="icon icon-link"></span></a></h2>
+<p>HMR can be used in development as a LiveReload replacement. <a href="/configuration/dev-server/">webpack-dev-server</a> supports a <code>hot</code> mode in which it tries to update with HMR before trying to reload the whole page. See the <a href="/guides/hot-module-replacement">Hot Module Replacement guide</a> for details.</p>
+<blockquote class="tip">
+    <p>As with many other features, webpack&apos;s power lies in its customizability. There are <em>many</em> ways of configuring HMR depending on the needs of a particular project. However, for most purposes, <code>webpack-dev-server</code> is a good fit and will allow you to get started with HMR quickly.</p>
+</blockquote>
+</body>
+</html>

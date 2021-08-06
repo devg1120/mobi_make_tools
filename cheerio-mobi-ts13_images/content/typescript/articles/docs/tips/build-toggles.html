@@ -1,0 +1,41 @@
+<h2 id="build-toggles">Build Toggles</h2>
+<p>It is common to switch in JavaScript projects based on where they are being run. You can do this quite easily with webpack as it supports <em>dead code elimination</em> based on environment variables.</p>
+<p>Add different targets in your <code>package.json</code> <code>scripts</code>:</p>
+<pre><code class="lang-json"><span class="hljs-string">"build:test"</span>: <span class="hljs-string">"webpack -p --config ./src/webpack.config.js"</span>,
+<span class="hljs-string">"build:prod"</span>: <span class="hljs-string">"webpack -p --define process.env.NODE_ENV='\"production\"' --config ./src/webpack.config.js"</span>,
+</code></pre>
+<p>Of course I am assuming you have <code>npm install webpack --save-dev</code>. Now you can run <code>npm run build:test</code> etc.</p>
+<p>Using this variable is super easy as well:</p>
+<pre><code class="lang-ts"><span class="hljs-comment">/**
+ * This interface makes sure we don't miss adding a property to both `prod` and `test`
+ */</span>
+<span class="hljs-keyword">interface</span> Config {
+  someItem: <span class="hljs-built_in">string</span>;
+}
+
+<span class="hljs-comment">/**
+ * We only export a single thing. The config.
+ */</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">let</span> config: Config;
+
+<span class="hljs-comment">/**
+ * `process.env.NODE_ENV` definition is driven from webpack
+ *
+ * The whole `else` block will be removed in the emitted JavaScript
+ *  for a production build
+ */</span>
+<span class="hljs-keyword">if</span> (process.env.NODE_ENV === <span class="hljs-string">'production'</span>) {
+  config = {
+    someItem: <span class="hljs-string">'prod'</span>
+  }
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Running in prod'</span>);
+} <span class="hljs-keyword">else</span> {
+  config = {
+    someItem: <span class="hljs-string">'test'</span>
+  }
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Running in test'</span>);
+}
+</code></pre>
+<blockquote>
+    <p>We use <code>process.env.NODE_ENV</code> just because it is conventional in a lot of JavaScript libraries themselves e.g. <code>React</code>.</p>
+</blockquote>

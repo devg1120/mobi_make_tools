@@ -1,0 +1,155 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>The Subversion Repository, Defined</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/tmp/es2015/cheerio-mobi-ts3/css/kindle.css" />
+  </head>
+   <body>
+    <div class="sect1">
+      <div class="titlepage">
+        <div>
+          <div>
+            <h2 class="title" style="clear: both"><a id="svn.reposadmin.basics"></a>The Subversion Repository, Defined</h2>
+          </div>
+        </div>
+      </div>
+      <p>Before jumping into the broader topic of repository
+      administration, let's further define what a repository is.  How
+      does it look?  How does it feel?  Does it take its tea hot or
+      iced, sweetened, and with lemon?  As an administrator, you'll be
+      expected to understand the composition of a repository both from
+      a literal, OS-level perspective—how a repository looks and
+      acts with respect to non-Subversion tools—and from a
+      logical perspective—dealing with how data is represented
+      <span class="emphasis"><em>inside</em></span> the repository.</p>
+      <p>Seen through the eyes of a typical file browser application
+      (such as Windows Explorer) or command-line based filesystem
+      navigation tools, the Subversion repository is just another
+      directory full of stuff.  There are some subdirectories with
+      human-readable configuration files in them, some subdirectories
+      with some not-so-human-readable data files, and so on.  As in
+      other areas of the Subversion design, modularity is given high
+      regard, and hierarchical organization is preferred to cluttered
+      chaos.  So a shallow glance into a typical repository from a
+      nuts-and-bolts perspective is sufficient to reveal the basic
+      components of the repository:</p>
+      <div class="informalexample">
+        <pre class="screen">
+$ ls repos
+conf/  db/  format  hooks/  locks/  README.txt
+</pre>
+      </div>
+      <p>Here's a quick fly-by overview of what exactly you're seeing
+      in this directory listing.  (Don't get bogged down in the
+      terminology—detailed coverage of these components exists
+      elsewhere in this and other chapters.)</p>
+      <div class="variablelist">
+        <dl class="variablelist">
+          <dt>
+            <span class="term">conf/</span>
+          </dt>
+          <dd>
+            <p>This directory is a container for configuration
+            files.</p>
+          </dd>
+          <dt>
+            <span class="term">db/</span>
+          </dt>
+          <dd>
+            <p>This directory contains the data store for all of your
+            versioned data.<a href="#ftn.idm5016" class="footnote" id="idm5016"><sup class="footnote">[38]</sup></a></p>
+          </dd>
+          <dt>
+            <span class="term">format</span>
+          </dt>
+          <dd>
+            <p>This file describes the repository's internal
+            organizational scheme.  (As it turns out,
+            the <code class="filename">db/</code> subdirectory sometimes also
+            contains a <code class="filename">format</code> file which
+            describes only the contents of that subdirectory and which
+            is not to be confused with this file.)</p>
+          </dd>
+          <dt>
+            <span class="term">hooks/</span>
+          </dt>
+          <dd>
+            <p>This directory contains hook script templates and
+            hook scripts, if any have been installed.</p>
+          </dd>
+          <dt>
+            <span class="term">locks/</span>
+          </dt>
+          <dd>
+            <p>Subversion uses this directory to house repository
+            lock files, used for managing concurrent access to the
+            repository.</p>
+          </dd>
+          <dt>
+            <span class="term">README.txt</span>
+          </dt>
+          <dd>
+            <p>This is a brief text file containing merely a notice
+            to readers that the directory they are looking in is a
+            Subversion repository.</p>
+          </dd>
+        </dl>
+      </div>
+      <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+        <table border="0" summary="Note">
+          <tr>
+            <td rowspan="2" align="center" valign="top" width="25">
+              <img alt="[Note]" src="images/note.png">
+            </td>
+            <th align="left">Note</th>
+          </tr>
+          <tr>
+            <td align="left" valign="top">
+              <p>Prior to Subversion 1.5, the on-disk repository structure
+        also always contained a <code class="filename">dav</code> subdirectory.
+        <code class="filename">mod_dav_svn</code> used this directory to store
+        information about
+        WebDAV <em class="firstterm">activities</em>—mappings of
+        high-level WebDAV protocol concepts to Subversion commit
+        transactions.  Subversion 1.5 changed that behavior, moving
+        ownership of the activities directory, and the ability to
+        configure its location, into <code class="filename">mod_dav_svn</code>
+        itself.  Now, new repositories will not necessarily have
+        a <code class="filename">dav</code> subdirectory
+        unless <code class="filename">mod_dav_svn</code> is in use and hasn't
+        been configured to store its activities database elsewhere.
+        See <a class="xref" href="svn.ref.mod_dav_svn.conf.html#svn.ref.mod_dav_svn.conf.directives" title="Directives">the section called “Directives”</a> in
+        <a class="xref" href="svn.ref.html" title="Chapter 9. Subversion Complete Reference">Chapter 9, <em>Subversion Complete Reference</em></a> for more information.</p>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <p>Of course, when accessed via the Subversion libraries, this
+      otherwise unremarkable collection of files and directories
+      suddenly becomes an implementation of a virtual, versioned
+      filesystem, complete with customizable event triggers.  This
+      filesystem has its own notions of directories and files, very
+      similar to the notions of such things held by real filesystems
+      (such as NTFS, FAT32, ext3, etc.).  But this is a special
+      filesystem—it hangs these directories and files from
+      revisions, keeping all the changes you've ever made to them
+      safely stored and forever accessible.  This is where the
+      entirety of your versioned data lives.</p>
+      <div class="footnotes">
+        <br>
+        <hr style="width:100; text-align:left;margin-left: 0">
+        <div id="ftn.idm5016" class="footnote">
+          <p><a href="#idm5016" class="para"><sup class="para">[38] </sup></a>Strictly speaking,
+            Subversion doesn't dictate that the versioned data live
+            here, and there are known (albeit proprietary) alternative
+            backend storage implementations which do not, in fact,
+            store data in this directory.</p>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

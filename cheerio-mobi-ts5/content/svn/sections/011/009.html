@@ -1,0 +1,211 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svn copy (cp)</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts5/css/kindle.css" />
+  </head>
+   <body>
+    <div class="refentry">
+      <a id="svn.ref.svn.c.copy"></a>
+      <div class="titlepage"></div>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svn copy (cp) &#x2014; Copy a file or directory in a working copy or
+            in the repository.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm9605"></a>
+        <h2>Synopsis</h2>
+        <p>
+          <code class="literal">svn copy SRC[@REV]... DST</code>
+        </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm9609"></a>
+        <h2>Description</h2>
+        <p>Copy one or more files in a working copy or in the
+            repository. <em class="replaceable"><code>SRC</code></em> and
+            <em class="replaceable"><code>DST</code></em> can each be either a
+            working copy (WC) path or URL.  When copying multiple
+            sources, add the copies as immediate children
+            of <em class="replaceable"><code>DST</code></em> (which, of course, must
+            be a directory).</p>
+        <div class="variablelist">
+          <dl class="variablelist">
+            <dt>
+              <span class="term">WC &#x2192; WC</span>
+            </dt>
+            <dd>
+              <p>Copy and schedule an item for
+                    addition (with history).</p>
+            </dd>
+            <dt>
+              <span class="term">WC &#x2192; URL</span>
+            </dt>
+            <dd>
+              <p>Immediately commit a copy of WC to URL.</p>
+            </dd>
+            <dt>
+              <span class="term">URL &#x2192; WC</span>
+            </dt>
+            <dd>
+              <p>Check out URL into WC and schedule it for
+                    addition.</p>
+            </dd>
+            <dt>
+              <span class="term">URL &#x2192; URL</span>
+            </dt>
+            <dd>
+              <p>Complete server-side copy.  This is
+                    usually used to branch and tag.</p>
+            </dd>
+          </dl>
+        </div>
+        <p>If no peg revision (i.e.,
+            <em class="replaceable"><code>@REV</code></em>) is supplied, by default
+            the <code class="literal">BASE</code> revision will be used for
+            files copied from the working copy, while the
+            <code class="literal">HEAD</code> revision will be used for files
+            copied from a URL.</p>
+        <div class="note" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Note">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Note]" src="/home/gusa1120/es2015/cheerio-mobi-ts5/content/svn/processed_images/note-grayscale.gif">
+              </td>
+              <th align="left">Note</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>You can only copy files within a single repository.
+              Subversion does not support cross-repository copying.</p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm9638"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+          <pre class="screen">
+</pre>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm9652"></a>
+        <h2>Examples</h2>
+        <p>Copy an item within your working copy (this
+            schedules the copy&#x2014;nothing goes into the repository
+            until you commit):</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn copy foo.txt bar.txt
+A         bar.txt
+$ svn status
+A  +    bar.txt
+</pre>
+        </div>
+        <p>Copy several files in a working copy into a
+            subdirectory:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn copy bat.c baz.c qux.c src
+A         src/bat.c
+A         src/baz.c
+A         src/qux.c
+</pre>
+        </div>
+        <p>Copy revision 8 of <code class="filename">bat.c</code> into your
+            working copy under a different name:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn copy -r 8 bat.c ya-old-bat.c
+A         ya-old-bat.c
+</pre>
+        </div>
+        <p>Copy an item in your working copy to a URL in the
+            repository (this is an immediate commit, so you must supply a
+            commit message):</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn copy near.txt file:///var/svn/repos/test/far-away.txt -m &quot;Remote copy.&quot;
+Committed revision 8.
+</pre>
+        </div>
+        <p>Copy an item from the repository to your working
+            copy (this just schedules the copy&#x2014;nothing goes into the
+            repository until you commit):</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn copy file:///var/svn/repos/test/far-away -r 6 near-here
+A         near-here
+</pre>
+        </div>
+        <div class="tip" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Tip">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Tip]" src="/home/gusa1120/es2015/cheerio-mobi-ts5/content/svn/processed_images/tip-grayscale.gif">
+              </td>
+              <th align="left">Tip</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>This is the recommended way to resurrect a dead
+              file in your repository!</p>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <p>And finally, copy between two URLs:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn copy file:///var/svn/repos/test/far-away \
+           file:///var/svn/repos/test/over-there -m &quot;remote copy.&quot;
+Committed revision 9.
+</pre>
+        </div>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn copy file:///var/svn/repos/test/trunk \
+           file:///var/svn/repos/test/tags/0.6.32-prerelease -m &quot;tag tree&quot;
+Committed revision 12.
+</pre>
+        </div>
+        <div class="tip" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Tip">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Tip]" src="/home/gusa1120/es2015/cheerio-mobi-ts5/content/svn/processed_images/tip-grayscale.gif">
+              </td>
+              <th align="left">Tip</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>This is the easiest way to <span class="quote">&#x201C;<span class="quote">tag</span>&#x201D;</span> a
+              revision in your repository&#x2014;just <span class="command"><strong>svn
+              copy</strong></span> that revision (usually
+              <code class="literal">HEAD</code>) into your <code class="filename">tags</code> directory.</p>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <p>And don&apos;t worry if you forgot to tag&#x2014;you can
+            always specify an older revision and tag anytime:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn copy -r 11 file:///var/svn/repos/test/trunk \
+           file:///var/svn/repos/test/tags/0.6.32-prerelease \
+           -m &quot;Forgot to tag at rev 11&quot;
+Committed revision 13.
+</pre>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

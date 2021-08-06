@@ -1,0 +1,3 @@
+<h2 id="multiple-targets">Multiple Targets<a href="#multiple-targets" aria-hidden="true"><span class="icon icon-link"></span></a></h2>
+<p>Along with exporting a single configuration as an object, <a href="/configuration/configuration-types/#exporting-a-function">function</a> or <a href="/configuration/configuration-types/#exporting-a-promise">Promise</a>, you can export multiple configurations.</p>
+<p><em>See</em>: <a href="/configuration/configuration-types/#exporting-multiple-configurations">Exporting multiple configurations</a></p>

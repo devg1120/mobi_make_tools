@@ -1,0 +1,54 @@
+<h2 id="closure">Closure</h2>
+<p>The best thing that JavaScript ever got was closures. A function in JavaScript has access to any variables defined in the outer scope. Closures are best explained with examples:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">outerFunction</span>(<span class="hljs-params">arg</span>) </span>{
+    <span class="hljs-keyword">var</span> variableInOuterFunction = arg;
+
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">bar</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-built_in">console</span>.log(variableInOuterFunction); <span class="hljs-comment">// Access a variable from the outer scope</span>
+    }
+
+    <span class="hljs-comment">// Call the local function to demonstrate that it has access to arg</span>
+    bar();
+}
+
+outerFunction(<span class="hljs-string">"hello closure"</span>); <span class="hljs-comment">// logs hello closure!</span>
+</code></pre>
+<p>You can see that the inner function has access to a variable (variableInOuterFunction) from the outer scope. The variables in the outer function have been closed by (or bound in) the inner function. Hence the term <strong>closure</strong>. The concept in itself is simple enough and pretty intuitive.</p>
+<p>Now the awesome part: The inner function can access the variables from the outer scope <em>even after the outer function has returned</em>. This is because the variables are still bound in the inner function and not dependent on the outer function. Again let's look at an example:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">outerFunction</span>(<span class="hljs-params">arg</span>) </span>{
+    <span class="hljs-keyword">var</span> variableInOuterFunction = arg;
+    <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+        <span class="hljs-built_in">console</span>.log(variableInOuterFunction);
+    }
+}
+
+<span class="hljs-keyword">var</span> innerFunction = outerFunction(<span class="hljs-string">"hello closure!"</span>);
+
+<span class="hljs-comment">// Note the outerFunction has returned</span>
+innerFunction(); <span class="hljs-comment">// logs hello closure!</span>
+</code></pre>
+<h3 id="reason-why-its-awesome">Reason why it's awesome</h3>
+<p>It allows you to compose objects easily e.g. the revealing module pattern:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createCounter</span>(<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">let</span> val = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">return</span> {
+        increment() { val++ },
+        getVal() { <span class="hljs-keyword">return</span> val }
+    }
+}
+
+<span class="hljs-keyword">let</span> counter = createCounter();
+counter.increment();
+<span class="hljs-built_in">console</span>.log(counter.getVal()); <span class="hljs-comment">// 1</span>
+counter.increment();
+<span class="hljs-built_in">console</span>.log(counter.getVal()); <span class="hljs-comment">// 2</span>
+</code></pre>
+<p>At a high level it is also what makes something like Node.js possible (don't worry if it doesn't click in your brain right now. It will eventually 🌹):</p>
+<pre><code class="lang-ts"><span class="hljs-comment">// Pseudo code to explain the concept</span>
+server.on(<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handler</span>(<span class="hljs-params">req, res</span>) </span>{
+    loadData(req.id).then(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">data</span>) </span>{
+        <span class="hljs-comment">// the `res` has been closed over and is available</span>
+        res.send(data);
+    })
+});
+</code></pre>

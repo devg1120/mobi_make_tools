@@ -1,0 +1,86 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Multi Page Application</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<h3 id="multi-page-application">Multi Page Application<a href="#multi-page-application" aria-hidden="true"><span class="icon icon-link"></span></a></h3>
+<p><strong>webpack.config.js</strong></p>
+<pre><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  entry<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    pageOne<span class="token punctuation">:</span> <span class="token string">&apos;./src/pageOne/index.js&apos;</span><span class="token punctuation">,</span>
+    pageTwo<span class="token punctuation">:</span> <span class="token string">&apos;./src/pageTwo/index.js&apos;</span><span class="token punctuation">,</span>
+    pageThree<span class="token punctuation">:</span> <span class="token string">&apos;./src/pageThree/index.js&apos;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<p><strong>What does this do?</strong> We are telling webpack that we would like 3 separate dependency graphs (like the above example).</p>
+<p><strong>Why?</strong> In a multi-page application, the server is going to fetch a new HTML document for you. The page reloads this new document and assets are redownloaded. However, this gives us the unique opportunity to do things like using <a href="/configuration/optimization/#optimizationsplitchunks"><code>optimization.splitChunks</code></a> to create bundles of shared application code between each page. Multi-page applications that reuse a lot of code/modules between entry points can greatly benefit from these techniques, as the number of entry points increases.</p>
+<blockquote class="tip">
+    <p>As a rule of thumb: Use exactly one entry point for each HTML document.</p>
+</blockquote>
+<h1 id="output-1">Output<a href="#output-1" aria-hidden="true"><span class="icon icon-link"></span></a></h1>
+<p>Configuring the <code>output</code> configuration options tells webpack how to write the compiled files to disk. Note that, while there can be multiple <code>entry</code> points, only one <code>output</code> configuration is specified.</p>
+<h2 id="usage">Usage<a href="#usage" aria-hidden="true"><span class="icon icon-link"></span></a></h2>
+<p>The minimum requirement for the <code>output</code> property in your webpack configuration is to set its value to an object and provide an <a href="/configuration/output/#outputfilename"><code>output.filename</code></a> to use for the output file(s):</p>
+<p><strong>webpack.config.js</strong></p>
+<pre><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    filename<span class="token punctuation">:</span> <span class="token string">&apos;bundle.js&apos;</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<p>This configuration would output a single <code>bundle.js</code> file into the <code>dist</code> directory.</p>
+<h2 id="multiple-entry-points">Multiple Entry Points<a href="#multiple-entry-points" aria-hidden="true"><span class="icon icon-link"></span></a></h2>
+<p>If your configuration creates more than a single &quot;chunk&quot; (as with multiple entry points or when using plugins like CommonsChunkPlugin), you should use <a href="/configuration/output/#outputfilename">substitutions</a> to ensure that each file has a unique name.</p>
+<pre><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  entry<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    app<span class="token punctuation">:</span> <span class="token string">&apos;./src/app.js&apos;</span><span class="token punctuation">,</span>
+    search<span class="token punctuation">:</span> <span class="token string">&apos;./src/search.js&apos;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    filename<span class="token punctuation">:</span> <span class="token string">&apos;[name].js&apos;</span><span class="token punctuation">,</span>
+    path<span class="token punctuation">:</span> __dirname <span class="token operator">+</span> <span class="token string">&apos;/dist&apos;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token comment">// writes to disk: ./dist/app.js, ./dist/search.js</span></code></pre>
+<h2 id="advanced">Advanced<a href="#advanced" aria-hidden="true"><span class="icon icon-link"></span></a></h2>
+<p>Here&apos;s a more complicated example of using a CDN and hashes for assets:</p>
+<p><strong>config.js</strong></p>
+<pre><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token comment">//...</span>
+  output<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    path<span class="token punctuation">:</span> <span class="token string">&apos;/home/proj/cdn/assets/[hash]&apos;</span><span class="token punctuation">,</span>
+    publicPath<span class="token punctuation">:</span> <span class="token string">&apos;https://cdn.example.com/assets/[hash]/&apos;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<p>In cases where the eventual <code>publicPath</code> of output files isn&apos;t known at compile time, it can be left blank and set dynamically at runtime via the <code>__webpack_public_path__</code> variable in the entry point file:</p>
+<pre><code class="hljs language-javascript">__webpack_public_path__ <span class="token operator">=</span> myRuntimePublicPath<span class="token punctuation">;</span>
+<span class="token comment">// rest of your application entry</span></code></pre>
+<h1 id="loaders-1">Loaders<a href="#loaders-1" aria-hidden="true"><span class="icon icon-link"></span></a></h1>
+<p>Loaders are transformations that are applied on the source code of a module. They allow you to pre-process files as you <code>import</code> or &#x201C;load&#x201D; them. Thus, loaders are kind of like &#x201C;tasks&#x201D; in other build tools and provide a powerful way to handle front-end build steps. Loaders can transform files from a different language (like TypeScript) to JavaScript or inline images as data URLs. Loaders even allow you to do things like <code>import</code> CSS files directly from your JavaScript modules!</p>
+<h2 id="example">Example<a href="#example" aria-hidden="true"><span class="icon icon-link"></span></a></h2>
+<p>For example, you can use loaders to tell webpack to load a CSS file or to convert TypeScript to JavaScript. To do this, you would start by installing the loaders you need:</p>
+<pre><code class="hljs language-bash"><span class="token function">npm</span> <span class="token function">install</span> --save-dev css-loader ts-loader</code></pre>
+<p>And then instruct webpack to use the <a href="/loaders/css-loader"><code>css-loader</code></a> for every <code>.css</code> file and the <a href="https://github.com/TypeStrong/ts-loader"><code>ts-loader</code></a> for all <code>.ts</code> files:</p>
+<p><strong>webpack.config.js</strong></p>
+<pre><code class="hljs language-js">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  module<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    rules<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span> test<span class="token punctuation">:</span> <span class="token regex">/\\.css$/</span><span class="token punctuation">,</span> use<span class="token punctuation">:</span> <span class="token string">&apos;css-loader&apos;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span> test<span class="token punctuation">:</span> <span class="token regex">/\\.ts$/</span><span class="token punctuation">,</span> use<span class="token punctuation">:</span> <span class="token string">&apos;ts-loader&apos;</span> <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<h2 id="using-loaders">Using Loaders<a href="#using-loaders" aria-hidden="true"><span class="icon icon-link"></span></a></h2>
+<p>There are three ways to use loaders in your application:</p>
+<ul>
+    <li><a href="#configuration">Configuration</a> (recommended): Specify them in your <strong>webpack.config.js</strong> file.</li>
+    <li><a href="#inline">Inline</a>: Specify them explicitly in each <code>import</code> statement.</li>
+    <li><a href="#cli">CLI</a>: Specify them within a shell command.</li>
+</ul>
+</body>
+</html>

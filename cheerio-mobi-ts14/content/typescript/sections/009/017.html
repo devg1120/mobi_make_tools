@@ -1,0 +1,132 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Type Inference
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts14/undefined" />
+  </head>
+   <body>
+<h1 id="type-inference-in-typescript">Type Inference in TypeScript</h1>
+<p>TypeScript can infer (and then check) the type of a variable based on a few simple rules. Because these rules
+    are simple you can train your brain to recognize safe / unsafe code (it happened for me and my teammates quite quickly).</p>
+<blockquote>
+    <p>The types flowing is just how I imagine in my brain the flow of type information.</p>
+</blockquote>
+<h2 id="variable-definition">Variable Definition</h2>
+<p>Types of a variable are inferred by definition.</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">let</span> foo = <span class="hljs-number">123</span>; <span class="hljs-comment">// foo is a `number`</span>
+<span class="hljs-keyword">let</span> bar = <span class="hljs-string">&quot;Hello&quot;</span>; <span class="hljs-comment">// bar is a `string`</span>
+foo = bar; <span class="hljs-comment">// Error: cannot assign `string` to a `number`</span>
+</code></pre>
+<p>This is an example of types flowing from right to left.</p>
+<h2 id="function-return-types">Function Return Types</h2>
+<p>The return type is inferred by the return statements e.g. the following function is inferred to return a <code>number</code>.</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">add</span>(<span class="hljs-params">a: <span class="hljs-built_in">number</span>, b: <span class="hljs-built_in">number</span></span>) </span>{
+    <span class="hljs-keyword">return</span> a + b;
+}
+</code></pre>
+<p>This is an example of types flowing bottom out.</p>
+<h2 id="assignment">Assignment</h2>
+<p>The type of function parameters / return values can also be inferred by assignment e.g. here we say that <code>foo</code> is an <code>Adder</code>, that makes <code>number</code> the type of <code>a</code> and <code>b</code>.</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">type</span> Adder = (a: <span class="hljs-built_in">number</span>, b: <span class="hljs-built_in">number</span>) =&gt; <span class="hljs-built_in">number</span>;
+<span class="hljs-keyword">let</span> foo: Adder = (a, b) =&gt; a + b;
+</code></pre>
+<p>This fact can be demonstrated by the below code which raises an error as you would hope:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">type</span> Adder = (a: <span class="hljs-built_in">number</span>, b: <span class="hljs-built_in">number</span>) =&gt; <span class="hljs-built_in">number</span>;
+<span class="hljs-keyword">let</span> foo: Adder = (a, b) =&gt; {
+    a = <span class="hljs-string">&quot;hello&quot;</span>; <span class="hljs-comment">// Error: cannot assign `string` to a `number`</span>
+    <span class="hljs-keyword">return</span> a + b;
+}
+</code></pre>
+<p>This is an example of types flowing from left to right.</p>
+<p>The same <em>assignment</em> style type inference works if you create a function for a callback argument. After all an <code>argument -&gt; parameter</code>is just another form of variable assignment.</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">type</span> Adder = (a: <span class="hljs-built_in">number</span>, b: <span class="hljs-built_in">number</span>) =&gt; <span class="hljs-built_in">number</span>;
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">iTakeAnAdder</span>(<span class="hljs-params">adder: Adder</span>) </span>{
+    <span class="hljs-keyword">return</span> adder(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>);
+}
+iTakeAnAdder((a, b) =&gt; {
+    <span class="hljs-comment">// a = &quot;hello&quot;; // Would Error: cannot assign `string` to a `number`</span>
+    <span class="hljs-keyword">return</span> a + b;
+})
+</code></pre>
+<h2 id="structuring">Structuring</h2>
+<p>These simple rules also work in the presence of <strong>structuring</strong> (object literal creation). For example in the following case the type of <code>foo</code> is inferred to be <code>{a:number, b:number}</code></p>
+<pre><code class="lang-ts"><span class="hljs-keyword">let</span> foo = {
+    a: <span class="hljs-number">123</span>,
+    b: <span class="hljs-number">456</span>
+};
+<span class="hljs-comment">// foo.a = &quot;hello&quot;; // Would Error: cannot assign `string` to a `number`</span>
+</code></pre>
+<p>Similarly for arrays:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">const</span> bar = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>];
+<span class="hljs-comment">// bar[0] = &quot;hello&quot;; // Would error: cannot assign `string` to a `number`</span>
+</code></pre>
+<p>And of course any nesting:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">let</span> foo = {
+    bar: [<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>]
+};
+<span class="hljs-comment">// foo.bar[0] = &apos;hello&apos;; // Would error: cannot assign `string` to a `number`</span>
+</code></pre>
+<h2 id="destructuring">Destructuring</h2>
+<p>And of course, they also work with destructuring, both objects:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">let</span> foo = {
+    a: <span class="hljs-number">123</span>,
+    b: <span class="hljs-number">456</span>
+};
+<span class="hljs-keyword">let</span> {a} = foo;
+<span class="hljs-comment">// a = &quot;hello&quot;; // Would Error: cannot assign `string` to a `number`</span>
+</code></pre>
+<p>and arrays:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">const</span> bar = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>];
+<span class="hljs-keyword">let</span> [a, b] = bar;
+<span class="hljs-comment">// a = &quot;hello&quot;; // Would Error: cannot assign `string` to a `number`</span>
+</code></pre>
+<p>And if the function parameter can be inferred, so can its destructured properties. For example here we destructure the argument into its <code>a</code>/<code>b</code> members.</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">type</span> Adder = (numbers: { a: <span class="hljs-built_in">number</span>, b: <span class="hljs-built_in">number</span> }) =&gt; <span class="hljs-built_in">number</span>;
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">iTakeAnAdder</span>(<span class="hljs-params">adder: Adder</span>) </span>{
+    <span class="hljs-keyword">return</span> adder({ a: <span class="hljs-number">1</span>, b: <span class="hljs-number">2</span> });
+}
+iTakeAnAdder(({a, b}) =&gt; { <span class="hljs-comment">// Types of `a` and `b` are inferred</span>
+    <span class="hljs-comment">// a = &quot;hello&quot;; // Would Error: cannot assign `string` to a `number`</span>
+    <span class="hljs-keyword">return</span> a + b;
+})
+</code></pre>
+<h2 id="type-guards">Type Guards</h2>
+<p>We have already seen how <a href="typeGuard.html">Type Guards</a> help change and narrow down types (particularly in the case of unions). Type guards are just another form of type inference for a variable in a block.</p>
+<h2 id="warnings">Warnings</h2>
+<h3 id="be-careful-around-parameters">Be careful around parameters</h3>
+<p>Types do not flow into the function parameters if it cannot be inferred from an assignment. For example in the following case the compiler does not know the type of <code>foo</code> so it cannot infer the type of <code>a</code> or <code>b</code>.</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">const</span> foo = (a,b) =&gt; { <span class="hljs-comment">/* do something */</span> };
+</code></pre>
+<p>However, if <code>foo</code> was typed the function parameters type can be inferred (<code>a</code>,<code>b</code> are both inferred to be of type <code>number</code> in the example below).</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">type</span> TwoNumberFunction = (a: <span class="hljs-built_in">number</span>, b: <span class="hljs-built_in">number</span>) =&gt; <span class="hljs-built_in">void</span>;
+<span class="hljs-keyword">const</span> foo: TwoNumberFunction = (a, b) =&gt; { <span class="hljs-comment">/* do something */</span> };
+</code></pre>
+<h3 id="be-careful-around-return">Be careful around return</h3>
+<p>Although TypeScript can generally infer the return type of a function, it might not be what you expect. For example here function <code>foo</code> has a return type of <code>any</code>.</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params">a: <span class="hljs-built_in">number</span>, b: <span class="hljs-built_in">number</span></span>) </span>{
+    <span class="hljs-keyword">return</span> a + addOne(b);
+}
+<span class="hljs-comment">// Some external function in a library someone wrote in JavaScript</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">addOne</span>(<span class="hljs-params">a</span>) </span>{
+    <span class="hljs-keyword">return</span> a + <span class="hljs-number">1</span>;
+}
+</code></pre>
+<p>This is because the return type is impacted by the poor type definition for <code>addOne</code> (<code>a</code> is <code>any</code> so the return of <code>addOne</code> is <code>any</code> so the return of <code>foo</code> is <code>any</code>).</p>
+<blockquote>
+    <p>I find it simplest to always be explicit about function returns. After all, these annotations are a theorem and the function body is the proof.</p>
+</blockquote>
+<p>There are other cases that one can imagine, but the good news is that there is a compiler flag that can help catch such bugs.</p>
+<h2 id="noimplicitany"><code>noImplicitAny</code></h2>
+<p>The flag <code>noImplicitAny</code> instructs the compiler to raise an error if it cannot infer the type of a variable (and therefore can only have it as an <em>implicit</em> <code>any</code> type). You can then</p>
+<ul>
+    <li>either say that <em>yes I want it to be of type <code>any</code></em> by <em>explicitly</em> adding an <code>: any</code> type annotation</li>
+    <li>help the compiler out by adding a few more <em>correct</em> annotations.</li>
+</ul>
+</body>
+</html>

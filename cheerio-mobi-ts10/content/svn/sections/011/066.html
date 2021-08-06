@@ -1,0 +1,66 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svnlook filesize</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts10/undefined" />
+  </head>
+   <body>
+<div class="refentry">
+    <a id="svn.ref.svnlook.c.filesize"></a>
+    <div class="titlepage"></div>
+    <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svnlook filesize &#x2014; Print the size (in bytes) of a versioned
+            file.</p>
+    </div>
+    <div class="refsect1">
+        <a id="idm12765"></a>
+        <h2>Synopsis</h2>
+        <p>
+            <code class="literal">svnlook filesize REPOS_PATH
+                PATH_IN_REPOS</code>
+        </p>
+    </div>
+    <div class="refsect1">
+        <a id="idm12769"></a>
+        <h2>Description</h2>
+        <p>Print the file size (in bytes) of the file located
+            at <em class="replaceable"><code>PATH_IN_REPOS</code></em> in the HEAD
+            revision of the repository identified
+            by <em class="replaceable"><code>REPOS_PATH</code></em> as a base-10
+            integer followed by an end-of-line character. Use
+            the <code class="option">--revision</code> (<code class="option">-r</code>)
+            and <code class="option">--transaction</code> (<code class="option">-t</code>)
+            options to specify a version of the file other than HEAD
+            whose file size you wish to display.</p>
+    </div>
+    <div class="refsect1">
+        <a id="idm12778"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+            <pre class="screen">
+</pre>
+        </div>
+    </div>
+    <div class="refsect1">
+        <a id="idm12784"></a>
+        <h2>Examples</h2>
+        <p>The following demonstrates how to display the size of
+            the <code class="filename">trunk/vendors/deli/soda.txt</code> file
+            as it appeared in revision 40 of our sample
+            repository:</p>
+        <div class="informalexample">
+            <pre class="screen">
+$ svnlook filesize -r 40 /var/svn/repos trunk/vendors/deli/soda.txt
+23
+$
+</pre>
+        </div>
+    </div>
+</div>
+</body>
+</html>

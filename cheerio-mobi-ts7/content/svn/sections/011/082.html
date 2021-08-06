@@ -1,0 +1,106 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svnsync synchronize (sync)</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts7/undefined" />
+  </head>
+   <body>
+    <div class="refentry">
+      <a id="svn.ref.svnsync.c.sync"></a>
+      <div class="titlepage"></div>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svnsync synchronize (sync) &#x2014; Transfer all pending revisions from the source
+            repository to the mirror repository.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm13369"></a>
+        <h2>Synopsis</h2>
+        <p>
+          <code class="literal">svnsync synchronize DEST_URL
+            [SOURCE_URL]</code>
+        </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm13373"></a>
+        <h2>Description</h2>
+        <p>The <span class="command"><strong>svnsync synchronize</strong></span> command
+            does all the heavy lifting of a repository mirroring
+            operation.  After consulting with the mirror repository to
+            see which revisions have already been copied into it, it
+            then begins to copy any not-yet-mirrored revisions from
+            the source repository.</p>
+        <p><span class="command"><strong>svnsync synchronize</strong></span> can be
+            gracefully canceled and restarted.</p>
+        <p>When <em class="replaceable"><code>SOURCE_URL</code></em> is
+            provided, <span class="command"><strong>svnsync</strong></span> will use it as the
+            repository URL which the destination repository is
+            mirroring. Generally, <em class="replaceable"><code>SOURCE_URL</code></em>
+            will be exactly the same source URL as was used with
+            the <span class="command"><strong>svnsync initialize</strong></span> command when the
+            mirror was first set up.  You may choose, however, to
+            omit <em class="replaceable"><code>SOURCE_URL</code></em>, in which
+            case <span class="command"><strong>svnsync</strong></span> will consult the mirror
+            repository&apos;s records to determine the source URL which
+            should be used.</p>
+        <div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Warning">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Warning]" src="/home/gusa1120/es2015/cheerio-mobi-ts7/content/svn/processed_images/warning-grayscale.gif">
+              </td>
+              <th align="left">Warning</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>We strongly recommend that you specify the source
+              URL on the command-line, especially when untrusted users
+              have write access to the revision 0 properties
+              which <span class="command"><strong>svnsync</strong></span> uses to coordinate its
+              efforts.</p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm13389"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+          <pre class="screen">
+</pre>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm13406"></a>
+        <h2>Examples</h2>
+        <p>Copy unsynchronized revisions from the source
+            repository to the mirror repository:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svnsync synchronize file:///var/svn/repos-mirror \
+                      http://svn.example.com/repos
+Committed revision 1.
+Copied properties for revision 1.
+Committed revision 2.
+Copied properties for revision 2.
+Committed revision 3.
+Copied properties for revision 3.
+&#x2026;
+Committed revision 45.
+Copied properties for revision 45.
+Committed revision 46.
+Copied properties for revision 46.
+Committed revision 47.
+Copied properties for revision 47.
+$
+</pre>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

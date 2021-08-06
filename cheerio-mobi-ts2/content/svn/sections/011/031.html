@@ -1,0 +1,105 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svn resolved</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts2/css/kindle.css" />
+  </head>
+   <body>
+    <div class="refentry">
+      <a id="svn.ref.svn.c.resolved"></a>
+      <div class="titlepage"></div>
+      <a id="idm11057" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svn resolved — <span class="emphasis"><em>Deprecated</em></span>.
+            Remove <span class="quote">“<span class="quote">conflicted</span>”</span> state on working copy
+            files or directories.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm11066"></a>
+        <h2>Synopsis</h2>
+        <p>
+          <code class="literal">svn resolved PATH...</code>
+        </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm11070"></a>
+        <h2>Description</h2>
+        <p>This command has been deprecated in favor of
+            running <strong class="userinput"><code>svn resolve --accept working <em class="replaceable"><code>PATH</code></em></code></strong>.
+            See <a class="xref" href="svn.ref.svn.c.resolve.html" title="svn resolve">svn resolve</a> in the preceding section for
+            details.</p>
+        <p>Remove <span class="quote">“<span class="quote">conflicted</span>”</span> state on working copy
+            files or directories.  This routine does not semantically
+            resolve conflict markers; it merely removes
+            conflict-related artifact files and allows
+            <em class="replaceable"><code>PATH</code></em> to be committed again;
+            that is, it tells Subversion that the conflicts have been
+            <span class="quote">“<span class="quote">resolved.</span>”</span>  See <a class="xref" href="svn.tour.cycle.html#svn.tour.cycle.resolve" title="Resolve Any Conflicts">the section called “Resolve Any Conflicts”</a> for an in-depth look at
+            resolving conflicts.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm11081"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+          <pre class="screen">
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.depth"><code class="option">--depth</code> <em class="replaceable"><code>ARG</code></em></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.quiet"><code class="option">--quiet</code> (<code class="option">-q</code>)</a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.recursive"><code class="option">--recursive</code> (<code class="option">-R</code>)</a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.targets"><code class="option">--targets</code> <em class="replaceable"><code>FILENAME</code></em></a>
+</pre>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm11089"></a>
+        <h2>Examples</h2>
+        <p>If you get a conflict on an update, your working
+            copy will sprout three new files:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svn update
+Updating '.':
+C    foo.c
+Updated to revision 31.
+Summary of conflicts:
+  Text conflicts: 1
+$ ls foo.c*
+foo.c
+foo.c.mine
+foo.c.r30
+foo.c.r31
+$
+</pre>
+        </div>
+        <p>Once you've resolved the conflict and
+            <code class="filename">foo.c</code> is ready to be committed, run
+            <span class="command"><strong>svn resolved</strong></span> to let your working copy
+            know you've taken care of everything.</p>
+        <div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Warning">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Warning]" src="images/warning.png">
+              </td>
+              <th align="left">Warning</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>You <span class="emphasis"><em>can</em></span> just remove the
+              conflict files and commit, but <span class="command"><strong>svn
+              resolved</strong></span> fixes up some bookkeeping data
+              in the working copy administrative area in addition
+              to removing the conflict files, so we recommend that
+              you use this command.</p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

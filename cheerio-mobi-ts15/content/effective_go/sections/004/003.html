@@ -1,0 +1,32 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Interface names</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+By convention, one-method interfaces are named by
+the method name plus an -er suffix or similar modification
+to construct an agent noun: <code>Reader</code>,
+<code>Writer</code>, <code>Formatter</code>,
+<code>CloseNotifier</code> etc.
+</p><p>
+There are a number of such names and it&apos;s productive to honor them and the function
+names they capture.
+<code>Read</code>, <code>Write</code>, <code>Close</code>, <code>Flush</code>,
+<code>String</code> and so on have
+canonical signatures and meanings.  To avoid confusion,
+don&apos;t give your method one of those names unless it
+has the same signature and meaning.
+Conversely, if your type implements a method with the
+same meaning as a method on a well-known type,
+give it the same name and signature;
+call your string-converter method <code>String</code> not <code>ToString</code>.
+</p></body>
+</body>
+</html>

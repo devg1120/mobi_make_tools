@@ -1,0 +1,611 @@
+<?xml version='1.0' encoding='utf-8'?>
+<package xmlns="http://www.idpf.org/2007/opf" version="2.0" unique-identifier="svn-documetation-2019-07-22-035120">
+  <metadata>
+    <meta content="cover-image" name="cover"/>
+    <dc-metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+      <dc:title>svn</dc:title>
+      <dc:language>en-gb</dc:language>
+      <dc:creator>AUTHOR</dc:creator>
+      <dc:publisher>github.com/danchoi/kindlefodder</dc:publisher>
+      <dc:subject>SUBJECT</dc:subject>
+      <dc:date>2019-07-22-03/51/20</dc:date>
+      <dc:description></dc:description>
+    </dc-metadata>
+
+    <x-metadata>
+      <output content-type="application/x-mobipocket-subscription-magazine" encoding="utf-8"/>
+    </x-metadata>
+
+
+  </metadata>
+  <manifest>
+    <item href="contents.html" media-type="application/xhtml+xml" id="contents"/>
+    <item href="nav-contents.ncx" media-type="application/x-dtbncx+xml" id="nav-contents"/>
+    <item href="" media-type="image/gif" id="cover-image"/>
+    <item href="" media-type="image/gif" id="masthead"/>
+    <item href="sections/000/section.html" media-type="application/xhtml+xml" id="item-content/svn/sections/000"/>
+    <item href="sections/000/000.html" media-type="application/xhtml+xml" id="item-content/svn/sections/000/000.html"/>
+    <item href="sections/000/_section.txt" media-type="application/xhtml+xml" id="item-content/svn/sections/000/_section.txt"/>
+    <item href="sections/000/section.html" media-type="application/xhtml+xml" id="item-content/svn/sections/000/section.html"/>
+    <item href="sections/001/section.html" media-type="application/xhtml+xml" id="item-content/svn/sections/001"/>
+    <item href="sections/001/000.html" media-type="application/xhtml+xml" id="item-content/svn/sections/001/000.html"/>
+    <item href="sections/001/_section.txt" media-type="application/xhtml+xml" id="item-content/svn/sections/001/_section.txt"/>
+    <item href="content/svn/sections/001/section.html" media-type="application/xhtml+xml" id="item-content/svn/sections/001/section.html"/>
+    <item href="content/svn/sections/002/section.html" media-type="application/xhtml+xml" id="item-content/svn/sections/002"/>
+    <item href="content/svn/sections/002/000.html" media-type="application/xhtml+xml" id="item-content/svn/sections/002/000.html"/>
+    <item href="content/svn/sections/002/001.html" media-type="application/xhtml+xml" id="item-content/svn/sections/002/001.html"/>
+    <item href="content/svn/sections/002/002.html" media-type="application/xhtml+xml" id="item-content/svn/sections/002/002.html"/>
+    <item href="content/svn/sections/002/003.html" media-type="application/xhtml+xml" id="item-content/svn/sections/002/003.html"/>
+    <item href="content/svn/sections/002/004.html" media-type="application/xhtml+xml" id="item-content/svn/sections/002/004.html"/>
+    <item href="content/svn/sections/002/005.html" media-type="application/xhtml+xml" id="item-content/svn/sections/002/005.html"/>
+    <item href="content/svn/sections/002/006.html" media-type="application/xhtml+xml" id="item-content/svn/sections/002/006.html"/>
+    <item href="content/svn/sections/002/_section.txt" media-type="application/xhtml+xml" id="item-content/svn/sections/002/_section.txt"/>
+    <item href="content/svn/sections/002/section.html" media-type="application/xhtml+xml" id="item-content/svn/sections/002/section.html"/>
+    <item href="content/svn/sections/003/section.html" media-type="application/xhtml+xml" id="item-content/svn/sections/003"/>
+    <item href="content/svn/sections/003/000.html" media-type="application/xhtml+xml" id="item-content/svn/sections/003/000.html"/>
+    <item href="content/svn/sections/003/001.html" media-type="application/xhtml+xml" id="item-content/svn/sections/003/001.html"/>
+    <item href="content/svn/sections/003/002.html" media-type="application/xhtml+xml" id="item-content/svn/sections/003/002.html"/>
+    <item href="content/svn/sections/003/003.html" media-type="application/xhtml+xml" id="item-content/svn/sections/003/003.html"/>
+    <item href="content/svn/sections/003/_section.txt" media-type="application/xhtml+xml" id="item-content/svn/sections/003/_section.txt"/>
+    <item href="content/svn/sections/003/section.html" media-type="application/xhtml+xml" id="item-content/svn/sections/003/section.html"/>
+    <item href="content/svn/sections/004/section.html" media-type="application/xhtml+xml" id="item-content/svn/sections/004"/>
+    <item href="content/svn/sections/004/000.html" media-type="application/xhtml+xml" id="item-content/svn/sections/004/000.html"/>
+    <item href="content/svn/sections/004/001.html" media-type="application/xhtml+xml" id="item-content/svn/sections/004/001.html"/>
+    <item href="content/svn/sections/004/002.html" media-type="application/xhtml+xml" id="item-content/svn/sections/004/002.html"/>
+    <item href="content/svn/sections/004/003.html" media-type="application/xhtml+xml" id="item-content/svn/sections/004/003.html"/>
+    <item href="content/svn/sections/004/004.html" media-type="application/xhtml+xml" id="item-content/svn/sections/004/004.html"/>
+    <item href="content/svn/sections/004/005.html" media-type="application/xhtml+xml" id="item-content/svn/sections/004/005.html"/>
+    <item href="content/svn/sections/004/006.html" media-type="application/xhtml+xml" id="item-content/svn/sections/004/006.html"/>
+    <item href="content/svn/sections/004/007.html" media-type="application/xhtml+xml" id="item-content/svn/sections/004/007.html"/>
+    <item href="content/svn/sections/004/008.html" media-type="application/xhtml+xml" id="item-content/svn/sections/004/008.html"/>
+    <item href="content/svn/sections/004/_section.txt" media-type="application/xhtml+xml" id="item-content/svn/sections/004/_section.txt"/>
+    <item href="content/svn/sections/004/section.html" media-type="application/xhtml+xml" id="item-content/svn/sections/004/section.html"/>
+    <item href="content/svn/sections/005/section.html" media-type="application/xhtml+xml" id="item-content/svn/sections/005"/>
+    <item href="content/svn/sections/005/000.html" media-type="application/xhtml+xml" id="item-content/svn/sections/005/000.html"/>
+    <item href="content/svn/sections/005/001.html" media-type="application/xhtml+xml" id="item-content/svn/sections/005/001.html"/>
+    <item href="content/svn/sections/005/002.html" media-type="application/xhtml+xml" id="item-content/svn/sections/005/002.html"/>
+    <item href="content/svn/sections/005/003.html" media-type="application/xhtml+xml" id="item-content/svn/sections/005/003.html"/>
+    <item href="content/svn/sections/005/004.html" media-type="application/xhtml+xml" id="item-content/svn/sections/005/004.html"/>
+    <item href="content/svn/sections/005/005.html" media-type="application/xhtml+xml" id="item-content/svn/sections/005/005.html"/>
+    <item href="content/svn/sections/005/006.html" media-type="application/xhtml+xml" id="item-content/svn/sections/005/006.html"/>
+    <item href="content/svn/sections/005/007.html" media-type="application/xhtml+xml" id="item-content/svn/sections/005/007.html"/>
+    <item href="content/svn/sections/005/008.html" media-type="application/xhtml+xml" id="item-content/svn/sections/005/008.html"/>
+    <item href="content/svn/sections/005/009.html" media-type="application/xhtml+xml" id="item-content/svn/sections/005/009.html"/>
+    <item href="content/svn/sections/005/010.html" media-type="application/xhtml+xml" id="item-content/svn/sections/005/010.html"/>
+    <item href="content/svn/sections/005/011.html" media-type="application/xhtml+xml" id="item-content/svn/sections/005/011.html"/>
+    <item href="content/svn/sections/005/012.html" media-type="application/xhtml+xml" id="item-content/svn/sections/005/012.html"/>
+    <item href="content/svn/sections/005/_section.txt" media-type="application/xhtml+xml" id="item-content/svn/sections/005/_section.txt"/>
+    <item href="content/svn/sections/005/section.html" media-type="application/xhtml+xml" id="item-content/svn/sections/005/section.html"/>
+    <item href="content/svn/sections/006/section.html" media-type="application/xhtml+xml" id="item-content/svn/sections/006"/>
+    <item href="content/svn/sections/006/000.html" media-type="application/xhtml+xml" id="item-content/svn/sections/006/000.html"/>
+    <item href="content/svn/sections/006/001.html" media-type="application/xhtml+xml" id="item-content/svn/sections/006/001.html"/>
+    <item href="content/svn/sections/006/002.html" media-type="application/xhtml+xml" id="item-content/svn/sections/006/002.html"/>
+    <item href="content/svn/sections/006/003.html" media-type="application/xhtml+xml" id="item-content/svn/sections/006/003.html"/>
+    <item href="content/svn/sections/006/004.html" media-type="application/xhtml+xml" id="item-content/svn/sections/006/004.html"/>
+    <item href="content/svn/sections/006/005.html" media-type="application/xhtml+xml" id="item-content/svn/sections/006/005.html"/>
+    <item href="content/svn/sections/006/006.html" media-type="application/xhtml+xml" id="item-content/svn/sections/006/006.html"/>
+    <item href="content/svn/sections/006/007.html" media-type="application/xhtml+xml" id="item-content/svn/sections/006/007.html"/>
+    <item href="content/svn/sections/006/008.html" media-type="application/xhtml+xml" id="item-content/svn/sections/006/008.html"/>
+    <item href="content/svn/sections/006/009.html" media-type="application/xhtml+xml" id="item-content/svn/sections/006/009.html"/>
+    <item href="content/svn/sections/006/010.html" media-type="application/xhtml+xml" id="item-content/svn/sections/006/010.html"/>
+    <item href="content/svn/sections/006/011.html" media-type="application/xhtml+xml" id="item-content/svn/sections/006/011.html"/>
+    <item href="content/svn/sections/006/_section.txt" media-type="application/xhtml+xml" id="item-content/svn/sections/006/_section.txt"/>
+    <item href="content/svn/sections/006/section.html" media-type="application/xhtml+xml" id="item-content/svn/sections/006/section.html"/>
+    <item href="content/svn/sections/007/section.html" media-type="application/xhtml+xml" id="item-content/svn/sections/007"/>
+    <item href="content/svn/sections/007/000.html" media-type="application/xhtml+xml" id="item-content/svn/sections/007/000.html"/>
+    <item href="content/svn/sections/007/001.html" media-type="application/xhtml+xml" id="item-content/svn/sections/007/001.html"/>
+    <item href="content/svn/sections/007/002.html" media-type="application/xhtml+xml" id="item-content/svn/sections/007/002.html"/>
+    <item href="content/svn/sections/007/003.html" media-type="application/xhtml+xml" id="item-content/svn/sections/007/003.html"/>
+    <item href="content/svn/sections/007/004.html" media-type="application/xhtml+xml" id="item-content/svn/sections/007/004.html"/>
+    <item href="content/svn/sections/007/005.html" media-type="application/xhtml+xml" id="item-content/svn/sections/007/005.html"/>
+    <item href="content/svn/sections/007/006.html" media-type="application/xhtml+xml" id="item-content/svn/sections/007/006.html"/>
+    <item href="content/svn/sections/007/_section.txt" media-type="application/xhtml+xml" id="item-content/svn/sections/007/_section.txt"/>
+    <item href="content/svn/sections/007/section.html" media-type="application/xhtml+xml" id="item-content/svn/sections/007/section.html"/>
+    <item href="content/svn/sections/008/section.html" media-type="application/xhtml+xml" id="item-content/svn/sections/008"/>
+    <item href="content/svn/sections/008/000.html" media-type="application/xhtml+xml" id="item-content/svn/sections/008/000.html"/>
+    <item href="content/svn/sections/008/001.html" media-type="application/xhtml+xml" id="item-content/svn/sections/008/001.html"/>
+    <item href="content/svn/sections/008/002.html" media-type="application/xhtml+xml" id="item-content/svn/sections/008/002.html"/>
+    <item href="content/svn/sections/008/003.html" media-type="application/xhtml+xml" id="item-content/svn/sections/008/003.html"/>
+    <item href="content/svn/sections/008/004.html" media-type="application/xhtml+xml" id="item-content/svn/sections/008/004.html"/>
+    <item href="content/svn/sections/008/005.html" media-type="application/xhtml+xml" id="item-content/svn/sections/008/005.html"/>
+    <item href="content/svn/sections/008/006.html" media-type="application/xhtml+xml" id="item-content/svn/sections/008/006.html"/>
+    <item href="content/svn/sections/008/007.html" media-type="application/xhtml+xml" id="item-content/svn/sections/008/007.html"/>
+    <item href="content/svn/sections/008/008.html" media-type="application/xhtml+xml" id="item-content/svn/sections/008/008.html"/>
+    <item href="content/svn/sections/008/_section.txt" media-type="application/xhtml+xml" id="item-content/svn/sections/008/_section.txt"/>
+    <item href="content/svn/sections/008/section.html" media-type="application/xhtml+xml" id="item-content/svn/sections/008/section.html"/>
+    <item href="content/svn/sections/009/section.html" media-type="application/xhtml+xml" id="item-content/svn/sections/009"/>
+    <item href="content/svn/sections/009/000.html" media-type="application/xhtml+xml" id="item-content/svn/sections/009/000.html"/>
+    <item href="content/svn/sections/009/001.html" media-type="application/xhtml+xml" id="item-content/svn/sections/009/001.html"/>
+    <item href="content/svn/sections/009/002.html" media-type="application/xhtml+xml" id="item-content/svn/sections/009/002.html"/>
+    <item href="content/svn/sections/009/003.html" media-type="application/xhtml+xml" id="item-content/svn/sections/009/003.html"/>
+    <item href="content/svn/sections/009/004.html" media-type="application/xhtml+xml" id="item-content/svn/sections/009/004.html"/>
+    <item href="content/svn/sections/009/005.html" media-type="application/xhtml+xml" id="item-content/svn/sections/009/005.html"/>
+    <item href="content/svn/sections/009/_section.txt" media-type="application/xhtml+xml" id="item-content/svn/sections/009/_section.txt"/>
+    <item href="content/svn/sections/009/section.html" media-type="application/xhtml+xml" id="item-content/svn/sections/009/section.html"/>
+    <item href="content/svn/sections/010/section.html" media-type="application/xhtml+xml" id="item-content/svn/sections/010"/>
+    <item href="content/svn/sections/010/000.html" media-type="application/xhtml+xml" id="item-content/svn/sections/010/000.html"/>
+    <item href="content/svn/sections/010/001.html" media-type="application/xhtml+xml" id="item-content/svn/sections/010/001.html"/>
+    <item href="content/svn/sections/010/002.html" media-type="application/xhtml+xml" id="item-content/svn/sections/010/002.html"/>
+    <item href="content/svn/sections/010/003.html" media-type="application/xhtml+xml" id="item-content/svn/sections/010/003.html"/>
+    <item href="content/svn/sections/010/_section.txt" media-type="application/xhtml+xml" id="item-content/svn/sections/010/_section.txt"/>
+    <item href="content/svn/sections/010/section.html" media-type="application/xhtml+xml" id="item-content/svn/sections/010/section.html"/>
+    <item href="content/svn/sections/011/section.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011"/>
+    <item href="content/svn/sections/011/000.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/000.html"/>
+    <item href="content/svn/sections/011/001.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/001.html"/>
+    <item href="content/svn/sections/011/002.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/002.html"/>
+    <item href="content/svn/sections/011/003.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/003.html"/>
+    <item href="content/svn/sections/011/004.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/004.html"/>
+    <item href="content/svn/sections/011/005.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/005.html"/>
+    <item href="content/svn/sections/011/006.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/006.html"/>
+    <item href="content/svn/sections/011/007.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/007.html"/>
+    <item href="content/svn/sections/011/008.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/008.html"/>
+    <item href="content/svn/sections/011/009.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/009.html"/>
+    <item href="content/svn/sections/011/010.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/010.html"/>
+    <item href="content/svn/sections/011/011.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/011.html"/>
+    <item href="content/svn/sections/011/012.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/012.html"/>
+    <item href="content/svn/sections/011/013.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/013.html"/>
+    <item href="content/svn/sections/011/014.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/014.html"/>
+    <item href="content/svn/sections/011/015.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/015.html"/>
+    <item href="content/svn/sections/011/016.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/016.html"/>
+    <item href="content/svn/sections/011/017.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/017.html"/>
+    <item href="content/svn/sections/011/018.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/018.html"/>
+    <item href="content/svn/sections/011/019.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/019.html"/>
+    <item href="content/svn/sections/011/020.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/020.html"/>
+    <item href="content/svn/sections/011/021.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/021.html"/>
+    <item href="content/svn/sections/011/022.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/022.html"/>
+    <item href="content/svn/sections/011/023.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/023.html"/>
+    <item href="content/svn/sections/011/024.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/024.html"/>
+    <item href="content/svn/sections/011/025.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/025.html"/>
+    <item href="content/svn/sections/011/026.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/026.html"/>
+    <item href="content/svn/sections/011/027.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/027.html"/>
+    <item href="content/svn/sections/011/028.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/028.html"/>
+    <item href="content/svn/sections/011/029.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/029.html"/>
+    <item href="content/svn/sections/011/030.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/030.html"/>
+    <item href="content/svn/sections/011/031.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/031.html"/>
+    <item href="content/svn/sections/011/032.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/032.html"/>
+    <item href="content/svn/sections/011/033.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/033.html"/>
+    <item href="content/svn/sections/011/034.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/034.html"/>
+    <item href="content/svn/sections/011/035.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/035.html"/>
+    <item href="content/svn/sections/011/036.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/036.html"/>
+    <item href="content/svn/sections/011/037.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/037.html"/>
+    <item href="content/svn/sections/011/038.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/038.html"/>
+    <item href="content/svn/sections/011/039.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/039.html"/>
+    <item href="content/svn/sections/011/040.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/040.html"/>
+    <item href="content/svn/sections/011/041.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/041.html"/>
+    <item href="content/svn/sections/011/042.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/042.html"/>
+    <item href="content/svn/sections/011/043.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/043.html"/>
+    <item href="content/svn/sections/011/044.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/044.html"/>
+    <item href="content/svn/sections/011/045.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/045.html"/>
+    <item href="content/svn/sections/011/046.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/046.html"/>
+    <item href="content/svn/sections/011/047.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/047.html"/>
+    <item href="content/svn/sections/011/048.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/048.html"/>
+    <item href="content/svn/sections/011/049.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/049.html"/>
+    <item href="content/svn/sections/011/050.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/050.html"/>
+    <item href="content/svn/sections/011/051.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/051.html"/>
+    <item href="content/svn/sections/011/052.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/052.html"/>
+    <item href="content/svn/sections/011/053.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/053.html"/>
+    <item href="content/svn/sections/011/054.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/054.html"/>
+    <item href="content/svn/sections/011/055.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/055.html"/>
+    <item href="content/svn/sections/011/056.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/056.html"/>
+    <item href="content/svn/sections/011/057.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/057.html"/>
+    <item href="content/svn/sections/011/058.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/058.html"/>
+    <item href="content/svn/sections/011/059.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/059.html"/>
+    <item href="content/svn/sections/011/060.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/060.html"/>
+    <item href="content/svn/sections/011/061.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/061.html"/>
+    <item href="content/svn/sections/011/062.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/062.html"/>
+    <item href="content/svn/sections/011/063.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/063.html"/>
+    <item href="content/svn/sections/011/064.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/064.html"/>
+    <item href="content/svn/sections/011/065.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/065.html"/>
+    <item href="content/svn/sections/011/066.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/066.html"/>
+    <item href="content/svn/sections/011/067.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/067.html"/>
+    <item href="content/svn/sections/011/068.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/068.html"/>
+    <item href="content/svn/sections/011/069.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/069.html"/>
+    <item href="content/svn/sections/011/070.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/070.html"/>
+    <item href="content/svn/sections/011/071.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/071.html"/>
+    <item href="content/svn/sections/011/072.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/072.html"/>
+    <item href="content/svn/sections/011/073.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/073.html"/>
+    <item href="content/svn/sections/011/074.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/074.html"/>
+    <item href="content/svn/sections/011/075.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/075.html"/>
+    <item href="content/svn/sections/011/076.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/076.html"/>
+    <item href="content/svn/sections/011/077.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/077.html"/>
+    <item href="content/svn/sections/011/078.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/078.html"/>
+    <item href="content/svn/sections/011/079.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/079.html"/>
+    <item href="content/svn/sections/011/080.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/080.html"/>
+    <item href="content/svn/sections/011/081.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/081.html"/>
+    <item href="content/svn/sections/011/082.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/082.html"/>
+    <item href="content/svn/sections/011/083.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/083.html"/>
+    <item href="content/svn/sections/011/084.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/084.html"/>
+    <item href="content/svn/sections/011/085.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/085.html"/>
+    <item href="content/svn/sections/011/086.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/086.html"/>
+    <item href="content/svn/sections/011/087.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/087.html"/>
+    <item href="content/svn/sections/011/088.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/088.html"/>
+    <item href="content/svn/sections/011/089.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/089.html"/>
+    <item href="content/svn/sections/011/090.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/090.html"/>
+    <item href="content/svn/sections/011/091.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/091.html"/>
+    <item href="content/svn/sections/011/092.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/092.html"/>
+    <item href="content/svn/sections/011/093.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/093.html"/>
+    <item href="content/svn/sections/011/094.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/094.html"/>
+    <item href="content/svn/sections/011/_section.txt" media-type="application/xhtml+xml" id="item-content/svn/sections/011/_section.txt"/>
+    <item href="content/svn/sections/011/section.html" media-type="application/xhtml+xml" id="item-content/svn/sections/011/section.html"/>
+    <item href="content/svn/sections/012/section.html" media-type="application/xhtml+xml" id="item-content/svn/sections/012"/>
+    <item href="content/svn/sections/012/000.html" media-type="application/xhtml+xml" id="item-content/svn/sections/012/000.html"/>
+    <item href="content/svn/sections/012/001.html" media-type="application/xhtml+xml" id="item-content/svn/sections/012/001.html"/>
+    <item href="content/svn/sections/012/_section.txt" media-type="application/xhtml+xml" id="item-content/svn/sections/012/_section.txt"/>
+    <item href="content/svn/sections/012/section.html" media-type="application/xhtml+xml" id="item-content/svn/sections/012/section.html"/>
+    <item href="content/svn/sections/013/section.html" media-type="application/xhtml+xml" id="item-content/svn/sections/013"/>
+    <item href="content/svn/sections/013/000.html" media-type="application/xhtml+xml" id="item-content/svn/sections/013/000.html"/>
+    <item href="content/svn/sections/013/001.html" media-type="application/xhtml+xml" id="item-content/svn/sections/013/001.html"/>
+    <item href="content/svn/sections/013/002.html" media-type="application/xhtml+xml" id="item-content/svn/sections/013/002.html"/>
+    <item href="content/svn/sections/013/003.html" media-type="application/xhtml+xml" id="item-content/svn/sections/013/003.html"/>
+    <item href="content/svn/sections/013/004.html" media-type="application/xhtml+xml" id="item-content/svn/sections/013/004.html"/>
+    <item href="content/svn/sections/013/005.html" media-type="application/xhtml+xml" id="item-content/svn/sections/013/005.html"/>
+    <item href="content/svn/sections/013/006.html" media-type="application/xhtml+xml" id="item-content/svn/sections/013/006.html"/>
+    <item href="content/svn/sections/013/007.html" media-type="application/xhtml+xml" id="item-content/svn/sections/013/007.html"/>
+    <item href="content/svn/sections/013/008.html" media-type="application/xhtml+xml" id="item-content/svn/sections/013/008.html"/>
+    <item href="content/svn/sections/013/009.html" media-type="application/xhtml+xml" id="item-content/svn/sections/013/009.html"/>
+    <item href="content/svn/sections/013/010.html" media-type="application/xhtml+xml" id="item-content/svn/sections/013/010.html"/>
+    <item href="content/svn/sections/013/011.html" media-type="application/xhtml+xml" id="item-content/svn/sections/013/011.html"/>
+    <item href="content/svn/sections/013/_section.txt" media-type="application/xhtml+xml" id="item-content/svn/sections/013/_section.txt"/>
+    <item href="content/svn/sections/013/section.html" media-type="application/xhtml+xml" id="item-content/svn/sections/013/section.html"/>
+    <item href="content/svn/sections/014/section.html" media-type="application/xhtml+xml" id="item-content/svn/sections/014"/>
+    <item href="content/svn/sections/014/000.html" media-type="application/xhtml+xml" id="item-content/svn/sections/014/000.html"/>
+    <item href="content/svn/sections/014/001.html" media-type="application/xhtml+xml" id="item-content/svn/sections/014/001.html"/>
+    <item href="content/svn/sections/014/002.html" media-type="application/xhtml+xml" id="item-content/svn/sections/014/002.html"/>
+    <item href="content/svn/sections/014/_section.txt" media-type="application/xhtml+xml" id="item-content/svn/sections/014/_section.txt"/>
+    <item href="content/svn/sections/014/section.html" media-type="application/xhtml+xml" id="item-content/svn/sections/014/section.html"/>
+    <item href="content/svn/sections/015/section.html" media-type="application/xhtml+xml" id="item-content/svn/sections/015"/>
+    <item href="content/svn/sections/015/000.html" media-type="application/xhtml+xml" id="item-content/svn/sections/015/000.html"/>
+    <item href="content/svn/sections/015/001.html" media-type="application/xhtml+xml" id="item-content/svn/sections/015/001.html"/>
+    <item href="content/svn/sections/015/002.html" media-type="application/xhtml+xml" id="item-content/svn/sections/015/002.html"/>
+    <item href="content/svn/sections/015/003.html" media-type="application/xhtml+xml" id="item-content/svn/sections/015/003.html"/>
+    <item href="content/svn/sections/015/004.html" media-type="application/xhtml+xml" id="item-content/svn/sections/015/004.html"/>
+    <item href="content/svn/sections/015/005.html" media-type="application/xhtml+xml" id="item-content/svn/sections/015/005.html"/>
+    <item href="content/svn/sections/015/006.html" media-type="application/xhtml+xml" id="item-content/svn/sections/015/006.html"/>
+    <item href="content/svn/sections/015/007.html" media-type="application/xhtml+xml" id="item-content/svn/sections/015/007.html"/>
+    <item href="content/svn/sections/015/008.html" media-type="application/xhtml+xml" id="item-content/svn/sections/015/008.html"/>
+    <item href="content/svn/sections/015/009.html" media-type="application/xhtml+xml" id="item-content/svn/sections/015/009.html"/>
+    <item href="content/svn/sections/015/010.html" media-type="application/xhtml+xml" id="item-content/svn/sections/015/010.html"/>
+    <item href="content/svn/sections/015/011.html" media-type="application/xhtml+xml" id="item-content/svn/sections/015/011.html"/>
+    <item href="content/svn/sections/015/_section.txt" media-type="application/xhtml+xml" id="item-content/svn/sections/015/_section.txt"/>
+    <item href="content/svn/sections/015/section.html" media-type="application/xhtml+xml" id="item-content/svn/sections/015/section.html"/>
+    <item href="content/svn/sections/016/section.html" media-type="application/xhtml+xml" id="item-content/svn/sections/016"/>
+    <item href="content/svn/sections/016/000.html" media-type="application/xhtml+xml" id="item-content/svn/sections/016/000.html"/>
+    <item href="content/svn/sections/016/001.html" media-type="application/xhtml+xml" id="item-content/svn/sections/016/001.html"/>
+    <item href="content/svn/sections/016/002.html" media-type="application/xhtml+xml" id="item-content/svn/sections/016/002.html"/>
+    <item href="content/svn/sections/016/003.html" media-type="application/xhtml+xml" id="item-content/svn/sections/016/003.html"/>
+    <item href="content/svn/sections/016/_section.txt" media-type="application/xhtml+xml" id="item-content/svn/sections/016/_section.txt"/>
+    <item href="content/svn/sections/016/section.html" media-type="application/xhtml+xml" id="item-content/svn/sections/016/section.html"/>
+    <item href="content/svn/sections/017/section.html" media-type="application/xhtml+xml" id="item-content/svn/sections/017"/>
+    <item href="content/svn/sections/017/000.html" media-type="application/xhtml+xml" id="item-content/svn/sections/017/000.html"/>
+    <item href="content/svn/sections/017/_section.txt" media-type="application/xhtml+xml" id="item-content/svn/sections/017/_section.txt"/>
+    <item href="content/svn/sections/017/section.html" media-type="application/xhtml+xml" id="item-content/svn/sections/017/section.html"/>
+    <item href="content/svn/sections/018/section.html" media-type="application/xhtml+xml" id="item-content/svn/sections/018"/>
+    <item href="content/svn/sections/018/000.html" media-type="application/xhtml+xml" id="item-content/svn/sections/018/000.html"/>
+    <item href="content/svn/sections/018/_section.txt" media-type="application/xhtml+xml" id="item-content/svn/sections/018/_section.txt"/>
+    <item href="content/svn/sections/018/section.html" media-type="application/xhtml+xml" id="item-content/svn/sections/018/section.html"/>
+    <item href="" media-type="" id="img-000"/>
+    <item href="" media-type="" id="img-001"/>
+    <item href="" media-type="" id="img-002"/>
+    <item href="" media-type="" id="img-003"/>
+    <item href="" media-type="" id="img-004"/>
+    <item href="" media-type="" id="img-005"/>
+    <item href="" media-type="" id="img-006"/>
+    <item href="" media-type="" id="img-007"/>
+    <item href="" media-type="" id="img-008"/>
+    <item href="" media-type="" id="img-009"/>
+    <item href="" media-type="" id="img-010"/>
+    <item href="" media-type="" id="img-011"/>
+    <item href="" media-type="" id="img-012"/>
+    <item href="" media-type="" id="img-013"/>
+    <item href="" media-type="" id="img-014"/>
+    <item href="" media-type="" id="img-015"/>
+    <item href="" media-type="" id="img-016"/>
+    <item href="" media-type="" id="img-017"/>
+    <item href="" media-type="" id="img-018"/>
+    <item href="" media-type="" id="img-019"/>
+    <item href="" media-type="" id="img-020"/>
+    <item href="" media-type="" id="img-021"/>
+    <item href="" media-type="" id="img-022"/>
+    <item href="" media-type="" id="img-023"/>
+    <item href="" media-type="" id="img-024"/>
+    <item href="" media-type="" id="img-025"/>
+    <item href="" media-type="" id="img-026"/>
+    <item href="" media-type="" id="img-027"/>
+    <item href="" media-type="" id="img-028"/>
+    <item href="" media-type="" id="img-029"/>
+    <item href="" media-type="" id="img-030"/>
+    <item href="" media-type="" id="img-031"/>
+    <item href="" media-type="" id="img-032"/>
+    <item href="" media-type="" id="img-033"/>
+    <item href="" media-type="" id="img-034"/>
+    <item href="" media-type="" id="img-035"/>
+    <item href="" media-type="" id="img-036"/>
+    <item href="" media-type="" id="img-037"/>
+    <item href="" media-type="" id="img-038"/>
+    <item href="" media-type="" id="img-039"/>
+    <item href="" media-type="" id="img-040"/>
+    <item href="" media-type="" id="img-041"/>
+    <item href="" media-type="" id="img-042"/>
+    <item href="" media-type="" id="img-043"/>
+    <item href="" media-type="" id="img-044"/>
+    <item href="" media-type="" id="img-045"/>
+    <item href="" media-type="" id="img-046"/>
+    <item href="" media-type="" id="img-047"/>
+    <item href="" media-type="" id="img-048"/>
+    <item href="" media-type="" id="img-049"/>
+    <item href="" media-type="" id="img-050"/>
+    <item href="" media-type="" id="img-051"/>
+    <item href="" media-type="" id="img-052"/>
+    <item href="" media-type="" id="img-053"/>
+    <item href="" media-type="" id="img-054"/>
+    <item href="" media-type="" id="img-055"/>
+    <item href="" media-type="" id="img-056"/>
+  </manifest>
+  <spine toc="nav-contents">
+    <itemref idref="contents"/>
+    <itemref idref="item-content/svn/sections/000"/>
+    <itemref idref="item-content/svn/sections/000/000.html"/>
+    <itemref idref="item-content/svn/sections/000/_section.txt"/>
+    <itemref idref="item-content/svn/sections/000/section.html"/>
+    <itemref idref="item-content/svn/sections/001"/>
+    <itemref idref="item-content/svn/sections/001/000.html"/>
+    <itemref idref="item-content/svn/sections/001/_section.txt"/>
+    <itemref idref="item-content/svn/sections/001/section.html"/>
+    <itemref idref="item-content/svn/sections/002"/>
+    <itemref idref="item-content/svn/sections/002/000.html"/>
+    <itemref idref="item-content/svn/sections/002/001.html"/>
+    <itemref idref="item-content/svn/sections/002/002.html"/>
+    <itemref idref="item-content/svn/sections/002/003.html"/>
+    <itemref idref="item-content/svn/sections/002/004.html"/>
+    <itemref idref="item-content/svn/sections/002/005.html"/>
+    <itemref idref="item-content/svn/sections/002/006.html"/>
+    <itemref idref="item-content/svn/sections/002/_section.txt"/>
+    <itemref idref="item-content/svn/sections/002/section.html"/>
+    <itemref idref="item-content/svn/sections/003"/>
+    <itemref idref="item-content/svn/sections/003/000.html"/>
+    <itemref idref="item-content/svn/sections/003/001.html"/>
+    <itemref idref="item-content/svn/sections/003/002.html"/>
+    <itemref idref="item-content/svn/sections/003/003.html"/>
+    <itemref idref="item-content/svn/sections/003/_section.txt"/>
+    <itemref idref="item-content/svn/sections/003/section.html"/>
+    <itemref idref="item-content/svn/sections/004"/>
+    <itemref idref="item-content/svn/sections/004/000.html"/>
+    <itemref idref="item-content/svn/sections/004/001.html"/>
+    <itemref idref="item-content/svn/sections/004/002.html"/>
+    <itemref idref="item-content/svn/sections/004/003.html"/>
+    <itemref idref="item-content/svn/sections/004/004.html"/>
+    <itemref idref="item-content/svn/sections/004/005.html"/>
+    <itemref idref="item-content/svn/sections/004/006.html"/>
+    <itemref idref="item-content/svn/sections/004/007.html"/>
+    <itemref idref="item-content/svn/sections/004/008.html"/>
+    <itemref idref="item-content/svn/sections/004/_section.txt"/>
+    <itemref idref="item-content/svn/sections/004/section.html"/>
+    <itemref idref="item-content/svn/sections/005"/>
+    <itemref idref="item-content/svn/sections/005/000.html"/>
+    <itemref idref="item-content/svn/sections/005/001.html"/>
+    <itemref idref="item-content/svn/sections/005/002.html"/>
+    <itemref idref="item-content/svn/sections/005/003.html"/>
+    <itemref idref="item-content/svn/sections/005/004.html"/>
+    <itemref idref="item-content/svn/sections/005/005.html"/>
+    <itemref idref="item-content/svn/sections/005/006.html"/>
+    <itemref idref="item-content/svn/sections/005/007.html"/>
+    <itemref idref="item-content/svn/sections/005/008.html"/>
+    <itemref idref="item-content/svn/sections/005/009.html"/>
+    <itemref idref="item-content/svn/sections/005/010.html"/>
+    <itemref idref="item-content/svn/sections/005/011.html"/>
+    <itemref idref="item-content/svn/sections/005/012.html"/>
+    <itemref idref="item-content/svn/sections/005/_section.txt"/>
+    <itemref idref="item-content/svn/sections/005/section.html"/>
+    <itemref idref="item-content/svn/sections/006"/>
+    <itemref idref="item-content/svn/sections/006/000.html"/>
+    <itemref idref="item-content/svn/sections/006/001.html"/>
+    <itemref idref="item-content/svn/sections/006/002.html"/>
+    <itemref idref="item-content/svn/sections/006/003.html"/>
+    <itemref idref="item-content/svn/sections/006/004.html"/>
+    <itemref idref="item-content/svn/sections/006/005.html"/>
+    <itemref idref="item-content/svn/sections/006/006.html"/>
+    <itemref idref="item-content/svn/sections/006/007.html"/>
+    <itemref idref="item-content/svn/sections/006/008.html"/>
+    <itemref idref="item-content/svn/sections/006/009.html"/>
+    <itemref idref="item-content/svn/sections/006/010.html"/>
+    <itemref idref="item-content/svn/sections/006/011.html"/>
+    <itemref idref="item-content/svn/sections/006/_section.txt"/>
+    <itemref idref="item-content/svn/sections/006/section.html"/>
+    <itemref idref="item-content/svn/sections/007"/>
+    <itemref idref="item-content/svn/sections/007/000.html"/>
+    <itemref idref="item-content/svn/sections/007/001.html"/>
+    <itemref idref="item-content/svn/sections/007/002.html"/>
+    <itemref idref="item-content/svn/sections/007/003.html"/>
+    <itemref idref="item-content/svn/sections/007/004.html"/>
+    <itemref idref="item-content/svn/sections/007/005.html"/>
+    <itemref idref="item-content/svn/sections/007/006.html"/>
+    <itemref idref="item-content/svn/sections/007/_section.txt"/>
+    <itemref idref="item-content/svn/sections/007/section.html"/>
+    <itemref idref="item-content/svn/sections/008"/>
+    <itemref idref="item-content/svn/sections/008/000.html"/>
+    <itemref idref="item-content/svn/sections/008/001.html"/>
+    <itemref idref="item-content/svn/sections/008/002.html"/>
+    <itemref idref="item-content/svn/sections/008/003.html"/>
+    <itemref idref="item-content/svn/sections/008/004.html"/>
+    <itemref idref="item-content/svn/sections/008/005.html"/>
+    <itemref idref="item-content/svn/sections/008/006.html"/>
+    <itemref idref="item-content/svn/sections/008/007.html"/>
+    <itemref idref="item-content/svn/sections/008/008.html"/>
+    <itemref idref="item-content/svn/sections/008/_section.txt"/>
+    <itemref idref="item-content/svn/sections/008/section.html"/>
+    <itemref idref="item-content/svn/sections/009"/>
+    <itemref idref="item-content/svn/sections/009/000.html"/>
+    <itemref idref="item-content/svn/sections/009/001.html"/>
+    <itemref idref="item-content/svn/sections/009/002.html"/>
+    <itemref idref="item-content/svn/sections/009/003.html"/>
+    <itemref idref="item-content/svn/sections/009/004.html"/>
+    <itemref idref="item-content/svn/sections/009/005.html"/>
+    <itemref idref="item-content/svn/sections/009/_section.txt"/>
+    <itemref idref="item-content/svn/sections/009/section.html"/>
+    <itemref idref="item-content/svn/sections/010"/>
+    <itemref idref="item-content/svn/sections/010/000.html"/>
+    <itemref idref="item-content/svn/sections/010/001.html"/>
+    <itemref idref="item-content/svn/sections/010/002.html"/>
+    <itemref idref="item-content/svn/sections/010/003.html"/>
+    <itemref idref="item-content/svn/sections/010/_section.txt"/>
+    <itemref idref="item-content/svn/sections/010/section.html"/>
+    <itemref idref="item-content/svn/sections/011"/>
+    <itemref idref="item-content/svn/sections/011/000.html"/>
+    <itemref idref="item-content/svn/sections/011/001.html"/>
+    <itemref idref="item-content/svn/sections/011/002.html"/>
+    <itemref idref="item-content/svn/sections/011/003.html"/>
+    <itemref idref="item-content/svn/sections/011/004.html"/>
+    <itemref idref="item-content/svn/sections/011/005.html"/>
+    <itemref idref="item-content/svn/sections/011/006.html"/>
+    <itemref idref="item-content/svn/sections/011/007.html"/>
+    <itemref idref="item-content/svn/sections/011/008.html"/>
+    <itemref idref="item-content/svn/sections/011/009.html"/>
+    <itemref idref="item-content/svn/sections/011/010.html"/>
+    <itemref idref="item-content/svn/sections/011/011.html"/>
+    <itemref idref="item-content/svn/sections/011/012.html"/>
+    <itemref idref="item-content/svn/sections/011/013.html"/>
+    <itemref idref="item-content/svn/sections/011/014.html"/>
+    <itemref idref="item-content/svn/sections/011/015.html"/>
+    <itemref idref="item-content/svn/sections/011/016.html"/>
+    <itemref idref="item-content/svn/sections/011/017.html"/>
+    <itemref idref="item-content/svn/sections/011/018.html"/>
+    <itemref idref="item-content/svn/sections/011/019.html"/>
+    <itemref idref="item-content/svn/sections/011/020.html"/>
+    <itemref idref="item-content/svn/sections/011/021.html"/>
+    <itemref idref="item-content/svn/sections/011/022.html"/>
+    <itemref idref="item-content/svn/sections/011/023.html"/>
+    <itemref idref="item-content/svn/sections/011/024.html"/>
+    <itemref idref="item-content/svn/sections/011/025.html"/>
+    <itemref idref="item-content/svn/sections/011/026.html"/>
+    <itemref idref="item-content/svn/sections/011/027.html"/>
+    <itemref idref="item-content/svn/sections/011/028.html"/>
+    <itemref idref="item-content/svn/sections/011/029.html"/>
+    <itemref idref="item-content/svn/sections/011/030.html"/>
+    <itemref idref="item-content/svn/sections/011/031.html"/>
+    <itemref idref="item-content/svn/sections/011/032.html"/>
+    <itemref idref="item-content/svn/sections/011/033.html"/>
+    <itemref idref="item-content/svn/sections/011/034.html"/>
+    <itemref idref="item-content/svn/sections/011/035.html"/>
+    <itemref idref="item-content/svn/sections/011/036.html"/>
+    <itemref idref="item-content/svn/sections/011/037.html"/>
+    <itemref idref="item-content/svn/sections/011/038.html"/>
+    <itemref idref="item-content/svn/sections/011/039.html"/>
+    <itemref idref="item-content/svn/sections/011/040.html"/>
+    <itemref idref="item-content/svn/sections/011/041.html"/>
+    <itemref idref="item-content/svn/sections/011/042.html"/>
+    <itemref idref="item-content/svn/sections/011/043.html"/>
+    <itemref idref="item-content/svn/sections/011/044.html"/>
+    <itemref idref="item-content/svn/sections/011/045.html"/>
+    <itemref idref="item-content/svn/sections/011/046.html"/>
+    <itemref idref="item-content/svn/sections/011/047.html"/>
+    <itemref idref="item-content/svn/sections/011/048.html"/>
+    <itemref idref="item-content/svn/sections/011/049.html"/>
+    <itemref idref="item-content/svn/sections/011/050.html"/>
+    <itemref idref="item-content/svn/sections/011/051.html"/>
+    <itemref idref="item-content/svn/sections/011/052.html"/>
+    <itemref idref="item-content/svn/sections/011/053.html"/>
+    <itemref idref="item-content/svn/sections/011/054.html"/>
+    <itemref idref="item-content/svn/sections/011/055.html"/>
+    <itemref idref="item-content/svn/sections/011/056.html"/>
+    <itemref idref="item-content/svn/sections/011/057.html"/>
+    <itemref idref="item-content/svn/sections/011/058.html"/>
+    <itemref idref="item-content/svn/sections/011/059.html"/>
+    <itemref idref="item-content/svn/sections/011/060.html"/>
+    <itemref idref="item-content/svn/sections/011/061.html"/>
+    <itemref idref="item-content/svn/sections/011/062.html"/>
+    <itemref idref="item-content/svn/sections/011/063.html"/>
+    <itemref idref="item-content/svn/sections/011/064.html"/>
+    <itemref idref="item-content/svn/sections/011/065.html"/>
+    <itemref idref="item-content/svn/sections/011/066.html"/>
+    <itemref idref="item-content/svn/sections/011/067.html"/>
+    <itemref idref="item-content/svn/sections/011/068.html"/>
+    <itemref idref="item-content/svn/sections/011/069.html"/>
+    <itemref idref="item-content/svn/sections/011/070.html"/>
+    <itemref idref="item-content/svn/sections/011/071.html"/>
+    <itemref idref="item-content/svn/sections/011/072.html"/>
+    <itemref idref="item-content/svn/sections/011/073.html"/>
+    <itemref idref="item-content/svn/sections/011/074.html"/>
+    <itemref idref="item-content/svn/sections/011/075.html"/>
+    <itemref idref="item-content/svn/sections/011/076.html"/>
+    <itemref idref="item-content/svn/sections/011/077.html"/>
+    <itemref idref="item-content/svn/sections/011/078.html"/>
+    <itemref idref="item-content/svn/sections/011/079.html"/>
+    <itemref idref="item-content/svn/sections/011/080.html"/>
+    <itemref idref="item-content/svn/sections/011/081.html"/>
+    <itemref idref="item-content/svn/sections/011/082.html"/>
+    <itemref idref="item-content/svn/sections/011/083.html"/>
+    <itemref idref="item-content/svn/sections/011/084.html"/>
+    <itemref idref="item-content/svn/sections/011/085.html"/>
+    <itemref idref="item-content/svn/sections/011/086.html"/>
+    <itemref idref="item-content/svn/sections/011/087.html"/>
+    <itemref idref="item-content/svn/sections/011/088.html"/>
+    <itemref idref="item-content/svn/sections/011/089.html"/>
+    <itemref idref="item-content/svn/sections/011/090.html"/>
+    <itemref idref="item-content/svn/sections/011/091.html"/>
+    <itemref idref="item-content/svn/sections/011/092.html"/>
+    <itemref idref="item-content/svn/sections/011/093.html"/>
+    <itemref idref="item-content/svn/sections/011/094.html"/>
+    <itemref idref="item-content/svn/sections/011/_section.txt"/>
+    <itemref idref="item-content/svn/sections/011/section.html"/>
+    <itemref idref="item-content/svn/sections/012"/>
+    <itemref idref="item-content/svn/sections/012/000.html"/>
+    <itemref idref="item-content/svn/sections/012/001.html"/>
+    <itemref idref="item-content/svn/sections/012/_section.txt"/>
+    <itemref idref="item-content/svn/sections/012/section.html"/>
+    <itemref idref="item-content/svn/sections/013"/>
+    <itemref idref="item-content/svn/sections/013/000.html"/>
+    <itemref idref="item-content/svn/sections/013/001.html"/>
+    <itemref idref="item-content/svn/sections/013/002.html"/>
+    <itemref idref="item-content/svn/sections/013/003.html"/>
+    <itemref idref="item-content/svn/sections/013/004.html"/>
+    <itemref idref="item-content/svn/sections/013/005.html"/>
+    <itemref idref="item-content/svn/sections/013/006.html"/>
+    <itemref idref="item-content/svn/sections/013/007.html"/>
+    <itemref idref="item-content/svn/sections/013/008.html"/>
+    <itemref idref="item-content/svn/sections/013/009.html"/>
+    <itemref idref="item-content/svn/sections/013/010.html"/>
+    <itemref idref="item-content/svn/sections/013/011.html"/>
+    <itemref idref="item-content/svn/sections/013/_section.txt"/>
+    <itemref idref="item-content/svn/sections/013/section.html"/>
+    <itemref idref="item-content/svn/sections/014"/>
+    <itemref idref="item-content/svn/sections/014/000.html"/>
+    <itemref idref="item-content/svn/sections/014/001.html"/>
+    <itemref idref="item-content/svn/sections/014/002.html"/>
+    <itemref idref="item-content/svn/sections/014/_section.txt"/>
+    <itemref idref="item-content/svn/sections/014/section.html"/>
+    <itemref idref="item-content/svn/sections/015"/>
+    <itemref idref="item-content/svn/sections/015/000.html"/>
+    <itemref idref="item-content/svn/sections/015/001.html"/>
+    <itemref idref="item-content/svn/sections/015/002.html"/>
+    <itemref idref="item-content/svn/sections/015/003.html"/>
+    <itemref idref="item-content/svn/sections/015/004.html"/>
+    <itemref idref="item-content/svn/sections/015/005.html"/>
+    <itemref idref="item-content/svn/sections/015/006.html"/>
+    <itemref idref="item-content/svn/sections/015/007.html"/>
+    <itemref idref="item-content/svn/sections/015/008.html"/>
+    <itemref idref="item-content/svn/sections/015/009.html"/>
+    <itemref idref="item-content/svn/sections/015/010.html"/>
+    <itemref idref="item-content/svn/sections/015/011.html"/>
+    <itemref idref="item-content/svn/sections/015/_section.txt"/>
+    <itemref idref="item-content/svn/sections/015/section.html"/>
+    <itemref idref="item-content/svn/sections/016"/>
+    <itemref idref="item-content/svn/sections/016/000.html"/>
+    <itemref idref="item-content/svn/sections/016/001.html"/>
+    <itemref idref="item-content/svn/sections/016/002.html"/>
+    <itemref idref="item-content/svn/sections/016/003.html"/>
+    <itemref idref="item-content/svn/sections/016/_section.txt"/>
+    <itemref idref="item-content/svn/sections/016/section.html"/>
+    <itemref idref="item-content/svn/sections/017"/>
+    <itemref idref="item-content/svn/sections/017/000.html"/>
+    <itemref idref="item-content/svn/sections/017/_section.txt"/>
+    <itemref idref="item-content/svn/sections/017/section.html"/>
+    <itemref idref="item-content/svn/sections/018"/>
+    <itemref idref="item-content/svn/sections/018/000.html"/>
+    <itemref idref="item-content/svn/sections/018/_section.txt"/>
+    <itemref idref="item-content/svn/sections/018/section.html"/>
+  </spine>
+  <guide>
+    <reference href="contents.html" type="toc" title="Table of Contents"/>
+    <reference href="content/svn/sections/000/000.html" type="text" title="Beginning"/>
+  </guide>
+</package>

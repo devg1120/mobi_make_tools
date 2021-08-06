@@ -1,0 +1,37 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Go statements</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+A &quot;go&quot; statement starts the execution of a function call
+as an independent concurrent thread of control, or <i>goroutine</i>,
+within the same address space.
+</p><pre>
+[<a>GoStmt</a>] = &quot;go&quot; [<a>Expression</a>] .
+</pre><p>
+The expression must be a function or method call; it cannot be parenthesized.
+Calls of built-in functions are restricted as for
+[<a>expression statements</a>].
+</p><p>
+The function value and parameters are
+[<a>evaluated as usual</a>]
+in the calling goroutine, but
+unlike with a regular call, program execution does not wait
+for the invoked function to complete.
+Instead, the function begins executing independently
+in a new goroutine.
+When the function terminates, its goroutine also terminates.
+If the function has any return values, they are discarded when the
+function completes.
+</p><pre>
+go Server()
+go func(ch chan<- bool) { for sleep(10); ch <- true }} (c) < pre></-></pre></body>
+</body>
+</html>

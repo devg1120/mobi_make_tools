@@ -1,0 +1,7 @@
+<body><p>
+Given a set of identifiers, an identifier is called <i>unique</i> if it is
+<i>different</i> from every other in the set.
+Two identifiers are different if they are spelled differently, or if they
+appear in different [<a>packages</a>] and are not
+[<a>exported</a>]. Otherwise, they are the same.
+</p></body>

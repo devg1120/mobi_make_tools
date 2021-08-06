@@ -1,0 +1,653 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Taxonomy of Unix IPC Methods</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts10/undefined" />
+  </head>
+   <body>
+<div class="sect1" lang="en">
+    <div class="titlepage">
+        <div>
+            <h2 class="title" style="clear: both"><a id="id2915457">Taxonomy of Unix IPC Methods</a></h2>
+        </div>
+    </div>
+    <p>As in single-process program architectures, the simplest
+        organization is the best. The remainder of this chapter will present
+        IPC techniques roughly in order of escalating complexity of
+        programming them. Before using a later, more complex technique, you
+        should prove by demonstration &#x2014; with prototypes and benchmark
+        results &#x2014; that no earlier and simpler technique will do. Often
+        you will surprise yourself.</p>
+    <div class="sect2" lang="en">
+        <div class="titlepage">
+            <div>
+                <h3 class="title"><a id="id2915475">Handing off Tasks to Specialist Programs</a></h3>
+            </div>
+        </div>
+        <p>In the simplest form of interprogram cooperation enabled by
+            inexpensive process spawning, a program runs another to accomplish a
+            specialized task. Because the called program is often specified as a
+            Unix shell command through the
+            system(3)
+            call, this is often called <span class="emphasis"><em>shelling out</em></span> to the
+            called program. The called program inherits the user&apos;s keyboard and
+            display and runs to completion. When it exits, the calling program
+            resumes control of the keyboard and display and resumes
+            execution.<sup>[<a id="id2915505" href="ch07s02.html#ftn.id2915505">68</a>]</sup> Because the calling program does not
+            communicate with the called program during the callee&apos;s execution,
+            protocol design is not an issue in this kind of cooperation,
+            except in the trivial sense that the caller may pass command-line
+            arguments to the callee to change its behavior.</p>
+        <p>The classic Unix case of shelling out is calling an editor from
+            within a mail or news program. In the Unix tradition one does
+            <span class="emphasis"><em>not</em></span> bundle purpose-built editors into programs
+            that require general text-edited input. Instead, one allows the user
+            to specify an editor of his or her choice to be called when editing
+            needs to be done.</p>
+        <p>The specialist program usually communicates with its parent through the
+            file system, by reading or modifying file(s) with specified
+            location(s); this is how editor or mailer shellouts work.</p>
+        <p>In a common variant of this pattern, the specialist program may
+            accept input on its standard input, and be called with the
+            C</p>
+        <p>They key point about all these cases is that the specialist
+            programs don&apos;t handshake with the parent while they are running. They
+            have an associated protocol only in the trivial sense that whichever
+            program (master or slave) is accepting input from the other has to be
+            able to parse it.</p>
+        <div class="sect3" lang="en">
+            <div class="titlepage">
+                <div>
+                    <h4 class="title"><a id="id2915594">Case Study: The <i>mutt</i> Mail User Agent</a></h4>
+                </div>
+            </div>
+            <p>The <i>mutt</i></p>
+            <p>When you use
+                <i>mutt</i></p>
+            <p>Almost all Unix mail- and netnews-composition programs observe
+                the same convention. Because they do, composer implementers don&apos;t
+                need to write a hundred inevitably diverging editors, and users
+                don&apos;t need to learn a hundred divergent interfaces. Instead, users
+                can carry their chosen editors with them.</p>
+            <p>An important variant of this strategy shells out to a small proxy
+                program that passes the specialist job to an already-running instance
+                of a big program, like an editor or a Web browser. Thus, developers
+                who normally have an instance of <i>emacs</i>
+                running on their X display can set
+                <b>EDITOR=emacsclient</b>, and have a buffer pop open in
+                their <i>emacs</i> when they request editing in
+                <i>mutt</i>. The point of this is not really to
+                save memory or other resources, it&apos;s to enable the user to unify all
+                editing in a single <i>emacs</i> process (so that,
+                for example, cut and paste among buffers can carry along internal
+                <i>emacs</i> state information like font
+                highlighting).</p>
+        </div>
+    </div>
+    <div class="sect2" lang="en">
+        <div class="titlepage">
+            <div>
+                <h3 class="title"><a id="plumbing">Pipes, Redirection, and Filters</a></h3>
+            </div>
+        </div>
+    </div>
+    <div class="sect2" lang="en">
+        <div class="titlepage">
+            <div>
+                <h3 class="title"><a id="id2921506">Wrappers</a></h3>
+            </div>
+        </div>
+        <p>The opposite of a shellout is a <span class="emphasis"><em>wrapper</em></span>. A
+            wrapper creates a new interface for a called program, or specializes
+            it. Often, wrappers are used to hide the details of elaborate shell
+            pipelines</p>
+        <p>As with shellouts, there is no associated protocol because the
+            programs do not communicate during the execution of the callee; but
+            the wrapper usually exists to specify arguments that modify the
+            callee&apos;s behavior.</p>
+        <div class="sect3" lang="en">
+            <div class="titlepage">
+                <div>
+                    <h4 class="title"><a id="id2921550">Case Study: Backup Scripts</a></h4>
+                </div>
+            </div>
+            <p>Specialization wrappers are a classic use of the Unix shell and
+                other scripting languages</p>
+            <pre class="programlisting">
+tar -czvf /dev/st0 &quot;$@&quot;
+</pre>
+            <p>This is a wrapper for the
+                tar(1)
+                tape archiver utility which simply supplies one fixed argument (the
+                tape device <tt>/dev/st0</tt>) and passes to tar all the other arguments
+                supplied by the user (&#x201C;<tt>$@</tt>&#x201D;).<sup>[<a id="id2921610" href="ch07s02.html#ftn.id2921610">71</a>]</sup></p>
+        </div>
+    </div>
+    <div class="sect2" lang="en">
+        <div class="titlepage">
+            <div>
+                <h3 class="title"><a id="id2921634">Security Wrappers and Bernstein Chaining</a></h3>
+            </div>
+        </div>
+        <p>One common use of wrapper scripts is as <i>security
+                wrappers</i>. A security script may call a gatekeeper program
+            to check some sort of credential, then conditionally execute another
+            based on the status value returned by the gatekeeper.</p>
+        <p>Bernstein chaining is a specialized security-wrapper technique
+            first invented by Daniel J. Bernstein, who has employed it in a number
+            of his packages. (A similar pattern appears in commands like
+            nohup(1)
+            and
+            su(1),
+            but the conditionality is absent.) Conceptually, a Bernstein chain is
+            like a pipeline</p>
+        <p>The usual application is to confine security-privileged
+            applications to some sort of gatekeeper program, which can then hand
+            state to a less privileged one. The technique pastes several programs
+            together using execs, or possibly a combination of forks and
+            execs. The programs are all named on one command line. Each program
+            performs some function and (if successful) runs
+            exec(2)
+            on the rest of its command line.</p>
+        <p>Bernstein&apos;s <i>rblsmtpd</i> package is a
+            prototypical example. It serves to look up a host in the antispam DNS
+            zone of the Mail Abuse Prevention System. It does this by doing a DNS
+            query on the IP address passed into it in the
+            <tt>TCPREMOTEIP</tt> environment variable. If the query is
+            successful, then <i>rblsmtpd</i> runs its own SMTP
+            that discards the mail. Otherwise the remaining command-line arguments
+            are presumed to constitute a mail transport agent that knows the SMTP
+            protocol, and are handed to
+            exec(2)
+            to be run.</p>
+        <p>Another example can be found in Bernstein&apos;s
+            <i>qmail</i> package. It contains a program called
+            <i>condredirect</i>. The first parameter is an
+            email address, and the remainder a gatekeeper program and
+            arguments. <i>condredirect</i> forks and execs the
+            gatekeeper with its arguments. If the gatekeeper exits successfully,
+            <i>condredirect</i> forwards the email
+            pending on stdin to the specified email address. In this case,
+            opposite to that of <i>rblsmtpd</i>, the security
+            decision is made by the child; this case is a bit more like a
+            classical shellout.</p>
+        <p>A more elaborate example is the <i>qmail</i>
+            POP3 server. It consists of three programs,
+            <i>qmail-popup</i>,
+            <i>checkpassword</i>, and
+            <i>qmail-pop3d</i>.
+            <i>Checkpassword</i> comes from a separate package
+            cleverly called <i>checkpassword</i>, and
+            unsurprisingly it checks the password. The POP3 protocol has an
+            authentication phase and mailbox phase; once you enter the mailbox
+            phase you cannot go back to the authentication phase. This is a
+            perfect application for Bernstein chaining.</p>
+        <p>The first parameter of <i>qmail-popup</i> is
+            the hostname to use in the POP3 prompts. The rest of its parameters
+            are forked and passed to
+            exec(2),
+            after the POP3 username and password have been fetched. If the program
+            returns failure, the password must be wrong, so
+            <i>qmail-popup</i> reports that and waits for a
+            different password. Otherwise, the program is presumed to have
+            finished the POP3 conversation, so
+            <i>qmail-popup</i> exits.</p>
+        <p>The program named on <i>qmail-popup</i>&apos;s
+            command line is expected to read three null-terminated strings from
+            file descriptor 3.<sup>[<a id="id2921897" href="ch07s02.html#ftn.id2921897">72</a>]</sup> These are the username, password, and response to
+            a cryptographic challenge, if any. This time it&apos;s
+            <i>checkpassword</i> which accepts as parameters
+            the name of <i>qmail-pop3d</i> and its
+            parameters. The <i>checkpassword</i> program exits
+            with failure if the password does not match; otherwise it changes to
+            the user&apos;s uid, gid, and home directory, and executes the rest of its
+            command line on behalf of that user.</p>
+        <p>Bernstein chaining is useful for situations in which the
+            application needs setuid or setgid privileges to initialize a
+            connection, or to acquire some credential, and then drop those
+            privileges so that following code does not have to be trusted.
+            Following the exec, the child program cannot set its real user ID back
+            to root. It&apos;s also more flexible than a single process, because you
+            can modify the behavior of the system by inserting another program
+            into the chain.</p>
+        <p>For example, <i>rblsmtpd</i> (mentioned
+            above) can be inserted into a Bernstein chain, in between tcpserver
+            (from the <i>ucspi-tcp</i> package) and the real
+            SMTP server, typically
+            <i>qmail-smtpd</i>. However, it works with
+            inetd(8)
+            and <b>sendmail -bs</b> as well.</p>
+    </div>
+    <div class="sect2" lang="en">
+        <div class="titlepage">
+            <div>
+                <h3 class="title"><a id="id2922002">Slave Processes</a></h3>
+            </div>
+        </div>
+        <p>Occasionally, child programs both accept data from and return
+            data to their callers through
+            pipes</p>
+        <p>Unix&apos;s
+            popen(3)
+            call can set up either an input pipe or an output pipe for a shellout,
+            but not both for a slave process &#x2014; this seems intended to
+            encourage simpler programming. And, in fact, interactive master-slave
+            communication is tricky enough that it is normally only used when
+            either (a) the implied protocol is utterly trivial, or (b) the slave
+            process has been designed to speak an application protocol along the
+            lines we discussed in <a href="textualitychapter.html" title="Chapter&#xFFFD;5.&#xFFFD;Textuality">Chapter&#xFFFD;5</a>. We&apos;ll return to this issue, and ways
+            to cope with it, in <a href="minilanguageschapter.html" title="Chapter&#xFFFD;8.&#xFFFD;Minilanguages">Chapter&#xFFFD;8</a>.</p>
+        <p>When writing a master/slave pair, it is good practice for the
+            master to support a command-line switch or environment variable that
+            allows callers to set their own slave command. Among other things,
+            this is useful for debugging; you will often find it handy during
+            development to invoke the real slave process from within a harness
+            that monitors and logs transactions between slave and master.</p>
+        <p>If you find that master/slave interactions in your program are
+            becoming nontrivial, it may be time to think about going the rest of
+            the way to a more peer-to-peer organization, using techniques like
+            sockets or shared memory.</p>
+        <div class="sect3" lang="en">
+            <div class="titlepage">
+                <div>
+                    <h4 class="title"><a id="id2922085">Case Study: <i>scp</i> and <i>ssh</i></a></h4>
+                </div>
+            </div>
+            <p>One common case in which the implied protocol really is trivial is
+                progress meters. The
+                scp(1)
+                secure-copy command calls
+                ssh(1)
+                as a slave process, intercepting enough information from ssh&apos;s
+                standard output to reformat the reports as an ASCII animation of a
+                progress bar.<sup>[<a id="id2922127" href="ch07s02.html#ftn.id2922127">73</a>]</sup>
+            </p>
+        </div>
+    </div>
+    <div class="sect2" lang="en">
+        <div class="titlepage">
+            <div>
+                <h3 class="title"><a id="id2922148">Peer-to-Peer Inter-Process Communication</a></h3>
+            </div>
+        </div>
+        <p>All the communication methods we&apos;ve discussed so far have a sort
+            of implicit hierarchy about them, with one program effectively
+            controlling or driving another and zero or limited feedback passing in
+            the opposite direction. In communications and networking we frequently
+            need channels that are <span class="emphasis"><em>peer-to-peer</em></span>, usually (but
+            not necessarily) with data flowing freely in both directions. We&apos;ll
+            survey peer-to-peer communications methods under Unix here, and
+            develop some case studies in later chapters.</p>
+        <div class="sect3" lang="en">
+            <div class="titlepage">
+                <div>
+                    <h4 class="title"><a id="id2922172">Tempfiles</a></h4>
+                </div>
+            </div>
+            <p>The use of tempfiles as communications drops between
+                cooperating programs is the oldest IPC technique there is. Despite
+                drawbacks, it&apos;s still useful in shellscripts, and in one-off programs
+                where a more elaborate and coordinated method of communication would
+                be overkill.</p>
+            <p>The most obvious problem with using tempfiles as an IPC
+                technique is that it tends to leave garbage lying around if processing
+                is interrupted before the tempfile can be deleted. A less obvious risk
+                is that of collisions between multiple instances of a program using
+                the same name for a tempfile. This is why it is conventional for
+                shellscripts that make tempfiles to include $$ in their names; this
+                shell variable expands to the process-ID of the enclosing shell and
+                effectively guarantees that the filename will be unique (the same
+                trick is supported in Perl).</p>
+            <p>Finally, if an attacker knows the location to which a tempfile
+                will be written, it can overwrite on that name and possibly either read
+                the producer&apos;s data or spoof the consumer process by inserting
+                modified or spurious data into the file.<sup>[<a id="id2922208" href="ch07s02.html#ftn.id2922208">74</a>]</sup>
+                This is a security risk. If the processes involved have root
+                privileges, this is a very serious risk. It can be mitigated by setting
+                the permissions on the tempfile directory carefully, but such
+                arrangements are notoriously likely to spring leaks.</p>
+            <p>All these problems aside, tempfiles still have a niche because
+                they&apos;re easy to set up, they&apos;re flexible, and they&apos;re less vulnerable
+                to deadlocks or race conditions than more elaborate methods. And
+                sometimes, nothing else will do. The calling conventions of your
+                child process may require that it be handed a file to operate on. Our
+                first example of a shellout to an editor demonstrates this
+                perfectly.</p>
+        </div>
+        <div class="sect3" lang="en">
+            <div class="titlepage">
+                <div>
+                    <h4 class="title"><a id="id2922239">Signals</a></h4>
+                </div>
+            </div>
+            <p>The simplest and crudest way for two processes on the same
+                machine to communicate with each other is for one to send the other a
+                <span class="emphasis"><em>signal</em></span>. Unix signals are a form of soft
+                interrupt; each one has a default effect on the receiving process
+                (usually to kill it). A process can declare a <span class="emphasis"><em>signal
+                        handler</em></span> that overrides the default action for the signal; the
+                handler is a function that is executed asynchronously when the signal
+                is received.</p>
+            <p>Signals were originally designed into Unix as a way for the
+                operating system to notify programs of certain errors and critical
+                events, not as an IPC facility. The <tt>SIGHUP</tt> signal,
+                for example, is sent to every program started from a given terminal
+                session when that session is terminated. The <tt>SIGINT</tt>
+                signal is sent to whatever process is currently attached to the
+                keyboard when the user enters the currently-defined interrupt
+                character (often control-C). Nevertheless, signals can be useful for
+                some IPC situations (and the POSIX-standard signal set includes two
+                signals, <tt>SIGUSR1</tt> and <tt>SIGUSR2</tt>,
+                intended for this
+                use)</p>
+            <div class="blockquote">
+                <table border="0" width="100%" cellspacing="0" cellpadding="0" class="blockquote" summary="Block quote">
+                    <tr>
+                        <td width="10%" valign="top">&#xFFFD;</td>
+                        <td width="80%" valign="top">
+                            <p>I insisted <tt>SIGUSR1</tt> and <tt>SIGUSR2</tt> be invented for BSD. People
+                                were grabbing system signals to mean what they needed them to mean for IPC,
+                                so that (for example) some programs that segfaulted would not coredump
+                                because <tt>SIGSEGV</tt> had been hijacked.</p>
+                            <p>This is a general principle &#x2014; people will want to hijack
+                                any tools you build, so you have to design them to either be
+                                un-hijackable or to be hijacked cleanly. Those are your only choices.
+                                Except, of course, for being ignored&#x2014;a highly reliable way to
+                                remain unsullied, but less satisfying than might at first appear.</p>
+                        </td>
+                        <td width="10%" valign="top">&#xFFFD;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="right" valign="top">--<span class="attribution">
+                                <span class="author">Ken Arnold</span>
+                                </span></td>
+                        <td width="10%" valign="top">&#xFFFD;</td>
+                    </tr>
+                </table>
+            </div>
+            <p>A technique often used with signal IPC is the so-called
+                <span class="emphasis"><em>pidfile</em></span>. Programs that will need to be signaled
+                will write a small file to a known location (often in
+                <tt>/var/run</tt> or the invoking user&apos;s home directory)
+                containing their process ID or PID. Other programs can read that file
+                to discover that PID. The pidfile may also function as an implicit
+                <span class="emphasis"><em>lock file</em></span> in cases where no more than one
+                instance of the daemon should be running simultaneously.</p>
+            <p>There are actually two different flavors of signals. In the
+                older implementations (notably V7, System
+                III</p>
+            <p>The BSD 4.x </p>
+            <p>Receiving N signals does not necessarily invoke the signal
+                handler N times. Under the older System V signal model, two or more
+                signals spaced very closely together (that is, within a single
+                timeslice of the target process) can result in various race
+                conditions<sup>[<a id="id2922479" href="ch07s02.html#ftn.id2922479">75</a>]</sup> or anomalies. Depending on what
+                variant of signals semantics the system supports, the second and later
+                instances may be ignored, may cause an unexpected process kill, or may
+                have their delivery delayed until earlier instances have been
+                processed (on modern Unixes the last is most likely).</p>
+            <p>The modern signals API is portable across all recent Unix
+                versions, but not to Windows or classic (pre-OS X) MacOS.</p>
+        </div>
+        <div class="sect3" lang="en">
+            <div class="titlepage">
+                <div>
+                    <h4 class="title"><a id="id2922508">System Daemons and Conventional Signals</a></h4>
+                </div>
+            </div>
+            <p>Many well-known system daemons accept <tt>SIGHUP</tt>
+                (originally the signal sent to programs on a serial-line drop, such as
+                was produced by hanging up a modem connection) as a signal to
+                reinitialize (that is, reload their configuration files); examples
+                include Apache</p>
+            <p><tt>SIGTERM</tt> (&#x2018;terminate&#x2019;) is
+                often accepted as a graceful-shutdown signal (this is as distinct from
+                <tt>SIGKILL</tt>, which does an immediate process
+                kill and cannot be blocked or handled). <tt>SIGTERM</tt> actions often involve cleaning up
+                tempfiles, flushing final updates out to databases, and the
+                like.</p>
+            <p>When writing daemons, follow the Rule of Least Surprise: use
+                these conventions, and read the manual pages to look for existing
+                models.</p>
+        </div>
+        <div class="sect3" lang="en">
+            <div class="titlepage">
+                <div>
+                    <h4 class="title"><a id="fetchmail_signals">Case Study: <i>fetchmail&apos;s</i> Use of Signals</a></h4>
+                </div>
+            </div>
+        </div>
+        <div class="sect3" lang="en">
+            <div class="titlepage">
+                <div>
+                    <h4 class="title"><a id="sockets">Sockets</a></h4>
+                </div>
+            </div>
+            <p>Sockets</p>
+            <div class="blockquote">
+                <table border="0" width="100%" cellspacing="0" cellpadding="0" class="blockquote" summary="Block quote">
+                    <tr>
+                        <td width="10%" valign="top">&#xFFFD;</td>
+                        <td width="80%" valign="top">
+                            <p>Sockets differ from read/write in one important case. If
+                                the bytes you send arrive, but the receiving machine fails to ACK, the
+                                sending machine&apos;s TCP/IP stack will time out. So getting an error does
+                                <span class="emphasis"><em>not</em></span> necessarily mean that the bytes didn&apos;t
+                                arrive; the receiver may be using them. This problem has profound
+                                consequences for the design of reliable protocols, because you have to be
+                                able to work properly when you don&apos;t know what was received in the
+                                past. Local I/O is &#x2018;yes/no&#x2019;. Socket I/O is &#x2018;yes/no/maybe&#x2019;.
+                                And nothing can ensure delivery &#x2014; the remote machine
+                                might have been destroyed by a comet.</p>
+                        </td>
+                        <td width="10%" valign="top">&#xFFFD;</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="right" valign="top">--<span class="attribution">
+                                <span class="author">Ken Arnold</span>
+                                </span></td>
+                        <td width="10%" valign="top">&#xFFFD;</td>
+                    </tr>
+                </table>
+            </div>
+            <p>At the time a socket is created, you specify a
+                <span class="emphasis"><em>protocol family</em></span> which tells the network layer how
+                the name of the socket is interpreted. Sockets are usually thought of
+                in connection with the Internet, as a way of passing data between
+                programs running on different hosts; this is the AF_INET socket
+                family, in which addresses are interpreted as host-address and
+                service-number pairs. However, the AF_UNIX (aka AF_LOCAL) protocol
+                family supports the same socket abstraction for communication between
+                two processes on the same machine (names are interpreted as the
+                locations of special files analogous to bidirectional named pipes). As
+                an example, client programs and servers using the X windowing
+                system</p>
+            <p>All modern Unixes support BSD-style
+                </p>
+            <p>To use sockets gracefully, in the Unix tradition, start by
+                designing an <span class="emphasis"><em>application protocol</em></span> for use between
+                them &#x2014; a set of requests and responses which expresses the
+                semantics of what your programs will be communicating about in a
+                succinct way. We&apos;ve already discussed the some major issues in the
+                design of application protocols in <a href="textualitychapter.html" title="Chapter&#xFFFD;5.&#xFFFD;Textuality">Chapter&#xFFFD;5</a>.</p>
+            <p>Sockets are supported in all recent Unixes, under Windows, and
+                under classic MacOS as well.</p>
+            <div class="sect4" lang="en">
+                <div class="titlepage">
+                    <div>
+                        <h5 class="title"><a id="id2922950">Case Study: PostgreSQL</a></h5>
+                    </div>
+                </div>
+                <p>PostgreSQL is an open-source database program. Had it been
+                    implemented as a monster monolith, it would be a single program with
+                    an interactive interface that manipulates database files on disk
+                    directly. Interface would be welded together with implementation, and
+                    two instances of the program attempting to manipulate the same
+                    database at the same time would have serious contention and locking
+                    issues.</p>
+                <p>Instead, the PostgreSQL suite includes a server called
+                    <i>postmaster</i> and at least three client
+                    applications. One <i>postmaster</i> server
+                    process per machine runs in background and has exclusive access to the
+                    database files. It accepts requests in the SQL query minilanguage through
+                    TCP/IP</p>
+                <p>Because the front end and back end are separate, the server
+                    doesn&apos;t need to know anything except how to interpret SQL requests
+                    from a client and send SQL reports back to it. The clients, on the
+                    other hand, don&apos;t need to know anything about how the database is
+                    stored. Clients can be specialized for different needs and have
+                    different user interfaces.</p>
+                <p>This organization is quite typical for Unix databases &#x2014; so
+                    much so that it is often possible to mix and match SQL clients and SQL
+                    servers. The interoperability issues are the SQL server&apos;s
+                    TCP/IP</p>
+            </div>
+            <div class="sect4" lang="en">
+                <div class="titlepage">
+                    <div>
+                        <h5 class="title"><a id="id2923040">Case Study: Freeciv</a></h5>
+                    </div>
+                </div>
+                <p>In <a href="transparencychapter.html" title="Chapter&#xFFFD;6.&#xFFFD;Transparency">Chapter&#xFFFD;6</a>, we
+                    introduced Freeciv as an example of transparent data formats. But
+                    more critical to the way it supports multiplayer gaming is the
+                    client/server partitioning of the code. This is a representative
+                    example of a program in which the application needs to be distributed
+                    over a wide-area network and handles communication through TCP/IP
+                    sockets.</p>
+                <p>The state of a running Freeciv game is maintained by a server
+                    process, the game engine. Players run GUI clients which exchange
+                    information and commands with the server through a packet protocol.
+                    All game logic is handled in the server. The details of GUI are
+                    handled in the client; different clients support different interface
+                    styles.</p>
+                <p>This is a very typical organization for a multiplayer online
+                    game. The packet protocol uses
+                    TCP/IP</p>
+            </div>
+        </div>
+        <div class="sect3" lang="en">
+            <div class="titlepage">
+                <div>
+                    <h4 class="title"><a id="id2923100">Shared Memory</a></h4>
+                </div>
+            </div>
+            <p>Whereas two processes using sockets to communicate may live on
+                different machines (and, in fact, be separated by an Internet
+                connection spanning half the globe), shared memory requires producers
+                and consumers to be co-resident on the same hardware. But, if your
+                communicating processes can get access to the same physical memory,
+                shared memory will be the fastest way to pass information between
+                them.</p>
+            <p>Shared memory may be disguised under different APIs, but on
+                modern Unixes the implementation normally depends on the use of
+                mmap(2)
+                to map files into memory that can be shared between processes.
+                POSIX</p>
+            <p>Because access to shared memory is not automatically serialized
+                by a discipline resembling read and write calls, programs doing the
+                sharing must handle contention and deadlock issues themselves,
+                typically by using semaphore variables located in the shared segment.
+                The issues here resemble those in multithreading (see the end of this
+                chapter for discussion) but are more manageable because default is
+                <span class="emphasis"><em>not</em></span> to share memory. Thus, problems are better
+                contained.</p>
+            <p>On systems where it is available and reliable, the
+                Apache</p>
+            <p>The
+                mmap(2)
+                call is supported under all modern Unixes, including
+                Linux</p>
+            <p>Before purpose-built
+                mmap(2)
+                was available, a common way for two processes to communicate was for
+                them to open the same file, and then delete that file. The file
+                wouldn&apos;t go away until all open filehandles were closed, but some old
+                Unixes took the link count falling to zero as a hint that they could
+                stop updating the on-disk copy of the file. The downside was that
+                your backing store was the file system rather than a swap device,
+                the file system the deleted file lived on couldn&apos;t be unmounted until the
+                programs using it closed, and attaching new processes to an existing
+                shared memory segment faked up in this way was tricky at best.</p>
+            <p>After Version 7 and the split between the
+                BSD</p>
+            <p>The upper, message-passing layer of System V IPC has largely
+                fallen out of use. The lower layer, which consists of shared memory
+                and semaphores, still has significant applications under circumstances
+                in which one needs to do mutual-exclusion locking and some global data
+                sharing among processes running on the same machine. These System V
+                shared memory facilities evolved into the POSIX shared-memory API,
+                supported under Linux, the BSDs, MacOS X and Windows, but not classic
+                MacOS.</p>
+            <p>By using these shared-memory and semaphore facilities
+                (shmget(2),
+                semget(2),
+                and friends) one can avoid the overhead of copying data through the
+                network stack. Large commercial databases (including Oracle, DB2, Sybase, and
+                Informix) use this technique heavily. </p>
+        </div>
+    </div>
+    <div class="footnotes"><br>
+        <hr width="100" align="left">
+        <div class="footnote">
+            <p><sup>[<a id="ftn.id2915505" href="ch07s02.html#id2915505">68</a>] </sup>A common error in programming shellouts is to
+                forget to block signals in the parent while the subprocess runs.
+                Without this precaution, an interrupt typed to the subprocess can have
+                unwanted side effects on the parent
+                process.</p>
+        </div>
+        <div class="footnote">
+            <p><sup>[<a id="ftn.id2915659" href="ch07s02.html#id2915659">69</a>] </sup>Actually, the above
+                is a slight oversimplification. See the discussion of
+                <tt>EDITOR</tt> and <tt>VISUAL</tt> in <a href="configurationchapter.html" title="Chapter&#xFFFD;10.&#xFFFD;Configuration">Chapter&#xFFFD;10</a> for the rest of the
+                story.</p>
+        </div>
+        <div class="footnote">
+            <p><sup>[<a id="ftn.id2916197" href="ch07s02.html#id2916197">70</a>] </sup>The
+                less(1)
+                man page explains the name by observing &#x201C;Less is
+                more&#x201D;.</p>
+        </div>
+        <div class="footnote">
+            <p><sup>[<a id="ftn.id2921610" href="ch07s02.html#id2921610">71</a>] </sup>A common error is to use <tt>$*</tt>
+                rather than &#x201C;<tt>$@</tt>&#x201D;. This does bad things when handed a filename with
+                embedded spaces.</p>
+        </div>
+        <div class="footnote">
+            <p><sup>[<a id="ftn.id2921897" href="ch07s02.html#id2921897">72</a>] </sup><i>qmail-popup</i>&apos;s standard
+                input and standard output are the socket, and standard error (which
+                will be file descriptor 2) goes to a log file. File descriptor 3 is
+                guaranteed to be the next to be allocated. As an infamous kernel comment
+                once observed: &#x201C;You are not expected to understand&#xFFFD;this&#x201D;.
+            </p>
+        </div>
+        <div class="footnote">
+            <p><sup>[<a id="ftn.id2922127" href="ch07s02.html#id2922127">73</a>] </sup>The friend who suggested this case study comments: &#x201C;Yes,
+                you can get away with this technique...if there are just a few
+                easily-recognizable nuggets of information coming back from the slave
+                process, and you have tongs and a radiation suit&#x201D;.
+            </p>
+        </div>
+        <div class="footnote">
+            <p><sup>[<a id="ftn.id2922208" href="ch07s02.html#id2922208">74</a>] </sup>
+                A particularly nasty
+                variant of this attack is to drop in a named Unix-domain socket where
+                the producer and consumer programs are expecting the tempfile to
+                be.</p>
+        </div>
+        <div class="footnote">
+            <p><sup>[<a id="ftn.id2922479" href="ch07s02.html#id2922479">75</a>] </sup>A &#x2018;race condition&#x2019; is a class
+                of problem in which correct behavior of the system relies on two
+                independent events happening in the right order, but there is no
+                mechanism for ensuring that they actually will. Race conditions
+                produce intermittent, timing-dependent problems that can be devilishly
+                difficult to debug.</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

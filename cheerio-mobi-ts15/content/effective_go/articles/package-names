@@ -1,0 +1,52 @@
+<body><p>
+When a package is imported, the package name becomes an accessor for the
+contents.  After
+</p><pre>
+import "bytes"
+</pre><p>
+the importing package can talk about <code>bytes.Buffer</code>.  It's
+helpful if everyone using the package can use the same name to refer to
+its contents, which implies that the package name should be good:
+short, concise, evocative.  By convention, packages are given
+lower case, single-word names; there should be no need for underscores
+or mixedCaps.
+Err on the side of brevity, since everyone using your
+package will be typing that name.
+And don't worry about collisions <i>a priori</i>.
+The package name is only the default name for imports; it need not be unique
+across all source code, and in the rare case of a collision the
+importing package can choose a different name to use locally.
+In any case, confusion is rare because the file name in the import
+determines just which package is being used.
+</p><p>
+Another convention is that the package name is the base name of
+its source directory;
+the package in <code>src/encoding/base64</code>
+is imported as <code>"encoding/base64"</code> but has name <code>base64</code>,
+not <code>encoding_base64</code> and not <code>encodingBase64</code>.
+</p><p>
+The importer of a package will use the name to refer to its contents,
+so exported names in the package can use that fact
+to avoid stutter.
+(Don't use the <code>import .</code> notation, which can simplify
+tests that must run outside the package they are testing, but should otherwise be avoided.)
+For instance, the buffered reader type in the <code>bufio</code> package is called <code>Reader</code>,
+not <code>BufReader</code>, because users see it as <code>bufio.Reader</code>,
+which is a clear, concise name.
+Moreover,
+because imported entities are always addressed with their package name, <code>bufio.Reader</code>
+does not conflict with <code>io.Reader</code>.
+Similarly, the function to make new instances of <code>ring.Ring</code>—which
+is the definition of a <em>constructor</em> in Go—would
+normally be called <code>NewRing</code>, but since
+<code>Ring</code> is the only type exported by the package, and since the
+package is called <code>ring</code>, it's called just <code>New</code>,
+which clients of the package see as <code>ring.New</code>.
+Use the package structure to help you choose good names.
+</p><p>
+Another short example is <code>once.Do</code>;
+<code>once.Do(setup)</code> reads well and would not be improved by
+writing <code>once.DoOrWaitUntilDone(setup)</code>.
+Long names don't automatically make things more readable.
+A helpful doc comment can often be more valuable than an extra long name.
+</p></body>

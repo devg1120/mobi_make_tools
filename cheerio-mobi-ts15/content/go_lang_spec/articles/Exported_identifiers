@@ -1,0 +1,12 @@
+<body><p>
+An identifier may be <i>exported</i> to permit access to it from another package.
+An identifier is exported if both:
+</p><ol>
+	<li>the first character of the identifier's name is a Unicode upper case
+	letter (Unicode class "Lu"); and</li>
+	<li>the identifier is declared in the [<a>package block</a>]
+	or it is a [<a>field name</a>] or
+	[<a>method name</a>].</li>
+</ol><p>
+All other identifiers are not exported.
+</p></body>

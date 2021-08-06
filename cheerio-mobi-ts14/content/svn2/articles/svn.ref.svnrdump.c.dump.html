@@ -1,0 +1,78 @@
+
+    
+    
+    <div class="refentry">
+      <a id="svn.ref.svnrdump.c.dump"></a>
+      <div class="titlepage"></div>
+      <a id="idm13501" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svnrdump dump</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm13508"></a>
+        <h2>Synopsis</h2>
+        <p>
+          <code class="literal">svnrdump dump SOURCE_URL</code>
+        </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm13512"></a>
+        <h2>Description</h2>
+        <p>Dump—that is, generate a repository dump stream
+            of—revisions of the repository item located
+            at <em class="replaceable"><code>SOURCE_URL</code></em>, printing the
+            information to standard output.  By default, the entire
+            history will be included in the dump stream, but the scope
+            of the operation can be limited via the use of
+            the <code class="option">--revision</code> (<code class="option">-r</code>)
+            option.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm13518"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+          <pre class="screen">
+<a class="xref" href="svn.ref.svnrdump.html#svn.ref.svnrdump.sw.config_dir"><code class="option">--config-dir</code> <em class="replaceable"><code>DIR</code></em></a>
+<a class="xref" href="svn.ref.svnrdump.html#svn.ref.svnrdump.sw.config_option"><code class="option">--config-option</code> <em class="replaceable"><code>FILE</code></em>:<em class="replaceable"><code>SECTION</code></em>:<em class="replaceable"><code>OPTION</code></em>=[<em class="replaceable"><code>VALUE</code></em>]</a>
+<a class="xref" href="svn.ref.svnrdump.html#svn.ref.svnrdump.sw.incremental"><code class="option">--incremental</code></a>
+<a class="xref" href="svn.ref.svnrdump.html#svn.ref.svnrdump.sw.no_auth_cache"><code class="option">--no-auth-cache</code></a>
+<a class="xref" href="svn.ref.svnrdump.html#svn.ref.svnrdump.sw.non_interactive"><code class="option">--non-interactive</code></a>
+<a class="xref" href="svn.ref.svnrdump.html#svn.ref.svnrdump.sw.password"><code class="option">--password</code> <em class="replaceable"><code>PASSWD</code></em></a>
+<a class="xref" href="svn.ref.svnrdump.html#svn.ref.svnrdump.sw.quiet"><code class="option">--quiet</code> (<code class="option">-q</code>)</a>
+<a class="xref" href="svn.ref.svnrdump.html#svn.ref.svnrdump.sw.revision"><code class="option">--revision</code> (<code class="option">-r</code>) <em class="replaceable"><code>ARG</code></em></a>
+<a class="xref" href="svn.ref.svnrdump.html#svn.ref.svnrdump.sw.trust_server_cert"><code class="option">--trust-server-cert</code></a>
+<a class="xref" href="svn.ref.svnrdump.html#svn.ref.svnrdump.sw.username"><code class="option">--username</code> <em class="replaceable"><code>NAME</code></em></a>
+</pre>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm13532"></a>
+        <h2>Examples</h2>
+        <p>Generate a dump stream of the full history of a remote
+            repository (assuming that the user as who this runs has
+            authorization to read all paths in the repository).</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svnrdump dump http://svn.example.com/repos/calc > full.dump
+* Dumped revision 0.
+* Dumped revision 1.
+* Dumped revision 2.
+…
+</pre>
+        </div>
+        <p>Incrementally dump a single revision from that same
+            repository:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svnrdump dump http://svn.example.com/repos/calc \
+           -r 21 --incremental > inc.dump
+* Dumped revision 21.
+$
+</pre>
+        </div>
+      </div>
+    </div>
+    
+    
+  

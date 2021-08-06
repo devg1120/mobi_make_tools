@@ -1,0 +1,214 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    TypeScript's Type System
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts12_mlv/undefined" />
+  </head>
+   <body>
+<h1 id="typescript-type-system">TypeScript Type System</h1>
+<p>We covered the main features of the TypeScript Type System back when we discussed <a href="../why-typescript.html">Why TypeScript?</a>. The following are a few key takeaways from that discussion which don&apos;t need further explanation:</p>
+<ul>
+    <li>The type system in TypeScript is designed to be <em>optional</em> so that <em>your JavaScript is TypeScript</em>.</li>
+    <li>TypeScript does not block <em>JavaScript emit</em> in the presence of Type Errors, allowing you to <em>progressively update your JS to TS</em>.</li>
+</ul>
+<p>Now let&apos;s start with the <em>syntax</em> of the TypeScript type system. This way you can start using these annotations in your code immediately and see the benefit. This will prepare you for a deeper dive later.</p>
+<h2 id="basic-annotations">Basic Annotations</h2>
+<p>As mentioned before Types are annotated using <code>:TypeAnnotation</code> syntax. Anything that is available in the type declaration space can be used as a Type Annotation.</p>
+<p>The following example demonstrates type annotations for variables, function parameters and function return values:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">var</span> num: <span class="hljs-built_in">number</span> = <span class="hljs-number">123</span>;
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">identity</span>(<span class="hljs-params">num: <span class="hljs-built_in">number</span></span>): <span class="hljs-title">number</span> </span>{
+    <span class="hljs-keyword">return</span> num;
+}
+</code></pre>
+<h3 id="primitive-types">Primitive Types</h3>
+<p>The JavaScript primitive types are well represented in the TypeScript type system. This means <code>string</code>, <code>number</code>, <code>boolean</code> as demonstrated below:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">var</span> num: <span class="hljs-built_in">number</span>;
+<span class="hljs-keyword">var</span> str: <span class="hljs-built_in">string</span>;
+<span class="hljs-keyword">var</span> bool: <span class="hljs-built_in">boolean</span>;
+num = <span class="hljs-number">123</span>;
+num = <span class="hljs-number">123.456</span>;
+num = <span class="hljs-string">&apos;123&apos;</span>; <span class="hljs-comment">// Error</span>
+str = <span class="hljs-string">&apos;123&apos;</span>;
+str = <span class="hljs-number">123</span>; <span class="hljs-comment">// Error</span>
+bool = <span class="hljs-literal">true</span>;
+bool = <span class="hljs-literal">false</span>;
+bool = <span class="hljs-string">&apos;false&apos;</span>; <span class="hljs-comment">// Error</span>
+</code></pre>
+<h3 id="arrays">Arrays</h3>
+<p>TypeScript provides dedicated type syntax for arrays to make it easier for you to annotate and document your code. The syntax is basically postfixing <code>[]</code> to any valid type annotation (e.g. <code>:boolean[]</code>). It allows you to safely do any array manipulation that you would normally do and protects you from errors like assigning a member of the wrong type. This is demonstrated below:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">var</span> boolArray: <span class="hljs-built_in">boolean</span>[];
+boolArray = [<span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>];
+<span class="hljs-built_in">console</span>.log(boolArray[<span class="hljs-number">0</span>]); <span class="hljs-comment">// true</span>
+<span class="hljs-built_in">console</span>.log(boolArray.length); <span class="hljs-comment">// 2</span>
+boolArray[<span class="hljs-number">1</span>] = <span class="hljs-literal">true</span>;
+boolArray = [<span class="hljs-literal">false</span>, <span class="hljs-literal">false</span>];
+boolArray[<span class="hljs-number">0</span>] = <span class="hljs-string">&apos;false&apos;</span>; <span class="hljs-comment">// Error!</span>
+boolArray = <span class="hljs-string">&apos;false&apos;</span>; <span class="hljs-comment">// Error!</span>
+boolArray = [<span class="hljs-literal">true</span>, <span class="hljs-string">&apos;false&apos;</span>]; <span class="hljs-comment">// Error!</span>
+</code></pre>
+<h3 id="interfaces">Interfaces</h3>
+<p>Interfaces are the core way in TypeScript to compose multiple type annotations into a single named annotation. Consider the following example:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">interface</span> Name {
+    first: <span class="hljs-built_in">string</span>;
+    second: <span class="hljs-built_in">string</span>;
+}
+<span class="hljs-keyword">var</span> name: Name;
+name = {
+    first: <span class="hljs-string">&apos;John&apos;</span>,
+    second: <span class="hljs-string">&apos;Doe&apos;</span>
+};
+name = {           <span class="hljs-comment">// Error : `second` is missing</span>
+    first: <span class="hljs-string">&apos;John&apos;</span>
+};
+name = {           <span class="hljs-comment">// Error : `second` is the wrong type</span>
+    first: <span class="hljs-string">&apos;John&apos;</span>,
+    second: <span class="hljs-number">1337</span>
+};
+</code></pre>
+<p>Here we&apos;ve composed the annotations <code>first: string</code> + <code>second: string</code> into a new annotation <code>Name</code> that enforces the type checks on individual members. Interfaces have a lot of power in TypeScript and we will dedicate an entire section to how you can use that to your advantage.</p>
+<h3 id="inline-type-annotation">Inline Type Annotation</h3>
+<p>Instead of creating a new <code>interface</code> you can annotate anything you want <em>inline</em> using <code>:{ /*Structure*/ }</code>. The previous example presented again with an inline type:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">var</span> name: {
+    first: <span class="hljs-built_in">string</span>;
+    second: <span class="hljs-built_in">string</span>;
+};
+name = {
+    first: <span class="hljs-string">&apos;John&apos;</span>,
+    second: <span class="hljs-string">&apos;Doe&apos;</span>
+};
+name = {           <span class="hljs-comment">// Error : `second` is missing</span>
+    first: <span class="hljs-string">&apos;John&apos;</span>
+};
+name = {           <span class="hljs-comment">// Error : `second` is the wrong type</span>
+    first: <span class="hljs-string">&apos;John&apos;</span>,
+    second: <span class="hljs-number">1337</span>
+};
+</code></pre>
+<p>Inline types are great for quickly providing a one off type annotation for something. It saves you the hassle of coming up with (a potentially bad) type name. However, if you find yourself putting in the same type annotation inline multiple times it&apos;s a good idea to consider refactoring it into an interface (or a <code>type alias</code> covered later in this section).</p>
+<h2 id="special-types">Special Types</h2>
+<p>Beyond the primitive types that have been covered there are a few types that have special meaning in TypeScript. These are <code>any</code>, <code>null</code>, <code>undefined</code>, <code>void</code>.</p>
+<h3 id="any">any</h3>
+<p>The <code>any</code> type holds a special place in the TypeScript type system. It gives you an escape hatch from the type system to tell the compiler to bugger off. <code>any</code> is compatible with <em>any and all</em> types in the type system. This means that <em>anything can be assigned to it</em> and <em>it can be assigned to anything</em>. This is demonstrated in the example below:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">var</span> power: <span class="hljs-built_in">any</span>;
+<span class="hljs-comment">// Takes any and all types</span>
+power = <span class="hljs-string">&apos;123&apos;</span>;
+power = <span class="hljs-number">123</span>;
+<span class="hljs-comment">// Is compatible with all types</span>
+<span class="hljs-keyword">var</span> num: <span class="hljs-built_in">number</span>;
+power = num;
+num = power;
+</code></pre>
+<p>If you are porting JavaScript code to TypeScript, you are going to be close friends with <code>any</code> in the beginning. However, don&apos;t take this friendship too seriously as it means that <em>it is up to you to ensure the type safety</em>. You are basically telling the compiler to <em>not do any meaningful static analysis</em>.</p>
+<h3 id="null-and-undefined"><code>null</code> and <code>undefined</code></h3>
+<p>How they are treated by the type system depends on the <code>strictNullChecks</code> compiler flag (we cover this flag later). When in <code>strictNullCheck:false</code>, the <code>null</code> and <code>undefined</code> JavaScript literals are effectively treated by the type system the same as something of type <code>any</code>. These literals can be assigned to any other type. This is demonstrated in the below example:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">var</span> num: <span class="hljs-built_in">number</span>;
+<span class="hljs-keyword">var</span> str: <span class="hljs-built_in">string</span>;
+<span class="hljs-comment">// These literals can be assigned to anything</span>
+num = <span class="hljs-literal">null</span>;
+str = <span class="hljs-literal">undefined</span>;
+</code></pre>
+<h3 id="void"><code>:void</code></h3>
+<p>Use <code>:void</code> to signify that a function does not have a return type:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">log</span>(<span class="hljs-params">message</span>): <span class="hljs-title">void</span> </span>{
+    <span class="hljs-built_in">console</span>.log(message);
+}
+</code></pre>
+<h2 id="generics">Generics</h2>
+<p>Many algorithms and data structures in computer science do not depend on the <em>actual type</em> of the object. However, you still want to enforce a constraint between various variables. A simple toy example is a function that takes a list of items and returns a reversed list of items. The constraint here is between what is passed in to the function and what is returned by the function:</p>
+<pre><code class="lang-ts">function reverse<t>(items: T[]): T[] {
+    var toreturn = [];
+    for (let i = items.length - 1; i &gt;= 0; i--) {
+        toreturn.push(items[i]);
+    }
+    return toreturn;
+}
+var sample = [1, 2, 3];
+var reversed = reverse(sample);
+console.log(reversed); // 3,2,1
+// Safety!
+reversed[0] = &apos;1&apos;;     // Error!
+reversed = [&apos;1&apos;, &apos;2&apos;]; // Error!
+reversed[0] = 1;       // Okay
+reversed = [1, 2];     // Okay
+</t></code></pre>
+<p>Here you are basically saying that the function <code>reverse</code> takes an array (<code>items: T[]</code>) of <em>some</em> type <code>T</code> (notice the type parameter in <code>reverse<t></t></code>) and returns an array of type <code>T</code> (notice <code>: T[]</code>). Because the <code>reverse</code> function returns items of the same type as it takes, TypeScript knows the <code>reversed</code> variable is also of type <code>number[]</code> and will give you Type safety. Similarly if you pass in an array of <code>string[]</code> to the reverse function the returned result is also an array of <code>string[]</code> and you get similar type safety as shown below:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">var</span> strArr = [<span class="hljs-string">&apos;1&apos;</span>, <span class="hljs-string">&apos;2&apos;</span>];
+<span class="hljs-keyword">var</span> reversedStrs = reverse(strArr);
+reversedStrs = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>]; <span class="hljs-comment">// Error!</span>
+</code></pre>
+<p>In fact JavaScript arrays already have a <code>.reverse</code> function and TypeScript does indeed use generics to define its structure:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">interface</span> Array<t> {
+ reverse(): T[];
+ <span class="hljs-comment">// ...</span>
+}
+</t></code></pre>
+<p>This means that you get type safety when calling <code>.reverse</code> on any array as shown below:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">var</span> numArr = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>];
+<span class="hljs-keyword">var</span> reversedNums = numArr.reverse();
+reversedNums = [<span class="hljs-string">&apos;1&apos;</span>, <span class="hljs-string">&apos;2&apos;</span>]; <span class="hljs-comment">// Error!</span>
+</code></pre>
+<p>We will discuss more about the <code>Array<t></t></code> interface later when we present <code>lib.d.ts</code> in the section <strong>Ambient Declarations</strong>.</p>
+<h2 id="union-type">Union Type</h2>
+<p>Quite commonly in JavaScript you want to allow a property to be one of multiple types e.g. <em>a <code>string</code> or a <code>number</code></em>. This is where the <em>union type</em> (denoted by <code>|</code> in a type annotation e.g. <code>string|number</code>) comes in handy. A common use case is a function that can take a single object or an array of the object e.g.:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">formatCommandline</span>(<span class="hljs-params">command: <span class="hljs-built_in">string</span>[]|<span class="hljs-built_in">string</span></span>) </span>{
+    <span class="hljs-keyword">var</span> line = <span class="hljs-string">&apos;&apos;</span>;
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> command === <span class="hljs-string">&apos;string&apos;</span>) {
+        line = command.trim();
+    } <span class="hljs-keyword">else</span> {
+        line = command.join(<span class="hljs-string">&apos; &apos;</span>).trim();
+    }
+    <span class="hljs-comment">// Do stuff with line: string</span>
+}
+</code></pre>
+<h2 id="intersection-type">Intersection Type</h2>
+<p><code>extend</code> is a very common pattern in JavaScript where you take two objects and create a new one that has the features of both these objects. An <strong>Intersection Type</strong> allows you to use this pattern in a safe way as demonstrated below:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">extend</span>&lt;<span class="hljs-title">T</span>, <span class="hljs-title">U</span>&gt;(<span class="hljs-params">first: T, second: U</span>): <span class="hljs-title">T</span> &amp; <span class="hljs-title">U</span> </span>{
+  <span class="hljs-keyword">return</span> { ...first, ...second };
+}
+<span class="hljs-keyword">const</span> x = extend({ a: <span class="hljs-string">&quot;hello&quot;</span> }, { b: <span class="hljs-number">42</span> });
+<span class="hljs-comment">// x now has both `a` and `b`</span>
+<span class="hljs-keyword">const</span> a = x.a;
+<span class="hljs-keyword">const</span> b = x.b;
+</code></pre>
+<h2 id="tuple-type">Tuple Type</h2>
+<p>JavaScript doesn&apos;t have first class tuple support. People generally just use an array as a tuple. This is exactly what the TypeScript type system supports. Tuples can be annotated using <code>: [typeofmember1, typeofmember2]</code> etc. A tuple can have any number of members. Tuples are demonstrated in the below example:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">var</span> nameNumber: [<span class="hljs-built_in">string</span>, <span class="hljs-built_in">number</span>];
+<span class="hljs-comment">// Okay</span>
+nameNumber = [<span class="hljs-string">&apos;Jenny&apos;</span>, <span class="hljs-number">8675309</span>];
+<span class="hljs-comment">// Error!</span>
+nameNumber = [<span class="hljs-string">&apos;Jenny&apos;</span>, <span class="hljs-string">&apos;867-5309&apos;</span>];
+</code></pre>
+<p>Combine this with the destructuring support in TypeScript, tuples feel fairly first class despite being arrays underneath:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">var</span> nameNumber: [<span class="hljs-built_in">string</span>, <span class="hljs-built_in">number</span>];
+nameNumber = [<span class="hljs-string">&apos;Jenny&apos;</span>, <span class="hljs-number">8675309</span>];
+<span class="hljs-keyword">var</span> [name, num] = nameNumber;
+</code></pre>
+<h2 id="type-alias">Type Alias</h2>
+<p>TypeScript provides convenient syntax for providing names for type annotations that you would like to use in more than one place. The aliases are created using the <code>type SomeName = someValidTypeAnnotation</code> syntax. An example is demonstrated below:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">type</span> StrOrNum = <span class="hljs-built_in">string</span>|<span class="hljs-built_in">number</span>;
+<span class="hljs-comment">// Usage: just like any other notation</span>
+<span class="hljs-keyword">var</span> sample: StrOrNum;
+sample = <span class="hljs-number">123</span>;
+sample = <span class="hljs-string">&apos;123&apos;</span>;
+<span class="hljs-comment">// Just checking</span>
+sample = <span class="hljs-literal">true</span>; <span class="hljs-comment">// Error!</span>
+</code></pre>
+<p>Unlike an <code>interface</code> you can give a type alias to literally any type annotation (useful for stuff like union and intersection types). Here are a few more examples to make you familiar with the syntax:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">type</span> Text = <span class="hljs-built_in">string</span> | { text: <span class="hljs-built_in">string</span> };
+<span class="hljs-keyword">type</span> Coordinates = [<span class="hljs-built_in">number</span>, <span class="hljs-built_in">number</span>];
+<span class="hljs-keyword">type</span> Callback = (data: <span class="hljs-built_in">string</span>) =&gt; <span class="hljs-built_in">void</span>;
+</code></pre>
+<blockquote>
+    <p>TIP: If you need to have hierarchies of Type annotations use an <code>interface</code>. They can be used with <code>implements</code> and <code>extends</code></p>
+    <p>TIP: Use a type alias for simpler object structures (like <code>Coordinates</code>) just to give them a semantic name. Also when you want to give semantic names to Union or Intersection types, a Type alias is the way to go.</p>
+</blockquote>
+<h2 id="summary">Summary</h2>
+<p>Now that you can start annotating most of your JavaScript code we can jump into the nitty gritty details of all the power available in TypeScript&apos;s Type System.</p>
+</body>
+</html>

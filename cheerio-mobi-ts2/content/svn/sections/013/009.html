@@ -1,0 +1,59 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>post-lock</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts2/css/kindle.css" />
+  </head>
+   <body>
+    <div class="refentry">
+      <a id="svn.ref.reposhooks.post-lock"></a>
+      <div class="titlepage"></div>
+      <a id="idm14586" class="indexterm"></a>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>post-lock — Notification of a successful path lock.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm14593"></a>
+        <h2>Description</h2>
+        <p>The <code class="literal">post-lock</code> hook runs after one or
+          more paths have been locked.  It is typically used to send
+          email notification of the lock event.</p>
+        <p>If the <code class="literal">post-lock</code> hook returns a
+          nonzero exit status, the lock <span class="emphasis"><em>will
+          not</em></span> be aborted since it has already
+          completed.  However, anything that the hook printed
+          to <code class="filename">stderr</code> will be marshalled back to the
+          client, making it easier to diagnose hook failures.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm14601"></a>
+        <h2>Input parameter(s)</h2>
+        <p>The command-line arguments passed to the hook program,
+          in order, are:</p>
+        <div class="orderedlist">
+          <ol class="orderedlist" type="1">
+            <li class="listitem">
+              <p>Repository path</p>
+            </li>
+            <li class="listitem">
+              <p>Authenticated username of the person who locked the 
+              paths</p>
+            </li>
+          </ol>
+        </div>
+        <p>Additionally, the list of paths locked is passed to the
+          hook program via standard input, one path per line.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm14610"></a>
+        <h2>Common uses</h2>
+        <p>Lock notification</p>
+      </div>
+    </div>
+</body>
+</html>

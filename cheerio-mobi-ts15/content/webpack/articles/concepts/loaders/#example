@@ -1,0 +1,13 @@
+<h2 id="example">Example<a href="#example" aria-hidden="true"><span class="icon icon-link"></span></a></h2>
+<p>For example, you can use loaders to tell webpack to load a CSS file or to convert TypeScript to JavaScript. To do this, you would start by installing the loaders you need:</p>
+<pre><code><span class="token function">npm</span> <span class="token function">install</span> --save-dev css-loader ts-loader</code></pre>
+<p>And then instruct webpack to use the <a href="/loaders/css-loader"><code>css-loader</code></a> for every <code>.css</code> file and the <a href="https://github.com/TypeStrong/ts-loader"><code>ts-loader</code></a> for all <code>.ts</code> files:</p>
+<p><strong>webpack.config.js</strong></p>
+<pre><code>module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  module<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    rules<span class="token punctuation">:</span> <span class="token punctuation">[</span>
+      <span class="token punctuation">{</span> test<span class="token punctuation">:</span> <span class="token regex">/\.css$/</span><span class="token punctuation">,</span> use<span class="token punctuation">:</span> <span class="token string">&apos;css-loader&apos;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+      <span class="token punctuation">{</span> test<span class="token punctuation">:</span> <span class="token regex">/\.ts$/</span><span class="token punctuation">,</span> use<span class="token punctuation">:</span> <span class="token string">&apos;ts-loader&apos;</span> <span class="token punctuation">}</span>
+    <span class="token punctuation">]</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>

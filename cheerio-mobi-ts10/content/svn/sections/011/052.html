@@ -1,0 +1,54 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svnadmin rmlocks</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts10/undefined" />
+  </head>
+   <body>
+<div class="refentry">
+    <a id="svn.ref.svnadmin.c.rmlocks"></a>
+    <div class="titlepage"></div>
+    <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svnadmin rmlocks &#x2014; Unconditionally remove one or more locks from a
+            repository.</p>
+    </div>
+    <div class="refsect1">
+        <a id="idm12181"></a>
+        <h2>Synopsis</h2>
+        <p>
+            <code class="literal">svnadmin rmlocks REPOS_PATH LOCKED_PATH...</code>
+        </p>
+    </div>
+    <div class="refsect1">
+        <a id="idm12185"></a>
+        <h2>Description</h2>
+        <p>Remove one or more locks from each <em class="replaceable"><code>LOCKED_PATH</code></em>.</p>
+    </div>
+    <div class="refsect1">
+        <a id="idm12189"></a>
+        <h2>Options</h2>
+        <p>None</p>
+    </div>
+    <div class="refsect1">
+        <a id="idm12192"></a>
+        <h2>Examples</h2>
+        <p>This deletes the locks on
+            <code class="filename">tree.jpg</code> and
+            <code class="filename">house.jpg</code> in the repository at
+            <code class="filename">/var/svn/repos</code>:</p>
+        <div class="informalexample">
+            <pre class="screen">
+$ svnadmin rmlocks /var/svn/repos tree.jpg house.jpg
+Removed lock on &apos;/tree.jpg.
+Removed lock on &apos;/house.jpg.
+</pre>
+        </div>
+    </div>
+</div>
+</body>
+</html>

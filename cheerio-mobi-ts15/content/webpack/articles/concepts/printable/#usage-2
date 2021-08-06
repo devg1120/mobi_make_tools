@@ -1,0 +1,11 @@
+<h2 id="usage-2">Usage<a href="#usage-2" aria-hidden="true"><span class="icon icon-link"></span></a></h2>
+<p>To set the <code>target</code> property, you simply set the target value in your webpack config:</p>
+<p><strong>webpack.config.js</strong></p>
+<pre><code class="hljs language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token punctuation">{</span>
+  target<span class="token punctuation">:</span> <span class="token string">&apos;node&apos;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span></code></pre>
+<p>In the example above, using <code>node</code> webpack will compile for usage in a Node.js-like environment (uses Node.js <code>require</code> to load chunks and not touch any built in modules like <code>fs</code> or <code>path</code>).</p>
+<p>Each <em>target</em> has a variety of deployment/environment specific additions, support to fit its needs. See what <a href="/configuration/target/">targets are available</a>.</p>
+<blockquote class="todo">
+    <p>Further expansion for other popular target values</p>
+</blockquote>

@@ -1,0 +1,228 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Compactness and Orthogonality</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts10/undefined" />
+  </head>
+   <body>
+<div class="sect1" lang="en">
+    <div class="titlepage">
+        <div>
+            <h2 class="title" style="clear: both"><a id="id2894547">Compactness and Orthogonality</a></h2>
+        </div>
+    </div>
+    <p>Code is not the only sort of thing with an optimal chunk size.
+        Languages and APIs (such as sets of library or system calls) run up
+        against the same sorts of human cognitive constraints that produce
+        Hatton&apos;s U-curve.</p>
+    <p>Accordingly, Unix programmers have learned to think very hard
+        about two other properties when designing APIs, command sets,
+        protocols, and other ways to make computers do tricks:
+        <i>compactness</i> and
+        <i>orthogonality</i>.</p>
+    <div class="sect2" lang="en">
+        <div class="titlepage">
+            <div>
+                <h3 class="title"><a id="compactness">Compactness</a></h3>
+            </div>
+        </div>
+    </div>
+    <div class="sect2" lang="en">
+        <div class="titlepage">
+            <div>
+                <h3 class="title"><a id="orthogonality">Orthogonality</a></h3>
+            </div>
+        </div>
+    </div>
+    <div class="sect2" lang="en">
+        <div class="titlepage">
+            <div>
+                <h3 class="title"><a id="spot_rule">The SPOT Rule</a></h3>
+            </div>
+        </div>
+    </div>
+    <div class="sect2" lang="en">
+        <div class="titlepage">
+            <div>
+                <h3 class="title"><a id="id2895445">Compactness and the Strong Single Center</a></h3>
+            </div>
+        </div>
+        <p>One subtle but powerful way to promote compactness in a
+            design is to organize it around a strong core algorithm addressing a
+            clear formal definition of the problem, avoiding heuristics and
+            fudging.</p>
+        <div class="blockquote">
+            <table border="0" width="100%" cellspacing="0" cellpadding="0" class="blockquote" summary="Block quote">
+                <tr>
+                    <td width="10%" valign="top">&#xFFFD;</td>
+                    <td width="80%" valign="top">
+                        <p>Formalization often clarifies a task spectacularly. It is not
+                            enough for a programmer to recognize that bits of his task fall within
+                            standard computer-science categories &#x2014; a little depth-first
+                            search here and a quicksort there. The best results occur when the
+                            nub of the task can be formalized, and a clear model of the job at
+                            hand can be constructed. It is not necessary that ultimate users
+                            comprehend the model. The very existence of a unifying core will
+                            provide a comfortable feel, unencumbered with the
+                            why-in-hell-did-they-do-that moments that are so prevalent in using
+                            Swiss-army-knife programs.</p>
+                    </td>
+                    <td width="10%" valign="top">&#xFFFD;</td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="right" valign="top">--<span class="attribution">
+                            <span class="author">Doug McIlroy</span>
+                            </span></td>
+                    <td width="10%" valign="top">&#xFFFD;</td>
+                </tr>
+            </table>
+        </div>
+        <p>This is an often-overlooked strength of the Unix
+            tradition. Many of its most effective tools are thin wrappers around
+            a direct translation of some single powerful algorithm.</p>
+        <p>Perhaps the clearest example of this is
+            diff(1),
+            the Unix tool for reporting differences between related files. This
+            tool and its dual,
+            patch(1),
+            have become central to the network-distributed development style of
+            modern Unix. A valuable property of diff is that it seldom surprises
+            anyone. It doesn&apos;t have special cases or painful edge conditions,
+            because it uses a simple, mathematically sound method of sequence
+            comparison. This has consequences:</p>
+        <div class="blockquote">
+            <table border="0" width="100%" cellspacing="0" cellpadding="0" class="blockquote" summary="Block quote">
+                <tr>
+                    <td width="10%" valign="top">&#xFFFD;</td>
+                    <td width="80%" valign="top">
+                        <p>By virtue of a mathematical model and a solid
+                            algorithm, Unix diff contrasts markedly with its
+                            imitators. First, the central engine is solid, small, and
+                            has never needed one line of maintenance. Second, the
+                            results are clear and consistent, unmarred by surprises
+                            where heuristics fail.</p>
+                    </td>
+                    <td width="10%" valign="top">&#xFFFD;</td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="right" valign="top">--<span class="attribution">
+                            <span class="author">Doug McIlroy</span>
+                            </span></td>
+                    <td width="10%" valign="top">&#xFFFD;</td>
+                </tr>
+            </table>
+        </div>
+        <p>Thus, people who use diff can develop an intuitive feel for what
+            it will do in any given situation without necessarily understanding
+            the central algorithm perfectly. Other well-known examples of
+            this special kind of clarity achieved through a strong central
+            algorithm abound in Unix:</p>
+        <div class="itemizedlist">
+            <ul type="disc">
+                <li>
+                    <p>The
+                        grep(1)
+                        utility for selecting lines out of files by pattern matching is a
+                        simple wrapper around a formal algebra of regular-expression patterns
+                        (see <a href="ch08s02.html#regexps" title="Case Study: Regular Expressions">the section called &#x201C;Case Study: Regular Expressions&#x201D;</a> for discussion). If it had
+                        lacked this consistent mathematical model, it would probably look like
+                        the design of the original
+                        glob(1)
+                        facility in the oldest Unixes, a handful of ad-hoc wildcards that
+                        can&apos;t be combined.</p>
+                </li>
+                <li>
+                    <p>The yacc(1) utility for
+                        generating language parsers is a thin wrapper around the formal theory
+                        of LR(1) grammars. Its partner, the lexical analyzer generator
+                        lex(1),
+                        is a similarly thin wrapper around the theory of nondeterministic
+                        finite-state automata.</p>
+                </li>
+            </ul>
+        </div>
+        <p>All three of these programs are so bug-free that their correct
+            functioning is taken utterly for granted, and compact enough to fit
+            easily in a programmer&apos;s hand. Only a part of these good qualities are due
+            to the polishing that comes with a long service life and frequent use;
+            most of it is that, having been constructed around a strong and
+            provably correct algorithmic core, they never needed much polishing
+            in the first place.</p>
+        <p>The opposite of a formal approach is using
+            <i>heuristics</i>&#x2014;rules of thumb leading
+            toward a solution that is probabilistically, but not certainly,
+            correct. Sometimes we use heuristics because a deterministically
+            correct solution is impossible. Think of spam filtering, for example;
+            an algorithmically perfect spam filter would need a full solution to
+            the problem of understanding natural language as a module. Other
+            times, we use heuristics because known formally correct methods are
+            impossibly expensive. Virtual-memory management is an example of
+            this; there are near-perfect solutions, but they require so much
+            runtime instrumentation that their overhead would swamp any
+            theoretical gain over heuristics.</p>
+        <p>The trouble with heuristics is that they proliferate special
+            cases and edge cases. If nothing else, you usually have to backstop
+            a heuristic with some sort of recovery mechanism when it fails. All
+            the usual problems with escalating complexity follow. To manage the
+            resulting tradeoffs, you have to start by being aware of them. Always
+            ask if a heuristic actually pays off in performance what it costs
+            in code complexity &#x2014; and don&apos;t guess at the performance
+            difference, actually measure it before making a decision.</p>
+    </div>
+    <div class="sect2" lang="en">
+        <div class="titlepage">
+            <div>
+                <h3 class="title"><a id="id2899405">The Value of Detachment</a></h3>
+            </div>
+        </div>
+        <p>We began this book with a reference to Zen: &#x201C;a special
+            transmission, outside the scriptures&#x201D;. This was not mere
+            exoticism for stylistic effect; the core concepts of Unix have always
+            had a spare, Zen-like simplicity that continues to shine through the
+            layers of historical accidents that have accreted around
+            them</p>
+        <p>To design for
+            compactness</p>
+        <p>To achieve enlightenment and surcease from suffering, Zen
+            teaches detachment. The Unix tradition teaches the value of
+            detachment from the particular, accidental conditions under which a
+            design problem was posed. Abstract. Simplify. Generalize. Because
+            we write software to solve problems, we cannot completely detach from
+            the problems &#x2014; but it is well worth the mental effort to see how
+            many preconceptions you can throw away, and whether the design becomes
+            more compact</p>
+        <p>Jokes about the relationship between Unix and Zen are a live
+            part of the Unix tradition as well.<sup>[<a id="id2899522" href="ch04s02.html#ftn.id2899522">45</a>]</sup>
+            This is not an accident.</p>
+    </div>
+    <div class="footnotes"><br>
+        <hr width="100" align="left">
+        <div class="footnote">
+            <p><sup>[<a id="ftn.id2895110" href="ch04s02.html#id2895110">43</a>] </sup>In
+                the foundation text on this topic, <i>Refactoring</i>
+                [<a href="apb.html#Fowler" title="[Fowler]">Fowler</a>], the author comes very close to stating that
+                the principal goal of refactoring is to improve orthogonality. But
+                lacking the concept, he can only approximate this idea from several
+                different directions: eliminating code duplication and various other
+                &#x201C;bad smells&#x201D; many of which are some sort of orthogonality
+                violation.</p>
+        </div>
+        <div class="footnote">
+            <p><sup>[<a id="ftn.id2895368" href="ch04s02.html#id2895368">44</a>] </sup>An
+                archetypal example of bad caching is the <b>rehash</b>
+                directive in
+                csh(1);
+                type <b>man 1 csh</b> for details. See <a href="ch12s04.html#binary_caches" title="Caching Operation Results">the section called &#x201C;Caching Operation Results&#x201D;</a> for another example.</p>
+        </div>
+        <div class="footnote">
+            <p><sup>[<a id="ftn.id2899522" href="ch04s02.html#id2899522">45</a>] </sup>For a recent example
+                of Unix/Zen crossover, see <a href="unix_koans.html" title="Appendix&#xFFFD;D.&#xFFFD;Rootless Root">Appendix&#xFFFD;D</a>.</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

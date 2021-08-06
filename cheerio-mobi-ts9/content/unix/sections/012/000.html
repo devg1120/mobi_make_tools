@@ -1,0 +1,56 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Interfaces</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts9/undefined" />
+  </head>
+   <body>
+<div class="chapter" lang="en"><div class="titlepage"><div><h2 class="title"><a id="interfacechapter">Chapter&#xFFFD;11.&#xFFFD;Interfaces</a></h2></div><div><h3 class="subtitle"><i>User-Interface Design Patterns in&#xFFFD;the&#xFFFD;Unix Environment</i></h3></div></div><div xmlns class="epigraph"><i><p xmlns="http://www.w3.org/1999/xhtml">All our knowledge has its origins in our perceptions.</p></i><span>--<i><span xmlns="http://www.w3.org/1999/xhtml" class="attribution">
+<span class="author">Leonardo Da Vinci</span>
+</span></i></span></div><p>The interface of a program is the sum of all the ways that it
+communicates with human users and other programs.  In <a href="configurationchapter.html" title="Chapter&#xFFFD;10.&#xFFFD;Configuration">Chapter&#xFFFD;10</a>, we discussed the use of environment
+variables, switches, run-control files and other parts of
+start-up-time interfaces. In this chapter, we&apos;ll untangle the history
+and explain the pragmatics of Unix interfaces after startup time.
+Because user-interface code normally consumes 40% or more of development
+time, knowing good design patterns is especially important here in
+order to avoid a lot of false starts and time-intensive
+rewrites.</p><p>In the Unix tradition of interface design, we encounter two
+themes over and over again. One is anticipatory design for
+communication with other programs; the other is the Rule of Least
+Surprise.</p><p>Unix programs can give you extra power from being used in
+synergistic combinations; we discussed various methods for hooking
+together such combinations in <a href="multiprogramchapter.html" title="Chapter&#xFFFD;7.&#xFFFD;Multiprogramming">Chapter&#xFFFD;7</a>. The &#x2018;other programs&#x2019; part
+of Unix interface design is not an afterthought or a marginal case as
+it is under many other operating systems. Rather, it is a central
+challenge that has to be balanced and integrated carefully with the
+demands of interface design for human users.</p><p>Much of Unix-community tradition about program interface design
+may seem odd and arbitrary &#x2014; or even, in the age of the GUI,
+downright regressive &#x2014; when you encounter that tradition for the
+first time.  But in spite of various blemishes and irregularities,
+that tradition has an inner logic to it which is worth learning and
+understanding. It reflects heuristics accumulated over Unix&apos;s long
+history about ways to do effective communication both with human
+beings and with other programs. And it includes a set of conventions
+which create commonalities between programs &#x2014; it defines
+&#x2018;least surprising&#x2019; alternatives for a wide range of common
+interface-design problems.</p><p>After startup, programs normally get input or commands from the
+following sources:</p><div class="itemizedlist"><ul type="disc"><li><p>Data and commands presented on the program&apos;s standard
+input.</p></li><li><p>Inputs passed through IPC, such as X server events and
+network messages.</p></li><li><p>Files and devices in known locations (such as a data file name
+passed to or computed by the program).</p></li></ul></div><p>Programs can emit results in all the same ways (with output
+going to standard&#xFFFD;output).</p><p>Some Unix programs are graphical, some have screen-oriented
+character interfaces, and some use a starkly simple text-filter
+design unchanged from the days of mechanical teletypes. To the
+uninitiated, it is often far from obvious why any given program
+uses the style it does &#x2014; or, indeed, why Unix supports such a
+plethora of interface styles at all.</p><p>Unix has several competing interface styles.  All are still
+alive for a reason; they&apos;re optimized for different situations. By
+understanding the fit between task and interface style, you will learn
+how to choose the right styles for the jobs you need to do.</p></div>
+</body>
+</html>

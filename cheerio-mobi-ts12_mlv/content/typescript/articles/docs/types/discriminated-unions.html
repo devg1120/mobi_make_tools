@@ -1,0 +1,214 @@
+<h3 id="discriminated-union">Discriminated Union</h3>
+<p>If you have a class with a <a href="literal-types.html"><em>literal member</em></a> then you can use that property to discriminate between union members.</p>
+<p>As an example consider the union of a <code>Square</code> and <code>Rectangle</code>, here we have a member <code>kind</code> that exists on both union members and is of a particular <em>literal type</em>:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">interface</span> Square {
+    kind: <span class="hljs-string">"square"</span>;
+    size: <span class="hljs-built_in">number</span>;
+}
+
+<span class="hljs-keyword">interface</span> Rectangle {
+    kind: <span class="hljs-string">"rectangle"</span>;
+    width: <span class="hljs-built_in">number</span>;
+    height: <span class="hljs-built_in">number</span>;
+}
+<span class="hljs-keyword">type</span> Shape = Square | Rectangle;
+</code></pre>
+<p>If you use a type guard style check (<code>==</code>, <code>===</code>, <code>!=</code>, <code>!==</code>) or <code>switch</code> on the <em>discriminant property</em> (here <code>kind</code>) TypeScript will realize that the object must be of the type that has that specific literal and do a type narrowing for you :)</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">area</span>(<span class="hljs-params">s: Shape</span>) </span>{
+    <span class="hljs-keyword">if</span> (s.kind === <span class="hljs-string">"square"</span>) {
+        <span class="hljs-comment">// Now TypeScript *knows* that `s` must be a square ;)</span>
+        <span class="hljs-comment">// So you can use its members safely :)</span>
+        <span class="hljs-keyword">return</span> s.size * s.size;
+    }
+    <span class="hljs-keyword">else</span> {
+        <span class="hljs-comment">// Wasn't a square? So TypeScript will figure out that it must be a Rectangle ;)</span>
+        <span class="hljs-comment">// So you can use its members safely :)</span>
+        <span class="hljs-keyword">return</span> s.width * s.height;
+    }
+}
+</code></pre>
+<h3 id="exhaustive-checks">Exhaustive Checks</h3>
+<p>Quite commonly you want to make sure that all members of a union have some code(action) against them.</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">interface</span> Square {
+    kind: <span class="hljs-string">"square"</span>;
+    size: <span class="hljs-built_in">number</span>;
+}
+
+<span class="hljs-keyword">interface</span> Rectangle {
+    kind: <span class="hljs-string">"rectangle"</span>;
+    width: <span class="hljs-built_in">number</span>;
+    height: <span class="hljs-built_in">number</span>;
+}
+
+<span class="hljs-comment">// Someone just added this new `Circle` Type</span>
+<span class="hljs-comment">// We would like to let TypeScript give an error at any place that *needs* to cater for this</span>
+<span class="hljs-keyword">interface</span> Circle {
+    kind: <span class="hljs-string">"circle"</span>;
+    radius: <span class="hljs-built_in">number</span>;
+}
+
+<span class="hljs-keyword">type</span> Shape = Square | Rectangle | Circle;
+</code></pre>
+<p>As an example of where stuff goes bad:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">area</span>(<span class="hljs-params">s: Shape</span>) </span>{
+    <span class="hljs-keyword">if</span> (s.kind === <span class="hljs-string">"square"</span>) {
+        <span class="hljs-keyword">return</span> s.size * s.size;
+    }
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (s.kind === <span class="hljs-string">"rectangle"</span>) {
+        <span class="hljs-keyword">return</span> s.width * s.height;
+    }
+    <span class="hljs-comment">// Would it be great if you could get TypeScript to give you an error?</span>
+}
+</code></pre>
+<p>You can do that by simply adding a fall through and making sure that the inferred type in that block is compatible with the <code>never</code> type. For example if you add the exhaustive check you get a nice error:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">area</span>(<span class="hljs-params">s: Shape</span>) </span>{
+    <span class="hljs-keyword">if</span> (s.kind === <span class="hljs-string">"square"</span>) {
+        <span class="hljs-keyword">return</span> s.size * s.size;
+    }
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (s.kind === <span class="hljs-string">"rectangle"</span>) {
+        <span class="hljs-keyword">return</span> s.width * s.height;
+    }
+    <span class="hljs-keyword">else</span> {
+        <span class="hljs-comment">// ERROR : `Circle` is not assignable to `never`</span>
+        <span class="hljs-keyword">const</span> _exhaustiveCheck: never = s;
+    }
+}
+</code></pre>
+<p>That forces you to handle this new case : </p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">area</span>(<span class="hljs-params">s: Shape</span>) </span>{
+    <span class="hljs-keyword">if</span> (s.kind === <span class="hljs-string">"square"</span>) {
+        <span class="hljs-keyword">return</span> s.size * s.size;
+    }
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (s.kind === <span class="hljs-string">"rectangle"</span>) {
+        <span class="hljs-keyword">return</span> s.width * s.height;
+    }
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (s.kind === <span class="hljs-string">"circle"</span>) {
+        <span class="hljs-keyword">return</span> <span class="hljs-built_in">Math</span>.PI * (s.radius **<span class="hljs-number">2</span>);
+    }
+    <span class="hljs-keyword">else</span> {
+        <span class="hljs-comment">// Okay once more</span>
+        <span class="hljs-keyword">const</span> _exhaustiveCheck: never = s;
+    }
+}
+</code></pre>
+<h3 id="switch">Switch</h3>
+<p>TIP: of course you can also do it in a <code>switch</code> statement:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">area</span>(<span class="hljs-params">s: Shape</span>) </span>{
+    <span class="hljs-keyword">switch</span> (s.kind) {
+        <span class="hljs-keyword">case</span> <span class="hljs-string">"square"</span>: <span class="hljs-keyword">return</span> s.size * s.size;
+        <span class="hljs-keyword">case</span> <span class="hljs-string">"rectangle"</span>: <span class="hljs-keyword">return</span> s.width * s.height;
+        <span class="hljs-keyword">case</span> <span class="hljs-string">"circle"</span>: <span class="hljs-keyword">return</span> <span class="hljs-built_in">Math</span>.PI * s.radius * s.radius;
+        <span class="hljs-keyword">default</span>: <span class="hljs-keyword">const</span> _exhaustiveCheck: never = s;
+    }
+}
+</code></pre>
+<h3 id="strictnullchecks">strictNullChecks</h3>
+<p>If using <em>strictNullChecks</em> and doing exhaustive checks, TypeScript might complain "not all code paths return a value". You can silence that by simply returning the <code>_exhaustiveCheck</code> variable (of type <code>never</code>). So:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">area</span>(<span class="hljs-params">s: Shape</span>) </span>{
+    <span class="hljs-keyword">switch</span> (s.kind) {
+        <span class="hljs-keyword">case</span> <span class="hljs-string">"square"</span>: <span class="hljs-keyword">return</span> s.size * s.size;
+        <span class="hljs-keyword">case</span> <span class="hljs-string">"rectangle"</span>: <span class="hljs-keyword">return</span> s.width * s.height;
+        <span class="hljs-keyword">case</span> <span class="hljs-string">"circle"</span>: <span class="hljs-keyword">return</span> <span class="hljs-built_in">Math</span>.PI * s.radius * s.radius;
+        <span class="hljs-keyword">default</span>:
+          <span class="hljs-keyword">const</span> _exhaustiveCheck: never = s;
+          <span class="hljs-keyword">return</span> _exhaustiveCheck;
+    }
+}
+</code></pre>
+<h3 id="retrospective-versioning">Retrospective Versioning</h3>
+<p>Say you have a data structure of the form: </p>
+<pre><code class="lang-ts"><span class="hljs-keyword">type</span> DTO = {
+  name: <span class="hljs-built_in">string</span>
+}
+</code></pre>
+<p>And after you have a bunch of <code>DTO</code>s you realize that <code>name</code> was a poor choice. You can add versioning retrospectively by creating a new <em>union</em> with <em>literal number</em> (or string if you want) of DTO. Mark the version 0 as <code>undefined</code> and if you have <em>strictNullChecks</em> enabled it will just work out: </p>
+<pre><code class="lang-ts"><span class="hljs-keyword">type</span> DTO = 
+| { 
+   version: <span class="hljs-literal">undefined</span>, <span class="hljs-comment">// version 0</span>
+   name: <span class="hljs-built_in">string</span>,
+ }
+| {
+   version: <span class="hljs-number">1</span>,
+   firstName: <span class="hljs-built_in">string</span>,
+   lastName: <span class="hljs-built_in">string</span>, 
+}
+<span class="hljs-comment">// Even later </span>
+| {
+    version: <span class="hljs-number">2</span>,
+    firstName: <span class="hljs-built_in">string</span>,
+    middleName: <span class="hljs-built_in">string</span>,
+    lastName: <span class="hljs-built_in">string</span>, 
+} 
+<span class="hljs-comment">// So on</span>
+</code></pre>
+<p> Example usage of such a DTO:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">printDTO</span>(<span class="hljs-params">dto:DTO</span>) </span>{
+  <span class="hljs-keyword">if</span> (dto.version == <span class="hljs-literal">null</span>) {
+      <span class="hljs-built_in">console</span>.log(dto.name);
+  } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (dto.version == <span class="hljs-number">1</span>) {
+      <span class="hljs-built_in">console</span>.log(dto.firstName,dto.lastName);
+  } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (dto.version == <span class="hljs-number">2</span>) {
+      <span class="hljs-built_in">console</span>.log(dto.firstName, dto.middleName, dto.lastName);
+  } <span class="hljs-keyword">else</span> {
+      <span class="hljs-keyword">const</span> _exhaustiveCheck: never = dto;
+  }
+}
+</code></pre>
+<h3 id="redux">Redux</h3>
+<p>A popular library that makes use of this is redux.</p>
+<p>Here is the <a href="https://github.com/reactjs/redux#the-gist" target="_blank"><em>gist of redux</em></a> with TypeScript type annotations added:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">import</span> { createStore } from <span class="hljs-string">'redux'</span>
+
+<span class="hljs-keyword">type</span> Action
+  = {
+    <span class="hljs-keyword">type</span>: <span class="hljs-string">'INCREMENT'</span>
+  }
+  | {
+    <span class="hljs-keyword">type</span>: <span class="hljs-string">'DECREMENT'</span>
+  }
+
+<span class="hljs-comment">/**
+ * This is a reducer, a pure function with (state, action) => state signature.
+ * It describes how an action transforms the state into the next state.
+ *
+ * The shape of the state is up to you: it can be a primitive, an array, an object,
+ * or even an Immutable.js data structure. The only important part is that you should
+ * not mutate the state object, but return a new object if the state changes.
+ *
+ * In this example, we use a `switch` statement and strings, but you can use a helper that
+ * follows a different convention (such as function maps) if it makes sense for your
+ * project.
+ */</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">counter</span>(<span class="hljs-params">state = 0, action: Action</span>) </span>{
+  <span class="hljs-keyword">switch</span> (action.type) {
+  <span class="hljs-keyword">case</span> <span class="hljs-string">'INCREMENT'</span>:
+    <span class="hljs-keyword">return</span> state + <span class="hljs-number">1</span>
+  <span class="hljs-keyword">case</span> <span class="hljs-string">'DECREMENT'</span>:
+    <span class="hljs-keyword">return</span> state - <span class="hljs-number">1</span>
+  <span class="hljs-keyword">default</span>:
+    <span class="hljs-keyword">return</span> state
+  }
+}
+
+<span class="hljs-comment">// Create a Redux store holding the state of your app.</span>
+<span class="hljs-comment">// Its API is { subscribe, dispatch, getState }.</span>
+<span class="hljs-keyword">let</span> store = createStore(counter)
+
+<span class="hljs-comment">// You can use subscribe() to update the UI in response to state changes.</span>
+<span class="hljs-comment">// Normally you'd use a view binding library (e.g. React Redux) rather than subscribe() directly.</span>
+<span class="hljs-comment">// However, it can also be handy to persist the current state in the localStorage.</span>
+
+store.subscribe(() =>
+  <span class="hljs-built_in">console</span>.log(store.getState())
+)
+
+<span class="hljs-comment">// The only way to mutate the internal state is to dispatch an action.</span>
+<span class="hljs-comment">// The actions can be serialized, logged or stored and later replayed.</span>
+store.dispatch({ <span class="hljs-keyword">type</span>: <span class="hljs-string">'INCREMENT'</span> })
+<span class="hljs-comment">// 1</span>
+store.dispatch({ <span class="hljs-keyword">type</span>: <span class="hljs-string">'INCREMENT'</span> })
+<span class="hljs-comment">// 2</span>
+store.dispatch({ <span class="hljs-keyword">type</span>: <span class="hljs-string">'DECREMENT'</span> })
+<span class="hljs-comment">// 1</span>
+</code></pre>
+<p>Using it with TypeScript gives you safety against typo errors, increased refactor-ability and self documenting code.</p>

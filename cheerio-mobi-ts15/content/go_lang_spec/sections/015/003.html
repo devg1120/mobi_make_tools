@@ -1,0 +1,28 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Program execution</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+A complete program is created by linking a single, unimported package
+called the <i>main package</i> with all the packages it imports, transitively.
+The main package must
+have package name <code>main</code> and
+declare a function <code>main</code> that takes no
+arguments and returns no value.
+</p><pre>
+func main() { &#x2026; }
+</pre><p>
+Program execution begins by initializing the main package and then
+invoking the function <code>main</code>.
+When that function invocation returns, the program exits.
+It does not wait for other (non-<code>main</code>) goroutines to complete.
+</p></body>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<h2 id="modules">Modules</h2>
+<h3 id="global-module">Global Module</h3>
+<p>By default when you start typing code in a new TypeScript file your code is in a <em>global</em> namespace. As a demo consider a file <code>foo.ts</code>:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">var</span> foo = <span class="hljs-number">123</span>;
+</code></pre>
+<p>If you now create a <em>new</em> file <code>bar.ts</code> in the same project, you will be <em>allowed</em> by the TypeScript type system to use the variable <code>foo</code> as if it was available globally:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">var</span> bar = foo; <span class="hljs-comment">// allowed</span>
+</code></pre>
+<p>Needless to say having a global namespace is dangerous as it opens your code up for naming conflicts. We recommend using file modules which are presented next.</p>
+<h3 id="file-module">File Module</h3>
+<p>Also called <em>external modules</em>. If you have an <code>import</code> or an <code>export</code> at the root level of a TypeScript file then it creates a <em>local</em> scope within that file. So if we were to change the previous <code>foo.ts</code> to the following (note the <code>export</code> usage):</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">export</span> <span class="hljs-keyword">var</span> foo = <span class="hljs-number">123</span>;
+</code></pre>
+<p>We will no longer have <code>foo</code> in the global namespace. This can be demonstrated by creating a new file <code>bar.ts</code> as follows:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">var</span> bar = foo; <span class="hljs-comment">// ERROR: "cannot find name 'foo'"</span>
+</code></pre>
+<p>If you want to use stuff from <code>foo.ts</code> in <code>bar.ts</code> <em>you need to explicitly import it</em>. This is shown in an updated <code>bar.ts</code> below:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">import</span> { foo } from <span class="hljs-string">"./foo"</span>;
+<span class="hljs-keyword">var</span> bar = foo; <span class="hljs-comment">// allowed</span>
+</code></pre>
+<p>Using an <code>import</code> in <code>bar.ts</code> not only allows you to bring in stuff from other files, but also marks the file <code>bar.ts</code> as a <em>module</em> and therefore, declarations in <code>bar.ts</code> don't pollute the global namespace either.</p>
+<p>What JavaScript is generated from a given TypeScript file that uses external modules is driven by the compiler flag called <code>module</code>.</p>

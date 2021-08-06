@@ -1,0 +1,117 @@
+<div class="sect1" lang="en">
+    <div class="titlepage">
+        <div>
+            <h2 class="title" style="clear: both"><a id="why_not_c">Why Not C?</a></h2>
+        </div>
+    </div><a id="id2970988" class="indexterm"><a id="id2970999" class="indexterm">
+            <p>C is the native language of Unix. Since the early 1980s it has
+                come to dominate systems programming almost everywhere in the computer
+                industry. Outside of Fortran's dwindling niche in scientific and
+                engineering computing, and excluding the vast invisible dark mass of
+                COBOL financial applications at banks and insurance companies, C and
+                its offspring C++ have now (in 2003) dominated applications
+                programming almost completely for more than a decade.</p>
+            <p>It may therefore seem perverse to assert that C and C++ are
+                nowadays almost always the wrong vehicle for beginning new
+                applications development. But it's true; C and C++ optimize for
+                machine efficiency at the expense of increased implementation and
+                (especially) debugging time. While it still makes sense to write
+                system programs and time-critical kernels of applications in C or C++,
+                the world has changed a great deal since these languages came to
+                prominence in the 1980s. In 2003, processors are a thousand
+                times faster, memories are a thousand times larger, and disks are a
+                factor of <span class="emphasis"><em>ten</em></span> thousand larger, for roughly
+                constant dollars.<sup>[<a id="id2971041" href="why_not_c.html#ftn.id2971041">123</a>]</sup></p>
+            <p>These plunging costs change the economics of programming in a
+                fundamental way. Under most circumstances it no longer makes sense
+                to try to be as sparing of machine resources as C permits. Instead,
+                the economically optimal choice is to minimize debugging time and
+                maximize the long-term maintainability of the code by human beings.
+                Most sorts of implementation (including application prototyping) are
+                therefore better served by the newer generation of interpreted and
+                scripting languages<a id="id2968194" class="indexterm">. This transition exactly parallels
+                    the conditions that, last time around the wheel, led to the rise of
+                    C/C++ and the eclipse of assembler programming.</a></p>
+            <p>The central problem of C and C++ is that they require
+                programmers to do their own memory management — to declare
+                variables, to explicitly manage pointer-chained lists, to dimension buffers,
+                to detect or prevent buffer overruns, and to allocate and deallocate
+                dynamic storage. Some of this task can be automated away by
+                unnatural acts like retrofitting C with a garbage collector such as
+                the Boehm-Weiser implementation, but the design of C is such that this
+                cannot be a complete solution.</p>
+            <p>C memory management is an enormous source of complication and
+                error. One study (cited in [<a href="apb.html#Boehm" title="[Boehm]">Boehm</a>])
+                estimates that 30% or 40% of development time is devoted to storage
+                management for programs that manipulate complex data structures. This
+                did not even include the impact on debugging cost. While hard figures
+                are lacking, many experienced programmers believe that
+                memory-management bugs are the single largest source of persistent
+                errors in real-world code.<sup>[<a id="id2968237" href="why_not_c.html#ftn.id2968237">124</a>]</sup> Buffer overruns are a
+                common cause of crashes and security holes. Dynamic-memory management
+                is particularly notorious for spawning insidious and hard-to-track
+                bugs, such as memory leaks and stale-pointer problems.</p>
+            <p>Not so long ago, manual memory management made sense anyway.
+                But there are no ‘small systems’ any more, not in
+                mainstream applications programming. Under today's conditions, an
+                implementation language that automates away memory management (and
+                buys an order of magnitude decrease in bugs at the expense of using a
+                bit more cycles and core) makes a lot more sense.</p>
+            <p>A recent paper [<a href="apb.html#Prechelt" title="[Prechelt]">Prechelt</a>]
+                musters an impressive array of statistical evidence for a claim that
+                programmers with experience in both worlds will find very plausible:
+                programmers are just about twice as productive in scripting
+                languages<a id="id2968281" class="indexterm">
+                    as they are in C or C++. This accords well with the 30%–40% penalty
+                    estimate noted earlier, plus debugging overhead. The performance
+                    penalty of using a scripting language<a id="id2968293" class="indexterm"> is very often insignificant for
+                        real-world programs, because real-world programs tend to be limited by
+                        waits for I/O events, network latency, and cache-line fills rather
+                        than by the efficiency with which they use the CPU itself.</a></a></p>
+            <p>The Unix world has been slowly coming around to this point of
+                view in practice, especially since 1990 or so, as is shown by the
+                increasing popularity of Perl and other scripting languages. But the
+                evolution of practice has not yet (as of mid-2003) led to a
+                wholesale change in conscious attitudes; many
+                Unix programmers are still absorbing the lesson
+                Perl<a id="id2968316" class="indexterm"> and
+                    Python<a id="id2968325" class="indexterm"> have
+                        been teaching.</a></a></p>
+            <p>We can see the same trend happening, albeit more slowly, outside
+                the Unix world — for example, in the continuing shift from C++
+                to Visual Basic evident in applications development under Microsoft
+                Windows and NT<a id="id2968341" class="indexterm">, and the move toward
+                    Java<a id="id2968350" class="indexterm"> in the
+                        mainframe world.</a></a></p>
+            <p>The arguments against C and C++ apply with equal force to other
+                conventional compiled languages such as Pascal, Algol, PL/I, FORTRAN,
+                and compiled Basic dialects. Despite occasional heroic efforts such as
+                Ada, the differences between conventional languages remain superficial
+                when set against their basic design decision to leave memory
+                management to the programmer. Though high-quality open-source
+                implementations of most languages ever written are available under
+                Unix, no other conventional languages remain in widespread use in the
+                Unix or Windows worlds; they have been abandoned in favor of C and
+                C++. Accordingly we will not survey them here.</p>
+            <div class="footnotes"><br>
+                <hr width="100" align="left">
+                <div class="footnote">
+                    <p><sup>[<a id="ftn.id2971041" href="why_not_c.html#id2971041">123</a>] </sup>Outside the Unix world, this
+                        three-orders-of-magnitude improvement in hardware performance has been
+                        masked to a significant extent by a corresponding drop in software
+                        performance.</p>
+                </div>
+                <div class="footnote">
+                    <p><sup>[<a id="ftn.id2968237" href="why_not_c.html#id2968237">124</a>] </sup>The severity of this problem
+                        is attested to by the rich slang Unix programmers have developed for
+                        describing different varieties: ‘aliasing bug’,
+                        ‘arena corruption’, ‘memory leak’,
+                        ‘buffer overflow’, ‘stack smash’,
+                        ‘fandango on core’, ‘stale pointer’,
+                        ‘heap trashing’, and the rightly dreaded ‘secondary
+                        damage’. See the <a href="http://www.catb.org/~esr/jargon" target="_top">Jargon
+                            File</a> for elucidation.</p>
+                </div>
+            </div>
+        </a></a>
+</div>

@@ -1,0 +1,28 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    this
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts14/undefined" />
+  </head>
+   <body>
+<h2 id="this">this</h2>
+<p>Any access to <code>this</code> keyword within a function is actually controlled by how the function is actually called. It is commonly referred to as the &#x201C;calling context.&#x201D;</p>
+<p>Here is an example:</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">foo</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>);
+}
+foo(); <span class="hljs-comment">// logs out the global e.g. `window` in browsers</span>
+<span class="hljs-keyword">let</span> bar = {
+  foo
+}
+bar.foo(); <span class="hljs-comment">// Logs out `bar` as `foo` was called on `bar`</span>
+</code></pre>
+<p>So be mindful of your usage of <code>this</code>. If you want to disconnect <code>this</code> in a class from the calling context use an arrow function, <a href="../arrow-functions.html">more on that later</a>.</p>
+</body>
+</html>

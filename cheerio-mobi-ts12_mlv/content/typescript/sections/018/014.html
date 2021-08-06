@@ -1,0 +1,46 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Binder Error Reporting
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts12_mlv/undefined" />
+  </head>
+   <body>
+<h3 id="binder-error-reporting">Binder Error Reporting</h3>
+<p>Binding errors are added to the sourceFile&apos;s list of <code>bindDiagnostics</code>.</p>
+<p>An example error detected during binding is the use of <code>eval</code> or <code>arguments</code> as a variable name in <code>use strict</code> scenario. The relevant code is presented in its entirety below (<code>checkStrictModeEvalOrArguments</code> is called from multiple places, call stacks originating from <code>bindWorker</code> which calls different functions for different node <code>SyntaxKind</code>):</p>
+<pre><code class="lang-ts"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">checkStrictModeEvalOrArguments</span>(<span class="hljs-params">contextNode: Node, name: Node</span>) </span>{
+    <span class="hljs-keyword">if</span> (name &amp;&amp; name.kind === SyntaxKind.Identifier) {
+        <span class="hljs-keyword">let</span> identifier = <identifier>name;
+        <span class="hljs-keyword">if</span> (isEvalOrArgumentsIdentifier(identifier)) {
+            <span class="hljs-comment">// We check first if the name is inside class declaration or class expression; if so give explicit message</span>
+            <span class="hljs-comment">// otherwise report generic error message.</span>
+            <span class="hljs-keyword">let</span> span = getErrorSpanForNode(file, name);
+            file.bindDiagnostics.push(createFileDiagnostic(file, span.start, span.length,
+                getStrictModeEvalOrArgumentsMessage(contextNode), identifier.text));
+        }
+    }
+}
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">isEvalOrArgumentsIdentifier</span>(<span class="hljs-params">node: Node</span>): <span class="hljs-title">boolean</span> </span>{
+    <span class="hljs-keyword">return</span> node.kind === SyntaxKind.Identifier &amp;&amp;
+        ((<identifier>node).text === <span class="hljs-string">&quot;eval&quot;</span> || (<identifier>node).text === <span class="hljs-string">&quot;arguments&quot;</span>);
+}
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getStrictModeEvalOrArgumentsMessage</span>(<span class="hljs-params">node: Node</span>) </span>{
+    <span class="hljs-comment">// Provide specialized messages to help the user understand why we think they&apos;re in</span>
+    <span class="hljs-comment">// strict mode.</span>
+    <span class="hljs-keyword">if</span> (getContainingClass(node)) {
+        <span class="hljs-keyword">return</span> Diagnostics.Invalid_use_of_0_Class_definitions_are_automatically_in_strict_mode;
+    }
+    <span class="hljs-keyword">if</span> (file.externalModuleIndicator) {
+        <span class="hljs-keyword">return</span> Diagnostics.Invalid_use_of_0_Modules_are_automatically_in_strict_mode;
+    }
+    <span class="hljs-keyword">return</span> Diagnostics.Invalid_use_of_0_in_strict_mode;
+}
+</identifier></identifier></identifier></code></pre>
+</body>
+</html>

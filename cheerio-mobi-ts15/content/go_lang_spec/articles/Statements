@@ -1,0 +1,11 @@
+<body><p>
+Statements control execution.
+</p><pre>
+[<a>Statement</a>] =
+	[<a>Declaration</a>] | [<a>LabeledStmt</a>] | [<a>SimpleStmt</a>] |
+	[<a>GoStmt</a>] | [<a>ReturnStmt</a>] | [<a>BreakStmt</a>] | [<a>ContinueStmt</a>] | [<a>GotoStmt</a>] |
+	[<a>FallthroughStmt</a>] | [<a>Block</a>] | [<a>IfStmt</a>] | [<a>SwitchStmt</a>] | [<a>SelectStmt</a>] | [<a>ForStmt</a>] |
+	[<a>DeferStmt</a>] .
+
+[<a>SimpleStmt</a>] = [<a>EmptyStmt</a>] | [<a>ExpressionStmt</a>] | [<a>SendStmt</a>] | [<a>IncDecStmt</a>] | [<a>Assignment</a>] | [<a>ShortVarDecl</a>] .
+</pre></body>

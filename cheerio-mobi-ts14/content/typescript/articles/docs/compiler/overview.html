@@ -1,0 +1,54 @@
+<h1 id="compiler">Compiler</h1>
+<p>The TypeScript compiler source is located under the <a href="https://github.com/Microsoft/TypeScript/tree/master/src/compiler" target="_blank"><code>src/compiler</code></a> folder.</p>
+<p>It is split into the follow key parts:</p>
+<ul>
+    <li>Scanner (<code>scanner.ts</code>)</li>
+    <li>Parser (<code>parser.ts</code>)</li>
+    <li>Binder (<code>binder.ts</code>)</li>
+    <li>Checker (<code>checker.ts</code>)</li>
+    <li>Emitter (<code>emitter.ts</code>)</li>
+</ul>
+<p>Each of these get their own unique files in the source. These parts will be explained later on in this chapter.</p>
+<h2 id="byots">BYOTS</h2>
+<p>We have a project called <a href="https://github.com/basarat/byots" target="_blank">Bring Your Own TypeScript (BYOTS)</a> which makes it easier to play around with the compiler API e.g. by exposing internal APIs. You can use it to expose your local app's version of TypeScript globally.</p>
+<h2 id="syntax-vs-semantics">Syntax vs. Semantics</h2>
+<p>Just because something is <em>syntactically</em> correct doesn't mean it is <em>semantically</em> correct. Consider the following piece of TypeScript code which although <em>syntactically</em> valid is <em>semantically</em> wrong</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">var</span> foo: <span class="hljs-built_in">number</span> = <span class="hljs-string">"not a number"</span>;
+</code></pre>
+<p><code>Semantic</code> means "meaning" in English. This concept is useful to have in your head.</p>
+<h2 id="processing-overview">Processing Overview</h2>
+<p>The following is a quick review of how these key parts of the TypeScript compiler compose:</p>
+<pre><code class="lang-code">SourceCode ~~ scanner ~~> Token Stream
+</code></pre>
+<pre><code class="lang-code">Token Stream ~~ parser ~~> AST
+</code></pre>
+<pre><code class="lang-code">AST ~~ binder ~~> Symbols
+</code></pre>
+<p><code>Symbol</code> is the primary building block of the TypeScript <em>semantic</em> system. As shown the symbols are created as a result of binding. Symbols connect declaration nodes in the AST to other declarations contributing to the same entity.</p>
+<p>Symbols + AST are what is used by the checker to <em>semantically</em> validate the source code</p>
+<pre><code class="lang-code">AST + Symbols ~~ checker ~~> Type Validation
+</code></pre>
+<p>Finally When a JS output is requested:</p>
+<pre><code class="lang-code">AST + Checker ~~ emitter ~~> JS
+</code></pre>
+<p>There are a few additional files in the TypeScript compiler that provide utilities to many of these key portions which we cover next.</p>
+<h2 id="file-utilities">File: Utilities</h2>
+<p><code>core.ts</code> : core utilities used by the TypeScript compiler. A few important ones:</p>
+<ul>
+    <li><code>let objectAllocator: ObjectAllocator</code> : is a variable defined as a singleton global. It provides the definitions for <code>getNodeConstructor</code> (Nodes are covered when we look at <code>parser</code> / <code>AST</code>), <code>getSymbolConstructor</code> (Symbols are covered in <code>binder</code>), <code>getTypeConstructor</code> (Types are covered in <code>checker</code>), <code>getSignatureConstructor</code> (Signatures are the index, call and construct signatures).</li>
+</ul>
+<h2 id="file-key-data-structures">File: Key Data Structures</h2>
+<p><code>types.ts</code> contains key data structures and interfaces uses throughout the compiler. Here is a sampling of a few key ones:</p>
+<ul>
+    <li><code>SyntaxKind</code>
+        The AST node type is identified by the <code>SyntaxKind</code> enum.</li>
+    <li><code>TypeChecker</code>
+        This is the interface provided by the TypeChecker.</li>
+    <li><code>CompilerHost</code>
+        This is used by the <code>Program</code> to interact with the <code>System</code>.</li>
+    <li><code>Node</code>
+        An AST node.</li>
+</ul>
+<h2 id="file-system">File: System</h2>
+<p><code>system.ts</code>. All interaction of the TypeScript compiler with the operating system goes through a <code>System</code> interface. Both the interface and its implementations (<code>WScript</code> and <code>Node</code>) are defined in <code>system.ts</code>. You can think of it as the <em>Operating Environment</em> (OE).</p>
+<p>Now that you have an overview of the major files, we can look at the concept of <code>Program</code></p>

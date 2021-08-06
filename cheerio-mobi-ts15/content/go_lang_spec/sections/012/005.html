@@ -1,0 +1,31 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Send statements</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+A send statement sends a value on a channel.
+The channel expression must be of [<a>channel type</a>],
+the channel direction must permit send operations,
+and the type of the value to be sent must be [<a>assignable</a>]
+to the channel&apos;s element type.
+</p><pre>
+[<a>SendStmt</a>] = [<a>Channel</a>] &quot;<-" [<a>Expression] .
+[<a>Channel</a>]  = [<a>Expression</a>] .
+</-"></pre><p>
+Both the channel and the value expression are evaluated before communication
+begins. Communication blocks until the send can proceed.
+A send on an unbuffered channel can proceed if a receiver is ready.
+A send on a buffered channel can proceed if there is room in the buffer.
+A send on a closed channel proceeds by causing a [<a>run-time panic</a>].
+A send on a <code>nil</code> channel blocks forever.
+</p><pre>
+ch <- 3 send value to channel ch < pre></-></pre></body>
+</body>
+</html>

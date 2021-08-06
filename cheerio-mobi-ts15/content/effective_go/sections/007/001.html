@@ -1,0 +1,58 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Multiple return values</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+One of Go&apos;s unusual features is that functions and methods
+can return multiple values.  This form can be used to
+improve on a couple of clumsy idioms in C programs: in-band
+error returns such as <code>-1</code> for <code>EOF</code>
+and modifying an argument passed by address.
+</p><p>
+In C, a write error is signaled by a negative count with the
+error code secreted away in a volatile location.
+In Go, <code>Write</code>
+can return a count <i>and</i> an error: &#x201C;Yes, you wrote some
+bytes but not all of them because you filled the device&#x201D;.
+The signature of the <code>Write</code> method on files from
+package <code>os</code> is:
+</p><pre>
+func (file *File) Write(b []byte) (n int, err error)
+</pre><p>
+and as the documentation says, it returns the number of bytes
+written and a non-nil <code>error</code> when <code>n</code>
+<code>!=</code> <code>len(b)</code>.
+This is a common style; see the section on error handling for more examples.
+</p><p>
+A similar approach obviates the need to pass a pointer to a return
+value to simulate a reference parameter.
+Here&apos;s a simple-minded function to
+grab a number from a position in a byte slice, returning the number
+and the next position.
+</p><pre>
+func nextInt(b []byte, i int) (int, int) {
+    for ; i &lt; len(b) &amp;&amp; !isDigit(b[i]); i++ {
+    }
+    x := 0
+    for ; i &lt; len(b) &amp;&amp; isDigit(b[i]); i++ {
+        x = x*10 + int(b[i]) - &apos;0&apos;
+    }
+    return x, i
+}
+</pre><p>
+You could use it to scan the numbers in an input slice <code>b</code> like this:
+</p><pre>
+    for i := 0; i &lt; len(b); {
+        x, i = nextInt(b, i)
+        fmt.Println(x)
+    }
+</pre></body>
+</body>
+</html>

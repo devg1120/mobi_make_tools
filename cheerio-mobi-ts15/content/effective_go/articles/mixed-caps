@@ -1,0 +1,5 @@
+<body><p>
+Finally, the convention in Go is to use <code>MixedCaps</code>
+or <code>mixedCaps</code> rather than underscores to write
+multiword names.
+</p></body>

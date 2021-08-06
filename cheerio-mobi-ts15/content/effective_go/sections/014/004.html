@@ -1,0 +1,52 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Channels of channels</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/admin/es2015/cheerio-mobi-ts15/undefined" />
+  </head>
+   <body>
+<body><p>
+One of the most important properties of Go is that
+a channel is a first-class value that can be allocated and passed
+around like any other.  A common use of this property is
+to implement safe, parallel demultiplexing.
+</p><p>
+In the example in the previous section, <code>handle</code> was
+an idealized handler for a request but we didn&apos;t define the
+type it was handling.  If that type includes a channel on which
+to reply, each client can provide its own path for the answer.
+Here&apos;s a schematic definition of type <code>Request</code>.
+</p><pre>
+type Request struct {
+    args        []int
+    f           func([]int) int
+    resultChan  chan int
+}
+</pre><p>
+The client provides a function and its arguments, as well as
+a channel inside the request object on which to receive the answer.
+</p><pre>
+func sum(a []int) (s int) {
+    for _, v := range a {
+        s += v
+    }
+    return
+}
+request := &amp;Request{[]int{3, 4, 5}, sum, make(chan int)}
+// Send request
+clientRequests <- request wait for response. fmt.printf("answer: %d\n", <-request.resultchan) < pre><p>
+On the server side, the handler function is the only thing that changes.
+</p><pre>
+func handle(queue chan *Request) {
+    for req := range queue {
+        req.resultChan <- req.f(req.args) } < pre><p>
+There&apos;s clearly a lot more to do to make it realistic, but this
+code is a framework for a rate-limited, parallel, non-blocking RPC
+system, and there&apos;s not a mutex in sight.
+</p></-></pre></-></pre></body>
+</body>
+</html>

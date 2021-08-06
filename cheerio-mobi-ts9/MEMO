@@ -1,0 +1,17 @@
+
+  config/###-config.yaml
+
+  svc
+  unix
+    セクション抽出パラメータ化
+
+    関数 gets_extract_sections
+
+  webpack  ... NG
+      path 先頭 中間  /
+
+           /concepts/rrrrr/tttt#ssss
+
+
+
+

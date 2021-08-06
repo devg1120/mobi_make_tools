@@ -1,0 +1,54 @@
+<h2 id="barrel">Barrel</h2>
+<p>A barrel is a way to rollup exports from several modules into a single convenient module. The barrel itself is a module file that re-exports selected exports of other modules.</p>
+<p>Imagine the following class structure in a library: </p>
+<pre><code class="lang-ts"><span class="hljs-comment">// demo/foo.ts</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> Foo {}
+
+<span class="hljs-comment">// demo/bar.ts</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> Bar {}
+
+<span class="hljs-comment">// demo/baz.ts</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> Baz {}
+</code></pre>
+<p>Without a barrel, a consumer would need three import statements:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">import</span> { Foo } from <span class="hljs-string">'../demo/foo'</span>;
+<span class="hljs-keyword">import</span> { Bar } from <span class="hljs-string">'../demo/bar'</span>;
+<span class="hljs-keyword">import</span> { Baz } from <span class="hljs-string">'../demo/baz'</span>;
+</code></pre>
+<p>You can instead add a barrel <code>demo/index.ts</code> containing the following: </p>
+<pre><code class="lang-ts"><span class="hljs-comment">// demo/index.ts</span>
+<span class="hljs-keyword">export</span> * from <span class="hljs-string">'./foo'</span>; <span class="hljs-comment">// re-export all of its exports</span>
+<span class="hljs-keyword">export</span> * from <span class="hljs-string">'./bar'</span>; <span class="hljs-comment">// re-export all of its exports</span>
+<span class="hljs-keyword">export</span> * from <span class="hljs-string">'./baz'</span>; <span class="hljs-comment">// re-export all of its exports</span>
+</code></pre>
+<p>Now the consumer can import what it needs from the barrel:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">import</span> { Foo, Bar, Baz } from <span class="hljs-string">'../demo'</span>; <span class="hljs-comment">// demo/index.ts is implied</span>
+</code></pre>
+<h3 id="named-exports">Named exports</h3>
+<p>Instead of exporting <code>*</code>, you can choose to export the module in a name. E.g., assume that <code>baz.ts</code> has functions:</p>
+<pre><code class="lang-ts"><span class="hljs-comment">// demo/foo.ts</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> Foo {}
+
+<span class="hljs-comment">// demo/bar.ts</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> Bar {}
+
+<span class="hljs-comment">// demo/baz.ts</span>
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getBaz</span>(<span class="hljs-params"></span>) </span>{}
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">setBaz</span>(<span class="hljs-params"></span>) </span>{}
+</code></pre>
+<p>If you would rather not export <code>getBaz</code> / <code>setBaz</code> from demo you can instead put them in a variable by importing them in a name and exporting that name as shown below: </p>
+<pre><code class="lang-ts"><span class="hljs-comment">// demo/index.ts</span>
+<span class="hljs-keyword">export</span> * from <span class="hljs-string">'./foo'</span>; <span class="hljs-comment">// re-export all of its exports</span>
+<span class="hljs-keyword">export</span> * from <span class="hljs-string">'./bar'</span>; <span class="hljs-comment">// re-export all of its exports</span>
+
+<span class="hljs-keyword">import</span> * as baz from <span class="hljs-string">'./baz'</span>; <span class="hljs-comment">// import as a name</span>
+<span class="hljs-keyword">export</span> { baz }; <span class="hljs-comment">// export the name</span>
+</code></pre>
+<p>And now the consumer would look like: </p>
+<pre><code class="lang-ts"><span class="hljs-keyword">import</span> { Foo, Bar, baz } from <span class="hljs-string">'../demo'</span>; <span class="hljs-comment">// demo/index.ts is implied</span>
+
+<span class="hljs-comment">// usage</span>
+baz.getBaz();
+baz.setBaz();
+<span class="hljs-comment">// etc. ...</span>
+</code></pre>

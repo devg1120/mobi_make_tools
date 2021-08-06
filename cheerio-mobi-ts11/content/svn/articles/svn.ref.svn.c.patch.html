@@ -1,0 +1,237 @@
+<div class="refentry">
+    <a id="svn.ref.svn.c.patch"></a>
+    <div class="titlepage"></div>
+    <a id="idm10615" class="indexterm"></a>
+    <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svn patch — Apply changes represented in a unidiff patch to
+            the working copy.</p>
+    </div>
+    <div class="refsect1">
+        <a id="idm10622"></a>
+        <h2>Synopsis</h2>
+        <p>
+            <code class="literal">svn patch PATCHFILE [WCPATH]</code>
+        </p>
+    </div>
+    <div class="refsect1">
+        <a id="idm10626"></a>
+        <h2>Description</h2>
+        <p>This subcommand will apply changes described a
+            unidiff-formatted patch
+            file <em class="replaceable"><code>PATCHFILE</code></em> to the working
+            copy <em class="replaceable"><code>WCPATH</code></em>. As with most
+            other working copy subcommands,
+            if <em class="replaceable"><code>WCPATH</code></em> is omitted, the
+            changes are applied to the current working directory. A
+            unidiff patch suitable for application to a working copy
+            can be produced with the <span class="command"><strong>svn diff</strong></span>
+            command or third-party differencing tools. Any
+            non-unidiff content found in the patch file is
+            ignored.</p>
+        <p>Changes listed in the patch file will either be
+            applied or rejected. If a change does not match at its
+            exact line offset, it may be applied earlier or later in
+            the file if a match is found elsewhere for the surrounding
+            lines of context provided by the patch. A change may also
+            be applied with <em class="firstterm">fuzz</em>—meaning,
+            one or more lines of context are ignored when attempting
+            to match the change location. If no matching context can
+            be found for a change, the change conflicts and will be
+            written to a reject file which bears the extension
+            <code class="filename">.svnpatch.rej</code>.</p>
+        <p><span class="command"><strong>svn patch</strong></span> reports a status line for
+            patched file or directory using letter codes, very similar
+            to the way that <span class="command"><strong>svn update</strong></span> provides
+            notification. The letter codes have the following
+            meanings:</p>
+        <div class="variablelist">
+            <dl class="variablelist">
+                <dt>
+                    <span class="term">
+                        <code class="literal">A</code>
+                    </span>
+                </dt>
+                <dd>
+                    <p>Added</p>
+                </dd>
+                <dt>
+                    <span class="term">
+                        <code class="literal">D</code>
+                    </span>
+                </dt>
+                <dd>
+                    <p>Deleted</p>
+                </dd>
+                <dt>
+                    <span class="term">
+                        <code class="literal">C</code>
+                    </span>
+                </dt>
+                <dd>
+                    <p>Conflicted</p>
+                </dd>
+                <dt>
+                    <span class="term">
+                        <code class="literal">G</code>
+                    </span>
+                </dt>
+                <dd>
+                    <p>Merged</p>
+                </dd>
+                <dt>
+                    <span class="term">
+                        <code class="literal">U</code>
+                    </span>
+                </dt>
+                <dd>
+                    <p>Updated</p>
+                </dd>
+            </dl>
+        </div>
+        <p>Changes applied with an offset or fuzz are reported on
+            lines starting with the '<code class="literal">></code>'
+            symbol. You should review such changes carefully.</p>
+        <p>If the patch removes all content from a file, that
+            file is automatically scheduled for deletion. Likewise,
+            if the patch creates a new file, that file is
+            automatically scheduled for addition. Use <span class="command"><strong>svn
+                    revert</strong></span> to undo undesired deletions and
+            additions.</p>
+    </div>
+    <div class="refsect1">
+        <a id="idm10669"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+            <pre class="screen">
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.dry_run"><code class="option">--dry-run</code></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.ignore_whitespace"><code class="option">--ignore-whitespace</code></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.quiet"><code class="option">--quiet</code> (<code class="option">-q</code>)</a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.reverse_diff"><code class="option">--reverse-diff</code></a>
+<a class="xref" href="svn.ref.svn.html#svn.ref.svn.sw.strip"><code class="option">--strip</code> <em class="replaceable"><code>NUM</code></em></a>
+</pre>
+        </div>
+    </div>
+    <div class="refsect1">
+        <a id="idm10678"></a>
+        <h2>Examples</h2>
+        <p>Apply a simple patch file generated by
+            the <span class="command"><strong>svn diff</strong></span> command. Our patch file
+            will create a new file, delete another file, and modify a
+            third's contents and properties. Here's the patch file
+            itself (which we'll assume is creatively named
+            <code class="filename">PATCH</code>):</p>
+        <div class="informalexample">
+            <pre class="programlisting">
+Index: deleted-file
+===================================================================
+--- deleted-file	(revision 3)
++++ deleted-file	(working copy)
+@@ -1 +0,0 @@
+-This file will be deleted.
+Index: changed-file
+===================================================================
+--- changed-file	(revision 4)
++++ changed-file	(working copy)
+@@ -1,6 +1,6 @@
+ The letters in a line of text
+ Could make your day much better.
+ But expanded into paragraphs,
+-I'd tell of kangaroos and calves
++I'd tell of monkeys and giraffes
+ Until you were all smiles and laughs
+ From my letter made of letters.
+
+Property changes on: changed-file
+___________________________________________________________________
+Added: propname
+## -0,0 +1 ##
++propvalue
+Index: added-file
+===================================================================
+--- added-file	(revision 0)
++++ added-file	(working copy)
+@@ -0,0 +1 @@
++This is an added file.
+</pre>
+        </div>
+        <p>We can apply the previous patch file to another
+            working copy from our repository using <span class="command"><strong>svn
+                    patch</strong></span>, and verify that it did the right thing by
+            using <span class="command"><strong>svn diff</strong></span>:</p>
+        <div class="informalexample">
+            <pre class="screen">
+$ cd /some/other/workingcopy
+$ svn patch /path/to/PATCH
+D         deleted-file
+UU        changed-file
+A         added-file
+$ svn diff
+Index: deleted-file
+===================================================================
+--- deleted-file	(revision 3)
++++ deleted-file	(working copy)
+@@ -1 +0,0 @@
+-This file will be deleted.
+Index: changed-file
+===================================================================
+--- changed-file	(revision 4)
++++ changed-file	(working copy)
+@@ -1,6 +1,6 @@
+ The letters in a line of text
+ Could make your day much better.
+ But expanded into paragraphs,
+-I'd tell of kangaroos and calves
++I'd tell of monkeys and giraffes
+ Until you were all smiles and laughs
+ From my letter made of letters.
+
+Property changes on: changed-file
+___________________________________________________________________
+Added: propname
+## -0,0 +1 ##
++propvalue
+Index: added-file
+===================================================================
+--- added-file	(revision 0)
++++ added-file	(working copy)
+@@ -0,0 +1 @@
++This is an added file.
+$
+</pre>
+        </div>
+        <p>Sometimes you might need Subversion to interpret a
+            patch <span class="quote">“<span class="quote">in reverse</span>”</span>—where added things
+            get treated as removed things, and vice-versa. Use
+            the <code class="option">--reverse-diff</code> option for this
+            purpose. In the following example, we'll squirrel away
+            a patch file which describes the changes in our working
+            copy, and then use a reverse patch operation to undo those
+            changes.</p>
+        <div class="informalexample">
+            <pre class="screen">
+$ svn status
+M       foo.c
+$ svn diff > PATCH
+$ cat PATCH
+Index: foo.c
+===================================================================
+--- foo.c	(revision 128)
++++ foo.c	(working copy)
+@@ -1003,7 +1003,7 @@
+     return ERROR_ON_THE_G_STRING;
+ 
+   /* Do something in a loop. */
+-  for (i = 0; i < txns->nelts; i++)
++  for (i = 0; i < txns->nelts; i--)
+     {
+       status = do_something(i);
+       if (status)
+$ svn patch --reverse-diff PATCH
+U         foo.c
+$ svn status
+$
+</pre>
+        </div>
+    </div>
+</div>

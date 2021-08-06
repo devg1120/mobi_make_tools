@@ -1,0 +1,19 @@
+<body><p>
+With the exception of specific built-in functions,
+function and method [<a>calls</a>] and
+[<a>receive operations</a>]
+can appear in statement context. Such statements may be parenthesized.
+</p><pre>
+[<a>ExpressionStmt</a>] = [<a>Expression</a>] .
+</pre><p>
+The following built-in functions are not permitted in statement context:
+</p><pre>
+append cap complex imag len make new real
+unsafe.Alignof unsafe.Offsetof unsafe.Sizeof
+</pre><pre>
+h(x+y)
+f.Close()
+<-ch
+(<-ch)
+len("foo")  // illegal if len is the built-in function
+</pre></body>

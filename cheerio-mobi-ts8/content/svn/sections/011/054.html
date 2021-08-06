@@ -1,0 +1,78 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>svnadmin setlog</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/tmp/es2015/cheerio-mobi-ts8/undefined" />
+  </head>
+   <body>
+    <div class="refentry">
+      <a id="svn.ref.svnadmin.c.setlog"></a>
+      <div class="titlepage"></div>
+      <div class="refnamediv">
+        <h2>Name</h2>
+        <p>svnadmin setlog &#x2014; Set the log message on a revision.</p>
+      </div>
+      <div class="refsect1">
+        <a id="idm12240"></a>
+        <h2>Synopsis</h2>
+        <p>
+          <code class="literal">svnadmin setlog REPOS_PATH -r REVISION FILE</code>
+        </p>
+      </div>
+      <div class="refsect1">
+        <a id="idm12244"></a>
+        <h2>Description</h2>
+        <p>Set the log message on
+            revision <em class="replaceable"><code>REVISION</code></em> to the
+            contents of <em class="replaceable"><code>FILE</code></em>.</p>
+        <p>This is similar to using <span class="command"><strong>svn propset</strong></span>
+            with the <code class="option">--revprop</code> option to set the <code class="literal">svn:log</code> property
+            on a revision, except that you can also use the option
+            <code class="option">--bypass-hooks</code> to avoid running any pre-
+            or post-commit hooks, which is useful if the modification
+            of revision properties has not been enabled in
+            the <code class="literal">pre-revprop-change</code> hook.</p>
+        <div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;">
+          <table border="0" summary="Warning">
+            <tr>
+              <td rowspan="2" align="center" valign="top" width="25">
+                <img alt="[Warning]" src="/tmp/es2015/cheerio-mobi-ts8/content/svn/processed_images/warning-grayscale.gif">
+              </td>
+              <th align="left">Warning</th>
+            </tr>
+            <tr>
+              <td align="left" valign="top">
+                <p>Revision properties are not under version control,
+              so this command will permanently overwrite the previous
+              log message.</p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm12257"></a>
+        <h2>Options</h2>
+        <div class="informalexample">
+          <pre class="screen">
+</pre>
+        </div>
+      </div>
+      <div class="refsect1">
+        <a id="idm12263"></a>
+        <h2>Examples</h2>
+        <p>Set the log message for revision 19 to the contents of
+            the file <code class="filename">msg</code>:</p>
+        <div class="informalexample">
+          <pre class="screen">
+$ svnadmin setlog /var/svn/repos/ -r 19 msg
+</pre>
+        </div>
+      </div>
+    </div>
+</body>
+</html>

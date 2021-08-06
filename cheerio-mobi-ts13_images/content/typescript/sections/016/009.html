@@ -1,0 +1,38 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>
+                    Limit Property Setters
+                </title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts13_images/undefined" />
+  </head>
+   <body>
+<h2 id="limit-usage-of-property-setters">Limit usage of property setters</h2>
+<p>Prefer explicit set/get functions (e.g. <code>setBar</code> and <code>getBar</code> functions) over setters/getters.</p>
+<p>Consider the following code:</p>
+<pre><code class="lang-ts">foo.bar = {
+    a: <span class="hljs-number">123</span>,
+    b: <span class="hljs-number">456</span>
+};
+</code></pre>
+<p>In the presence of setter/getters:</p>
+<pre><code class="lang-ts"><span class="hljs-keyword">class</span> Foo {
+    a: <span class="hljs-built_in">number</span>;
+    b: <span class="hljs-built_in">number</span>;
+    <span class="hljs-keyword">set</span> bar(value:{a:<span class="hljs-built_in">number</span>,b:<span class="hljs-built_in">number</span>}) {
+        <span class="hljs-keyword">this</span>.a = value.a;
+        <span class="hljs-keyword">this</span>.b = value.b;
+    }
+}
+<span class="hljs-keyword">let</span> foo = <span class="hljs-keyword">new</span> Foo();
+</code></pre>
+<p>This is not a <em>good</em> use of property setters. The person reading the first code sample has no context about all the things that will change. Whereas someone calling <code>foo.setBar(value)</code> might have an idea that something might change on <code>foo</code>.</p>
+<blockquote>
+    <p>Bonus points: Find references works better if you have different functions. In TypeScript tools if you find references for a getter or a setter you get <em>both</em> whereas with explicit function calls you only get references to the relevant function.</p>
+</blockquote>
+</body>
+</html>

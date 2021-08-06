@@ -1,0 +1,25 @@
+
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta content="http://www.w3.org/1999/xhtml; charset=utf-8" http-equiv="Cont
+ent-Type" />
+    <title>Resolving rules in webpack</title>
+    <meta name="description" content="undefined" />
+    <meta name="author" content="undefined" />
+    <link rel="stylesheet" type="text/css" href="/home/gusa1120/es2015/cheerio-mobi-ts9/undefined" />
+  </head>
+   <body>
+<h2 id="resolving-rules-in-webpack">Resolving rules in webpack<a href="#resolving-rules-in-webpack" aria-hidden="true"><span class="icon icon-link"></span></a></h2><p>Using <code>enhanced-resolve</code>, webpack can resolve three kinds of file paths:</p><h3 id="absolute-paths">Absolute paths<a href="#absolute-paths" aria-hidden="true"><span class="icon icon-link"></span></a></h3><pre><code class="hljs language-js"><span class="token keyword">import</span> <span class="token string">&apos;/home/me/file&apos;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token string">&apos;C:\\Users\\me\\file&apos;</span><span class="token punctuation">;</span></code></pre><p>Since we already have the absolute path to the file, no further resolution is required.</p><h3 id="relative-paths">Relative paths<a href="#relative-paths" aria-hidden="true"><span class="icon icon-link"></span></a></h3><pre><code class="hljs language-js"><span class="token keyword">import</span> <span class="token string">&apos;../src/file1&apos;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token string">&apos;./file2&apos;</span><span class="token punctuation">;</span></code></pre><p>In this case, the directory of the resource file where the <code>import</code> or <code>require</code> occurs is taken to be the context directory. The relative path specified in the <code>import/require</code> is joined to this context path to produce the absolute path to the module.</p><h3 id="module-paths">Module paths<a href="#module-paths" aria-hidden="true"><span class="icon icon-link"></span></a></h3><pre><code class="hljs language-js"><span class="token keyword">import</span> <span class="token string">&apos;module&apos;</span><span class="token punctuation">;</span>
+<span class="token keyword">import</span> <span class="token string">&apos;module/lib/file&apos;</span><span class="token punctuation">;</span></code></pre><p>Modules are searched for inside all directories specified in <a href="/configuration/resolve/#resolve-modules"><code>resolve.modules</code></a>.
+You can replace the original module path by an alternate path by creating an alias for it using the <a href="/configuration/resolve/#resolve-alias"><code>resolve.alias</code></a> configuration option.</p><p>Once the path is resolved based on the above rule, the resolver checks to see if the path points to a file or a directory. If the path points to a file:</p><ul>
+<li>If the path has a file extension, then the file is bundled straightaway.</li>
+<li>Otherwise, the file extension is resolved using the <a href="/configuration/resolve/#resolve-extensions"><code>resolve.extensions</code></a> option, which tells the resolver which extensions (eg - <code>.js</code>, <code>.jsx</code>) are acceptable for resolution.</li>
+</ul><p>If the path points to a folder, then the following steps are taken to find the right file with the right extension:</p><ul>
+<li>If the folder contains a <code>package.json</code> file, then fields specified in <a href="/configuration/resolve/#resolve-mainfields"><code>resolve.mainFields</code></a> configuration option are looked up in order, and the first such field in <code>package.json</code> determines the file path.</li>
+<li>If there is no <code>package.json</code> or if the main fields do not return a valid path, file names specified in the <a href="/configuration/resolve/#resolve-mainfiles"><code>resolve.mainFiles</code></a> configuration option are looked for in order, to see if a matching filename exists in the imported/required directory .</li>
+<li>The file extension is then resolved in a similar way using the <code>resolve.extensions</code> option.</li>
+</ul><p>webpack provides reasonable <a href="/configuration/resolve">defaults</a> for these options depending on your build target.</p>
+</body>
+</html>

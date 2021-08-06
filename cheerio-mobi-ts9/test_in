@@ -1,0 +1,54 @@
+* generator sample
+
+### basic
+-- name: {{name}}
+-- age:   {{{age}}}
+-- info.ref: {{{info.ref}}}
+
+### build-in helper   each
+ {{#each momoclo}}
+       {{name}}
+       {{color}}
+ {{/each}}
+
+
+### build-in helper   if/unless
+ {{#if author}}
+    {{firstName}} {{lastName}}
+ {{else}}
+    Unknown Author
+ {{/if}}
+
+ {{#unless author}}
+    Unknown Author
+ {{else}}
+    {{firstName}} {{lastName}}
+ {{/unless}}
+
+
+### build-in helper   with
+ {{#with namedic}}
+       {{Kanako}}
+       {{Ayaka}}
+       {{Shiori}}
+       {{Momoka}}
+       {{Reni}}
+ {{/with}}
+
+
+### build-in helper   lookup
+ {{#each momoclo2}}
+    {{lookup ../color firstname}}
+ {{/each}}
+
+### custom regist helper   'fullName'
+ {{fullName test }}
+ {{#each momoclo2}}
+    {{fullName this}}
+ {{/each}}
+
+### custom regist blockhelper   'list'
+{{#list people}}{{firstName}} {{lastName}}{{/list}}
+
+
+
